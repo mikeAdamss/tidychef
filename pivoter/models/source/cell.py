@@ -5,11 +5,12 @@ Classes representing a sinlge cell of data.
 from dataclasses import dataclass
 from typing import Optional
 
-import pivoter.models.source
+from .cellformat import CellFormatting
 
-
-@dataclass
 class Cell:
-    x: int
-    y: int
-    cellformat: Optional[pivoter.models.source.CellFormatting]
+
+    def __init__(self, value: str, x: int, y: int, cell_formatting: Optional[CellFormatting] = None):
+        self.value = value
+        self.x: int = x
+        self.y: int = y
+        self.cellformat: Optional[CellFormatting] = cell_formatting

@@ -23,5 +23,7 @@ class UnnamedTableError(Exception):
     """
 
     def __init__(self):
-        self.msg = ('Cannot find table name/title property as this table does not have one. '
-         'This is typical of (but not exclusive to) csv tables')
+        self.msg = (
+            "Cannot find table name/title property as this table does not have one. "
+            "This is typical of (but not exclusive to) csv tables"
+        )

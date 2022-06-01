@@ -10,6 +10,8 @@ def identify_local_input_type(input_path: Path) -> str:
     from the extension.
     """
 
+    assert isinstance(input_path, Path)
+
     if str(input_path.absolute()).endswith(
         pivoter.constants.SUPPORTED_LOCAL_FILETYPES.CSV
     ):
