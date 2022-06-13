@@ -10,7 +10,7 @@ from typing import List, Optional
 from .cell import BaseCell, Cell
 import pivoter.exceptions
 from pivoter.utils import cellutils
-from pivoter.exceptions.common import OutOfBoundsError
+from pivoter.exceptions import OutOfBoundsError, UnnamedTableError
 
 
 class Table:
@@ -90,7 +90,7 @@ class LiveTable:
         if self._name:
             return self._name
         else:
-            raise pivoter.exceptions.UnnamedTableError
+            raise UnnamedTableError()
 
     @name.setter
     def name(self, name: Optional[str] = None):

@@ -29,7 +29,7 @@ def path_to_fixture(subdir: str, file_wanted: str) -> Path:
     return fixture_path
 
 
-def single_table_input(cells: List[Cell], table_name: Optional[str] == None) -> Input:
+def single_table_input(cells: List[Cell], table_name: Optional[str] = None) -> Input:
     """
     Returns a class:Input consisting of a single table
     comprised of the provided class:Cell objects

@@ -2,7 +2,7 @@ import pytest
 
 from helpers import single_table_input
 from pivoter.models.source import Cell, Input
-from pivoter.exceptions import IteratingSingleTableError
+from pivoter.exceptions import IteratingSingleTableError, UnnamedTableError
 
 
 @pytest.fixture
@@ -43,12 +43,14 @@ def test_table_title_property_returns_name(single_input_A1: Input):
     assert single_input_A1.title == "single input A1"
 
 
-def test_table_name_property_returns_error():
+def test_table_name_property_returns_error(single_unnamed_input_A1: Input):
     """
     If a table is not named, confirm accessing its name
     property returns the appropriate error.
     """
-    ...
+
+    with pytest.raises(UnnamedTableError):
+        single_unnamed_input_A1.name
 
 
 if __name__ == "__main__":
