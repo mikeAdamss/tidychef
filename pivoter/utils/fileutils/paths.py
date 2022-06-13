@@ -26,5 +26,5 @@ def ensure_existing_path(maybe_path: Union[Path, str]) -> Path:
         )
 
     assert isinstance(maybe_path, Path)
-    
+
     return maybe_path

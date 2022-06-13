@@ -27,3 +27,22 @@ class UnnamedTableError(Exception):
             "Cannot find table name/title property as this table does not have one. "
             "This is typical of (but not exclusive to) csv tables"
         )
+
+
+class OutOfBoundsError(Exception):
+    """
+    User is trying to select something from the filtred table that
+    does not exist in the filtered table.
+    """
+
+    def __init__(self, msg: str):
+        self.msg = msg
+
+class IteratingSingleTableError(Exception):
+    """
+    User is trying to iterate through an input that consists of
+    exactly one table.
+    """
+
+    def __init__(self):
+        self.msg = 'You cannot iterate this input, as it only consists of a single table'

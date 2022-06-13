@@ -1,1 +1,6 @@
-from .common import FileInputError, UnnamedTableError, UnsupportedLocalFileError
+from .common import (
+    FileInputError,
+    UnnamedTableError,
+    UnsupportedLocalFileError,
+    IteratingSingleTableError
+)

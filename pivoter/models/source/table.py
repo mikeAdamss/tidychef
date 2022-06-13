@@ -7,12 +7,12 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Optional
 
-from .cell import Cell
+from .cell import BaseCell,Cell
 import pivoter.exceptions
-
+from pivoter.utils import cellutils
+from pivoter.exceptions.common import OutOfBoundsError
 
 class Table:
-
     def __init__(self, cells: Optional[List[Cell]] = None):
         self.cells = cells
 
@@ -21,13 +21,42 @@ class Table:
             self.cells = []
         self.cells.append(cell)
 
+    def _filtered_xy_match(self, wanted_basecells: List[BaseCell]):
+        """
+        Given a list of BaseCell's. Filter .cells down to those
+        that match the required x & y attributes.
+
+        Raise where a requested cell does not exist. 
+        """
+
+        ecell: Cell # existing cell
+        wcell: BaseCell # wanted cell
+
+        found_cells = [
+            ecell for ecell in self.cells if any(
+                [ecell.matches_xy(wcell) for wcell in wanted_basecells]
+                )
+            ]
+
+        if len(found_cells) != len(wanted_basecells):
+            unfound_cells = [
+            wcell for wcell in self.cells if not any(
+                [wcell.matches_xy(ecell) for ecell in wanted_basecells]
+                )
+            ]
+
+            unfound_cells_as_excel = [cellutils.basecells_to_excel_refs(x) for x in unfound_cells]
+            raise OutOfBoundsError(f'These cells don\'t exist in the current selection: {unfound_cells_as_excel}')
+        
+        self.cells = found_cells
+
     def _has_length(self, expected_len: int):
         """
         Compare length (number of cells) with expected length
         """
         return len(self.cells) == expected_len
 
- 
+
 @dataclass
 class LiveTable:
     """
