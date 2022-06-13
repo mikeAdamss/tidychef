@@ -48,21 +48,22 @@ def test_multiple_excel_ref():
     """
 
     expected: List
-    for excel_ref, expected in [
-        ["A1:A2", [BaseCell(0, 0), BaseCell(0, 1)]]
-    ]:
-        cells_from_excel_ref: List[BaseCell] = cellutils.multi_excel_ref_to_basecells(excel_ref)
-        msg = f'''
+    for excel_ref, expected in [["A1:A2", [BaseCell(0, 0), BaseCell(0, 1)]]]:
+        cells_from_excel_ref: List[BaseCell] = cellutils.multi_excel_ref_to_basecells(
+            excel_ref
+        )
+        msg = f"""
             Expected cells:
             {expected}
 
             Got Cells
             {cells_from_excel_ref}
-            ''' 
+            """
 
         for ec in expected:
             assert ec in cells_from_excel_ref, msg
         assert len(expected) == len(cells_from_excel_ref), msg
+
 
 if __name__ == "__main__":
     pytest()

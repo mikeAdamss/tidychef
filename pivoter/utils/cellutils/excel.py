@@ -1,11 +1,14 @@
 from dataclasses import dataclass
+import logging
 import re
 from typing import List
 
 from pivoter.models.source.cell import BaseCell
 
+
 # TODO: there's a helper for this
 UPPER_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
 
 def letter_to_x(excel_letters_ref: str) -> int:
     """
@@ -31,6 +34,7 @@ def letter_to_x(excel_letters_ref: str) -> int:
 
     return x
 
+
 # TODO - this is nasty and shouldn't be capped, rewrite it
 def x_to_letters(x: int) -> str:
     """
@@ -39,21 +43,30 @@ def x_to_letters(x: int) -> str:
     full_alphabets = 0
     if x > 26:
         full_alphabets = x / 26
-        x -= (full_alphabets * 26)
+        x -= full_alphabets * 26
 
-    if full_alphabets < 27:
-        raise NotADirectoryError('Up to 702 columns only supported')
+    if full_alphabets > 27:
+        raise NotImplementedError("Up to 702 columns only supported")
 
     if full_alphabets > 0:
-        return f'{UPPER_ALPHABET[x-1]}:{UPPER_ALPHABET[full_alphabets -1]}'
-    return UPPER_ALPHABET[x-1]
+        return f"{UPPER_ALPHABET[x]}:{UPPER_ALPHABET[full_alphabets]}"
+    return UPPER_ALPHABET[x]
 
 
 def number_to_y(excel_number_ref: int):
     """
     Given an excel row number, return the y offset
     """
+    assert isinstance(excel_number_ref, int)
     return excel_number_ref - 1  # We are 0 indexed, unlike excel
+
+
+def y_to_number(excel_number_ref: int):
+    """
+    Given a y offset, return the excel row number
+    """
+    assert isinstance(excel_number_ref, int)
+    return excel_number_ref + 1  # We are 0 indexed, unlike excel
 
 
 def single_excel_ref_to_basecells(excel_ref: str) -> List[BaseCell]:
@@ -78,7 +91,11 @@ def single_excel_ref_to_basecells(excel_ref: str) -> List[BaseCell]:
     assert number
     assert len(letters) > 0
 
-    return [BaseCell(letter_to_x(letters), number_to_y(number))]
+    x = letter_to_x(letters)
+    y = number_to_y(number)
+
+    logging.warning(f"single_excel_ref_to_basecells: {excel_ref} becomes x:{x},y:{y}")
+    return [BaseCell(x=x, y=y)]
 
 
 def multi_excel_ref_to_basecells(excel_ref: str) -> List[BaseCell]:
@@ -97,9 +114,11 @@ def multi_excel_ref_to_basecells(excel_ref: str) -> List[BaseCell]:
     end_y = end_cell.y
 
     return_cells = []
-    for x in range(start_x, end_x+1):
-        for y in range(start_y, end_y+1):
+    for x in range(start_x, end_x + 1):
+        for y in range(start_y, end_y + 1):
             return_cells.append(BaseCell(x=x, y=y))
+
+    logging.warning(f"Excel ref {excel_ref} gets cells {return_cells}")
 
     return return_cells
 
@@ -109,20 +128,20 @@ class HandlerMatcher:
     """
     Associates a regex with a specific handler
     """
-    regex: str 
+
+    regex: str
     handler: callable
 
 
 ref_styles = {
     "single_cell": HandlerMatcher(
-        regex = '^[A-Z]+[0-9]+$',
-        handler = single_excel_ref_to_basecells
+        regex="^[A-Z]+[0-9]+$", handler=single_excel_ref_to_basecells
     ),
     "multi_cell": HandlerMatcher(
-        regex = '^[A-Z]+[0-9]+:[A-Z]+[0-9]+$',
-        handler = multi_excel_ref_to_basecells
-    )}
-    
+        regex="^[A-Z]+[0-9]+:[A-Z]+[0-9]+$", handler=multi_excel_ref_to_basecells
+    ),
+}
+
 
 def get_ref_as_wanted_basecells(excel_ref: str) -> List[BaseCell]:
 
@@ -133,8 +152,8 @@ def get_ref_as_wanted_basecells(excel_ref: str) -> List[BaseCell]:
             identified_ref_styles.append(name)
 
     assert len(identified_ref_styles) == 1, (
-        f'Identified {len(identified_ref_styles)} styles of excel reference from '
-        'ref. 1 is required.' 
+        f"Identified {len(identified_ref_styles)} styles of excel reference from "
+        "ref. 1 is required."
     )
 
     identified_ref_style = identified_ref_styles[0]
@@ -150,9 +169,11 @@ def basecells_to_excel_refs(base_cells: List[BaseCell]) -> List[str]:
     """
     excel_refs = []
 
+    logging.warning(f"basecells_to_excel_refs, recieved cells: \n{base_cells}")
+
     for base_cell in base_cells:
         letters = x_to_letters(base_cell.x)
-        number = base_cell.y + 1
-        excel_refs.append(f'{letters}:{number}')
+        number = y_to_number(base_cell.y)
+        excel_refs.append(f"{letters}{number}")
 
     return excel_refs

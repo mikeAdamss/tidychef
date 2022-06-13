@@ -4,5 +4,5 @@ from .excel import (
     single_excel_ref_to_basecells,
     get_ref_as_wanted_basecells,
     multi_excel_ref_to_basecells,
-    basecells_to_excel_refs
+    basecells_to_excel_refs,
 )

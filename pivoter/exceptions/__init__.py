@@ -1,6 +1,8 @@
 from .common import (
     FileInputError,
-    UnnamedTableError,
     UnsupportedLocalFileError,
-    IteratingSingleTableError
+    UnnamedTableError,
+    OutOfBoundsError,
+    IteratingSingleTableError,
+    LoneValueOnMultipleCellsError,
 )

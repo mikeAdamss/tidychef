@@ -1,41 +1,55 @@
 import pytest
 
-from pivoter.models.source import Cell, LiveTable, Input
+from pivoter.models.source import Cell, Input
+from pivoter.exceptions import OutOfBoundsError, LoneValueOnMultipleCellsError
 from helpers import single_table_input
 
 
 @pytest.fixture
-def single_input_1():
-    """A single table input, one column of one cell"""
-    return single_table_input("single fixture table 1", [Cell(x=0, y=0, value="foo")])
-
-
-@pytest.fixture
-def single_input_2():
-    """A single table input, one column of three cells"""
+def single_input_A1A3() -> Input:
+    """
+    A single table input, one column of three cells for
+    (in excel terms) A1:A3
+    """
     return single_table_input(
-        "single fixture table 1",
         [
             Cell(x=0, y=0, value="foo"),
             Cell(x=0, y=1, value="bar"),
             Cell(x=0, y=2, value="baz"),
         ],
+        "single fixture table 1"
     )
 
 
-def test_lone_value_selector(single_input_1: Input) -> LiveTable:
+def test_lone_value_selector(single_input_A1A3: Input):
     """
     Test we can return the value for selections of exactly one cell
     """
-    assert single_input_1.excel_ref("A1").lone_value() == "foo"
+    assert single_input_A1A3.excel_ref("A1").lone_value() == "foo"
 
 
-def tesst_lone_value_on_multiple_values_errors(single_input_2: Input) -> LiveTable:
+def test_lone_value_on_multiple_values_errors(single_input_A1A3: Input):
     """
-    Test than calling Input.long_value() on a filtered table containing
+    Test than calling Input.lone_value() on a filtered table containing
     more than one value raises.
     """
-    ...
+
+    with pytest.raises(LoneValueOnMultipleCellsError):
+        single_input_A1A3.lone_value()
+
+
+def test_excel_referece_out_of_bounds_error(single_input_A1A3: Input):
+    """
+    Test that we cannot select using an excel reference for cells that
+    are not within the current selection
+    """
+
+    with pytest.raises(OutOfBoundsError) as exc_info:
+        single_input_A1A3.excel_ref("A1:D2")
+    assert (
+        "The following requested cells don't exist in the current selection: ['B1', 'B2', 'C1', 'C2', 'D1', 'D2']"
+        in str(exc_info.value)
+    )
 
 
 if __name__ == "__main__":

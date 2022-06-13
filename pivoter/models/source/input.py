@@ -8,24 +8,27 @@ representation of same (to include dataframes).
 from __future__ import annotations
 
 from dataclasses import dataclass
+import logging
 from pathlib import Path
 from typing import Optional, List
 
 from .cell import BaseCell
 from .table import LiveTable, Table
-from pivoter.exceptions import IteratingSingleTableError
+from pivoter.exceptions import IteratingSingleTableError, LoneValueOnMultipleCellsError
 from pivoter.utils import cellutils
 
 
 def _input_from_single_table(file_path: Path, table: Table) -> Input:
-        """
-        Construct an Input object from a single table
-        """
-        return Input(
-            is_singelton_table=True,
-            selected_table=LiveTable.from_table(name=file_path.name, table=table),
-            had_initial_path=file_path,
-            tables=None)
+    """
+    Construct an Input object from a single table
+    """
+    return Input(
+        is_singelton_table=True,
+        selected_table=LiveTable.from_table(name=file_path.name, table=table),
+        had_initial_path=file_path,
+        tables=None,
+    )
+
 
 @dataclass
 class Input:
@@ -64,6 +67,22 @@ class Input:
     2.) Filter down ".filtered" to a smaller selection.
 
     """
+
+    @property
+    def name(self) -> str:
+        """
+        Get name of currently selected table
+        """
+        return self.selected_table.name
+
+    @property
+    def title(self) -> str:
+        """
+        Alternate call to name.
+        """
+        return self.name
+
+
     def excel_ref(self, excel_ref: str):
         """
         Use an excel style reference to filter down the current selection of cells.
@@ -71,16 +90,13 @@ class Input:
         An error will be raised if you ask for a cell that is not within the selection.
         """
         wanted_cells: List[BaseCell] = cellutils.get_ref_as_wanted_basecells(excel_ref)
-        self.selected_table.filtered._filtered_xy_match(wanted_cells)
+        self.selected_table.filtered._filter_to_matching_xys(wanted_cells)
         return self
 
     def lone_value(self) -> str:
         """
         Where a selection has exactly one cell, return the value of that cell
         """
-        assert len(self.selected_table.filtered.cells) == 1, (
-            "You can only call lone_value on a selection of exactly one cell. "
-            f"Current selection has {len(self.selected_table.filtered)} cells"
-        )
+        if len(self.selected_table.filtered.cells) != 1:
+            raise LoneValueOnMultipleCellsError(len(self.selected_table.filtered.cells))
         return self.selected_table.filtered.cells[0].value
-

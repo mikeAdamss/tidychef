@@ -7,12 +7,17 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Optional
 
-from .cell import BaseCell,Cell
+from .cell import BaseCell, Cell
 import pivoter.exceptions
 from pivoter.utils import cellutils
 from pivoter.exceptions.common import OutOfBoundsError
 
+
 class Table:
+    """
+    Represents a table of data in the from of a list of cells.
+    """
+
     def __init__(self, cells: Optional[List[Cell]] = None):
         self.cells = cells
 
@@ -21,33 +26,35 @@ class Table:
             self.cells = []
         self.cells.append(cell)
 
-    def _filtered_xy_match(self, wanted_basecells: List[BaseCell]):
+    def _filter_to_matching_xys(self, wanted_basecells: List[BaseCell]):
         """
         Given a list of BaseCell's. Filter .cells down to those
         that match the required x & y attributes.
 
-        Raise where a requested cell does not exist. 
+        Raise where a requested cell does not exist.
         """
 
-        ecell: Cell # existing cell
-        wcell: BaseCell # wanted cell
+        ecell: Cell  # existing cell
+        wcell: BaseCell  # wanted cell
 
         found_cells = [
-            ecell for ecell in self.cells if any(
-                [ecell.matches_xy(wcell) for wcell in wanted_basecells]
-                )
-            ]
+            ecell
+            for ecell in self.cells
+            if any([ecell.matches_xy(wcell) for wcell in wanted_basecells])
+        ]
 
         if len(found_cells) != len(wanted_basecells):
             unfound_cells = [
-            wcell for wcell in self.cells if not any(
-                [wcell.matches_xy(ecell) for ecell in wanted_basecells]
-                )
+                wcell
+                for wcell in wanted_basecells
+                if not any([wcell.matches_xy(ecell) for ecell in self.cells])
             ]
 
-            unfound_cells_as_excel = [cellutils.basecells_to_excel_refs(x) for x in unfound_cells]
-            raise OutOfBoundsError(f'These cells don\'t exist in the current selection: {unfound_cells_as_excel}')
-        
+            unfound_cells_as_excel = cellutils.basecells_to_excel_refs(unfound_cells)
+            raise OutOfBoundsError(
+                f"The following requested cells don't exist in the current selection: {unfound_cells_as_excel}"
+            )
+
         self.cells = found_cells
 
     def _has_length(self, expected_len: int):
@@ -74,14 +81,6 @@ class LiveTable:
     pristine: Table
     filtered: Table
     name: str
-
-    @property
-    def title(self):
-        """
-        Alternative accessor for table.name.
-        Returns a name if we have a name, else raises
-        """
-        return self.name()
 
     @property
     def name(self):

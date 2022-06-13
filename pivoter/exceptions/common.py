@@ -38,6 +38,7 @@ class OutOfBoundsError(Exception):
     def __init__(self, msg: str):
         self.msg = msg
 
+
 class IteratingSingleTableError(Exception):
     """
     User is trying to iterate through an input that consists of
@@ -45,4 +46,16 @@ class IteratingSingleTableError(Exception):
     """
 
     def __init__(self):
-        self.msg = 'You cannot iterate this input, as it only consists of a single table'
+        self.msg = (
+            "You cannot iterate this input, as it only consists of a single table"
+        )
+
+
+class LoneValueOnMultipleCellsError(Exception):
+    """
+    Raised when a user attempts to use the Input.long_value() method
+    on a selection of more than one cell.
+    """
+
+    def __init__(self, number_of_cells: int):
+        self.msg = f"You can only use lone_value() on a selection of exactly one cell. This selection has {number_of_cells}"

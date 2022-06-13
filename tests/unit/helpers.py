@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 from pivoter.models.source import Cell, Table, Input, LiveTable
 
@@ -29,10 +29,14 @@ def path_to_fixture(subdir: str, file_wanted: str) -> Path:
     return fixture_path
 
 
-def single_table_input(name: str, cells: List[Cell]) -> Input:
+def single_table_input(cells: List[Cell], table_name: Optional[str] == None) -> Input:
+    """
+    Returns a class:Input consisting of a single table
+    comprised of the provided class:Cell objects
+    """
     return Input(
         is_singelton_table=True,
-        selected_table=LiveTable.from_table(name, Table(cells)),
+        selected_table=LiveTable.from_table(table_name, Table(cells)),
         had_initial_path=None,
         tables=None,
     )

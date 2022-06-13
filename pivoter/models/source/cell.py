@@ -31,11 +31,13 @@ class BaseCell:
         """
         return self.x == other_cell.x and self.y == other_cell.y
 
+
 @dataclass
 class Cell(BaseCell):
     """
     Denotes a cell of data from a tabulated data source
     """
+
     value: Optional[str]
 
     # Optional as some tabllated formats (eg csv) do not have
