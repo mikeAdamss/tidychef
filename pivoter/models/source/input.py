@@ -18,7 +18,7 @@ from pivoter.exceptions import IteratingSingleTableError, LoneValueOnMultipleCel
 from pivoter.utils import cellutils
 
 
-def _input_from_single_table(file_path: Path, table: Table) -> Input:
+def input_from_single_table(file_path: Path, table: Table) -> Input:
     """
     Construct an Input object from a single table
     """

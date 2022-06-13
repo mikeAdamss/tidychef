@@ -8,7 +8,6 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 from .cell import BaseCell, Cell
-import pivoter.exceptions
 from pivoter.utils import cellutils
 from pivoter.exceptions import OutOfBoundsError, UnnamedTableError
 
