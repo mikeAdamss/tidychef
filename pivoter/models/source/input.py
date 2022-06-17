@@ -7,41 +7,38 @@ representation of same (to include dataframes).
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-import logging
 from pathlib import Path
-from typing import Optional, List
+from typing import List
 
-from .cell import BaseCell
-from .table import LiveTable, Table
-from pivoter.exceptions import IteratingSingleTableError, LoneValueOnMultipleCellsError
-from pivoter.utils import cellutils
+from .table import LiveTable
+from pivoter.configuration import ConfigController
+from pivoter.exceptions import IteratingSingleTableError
+from pivoter.selection import datamethods
 
 
-def input_from_single_table(file_path: Path, table: Table) -> Input:
+class BaseInput:
     """
-    Construct an Input object from a single table
-    """
-    return Input(
-        is_singelton_table=True,
-        selected_table=LiveTable.from_table(name=file_path.name, table=table),
-        had_initial_path=file_path,
-        tables=None,
-    )
+    A class representing a single input (typically though not exclusively a file).
 
-
-@dataclass
-class Input:
-    """
-    A class representing a single input (typically though not exclusively a file)
+    BaseInput will never be instantiated in its own right. But instead will inform
+    pivoter.selection.base.Selectable and its children.
     """
 
-    is_singelton_table: bool
-    selected_table: LiveTable
+    def __init__(
+        self,
 
-    had_initial_path: Optional[Path]
-    tables: Optional[List[LiveTable]]
-
+        is_singleton_table: bool,
+        selected_table: LiveTable,
+        cfg: ConfigController = ConfigController.from_ini(),
+        had_initial_path: Path = None,
+        tables: List[LiveTable] = None,
+    ):
+        self.cfg = cfg
+        self.is_singleton_table = is_singleton_table
+        self.selected_table = selected_table
+        self.had_initial_path = had_initial_path
+        self.tables = tables
+        self.datamethods = datamethods.DataMethods
 
     @property
     def name(self) -> str:
@@ -50,7 +47,6 @@ class Input:
         """
         return self.selected_table.name
 
-
     @property
     def title(self) -> str:
         """
@@ -58,44 +54,14 @@ class Input:
         """
         return self.name
 
-
     def __iter__(self):
-        if self.is_singelton_table:
+        """
+        We're not really iterating table objects, we're just moving the
+        pointer to the selected table then returning the updated self
+        """
+        if self.is_singleton_table:
             raise IteratingSingleTableError
 
         for table in self.tables:
             self.selected_table = table
             yield self
-
-    """
-    Dev notes:
-
-    - At any given time the user will be utilising a single LiveTable.
-    - A class:LiveTable consist of two class:Table's as follow:
-        - pristine: all the cells the table had when loaded in, this is never modified.
-        - filtered: the users current selection
-    
-    The following methods allow for iteration methods that will seem natural to the user
-    The following methods all do one of two things:
-    1.) Expand the current selection by comparing ".filtered" to ".pristine".
-    2.) Filter down ".filtered" to a smaller selection.
-    """
-
-    def excel_ref(self, excel_ref: str):
-        """
-        Use an excel style reference to filter down the current selection of cells.
-
-        An error will be raised if you ask for a cell that is not within the selection.
-        """
-        wanted_cells: List[BaseCell] = cellutils.get_ref_as_wanted_basecells(excel_ref)
-        self.selected_table.filtered._filter_to_matching_xys(wanted_cells)
-        return self
-
-
-    def lone_value(self) -> str:
-        """
-        Where a selection has exactly one cell, return the value of that cell
-        """
-        if len(self.selected_table.filtered.cells) != 1:
-            raise LoneValueOnMultipleCellsError(len(self.selected_table.filtered.cells))
-        return self.selected_table.filtered.cells[0].value

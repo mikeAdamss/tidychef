@@ -7,9 +7,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Optional
 
-from .cell import BaseCell, Cell
-from pivoter.utils import cellutils
-from pivoter.exceptions import OutOfBoundsError, UnnamedTableError
+from .cell import Cell
+from pivoter.exceptions import UnnamedTableError
 
 
 class Table:
@@ -24,43 +23,6 @@ class Table:
         if not self.cells:
             self.cells = []
         self.cells.append(cell)
-
-    def _filter_to_matching_xys(self, wanted_basecells: List[BaseCell]):
-        """
-        Given a list of BaseCell's. Filter .cells down to those
-        that match the required x & y attributes.
-
-        Raise where a requested cell does not exist.
-        """
-
-        ecell: Cell  # existing cell
-        wcell: BaseCell  # wanted cell
-
-        found_cells = [
-            ecell
-            for ecell in self.cells
-            if any([ecell.matches_xy(wcell) for wcell in wanted_basecells])
-        ]
-
-        if len(found_cells) != len(wanted_basecells):
-            unfound_cells = [
-                wcell
-                for wcell in wanted_basecells
-                if not any([wcell.matches_xy(ecell) for ecell in self.cells])
-            ]
-
-            unfound_cells_as_excel = cellutils.basecells_to_excel_refs(unfound_cells)
-            raise OutOfBoundsError(
-                f"The following requested cells don't exist in the current selection: {unfound_cells_as_excel}"
-            )
-
-        self.cells = found_cells
-
-    def _has_length(self, expected_len: int):
-        """
-        Compare length (number of cells) with expected length
-        """
-        return len(self.cells) == expected_len
 
 
 @dataclass
@@ -79,7 +41,7 @@ class LiveTable:
 
     pristine: Table
     filtered: Table
-    name: str
+    _name: str
 
     @property
     def name(self):
@@ -99,8 +61,11 @@ class LiveTable:
             self._name = None
 
     @staticmethod
-    def from_table(name: str, table: Table) -> LiveTable:
-        return LiveTable(name=name, pristine=table, filtered=table)
+    def from_table(table: Table, name: str = None) -> LiveTable:
+        """
+        Given a table and optional it's name, create a livetable.
+        """
+        return LiveTable(_name=name, pristine=table, filtered=table)
 
     def _table_lengths_match(self):
         """

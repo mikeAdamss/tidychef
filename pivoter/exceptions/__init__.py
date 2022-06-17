@@ -2,7 +2,7 @@ from .common import (
     FileInputError,
     UnsupportedLocalFileError,
     UnnamedTableError,
-    OutOfBoundsError,
+    CellsDoNotExistError,
     IteratingSingleTableError,
     LoneValueOnMultipleCellsError,
 )

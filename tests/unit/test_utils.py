@@ -2,7 +2,7 @@ import pytest
 from typing import List
 
 from pivoter.utils import cellutils
-from pivoter.models.source import BaseCell
+from pivoter.models.source.cell import BaseCell
 
 
 def test_excel_ref_to_x():

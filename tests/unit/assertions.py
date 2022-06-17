@@ -1,7 +1,7 @@
-from pivoter.models.source import Input, LiveTable
+from pivoter.models.source.input import BaseInput
 
 
-def livetable_tables_have_same_length(input: Input):
+def livetable_tables_have_same_length(input: BaseInput):
     """
     Assert that the Livetable class attributes:
 
@@ -21,7 +21,7 @@ def livetable_tables_have_same_length(input: Input):
     )
 
 
-def pristine_table_has_length(input: Input, expected_len: int):
+def pristine_table_has_length(input: BaseInput, expected_len: int):
     """
     Assert that the Livetable class attribute:
 
@@ -29,6 +29,8 @@ def pristine_table_has_length(input: Input, expected_len: int):
 
     Has a length (number of cells) matching the expected length.
     """
-    assert input.selected_table.pristine._has_length(
-        expected_len
-    ), f"For table {input.selected_table.name}, expected {expected_len} cells, got {len(input.selected_table.pristine.cells)}"
+
+    pristine_cell_count = len(input.selected_table.pristine.cells)
+    assert pristine_cell_count == expected_len, (
+        f"For table {input.selected_table.name}, expected {expected_len} cells, got {pristine_cell_count}"
+    )

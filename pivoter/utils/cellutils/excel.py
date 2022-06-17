@@ -69,7 +69,7 @@ def y_to_number(excel_number_ref: int):
     return excel_number_ref + 1  # We are 0 indexed, unlike excel
 
 
-def single_excel_ref_to_basecells(excel_ref: str) -> List[BaseCell]:
+def single_excel_ref_to_basecells(excel_ref: str) -> BaseCell:
     """
     Given a single excel cell reference, return a list of
     one BaseCell of Cell.

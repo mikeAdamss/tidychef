@@ -13,11 +13,6 @@ from .cellformat import CellFormatting
 class BaseCell:
     """
     A primitive non value holding cell construct.
-
-    Used in two scenarios:
-    - The base class for class:Cell
-    - Denoting x,y offsets of cells requested. Queries
-    compare BaseCell's with Cell's
     """
 
     x: int
@@ -40,7 +35,7 @@ class Cell(BaseCell):
 
     value: Optional[str]
 
-    # Optional as some tabllated formats (eg csv) do not have
+    # Optional as some tabullated formats (eg csv) do not have
     # cell formatting.
     cellformat: Optional[CellFormatting] = None
 

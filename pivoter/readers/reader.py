@@ -7,12 +7,12 @@ from pathlib import Path
 from typing import Union
 
 from pivoter.utils import fileutils
-import pivoter.models.source
+from pivoter.models.source.input import BaseInput
 from pivoter.readers import LocalCsvReader, BaseReader
 from pivoter.constants import SUPPORTED_LOCAL_FILETYPES
 
 
-def read_local_file(input: Union[str, Path]) -> pivoter.models.source.Input:
+def read_local(input: Union[str, Path]) -> BaseInput:
     """
     Simplest input, read from a local file.
     """

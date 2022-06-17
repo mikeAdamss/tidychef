@@ -1,3 +1,9 @@
+from typing import List
+
+from pivoter.configuration import ConfigController
+from pivoter.models.source.cell import BaseCell
+
+
 class FileInputError(Exception):
     """
     There is an issues with what has been provided as a file input.
@@ -29,13 +35,31 @@ class UnnamedTableError(Exception):
         )
 
 
-class OutOfBoundsError(Exception):
+class CellsDoNotExistError(Exception):
     """
-    User is trying to select something from the filtred table that
+    User is trying to select something from the filtered table that
     does not exist in the filtered table.
+
+    The number cells to include as examples in the error is truncated
+    based on configuration.
     """
 
-    def __init__(self, msg: str):
+    def __init__(self, config: ConfigController, unfound_cells: List[BaseCell]):
+
+        max_cell_display = int(config.configparser["DISPLAY"]["BAD_CELLS_TO_DISPLAY"])
+
+        truncated = False
+        if len(unfound_cells) > max_cell_display:
+            unfound_cells = unfound_cells[:max_cell_display]
+            truncated = True
+
+        msg = "You are to select a subset of cells that do not exist in the current selection:"
+        for uc in unfound_cells:
+            msg += f'\n{uc}'
+            
+        if truncated:
+            msg += f'\Examples missing cells truncated to {len(unfound_cells)} results from {max_cell_display}'
+
         self.msg = msg
 
 
