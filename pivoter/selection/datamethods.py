@@ -6,16 +6,14 @@ from pivoter.models.source.cell import BaseCell
 
 class DataMethods:
     """
-    The data selection and combination methods that power
-    _all_ data selection and combination methods.
+    The data selection and combination methods that underpin
+    all data selection and combination methods.
 
     We're exposing these via .datamethods to account for
     unknown or complex use cases for advanced users, but
     otherwise we push the user towards the more
     obvious and user friendly methods attached to the
-    various source type specific selecors (which are
-    ultimately just wrappers of these more low level
-    methods).
+    various source type specific selecors.
     """
 
     @classmethod
@@ -94,3 +92,25 @@ class DataMethods:
         min_y_cell = [c for c in cells if c.y == min_y]
         assert len(min_y_cell) == 1
         return min_y_cell[0]
+
+    @classmethod
+    def _minimum_x_offset_cell(cls, cells: List[BaseCell]) -> BaseCell:
+        """
+        Given a list of BaseCell's, return the Basecell with the smallest
+        y offset
+        """
+        min_x = min([c.x for c in cells])
+        min_x_cell = [c for c in cells if c.x == min_x]
+        assert len(min_x_cell) == 1
+        return min_x_cell[0]
+
+    @classmethod
+    def _maximum_x_offset_cell(cls, cells: List[BaseCell]) -> BaseCell:
+        """
+        Given a list of BaseCell's, return the Basecell with the largest
+        x offset
+        """
+        max_x = max([c.x for c in cells])
+        max_x_cell = [c for c in cells if c.x == max_x]
+        assert len(max_x_cell) == 1
+        return max_x_cell[0]

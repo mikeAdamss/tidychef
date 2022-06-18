@@ -53,13 +53,39 @@ class Selectable(BaseInput):
                     selection += [
                         c for c in potential_cells_on_xi if c.is_above(highest_selected_cell_on_xi)
                     ]
-
+                
                 if direction == DOWN:
                     lowest_selected_cell_on_xi = self.datamethods._maximum_y_offset_cell(
                         selected_cells_on_xi
                     )
                     selection += [
                         c for c in potential_cells_on_xi if c.is_below(lowest_selected_cell_on_xi)
+                    ]
+
+        if direction in [LEFT, RIGHT]:
+
+            all_used_y_indicies: FrozenSet[int] = set(c.y for c in self.cells)
+            for yi in all_used_y_indicies:
+                selected_cells_on_yi = [c for c in self.cells if c.y == yi]
+
+                potential_cells_on_yi: List[Cell] = [
+                    c for c in potential_cells if c.y == yi
+                ]
+
+                if direction == LEFT:
+                    leftmost_selected_cell_on_yi = self.datamethods._minimum_x_offset_cell(
+                        selected_cells_on_yi
+                    )
+                    selection += [
+                        c for c in potential_cells_on_yi if c.is_left_of(leftmost_selected_cell_on_yi)
+                    ]
+
+                if direction == RIGHT:
+                    rightmost_selected_cell_on_yi = self.datamethods._maximum_x_offset_cell(
+                        selected_cells_on_yi
+                    )
+                    selection += [
+                        c for c in potential_cells_on_yi if c.is_right_of(rightmost_selected_cell_on_yi)
                     ]
 
         self.cells += selection

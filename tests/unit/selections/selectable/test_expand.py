@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from os import linesep
 
 import pytest
@@ -6,7 +5,7 @@ import pytest
 from pivoter.constants import RIGHT, UP, DOWN, LEFT
 from pivoter.models.source.cell import Cell, BaseCell
 from pivoter.selection.base import Selectable
-from helpers import single_table_test_input, CaseInputExtrusion
+from helpers import single_table_test_input, InputsToTestExtrusion
 
 
 def single_input_A1F5() -> Selectable:
@@ -59,34 +58,56 @@ def test_expand():
     for case in [
 
         # F5, UP
-        CaseInputExtrusion([BaseCell(x=5, y=4)], UP, 5, single_input_A1F5()),
+        InputsToTestExtrusion([BaseCell(x=5, y=4)], UP, 5, single_input_A1F5()),
 
         # C4, UP
-        CaseInputExtrusion([BaseCell(x=2, y=3)], UP, 4, single_input_A1F5()),
+        InputsToTestExtrusion([BaseCell(x=2, y=3)], UP, 4, single_input_A1F5()),
 
         # A3, UP
-        CaseInputExtrusion([BaseCell(x=0, y=2)], UP, 3, single_input_A1F5()),
+        InputsToTestExtrusion([BaseCell(x=0, y=2)], UP, 3, single_input_A1F5()),
 
         # A3 + F2, UP
-        CaseInputExtrusion([
+        InputsToTestExtrusion([
             BaseCell(x=0, y=2),
             BaseCell(x=5, y=1)
             ], UP, 5, single_input_A1F5()),
 
         # A1, DOWN
-        CaseInputExtrusion([BaseCell(x=0, y=0)], DOWN, 5, single_input_A1F5()),
+        InputsToTestExtrusion([BaseCell(x=0, y=0)], DOWN, 5, single_input_A1F5()),
 
         # C4, DOWN
-        CaseInputExtrusion([BaseCell(x=2, y=3)], DOWN, 2, single_input_A1F5()),
+        InputsToTestExtrusion([BaseCell(x=2, y=3)], DOWN, 2, single_input_A1F5()),
 
         # A3, DOWN
-        CaseInputExtrusion([BaseCell(x=0, y=2)], DOWN, 3, single_input_A1F5()),
+        InputsToTestExtrusion([BaseCell(x=0, y=2)], DOWN, 3, single_input_A1F5()),
 
         # A3 + F2, DOWN
-        CaseInputExtrusion([
+        InputsToTestExtrusion([
             BaseCell(x=0, y=2),
             BaseCell(x=5, y=1)
             ], DOWN, 7, single_input_A1F5()),
+
+        # B2, RIGHT
+        InputsToTestExtrusion([BaseCell(x=1, y=1)], LEFT, 2, single_input_A1F5()),
+
+        # B4 + F5, LEFT
+        InputsToTestExtrusion([
+            BaseCell(x=1, y=3),
+            BaseCell(x=5, y=4)
+            ], LEFT, 8, single_input_A1F5()),
+
+        # B2 + C3, LEFT
+        InputsToTestExtrusion([
+            BaseCell(x=1, y=1),
+            BaseCell(x=2, y=2)
+            ], LEFT, 5, single_input_A1F5()),
+
+       # B2 + C3, RIGHT
+        InputsToTestExtrusion([
+            BaseCell(x=1, y=1),
+            BaseCell(x=2, y=2)
+            ], RIGHT, 9, single_input_A1F5()),
+
     ]:
 
         case.data.cells = case.data.datamethods._exactly_matched_xy_cells(

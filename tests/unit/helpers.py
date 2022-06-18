@@ -16,9 +16,9 @@ fixture_dir = Path(pivoter_dir / "tests" / "fixtures")
 
 
 @dataclass
-class TestCaseExtrusion:
+class InputsToTestExtrusion:
     """
-    Test Inputs for an extrusion (fill/expand) case.
+    Test Inputs for an extrusion (fill/expand) test.
     """
     starting_at: List[BaseCell]
     direction: int
