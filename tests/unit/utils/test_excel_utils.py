@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 import pytest
 from typing import List
 
@@ -63,6 +64,28 @@ def test_multiple_excel_ref():
         for ec in expected:
             assert ec in cells_from_excel_ref, msg
         assert len(expected) == len(cells_from_excel_ref), msg
+
+
+def test_x_to_letters():
+    """
+    Given an x co-ordinate, covert that co-ordinate to the
+    excel letters represnting it as a column
+    """
+
+    @dataclass
+    class Case:
+        x: int
+        expected: str
+
+    for case in [
+        Case(5, "F"),
+        Case(26, "AA"),
+        Case(25, "Z"),
+        Case(51, "AZ")
+    ]:
+        assert cellutils.x_to_letters(case.x) == case.expected, (
+            f'Expected {case.expected} from x:{case.x}, but got {cellutils.x_to_letters(case.x)}'
+        )
 
 
 if __name__ == "__main__":

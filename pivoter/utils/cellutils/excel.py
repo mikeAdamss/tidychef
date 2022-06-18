@@ -40,18 +40,16 @@ def x_to_letters(x: int) -> str:
     """
     Convert an x co-ordinate to excel style letter references
     """
-    full_alphabets = 0
-    if x > 26:
-        full_alphabets = x / 26
-        x -= full_alphabets * 26
 
-    if full_alphabets > 27:
-        raise NotImplementedError("Up to 702 columns only supported")
-
-    if full_alphabets > 0:
-        return f"{UPPER_ALPHABET[x]}:{UPPER_ALPHABET[full_alphabets]}"
-    return UPPER_ALPHABET[x]
-
+    # https://stackoverflow.com/questions/23861680/convert-spreadsheet-number-to-column-letter
+    start_index = 0   #  it can start either at 0 or at 1
+    letter = ''
+    while x > 25 + start_index:   
+        letter += chr(65 + int((x-start_index)/26) - 1)
+        x = x - (int((x-start_index)/26))*26
+    letter += chr(65 - start_index + (int(x)))
+        
+    return letter
 
 def number_to_y(excel_number_ref: int):
     """
