@@ -47,19 +47,23 @@ class Selectable(BaseInput):
                 ]
 
                 if direction == UP:
-                    highest_selected_cell_on_xi = self.datamethods._minium_y_offset_cell(
-                        selected_cells_on_xi
+                    highest_selected_cell_on_xi = (
+                        self.datamethods._minium_y_offset_cell(selected_cells_on_xi)
                     )
                     selection += [
-                        c for c in potential_cells_on_xi if c.is_above(highest_selected_cell_on_xi)
+                        c
+                        for c in potential_cells_on_xi
+                        if c.is_above(highest_selected_cell_on_xi)
                     ]
-                
+
                 if direction == DOWN:
-                    lowest_selected_cell_on_xi = self.datamethods._maximum_y_offset_cell(
-                        selected_cells_on_xi
+                    lowest_selected_cell_on_xi = (
+                        self.datamethods._maximum_y_offset_cell(selected_cells_on_xi)
                     )
                     selection += [
-                        c for c in potential_cells_on_xi if c.is_below(lowest_selected_cell_on_xi)
+                        c
+                        for c in potential_cells_on_xi
+                        if c.is_below(lowest_selected_cell_on_xi)
                     ]
 
         if direction in [LEFT, RIGHT]:
@@ -73,26 +77,29 @@ class Selectable(BaseInput):
                 ]
 
                 if direction == LEFT:
-                    leftmost_selected_cell_on_yi = self.datamethods._minimum_x_offset_cell(
-                        selected_cells_on_yi
+                    leftmost_selected_cell_on_yi = (
+                        self.datamethods._minimum_x_offset_cell(selected_cells_on_yi)
                     )
                     selection += [
-                        c for c in potential_cells_on_yi if c.is_left_of(leftmost_selected_cell_on_yi)
+                        c
+                        for c in potential_cells_on_yi
+                        if c.is_left_of(leftmost_selected_cell_on_yi)
                     ]
 
                 if direction == RIGHT:
-                    rightmost_selected_cell_on_yi = self.datamethods._maximum_x_offset_cell(
-                        selected_cells_on_yi
+                    rightmost_selected_cell_on_yi = (
+                        self.datamethods._maximum_x_offset_cell(selected_cells_on_yi)
                     )
                     selection += [
-                        c for c in potential_cells_on_yi if c.is_right_of(rightmost_selected_cell_on_yi)
+                        c
+                        for c in potential_cells_on_yi
+                        if c.is_right_of(rightmost_selected_cell_on_yi)
                     ]
 
         self.cells += selection
         return self
 
-
-    def fill(self, direction: Tuple[int,int]):
+    def fill(self, direction: Tuple[int, int]):
         """
         Given a direction of UP, DOWN, LEFT, RIGHT
         Creates a new selection from the cells in that direction

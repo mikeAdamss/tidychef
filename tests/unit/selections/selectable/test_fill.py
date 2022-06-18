@@ -56,33 +56,62 @@ def test_fill():
     """
 
     for case in [
-        InputsToTestExtrusion("F5, UP", [BaseCell(x=5, y=4)], UP, 4, single_input_A1F5()),
-        InputsToTestExtrusion("C4, UP", [BaseCell(x=2, y=3)], UP, 3, single_input_A1F5()),
-        InputsToTestExtrusion("A3, UP", [BaseCell(x=0, y=2)], UP, 2, single_input_A1F5()),
-        InputsToTestExtrusion("A3 + F2, UP", [
-            BaseCell(x=0, y=2),
-            BaseCell(x=5, y=1)
-            ], UP, 3, single_input_A1F5()),
-        InputsToTestExtrusion("A1, DOWN", [BaseCell(x=0, y=0)], DOWN, 4, single_input_A1F5()),
-        InputsToTestExtrusion("C4, DOWN", [BaseCell(x=2, y=3)], DOWN, 1, single_input_A1F5()),
-        InputsToTestExtrusion("A3, DOWN", [BaseCell(x=0, y=2)], DOWN, 2, single_input_A1F5()),
-        InputsToTestExtrusion("A3 + F2, DOWN", [
-            BaseCell(x=0, y=2),
-            BaseCell(x=5, y=1)
-            ], DOWN, 5, single_input_A1F5()),
-        InputsToTestExtrusion("B2, RIGHT", [BaseCell(x=1, y=1)], LEFT, 1, single_input_A1F5()),
-        InputsToTestExtrusion("B4 + F5, LEFT", [
-            BaseCell(x=1, y=3),
-            BaseCell(x=5, y=4)
-            ], LEFT, 6, single_input_A1F5()),
-        InputsToTestExtrusion("B2 + C3, LEFT", [
-            BaseCell(x=1, y=1),
-            BaseCell(x=2, y=2)
-            ], LEFT, 3, single_input_A1F5()),
-        InputsToTestExtrusion("B2 + C3, RIGHT", [
-            BaseCell(x=1, y=1),
-            BaseCell(x=2, y=2)
-            ], RIGHT, 7, single_input_A1F5())
+        InputsToTestExtrusion(
+            "F5, UP", [BaseCell(x=5, y=4)], UP, 4, single_input_A1F5()
+        ),
+        InputsToTestExtrusion(
+            "C4, UP", [BaseCell(x=2, y=3)], UP, 3, single_input_A1F5()
+        ),
+        InputsToTestExtrusion(
+            "A3, UP", [BaseCell(x=0, y=2)], UP, 2, single_input_A1F5()
+        ),
+        InputsToTestExtrusion(
+            "A3 + F2, UP",
+            [BaseCell(x=0, y=2), BaseCell(x=5, y=1)],
+            UP,
+            3,
+            single_input_A1F5(),
+        ),
+        InputsToTestExtrusion(
+            "A1, DOWN", [BaseCell(x=0, y=0)], DOWN, 4, single_input_A1F5()
+        ),
+        InputsToTestExtrusion(
+            "C4, DOWN", [BaseCell(x=2, y=3)], DOWN, 1, single_input_A1F5()
+        ),
+        InputsToTestExtrusion(
+            "A3, DOWN", [BaseCell(x=0, y=2)], DOWN, 2, single_input_A1F5()
+        ),
+        InputsToTestExtrusion(
+            "A3 + F2, DOWN",
+            [BaseCell(x=0, y=2), BaseCell(x=5, y=1)],
+            DOWN,
+            5,
+            single_input_A1F5(),
+        ),
+        InputsToTestExtrusion(
+            "B2, RIGHT", [BaseCell(x=1, y=1)], LEFT, 1, single_input_A1F5()
+        ),
+        InputsToTestExtrusion(
+            "B4 + F5, LEFT",
+            [BaseCell(x=1, y=3), BaseCell(x=5, y=4)],
+            LEFT,
+            6,
+            single_input_A1F5(),
+        ),
+        InputsToTestExtrusion(
+            "B2 + C3, LEFT",
+            [BaseCell(x=1, y=1), BaseCell(x=2, y=2)],
+            LEFT,
+            3,
+            single_input_A1F5(),
+        ),
+        InputsToTestExtrusion(
+            "B2 + C3, RIGHT",
+            [BaseCell(x=1, y=1), BaseCell(x=2, y=2)],
+            RIGHT,
+            7,
+            single_input_A1F5(),
+        ),
     ]:
 
         case.data.cells = case.data.datamethods._exactly_matched_xy_cells(
