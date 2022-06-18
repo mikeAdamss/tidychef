@@ -8,10 +8,10 @@ test: ## Run all tests and update your test coverage statistics
     poetry run coverage run -m pytest
 
 coverage: ## View test coverage statistics
-    coverage report -m
+    poetry run coverage report -m
 
 black: ## Format the code base with black
-    black ./*
+    poetry run black ./*
 
 pyright: ## Run pyright against the code base
-    pyright . --lib
+    poetry run pyright . --lib

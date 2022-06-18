@@ -67,18 +67,26 @@ class Cell(BaseCell):
     # cell formatting.
     cellformat: Optional[CellFormatting] = None
 
-    @property
-    def blank(self):
+    def is_blank(self, discount_whitespace: bool = True):
         """
         Can the contents of the cell be regarded as blank
         """
         if isinstance(self.value, str):
-            if self.value.strip() == "":
+            v = self.value.strip() if discount_whitespace else self.value
+            if v == "":
                 return True
+            else:
+                return False
         elif not self.value:
             return True
         else:
-            return False
+            raise ValueError(f'Error with {self._as_xy_str()} A cell should have a str or nan/None value')
+
+    def is_not_blank(self, discount_whitespace: bool = True):
+        """
+        Can the contents of the cell be regarded as not blank
+        """
+        return not self.is_blank(discount_whitespace = discount_whitespace)
 
     def _as_xy_str(self) -> str:
         """

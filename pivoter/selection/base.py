@@ -21,6 +21,29 @@ class Selectable(BaseInput):
             raise LoneValueOnMultipleCellsError(len(self.cells))
         return self.cells[0].value
 
+
+    def is_blank(self, discount_whitespace=True):
+        """
+        Filters the selection to those cells that are blank.
+
+        By default a cell with just whitespace in it is
+        considered blank. You can change this behaviour
+        with the discount_whitespace keyword.
+        """
+        self.cells = [x for x in self.cells if x.is_blank(discount_whitespace)]
+
+
+    def is_not_blank(self, discount_whitespace=True):
+        """
+        Filters the selection to those cells that are not blank.
+
+        By default a cell with just whitespace in it is
+        considered blank. You can change this behaviour
+        with the discount_whitespace keyword.
+        """
+        self.cells = [x for x in self.cells if x.is_not_blank(discount_whitespace)]
+
+
     def expand(self, direction: Tuple[int, int]):
         """
         Given a direction of UP, DOWN, LEFT, RIGHT

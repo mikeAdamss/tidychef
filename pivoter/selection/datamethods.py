@@ -1,7 +1,7 @@
 from typing import List
 
 from pivoter.exceptions import CellsDoNotExistError
-from pivoter.models.source.cell import BaseCell
+from pivoter.models.source.cell import BaseCell, Cell
 
 
 class DataMethods:
