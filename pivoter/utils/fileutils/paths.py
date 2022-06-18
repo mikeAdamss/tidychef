@@ -6,10 +6,10 @@ from pivoter.exceptions import FileInputError
 
 def ensure_existing_path(maybe_path: Union[Path, str]) -> Path:
     """
-    When given something that is expected to be a existing path, ensure that:
+    When given a Path or str representing an existing path, ensure that:
 
-    a.) it is
-    b.) it exists
+    a.) it is a Path (convert where necessary)
+    b.) confirm it exists
     """
 
     if not isinstance(maybe_path, (Path, str)):
