@@ -103,5 +103,6 @@ class Selectable(BaseInput):
         are aliases of UP and DOWN respectively.
         """
         did_have = copy.deepcopy(self.cells)
-        expanded = self.expand(direction)
-        return expanded - did_have
+        self = self.expand(direction)
+        self.cells = [x for x in self.cells if x not in did_have]
+        return self

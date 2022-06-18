@@ -50,49 +50,49 @@ def single_input_A1F5() -> Selectable:
     )
 
 
-def test_expand():
+def test_fill():
     """
-    Test multiple variations of the expand command.
+    Test multiple variations of the fill command.
     """
 
     for case in [
-        InputsToTestExtrusion("F5, UP", [BaseCell(x=5, y=4)], UP, 5, single_input_A1F5()),
-        InputsToTestExtrusion("C4, UP", [BaseCell(x=2, y=3)], UP, 4, single_input_A1F5()),
-        InputsToTestExtrusion("A3, UP", [BaseCell(x=0, y=2)], UP, 3, single_input_A1F5()),
+        InputsToTestExtrusion("F5, UP", [BaseCell(x=5, y=4)], UP, 4, single_input_A1F5()),
+        InputsToTestExtrusion("C4, UP", [BaseCell(x=2, y=3)], UP, 3, single_input_A1F5()),
+        InputsToTestExtrusion("A3, UP", [BaseCell(x=0, y=2)], UP, 2, single_input_A1F5()),
         InputsToTestExtrusion("A3 + F2, UP", [
             BaseCell(x=0, y=2),
             BaseCell(x=5, y=1)
-            ], UP, 5, single_input_A1F5()),
-        InputsToTestExtrusion("A1, DOWN", [BaseCell(x=0, y=0)], DOWN, 5, single_input_A1F5()),
-        InputsToTestExtrusion("C4, DOWN", [BaseCell(x=2, y=3)], DOWN, 2, single_input_A1F5()),
-        InputsToTestExtrusion("A3, DOWN", [BaseCell(x=0, y=2)], DOWN, 3, single_input_A1F5()),
+            ], UP, 3, single_input_A1F5()),
+        InputsToTestExtrusion("A1, DOWN", [BaseCell(x=0, y=0)], DOWN, 4, single_input_A1F5()),
+        InputsToTestExtrusion("C4, DOWN", [BaseCell(x=2, y=3)], DOWN, 1, single_input_A1F5()),
+        InputsToTestExtrusion("A3, DOWN", [BaseCell(x=0, y=2)], DOWN, 2, single_input_A1F5()),
         InputsToTestExtrusion("A3 + F2, DOWN", [
             BaseCell(x=0, y=2),
             BaseCell(x=5, y=1)
-            ], DOWN, 7, single_input_A1F5()),
-        InputsToTestExtrusion("B2, RIGHT", [BaseCell(x=1, y=1)], LEFT, 2, single_input_A1F5()),
+            ], DOWN, 5, single_input_A1F5()),
+        InputsToTestExtrusion("B2, RIGHT", [BaseCell(x=1, y=1)], LEFT, 1, single_input_A1F5()),
         InputsToTestExtrusion("B4 + F5, LEFT", [
             BaseCell(x=1, y=3),
             BaseCell(x=5, y=4)
-            ], LEFT, 8, single_input_A1F5()),
+            ], LEFT, 6, single_input_A1F5()),
         InputsToTestExtrusion("B2 + C3, LEFT", [
             BaseCell(x=1, y=1),
             BaseCell(x=2, y=2)
-            ], LEFT, 5, single_input_A1F5()),
+            ], LEFT, 3, single_input_A1F5()),
         InputsToTestExtrusion("B2 + C3, RIGHT", [
             BaseCell(x=1, y=1),
             BaseCell(x=2, y=2)
-            ], RIGHT, 9, single_input_A1F5())
+            ], RIGHT, 7, single_input_A1F5())
     ]:
 
         case.data.cells = case.data.datamethods._exactly_matched_xy_cells(
             case.data.cells, case.starting_at
         )
 
-        case.data.expand(case.direction)
+        case.data.fill(case.direction)
 
         assert len(case.data.cells) == case.expected_count, (
-            f"Expected {case.expected_count} cells, got {len(case.data.cells)}: {linesep}"
+            f"For {case.name} expected {case.expected_count} cells, got {len(case.data.cells)}: {linesep}"
             f"{case.data.selected_table.filtered._as_xy_str()}"
         )
 
