@@ -71,11 +71,7 @@ def y_to_number(excel_number_ref: int):
 
 def single_excel_ref_to_basecells(excel_ref: str) -> BaseCell:
     """
-    Given a single excel cell reference, return a list of
-    one BaseCell of Cell.
-
-    It's a list to keep the return signature syncronised with the other
-    handlers
+    Given a single excel cell reference, return a single BaseCell.
     """
 
     letters = ""
@@ -101,7 +97,7 @@ def single_excel_ref_to_basecells(excel_ref: str) -> BaseCell:
 def multi_excel_ref_to_basecells(excel_ref: str) -> List[BaseCell]:
     """
     Given an excel reference referring to multiple cells, return a list of
-    wanted BaseCells or Cells.
+    wanted BaseCells.
     """
 
     assert ":" in excel_ref

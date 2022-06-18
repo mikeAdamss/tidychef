@@ -31,6 +31,6 @@ def pristine_table_has_length(input: BaseInput, expected_len: int):
     """
 
     pristine_cell_count = len(input.selected_table.pristine.cells)
-    assert pristine_cell_count == expected_len, (
-        f"For table {input.selected_table.name}, expected {expected_len} cells, got {pristine_cell_count}"
-    )
+    assert (
+        pristine_cell_count == expected_len
+    ), f"For table {input.selected_table.name}, expected {expected_len} cells, got {pristine_cell_count}"

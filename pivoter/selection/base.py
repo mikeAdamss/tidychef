@@ -1,14 +1,15 @@
-from typing import List
+import copy
+from typing import List, FrozenSet, Tuple
 
 from pivoter.exceptions import LoneValueOnMultipleCellsError
-from pivoter.models.source.cell import BaseCell
+from pivoter.models.source.cell import BaseCell, Cell
 from pivoter.models.source.input import BaseInput
 from pivoter.constants import UP, DOWN, LEFT, RIGHT
 
+
 class Selectable(BaseInput):
     """
-    Selection methods that are (now and in the future)
-    generic to all tabulated source inputs.
+    Selection methods that are generic to all tabulated source inputs.
     """
 
     def lone_value(self) -> str:
@@ -16,51 +17,65 @@ class Selectable(BaseInput):
         Confirms the selection contains exactly one cell, then returns
         the value of that cell
         """
-        if len(self.selected_table.filtered.cells) != 1:
-            raise LoneValueOnMultipleCellsError(
-                len(self.selected_table.filtered.cells)
-            )
-        return self.selected_table.filtered.cells[0].value
+        if len(self.cells) != 1:
+            raise LoneValueOnMultipleCellsError(len(self.cells))
+        return self.cells[0].value
 
-
-    def expand(self, DIRECTION):
+    def expand(self, direction: Tuple[int, int]):
         """
-        Given a direction of UP, DOWN, LEFT, RIGHT, ABOVE or BELOW
+        Given a direction of UP, DOWN, LEFT, RIGHT
         Expands the current selection of cells in that direction.
-        """
-        availible_cells = self.datamethods._unmatching_xy_cells_from_filtered(
-            self, self.selected_table.pristine
-        )
 
-        all_y_indicies = set(
-            c.y for c in self.selected_table.filtered
+        Notes:
+        - Will also accept ABOVE and BELOW as direction, as they
+        are aliases of UP and DOWN respectively.
+        """
+
+        potential_cells: List[Cell] = self.datamethods._cells_not_in(
+            self.cells, self.pcells
         )
 
         selection: List[BaseCell] = []
+        if direction in [UP, DOWN]:  # so also ABOVE and BELOW
 
-        if DIRECTION == UP or DIRECTION == DOWN:
-            all_x_indicies = set(
-                c.x for c in self.selected_table.filtered
-            )
-            for xi in all_x_indicies:
-                cells_on_xi = self.datamethods._cells_on_x_index(self, xi)
-                for cell in cells_on_xi:
-                    cells_on_yi = self.datamethods._cells_on_y_index(self, cell.y)
+            all_used_x_indicies: FrozenSet[int] = set(c.x for c in self.cells)
+            for xi in all_used_x_indicies:
+                selected_cells_on_xi = [c for c in self.cells if c.x == xi]
 
-                    if DIRECTION == UP:
-                        selection += [
-                            c1
-                            for c1 in availible_cells
-                            if any([c2 for c2 in cells_on_yi if c2.y < c1.y])
-                        ]
+                potential_cells_on_xi: List[Cell] = [
+                    c for c in potential_cells if c.x == xi
+                ]
 
-                    if DIRECTION == DOWN:
-                        selection += [
-                            c1
-                            for c1 in availible_cells
-                            if any([c2 for c2 in cells_on_yi if c2.y > c1.y])
-                        ]
-      
+                if direction == UP:
+                    highest_selected_cell_on_xi = self.datamethods._minium_y_offset_cell(
+                        selected_cells_on_xi
+                    )
+                    selection += [
+                        c for c in potential_cells_on_xi if c.is_above(highest_selected_cell_on_xi)
+                    ]
 
-        self.selected_table.filtered = self.datamethods._exactly_matched_xy_cells_from_filtered(self, selection)
+                if direction == DOWN:
+                    lowest_selected_cell_on_xi = self.datamethods._maximum_y_offset_cell(
+                        selected_cells_on_xi
+                    )
+                    selection += [
+                        c for c in potential_cells_on_xi if c.is_below(lowest_selected_cell_on_xi)
+                    ]
+
+        self.cells += selection
         return self
+
+
+    def fill(self, direction: Tuple[int,int]):
+        """
+        Given a direction of UP, DOWN, LEFT, RIGHT
+        Creates a new selection from the cells in that direction
+        relative to the current cell selection.
+
+        Notes:
+        - Will also accept ABOVE and BELOW as direction, as they
+        are aliases of UP and DOWN respectively.
+        """
+        did_have = copy.deepcopy(self.cells)
+        expanded = self.expand(direction)
+        return expanded - did_have

@@ -5,4 +5,5 @@ from .common import (
     CellsDoNotExistError,
     IteratingSingleTableError,
     LoneValueOnMultipleCellsError,
+    IllegalOperationError,
 )

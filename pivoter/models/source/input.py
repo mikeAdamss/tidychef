@@ -12,7 +12,8 @@ from typing import List
 
 from .table import LiveTable
 from pivoter.configuration import ConfigController
-from pivoter.exceptions import IteratingSingleTableError
+from pivoter.exceptions import IllegalOperationError, IteratingSingleTableError
+from pivoter.models.source.cell import BaseCell, Cell
 from pivoter.selection import datamethods
 
 
@@ -26,7 +27,6 @@ class BaseInput:
 
     def __init__(
         self,
-
         is_singleton_table: bool,
         selected_table: LiveTable,
         cfg: ConfigController = ConfigController.from_ini(),
@@ -53,6 +53,44 @@ class BaseInput:
         Alternate call to name.
         """
         return self.name
+
+    @property
+    def cells(self) -> List[Cell]:
+        """
+        Accessor for currently selected cells from the
+        currently selected table
+        """
+        return self.selected_table.filtered.cells
+
+    @cells.setter
+    def cells(self, cells: List[Cell]):
+        """
+        Setter for the cells property
+        """
+        self.selected_table.filtered.cells = cells
+
+    @property
+    def pcells(self) -> List[BaseCell]:
+        """
+        Accessor for the pristine cells from the
+        currently selected table
+        """
+        return self.selected_table.pristine.cells
+
+    @pcells.setter
+    def pcells(self, cells: List[BaseCell]):
+        """
+        Illegal method. This is defensive programming and
+        will raise an error. There are no circumatances
+        where you should ever modify you pristine record
+        of the source data.
+
+        If you are attempting to do this, you are trying to
+        achieve something that is fundementally wrong.
+        """
+        raise IllegalOperationError(
+            "You should never, under any circumstances be attempting to modify the pristne record of which cells were ingested for this table."
+        )
 
     def __iter__(self):
         """

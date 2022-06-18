@@ -95,6 +95,14 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "nodeenv"
+version = "1.6.0"
+description = "Node.js virtual environment builder"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "packaging"
 version = "21.3"
 description = "Core utilities for Python packages"
@@ -181,6 +189,21 @@ python-versions = ">=3.6.8"
 diagrams = ["railroad-diagrams", "jinja2"]
 
 [[package]]
+name = "pyright"
+version = "1.1.254"
+description = "Command line wrapper for pyright"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+nodeenv = ">=1.6.0"
+
+[package.extras]
+all = ["twine (>=3.4.1)"]
+dev = ["twine (>=3.4.1)"]
+
+[[package]]
 name = "pytest"
 version = "7.1.2"
 description = "pytest: simple powerful testing with Python"
@@ -228,7 +251,7 @@ python-versions = ">=3.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "897551722bed544235abee97f55b97de6c30bf5cbf5659beedbb01e9d6788d73"
+content-hash = "a49c92aadfec29af7388cb59bfc94af10666420454f98483af8ed04e8ababa46"
 
 [metadata.files]
 atomicwrites = [
@@ -284,6 +307,10 @@ mypy-extensions = [
     {file = "mypy_extensions-0.4.3-py2.py3-none-any.whl", hash = "sha256:090fedd75945a69ae91ce1303b5824f428daf5a028d2f6ab8a299250a846f15d"},
     {file = "mypy_extensions-0.4.3.tar.gz", hash = "sha256:2d82818f5bb3e369420cb3c4060a7970edba416647068eb4c5343488a6c604a8"},
 ]
+nodeenv = [
+    {file = "nodeenv-1.6.0-py2.py3-none-any.whl", hash = "sha256:621e6b7076565ddcacd2db0294c0381e01fd28945ab36bcf00f41c5daf63bef7"},
+    {file = "nodeenv-1.6.0.tar.gz", hash = "sha256:3ef13ff90291ba2a4a7a4ff9a979b63ffdd00a464dbe04acf0ea6471517a4c2b"},
+]
 packaging = [
     {file = "packaging-21.3-py3-none-any.whl", hash = "sha256:ef103e05f519cdc783ae24ea4e2e0f508a9c99b2d4969652eed6a2e1ea5bd522"},
     {file = "packaging-21.3.tar.gz", hash = "sha256:dd47c42927d89ab911e606518907cc2d3a1f38bbd026385970643f9c5b8ecfeb"},
@@ -314,6 +341,10 @@ py = [
 pyparsing = [
     {file = "pyparsing-3.0.9-py3-none-any.whl", hash = "sha256:5026bae9a10eeaefb61dab2f09052b9f4307d44aee4eda64b309723d8d206bbc"},
     {file = "pyparsing-3.0.9.tar.gz", hash = "sha256:2b020ecf7d21b687f219b71ecad3631f644a47f01403fa1d1036b0c6416d70fb"},
+]
+pyright = [
+    {file = "pyright-1.1.254-py3-none-any.whl", hash = "sha256:4a12432a29359195738685091da9e5b39f830940d265c85ce8920fa936e92b31"},
+    {file = "pyright-1.1.254.tar.gz", hash = "sha256:55394e1198b0feef261552a7fcca13c7705cb89fd9c77e8c4cfa79b27f4af549"},
 ]
 pytest = [
     {file = "pytest-7.1.2-py3-none-any.whl", hash = "sha256:13d0e3ccfc2b6e26be000cb6568c832ba67ba32e719443bfe725814d3c42433c"},

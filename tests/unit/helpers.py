@@ -1,7 +1,8 @@
+from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Optional
 
-from pivoter.models.source.cell import Cell
+from pivoter.models.source.cell import BaseCell, Cell
 from pivoter.models.source.table import Table, LiveTable
 from pivoter.selection.base import Selectable
 
@@ -12,6 +13,17 @@ fixture_locations_as_str = ",".join(fixtures_locations)
 
 pivoter_dir = Path(__file__).parent.parent.parent
 fixture_dir = Path(pivoter_dir / "tests" / "fixtures")
+
+
+@dataclass
+class TestCaseExtrusion:
+    """
+    Test Inputs for an extrusion (fill/expand) case.
+    """
+    starting_at: List[BaseCell]
+    direction: int
+    expected_count: int
+    data: Optional[Selectable] = None
 
 
 def path_to_fixture(subdir: str, file_wanted: str) -> Path:

@@ -35,6 +35,16 @@ class UnnamedTableError(Exception):
         )
 
 
+class IllegalOperationError(Exception):
+    """
+    Defensive programming. The user is attempting to do something that
+    they should never be attempting to do.
+    """
+
+    def __init__(self, msg):
+        self.msg = msg
+
+
 class CellsDoNotExistError(Exception):
     """
     User is trying to select something from the filtered table that
@@ -44,9 +54,7 @@ class CellsDoNotExistError(Exception):
     based on configuration.
     """
 
-    def __init__(self, config: ConfigController, unfound_cells: List[BaseCell]):
-
-        max_cell_display = int(config.configparser["DISPLAY"]["BAD_CELLS_TO_DISPLAY"])
+    def __init__(self, max_cell_display, unfound_cells: List[BaseCell]):
 
         truncated = False
         if len(unfound_cells) > max_cell_display:
@@ -55,10 +63,10 @@ class CellsDoNotExistError(Exception):
 
         msg = "You are to select a subset of cells that do not exist in the current selection:"
         for uc in unfound_cells:
-            msg += f'\n{uc}'
-            
+            msg += f"\n{uc}"
+
         if truncated:
-            msg += f'\Examples missing cells truncated to {len(unfound_cells)} results from {max_cell_display}'
+            msg += f"\Examples missing cells truncated to {len(unfound_cells)} results from {max_cell_display}"
 
         self.msg = msg
 

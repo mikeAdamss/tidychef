@@ -31,7 +31,7 @@ class ConfigController:
 
         cfg = configparser.ConfigParser()
         cfg.read(ini_path)
-        
+
         cc = ConfigController(cfg)
         cc.validate()
         return cc

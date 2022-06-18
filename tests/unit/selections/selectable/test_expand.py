@@ -1,12 +1,14 @@
+from dataclasses import dataclass
+from os import linesep
+
 import pytest
 
 from pivoter.constants import RIGHT, UP, DOWN, LEFT
-from pivoter.models.source.cell import Cell
+from pivoter.models.source.cell import Cell, BaseCell
 from pivoter.selection.base import Selectable
-from ...helpers import single_table_test_input
+from helpers import single_table_test_input, CaseInputExtrusion
 
 
-@pytest.fixture
 def single_input_A1F5() -> Selectable:
     """
     A single table input, one column of three cells for
@@ -19,31 +21,26 @@ def single_input_A1F5() -> Selectable:
             Cell(x=0, y=2, value="of A3"),
             Cell(x=0, y=3, value="of A4"),
             Cell(x=0, y=4, value="of A5"),
-
             Cell(x=1, y=0, value="of B1"),
             Cell(x=1, y=1, value="of B2"),
             Cell(x=1, y=2, value="of B3"),
             Cell(x=1, y=3, value="of B4"),
             Cell(x=1, y=4, value="of B5"),
-
             Cell(x=2, y=0, value="of C1"),
             Cell(x=2, y=1, value="of C2"),
             Cell(x=2, y=2, value="of C3"),
             Cell(x=2, y=3, value="of C4"),
             Cell(x=2, y=4, value="of C5"),
-
             Cell(x=3, y=0, value="of D1"),
             Cell(x=3, y=1, value="of D2"),
             Cell(x=3, y=2, value="of D3"),
             Cell(x=3, y=3, value="of D4"),
             Cell(x=3, y=4, value="of D5"),
-
             Cell(x=4, y=0, value="of E1"),
             Cell(x=4, y=1, value="of E2"),
             Cell(x=4, y=2, value="of E3"),
             Cell(x=4, y=3, value="of E4"),
             Cell(x=4, y=4, value="of E5"),
-
             Cell(x=5, y=0, value="of F1"),
             Cell(x=5, y=1, value="of F2"),
             Cell(x=5, y=2, value="of F3"),
@@ -54,6 +51,55 @@ def single_input_A1F5() -> Selectable:
     )
 
 
-def test_expand_1(single_input_A1F5: Selectable):
-    
-    single_input_A1F5.expand(RIGHT)
+def test_expand():
+    """
+    Test multiple variations of the expand command.
+    """
+
+    for case in [
+
+        # F5, UP
+        CaseInputExtrusion([BaseCell(x=5, y=4)], UP, 5, single_input_A1F5()),
+
+        # C4, UP
+        CaseInputExtrusion([BaseCell(x=2, y=3)], UP, 4, single_input_A1F5()),
+
+        # A3, UP
+        CaseInputExtrusion([BaseCell(x=0, y=2)], UP, 3, single_input_A1F5()),
+
+        # A3 + F2, UP
+        CaseInputExtrusion([
+            BaseCell(x=0, y=2),
+            BaseCell(x=5, y=1)
+            ], UP, 5, single_input_A1F5()),
+
+        # A1, DOWN
+        CaseInputExtrusion([BaseCell(x=0, y=0)], DOWN, 5, single_input_A1F5()),
+
+        # C4, DOWN
+        CaseInputExtrusion([BaseCell(x=2, y=3)], DOWN, 2, single_input_A1F5()),
+
+        # A3, DOWN
+        CaseInputExtrusion([BaseCell(x=0, y=2)], DOWN, 3, single_input_A1F5()),
+
+        # A3 + F2, DOWN
+        CaseInputExtrusion([
+            BaseCell(x=0, y=2),
+            BaseCell(x=5, y=1)
+            ], DOWN, 7, single_input_A1F5()),
+    ]:
+
+        case.data.cells = case.data.datamethods._exactly_matched_xy_cells(
+            case.data.cells, case.starting_at
+        )
+
+        case.data.expand(case.direction)
+
+        assert len(case.data.cells) == case.expected_count, (
+            f"Expected {case.expected_count} cells, got {len(case.data.cells)}: {linesep}"
+            f"{case.data.selected_table.filtered._as_xy_str()}"
+        )
+
+
+if __name__ == "__main__":
+    pytest()

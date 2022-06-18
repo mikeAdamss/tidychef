@@ -4,7 +4,9 @@ Classes representing a single cell of data.
 
 from __future__ import annotations
 
+import copy
 from dataclasses import dataclass
+from os import linesep
 from typing import List, Optional
 
 from .cell import Cell
@@ -23,6 +25,16 @@ class Table:
         if not self.cells:
             self.cells = []
         self.cells.append(cell)
+
+    def _as_xy_str(self, demarcation=linesep) -> str:
+        """
+        Returns a str represtentation of the current cells
+        with their xy co-ordinates and values.
+        """
+        mystr = ""
+        for cell in self.cells:
+            mystr += f"{cell._as_xy_str()}{demarcation}"
+        return mystr
 
 
 @dataclass
@@ -65,7 +77,7 @@ class LiveTable:
         """
         Given a table and optional it's name, create a livetable.
         """
-        return LiveTable(_name=name, pristine=table, filtered=table)
+        return LiveTable(_name=name, pristine=table, filtered=copy.deepcopy(table))
 
     def _table_lengths_match(self):
         """

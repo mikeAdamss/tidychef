@@ -26,6 +26,34 @@ class BaseCell:
         """
         return self.x == other_cell.x and self.y == other_cell.y
 
+    def is_above(self, cell: BaseCell) -> bool:
+        """
+        When compared to another cell, is this
+        cell above it?
+        """
+        return self.y < cell.y
+
+    def is_below(self, cell: BaseCell) -> bool:
+        """
+        When compared to another cell, is this
+        cell below it?
+        """
+        return self.y > cell.y
+
+    def is_right_of(self, cell: BaseCell) -> bool:
+        """
+        When compared to another cell, is this
+        cell to the right of it?
+        """
+        return self.x > cell.x
+
+    def is_left_of(self, cell: BaseCell) -> bool:
+        """
+        When compared to another cell, is this
+        cell to the left of it?
+        """
+        return self.x < cell.x
+
 
 @dataclass
 class Cell(BaseCell):
@@ -51,3 +79,10 @@ class Cell(BaseCell):
             return True
         else:
             return False
+
+    def _as_xy_str(self) -> str:
+        """
+        Returns a str representation of the current cell
+        with xy co-ordinates and value.
+        """
+        return f"x:{self.x}, y:{self.y}, value = {self.value}"
