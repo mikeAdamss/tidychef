@@ -90,5 +90,47 @@ def test_x_to_letters():
         ), f"Expected {case.expected} from x:{case.x}, but got {cellutils.x_to_letters(case.x)}"
 
 
+def test_excel_ref_to_basecells():
+    """
+    Confirm that excel references can correctly be converted to lists of BaseCells
+    """
+
+    @dataclass
+    class Case:
+        excel_ref: str
+        cells: List[BaseCell]
+
+    for case in [
+        Case("A1:B1", [BaseCell(x=0, y=0), BaseCell(x=1, y=0)]),
+        Case(
+            "A2:C3",
+            [
+                BaseCell(x=0, y=1),
+                BaseCell(x=0, y=2),
+                BaseCell(x=1, y=1),
+                BaseCell(x=1, y=2),
+                BaseCell(x=2, y=1),
+                BaseCell(x=2, y=2),
+            ],
+        ),
+        Case("ZB1", [BaseCell(x=27, y=0)])
+    ]:
+
+        cells: List[BaseCell] = cellutils.excel_ref_as_wanted_basecells(case.excel_ref)
+
+        assert len(cells) == len(case.cells), (
+            "Excel ref resulting in unexpected number of cell references. "
+            f"Got {len(cells)}, expecting {len()}"
+        )
+
+        for cell in cells:
+            assert (
+                cell in case.cells
+            ), f"Cell {cell} missing from expected cells {case.cells}"
+
+        for cell in case.cells:
+            assert cell in cells, f"Cell {cell} missing from expected cells {cells}"
+
+
 if __name__ == "__main__":
     pytest()

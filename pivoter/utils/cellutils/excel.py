@@ -137,7 +137,11 @@ ref_styles = {
 }
 
 
-def get_ref_as_wanted_basecells(excel_ref: str) -> List[BaseCell]:
+def excel_ref_as_wanted_basecells(excel_ref: str) -> List[BaseCell]:
+    """
+    Convert an excel reference into a list of BaseCell objects,
+    holding the x and y indicies of the cells in question.
+    """
 
     identified_ref_styles = []
 
