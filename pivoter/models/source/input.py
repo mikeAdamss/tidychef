@@ -12,7 +12,10 @@ from typing import List
 
 from .table import LiveTable
 from pivoter.configuration import ConfigController
-from pivoter.exceptions import IllegalOperationError, IteratingSingleTableError
+from pivoter.exceptions import (
+    IteratingSingleTableError,
+    UnalignedTableOperation
+)
 from pivoter.models.source.cell import BaseCell, Cell
 from pivoter.selection import datamethods
 
@@ -50,7 +53,7 @@ class BaseInput:
     @property
     def title(self) -> str:
         """
-        Alternate call to name.
+        Alternate call to name for databaker backwards compatibility
         """
         return self.name
 
@@ -77,20 +80,27 @@ class BaseInput:
         """
         return self.selected_table.pristine.cells
 
-    @pcells.setter
-    def pcells(self, cells: List[BaseCell]):
+    @property
+    def signature(self):
         """
-        Illegal method. This is defensive programming and
-        will raise an error. There are no circumatances
-        where you should ever modify you pristine record
-        of the source data.
+        A uuid that uniquely identifies a parsed input source
+        """
+        return self.selected_table.filtered._signature
 
-        If you are attempting to do this, you are trying to
-        achieve something that is fundementally wrong.
+    def __sub__(self, other_input: BaseInput):
         """
-        raise IllegalOperationError(
-            "You should never, under any circumstances be attempting to modify the pristne record of which cells were ingested for this table."
-        )
+        Allow subtraction of one selection from the same distinct
+        and currently selected table from another. Provided they 
+        are derrived from the same initial BaseInput.
+        """
+
+        if self.signature != other_input.signature:
+            raise UnalignedTableOperation()
+
+        remove_cells = self.datamethods._cells_not_in(other_input.cells, self.cells)
+        self.cells = [c for c in self.cells if c not in remove_cells]
+        return self
+
 
     def __iter__(self):
         """

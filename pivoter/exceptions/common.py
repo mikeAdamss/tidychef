@@ -33,16 +33,6 @@ class UnnamedTableError(Exception):
         )
 
 
-class IllegalOperationError(Exception):
-    """
-    Defensive programming. The user is attempting to do something that
-    they should never be attempting to do.
-    """
-
-    def __init__(self, msg):
-        self.msg = msg
-
-
 class CellsDoNotExistError(Exception):
     """
     User is trying to select something from the filtered table that
@@ -83,3 +73,33 @@ class InvalidCellObjectError(Exception):
 
     def __init__(self, msg):
         self.msg = msg
+
+
+class UnalignedTableOperation(Exception):
+    """
+    Raised where a user it trying to combine selections from two
+    distinct inputs to synthasise a new input.
+
+    This is invalid, as each input represents a subset (up to the whole of)
+    a single distinct source of tabulated data.
+    """
+
+    def __init__(self):
+        self.msg = (
+            'Selection can only be combined if they are taken '
+            'from the exact same table as taken from a single '
+            'instance of a parsed input.'
+        )
+                 
+
+class InvalidTableSignatures(Exception):
+    """
+    Raised where someone is constructing a LiveTable from two
+    non identical tables.
+    """
+
+    def __init__(self):
+        self.msg = (
+            'This class:LiveTable is invalid. A LiveTable must be '
+            'instantiated from tables with matching signatures.'
+        )

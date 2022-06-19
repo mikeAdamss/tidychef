@@ -7,10 +7,11 @@ from __future__ import annotations
 import copy
 from dataclasses import dataclass
 from os import linesep
+import uuid
 from typing import List, Optional
 
 from .cell import Cell
-from pivoter.exceptions import UnnamedTableError
+from pivoter.exceptions import InvalidTableSignatures, UnnamedTableError
 
 
 class Table:
@@ -20,6 +21,7 @@ class Table:
 
     def __init__(self, cells: Optional[List[Cell]] = None):
         self.cells = cells
+        self._signature = str(uuid.uuid4())
 
     def add_cell(self, cell: Cell):
         if not self.cells:
@@ -37,7 +39,6 @@ class Table:
         return mystr.strip()
 
 
-@dataclass
 class LiveTable:
     """
     A "live" table represents two things:
@@ -51,9 +52,11 @@ class LiveTable:
     filtering down of one.
     """
 
-    pristine: Table
-    filtered: Table
-    _name: Optional[str] = None
+    def __init__(self, pristine: Table, filtered: Table, _name: str = None):
+        self.pristine: Table = pristine
+        self.filtered: Table = filtered
+        self._name: Optional[str] = _name
+        self.validate()
 
     @property
     def name(self):
@@ -69,9 +72,16 @@ class LiveTable:
     def name(self, name: str):
         self._name = name
 
+    def validate(self):
+        """
+        Confirm class is validly constructed.
+        """
+        if self.pristine._signature != self.filtered._signature:
+            raise InvalidTableSignatures()
+
     @staticmethod
     def from_table(table: Table, name: str = None) -> LiveTable:
         """
         Given a table and optional it's name, create a livetable.
         """
-        return LiveTable(_name=name, pristine=table, filtered=copy.deepcopy(table))
+        return LiveTable(pristine=table, filtered=copy.deepcopy(table), _name=name, )
