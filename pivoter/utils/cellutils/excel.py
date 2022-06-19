@@ -41,14 +41,15 @@ def x_to_letters(x: int) -> str:
     """
 
     # https://stackoverflow.com/questions/23861680/convert-spreadsheet-number-to-column-letter
-    start_index = 0   #  it can start either at 0 or at 1
-    letter = ''
-    while x > 25 + start_index:   
-        letter += chr(65 + int((x-start_index)/26) - 1)
-        x = x - (int((x-start_index)/26))*26
+    start_index = 0  #  it can start either at 0 or at 1
+    letter = ""
+    while x > 25 + start_index:
+        letter += chr(65 + int((x - start_index) / 26) - 1)
+        x = x - (int((x - start_index) / 26)) * 26
     letter += chr(65 - start_index + (int(x)))
-        
+
     return letter
+
 
 def number_to_y(excel_number_ref: int):
     """

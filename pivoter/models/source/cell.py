@@ -80,13 +80,15 @@ class Cell(BaseCell):
         elif not self.value:
             return True
         else:
-            raise ValueError(f'Error with {self._as_xy_str()} A cell should have a str or nan/None value')
+            raise ValueError(
+                f"Error with {self._as_xy_str()} A cell should have a str or nan/None value"
+            )
 
     def is_not_blank(self, discount_whitespace: bool = True):
         """
         Can the contents of the cell be regarded as not blank
         """
-        return not self.is_blank(discount_whitespace = discount_whitespace)
+        return not self.is_blank(discount_whitespace=discount_whitespace)
 
     def _as_xy_str(self) -> str:
         """

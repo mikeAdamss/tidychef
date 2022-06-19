@@ -17,13 +17,13 @@ def single_input_mixed_blank_and_not():
             Cell(x=0, y=0, value=""),
             Cell(x=0, y=1, value=" "),
             Cell(x=0, y=1, value="    "),
-            Cell(x=0, y=1, value=None),         
+            Cell(x=0, y=1, value=None),
             Cell(x=1, y=0, value="foo"),
             Cell(x=1, y=1, value="bar"),
             Cell(x=1, y=1, value="baz"),
         ],
         "single input A1",
-        Selectable
+        Selectable,
     )
 
 
@@ -35,7 +35,9 @@ def test_all_blanks_from_table(single_input_mixed_blank_and_not: Selectable):
     assert len(single_input_mixed_blank_and_not.cells) == 4
 
 
-def test_all_blanks_from_table_not_discounting_whitespace(single_input_mixed_blank_and_not: Selectable):
+def test_all_blanks_from_table_not_discounting_whitespace(
+    single_input_mixed_blank_and_not: Selectable,
+):
     """
     Test that default blank behaviour filters to all expected cells.
     """

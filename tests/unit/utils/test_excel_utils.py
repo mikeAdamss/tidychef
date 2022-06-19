@@ -77,15 +77,10 @@ def test_x_to_letters():
         x: int
         expected: str
 
-    for case in [
-        Case(5, "F"),
-        Case(26, "AA"),
-        Case(25, "Z"),
-        Case(51, "AZ")
-    ]:
-        assert cellutils.x_to_letters(case.x) == case.expected, (
-            f'Expected {case.expected} from x:{case.x}, but got {cellutils.x_to_letters(case.x)}'
-        )
+    for case in [Case(5, "F"), Case(26, "AA"), Case(25, "Z"), Case(51, "AZ")]:
+        assert (
+            cellutils.x_to_letters(case.x) == case.expected
+        ), f"Expected {case.expected} from x:{case.x}, but got {cellutils.x_to_letters(case.x)}"
 
 
 if __name__ == "__main__":

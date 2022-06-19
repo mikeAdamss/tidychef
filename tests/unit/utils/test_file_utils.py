@@ -6,6 +6,7 @@ from pivoter.exceptions import FileInputError, UnsupportedLocalFileError
 from pivoter.utils import fileutils
 from pivoter.constants import SUPPORTED_LOCAL_FILETYPES
 
+
 def test_identify_local_input_type_with_known_input_type():
     """
     Test we can successfuly identify known local input types
@@ -13,11 +14,12 @@ def test_identify_local_input_type_with_known_input_type():
     """
 
     for known_filetype in SUPPORTED_LOCAL_FILETYPES.__dict__.values():
-        filepath_to_nothing: Path = Path(f'I-dont-exist.{known_filetype}')
+        filepath_to_nothing: Path = Path(f"I-dont-exist.{known_filetype}")
         input_type = fileutils.identify_local_input_type(filepath_to_nothing)
-        assert input_type == known_filetype, (
-            f'failing to identify registered file type of {input_type} from {filepath_to_nothing}'
-        )
+        assert (
+            input_type == known_filetype
+        ), f"failing to identify registered file type of {input_type} from {filepath_to_nothing}"
+
 
 def test_identify_local_input_type_with_unknown_input_type():
     """
@@ -25,9 +27,10 @@ def test_identify_local_input_type_with_unknown_input_type():
     is provided.
     """
 
-    filepath_to_nothing: Path = Path('I-dont-exist.wonderfulfileextension')
+    filepath_to_nothing: Path = Path("I-dont-exist.wonderfulfileextension")
     with pytest.raises(UnsupportedLocalFileError):
         fileutils.identify_local_input_type(filepath_to_nothing)
+
 
 def test_ensure_existing_path_from_str_where_exists():
     """
@@ -47,7 +50,7 @@ def test_ensure_existing_path_raises_for_not_existing():
     the appropriate error is raised.
     """
 
-    filepath_to_nothing: Path = Path('I-dont-exist.wonderfulfileextension')
+    filepath_to_nothing: Path = Path("I-dont-exist.wonderfulfileextension")
     with pytest.raises(FileInputError):
         fileutils.ensure_existing_path(filepath_to_nothing)
 
