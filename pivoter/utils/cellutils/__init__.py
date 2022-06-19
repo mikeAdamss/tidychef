@@ -6,4 +6,5 @@ from .excel import (
     multi_excel_ref_to_basecells,
     basecells_to_excel_refs,
     x_to_letters,
+    y_to_number,
 )

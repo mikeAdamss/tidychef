@@ -22,11 +22,18 @@ def test_excel_ref_to_x():
         assert expected_x == got, f"Expected {expected_x}, got {got}"
 
 
-def text_excel_row_to_y():
+def test_excel_row_to_y():
     """
     Test converting an excel row number into a y offset
     """
     assert cellutils.number_to_y(7) == 6
+
+
+def test_y_to_excel_row():
+    """
+    Test converting an excel row number into a y offset
+    """
+    assert cellutils.y_to_number(6) == 7
 
 
 def test_single_excel_ref():

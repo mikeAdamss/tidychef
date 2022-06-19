@@ -60,7 +60,9 @@ class Selectable(BaseInput):
 
             all_used_x_indicies: FrozenSet[int] = set(c.x for c in self.cells)
             for xi in all_used_x_indicies:
-                selected_cells_on_xi = [c for c in self.cells if c.x == xi]
+                selected_cells_on_xi = self.datamethods._cells_on_x_index(
+                    self.cells, xi
+                )
 
                 potential_cells_on_xi: List[Cell] = [
                     c for c in potential_cells if c.x == xi
@@ -90,7 +92,9 @@ class Selectable(BaseInput):
 
             all_used_y_indicies: FrozenSet[int] = set(c.y for c in self.cells)
             for yi in all_used_y_indicies:
-                selected_cells_on_yi = [c for c in self.cells if c.y == yi]
+                selected_cells_on_yi = self.datamethods._cells_on_y_index(
+                    self.cells, yi
+                )
 
                 potential_cells_on_yi: List[Cell] = [
                     c for c in potential_cells if c.y == yi

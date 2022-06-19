@@ -63,5 +63,6 @@ def test_livetable_name_getter_unnamed_table_err(two_cell_table_A1A2: Selectable
     with pytest.raises(UnnamedTableError):
         ltable.name
 
+
 if __name__ == "__main__":
     pytest()
