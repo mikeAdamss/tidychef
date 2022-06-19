@@ -89,7 +89,9 @@ class BaseInput:
 
     def __sub__(self, other_input: BaseInput):
         """
-        Allow subtraction of one selection from the same distinct
+        Implements - operator.
+
+        Allows subtraction of one selection from the same distinct
         and currently selected table from another. Provided they 
         are derrived from the same initial BaseInput.
         """
