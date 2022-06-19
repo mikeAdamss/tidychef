@@ -9,7 +9,3 @@ def test_local_filetype_repr():
     as intended.
     """
     assert str(SupportedLocalFiles()) == "csv"
-
-
-if __name__ == "__main__":
-    pytest()

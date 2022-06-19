@@ -130,7 +130,3 @@ def test_excel_ref_to_basecells():
 
         for cell in case.cells:
             assert cell in cells, f"Cell {cell} missing from expected cells {cells}"
-
-
-if __name__ == "__main__":
-    pytest()

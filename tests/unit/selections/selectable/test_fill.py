@@ -124,7 +124,3 @@ def test_fill():
             f"For {case.name} expected {case.expected_count} cells, got {len(case.data.cells)}: {linesep}"
             f"{case.data.selected_table.filtered._as_xy_str()}"
         )
-
-
-if __name__ == "__main__":
-    pytest()

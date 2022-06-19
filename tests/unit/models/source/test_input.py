@@ -103,7 +103,3 @@ def test_assign_to_pristine_cells_raises_err(single_unnamed_input_A1: BaseInput)
 
     with pytest.raises(IllegalOperationError):
         single_unnamed_input_A1.pcells = ""
-
-
-if __name__ == "__main__":
-    pytest()

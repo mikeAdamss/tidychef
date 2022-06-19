@@ -64,7 +64,3 @@ def test_ensure_existing_path_unexpected_type_raised_err():
     neither_path_nor_str = None 
     with pytest.raises(FileInputError):
         fileutils.ensure_existing_path(neither_path_nor_str)
-
-
-if __name__ == "__main__":
-    pytest()

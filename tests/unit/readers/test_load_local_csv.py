@@ -27,7 +27,3 @@ def test_read_local_csv_from_str():
 
     assertions.livetable_tables_have_same_length(input)
     assertions.pristine_table_has_length(input, 12)
-
-
-if __name__ == "__main__":
-    pytest()

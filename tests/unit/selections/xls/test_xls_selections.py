@@ -57,7 +57,3 @@ def test_excel_referece_out_of_bounds_error(
             "The following requested cells don't exist in the current selection: ['B1', 'B2', 'C1', 'C2', 'D1', 'D2']"
             in str(exc_info.value)
         )
-
-
-if __name__ == "__main__":
-    pytest()
