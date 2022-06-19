@@ -53,7 +53,7 @@ class DataMethods:
             x for x in wanted_cells if not any([x.matches_xy(y) for y in matched_cells])
         ]
         if len(unfound_cells) > 1:
-            raise CellsDoNotExistError(5, unfound_cells)
+            raise CellsDoNotExistError()
 
         return cls._matching_xy_cells(cells, wanted_cells)
 

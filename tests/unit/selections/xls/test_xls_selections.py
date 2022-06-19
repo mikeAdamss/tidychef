@@ -52,8 +52,3 @@ def test_excel_referece_out_of_bounds_error(
 
     with pytest.raises(CellsDoNotExistError) as exc_info:
         single_excel_input_A1A3.excel_ref("A1:D2")
-
-        assert (
-            "The following requested cells don't exist in the current selection: ['B1', 'B2', 'C1', 'C2', 'D1', 'D2']"
-            in str(exc_info.value)
-        )
