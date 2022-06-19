@@ -5,7 +5,7 @@ import pytest
 from pivoter.constants import RIGHT, UP, DOWN, LEFT
 from pivoter.models.source.cell import Cell, BaseCell
 from pivoter.selection.base import Selectable
-from helpers import single_table_test_input, InputsToTestExtrusion
+from pivotertesthelpers import single_table_test_input, InputsToTestExtrusion
 
 
 def single_input_A1F5() -> Selectable:

@@ -3,7 +3,7 @@ import pytest
 from pivoter.models.source.cell import Cell
 from pivoter.selection.spreadsheet.xls import XlsInputSelectable
 from pivoter.exceptions import CellsDoNotExistError, LoneValueOnMultipleCellsError
-from helpers import single_table_test_input
+from pivotertesthelpers import single_table_test_input
 
 
 @pytest.fixture

@@ -3,7 +3,7 @@ import pytest
 
 from pivoter.models.source.input import BaseInput
 from pivoter.readers import reader
-from helpers import path_to_fixture
+from pivotertesthelpers import path_to_fixture
 import assertions
 
 

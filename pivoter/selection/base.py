@@ -12,6 +12,12 @@ class Selectable(BaseInput):
     Selection methods that are generic to all tabulated source inputs.
     """
 
+    def assert_one(self):
+        """
+        Assert that the current selection contains exactly one cell
+        """
+        assert len(self.cells) == 1, f'Selection contains {len(self.cells)} cells, not 1'
+
     def lone_value(self) -> str:
         """
         Confirms the selection contains exactly one cell, then returns

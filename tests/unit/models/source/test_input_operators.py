@@ -6,7 +6,7 @@ controlling Input upon Input operators.
 import copy
 import pytest
 
-from helpers import single_table_test_input
+from pivotertesthelpers import single_table_test_input
 from pivoter.models.source.cell import Cell
 from pivoter.models.source.input import BaseInput
 from pivoter.exceptions import UnalignedTableOperation

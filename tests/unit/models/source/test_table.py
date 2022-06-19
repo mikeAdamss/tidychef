@@ -5,7 +5,7 @@ from pivoter.exceptions import InvalidTableSignatures, UnnamedTableError
 from pivoter.models.source.cell import Cell
 from pivoter.models.source.table import LiveTable
 from pivoter.selection.base import Selectable
-from helpers import single_table_test_input, multiple_table_test_input
+from pivotertesthelpers import single_table_test_input, multiple_table_test_input
 
 
 @pytest.fixture

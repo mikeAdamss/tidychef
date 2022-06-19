@@ -1,7 +1,7 @@
 from pathlib import Path
 import pytest
 
-from helpers import path_to_fixture
+from pivotertesthelpers import path_to_fixture
 from pivoter.exceptions import FileInputError, UnsupportedLocalFileError
 from pivoter.utils import fileutils
 from pivoter.constants import SUPPORTED_LOCAL_FILETYPES

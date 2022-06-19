@@ -5,7 +5,7 @@ and its use in a users workflow
 
 import pytest
 
-from helpers import multiple_table_test_input, single_table_test_input
+from pivotertesthelpers import multiple_table_test_input, single_table_test_input
 from pivoter.models.source.cell import Cell
 from pivoter.models.source.input import BaseInput
 from pivoter.exceptions import (
