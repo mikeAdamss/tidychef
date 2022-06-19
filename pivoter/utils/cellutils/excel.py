@@ -158,20 +158,3 @@ def excel_ref_as_wanted_basecells(excel_ref: str) -> List[BaseCell]:
     handler = ref_styles[identified_ref_style].handler
 
     return handler(excel_ref)
-
-
-def basecells_to_excel_refs(base_cells: List[BaseCell]) -> List[str]:
-    """
-    Given a list of Basecell, use the BaseCell x and y properties
-    to return a list of excel cell references.
-    """
-    excel_refs = []
-
-    logging.warning(f"basecells_to_excel_refs, recieved cells: \n{base_cells}")
-
-    for base_cell in base_cells:
-        letters = x_to_letters(base_cell.x)
-        number = y_to_number(base_cell.y)
-        excel_refs.append(f"{letters}{number}")
-
-    return excel_refs
