@@ -35,7 +35,6 @@ def letter_to_x(excel_letters_ref: str) -> int:
     return x
 
 
-# TODO - this is nasty and shouldn't be capped, rewrite it
 def x_to_letters(x: int) -> str:
     """
     Convert an x co-ordinate to excel style letter references
