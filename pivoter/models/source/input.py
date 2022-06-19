@@ -84,9 +84,10 @@ class BaseInput:
         """
         return self.selected_table.filtered._signature
 
+
     def __sub__(self, other_input: BaseInput):
         """
-        Implements - operator.
+        Implements "-" operator, subtraction
 
         Allows subtraction of one selection from the same distinct
         and currently selected table from another. Provided they
@@ -99,6 +100,23 @@ class BaseInput:
         remove_cells = self.datamethods._cells_not_in(other_input.cells, self.cells)
         self.cells = [c for c in self.cells if c not in remove_cells]
         return self
+
+
+    def __or__(self, other_input: BaseInput):
+        """
+        Implements "|" operator, union.
+
+        Allows the union of one selection from the same distinct
+        and currently selected table with another. Provided they
+        are derrived from the same initial BaseInput.
+        """
+        if self.signature != other_input.signature:
+            raise UnalignedTableOperation()
+
+        new_cells = self.datamethods._cells_not_in(other_input.cells, self.cells)
+        self.cells = self.cells + new_cells
+        return self
+
 
     def __iter__(self):
         """

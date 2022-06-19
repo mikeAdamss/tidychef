@@ -34,7 +34,7 @@ def single_unnamed_input_B1():
 
 def test_sub_operator(single_input_multicells: BaseInput):
     """
-    Test we try and make a substraction of cells from a table selection,
+    Test we can make a substraction of cells from a table selection,
     using another selection taken from said table.
     """
 
@@ -59,3 +59,39 @@ def test_subtract_operator_raises_for_unaligned_tables(
 
     with pytest.raises(UnalignedTableOperation):
         single_unnamed_input_A1 - single_unnamed_input_B1
+
+
+def test_union_operator(single_input_multicells: BaseInput):
+    """
+    Test we can create a union of cells from a table selection
+    with another selection taken from the same table.
+    """
+
+    assert len(single_input_multicells.cells) == 2
+
+    selection1 = copy.deepcopy(single_input_multicells)
+    selection1.cells = single_input_multicells.datamethods._cells_on_x_index(
+        single_input_multicells.cells, 0
+    )
+    assert len(selection1.cells) == 1
+
+    selection2 = copy.deepcopy(single_input_multicells)
+    selection2.cells = single_input_multicells.datamethods._cells_on_x_index(
+        single_input_multicells.cells, 1
+    )
+    assert len(selection2.cells) == 1
+
+    union_selection = selection1 | selection2
+    assert len(union_selection.cells) == 2
+
+
+def test_union_operator_raises_for_unaligned_tables(
+    single_unnamed_input_A1: BaseInput, single_unnamed_input_B1: BaseInput
+):
+    """
+    Test that a a suitable error is raised if we try and make a substraction of
+    cells using selections taken from different tables.
+    """
+
+    with pytest.raises(UnalignedTableOperation):
+        single_unnamed_input_A1 | single_unnamed_input_B1
