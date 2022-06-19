@@ -86,11 +86,11 @@ class UnalignedTableOperation(Exception):
 
     def __init__(self):
         self.msg = (
-            'Selection can only be combined if they are taken '
-            'from the exact same table as taken from a single '
-            'instance of a parsed input.'
+            "Selection can only be combined if they are taken "
+            "from the exact same table as taken from a single "
+            "instance of a parsed input."
         )
-                 
+
 
 class InvalidTableSignatures(Exception):
     """
@@ -100,6 +100,6 @@ class InvalidTableSignatures(Exception):
 
     def __init__(self):
         self.msg = (
-            'This class:LiveTable is invalid. A LiveTable must be '
-            'instantiated from tables with matching signatures.'
+            "This class:LiveTable is invalid. A LiveTable must be "
+            "instantiated from tables with matching signatures."
         )

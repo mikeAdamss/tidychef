@@ -12,7 +12,7 @@ def test_base_reader_can_raise_for_no_path_parameter():
 
     class FakeReader(BaseReader):
         def parse():
-            """ never called """
+            """never called"""
 
     not_a_path = "foo"
     reader = FakeReader(not_a_path)

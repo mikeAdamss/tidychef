@@ -48,7 +48,7 @@ def test_cannot_iterate_single_table_inputs(single_input_A1: BaseInput):
 
     with pytest.raises(IteratingSingleTableError):
         for table in single_input_A1:
-            """ never triggered """
+            """never triggered"""
 
 
 def test_can_iterate_multiple_table_inputs(multiple_input_A1: BaseInput):

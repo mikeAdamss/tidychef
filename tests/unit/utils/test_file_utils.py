@@ -61,6 +61,6 @@ def test_ensure_existing_path_unexpected_type_raised_err():
     confirm the expected error is raised.
     """
 
-    neither_path_nor_str = None 
+    neither_path_nor_str = None
     with pytest.raises(FileInputError):
         fileutils.ensure_existing_path(neither_path_nor_str)

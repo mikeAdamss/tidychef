@@ -84,4 +84,8 @@ class LiveTable:
         """
         Given a table and optional it's name, create a livetable.
         """
-        return LiveTable(pristine=table, filtered=copy.deepcopy(table), _name=name, )
+        return LiveTable(
+            pristine=table,
+            filtered=copy.deepcopy(table),
+            _name=name,
+        )

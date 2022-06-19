@@ -113,7 +113,7 @@ def test_excel_ref_to_basecells():
                 BaseCell(x=2, y=2),
             ],
         ),
-        Case("ZB1", [BaseCell(x=27, y=0)])
+        Case("ZB1", [BaseCell(x=27, y=0)]),
     ]:
 
         cells: List[BaseCell] = cellutils.excel_ref_as_wanted_basecells(case.excel_ref)

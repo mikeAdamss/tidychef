@@ -12,10 +12,7 @@ from typing import List
 
 from .table import LiveTable
 from pivoter.configuration import ConfigController
-from pivoter.exceptions import (
-    IteratingSingleTableError,
-    UnalignedTableOperation
-)
+from pivoter.exceptions import IteratingSingleTableError, UnalignedTableOperation
 from pivoter.models.source.cell import BaseCell, Cell
 from pivoter.selection import datamethods
 
@@ -92,7 +89,7 @@ class BaseInput:
         Implements - operator.
 
         Allows subtraction of one selection from the same distinct
-        and currently selected table from another. Provided they 
+        and currently selected table from another. Provided they
         are derrived from the same initial BaseInput.
         """
 
@@ -102,7 +99,6 @@ class BaseInput:
         remove_cells = self.datamethods._cells_not_in(other_input.cells, self.cells)
         self.cells = [c for c in self.cells if c not in remove_cells]
         return self
-
 
     def __iter__(self):
         """

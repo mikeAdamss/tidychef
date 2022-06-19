@@ -7,5 +7,5 @@ from .common import (
     LoneValueOnMultipleCellsError,
     InvalidCellObjectError,
     UnalignedTableOperation,
-    InvalidTableSignatures
+    InvalidTableSignatures,
 )

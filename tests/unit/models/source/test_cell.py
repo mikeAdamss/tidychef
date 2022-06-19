@@ -81,4 +81,3 @@ def test_is_blank_on_invalid_cell_value_types_raises_err(
 
         with pytest.raises(InvalidCellObjectError):
             cell.is_blank()
-
