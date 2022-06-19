@@ -19,7 +19,7 @@ from pivoter.selection import datamethods
 
 class BaseInput:
     """
-    A class representing a single input (typically though not exclusively a file).
+    A class representing a single input representing one or more tables.
 
     BaseInput will never be instantiated in its own right. But instead will inform
     pivoter.selection.base.Selectable and its children.

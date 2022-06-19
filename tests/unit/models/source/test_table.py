@@ -1,19 +1,29 @@
 from os import linesep
 import pytest
 
-from pivoter.exceptions import UnnamedTableError
+from pivoter.exceptions import InvalidTableSignatures, UnnamedTableError
 from pivoter.models.source.cell import Cell
 from pivoter.models.source.table import LiveTable
 from pivoter.selection.base import Selectable
-from helpers import single_table_test_input
+from helpers import single_table_test_input, multiple_table_test_input
 
 
 @pytest.fixture
-def two_cell_table_A1A2():
+def two_cell_table_A1A2() -> Selectable:
     return single_table_test_input(
         [Cell(x=0, y=0, value="foo"), Cell(x=0, y=0, value="bar")]
     )
 
+
+@pytest.fixture
+def multiple_input_A1() -> Selectable:
+    """A multiple table input, one column of one cell"""
+    return multiple_table_test_input(
+        [
+            [[Cell(x=0, y=0, value="foo in 1")], "single input A1 table 1"],
+            [[Cell(x=0, y=0, value="foo in 2")], "single input A1 table 2"],
+        ]
+    )
 
 def test_simple_xy_str(two_cell_table_A1A2: Selectable):
     """
@@ -62,3 +72,16 @@ def test_livetable_name_getter_unnamed_table_err(two_cell_table_A1A2: Selectable
     ltable: LiveTable = two_cell_table_A1A2.selected_table
     with pytest.raises(UnnamedTableError):
         ltable.name
+
+
+def test_livetable_with_unmatched_signatues_raises(multiple_input_A1: Selectable):
+    """
+    Test that where we create a class:LiveTable from two tables with
+    unmatching signatures the appropriate error is raised.
+    """
+
+    with pytest.raises(InvalidTableSignatures):
+        LiveTable(
+            multiple_input_A1.tables[0].pristine,
+            multiple_input_A1.tables[1].pristine
+    )

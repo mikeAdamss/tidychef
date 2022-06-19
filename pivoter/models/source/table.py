@@ -16,7 +16,7 @@ from pivoter.exceptions import InvalidTableSignatures, UnnamedTableError
 
 class Table:
     """
-    Represents a table of data in the from of a list of cells.
+    Represents a table of data in the form of a list of cells.
     """
 
     def __init__(self, cells: Optional[List[Cell]] = None):
@@ -43,8 +43,8 @@ class LiveTable:
     """
     A "live" table represents two things:
 
-    1.) "printine" - The pristine table as pulled from the source.
-    2.) "filtered" - The current subset of cells as selected from the pristine table.
+    1.) "pristine" - The pristine table as pulled from the source.
+    2.) "filtered" - The current subset of cells (up to all) as selected from the pristine table.
 
     Keeping track of the pristine cell selection (the initial table) allows us to
     extend a Table of cells (.filtered) via comparing it with the pristine Table
