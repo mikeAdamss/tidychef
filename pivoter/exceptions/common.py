@@ -1,8 +1,5 @@
+from os import linesep
 from typing import List
-
-from pivoter.configuration import ConfigController
-from pivoter.models.source.cell import BaseCell
-
 
 class FileInputError(Exception):
     """
@@ -54,7 +51,7 @@ class CellsDoNotExistError(Exception):
     based on configuration.
     """
 
-    def __init__(self, max_cell_display, unfound_cells: List[BaseCell]):
+    def __init__(self, max_cell_display, unfound_cells):
 
         truncated = False
         if len(unfound_cells) > max_cell_display:
@@ -66,7 +63,7 @@ class CellsDoNotExistError(Exception):
             msg += f"\n{uc}"
 
         if truncated:
-            msg += f"\Examples missing cells truncated to {len(unfound_cells)} results from {max_cell_display}"
+            msg += f"{linesep}Examples missing cells truncated to {len(unfound_cells)} results from {max_cell_display}"
 
         self.msg = msg
 
@@ -91,3 +88,13 @@ class LoneValueOnMultipleCellsError(Exception):
 
     def __init__(self, number_of_cells: int):
         self.msg = f"You can only use lone_value() on a selection of exactly one cell. This selection has {number_of_cells}"
+
+
+class InvalidCellObjectError(Exception):
+    """
+    Raised where a cell object is missing required attributes or
+    said attribites hold invalid types or values. 
+    """
+
+    def __init__(self, msg):
+        self.msg = msg

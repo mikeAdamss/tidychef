@@ -35,13 +35,13 @@ def test_all_blanks_from_table(single_input_mixed_blank_and_not: Selectable):
     assert len(single_input_mixed_blank_and_not.cells) == 4
 
 
-def test_all_blanks_from_table_not_discounting_whitespace(
+def test_all_blanks_from_table_not_disregarding_whitespace(
     single_input_mixed_blank_and_not: Selectable,
 ):
     """
     Test that default blank behaviour filters to all expected cells.
     """
-    single_input_mixed_blank_and_not.is_blank(discount_whitespace=False)
+    single_input_mixed_blank_and_not.is_blank(disregard_whitespace=False)
     assert len(single_input_mixed_blank_and_not.cells) == 2
 
 

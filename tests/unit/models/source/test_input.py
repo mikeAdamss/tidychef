@@ -1,10 +1,18 @@
+"""
+Tests relating to pivoters uderlying pivoter.models.source.BaseInput class
+and its control of a users workflow.
+"""
+
 import pytest
 
 from helpers import multiple_table_test_input, single_table_test_input
 from pivoter.models.source.cell import Cell
 from pivoter.models.source.input import BaseInput
-from pivoter.exceptions import IteratingSingleTableError, UnnamedTableError
-
+from pivoter.exceptions import (
+    IllegalOperationError,
+    IteratingSingleTableError,
+    UnnamedTableError
+)
 
 @pytest.fixture
 def single_input_A1():
@@ -35,7 +43,7 @@ def single_unnamed_input_A1():
 def test_cannot_iterate_single_table_inputs(single_input_A1: BaseInput):
     """
     Confirm the appropriate error is raised where a user tries to
-    iterate through an input consisting of exactly one input.
+    iterate through an input consisting of exactly one table.
     """
 
     with pytest.raises(IteratingSingleTableError):
@@ -65,8 +73,8 @@ def test_table_name_property_returns_name(single_input_A1: BaseInput):
     assert single_input_A1.name == "single input A1"
 
 
-# Note: title as an alternate proeprty for name is included for backwards
-# compatibiity with the databaker library
+# Note: title as an alternate property acvessor for name is included
+# for backwards compatibiity with the databaker library
 def test_table_title_property_returns_name(single_input_A1: BaseInput):
     """
     If a table is named, confirm we can access the name
@@ -75,7 +83,7 @@ def test_table_title_property_returns_name(single_input_A1: BaseInput):
     assert single_input_A1.title == "single input A1"
 
 
-def test_table_name_property_returns_error(single_unnamed_input_A1: BaseInput):
+def test_table_name_property_raises_err(single_unnamed_input_A1: BaseInput):
     """
     If a table is not named, confirm accessing its name
     property returns the appropriate error.
@@ -83,6 +91,17 @@ def test_table_name_property_returns_error(single_unnamed_input_A1: BaseInput):
 
     with pytest.raises(UnnamedTableError):
         single_unnamed_input_A1.name
+
+
+def test_assign_to_pristine_cells_raises_err(single_unnamed_input_A1: BaseInput):
+    """
+    Make sure our defenseive programming around attempted 
+    assignments to the pristine copy of the cells making up
+    a table (.pcells) is working as expected
+    """
+
+    with pytest.raises(IllegalOperationError):
+        single_unnamed_input_A1.pcells = ""
 
 
 if __name__ == "__main__":

@@ -33,7 +33,7 @@ def letter_to_x(excel_letters_ref: str) -> int:
             break
 
     return x
-
+ 
 
 def x_to_letters(x: int) -> str:
     """
