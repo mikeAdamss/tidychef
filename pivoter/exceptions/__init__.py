@@ -6,5 +6,5 @@ from .common import (
     IteratingSingleTableError,
     LoneValueOnMultipleCellsError,
     IllegalOperationError,
-    InvalidCellObjectError
+    InvalidCellObjectError,
 )

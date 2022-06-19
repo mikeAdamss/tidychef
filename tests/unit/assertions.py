@@ -14,10 +14,16 @@ def livetable_tables_have_same_length(input: BaseInput):
     point of ingestion before any filtering has taken place.
     """
 
-    assert input.selected_table._table_lengths_match(), (
+    # length of filtered table
+    flen = len(input.selected_table.filtered.cells)
+
+    # length of pristinr table
+    plen = len(input.selected_table.pristine.cells)
+
+    assert flen == plen, (
         f"Length of pristine and filtered table for table {input.selected_table.name}"
-        f" do not match. Pristine has {len(input.selected_table.pristine.cells)} cells, "
-        f"Filtered has {len(input.selected_table.filtered.cells)}"
+        f" do not match. Pristine has {plen} cells, "
+        f"Filtered has {flen}"
     )
 
 

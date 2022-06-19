@@ -34,7 +34,7 @@ class Table:
         mystr = ""
         for cell in self.cells:
             mystr += f"{cell._as_xy_str()}{demarcation}"
-        return mystr
+        return mystr.strip()
 
 
 @dataclass
@@ -53,7 +53,7 @@ class LiveTable:
 
     pristine: Table
     filtered: Table
-    _name: str
+    _name: Optional[str] = None
 
     @property
     def name(self):
@@ -66,11 +66,8 @@ class LiveTable:
             raise UnnamedTableError()
 
     @name.setter
-    def name(self, name: Optional[str] = None):
-        if name:
-            self._name = name
-        else:
-            self._name = None
+    def name(self, name: str):
+        self._name = name
 
     @staticmethod
     def from_table(table: Table, name: str = None) -> LiveTable:
@@ -78,10 +75,3 @@ class LiveTable:
         Given a table and optional it's name, create a livetable.
         """
         return LiveTable(_name=name, pristine=table, filtered=copy.deepcopy(table))
-
-    def _table_lengths_match(self):
-        """
-        Assert lengths of the pristine and filtered tables
-        match. Principally for testing.
-        """
-        return len(self.pristine.cells) == len(self.filtered.cells)

@@ -9,6 +9,9 @@ test: ## Run all tests and update your test coverage statistics
 coverage: ## View test coverage statistics
     poetry run coverage report -m
 
+coveragehtml: ## Create html report of test coverage, accssible at ./htmlcov/index.html
+    poetry run coverage html
+
 black: ## Format the code base with black
     poetry run black ./*
 

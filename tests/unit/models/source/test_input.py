@@ -11,8 +11,9 @@ from pivoter.models.source.input import BaseInput
 from pivoter.exceptions import (
     IllegalOperationError,
     IteratingSingleTableError,
-    UnnamedTableError
+    UnnamedTableError,
 )
+
 
 @pytest.fixture
 def single_input_A1():
@@ -95,7 +96,7 @@ def test_table_name_property_raises_err(single_unnamed_input_A1: BaseInput):
 
 def test_assign_to_pristine_cells_raises_err(single_unnamed_input_A1: BaseInput):
     """
-    Make sure our defenseive programming around attempted 
+    Make sure our defenseive programming around attempted
     assignments to the pristine copy of the cells making up
     a table (.pcells) is working as expected
     """

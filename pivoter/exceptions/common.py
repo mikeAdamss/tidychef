@@ -1,6 +1,7 @@
 from os import linesep
 from typing import List
 
+
 class FileInputError(Exception):
     """
     There is an issues with what has been provided as a file input.
@@ -93,7 +94,7 @@ class LoneValueOnMultipleCellsError(Exception):
 class InvalidCellObjectError(Exception):
     """
     Raised where a cell object is missing required attributes or
-    said attribites hold invalid types or values. 
+    said attribites hold invalid types or values.
     """
 
     def __init__(self, msg):

@@ -5,18 +5,13 @@ import pivoter.exceptions
 from pivoter.models.source.table import LiveTable
 from pivoter.readers import BaseReader
 from pivoter.models.source.cell import Cell
-from pivoter.models.source.input import BaseInput
 from pivoter.models.source.table import LiveTable, Table
 from pivoter.selection.csv.csv import CsvInputSelectable
 
 
 class LocalCsvReader(BaseReader):
-    def parse(self, delimiter=",") -> BaseInput:
-
-        if not isinstance(self.source, Path):
-            raise pivoter.exceptions.FileInputError(
-                "A local csv input should be provided in the form of a pathlib.Path"
-            )
+    def parse(self, delimiter=",") -> CsvInputSelectable:
+        self._raise_if_source_is_not_path()
 
         table = Table()
         with open(self.source, "r") as csv_file:
