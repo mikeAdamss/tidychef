@@ -1,6 +1,6 @@
-Work in progress pet/passion project. A ground up rewrite of the functionality of: https://github.com/sensiblecodeio/databaker.
+Work in progress pet/passion project. A ground up rewrite of the functionality of (excellent but getting a bit old): https://github.com/sensiblecodeio/databaker. Full credit and acknowlagments will be given.
 
-Started as an intellectual exercise, but now aiming for:
+Aiming for:
 
 - A more object orientated extensible design with exhaustive test coverage.
 - Stand alone app rather than wrapper to avoid the depreciated dependency issues plaguing databaker at the moment.
