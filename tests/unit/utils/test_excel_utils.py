@@ -47,7 +47,7 @@ def test_single_excel_ref():
         ["C17", BaseCell(2, 16)],
         ["DFG200", BaseCell(58, 199)],
     ]:
-        assert cellutils.single_excel_ref_to_basecells(excel_ref)[0] == expected
+        assert cellutils.single_excel_ref_to_basecells(excel_ref) == expected
 
 
 def test_multiple_excel_ref():

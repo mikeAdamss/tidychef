@@ -1,10 +1,10 @@
 import copy
-from typing import List, FrozenSet, Tuple
+from typing import List, FrozenSet, Tuple, Optional, Union
 
-from pivoter.exceptions import LoneValueOnMultipleCellsError
+from pivoter.exceptions import BadShiftParameterError, LoneValueOnMultipleCellsError, OutOfBoundsError
 from pivoter.models.source.cell import BaseCell, Cell
 from pivoter.models.source.input import BaseInput
-from pivoter.constants import UP, DOWN, LEFT, RIGHT
+from pivoter.cardinal.directions import UP, DOWN, LEFT, RIGHT, BaseDirection
 
 
 class Selectable(BaseInput):
@@ -142,4 +142,32 @@ class Selectable(BaseInput):
         did_have = copy.deepcopy(self.cells)
         self = self.expand(direction)
         self.cells = [x for x in self.cells if x not in did_have]
+        return self
+
+    def shift(self, direction_or_x: Union[BaseDirection, int], possibly_y: Optional[int] = None):
+        """
+        Move the entire selection relatively based on the changes
+        to x and/or y coordinates received.
+        """
+
+        if isinstance(direction_or_x, int):
+            if not isinstance(possibly_y, int):
+                raise BadShiftParameterError()
+            x = direction_or_x
+            y = possibly_y
+        elif isinstance(direction_or_x, BaseDirection):
+            assert not possibly_y, 'Where passing a direction into shift, that must be the only argument'
+            x = direction_or_x.x
+            y = direction_or_x.y
+        else:
+            raise BadShiftParameterError()
+
+        wanted_cells: List[BaseCell] = [BaseCell(x=c.x+x, y=c.y+y) for c in self.cells]
+
+        found_cells = self.datamethods._matching_xy_cells(self.pcells, wanted_cells)
+
+        if len(self.datamethods._cells_not_in(self.pcells, found_cells)) > 0:
+            raise OutOfBoundsError()
+
+        self.cells = found_cells
         return self

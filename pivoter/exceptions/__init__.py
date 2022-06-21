@@ -8,4 +8,6 @@ from .common import (
     InvalidCellObjectError,
     UnalignedTableOperation,
     InvalidTableSignatures,
+    BadShiftParameterError,
+    OutOfBoundsError
 )

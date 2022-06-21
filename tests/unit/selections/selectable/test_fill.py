@@ -1,8 +1,6 @@
 from os import linesep
 
-import pytest
-
-from pivoter.constants import RIGHT, UP, DOWN, LEFT
+from pivoter.cardinal.directions import RIGHT, UP, DOWN, LEFT
 from pivoter.models.source.cell import Cell, BaseCell
 from pivoter.selection.base import Selectable
 from pivotertesthelpers import single_table_test_input, InputsToTestExtrusion

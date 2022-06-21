@@ -28,13 +28,13 @@ class DataMethods:
 
     @classmethod
     def _cells_not_in(
-        cls, list1: List[BaseCell], list2: List[BaseCell]
+        cls, cells: List[BaseCell], looked_for: List[BaseCell]
     ) -> List[BaseCell]:
         """
-        Given two lists of cells. Return those cells from list2
-        that do not appear in list1
+        Given two lists of cells. Return those cells from looked_for
+        that do not appear in cells
         """
-        return [x for x in list2 if not any([x.matches_xy(y) for y in list1])]
+        return [c1 for c1 in looked_for if not any([c1.matches_xy(c2) for c2 in cells])]
 
     @classmethod
     def _exactly_matched_xy_cells(
@@ -48,12 +48,10 @@ class DataMethods:
         that do not exist.
         """
 
-        matched_cells = cls._matching_xy_cells(cells, wanted_cells)
-        unfound_cells = [
-            x for x in wanted_cells if not any([x.matches_xy(y) for y in matched_cells])
-        ]
-        if len(unfound_cells) > 1:
-            raise CellsDoNotExistError()
+        unfound_cells = cls._cells_not_in(cells, wanted_cells)
+
+        if len(unfound_cells) > 0:
+            raise CellsDoNotExistError(unfound_cells)
 
         return cls._matching_xy_cells(cells, wanted_cells)
 

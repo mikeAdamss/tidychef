@@ -39,8 +39,8 @@ class CellsDoNotExistError(Exception):
     does not exist in the filtered table.
     """
 
-    def __init__(self, msg="Requested cells are not in current selection"):
-        self.msg = msg
+    def __init__(self, unfound_cells):
+        self.msg = f"Requested cells are not in current selection: {unfound_cells}"
 
 
 class IteratingSingleTableError(Exception):
@@ -103,3 +103,34 @@ class InvalidTableSignatures(Exception):
             "This class:LiveTable is invalid. A LiveTable must be "
             "instantiated from tables with matching signatures."
         )
+
+class BadShiftParameterError(Exception):
+    """
+    Raised where someone has provided incorrect inputs to the
+    shift method.
+    """
+
+    def __init__(self):
+        self.msg = ''''
+        The shift method must be called with one of two types of
+        argument. 
+
+        1.) By passing in the UP, DOWN, LEFT, RIGHT, ABOVE or BELOW constant
+        example: .shift(UP)
+
+        2.) By passing in two integer arguments, on each for x index change and y index change
+        example: .shift(1, 2)
+        '''
+
+class OutOfBoundsError(Exception):
+    """
+    Raised when a users attempts to select cells outside of the
+    boundary of the pristine table of input cells.
+
+    Example: Selecting every cell then shifting RIGHT 1 position
+    would be trying to select a rightmost column of data that
+    does not exist in the table.
+    """
+
+    def __init__(self):
+        self.msg = "Invalid operation. This action is attempting to select cells outside of the bounds of the input table"

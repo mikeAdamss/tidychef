@@ -89,7 +89,7 @@ def single_excel_ref_to_basecells(excel_ref: str) -> BaseCell:
     y = number_to_y(number)
 
     logging.warning(f"single_excel_ref_to_basecells: {excel_ref} becomes x:{x},y:{y}")
-    return [BaseCell(x=x, y=y)]
+    return BaseCell(x=x, y=y)
 
 
 def multi_excel_ref_to_basecells(excel_ref: str) -> List[BaseCell]:
@@ -99,8 +99,8 @@ def multi_excel_ref_to_basecells(excel_ref: str) -> List[BaseCell]:
     """
 
     assert ":" in excel_ref
-    start_cell = single_excel_ref_to_basecells(excel_ref.split(":")[0])[0]
-    end_cell = single_excel_ref_to_basecells(excel_ref.split(":")[1])[0]
+    start_cell = single_excel_ref_to_basecells(excel_ref.split(":")[0])
+    end_cell = single_excel_ref_to_basecells(excel_ref.split(":")[1])
 
     start_x = start_cell.x
     start_y = start_cell.y
@@ -157,4 +157,9 @@ def excel_ref_as_wanted_basecells(excel_ref: str) -> List[BaseCell]:
     identified_ref_style = identified_ref_styles[0]
     handler = ref_styles[identified_ref_style].handler
 
-    return handler(excel_ref)
+    # the single excel ref handler returns a single cell
+    # so listify return where necessary 
+    cell_or_cell_list = handler(excel_ref)
+    if not isinstance(cell_or_cell_list, list):
+        return [cell_or_cell_list]
+    return cell_or_cell_list

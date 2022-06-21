@@ -22,8 +22,9 @@ class BaseSpreadsheetSelectable(Selectable):
             wanted: List[BaseCell] = cellutils.multi_excel_ref_to_basecells(excel_ref)
         else:
             wanted: BaseCell = cellutils.single_excel_ref_to_basecells(excel_ref)
+            wanted = [wanted]
 
         selected = self.datamethods._exactly_matched_xy_cells(self.cells, wanted)
 
-        self.selected_table.filtered.cells = selected
+        self.cells = selected
         return self

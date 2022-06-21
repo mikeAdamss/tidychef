@@ -53,9 +53,6 @@ def single_table_test_input(
     """
     Returns a subclass of class:Input consisting of a single table
     comprised of the provided class:Cell objects.
-
-    The sub class of Input (and mixin methods availible) are
-    defined by input_type
     """
     return input_type(
         is_singleton_table=True,
