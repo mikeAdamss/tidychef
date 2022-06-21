@@ -4,9 +4,25 @@ from dataclasses import dataclass
 from typing import List
 
 from pivoter.cardinal.directions import UP, DOWN, LEFT, RIGHT, BaseDirection
+from pivoter.exceptions import BadShiftParameterError
 from pivoter.models.source.cell import BaseCell, Cell
 from pivoter.selection.base import Selectable
 from pivotertesthelpers import single_table_test_input
+
+
+@pytest.fixture
+def single_table_input_A1() -> Selectable:
+    """
+    A single table input, one column of three cells for
+    (in excel terms) A1:A3
+    """
+    return single_table_test_input(
+        [
+            Cell(x=0, y=0, value="foo"),
+        ],
+        "single fixture table 1"
+    )
+
 
 def single_input_A1F5() -> Selectable:
     """
@@ -66,7 +82,7 @@ def test_shift_left_and_right():
         Case("Right one", RIGHT(1), [BaseCell(x=3, y=0)], 5),
         Case("Right two", RIGHT(2), [BaseCell(x=4, y=0)], 5)
     ]:
-    
+
         data = single_input_A1F5()
         data.cells = data.datamethods._cells_on_x_index(data.cells, 2) # C1:C5
 
@@ -78,3 +94,18 @@ def test_shift_left_and_right():
                 f' with case "{case.desc}" and direction {case.direction}'
             )
         assert len(data.cells) == case.length
+
+
+def test_bad_shift_parameters(single_table_input_A1: Selectable):
+    """
+    Confirm that intorrect shift parameters passed into shift
+    raise the appropriate error.
+    """
+    for params in [
+        [1, "foo"],
+        [object, 12],
+        [None, 4]
+    ]:
+    
+        with pytest.raises(BadShiftParameterError):
+            single_table_input_A1.shift(params[0], params[1])
