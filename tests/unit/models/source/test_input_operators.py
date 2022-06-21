@@ -9,6 +9,7 @@ import pytest
 from pivotertesthelpers import single_table_test_input
 from pivoter.models.source.cell import Cell
 from pivoter.models.source.input import BaseInput
+from pivoter.selection import datafuncs as dfc
 from pivoter.exceptions import UnalignedTableOperation
 
 
@@ -41,7 +42,7 @@ def test_sub_operator(single_input_multicells: BaseInput):
     assert len(single_input_multicells.cells) == 2
 
     selection_to_remove = copy.deepcopy(single_input_multicells)
-    selection_to_remove.cells = selection_to_remove.datamethods._cells_on_x_index(
+    selection_to_remove.cells = dfc.cells_on_x_index(
         selection_to_remove.cells, 0
     )
 
@@ -70,13 +71,13 @@ def test_union_operator(single_input_multicells: BaseInput):
     assert len(single_input_multicells.cells) == 2
 
     selection1 = copy.deepcopy(single_input_multicells)
-    selection1.cells = single_input_multicells.datamethods._cells_on_x_index(
+    selection1.cells = dfc.cells_on_x_index(
         single_input_multicells.cells, 0
     )
     assert len(selection1.cells) == 1
 
     selection2 = copy.deepcopy(single_input_multicells)
-    selection2.cells = single_input_multicells.datamethods._cells_on_x_index(
+    selection2.cells = dfc.cells_on_x_index(
         single_input_multicells.cells, 1
     )
     assert len(selection2.cells) == 1

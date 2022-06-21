@@ -5,7 +5,7 @@ from pivoter.exceptions import BadShiftParameterError, LoneValueOnMultipleCellsE
 from pivoter.models.source.cell import BaseCell, Cell
 from pivoter.models.source.input import BaseInput
 from pivoter.cardinal.directions import UP, DOWN, LEFT, RIGHT, BaseDirection
-
+from pivoter.selection import datafuncs as dfc
 
 class Selectable(BaseInput):
     """
@@ -57,7 +57,7 @@ class Selectable(BaseInput):
         are aliases of UP and DOWN respectively.
         """
 
-        potential_cells: List[Cell] = self.datamethods._cells_not_in(
+        potential_cells: List[Cell] = dfc.cells_not_in(
             self.cells, self.pcells
         )
 
@@ -66,7 +66,7 @@ class Selectable(BaseInput):
 
             all_used_x_indicies: FrozenSet[int] = set(c.x for c in self.cells)
             for xi in all_used_x_indicies:
-                selected_cells_on_xi = self.datamethods._cells_on_x_index(
+                selected_cells_on_xi = dfc.cells_on_x_index(
                     self.cells, xi
                 )
 
@@ -76,7 +76,7 @@ class Selectable(BaseInput):
 
                 if direction == UP:
                     highest_selected_cell_on_xi = (
-                        self.datamethods._minium_y_offset_cell(selected_cells_on_xi)
+                        dfc.minium_y_offset_cell(selected_cells_on_xi)
                     )
                     selection += [
                         c
@@ -86,7 +86,7 @@ class Selectable(BaseInput):
 
                 if direction == DOWN:
                     lowest_selected_cell_on_xi = (
-                        self.datamethods._maximum_y_offset_cell(selected_cells_on_xi)
+                        dfc.maximum_y_offset_cell(selected_cells_on_xi)
                     )
                     selection += [
                         c
@@ -98,7 +98,7 @@ class Selectable(BaseInput):
 
             all_used_y_indicies: FrozenSet[int] = set(c.y for c in self.cells)
             for yi in all_used_y_indicies:
-                selected_cells_on_yi = self.datamethods._cells_on_y_index(
+                selected_cells_on_yi = dfc.cells_on_y_index(
                     self.cells, yi
                 )
 
@@ -108,7 +108,7 @@ class Selectable(BaseInput):
 
                 if direction == LEFT:
                     leftmost_selected_cell_on_yi = (
-                        self.datamethods._minimum_x_offset_cell(selected_cells_on_yi)
+                        dfc.minimum_x_offset_cell(selected_cells_on_yi)
                     )
                     selection += [
                         c
@@ -118,7 +118,7 @@ class Selectable(BaseInput):
 
                 if direction == RIGHT:
                     rightmost_selected_cell_on_yi = (
-                        self.datamethods._maximum_x_offset_cell(selected_cells_on_yi)
+                        dfc.maximum_x_offset_cell(selected_cells_on_yi)
                     )
                     selection += [
                         c
@@ -164,9 +164,9 @@ class Selectable(BaseInput):
 
         wanted_cells: List[BaseCell] = [BaseCell(x=c.x+x, y=c.y+y) for c in self.cells]
 
-        found_cells = self.datamethods._matching_xy_cells(self.pcells, wanted_cells)
+        found_cells = dfc.matching_xy_cells(self.pcells, wanted_cells)
 
-        if len(self.datamethods._cells_not_in(self.pcells, found_cells)) > 0:
+        if len(dfc.cells_not_in(self.pcells, found_cells)) > 0:
             raise OutOfBoundsError()
 
         self.cells = found_cells

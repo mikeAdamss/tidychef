@@ -3,6 +3,7 @@ from os import linesep
 from pivoter.cardinal.directions import RIGHT, UP, DOWN, LEFT
 from pivoter.models.source.cell import Cell, BaseCell
 from pivoter.selection.base import Selectable
+from pivoter.selection import datafuncs as dfc
 from pivotertesthelpers import single_table_test_input, InputsToTestExtrusion
 
 
@@ -112,7 +113,7 @@ def test_fill():
         ),
     ]:
 
-        case.data.cells = case.data.datamethods._exactly_matched_xy_cells(
+        case.data.cells = dfc.exactly_matched_xy_cells(
             case.data.cells, case.starting_at
         )
 

@@ -3,6 +3,7 @@ from typing import List
 from pivoter.models.source.cell import BaseCell
 from pivoter.utils import cellutils
 from ..base import Selectable
+from .. import datafuncs as dfc
 
 
 class BaseSpreadsheetSelectable(Selectable):
@@ -24,7 +25,7 @@ class BaseSpreadsheetSelectable(Selectable):
             wanted: BaseCell = cellutils.single_excel_ref_to_basecells(excel_ref)
             wanted = [wanted]
 
-        selected = self.datamethods._exactly_matched_xy_cells(self.cells, wanted)
+        selected = dfc.exactly_matched_xy_cells(self.cells, wanted)
 
         self.cells = selected
         return self

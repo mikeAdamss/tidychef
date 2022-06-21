@@ -14,7 +14,7 @@ from .table import LiveTable
 from pivoter.configuration import ConfigController
 from pivoter.exceptions import IteratingSingleTableError, UnalignedTableOperation
 from pivoter.models.source.cell import BaseCell, Cell
-from pivoter.selection import datamethods
+from pivoter.selection import datafuncs as dfc
 
 
 class BaseInput:
@@ -38,7 +38,6 @@ class BaseInput:
         self.selected_table = selected_table
         self.had_initial_path = had_initial_path
         self.tables = tables
-        self.datamethods = datamethods.DataMethods
 
     @property
     def name(self) -> str:
@@ -97,7 +96,7 @@ class BaseInput:
         if self.signature != other_input.signature:
             raise UnalignedTableOperation()
 
-        remove_cells = self.datamethods._cells_not_in(other_input.cells, self.cells)
+        remove_cells = dfc.cells_not_in(other_input.cells, self.cells)
         self.cells = [c for c in self.cells if c not in remove_cells]
         return self
 
@@ -113,7 +112,7 @@ class BaseInput:
         if self.signature != other_input.signature:
             raise UnalignedTableOperation()
 
-        new_cells = self.datamethods._cells_not_in(other_input.cells, self.cells)
+        new_cells = dfc.cells_not_in(other_input.cells, self.cells)
         self.cells = self.cells + new_cells
         return self
 
