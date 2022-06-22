@@ -43,7 +43,9 @@ class Selectable(BaseInput):
         considered blank. You can change this behaviour
         with the disregard_whitespace keyword.
         """
-        self.cells = [x for x in self.cells if x.is_blank(disregard_whitespace)]
+        return_self = copy.deepcopy(self)
+        return_self.cells = [x for x in self.cells if x.is_blank(disregard_whitespace)]
+        return return_self
 
     def is_not_blank(self, disregard_whitespace=True):
         """
