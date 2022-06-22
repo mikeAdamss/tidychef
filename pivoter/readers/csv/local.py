@@ -19,8 +19,8 @@ class LocalCsvReader(BaseReader):
         with open(self.source, "r") as csv_file:
             filecontent = csv.reader(csv_file, delimiter=delimiter)
 
-            for x, row in enumerate(filecontent):
-                for y, cell_value in enumerate(row):
+            for y, row in enumerate(filecontent):
+                for x, cell_value in enumerate(row):
                     table.add_cell(Cell(x=x, y=y, value=cell_value))
 
         live_table = LiveTable.from_table(table)

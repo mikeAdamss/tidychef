@@ -9,9 +9,7 @@ from tests.fixtures import path_to_fixture
 
 
 def fixture_simple_one_tab():
-    """
-    Simple input of one tab. Cells A1:Z100
-    """
+    """Simple input of one tab. Cells A1:Z100"""
     return read_local(
         path_to_fixture("csv", "simple.csv"), override_selectable=XlsInputSelectable
     )
@@ -22,12 +20,7 @@ def fixture_with_blanks():
 
 # TODO - use excel when we have a real excel reader
 def fixture_simple_two_tabs():
-    """
-    Simple input of two tabs. Cells A1:Z100
-
-    For test purposes we're going to load each table distinctly
-    (to unsycronise their signatures) and give each distinct name
-    """
+    """Simple input of two tabs. Cells A1:Z100"""
     selectable1 = read_local(
         path_to_fixture("csv", "simple.csv"), override_selectable=XlsInputSelectable
     )
