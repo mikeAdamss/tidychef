@@ -11,11 +11,13 @@ import copy
 from pathlib import Path
 from typing import List
 
-from .table import LiveTable
 from pivoter.configuration import ConfigController
-from pivoter.exceptions import IteratingSingleTableError, UnalignedTableOperation
+from pivoter.exceptions import (IteratingSingleTableError,
+                                UnalignedTableOperation)
 from pivoter.models.source.cell import BaseCell, Cell
 from pivoter.selection import datafuncs as dfc
+
+from .table import LiveTable
 
 
 class BaseInput:

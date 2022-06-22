@@ -1,10 +1,9 @@
-from dataclasses import dataclass
 import logging
 import re
+from dataclasses import dataclass
 from typing import List
 
 from pivoter.models.source.cell import BaseCell
-
 
 # TODO: there's a helper for this
 UPPER_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -109,7 +108,7 @@ def multi_excel_ref_to_basecells(excel_ref: str) -> List[BaseCell]:
 
     return_cells = []
     for x in range(start_x, end_x + 1):
-        for y in range(start_y, end_y +1):
+        for y in range(start_y, end_y + 1):
             return_cells.append(BaseCell(x=x, y=y))
 
     return return_cells

@@ -6,10 +6,10 @@ Wrappers and utilities bringing together the functionality within
 from pathlib import Path
 from typing import Optional, Union
 
-from pivoter.utils import fileutils
-from pivoter.readers import LocalCsvReader, BaseReader
 from pivoter.constants import SUPPORTED_LOCAL_FILETYPES
+from pivoter.readers import BaseReader, LocalCsvReader
 from pivoter.selection.base import Selectable
+from pivoter.utils import fileutils
 
 
 def read_local(
@@ -39,9 +39,7 @@ def read_local(
         handler_insantiated: BaseReader = override_reader(input_path)
     else:
         if file_type == SUPPORTED_LOCAL_FILETYPES.CSV:
-            handler_insantiated: BaseReader = LocalCsvReader(
-                input_path
-            )
+            handler_insantiated: BaseReader = LocalCsvReader(input_path)
 
     if override_selectable:
         return handler_insantiated.parse(selectable=override_selectable)

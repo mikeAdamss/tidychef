@@ -1,8 +1,8 @@
 import pytest
 
 from pivoter.exceptions import InvalidCellObjectError
-from pivoter.selection.csv.csv import CsvInputSelectable
 from pivoter.readers.reader import read_local
+from pivoter.selection.csv.csv import CsvInputSelectable
 from tests.fixtures import path_to_fixture
 
 blank_values_not_disregarding_whitespace = [""]

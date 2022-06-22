@@ -1,13 +1,6 @@
-from .common import (
-    FileInputError,
-    UnsupportedLocalFileError,
-    UnnamedTableError,
-    CellsDoNotExistError,
-    IteratingSingleTableError,
-    LoneValueOnMultipleCellsError,
-    InvalidCellObjectError,
-    UnalignedTableOperation,
-    InvalidTableSignatures,
-    BadShiftParameterError,
-    OutOfBoundsError,
-)
+from .common import (BadShiftParameterError, CellsDoNotExistError,
+                     FileInputError, InvalidCellObjectError,
+                     InvalidTableSignatures, IteratingSingleTableError,
+                     LoneValueOnMultipleCellsError, OutOfBoundsError,
+                     UnalignedTableOperation, UnnamedTableError,
+                     UnsupportedLocalFileError)

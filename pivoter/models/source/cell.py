@@ -6,8 +6,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Optional
 
-from .cellformat import CellFormatting
 from pivoter.exceptions import InvalidCellObjectError
+
+from .cellformat import CellFormatting
 
 
 @dataclass

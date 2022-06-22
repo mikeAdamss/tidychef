@@ -1,8 +1,9 @@
 from typing import List
 
-from .helpers import single_table_test_input, multiple_table_test_input
 from pivoter.models.source.cell import Cell
 from pivoter.selection.base import Selectable
+
+from .helpers import multiple_table_test_input, single_table_test_input
 
 
 def single_input_multicells():

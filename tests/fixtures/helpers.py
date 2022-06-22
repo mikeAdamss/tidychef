@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import List, Optional
 
 from pivoter.models.source.cell import BaseCell, Cell
-from pivoter.models.source.table import Table, LiveTable
+from pivoter.models.source.table import LiveTable, Table
 from pivoter.selection.base import Selectable
 
 # Fixture dir shorthand

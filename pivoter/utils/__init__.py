@@ -1,2 +1,1 @@
-from . import fileutils
-from . import cellutils
+from . import cellutils, fileutils

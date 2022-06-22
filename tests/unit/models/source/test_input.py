@@ -6,17 +6,15 @@ and its use in a users workflow
 import pytest
 
 from pivoter.exceptions import IteratingSingleTableError
-from pivoter.selection.spreadsheet.xls import XlsInputSelectable
-
 from pivoter.readers.reader import read_local
+from pivoter.selection.spreadsheet.xls import XlsInputSelectable
 from tests.fixtures import path_to_fixture
 
 
 @pytest.fixture
 def table_simple_as_xls1():
     return read_local(
-        path_to_fixture("csv", "simple.csv"),
-        override_selectable = XlsInputSelectable
+        path_to_fixture("csv", "simple.csv"), override_selectable=XlsInputSelectable
     )
 
 

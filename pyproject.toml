@@ -9,6 +9,7 @@ license = "MIT"
 python = "^3.8"
 pyright = "^1.1.254"
 coverage = "^6.4.1"
+isort = "^5.10.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"

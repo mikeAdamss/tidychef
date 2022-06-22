@@ -4,6 +4,7 @@ from pivoter.exceptions import CellsDoNotExistError
 from pivoter.models.source.cell import BaseCell
 from pivoter.utils import cellutils
 
+
 def matching_xy_cells(
     cells: List[BaseCell], wanted_cells: List[BaseCell]
 ) -> List[BaseCell]:
@@ -14,12 +15,18 @@ def matching_xy_cells(
     return [x for x in cells if any([x.matches_xy(y) for y in wanted_cells])]
 
 
-def cells_not_in(initial_cells: List[BaseCell], without_cells: List[BaseCell]) -> List[BaseCell]:
+def cells_not_in(
+    initial_cells: List[BaseCell], without_cells: List[BaseCell]
+) -> List[BaseCell]:
     """
     Given two lists of cells. Return a List[BaseCell] representing
     initial_cells minus any cells from without_cells
     """
-    return [c1 for c1 in initial_cells if not any([c1.matches_xy(c2) for c2 in without_cells])]
+    return [
+        c1
+        for c1 in initial_cells
+        if not any([c1.matches_xy(c2) for c2 in without_cells])
+    ]
 
 
 def exactly_matched_xy_cells(
@@ -117,11 +124,10 @@ def xycells_to_excel_ref(cells: List[BaseCell]) -> str:
     x_axis = (max_x - min_x) + 1
     y_axis = (max_y - min_y) + 1
     assert (x_axis * y_axis) == len(cells)
-    
+
     topleft_cell = specific_cell_from_xy(cells, min_x, min_y)
     bottomright_cell = specific_cell_from_xy(cells, max_x, max_y)
 
-    ref1 = f'{cellutils.x_to_letters(topleft_cell.x)}{cellutils.y_to_number(topleft_cell.y)}'
-    ref2 = f'{cellutils.x_to_letters(bottomright_cell.x)}{cellutils.y_to_number(bottomright_cell.y)}'
-    return f'{ref1}:{ref2}'
-
+    ref1 = f"{cellutils.x_to_letters(topleft_cell.x)}{cellutils.y_to_number(topleft_cell.y)}"
+    ref2 = f"{cellutils.x_to_letters(bottomright_cell.x)}{cellutils.y_to_number(bottomright_cell.y)}"
+    return f"{ref1}:{ref2}"

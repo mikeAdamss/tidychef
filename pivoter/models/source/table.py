@@ -5,13 +5,14 @@ Classes representing a single cell of data.
 from __future__ import annotations
 
 import copy
+import uuid
 from dataclasses import dataclass
 from os import linesep
-import uuid
 from typing import List, Optional
 
-from .cell import Cell
 from pivoter.exceptions import InvalidTableSignatures, UnnamedTableError
+
+from .cell import Cell
 
 
 class Table:

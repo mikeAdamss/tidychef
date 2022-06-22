@@ -3,8 +3,9 @@ from typing import List
 
 from pivoter.models.source.cell import BaseCell
 from pivoter.utils import cellutils
-from ..base import Selectable
+
 from .. import datafuncs as dfc
+from ..base import Selectable
 
 
 class BaseSpreadsheetSelectable(Selectable):
@@ -31,7 +32,10 @@ class BaseSpreadsheetSelectable(Selectable):
         return_self = copy.deepcopy(self)
         return_self.cells = selected
         import logging
-        logging.warning(f'excel ref input {excel_ref}, results in cells {dfc.xycells_to_excel_ref(self.cells)}')
+
+        logging.warning(
+            f"excel ref input {excel_ref}, results in cells {dfc.xycells_to_excel_ref(self.cells)}"
+        )
 
         # Copy so we can assign as a new variable rather than a pointer
         return return_self

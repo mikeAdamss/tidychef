@@ -2,12 +2,11 @@ import csv
 from pathlib import Path
 
 import pivoter.exceptions
-from pivoter.models.source.table import LiveTable
-from pivoter.readers import BaseReader
 from pivoter.models.source.cell import Cell
 from pivoter.models.source.table import LiveTable, Table
-from pivoter.selection.csv.csv import CsvInputSelectable
+from pivoter.readers import BaseReader
 from pivoter.selection.base import Selectable
+from pivoter.selection.csv.csv import CsvInputSelectable
 
 
 class LocalCsvReader(BaseReader):

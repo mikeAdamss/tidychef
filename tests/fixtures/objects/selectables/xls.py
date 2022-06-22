@@ -2,6 +2,7 @@ import pytest
 
 from pivoter.models.source.cell import Cell
 from pivoter.selection.spreadsheet.xls import XlsInputSelectable
+
 from .helpers import single_table_test_input
 
 
