@@ -7,10 +7,13 @@ from pivoter.readers import BaseReader
 from pivoter.models.source.cell import Cell
 from pivoter.models.source.table import LiveTable, Table
 from pivoter.selection.csv.csv import CsvInputSelectable
+from pivoter.selection.base import Selectable
 
 
 class LocalCsvReader(BaseReader):
-    def parse(self, delimiter=",") -> CsvInputSelectable:
+    def parse(
+        self, delimiter=",", selectable: Selectable = CsvInputSelectable
+    ) -> Selectable:
         self._raise_if_source_is_not_path()
 
         table = Table()
@@ -23,7 +26,7 @@ class LocalCsvReader(BaseReader):
 
         live_table = LiveTable.from_table(table)
 
-        return CsvInputSelectable(
+        return selectable(
             is_singleton_table=True,
             selected_table=live_table,
             had_initial_path=self.source,

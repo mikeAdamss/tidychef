@@ -1,11 +1,17 @@
 import copy
+from os import linesep
 from typing import List, FrozenSet, Tuple, Optional, Union
 
-from pivoter.exceptions import BadShiftParameterError, LoneValueOnMultipleCellsError, OutOfBoundsError
+from pivoter.exceptions import (
+    BadShiftParameterError,
+    LoneValueOnMultipleCellsError,
+    OutOfBoundsError,
+)
 from pivoter.models.source.cell import BaseCell, Cell
 from pivoter.models.source.input import BaseInput
 from pivoter.cardinal.directions import UP, DOWN, LEFT, RIGHT, BaseDirection
 from pivoter.selection import datafuncs as dfc
+
 
 class Selectable(BaseInput):
     """
@@ -16,7 +22,9 @@ class Selectable(BaseInput):
         """
         Assert that the current selection contains exactly one cell
         """
-        assert len(self.cells) == 1, f'Selection contains {len(self.cells)} cells, not 1'
+        assert (
+            len(self.cells) == 1
+        ), f"Selection contains {len(self.cells)} cells, not 1"
 
     def lone_value(self) -> str:
         """
@@ -57,26 +65,22 @@ class Selectable(BaseInput):
         are aliases of UP and DOWN respectively.
         """
 
-        potential_cells: List[Cell] = dfc.cells_not_in(
-            self.cells, self.pcells
-        )
+        potential_cells: List[Cell] = dfc.cells_not_in(self.cells, self.pcells)
 
         selection: List[BaseCell] = []
         if direction in [UP, DOWN]:  # so also ABOVE and BELOW
 
             all_used_x_indicies: FrozenSet[int] = set(c.x for c in self.cells)
             for xi in all_used_x_indicies:
-                selected_cells_on_xi = dfc.cells_on_x_index(
-                    self.cells, xi
-                )
+                selected_cells_on_xi = dfc.cells_on_x_index(self.cells, xi)
 
                 potential_cells_on_xi: List[Cell] = [
                     c for c in potential_cells if c.x == xi
                 ]
 
                 if direction == UP:
-                    highest_selected_cell_on_xi = (
-                        dfc.minium_y_offset_cell(selected_cells_on_xi)
+                    highest_selected_cell_on_xi = dfc.minium_y_offset_cell(
+                        selected_cells_on_xi
                     )
                     selection += [
                         c
@@ -85,8 +89,8 @@ class Selectable(BaseInput):
                     ]
 
                 if direction == DOWN:
-                    lowest_selected_cell_on_xi = (
-                        dfc.maximum_y_offset_cell(selected_cells_on_xi)
+                    lowest_selected_cell_on_xi = dfc.maximum_y_offset_cell(
+                        selected_cells_on_xi
                     )
                     selection += [
                         c
@@ -98,17 +102,15 @@ class Selectable(BaseInput):
 
             all_used_y_indicies: FrozenSet[int] = set(c.y for c in self.cells)
             for yi in all_used_y_indicies:
-                selected_cells_on_yi = dfc.cells_on_y_index(
-                    self.cells, yi
-                )
+                selected_cells_on_yi = dfc.cells_on_y_index(self.cells, yi)
 
                 potential_cells_on_yi: List[Cell] = [
                     c for c in potential_cells if c.y == yi
                 ]
 
                 if direction == LEFT:
-                    leftmost_selected_cell_on_yi = (
-                        dfc.minimum_x_offset_cell(selected_cells_on_yi)
+                    leftmost_selected_cell_on_yi = dfc.minimum_x_offset_cell(
+                        selected_cells_on_yi
                     )
                     selection += [
                         c
@@ -117,8 +119,8 @@ class Selectable(BaseInput):
                     ]
 
                 if direction == RIGHT:
-                    rightmost_selected_cell_on_yi = (
-                        dfc.maximum_x_offset_cell(selected_cells_on_yi)
+                    rightmost_selected_cell_on_yi = dfc.maximum_x_offset_cell(
+                        selected_cells_on_yi
                     )
                     selection += [
                         c
@@ -144,7 +146,11 @@ class Selectable(BaseInput):
         self.cells = [x for x in self.cells if x not in did_have]
         return self
 
-    def shift(self, direction_or_x: Union[BaseDirection, int], possibly_y: Optional[int] = None):
+    def shift(
+        self,
+        direction_or_x: Union[BaseDirection, int],
+        possibly_y: Optional[int] = None,
+    ):
         """
         Move the entire selection relatively based on the changes
         to x and/or y coordinates received.
@@ -156,13 +162,17 @@ class Selectable(BaseInput):
             x = direction_or_x
             y = possibly_y
         elif isinstance(direction_or_x, BaseDirection):
-            assert not possibly_y, 'Where passing a direction into shift, that must be the only argument'
+            assert (
+                not possibly_y
+            ), "Where passing a direction into shift, that must be the only argument"
             x = direction_or_x.x
             y = direction_or_x.y
         else:
             raise BadShiftParameterError()
 
-        wanted_cells: List[BaseCell] = [BaseCell(x=c.x+x, y=c.y+y) for c in self.cells]
+        wanted_cells: List[BaseCell] = [
+            BaseCell(x=c.x + x, y=c.y + y) for c in self.cells
+        ]
 
         found_cells = dfc.matching_xy_cells(self.pcells, wanted_cells)
 

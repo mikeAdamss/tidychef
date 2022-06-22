@@ -96,4 +96,4 @@ class Cell(BaseCell):
         Returns a str representation of the current cell
         with xy co-ordinates and value.
         """
-        return f"x:{self.x}, y:{self.y}, value = {self.value}"
+        return f'x:{self.x}, y:{self.y}, value = "{self.value}"'

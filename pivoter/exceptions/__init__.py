@@ -9,5 +9,5 @@ from .common import (
     UnalignedTableOperation,
     InvalidTableSignatures,
     BadShiftParameterError,
-    OutOfBoundsError
+    OutOfBoundsError,
 )

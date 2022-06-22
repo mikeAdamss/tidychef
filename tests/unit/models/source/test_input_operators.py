@@ -3,55 +3,59 @@ These tests are whoely concerned with testsing the dunder methods
 controlling Input upon Input operators.
 """
 
-import copy
 import pytest
 
-from pivotertesthelpers import single_table_test_input
-from pivoter.models.source.cell import Cell
-from pivoter.models.source.input import BaseInput
 from pivoter.selection import datafuncs as dfc
+from pivoter.selection.spreadsheet.xls import XlsInputSelectable
 from pivoter.exceptions import UnalignedTableOperation
 
+from pivoter.readers.reader import read_local
+from tests.fixtures import path_to_fixture
 
-@pytest.fixture()
-def single_input_multicells():
-    """A single table input, two columns of one cell"""
-    return single_table_test_input(
-        [Cell(x=0, y=0, value="foo"), Cell(x=1, y=0, value="bar")]
+
+@pytest.fixture
+def table_simple_as_xls1():
+    return read_local(
+        path_to_fixture("csv", "simple.csv"),
+        override_selectable = XlsInputSelectable
+    )
+
+@pytest.fixture
+def table_simple_as_xls2():
+    return read_local(
+        path_to_fixture("csv", "simple.csv"),
+        override_selectable = XlsInputSelectable
     )
 
 
-@pytest.fixture
-def single_unnamed_input_A1():
-    """A single table input, one column of one cell"""
-    return single_table_test_input([Cell(x=0, y=0, value="foo")])
-
-
-@pytest.fixture
-def single_unnamed_input_B1():
-    """A single table input, one column of one cell"""
-    return single_table_test_input([Cell(x=1, y=0, value="bar")])
-
-
-def test_sub_operator(single_input_multicells: BaseInput):
+def test_sub_operator(table_simple_as_xls1: XlsInputSelectable):
     """
     Test we can make a substraction of cells from a table selection,
     using another selection taken from said table.
     """
 
-    assert len(single_input_multicells.cells) == 2
+    two_rows = table_simple_as_xls1.excel_ref('A1:Z2')
+    assert dfc.xycells_to_excel_ref(two_rows.cells) == 'A1:Z2'
+    assert len(two_rows.cells) == 52
 
-    selection_to_remove = copy.deepcopy(single_input_multicells)
-    selection_to_remove.cells = dfc.cells_on_x_index(
-        selection_to_remove.cells, 0
-    )
+    bottom_row = two_rows.excel_ref('A2:Z2')
+    assert dfc.xycells_to_excel_ref(bottom_row.cells) == 'A2:Z2'
+    assert len(bottom_row.cells) == 26
 
-    single_input_multicells = single_input_multicells - selection_to_remove
-    assert len(single_input_multicells.cells) == 1
+    top_row = two_rows.excel_ref('A1:Z1')
+    assert dfc.xycells_to_excel_ref(top_row.cells) == 'A1:Z1'
+    assert len(top_row.cells) == 26
+
+    sub1 = two_rows - top_row
+    assert len(sub1.cells) == 26
+
+    sub2 = two_rows - bottom_row
+    assert len(sub2.cells) == 26
 
 
 def test_subtract_operator_raises_for_unaligned_tables(
-    single_unnamed_input_A1: BaseInput, single_unnamed_input_B1: BaseInput
+    table_simple_as_xls1: XlsInputSelectable,
+    table_simple_as_xls2: XlsInputSelectable
 ):
     """
     Test that a a suitable error is raised if we try and make a substraction of
@@ -59,35 +63,35 @@ def test_subtract_operator_raises_for_unaligned_tables(
     """
 
     with pytest.raises(UnalignedTableOperation):
-        single_unnamed_input_A1 - single_unnamed_input_B1
+        table_simple_as_xls1 - table_simple_as_xls2
 
 
-def test_union_operator(single_input_multicells: BaseInput):
+def test_union_operator(table_simple_as_xls1: XlsInputSelectable):
     """
     Test we can create a union of cells from a table selection
     with another selection taken from the same table.
     """
 
-    assert len(single_input_multicells.cells) == 2
+    two_rows = table_simple_as_xls1.excel_ref('A1:Z2')
+    assert dfc.xycells_to_excel_ref(two_rows.cells) == 'A1:Z2'
+    assert len(two_rows.cells) == 52
 
-    selection1 = copy.deepcopy(single_input_multicells)
-    selection1.cells = dfc.cells_on_x_index(
-        single_input_multicells.cells, 0
-    )
-    assert len(selection1.cells) == 1
+    bottom_row = two_rows.excel_ref('A2:Z2')
+    assert dfc.xycells_to_excel_ref(bottom_row.cells) == 'A2:Z2'
+    assert len(bottom_row.cells) == 26
 
-    selection2 = copy.deepcopy(single_input_multicells)
-    selection2.cells = dfc.cells_on_x_index(
-        single_input_multicells.cells, 1
-    )
-    assert len(selection2.cells) == 1
+    top_row = two_rows.excel_ref('A1:Z1')
+    assert dfc.xycells_to_excel_ref(top_row.cells) == 'A1:Z1'
+    assert len(top_row.cells) == 26
 
-    union_selection = selection1 | selection2
-    assert len(union_selection.cells) == 2
+    recombined = bottom_row | top_row
+    assert len(recombined.cells) == 52
+    assert dfc.xycells_to_excel_ref(recombined.cells) == 'A1:Z2'
 
 
 def test_union_operator_raises_for_unaligned_tables(
-    single_unnamed_input_A1: BaseInput, single_unnamed_input_B1: BaseInput
+    table_simple_as_xls1: XlsInputSelectable,
+    table_simple_as_xls2: XlsInputSelectable
 ):
     """
     Test that a a suitable error is raised if we try and make a substraction of
@@ -95,4 +99,4 @@ def test_union_operator_raises_for_unaligned_tables(
     """
 
     with pytest.raises(UnalignedTableOperation):
-        single_unnamed_input_A1 | single_unnamed_input_B1
+        table_simple_as_xls1 | table_simple_as_xls2

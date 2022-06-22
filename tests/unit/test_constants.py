@@ -1,5 +1,3 @@
-import pytest
-
 from pivoter.constants import SupportedLocalFiles
 
 

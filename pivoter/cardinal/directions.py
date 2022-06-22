@@ -1,9 +1,10 @@
 from typing import Optional
 from dataclasses import dataclass
 
+
 @dataclass
 class BaseDirection:
-    x: int 
+    x: int
     y: int
     locked: bool = False
     horizontal_axis: Optional[bool] = None
@@ -17,7 +18,9 @@ class BaseDirection:
 
         # Don't allow continual reinstantiaition of a direction
         if self.locked:
-            raise Exception('You cannot modify a cardinal directions offset value more than once')
+            raise Exception(
+                "You cannot modify a cardinal directions offset value more than once"
+            )
 
         if self.horizontal_axis:
             if self.x == -1:

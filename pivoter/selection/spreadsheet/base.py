@@ -1,3 +1,4 @@
+import copy
 from typing import List
 
 from pivoter.models.source.cell import BaseCell
@@ -27,5 +28,10 @@ class BaseSpreadsheetSelectable(Selectable):
 
         selected = dfc.exactly_matched_xy_cells(self.cells, wanted)
 
-        self.cells = selected
-        return self
+        return_self = copy.deepcopy(self)
+        return_self.cells = selected
+        import logging
+        logging.warning(f'excel ref input {excel_ref}, results in cells {dfc.xycells_to_excel_ref(self.cells)}')
+
+        # Copy so we can assign as a new variable rather than a pointer
+        return return_self

@@ -109,10 +109,8 @@ def multi_excel_ref_to_basecells(excel_ref: str) -> List[BaseCell]:
 
     return_cells = []
     for x in range(start_x, end_x + 1):
-        for y in range(start_y, end_y + 1):
+        for y in range(start_y, end_y +1):
             return_cells.append(BaseCell(x=x, y=y))
-
-    logging.warning(f"Excel ref {excel_ref} gets cells {return_cells}")
 
     return return_cells
 
@@ -158,7 +156,7 @@ def excel_ref_as_wanted_basecells(excel_ref: str) -> List[BaseCell]:
     handler = ref_styles[identified_ref_style].handler
 
     # the single excel ref handler returns a single cell
-    # so listify return where necessary 
+    # so listify return where necessary
     cell_or_cell_list = handler(excel_ref)
     if not isinstance(cell_or_cell_list, list):
         return [cell_or_cell_list]

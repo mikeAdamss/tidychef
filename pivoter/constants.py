@@ -8,5 +8,5 @@ class SupportedLocalFiles:
     def __repr__(self):
         return ",".join([self.CSV])
 
-SUPPORTED_LOCAL_FILETYPES = SupportedLocalFiles()
 
+SUPPORTED_LOCAL_FILETYPES = SupportedLocalFiles()

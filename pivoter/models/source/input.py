@@ -7,6 +7,7 @@ representation of same (to include dataframes).
 
 from __future__ import annotations
 
+import copy
 from pathlib import Path
 from typing import List
 
@@ -83,7 +84,6 @@ class BaseInput:
         """
         return self.selected_table.filtered._signature
 
-
     def __sub__(self, other_input: BaseInput):
         """
         Implements "-" operator, subtraction
@@ -96,10 +96,9 @@ class BaseInput:
         if self.signature != other_input.signature:
             raise UnalignedTableOperation()
 
-        remove_cells = dfc.cells_not_in(other_input.cells, self.cells)
-        self.cells = [c for c in self.cells if c not in remove_cells]
-        return self
-
+        return_self = copy.deepcopy(self)
+        return_self.cells = dfc.cells_not_in(return_self.cells, other_input.cells)
+        return return_self
 
     def __or__(self, other_input: BaseInput):
         """
@@ -112,10 +111,10 @@ class BaseInput:
         if self.signature != other_input.signature:
             raise UnalignedTableOperation()
 
-        new_cells = dfc.cells_not_in(other_input.cells, self.cells)
-        self.cells = self.cells + new_cells
-        return self
-
+        return_self = copy.deepcopy(self)
+        new_cells = dfc.cells_not_in(other_input.cells, return_self.cells)
+        return_self.cells = return_self.cells + new_cells
+        return return_self
 
     def __iter__(self):
         """

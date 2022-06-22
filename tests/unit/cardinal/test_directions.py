@@ -2,6 +2,7 @@ import pytest
 
 from pivoter.cardinal.directions import UP, DOWN, LEFT, RIGHT, ABOVE, BELOW
 
+
 def test_cardinal_offset_can_be_overwritten():
     """
     Test that each cardinal direction denototes a single
@@ -38,6 +39,7 @@ def test_cardinal_offset_can_be_overwritten():
         assert direction.x == x_expected
         assert direction.y == y_expected
 
+
 def test_cardinal_offset_cannot_be_overwritten_twice():
     """
     Test that a user is blocked from overwriting a
@@ -46,4 +48,3 @@ def test_cardinal_offset_cannot_be_overwritten_twice():
 
     with pytest.raises(Exception):
         RIGHT(2)(2)
-
