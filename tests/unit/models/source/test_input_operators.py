@@ -6,24 +6,20 @@ controlling Input upon Input operators.
 import pytest
 
 from pivoter.exceptions import UnalignedTableOperation
-from pivoter.readers.reader import read_local
 from pivoter.selection import datafuncs as dfc
 from pivoter.selection.spreadsheet.xls import XlsInputSelectable
-from tests.fixtures import path_to_fixture
+from tests.fixtures.preconfigured import fixture_simple_one_tab
+
 
 
 @pytest.fixture
 def table_simple_as_xls1():
-    return read_local(
-        path_to_fixture("csv", "simple.csv"), override_selectable=XlsInputSelectable
-    )
+    return fixture_simple_one_tab()
 
 
 @pytest.fixture
 def table_simple_as_xls2():
-    return read_local(
-        path_to_fixture("csv", "simple.csv"), override_selectable=XlsInputSelectable
-    )
+    return fixture_simple_one_tab()
 
 
 def test_sub_operator(table_simple_as_xls1: XlsInputSelectable):

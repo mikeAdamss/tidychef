@@ -1,9 +1,8 @@
 import pytest
 
 from pivoter.exceptions import InvalidCellObjectError
-from pivoter.readers.reader import read_local
 from pivoter.selection.csv.csv import CsvInputSelectable
-from tests.fixtures import path_to_fixture
+from tests.fixtures import fixture_with_blanks
 
 blank_values_not_disregarding_whitespace = [""]
 default_blank_values = blank_values_not_disregarding_whitespace + ["    ", " "]
@@ -11,7 +10,7 @@ default_blank_values = blank_values_not_disregarding_whitespace + ["    ", " "]
 
 @pytest.fixture
 def table_with_blanks():
-    return read_local(path_to_fixture("csv", "has_blanks.csv"))
+    return fixture_with_blanks()
 
 
 def test_is_blank_on_valid_cell_values(table_with_blanks: CsvInputSelectable):
