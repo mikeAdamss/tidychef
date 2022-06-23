@@ -1,87 +1,76 @@
-# import copy
-# import pytest
-# from dataclasses import dataclass
-# from typing import List
+import pytest
 
-# from pivoter.cardinal.directions import UP, DOWN, LEFT, RIGHT, BaseDirection
-# from pivoter.exceptions import BadShiftParameterError
-# from pivoter.models.source.cell import BaseCell
-# from pivoter.selection import datafuncs as dfc
-# from pivoter.selection.base import Selectable
-# from tests.fixtures.objects.selectables.selectable import single_input_A1F5
+from pivoter.cardinal.directions import UP, DOWN, LEFT, RIGHT
+from pivoter.exceptions import BadShiftParameterError
+from pivoter.selection.spreadsheet.xls import XlsInputSelectable
+from tests.fixtures import fixture_simple_one_tab
+
+from pivoter.selection import datafuncs as dfc
 
 
-# def test_shift_left_and_right():
-#     """
-#     Test we can shift in the LEFT and RIGHT cardinal direction.
-#     """
-
-#     @dataclass
-#     class Case:
-#         desc: str
-#         direction: BaseDirection
-#         expected: List[BaseCell]
-#         length: int
-
-#     for case in [
-#         Case("Right one bare", RIGHT, [BaseCell(x=3, y=0)], 5),
-#         Case("Right one", RIGHT(1), [BaseCell(x=3, y=0)], 5),
-#         Case("Right two", RIGHT(2), [BaseCell(x=4, y=0)], 5)
-#     ]:
-
-#         data = single_input_A1F5()
-#         data.cells = dfc.cells_on_x_index(data.cells, 2) # C1:C5
-
-#         data.shift(case.direction)
-
-#         for cell_to_find in case.expected:
-#             assert any([x.matches_xy(cell_to_find) for x in data.cells]), (
-#                 f'Unable to find cell {cell_to_find} in {data.cells}, '
-#                 f' with case "{case.desc}" and direction {case.direction}'
-#             )
-#         assert len(data.cells) == case.length
+@pytest.fixture
+def table_simple_as_xls1():
+    return fixture_simple_one_tab()
 
 
-# # Note: backward compatibility functionality
-# # there are better ways of doing this now
-# def test_shift_via_offsets():
-#     """
-#     Test we can shift by passing in simple y and y offsets
-#     """
+def test_shift(table_simple_as_xls1: XlsInputSelectable):
+    """
+    Test we can shift in the LEFT and RIGHT cardinal direction.
+    """
 
-#     @dataclass
-#     class Case:
-#         desc: str
-#         x: int
-#         y: int
-#         expected_cell: BaseCell
+    s = table_simple_as_xls1.excel_ref("B3:D4")
+    assert len(s.cells) == 6
+    s = s.shift(RIGHT)
+    assert dfc.xycells_to_excel_ref(s.cells) == 'C3:E4'
+    assert len(s.cells) == 6
 
-#     for case in [
-#         Case("Right 1", 1, 0, BaseCell(x=3, y=2)),
-#         Case("Down 2", 0, 2, BaseCell(x=2, y=4)),
-#         Case("Left 2", -2, 0, BaseCell(x=0, y=2)),
-#         Case("Up 1", 0, -1, BaseCell(x=2, y=1))
-#     ]:
-#         data = single_input_A1F5()
-#         data.cells = dfc.exactly_matched_xy_cells(data.cells, [BaseCell(2, 2)]) # C3
+    s = table_simple_as_xls1.excel_ref("B3:D4")
+    assert len(s.cells) == 6
+    s = s.shift(RIGHT(1))
+    assert dfc.xycells_to_excel_ref(s.cells) == 'C3:E4'
+    assert len(s.cells) == 6
 
-#         data.shift(case.x, case.y)
+    s = table_simple_as_xls1.excel_ref("B3:D4")
+    assert len(s.cells) == 6
+    s = s.shift(RIGHT(3))
+    assert dfc.xycells_to_excel_ref(s.cells) == 'E3:G4'
+    assert len(s.cells) == 6
 
-#         assert len(data.cells) == 1
-#         assert case.expected_cell.x == data.cells[0].x
-#         assert case.expected_cell.y == data.cells[0].y
+    s = table_simple_as_xls1.excel_ref("B3:D4")
+    assert len(s.cells) == 6
+    s = s.shift(RIGHT(3)).shift(DOWN(7))
+    assert dfc.xycells_to_excel_ref(s.cells) == 'E10:G11'
+    assert len(s.cells) == 6
+
+    s = table_simple_as_xls1.excel_ref("F10:H21")
+    assert len(s.cells) == 36
+    s = s.shift(LEFT(2)).shift(UP(6))
+    assert dfc.xycells_to_excel_ref(s.cells) == 'D4:F15'
+    assert len(s.cells) == 36
+
+    s = table_simple_as_xls1.excel_ref("L12:M14")
+    assert len(s.cells) == 6
+    s = s.shift(3, 3)
+    assert dfc.xycells_to_excel_ref(s.cells) == 'O15:P17'
+    assert len(s.cells) == 6
+
+    s = table_simple_as_xls1.excel_ref("L12:M14")
+    assert len(s.cells) == 6
+    s = s.shift(3, -3)
+    assert dfc.xycells_to_excel_ref(s.cells) == 'O9:P11'
+    assert len(s.cells) == 6
 
 
-# def test_bad_shift_parameters(single_table_input_A1: Selectable):
-#     """
-#     Confirm that intorrect shift parameters passed into shift
-#     raise the appropriate error.
-#     """
-#     for params in [
-#         [1, "foo"],
-#         [object, 12],
-#         [None, 4]
-#     ]:
+def test_bad_shift_parameters(table_simple_as_xls1: XlsInputSelectable):
+    """
+    Confirm that intorrect shift parameters passed into shift
+    raise the appropriate error.
+    """
+    for params in [
+        [1, "foo"],
+        [object, 12],
+        [None, 4]
+    ]:
 
-#         with pytest.raises(BadShiftParameterError):
-#             single_table_input_A1.shift(params[0], params[1])
+        with pytest.raises(BadShiftParameterError):
+            table_simple_as_xls1.shift(params[0], params[1])

@@ -12,7 +12,7 @@ def matching_xy_cells(
     Given a list of cells, return all that match xy values
     with those in wanted_cells
     """
-    return [x for x in cells if any([x.matches_xy(y) for y in wanted_cells])]
+    return [c1 for c1 in cells if any([c1.matches_xy(c2) for c2 in wanted_cells])]
 
 
 def cells_not_in(

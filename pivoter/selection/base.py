@@ -175,8 +175,9 @@ class Selectable(BaseInput):
 
         found_cells = dfc.matching_xy_cells(self.pcells, wanted_cells)
 
-        if len(dfc.cells_not_in(self.pcells, found_cells)) > 0:
+        if len(dfc.cells_not_in(found_cells, self.pcells)) > 0:
             raise OutOfBoundsError()
 
-        self.cells = found_cells
-        return self
+        return_self = copy.deepcopy(self)
+        return_self.cells = found_cells
+        return return_self
