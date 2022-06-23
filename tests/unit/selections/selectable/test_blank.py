@@ -1,4 +1,5 @@
 from dis import dis
+
 import pytest
 
 from pivoter.exceptions import InvalidCellObjectError

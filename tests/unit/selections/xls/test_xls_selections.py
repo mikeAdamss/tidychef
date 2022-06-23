@@ -1,6 +1,7 @@
 import pytest
 
-from pivoter.exceptions import CellsDoNotExistError, LoneValueOnMultipleCellsError
+from pivoter.exceptions import (CellsDoNotExistError,
+                                LoneValueOnMultipleCellsError)
 from pivoter.selection.spreadsheet.xls import XlsInputSelectable
 from tests.fixtures import fixture_simple_one_tab, fixture_simple_two_tabs
 
@@ -13,7 +14,6 @@ def table_simple_as_xls1():
 @pytest.fixture
 def sheet_of_two_tables():
     return fixture_simple_two_tabs()
-
 
 
 def test_lone_value_selector(table_simple_as_xls1: XlsInputSelectable):
@@ -32,7 +32,7 @@ def test_lone_value_on_multiple_values_errors(
     """
 
     with pytest.raises(LoneValueOnMultipleCellsError):
-        table_simple_as_xls1.excel_ref('A1:A2').lone_value()
+        table_simple_as_xls1.excel_ref("A1:A2").lone_value()
 
 
 def test_excel_referece_out_of_bounds_error(

@@ -3,7 +3,7 @@ import pytest
 from pivoter.exceptions import InvalidTableSignatures, UnnamedTableError
 from pivoter.models.source.table import LiveTable
 from pivoter.selection.spreadsheet.xls import XlsInputSelectable
-from tests.fixtures import fixture_simple_two_tabs, fixture_simple_one_tab
+from tests.fixtures import fixture_simple_one_tab, fixture_simple_two_tabs
 
 
 @pytest.fixture

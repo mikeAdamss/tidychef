@@ -18,6 +18,12 @@ def fixture_with_blanks():
     return read_local(path_to_fixture("csv", "has_blanks.csv"))
 
 
+def fixture_is_wide():
+    return read_local(
+        path_to_fixture("csv", "wide.csv"), override_selectable=XlsInputSelectable
+    )
+
+
 # TODO - use excel when we have a real excel reader
 def fixture_simple_two_tabs():
     """Simple input of two tabs. Cells A1:Z100"""
