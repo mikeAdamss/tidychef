@@ -3,17 +3,12 @@ import pytest
 from pivoter.exceptions import (CellsDoNotExistError,
                                 LoneValueOnMultipleCellsError)
 from pivoter.selection.spreadsheet.xls import XlsInputSelectable
-from tests.fixtures import fixture_simple_one_tab, fixture_simple_two_tabs
+from tests.fixtures import fixture_simple_one_tab
 
 
 @pytest.fixture
 def table_simple_as_xls1():
     return fixture_simple_one_tab()
-
-
-@pytest.fixture
-def sheet_of_two_tables():
-    return fixture_simple_two_tabs()
 
 
 def test_lone_value_selector(table_simple_as_xls1: XlsInputSelectable):

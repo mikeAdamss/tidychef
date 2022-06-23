@@ -1,6 +1,7 @@
 import pytest
 
 from pivoter.exceptions import InvalidCellObjectError
+from pivoter.models.source.cell import Cell
 from pivoter.selection.csv.csv import CsvInputSelectable
 from tests.fixtures import fixture_with_blanks
 
@@ -67,3 +68,18 @@ def test_is_blank_on_invalid_cell_value_types_raises_err(
         with pytest.raises(InvalidCellObjectError):
             cell.value = 0.5
             cell.is_blank()
+
+
+def test_none_counts_as_blank():
+    """
+    Test that should be define a cell as None it registers
+    as blank.
+    """
+    assert Cell(x=0, y=0, value=None).is_blank()
+
+
+def test_cell_xy_str():
+    """
+    Test our cells can print a simple self reference
+    """
+    assert Cell(x=0, y=0, value="foo")._as_xy_str() == 'x:0, y:0, value = "foo"'

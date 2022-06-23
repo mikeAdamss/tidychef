@@ -29,16 +29,6 @@ class Table:
             self.cells = []
         self.cells.append(cell)
 
-    def _as_xy_str(self, demarcation=linesep) -> str:
-        """
-        Returns a str represtentation of the current cells
-        with their xy co-ordinates and values.
-        """
-        mystr = ""
-        for cell in self.cells:
-            mystr += f"{cell._as_xy_str()}{demarcation}"
-        return mystr.strip()
-
 
 class LiveTable:
     """

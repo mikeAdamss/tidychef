@@ -15,7 +15,7 @@ from pivoter.utils import fileutils
 def read_local(
     path_or_str: Union[str, Path],
     override_reader: Optional[BaseReader] = None,
-    override_selectable: Selectable = None,
+    override_selectable: Optional[Selectable] = None,
 ) -> Selectable:
     """
     Reads an input from a local file.
