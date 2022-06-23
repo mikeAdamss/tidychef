@@ -1,5 +1,4 @@
 import copy
-from os import linesep
 from typing import FrozenSet, List, Optional, Tuple, Union
 
 from pivoter.cardinal.directions import DOWN, LEFT, RIGHT, UP, BaseDirection
@@ -67,7 +66,7 @@ class Selectable(BaseInput):
         are aliases of UP and DOWN respectively.
         """
 
-        potential_cells: List[Cell] = dfc.cells_not_in(self.cells, self.pcells)
+        potential_cells: List[Cell] = dfc.cells_not_in(self.pcells, self.cells)
 
         selection: List[BaseCell] = []
         if direction in [UP, DOWN]:  # so also ABOVE and BELOW
@@ -81,57 +80,55 @@ class Selectable(BaseInput):
                 ]
 
                 if direction == UP:
-                    highest_selected_cell_on_xi = dfc.minium_y_offset_cell(
-                        selected_cells_on_xi
-                    )
+                    uppermost_used_yi = dfc.minium_y_offset(selected_cells_on_xi)
                     selection += [
                         c
                         for c in potential_cells_on_xi
-                        if c.is_above(highest_selected_cell_on_xi)
+                        if c.is_above(uppermost_used_yi)
                     ]
 
                 if direction == DOWN:
-                    lowest_selected_cell_on_xi = dfc.maximum_y_offset_cell(
-                        selected_cells_on_xi
-                    )
+                    lowest_used_xi = dfc.maximum_y_offset(selected_cells_on_xi)
                     selection += [
-                        c
-                        for c in potential_cells_on_xi
-                        if c.is_below(lowest_selected_cell_on_xi)
+                        c for c in potential_cells_on_xi if c.is_below(lowest_used_xi)
                     ]
 
         if direction in [LEFT, RIGHT]:
 
+            # For every row in which have at least one cell selected
             all_used_y_indicies: FrozenSet[int] = set(c.y for c in self.cells)
             for yi in all_used_y_indicies:
+
+                # Get all currently selected cells on that row
                 selected_cells_on_yi = dfc.cells_on_y_index(self.cells, yi)
 
+                # Get all not selected cells on that row
                 potential_cells_on_yi: List[Cell] = [
                     c for c in potential_cells if c.y == yi
                 ]
 
                 if direction == LEFT:
-                    leftmost_selected_cell_on_yi = dfc.minimum_x_offset_cell(
-                        selected_cells_on_yi
-                    )
+
+                    # Select anything to the left of the
+                    # rightmost of the selected cells on this row
+                    leftmost_used_yi = dfc.minimum_x_offset(selected_cells_on_yi)
                     selection += [
                         c
                         for c in potential_cells_on_yi
-                        if c.is_left_of(leftmost_selected_cell_on_yi)
+                        if c.is_left_of(leftmost_used_yi)
                     ]
 
                 if direction == RIGHT:
-                    rightmost_selected_cell_on_yi = dfc.maximum_x_offset_cell(
-                        selected_cells_on_yi
-                    )
+                    rightmost_used_yi = dfc.maximum_x_offset(selected_cells_on_yi)
                     selection += [
                         c
                         for c in potential_cells_on_yi
-                        if c.is_right_of(rightmost_selected_cell_on_yi)
+                        if c.is_right_of(rightmost_used_yi)
                     ]
 
-        self.cells += selection
-        return self
+        return_self = copy.deepcopy(self)
+        return_self.cells += selection
+        return return_self
 
     def fill(self, direction: Tuple[int, int]):
         """

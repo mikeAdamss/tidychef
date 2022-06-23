@@ -11,7 +11,6 @@ from pivoter.selection.spreadsheet.xls import XlsInputSelectable
 from tests.fixtures.preconfigured import fixture_simple_one_tab
 
 
-
 @pytest.fixture
 def table_simple_as_xls1():
     return fixture_simple_one_tab()

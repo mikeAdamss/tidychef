@@ -9,9 +9,11 @@ from pivoter.exceptions import IteratingSingleTableError, UnnamedTableError
 from pivoter.selection.spreadsheet.xls import XlsInputSelectable
 from tests.fixtures.preconfigured import fixture_simple_one_tab, fixture_simple_two_tabs
 
+
 @pytest.fixture
 def table_simple_as_xls1():
     return fixture_simple_one_tab()
+
 
 @pytest.fixture
 def sheet_of_two_tables():

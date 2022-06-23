@@ -10,9 +10,11 @@ from tests.fixtures import fixture_simple_two_tabs, fixture_simple_one_tab
 def table_simple_as_xls1():
     return fixture_simple_one_tab()
 
+
 @pytest.fixture
 def sheet_of_two_tables():
     return fixture_simple_two_tabs()
+
 
 def test_livetable_name_setter_and_getter(table_simple_as_xls1: XlsInputSelectable):
     """
@@ -25,7 +27,9 @@ def test_livetable_name_setter_and_getter(table_simple_as_xls1: XlsInputSelectab
     assert ltable.name == "foo"
 
 
-def test_livetable_name_getter_unnamed_table_err(table_simple_as_xls1: XlsInputSelectable):
+def test_livetable_name_getter_unnamed_table_err(
+    table_simple_as_xls1: XlsInputSelectable,
+):
     """
     Test the expected error is raised at the LiveTable class level if
     we try and access an unset name property.
@@ -36,7 +40,9 @@ def test_livetable_name_getter_unnamed_table_err(table_simple_as_xls1: XlsInputS
         ltable.name
 
 
-def test_livetable_with_unmatched_signatues_raises(sheet_of_two_tables: XlsInputSelectable):
+def test_livetable_with_unmatched_signatues_raises(
+    sheet_of_two_tables: XlsInputSelectable,
+):
     """
     Test that where we create a class:LiveTable from two tables with
     unmatching signatures the appropriate error is raised.
@@ -45,5 +51,5 @@ def test_livetable_with_unmatched_signatues_raises(sheet_of_two_tables: XlsInput
     with pytest.raises(InvalidTableSignatures):
         LiveTable(
             sheet_of_two_tables.tables[0].pristine,
-            sheet_of_two_tables.tables[1].pristine
-    )
+            sheet_of_two_tables.tables[1].pristine,
+        )

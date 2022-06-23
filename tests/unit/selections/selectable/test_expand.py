@@ -1,97 +1,32 @@
-# from dataclasses import dataclass
-# from os import linesep
-# from typing import List, Optional
+import pytest
 
-# from pivoter.cardinal.directions import RIGHT, UP, DOWN, LEFT
-# from pivoter.models.source.cell import BaseCell
-# from pivoter.selection.base import Selectable
-# from pivoter.selection import datafuncs as dfc
-# from tests.fixtures.objects.selectables.selectable import single_input_A1F5
+from pivoter.cardinal.directions import UP, DOWN, LEFT, RIGHT
+from pivoter.selection.spreadsheet.xls import XlsInputSelectable
+from tests.fixtures import fixture_simple_one_tab
+
+from pivoter.selection import datafuncs as dfc
 
 
-# def test_expand():
-#     """
-#     Test multiple variations of the expand command.
-#     """
+@pytest.fixture
+def table_simple_as_xls1():
+    return fixture_simple_one_tab()
 
-#     @dataclass
-#     class Case:
-#         """
-#         Test Inputs for an extrusion (fill/expand) test.
-#         """
 
-#         name: str
-#         starting_at: List[BaseCell]
-#         direction: int
-#         expected_count: int
-#         data: Optional[Selectable] = None
+def test_expand(table_simple_as_xls1: XlsInputSelectable):
+    """
+    Test the expand RIGHT commands work.
+    """
 
-#     for case in [
-#         Case(
-#             "F5, UP", [BaseCell(x=5, y=4)], UP, 5, single_input_A1F5()
-#         ),
-#         Case(
-#             "C4, UP", [BaseCell(x=2, y=3)], UP, 4, single_input_A1F5()
-#         ),
-#         Case(
-#             "A3, UP", [BaseCell(x=0, y=2)], UP, 3, single_input_A1F5()
-#         ),
-#         Case(
-#             "A3 + F2, UP",
-#             [BaseCell(x=0, y=2), BaseCell(x=5, y=1)],
-#             UP,
-#             5,
-#             single_input_A1F5(),
-#         ),
-#         Case(
-#             "A1, DOWN", [BaseCell(x=0, y=0)], DOWN, 5, single_input_A1F5()
-#         ),
-#         Case(
-#             "C4, DOWN", [BaseCell(x=2, y=3)], DOWN, 2, single_input_A1F5()
-#         ),
-#         Case(
-#             "A3, DOWN", [BaseCell(x=0, y=2)], DOWN, 3, single_input_A1F5()
-#         ),
-#         Case(
-#             "A3 + F2, DOWN",
-#             [BaseCell(x=0, y=2), BaseCell(x=5, y=1)],
-#             DOWN,
-#             7,
-#             single_input_A1F5(),
-#         ),
-#         Case(
-#             "B2, RIGHT", [BaseCell(x=1, y=1)], LEFT, 2, single_input_A1F5()
-#         ),
-#         Case(
-#             "B4 + F5, LEFT",
-#             [BaseCell(x=1, y=3), BaseCell(x=5, y=4)],
-#             LEFT,
-#             8,
-#             single_input_A1F5(),
-#         ),
-#         Case(
-#             "B2 + C3, LEFT",
-#             [BaseCell(x=1, y=1), BaseCell(x=2, y=2)],
-#             LEFT,
-#             5,
-#             single_input_A1F5(),
-#         ),
-#         Case(
-#             "B2 + C3, RIGHT",
-#             [BaseCell(x=1, y=1), BaseCell(x=2, y=2)],
-#             RIGHT,
-#             9,
-#             single_input_A1F5(),
-#         ),
-#     ]:
+    s = table_simple_as_xls1.excel_ref("W5:W10").expand(RIGHT)
+    assert len(s.cells) == 24
 
-#         case.data.cells = dfc.exactly_matched_xy_cells(
-#             case.data.cells, case.starting_at
-#         )
+    s = table_simple_as_xls1.excel_ref("E2:H2").expand(UP)
+    assert len(s.cells) == 8
 
-#         case.data.expand(case.direction)
+    s = table_simple_as_xls1.excel_ref("X17:Y18").expand(LEFT)
+    assert len(s.cells) == 50
 
-#         assert len(case.data.cells) == case.expected_count, (
-#             f"Expected {case.expected_count} cells, got {len(case.data.cells)}: {linesep}"
-#             f"{case.data.selected_table.filtered._as_xy_str()}"
-#         )
+    s = (
+        table_simple_as_xls1.excel_ref("X5") | table_simple_as_xls1.excel_ref("A2")
+    ).expand(DOWN)
+    assert len(s.cells) == 195

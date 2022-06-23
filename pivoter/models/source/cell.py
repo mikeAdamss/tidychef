@@ -28,33 +28,33 @@ class BaseCell:
         """
         return self.x == other_cell.x and self.y == other_cell.y
 
-    def is_above(self, cell: BaseCell) -> bool:
+    def is_above(self, y: int) -> bool:
         """
-        When compared to another cell, is this
+        When compared to a y index, is this
         cell above it?
         """
-        return self.y < cell.y
+        return self.y < y
 
-    def is_below(self, cell: BaseCell) -> bool:
+    def is_below(self, y: int) -> bool:
         """
-        When compared to another cell, is this
+        When compared to a y index, is this
         cell below it?
         """
-        return self.y > cell.y
+        return self.y > y
 
-    def is_right_of(self, cell: BaseCell) -> bool:
+    def is_right_of(self, x: int) -> bool:
         """
-        When compared to another cell, is this
+        When compared to an x index, is this
         cell to the right of it?
         """
-        return self.x > cell.x
+        return self.x > x
 
-    def is_left_of(self, cell: BaseCell) -> bool:
+    def is_left_of(self, x: int) -> bool:
         """
-        When compared to another cell, is this
+        When compared to an x index, is this
         cell to the left of it?
         """
-        return self.x < cell.x
+        return self.x < x
 
 
 @dataclass

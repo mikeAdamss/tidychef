@@ -1,4 +1,3 @@
-
 import pytest
 
 from pivoter.exceptions import UnnamedTableError
@@ -13,6 +12,7 @@ def fixture_simple_one_tab():
     return read_local(
         path_to_fixture("csv", "simple.csv"), override_selectable=XlsInputSelectable
     )
+
 
 def fixture_with_blanks():
     return read_local(path_to_fixture("csv", "has_blanks.csv"))
@@ -29,7 +29,7 @@ def fixture_simple_two_tabs():
     )
 
     selectable2 = read_local(
-    path_to_fixture("csv", "simple.csv"), override_selectable=XlsInputSelectable
+        path_to_fixture("csv", "simple.csv"), override_selectable=XlsInputSelectable
     )
     table2 = LiveTable.from_table(
         selectable2.selected_table.pristine, name="I am table 2"

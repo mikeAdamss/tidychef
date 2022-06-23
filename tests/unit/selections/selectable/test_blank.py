@@ -5,6 +5,7 @@ from pivoter.exceptions import InvalidCellObjectError
 from pivoter.selection.base import Selectable
 from tests.fixtures import fixture_with_blanks
 
+
 @pytest.fixture
 def table_with_blanks():
     return fixture_with_blanks()
