@@ -99,4 +99,3 @@ class Cell(BaseCell):
         with xy co-ordinates and value.
         """
         return f'x:{self.x}, y:{self.y}, value = "{self.value}"'
-        

@@ -1,13 +1,13 @@
+from dataclasses import dataclass
 from typing import List
 
 import pytest
-from dataclasses import dataclass
 
-from pivoter.models.source.cell import BaseCell, Cell
+from pivoter.models.source.cell import Cell
 from pivoter.selection import datafuncs as dfc
 from pivoter.selection.base import Selectable
 from tests.fixtures import fixture_simple_one_tab
-from tests.unit.helpers import qcel
+from tests.unit.helpers import qcel, qcels
 
 
 @pytest.fixture
@@ -53,22 +53,11 @@ def test_cell_is_within(selectable_simple1: Selectable):
         ref: str
         found: bool
 
-    for case in [
-        Case(
-            qcel("A1"),
-            "A1:A10",
-            True
-        ),
-            Case(
-            qcel("A1"),
-            "B1:B10",
-            False
-        )
-    ]:
-        assert dfc.cell_is_within(selectable_simple1.excel_ref(case.ref).cells, case.cell) == case.found, (
-            f'Expected cell {case.cell} within {case.ref} to be {case.found}' 
-        )
-
+    for case in [Case(qcel("A1"), "A1:A10", True), Case(qcel("A1"), "B1:B10", False)]:
+        assert (
+            dfc.cell_is_within(selectable_simple1.excel_ref(case.ref).cells, case.cell)
+            == case.found
+        ), f"Expected cell {case.cell} within {case.ref} to be {case.found}"
 
 
 def test_matching_xy_cells(selectable_simple1: Selectable):
@@ -78,14 +67,14 @@ def test_matching_xy_cells(selectable_simple1: Selectable):
 
     msg = "cannot find {} in {}"
 
-    find = [qcel('A2'), qcel('A3')]
+    find = qcels("A2:A3")
     found: List[Cell] = dfc.matching_xy_cells(selectable_simple1.cells, find)
     assert len(found) == 2
     for cell in found:
         exp = ["A2val", "A3val"]
         assert cell.value in exp, msg.format(cell.value, exp)
 
-    find = [qcel('D5'), qcel('I17')]  # D3 and H17
+    find = [qcel("D5"), qcel("I17")]  # D3 and H17
     found: List[Cell] = dfc.matching_xy_cells(selectable_simple1.cells, find)
     assert len(found) == 2
     for cell in found:
