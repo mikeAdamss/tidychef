@@ -4,6 +4,7 @@ Classes representing a sinlge cell of data.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from types import CellType
 from typing import Optional
 
 from pivoter.exceptions import InvalidCellObjectError
@@ -98,3 +99,4 @@ class Cell(BaseCell):
         with xy co-ordinates and value.
         """
         return f'x:{self.x}, y:{self.y}, value = "{self.value}"'
+        
