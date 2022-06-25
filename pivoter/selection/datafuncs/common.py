@@ -48,12 +48,6 @@ def cells_not_in(
     ]
 
 
-def cell_is_within(cells: List[BaseCell], cell: BaseCell) -> bool:
-    """ """
-    find_cell = matching_xy_cells(cells, [cell])
-    return len(find_cell) == 1
-
-
 def cells_on_x_index(cells: List[BaseCell], x: int) -> List[BaseCell]:
     """
     Return a list from the provided cells that are on the specific x index

@@ -127,3 +127,66 @@ def test_matching_xy_cells(selectable_simple1: Selectable):
     for cell in found:
         exp = ["D5val", "I17val"]
         assert cell.value in exp, msg.format(cell.value, exp)
+
+
+def test_cells_on_x_index(selectable_simple1: Selectable):
+    """
+    Test we can use x indicides to select all cells for that column
+    in a given selection of cells
+    """
+
+    @dataclass
+    class Case:
+        ref: str
+        x: int
+        expected: int
+
+    for case in [Case("A1:F6", 3, 6), Case("G12:G56", 6, 45), Case("A1:F6", 9, 0)]:
+        s: List[Cell] = selectable_simple1.excel_ref(case.ref).cells
+        cells_on_index: List[Cell] = dfc.cells_on_x_index(s, case.x)
+        assert (
+            len(cells_on_index) == case.expected
+        ), f"X axis {case.x} from cells {case.ref} should return {case.expected} cells, but got {len(cells_on_index)}"
+
+
+def test_cells_on_y_index(selectable_simple1: Selectable):
+    """
+    Test we can use y indicides to select all cells for that row
+    in a given selection of cells
+    """
+
+    @dataclass
+    class Case:
+        ref: str
+        y: int
+        expected: int
+
+    for case in [Case("A1:F6", 3, 6), Case("G2:H56", 6, 2), Case("A1:F6", 3, 6)]:
+        s: List[Cell] = selectable_simple1.excel_ref(case.ref).cells
+        cells_on_index: List[Cell] = dfc.cells_on_y_index(s, case.y)
+        assert (
+            len(cells_on_index) == case.expected
+        ), f"Y axis {case.y} from cells {case.ref} should return {case.expected} cells, but got {len(cells_on_index)}"
+
+
+def test_ensure_human_read_order():
+    """
+    Given an unordered list of cells, return them in a human readable
+    order.
+
+    i.e top row to bottom row, left to right
+    """
+
+    cells = [
+        BaseCell(5, 2),
+        BaseCell(12, 12),
+        BaseCell(2, 5),
+        BaseCell(6, 2),
+        BaseCell(3, 16),
+        BaseCell(0, 0),
+    ]
+    ordered = dfc.ensure_human_read_order(cells)
+    assert (
+        str(ordered)
+        == "[BaseCell(x=0, y=0), BaseCell(x=5, y=2), BaseCell(x=6, y=2), BaseCell(x=2, y=5), BaseCell(x=12, y=12), BaseCell(x=3, y=16)]"
+    )
