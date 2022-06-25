@@ -4,9 +4,11 @@ from pathlib import Path
 from typing import FrozenSet, List, Optional, Tuple, Union
 
 from pivoter.cardinal.directions import DOWN, LEFT, RIGHT, UP, BaseDirection
-from pivoter.exceptions import (BadShiftParameterError,
-                                LoneValueOnMultipleCellsError,
-                                OutOfBoundsError)
+from pivoter.exceptions import (
+    BadShiftParameterError,
+    LoneValueOnMultipleCellsError,
+    OutOfBoundsError,
+)
 from pivoter.models.source.cell import BaseCell, Cell
 from pivoter.models.source.input import BaseInput
 from pivoter.selection import datafuncs as dfc
@@ -78,7 +80,7 @@ class Selectable(BaseInput):
                 ]
 
                 if direction == UP:
-                    uppermost_used_yi = dfc.minium_y_offset(selected_cells_on_xi)
+                    uppermost_used_yi = dfc.minimum_y_offset(selected_cells_on_xi)
                     selection += [
                         c
                         for c in potential_cells_on_xi

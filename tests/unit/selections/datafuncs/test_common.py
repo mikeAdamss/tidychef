@@ -220,3 +220,81 @@ def test_exactly_matched_xy_cells(selectable_simple1: Selectable):
     wanted_cells: List[Cell] = selectable_simple1.excel_ref(wanted_cells_ref).cells
     with pytest.raises(CellsDoNotExistError):
         dfc.exactly_matched_xy_cells(cells, wanted_cells)
+
+
+def test_get_outlier_indicies(selectable_simple1: Selectable):
+    """
+    Test that when given a list of cell, we can get the outlier
+    indicies.
+
+    As in, the man and min x and y values in play.
+    """
+
+    cells = selectable_simple1.excel_ref("C4:F72").cells
+    min_x, max_x, min_y, max_y = dfc.get_outlier_indicies(cells)
+    assert min_x == 2
+    assert max_x == 5
+    assert min_y == 3
+    assert max_y == 71
+
+    cells = selectable_simple1.excel_ref("G46:L47").cells
+    min_x, max_x, min_y, max_y = dfc.get_outlier_indicies(cells)
+    assert min_x == 6
+    assert max_x == 11
+    assert min_y == 45
+    assert max_y == 46
+
+    cells = selectable_simple1.excel_ref("B7:F90").cells
+    min_x, max_x, min_y, max_y = dfc.get_outlier_indicies(cells)
+    assert min_x == 1
+    assert max_x == 5
+    assert min_y == 6
+    assert max_y == 89
+
+
+def test_matching_xy_cells(selectable_simple1: Selectable):
+    """
+    Where given two selections of cells, return all from the second
+    list that are all present in the first.
+    """
+
+    cells: List[Cell] = selectable_simple1.excel_ref("F6:H10").cells
+    wanted_cells: List[Cell] = selectable_simple1.excel_ref("F6:J10").cells
+    found: List[Cell] = dfc.matching_xy_cells(cells, wanted_cells)
+    assert len(found) == 15
+
+
+def test_matching_xy_cell(selectable_simple1: Selectable):
+    """
+    Test we can select a specific Cell from a list of cells.
+    """
+
+    @dataclass
+    class Case:
+        ref: str
+        wanted: str
+
+    for case in [Case("A6:G19", "F8"), Case("B5:Z90", "X33"), Case("F46:G50", "G50")]:
+
+        cells: List[Cell] = selectable_simple1.excel_ref(case.ref).cells
+        cell: Cell = dfc.exactly_matching_xy_cell(cells, qcel(case.wanted))
+        found_cell_ref: str = dfc.xycell_to_excel_ref(cell)
+        assert (
+            found_cell_ref == case.wanted
+        ), f"Expecting {case.wanted}, from {case.ref}, got {found_cell_ref}"
+
+
+def test_offsets(selectable_simple1: Selectable):
+    """
+    Tests for:
+
+    minimum_x_offset
+    maximum_x_offset
+    minimum_y_offset
+    maximum_y_offset
+    """
+    cells: List[Cell] = selectable_simple1.excel_ref("D16:Z77").cells
+    assert dfc.minimum_x_offset(cells) == 3
+    assert dfc.maximum_x_offset(cells) == 25
+    assert dfc.minimum_y_offset(cells) == 15
+    assert dfc.maximum_y_offset(cells) == 76

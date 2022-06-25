@@ -91,6 +91,16 @@ def exactly_matched_xy_cells(
     return matching_xy_cells(cells, wanted_cells)
 
 
+def exactly_matching_xy_cell(cells: List[BaseCell], wanted_cell: BaseCell) -> BaseCell:
+    """
+    Given a wanted cell, the cell from cells that matches xy values
+    with it
+    """
+    match = [c1 for c1 in cells if any([c1.matches_xy(wanted_cell)])]
+    assert len(match) == 1
+    return match[0]
+
+
 def get_outlier_indicies(cells: List[BaseCell]) -> Tuple[int, int, int, int]:
     """
     Given a list of cells, returns maximum and minimum x and y
@@ -98,7 +108,7 @@ def get_outlier_indicies(cells: List[BaseCell]) -> Tuple[int, int, int, int]:
     """
     min_x: int = minimum_x_offset(cells)
     max_x: int = maximum_x_offset(cells)
-    min_y: int = minium_y_offset(cells)
+    min_y: int = minimum_y_offset(cells)
     max_y: int = maximum_y_offset(cells)
     return min_x, max_x, min_y, max_y
 
@@ -108,19 +118,12 @@ def matching_xy_cells(
 ) -> List[BaseCell]:
     """
     Given a list of cells, return all that match xy values
-    with those in wanted_cells
+    with those in wanted_cells.
+
+    Note: does NOT raise an exception if we're asking for wanted_cells
+    that do not exist.
     """
     return [c1 for c1 in cells if any([c1.matches_xy(c2) for c2 in wanted_cells])]
-
-
-def matching_xy_cell(cells: List[BaseCell], wanted_cell: BaseCell) -> BaseCell:
-    """
-    Given a wanted cell, the cell from cells that matches xy values
-    with it
-    """
-    match = [c1 for c1 in cells if any([c1.matches_xy(wanted_cell)])]
-    assert len(match) == 1
-    return match[0]
 
 
 def maximum_x_offset(cells: List[BaseCell]) -> int:
@@ -150,7 +153,7 @@ def minimum_x_offset(cells: List[BaseCell]) -> int:
     return min_x_cell[0].x
 
 
-def minium_y_offset(cells: List[BaseCell]) -> int:
+def minimum_y_offset(cells: List[BaseCell]) -> int:
     """
     Given a list of BaseCell's, return the smallest y position in use
     """

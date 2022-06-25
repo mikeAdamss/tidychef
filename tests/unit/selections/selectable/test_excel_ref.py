@@ -1,7 +1,6 @@
 import pytest
 
-from pivoter.exceptions import (CellsDoNotExistError,
-                                LoneValueOnMultipleCellsError)
+from pivoter.exceptions import CellsDoNotExistError, LoneValueOnMultipleCellsError
 from pivoter.selection.base import Selectable
 from tests.fixtures import fixture_simple_one_tab
 

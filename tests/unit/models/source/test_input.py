@@ -7,8 +7,7 @@ import pytest
 
 from pivoter.exceptions import IteratingSingleTableError, UnnamedTableError
 from pivoter.selection.base import Selectable
-from tests.fixtures.preconfigured import (fixture_simple_one_tab,
-                                          fixture_simple_two_tabs)
+from tests.fixtures.preconfigured import fixture_simple_one_tab, fixture_simple_two_tabs
 
 
 @pytest.fixture
