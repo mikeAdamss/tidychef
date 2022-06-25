@@ -4,9 +4,11 @@ from pathlib import Path
 from typing import FrozenSet, List, Optional, Tuple, Union
 
 from pivoter.cardinal.directions import DOWN, LEFT, RIGHT, UP, BaseDirection
-from pivoter.exceptions import (BadShiftParameterError,
-                                LoneValueOnMultipleCellsError,
-                                OutOfBoundsError)
+from pivoter.exceptions import (
+    BadShiftParameterError,
+    LoneValueOnMultipleCellsError,
+    OutOfBoundsError,
+)
 from pivoter.models.source.cell import BaseCell, Cell
 from pivoter.models.source.input import BaseInput
 from pivoter.selection import datafuncs as dfc

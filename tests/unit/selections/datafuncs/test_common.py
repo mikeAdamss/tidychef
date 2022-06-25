@@ -3,6 +3,7 @@ from typing import List
 
 import pytest
 
+from pivoter.exceptions import CellsDoNotExistError
 from pivoter.models.source.cell import BaseCell, Cell
 from pivoter.selection import datafuncs as dfc
 from pivoter.selection.base import Selectable
@@ -190,3 +191,32 @@ def test_ensure_human_read_order():
         str(ordered)
         == "[BaseCell(x=0, y=0), BaseCell(x=5, y=2), BaseCell(x=6, y=2), BaseCell(x=2, y=5), BaseCell(x=12, y=12), BaseCell(x=3, y=16)]"
     )
+
+
+def test_exactly_matched_xy_cells(selectable_simple1: Selectable):
+    """
+    Test that:
+
+    Exactly matching cells can be extracted from a selection.
+
+    An error is raised where the requested cells are absent from
+    the intial selection.
+    """
+
+    # Should work
+    cells_ref = "G5:H8"
+    wanted_cells_ref = "G6:H7"
+    cells = selectable_simple1.excel_ref(cells_ref).cells
+    wanted_cells: List[Cell] = selectable_simple1.excel_ref(wanted_cells_ref).cells
+    found = dfc.exactly_matched_xy_cells(cells, wanted_cells)
+    assert (
+        len(found) == 4
+    ), f"Expected 4 cells exactly matching {wanted_cells_ref} from {cells_ref}, got {len(found)}"
+
+    # Should raise
+    cells_ref = "G5:H8"
+    wanted_cells_ref = "Z6:Z8"
+    cells = selectable_simple1.excel_ref(cells_ref).cells
+    wanted_cells: List[Cell] = selectable_simple1.excel_ref(wanted_cells_ref).cells
+    with pytest.raises(CellsDoNotExistError):
+        dfc.exactly_matched_xy_cells(cells, wanted_cells)
