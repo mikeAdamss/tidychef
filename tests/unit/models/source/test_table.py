@@ -2,7 +2,7 @@ import pytest
 
 from pivoter.exceptions import InvalidTableSignatures, UnnamedTableError
 from pivoter.models.source.table import LiveTable
-from pivoter.selection.spreadsheet.xls import XlsInputSelectable
+from pivoter.selection.base import Selectable
 from tests.fixtures import fixture_simple_one_tab, fixture_simple_two_tabs
 
 
@@ -16,7 +16,7 @@ def sheet_of_two_tables():
     return fixture_simple_two_tabs()
 
 
-def test_livetable_name_setter_and_getter(table_simple_as_xls1: XlsInputSelectable):
+def test_livetable_name_setter_and_getter(table_simple_as_xls1: Selectable):
     """
     Test we can both set and retreive the name property as defined
     on the LiveTable class
@@ -28,7 +28,7 @@ def test_livetable_name_setter_and_getter(table_simple_as_xls1: XlsInputSelectab
 
 
 def test_livetable_name_getter_unnamed_table_err(
-    table_simple_as_xls1: XlsInputSelectable,
+    table_simple_as_xls1: Selectable,
 ):
     """
     Test the expected error is raised at the LiveTable class level if
@@ -41,7 +41,7 @@ def test_livetable_name_getter_unnamed_table_err(
 
 
 def test_livetable_with_unmatched_signatues_raises(
-    sheet_of_two_tables: XlsInputSelectable,
+    sheet_of_two_tables: Selectable,
 ):
     """
     Test that where we create a class:LiveTable from two tables with

@@ -4,7 +4,7 @@ from typing import List
 import pytest
 
 from pivoter.models.source.cell import BaseCell
-from pivoter.selection.spreadsheet.xls import XlsInputSelectable
+from pivoter.selection.base import Selectable
 from pivoter.utils import cellutils
 from tests.fixtures import fixture_is_wide, fixture_simple_one_tab
 
@@ -19,7 +19,7 @@ def table_is_wide():
     return fixture_is_wide()
 
 
-def test_excel_ref_to_x(table_is_wide: XlsInputSelectable):
+def test_excel_ref_to_x(table_is_wide: Selectable):
     """
     Given excel references, return an x co-ordinate
     """
@@ -28,9 +28,8 @@ def test_excel_ref_to_x(table_is_wide: XlsInputSelectable):
         ["A1", 0],
         ["AA1", 26],
     ]:
-        assert (
-            table_is_wide.excel_ref(excel_ref).cells[0].x == expected_x
-        ), f"Expected {expected_x}, got {got}"
+        got_x = table_is_wide.excel_ref(excel_ref).cells[0].x
+        assert got_x == expected_x, f"Expected {expected_x}, got {got_x}"
 
 
 def test_excel_row_to_y():
@@ -47,7 +46,7 @@ def test_y_to_excel_row():
     assert cellutils.y_to_number(6) == 7
 
 
-def test_single_excel_ref(table_simple_as_xls1: XlsInputSelectable):
+def test_single_excel_ref(table_simple_as_xls1: Selectable):
     """
     Given a single cell excel reference, return the correct
     BaseCell

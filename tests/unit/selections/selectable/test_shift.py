@@ -3,7 +3,7 @@ import pytest
 from pivoter.cardinal.directions import DOWN, LEFT, RIGHT, UP
 from pivoter.exceptions import BadShiftParameterError, OutOfBoundsError
 from pivoter.selection import datafuncs as dfc
-from pivoter.selection.spreadsheet.xls import XlsInputSelectable
+from pivoter.selection.base import Selectable
 from tests.fixtures import fixture_simple_one_tab
 
 
@@ -12,7 +12,7 @@ def table_simple_as_xls1():
     return fixture_simple_one_tab()
 
 
-def test_shift(table_simple_as_xls1: XlsInputSelectable):
+def test_shift(table_simple_as_xls1: Selectable):
     """
     Test we can shift in the LEFT and RIGHT cardinal direction.
     """
@@ -60,7 +60,7 @@ def test_shift(table_simple_as_xls1: XlsInputSelectable):
     assert len(s.cells) == 6
 
 
-def test_bad_shift_parameters(table_simple_as_xls1: XlsInputSelectable):
+def test_bad_shift_parameters(table_simple_as_xls1: Selectable):
     """
     Confirm that intorrect shift parameters passed into shift
     raise the appropriate error.
@@ -71,7 +71,7 @@ def test_bad_shift_parameters(table_simple_as_xls1: XlsInputSelectable):
             table_simple_as_xls1.shift(params[0], params[1])
 
 
-def test_shift_out_of_bounds_raises(table_simple_as_xls1: XlsInputSelectable):
+def test_shift_out_of_bounds_raises(table_simple_as_xls1: Selectable):
     """
     Make sure an appropriate error is raised if we try and shift
     outisde the boundaries of the initial provided table of data.

@@ -86,6 +86,12 @@ class BaseInput:
         """
         return self.selected_table.filtered._signature
 
+    def selections_made(self) -> bool:
+        """
+        Have any selections of cells within the currently selected table been made
+        """
+        return self.selected_table.selections_made()
+
     def __sub__(self, other_input: BaseInput):
         """
         Implements "-" operator, subtraction

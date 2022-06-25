@@ -1,7 +1,6 @@
 import pytest
 
-from pivoter.selection import datafuncs as dfc
-from pivoter.selection.spreadsheet.xls import XlsInputSelectable
+from pivoter.selection.base import Selectable
 from tests.fixtures import fixture_simple_one_tab
 
 
@@ -10,7 +9,7 @@ def table_simple_as_xls1():
     return fixture_simple_one_tab()
 
 
-def test_assert_one_with_single_cell(table_simple_as_xls1: XlsInputSelectable):
+def test_assert_one_with_single_cell(table_simple_as_xls1: Selectable):
     """
     Test assert one behaves correctly on a selection consisting
     of one cell
@@ -20,7 +19,7 @@ def test_assert_one_with_single_cell(table_simple_as_xls1: XlsInputSelectable):
     s.assert_one()
 
 
-def test_assert_one_without_single_cell(table_simple_as_xls1: XlsInputSelectable):
+def test_assert_one_without_single_cell(table_simple_as_xls1: Selectable):
     """
     Test assert one behaves correctly on a selection not consisiting
     of a single cell.

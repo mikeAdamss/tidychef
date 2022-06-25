@@ -2,8 +2,7 @@ import pytest
 
 from pivoter.cardinal.directions import DOWN, LEFT, RIGHT, UP
 from pivoter.exceptions import CellsDoNotExistError
-from pivoter.selection import datafuncs as dfc
-from pivoter.selection.spreadsheet.xls import XlsInputSelectable
+from pivoter.selection.base import Selectable
 from tests.fixtures import fixture_simple_one_tab
 
 
@@ -12,7 +11,7 @@ def table_simple_as_xls1():
     return fixture_simple_one_tab()
 
 
-def test_expand(table_simple_as_xls1: XlsInputSelectable):
+def test_expand(table_simple_as_xls1: Selectable):
     """
     Test the expand RIGHT commands work.
     """
@@ -32,7 +31,7 @@ def test_expand(table_simple_as_xls1: XlsInputSelectable):
     assert len(s.cells) == 195
 
 
-def test_out_of_bounds_from_excel_ref(table_simple_as_xls1: XlsInputSelectable):
+def test_out_of_bounds_from_excel_ref(table_simple_as_xls1: Selectable):
     """
     Test that asking for a cell outside of the boundaries of the
     current table raises a suitable error.

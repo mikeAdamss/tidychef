@@ -7,7 +7,7 @@ import pytest
 
 from pivoter.exceptions import UnalignedTableOperation
 from pivoter.selection import datafuncs as dfc
-from pivoter.selection.spreadsheet.xls import XlsInputSelectable
+from pivoter.selection.base import Selectable
 from tests.fixtures.preconfigured import fixture_simple_one_tab
 
 
@@ -21,7 +21,7 @@ def table_simple_as_xls2():
     return fixture_simple_one_tab()
 
 
-def test_sub_operator(table_simple_as_xls1: XlsInputSelectable):
+def test_sub_operator(table_simple_as_xls1: Selectable):
     """
     Test we can make a substraction of cells from a table selection,
     using another selection taken from said table.
@@ -47,7 +47,7 @@ def test_sub_operator(table_simple_as_xls1: XlsInputSelectable):
 
 
 def test_subtract_operator_raises_for_unaligned_tables(
-    table_simple_as_xls1: XlsInputSelectable, table_simple_as_xls2: XlsInputSelectable
+    table_simple_as_xls1: Selectable, table_simple_as_xls2: Selectable
 ):
     """
     Test that a a suitable error is raised if we try and make a substraction of
@@ -58,7 +58,7 @@ def test_subtract_operator_raises_for_unaligned_tables(
         table_simple_as_xls1 - table_simple_as_xls2
 
 
-def test_union_operator(table_simple_as_xls1: XlsInputSelectable):
+def test_union_operator(table_simple_as_xls1: Selectable):
     """
     Test we can create a union of cells from a table selection
     with another selection taken from the same table.
@@ -82,7 +82,7 @@ def test_union_operator(table_simple_as_xls1: XlsInputSelectable):
 
 
 def test_union_operator_raises_for_unaligned_tables(
-    table_simple_as_xls1: XlsInputSelectable, table_simple_as_xls2: XlsInputSelectable
+    table_simple_as_xls1: Selectable, table_simple_as_xls2: Selectable
 ):
     """
     Test that a a suitable error is raised if we try and make a substraction of

@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional, Tuple
 
 from pivoter.exceptions import CellsDoNotExistError
 from pivoter.models.source.cell import BaseCell
@@ -15,6 +15,16 @@ def matching_xy_cells(
     return [c1 for c1 in cells if any([c1.matches_xy(c2) for c2 in wanted_cells])]
 
 
+def matching_xy_cell(cells: List[BaseCell], wanted_cell: BaseCell) -> BaseCell:
+    """
+    Given a wanted cell, the cell from cells that matches xy values
+    with it
+    """
+    match = [c1 for c1 in cells if any([c1.matches_xy(wanted_cell)])]
+    assert len(match) == 1
+    return match[0]
+
+
 def cells_not_in(
     initial_cells: List[BaseCell], without_cells: List[BaseCell]
 ) -> List[BaseCell]:
@@ -27,6 +37,12 @@ def cells_not_in(
         for c1 in initial_cells
         if not any([c1.matches_xy(c2) for c2 in without_cells])
     ]
+
+
+def cell_is_within(cells: List[BaseCell], cell: BaseCell) -> bool:
+    """ """
+    find_cell = matching_xy_cells(cells, [cell])
+    return len(find_cell) == 1
 
 
 def exactly_matched_xy_cells(
@@ -114,16 +130,9 @@ def xycells_to_excel_ref(cells: List[BaseCell]) -> str:
     no gaps. Return the representative excel reference.
     """
 
-    # +1 to account for zero offsets
-    min_x: int = minimum_x_offset(cells)
-    max_x: int = maximum_x_offset(cells)
-    min_y: int = minium_y_offset(cells)
-    max_y: int = maximum_y_offset(cells)
-
-    # Confirm its a contiguous selection with no gaps
-    x_axis = (max_x - min_x) + 1
-    y_axis = (max_y - min_y) + 1
-    assert (x_axis * y_axis) == len(cells)
+    min_x, max_x, min_y, max_y = assert_quadrilaterals(
+        cells, return_outlier_indicies=True
+    )
 
     topleft_cell = specific_cell_from_xy(cells, min_x, min_y)
     bottomright_cell = specific_cell_from_xy(cells, max_x, max_y)
@@ -131,3 +140,50 @@ def xycells_to_excel_ref(cells: List[BaseCell]) -> str:
     ref1 = f"{cellutils.x_to_letters(topleft_cell.x)}{cellutils.y_to_number(topleft_cell.y)}"
     ref2 = f"{cellutils.x_to_letters(bottomright_cell.x)}{cellutils.y_to_number(bottomright_cell.y)}"
     return f"{ref1}:{ref2}"
+
+
+def xycell_to_excel_ref(cell: BaseCell) -> str:
+    """
+    Given a specfic cell return the representative excel reference.
+    """
+    return f"{cellutils.x_to_letters(cell.x)}{cellutils.y_to_number(cell.y)}"
+
+
+def get_outlier_indicies(cells: List[BaseCell]) -> Tuple[int, int, int, int]:
+    """
+    Given a list of cells, returns maximum and minimum x and y
+    values from cells within that selecton.
+    """
+    min_x: int = minimum_x_offset(cells)
+    max_x: int = maximum_x_offset(cells)
+    min_y: int = minium_y_offset(cells)
+    max_y: int = maximum_y_offset(cells)
+    return min_x, max_x, min_y, max_y
+
+
+def assert_quadrilaterals(
+    cells: List[BaseCell], return_outlier_indicies=False
+) -> Optional[Tuple[int, int, int, int]]:
+    """
+    Get the
+    """
+
+    min_x, max_x, min_y, max_y = get_outlier_indicies(cells)
+
+    x_axis = (max_x - min_x) + 1
+    y_axis = (max_y - min_y) + 1
+
+    assert (x_axis * y_axis) == len(cells)
+
+    if return_outlier_indicies:
+        return min_x, max_x, min_y, max_y
+
+
+def ensure_human_read_order(cells: List[BaseCell]) -> List[BaseCell]:
+    """
+    Given a list of BaseCell's sort them into a typical human readable order.
+
+    - Reading each row from top to bottom
+    - Read each cell from left to right
+    """
+    return sorted(cells, key=lambda cell: (cell.y, cell.x), reverse=False)

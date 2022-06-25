@@ -12,6 +12,9 @@ coverage: ## View test coverage statistics
 coveragehtml: ## Create html report of test coverage, accssible at ./htmlcov/index.html
     poetry run coverage html
 
+isort: ## Run isort to sort out the imports
+    poetry run isort ./*
+
 black: ## Format the code base with black
     poetry run black ./*
 

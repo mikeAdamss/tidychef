@@ -1,4 +1,6 @@
 import copy
+import logging
+from pathlib import Path
 from typing import FrozenSet, List, Optional, Tuple, Union
 
 from pivoter.cardinal.directions import DOWN, LEFT, RIGHT, UP, BaseDirection
@@ -8,6 +10,7 @@ from pivoter.exceptions import (BadShiftParameterError,
 from pivoter.models.source.cell import BaseCell, Cell
 from pivoter.models.source.input import BaseInput
 from pivoter.selection import datafuncs as dfc
+from pivoter.utils import cellutils
 
 
 class Selectable(BaseInput):
@@ -178,4 +181,46 @@ class Selectable(BaseInput):
 
         return_self = copy.deepcopy(self)
         return_self.cells = found_cells
+        return return_self
+
+    def preview(
+        self, previewer=None, path: Path = False, bound_selection: bool = False
+    ):
+        """
+        Calls .print() via the specified previewer to preview
+        the currently selected cells in context.
+
+        By default the previwer will print an inline html
+        table using Ipython for compatibility with Jupyter.
+
+        :bound_selection: Toggle whether to display cells outside
+        of the futhest used x and used y values.
+        """
+        from pivoter.utils.preview import HtmlPreview
+
+        if not previewer:
+            previewer = HtmlPreview
+
+        previewer(self).print(bound_selection=bound_selection, path=path)
+        return self
+
+    def excel_ref(self, excel_ref: str):
+        """
+        Selects just the cells as indicated by the provided excel style
+        reference: "A6", "B17:B24": etc.
+        """
+
+        if ":" in excel_ref:
+            wanted: List[BaseCell] = cellutils.multi_excel_ref_to_basecells(excel_ref)
+        else:
+            wanted: BaseCell = cellutils.single_excel_ref_to_basecells(excel_ref)
+            wanted = [wanted]
+
+        selected = dfc.exactly_matched_xy_cells(self.cells, wanted)
+        logging.warning(
+            f"excel ref input {excel_ref}, results in cells {dfc.xycells_to_excel_ref(self.cells)}"
+        )
+
+        return_self = copy.deepcopy(self)
+        return_self.cells = selected
         return return_self

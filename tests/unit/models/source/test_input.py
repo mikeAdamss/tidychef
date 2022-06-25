@@ -6,7 +6,7 @@ and its use in a users workflow
 import pytest
 
 from pivoter.exceptions import IteratingSingleTableError, UnnamedTableError
-from pivoter.selection.spreadsheet.xls import XlsInputSelectable
+from pivoter.selection.base import Selectable
 from tests.fixtures.preconfigured import (fixture_simple_one_tab,
                                           fixture_simple_two_tabs)
 
@@ -21,7 +21,7 @@ def sheet_of_two_tables():
     return fixture_simple_two_tabs()
 
 
-def test_cannot_iterate_single_table_inputs(table_simple_as_xls1: XlsInputSelectable):
+def test_cannot_iterate_single_table_inputs(table_simple_as_xls1: Selectable):
     """
     Confirm the appropriate error is raised where a user tries to
     iterate through an input consisting of exactly one table.
@@ -32,7 +32,7 @@ def test_cannot_iterate_single_table_inputs(table_simple_as_xls1: XlsInputSelect
             """never triggered"""
 
 
-def test_selectable_name_property_returns_name(sheet_of_two_tables: XlsInputSelectable):
+def test_selectable_name_property_returns_name(sheet_of_two_tables: Selectable):
     """
     If a table is named, confirm we can access the name
     property.
@@ -40,7 +40,7 @@ def test_selectable_name_property_returns_name(sheet_of_two_tables: XlsInputSele
     assert sheet_of_two_tables.name == "I am table 1"
 
 
-def test_can_iterate_multiple_table_inputs(sheet_of_two_tables: XlsInputSelectable):
+def test_can_iterate_multiple_table_inputs(sheet_of_two_tables: Selectable):
     """
     Confirm the user can iterate through the tables in the expected
     manner.
@@ -56,7 +56,7 @@ def test_can_iterate_multiple_table_inputs(sheet_of_two_tables: XlsInputSelectab
 
 # Note: title as an alternate property acvessor for name is included
 # for backwards compatibiity with the databaker library
-def test_input_title_property_returns_name(sheet_of_two_tables: XlsInputSelectable):
+def test_input_title_property_returns_name(sheet_of_two_tables: Selectable):
     """
     If a table is named, confirm we can access the name
     via the alt property title.
@@ -64,7 +64,7 @@ def test_input_title_property_returns_name(sheet_of_two_tables: XlsInputSelectab
     assert sheet_of_two_tables.title == "I am table 1"
 
 
-def test_input_name_property_unset_raises_err(table_simple_as_xls1: XlsInputSelectable):
+def test_input_name_property_unset_raises_err(table_simple_as_xls1: Selectable):
     """
     If a table is not named, confirm accessing its name
     property returns the appropriate error.

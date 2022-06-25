@@ -59,6 +59,12 @@ class LiveTable:
         else:
             raise UnnamedTableError()
 
+    def selections_made(self) -> bool:
+        """
+        Have any selections been made
+        """
+        return len(self.pristine.cells) != len(self.filtered.cells)
+
     @name.setter
     def name(self, name: str):
         self._name = name
