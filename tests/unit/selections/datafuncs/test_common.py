@@ -60,6 +60,27 @@ def test_cell_is_within(selectable_simple1: Selectable):
         ), f"Expected cell {case.cell} within {case.ref} to be {case.found}"
 
 
+def test_cell_is_not_in(selectable_simple1: Selectable):
+    """
+    Test that we can check for the absense of a cell with a
+    list of cells.
+    """
+
+    @dataclass
+    class Case:
+        cell: Cell
+        ref: str
+        found: bool
+
+    for case in [Case(qcel("A1"), "A1:A10", False), Case(qcel("A1"), "B1:B10", True)]:
+        assert (
+            dfc.cell_is_not_within(
+                selectable_simple1.excel_ref(case.ref).cells, case.cell
+            )
+            == case.found
+        ), f"Expected cell {case.cell} within {case.ref} to be {case.found}"
+
+
 def test_matching_xy_cells(selectable_simple1: Selectable):
     """
     Test we can ask for and recieve specific cells from with a table

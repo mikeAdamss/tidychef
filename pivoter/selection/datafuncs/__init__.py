@@ -1,5 +1,6 @@
 from .common import (
     assert_quadrilaterals,
+    cell_is_not_within,
     cell_is_within,
     cells_not_in,
     cells_on_x_index,

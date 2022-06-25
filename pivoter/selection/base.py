@@ -40,7 +40,6 @@ class Selectable(BaseInput):
     def is_blank(self, disregard_whitespace=True):
         """
         Filters the selection to those cells that are blank.
-
         By default a cell with just whitespace in it is
         considered blank. You can change this behaviour
         with the disregard_whitespace keyword.
@@ -52,7 +51,6 @@ class Selectable(BaseInput):
     def is_not_blank(self, disregard_whitespace=True):
         """
         Filters the selection to those cells that are not blank.
-
         By default a cell with just whitespace in it is
         considered blank. You can change this behaviour
         with the disregard_whitespace keyword.
@@ -63,7 +61,6 @@ class Selectable(BaseInput):
         """
         Given a direction of UP, DOWN, LEFT, RIGHT
         Expands the current selection of cells in that direction.
-
         Notes:
         - Will also accept ABOVE and BELOW as direction, as they
         are aliases of UP and DOWN respectively.
@@ -138,7 +135,6 @@ class Selectable(BaseInput):
         Given a direction of UP, DOWN, LEFT, RIGHT
         Creates a new selection from the cells in that direction
         relative to the current cell selection.
-
         Notes:
         - Will also accept ABOVE and BELOW as direction, as they
         are aliases of UP and DOWN respectively.
@@ -191,10 +187,8 @@ class Selectable(BaseInput):
         """
         Calls .print() via the specified previewer to preview
         the currently selected cells in context.
-
         By default the previwer will print an inline html
         table using Ipython for compatibility with Jupyter.
-
         :bound_selection: Toggle whether to display cells outside
         of the futhest used x and used y values.
         """

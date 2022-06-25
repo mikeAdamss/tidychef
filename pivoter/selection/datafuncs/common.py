@@ -24,9 +24,14 @@ def assert_quadrilaterals(
 
 
 def cell_is_within(cells: List[BaseCell], cell: BaseCell) -> bool:
-    """ """
+    """Is the cell present with the list of cells?"""
     find_cell = matching_xy_cells(cells, [cell])
     return len(find_cell) == 1
+
+
+def cell_is_not_within(cells: List[BaseCell], cell: BaseCell) -> bool:
+    """Is the cell absent with the list of cells?"""
+    return not cell_is_within(cells, cell)
 
 
 def cells_not_in(
