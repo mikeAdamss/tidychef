@@ -5,24 +5,28 @@ from pivoter.models.source.cell import BaseCell
 from pivoter.utils import cellutils
 
 
-def matching_xy_cells(
-    cells: List[BaseCell], wanted_cells: List[BaseCell]
-) -> List[BaseCell]:
+def assert_quadrilaterals(
+    cells: List[BaseCell], return_outlier_indicies=False
+) -> Optional[Tuple[int, int, int, int]]:
     """
-    Given a list of cells, return all that match xy values
-    with those in wanted_cells
+    Get the
     """
-    return [c1 for c1 in cells if any([c1.matches_xy(c2) for c2 in wanted_cells])]
+
+    min_x, max_x, min_y, max_y = get_outlier_indicies(cells)
+
+    x_axis = (max_x - min_x) + 1
+    y_axis = (max_y - min_y) + 1
+
+    assert (x_axis * y_axis) == len(cells)
+
+    if return_outlier_indicies:
+        return min_x, max_x, min_y, max_y
 
 
-def matching_xy_cell(cells: List[BaseCell], wanted_cell: BaseCell) -> BaseCell:
-    """
-    Given a wanted cell, the cell from cells that matches xy values
-    with it
-    """
-    match = [c1 for c1 in cells if any([c1.matches_xy(wanted_cell)])]
-    assert len(match) == 1
-    return match[0]
+def cell_is_within(cells: List[BaseCell], cell: BaseCell) -> bool:
+    """ """
+    find_cell = matching_xy_cells(cells, [cell])
+    return len(find_cell) == 1
 
 
 def cells_not_in(
@@ -45,6 +49,30 @@ def cell_is_within(cells: List[BaseCell], cell: BaseCell) -> bool:
     return len(find_cell) == 1
 
 
+def cells_on_x_index(cells: List[BaseCell], x: int) -> List[BaseCell]:
+    """
+    Return a list from the provided cells that are on the specific x index
+    """
+    return [c for c in cells if c.x == x]
+
+
+def cells_on_y_index(cells: List[BaseCell], y: int) -> List[BaseCell]:
+    """
+    Return a list from the provided cells that are on the specific y index
+    """
+    return [c for c in cells if c.y == y]
+
+
+def ensure_human_read_order(cells: List[BaseCell]) -> List[BaseCell]:
+    """
+    Given a list of BaseCell's sort them into a typical human readable order.
+
+    - Reading each row from top to bottom
+    - Read each cell from left to right
+    """
+    return sorted(cells, key=lambda cell: (cell.y, cell.x), reverse=False)
+
+
 def exactly_matched_xy_cells(
     cells: List[BaseCell], wanted_cells: List[BaseCell]
 ) -> List[BaseCell]:
@@ -64,27 +92,45 @@ def exactly_matched_xy_cells(
     return matching_xy_cells(cells, wanted_cells)
 
 
-def cells_on_x_index(cells: List[BaseCell], x: int) -> List[BaseCell]:
+def get_outlier_indicies(cells: List[BaseCell]) -> Tuple[int, int, int, int]:
     """
-    Return a list from the provided cells that are on the specific x index
+    Given a list of cells, returns maximum and minimum x and y
+    values from cells within that selecton.
     """
-    return [c for c in cells if c.x == x]
+    min_x: int = minimum_x_offset(cells)
+    max_x: int = maximum_x_offset(cells)
+    min_y: int = minium_y_offset(cells)
+    max_y: int = maximum_y_offset(cells)
+    return min_x, max_x, min_y, max_y
 
 
-def cells_on_y_index(cells: List[BaseCell], y: int) -> List[BaseCell]:
+def matching_xy_cells(
+    cells: List[BaseCell], wanted_cells: List[BaseCell]
+) -> List[BaseCell]:
     """
-    Return a list from the provided cells that are on the specific y index
+    Given a list of cells, return all that match xy values
+    with those in wanted_cells
     """
-    return [c for c in cells if c.y == y]
+    return [c1 for c1 in cells if any([c1.matches_xy(c2) for c2 in wanted_cells])]
 
 
-def minium_y_offset(cells: List[BaseCell]) -> int:
+def matching_xy_cell(cells: List[BaseCell], wanted_cell: BaseCell) -> BaseCell:
     """
-    Given a list of BaseCell's, return the smallest y position in use
+    Given a wanted cell, the cell from cells that matches xy values
+    with it
     """
-    min_y = min([c.y for c in cells])
-    min_y_cell = [c for c in cells if c.y == min_y]
-    return min_y_cell[0].y
+    match = [c1 for c1 in cells if any([c1.matches_xy(wanted_cell)])]
+    assert len(match) == 1
+    return match[0]
+
+
+def maximum_x_offset(cells: List[BaseCell]) -> int:
+    """
+    Given a list of BaseCell's, return the largest x position in use
+    """
+    max_x = max([c.x for c in cells])
+    max_x_cell = [c for c in cells if c.x == max_x]
+    return max_x_cell[0].x
 
 
 def maximum_y_offset(cells: List[BaseCell]) -> int:
@@ -105,13 +151,13 @@ def minimum_x_offset(cells: List[BaseCell]) -> int:
     return min_x_cell[0].x
 
 
-def maximum_x_offset(cells: List[BaseCell]) -> int:
+def minium_y_offset(cells: List[BaseCell]) -> int:
     """
-    Given a list of BaseCell's, return the largest x position in use
+    Given a list of BaseCell's, return the smallest y position in use
     """
-    max_x = max([c.x for c in cells])
-    max_x_cell = [c for c in cells if c.x == max_x]
-    return max_x_cell[0].x
+    min_y = min([c.y for c in cells])
+    min_y_cell = [c for c in cells if c.y == min_y]
+    return min_y_cell[0].y
 
 
 def specific_cell_from_xy(cells: List, x: int, y: int) -> BaseCell:
@@ -122,6 +168,13 @@ def specific_cell_from_xy(cells: List, x: int, y: int) -> BaseCell:
     cells_that_match = exactly_matched_xy_cells(cells, [BaseCell(x=x, y=y)])
     assert len(cells_that_match) == 1
     return cells_that_match[0]
+
+
+def xycell_to_excel_ref(cell: BaseCell) -> str:
+    """
+    Given a specfic cell return the representative excel reference.
+    """
+    return f"{cellutils.x_to_letters(cell.x)}{cellutils.y_to_number(cell.y)}"
 
 
 def xycells_to_excel_ref(cells: List[BaseCell]) -> str:
@@ -140,50 +193,3 @@ def xycells_to_excel_ref(cells: List[BaseCell]) -> str:
     ref1 = f"{cellutils.x_to_letters(topleft_cell.x)}{cellutils.y_to_number(topleft_cell.y)}"
     ref2 = f"{cellutils.x_to_letters(bottomright_cell.x)}{cellutils.y_to_number(bottomright_cell.y)}"
     return f"{ref1}:{ref2}"
-
-
-def xycell_to_excel_ref(cell: BaseCell) -> str:
-    """
-    Given a specfic cell return the representative excel reference.
-    """
-    return f"{cellutils.x_to_letters(cell.x)}{cellutils.y_to_number(cell.y)}"
-
-
-def get_outlier_indicies(cells: List[BaseCell]) -> Tuple[int, int, int, int]:
-    """
-    Given a list of cells, returns maximum and minimum x and y
-    values from cells within that selecton.
-    """
-    min_x: int = minimum_x_offset(cells)
-    max_x: int = maximum_x_offset(cells)
-    min_y: int = minium_y_offset(cells)
-    max_y: int = maximum_y_offset(cells)
-    return min_x, max_x, min_y, max_y
-
-
-def assert_quadrilaterals(
-    cells: List[BaseCell], return_outlier_indicies=False
-) -> Optional[Tuple[int, int, int, int]]:
-    """
-    Get the
-    """
-
-    min_x, max_x, min_y, max_y = get_outlier_indicies(cells)
-
-    x_axis = (max_x - min_x) + 1
-    y_axis = (max_y - min_y) + 1
-
-    assert (x_axis * y_axis) == len(cells)
-
-    if return_outlier_indicies:
-        return min_x, max_x, min_y, max_y
-
-
-def ensure_human_read_order(cells: List[BaseCell]) -> List[BaseCell]:
-    """
-    Given a list of BaseCell's sort them into a typical human readable order.
-
-    - Reading each row from top to bottom
-    - Read each cell from left to right
-    """
-    return sorted(cells, key=lambda cell: (cell.y, cell.x), reverse=False)
