@@ -2,24 +2,24 @@ import pytest
 
 from pivoter.exceptions import (CellsDoNotExistError,
                                 LoneValueOnMultipleCellsError)
-from pivoter.selection.spreadsheet.xls import XlsInputSelectable
+from pivoter.selection.base import Selectable
 from tests.fixtures import fixture_simple_one_tab
 
 
 @pytest.fixture
-def table_simple_as_xls1():
+def selectable_simple1():
     return fixture_simple_one_tab()
 
 
-def test_lone_value_selector(table_simple_as_xls1: XlsInputSelectable):
+def test_lone_value_selector(selectable_simple1: Selectable):
     """
     Test we can return the value for selections of exactly one cell
     """
-    assert table_simple_as_xls1.excel_ref("A1").lone_value() == "A1val"
+    assert selectable_simple1.excel_ref("A1").lone_value() == "A1val"
 
 
 def test_lone_value_on_multiple_values_errors(
-    table_simple_as_xls1: XlsInputSelectable,
+    selectable_simple1: Selectable,
 ):
     """
     Test than calling Input.lone_value() on a filtered table containing
@@ -27,11 +27,11 @@ def test_lone_value_on_multiple_values_errors(
     """
 
     with pytest.raises(LoneValueOnMultipleCellsError):
-        table_simple_as_xls1.excel_ref("A1:A2").lone_value()
+        selectable_simple1.excel_ref("A1:A2").lone_value()
 
 
 def test_excel_referece_out_of_bounds_error(
-    table_simple_as_xls1: XlsInputSelectable,
+    selectable_simple1: Selectable,
 ):
     """
     Test that we cannot select using an excel reference for cells that
@@ -39,4 +39,4 @@ def test_excel_referece_out_of_bounds_error(
     """
 
     with pytest.raises(CellsDoNotExistError) as exc_info:
-        table_simple_as_xls1.excel_ref("AA2")
+        selectable_simple1.excel_ref("AA2")

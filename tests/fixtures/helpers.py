@@ -8,7 +8,8 @@ from pivoter.selection.base import Selectable
 
 # Fixture dir shorthand
 CSV = "csv"
-fixtures_locations = [CSV]
+PREVIEW = "preview"
+fixtures_locations = [CSV, PREVIEW]
 fixture_locations_as_str = ",".join(fixtures_locations)
 
 fixture_dir = Path(__file__).parent

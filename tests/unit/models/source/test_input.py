@@ -12,41 +12,41 @@ from tests.fixtures.preconfigured import (fixture_simple_one_tab,
 
 
 @pytest.fixture
-def table_simple_as_xls1():
+def selectable_simple1():
     return fixture_simple_one_tab()
 
 
 @pytest.fixture
-def sheet_of_two_tables():
+def selectable_of2_simple1():
     return fixture_simple_two_tabs()
 
 
-def test_cannot_iterate_single_table_inputs(table_simple_as_xls1: Selectable):
+def test_cannot_iterate_single_table_inputs(selectable_simple1: Selectable):
     """
     Confirm the appropriate error is raised where a user tries to
     iterate through an input consisting of exactly one table.
     """
 
     with pytest.raises(IteratingSingleTableError):
-        for table in table_simple_as_xls1:
+        for table in selectable_simple1:
             """never triggered"""
 
 
-def test_selectable_name_property_returns_name(sheet_of_two_tables: Selectable):
+def test_selectable_name_property_returns_name(selectable_of2_simple1: Selectable):
     """
     If a table is named, confirm we can access the name
     property.
     """
-    assert sheet_of_two_tables.name == "I am table 1"
+    assert selectable_of2_simple1.name == "I am table 1"
 
 
-def test_can_iterate_multiple_table_inputs(sheet_of_two_tables: Selectable):
+def test_can_iterate_multiple_table_inputs(selectable_of2_simple1: Selectable):
     """
     Confirm the user can iterate through the tables in the expected
     manner.
     """
 
-    for i, table in enumerate(sheet_of_two_tables):
+    for i, table in enumerate(selectable_of2_simple1):
         if i == 0:
             assert table.name == "I am table 1"
         if i == 1:
@@ -56,19 +56,19 @@ def test_can_iterate_multiple_table_inputs(sheet_of_two_tables: Selectable):
 
 # Note: title as an alternate property acvessor for name is included
 # for backwards compatibiity with the databaker library
-def test_input_title_property_returns_name(sheet_of_two_tables: Selectable):
+def test_input_title_property_returns_name(selectable_of2_simple1: Selectable):
     """
     If a table is named, confirm we can access the name
     via the alt property title.
     """
-    assert sheet_of_two_tables.title == "I am table 1"
+    assert selectable_of2_simple1.title == "I am table 1"
 
 
-def test_input_name_property_unset_raises_err(table_simple_as_xls1: Selectable):
+def test_input_name_property_unset_raises_err(selectable_simple1: Selectable):
     """
     If a table is not named, confirm accessing its name
     property returns the appropriate error.
     """
 
     with pytest.raises(UnnamedTableError):
-        table_simple_as_xls1.name
+        selectable_simple1.name

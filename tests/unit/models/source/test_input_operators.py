@@ -12,22 +12,22 @@ from tests.fixtures.preconfigured import fixture_simple_one_tab
 
 
 @pytest.fixture
-def table_simple_as_xls1():
+def selectable_simple1():
     return fixture_simple_one_tab()
 
 
 @pytest.fixture
-def table_simple_as_xls2():
+def selectable_simple2():
     return fixture_simple_one_tab()
 
 
-def test_sub_operator(table_simple_as_xls1: Selectable):
+def test_sub_operator(selectable_simple1: Selectable):
     """
     Test we can make a substraction of cells from a table selection,
     using another selection taken from said table.
     """
 
-    two_rows = table_simple_as_xls1.excel_ref("A1:Z2")
+    two_rows = selectable_simple1.excel_ref("A1:Z2")
     assert dfc.xycells_to_excel_ref(two_rows.cells) == "A1:Z2"
     assert len(two_rows.cells) == 52
 
@@ -47,7 +47,7 @@ def test_sub_operator(table_simple_as_xls1: Selectable):
 
 
 def test_subtract_operator_raises_for_unaligned_tables(
-    table_simple_as_xls1: Selectable, table_simple_as_xls2: Selectable
+    selectable_simple1: Selectable, selectable_simple2: Selectable
 ):
     """
     Test that a a suitable error is raised if we try and make a substraction of
@@ -55,16 +55,16 @@ def test_subtract_operator_raises_for_unaligned_tables(
     """
 
     with pytest.raises(UnalignedTableOperation):
-        table_simple_as_xls1 - table_simple_as_xls2
+        selectable_simple1 - selectable_simple2
 
 
-def test_union_operator(table_simple_as_xls1: Selectable):
+def test_union_operator(selectable_simple1: Selectable):
     """
     Test we can create a union of cells from a table selection
     with another selection taken from the same table.
     """
 
-    two_rows = table_simple_as_xls1.excel_ref("A1:Z2")
+    two_rows = selectable_simple1.excel_ref("A1:Z2")
     assert dfc.xycells_to_excel_ref(two_rows.cells) == "A1:Z2"
     assert len(two_rows.cells) == 52
 
@@ -82,7 +82,7 @@ def test_union_operator(table_simple_as_xls1: Selectable):
 
 
 def test_union_operator_raises_for_unaligned_tables(
-    table_simple_as_xls1: Selectable, table_simple_as_xls2: Selectable
+    selectable_simple1: Selectable, selectable_simple2: Selectable
 ):
     """
     Test that a a suitable error is raised if we try and make a substraction of
@@ -90,4 +90,4 @@ def test_union_operator_raises_for_unaligned_tables(
     """
 
     with pytest.raises(UnalignedTableOperation):
-        table_simple_as_xls1 | table_simple_as_xls2
+        selectable_simple1 | selectable_simple2

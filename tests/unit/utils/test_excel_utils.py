@@ -10,7 +10,7 @@ from tests.fixtures import fixture_is_wide, fixture_simple_one_tab
 
 
 @pytest.fixture
-def table_simple_as_xls1():
+def selectable_simple1():
     return fixture_simple_one_tab()
 
 
@@ -46,7 +46,7 @@ def test_y_to_excel_row():
     assert cellutils.y_to_number(6) == 7
 
 
-def test_single_excel_ref(table_simple_as_xls1: Selectable):
+def test_single_excel_ref(selectable_simple1: Selectable):
     """
     Given a single cell excel reference, return the correct
     BaseCell
@@ -56,7 +56,7 @@ def test_single_excel_ref(table_simple_as_xls1: Selectable):
         ["A1", BaseCell(0, 0)],
         ["C17", BaseCell(2, 16)],
     ]:
-        assert table_simple_as_xls1.excel_ref(excel_ref).cells[0].matches_xy(expected)
+        assert selectable_simple1.excel_ref(excel_ref).cells[0].matches_xy(expected)
 
 
 def test_x_to_letters():
