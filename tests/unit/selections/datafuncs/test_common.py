@@ -3,7 +3,7 @@ from typing import List
 
 import pytest
 
-from pivoter.models.source.cell import Cell
+from pivoter.models.source.cell import BaseCell, Cell
 from pivoter.selection import datafuncs as dfc
 from pivoter.selection.base import Selectable
 from tests.fixtures import fixture_simple_one_tab
@@ -49,7 +49,7 @@ def test_cell_is_within(selectable_simple1: Selectable):
 
     @dataclass
     class Case:
-        cell: Cell
+        cell: BaseCell
         ref: str
         found: bool
 
@@ -68,7 +68,7 @@ def test_cell_is_not_in(selectable_simple1: Selectable):
 
     @dataclass
     class Case:
-        cell: Cell
+        cell: BaseCell
         ref: str
         found: bool
 
@@ -79,6 +79,32 @@ def test_cell_is_not_in(selectable_simple1: Selectable):
             )
             == case.found
         ), f"Expected cell {case.cell} within {case.ref} to be {case.found}"
+
+
+def test_cells_not_in(selectable_simple1: Selectable):
+    """
+    Test we can get a list of cells from one list that are
+    not included in a second list.
+    """
+
+    @dataclass
+    class Case:
+        cells_ref: str
+        ref: str
+        expected_count: int
+
+    for case in [
+        Case("A1:F1", "A1:E1", 1),
+        Case("F20:G32", "F20:F32", 13),
+        Case("C4:E6", "C4:E5", 3),
+    ]:
+        cells = qcels(case.cells_ref)
+        cells_not_in: List[Cell] = dfc.cells_not_in(
+            cells, selectable_simple1.excel_ref(case.ref).cells
+        )
+        assert (
+            len(cells_not_in) == case.expected_count
+        ), f"Cells from {case.cells_ref} not in {case.ref} should be {case.expected_count}, but got {len(cells_not_in)}"
 
 
 def test_matching_xy_cells(selectable_simple1: Selectable):
