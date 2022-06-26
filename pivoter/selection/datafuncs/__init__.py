@@ -1,6 +1,4 @@
 from .common import (
-    any_excel_ref_as_wanted_basecells,
-    assert_excel_ref_within_cells,
     assert_quadrilaterals,
     cell_is_not_within,
     cell_is_within,
@@ -16,9 +14,13 @@ from .common import (
     maximum_y_offset,
     minimum_x_offset,
     minimum_y_offset,
+    specific_cell_from_xy,
+)
+from .excel import (
+    any_excel_ref_as_wanted_basecells,
+    assert_excel_ref_within_cells,
     multi_excel_ref_to_basecells,
     single_excel_ref_to_basecell,
-    specific_cell_from_xy,
     xycell_to_excel_ref,
     xycells_to_excel_ref,
 )
