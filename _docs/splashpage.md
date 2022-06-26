@@ -25,5 +25,5 @@ A repository of data transformation examples using datachef. These are all real 
 
 ## development
 
-In addition to the API documentation (see "SubModules" in the left hand menu) the [datachef github repo](https://github.com/mikeAdamss/datachef) also contains details on design choices, guidelines for contributing and an explanation of how datachef can be extended and customised. 
+In addition to the API documentation (see "Submodules" in the left hand menu) the [datachef github repo](https://github.com/mikeAdamss/datachef) also contains details on design choices, guidelines for contributing and an explanation of how datachef can be extended and customised. 
 
