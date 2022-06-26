@@ -25,7 +25,6 @@ jobs:
       - run: poetry install
       - run: rm -rf ./docs
       - run: poetry run pdoc -html ./datachef --output-dir ./docs
-      - run: cp -a ./_docs/* ./docs/
 
       - run: tar --directory docs/ -hcf artifact.tar .
       - uses: actions/upload-artifact@v3

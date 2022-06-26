@@ -197,13 +197,13 @@ class Selectable(BaseInput):
         bound_selection: Toggle whether to display cells outside
         of the futhest used x and used y values.
         """
-        from pivoter.utils.preview import HtmlPreview
+        from datachef.utils.preview import HtmlPreview
 
         if not previewer:
             previewer = HtmlPreview
 
         previewer(self).print(bound_selection=bound_selection, path=path)
-        return self
+
 
     def excel_ref(self, excel_ref: str):
         """
@@ -218,9 +218,6 @@ class Selectable(BaseInput):
             wanted = [wanted]
 
         selected = dfc.exactly_matched_xy_cells(self.cells, wanted)
-        logging.warning(
-            f"excel ref input {excel_ref}, results in cells {dfc.xycells_to_excel_ref(self.cells)}"
-        )
 
         return_self = copy.deepcopy(self)
         return_self.cells = selected

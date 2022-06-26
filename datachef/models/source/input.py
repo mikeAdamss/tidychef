@@ -129,7 +129,7 @@ class BaseInput:
         pointer to the selected table then returning the updated self
         """
         if self.is_singleton_table:
-            raise IteratingSingleTableError
+            raise IteratingSingleTableError()
 
         for table in self.tables:
             self.selected_table = table
