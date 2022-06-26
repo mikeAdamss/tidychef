@@ -110,7 +110,7 @@ def test_cells_not_in(selectable_simple1: Selectable):
 
 def test_matching_xy_cells(selectable_simple1: Selectable):
     """
-    Test we can ask for and recieve specific cells from with a table
+    Test we can ask for and receive specific cells from with a table
     """
 
     msg = "cannot find {} in {}"
@@ -122,7 +122,7 @@ def test_matching_xy_cells(selectable_simple1: Selectable):
         exp = ["A2val", "A3val"]
         assert cell.value in exp, msg.format(cell.value, exp)
 
-    find = [qcel("D5"), qcel("I17")]  # D3 and H17
+    find = [qcel("D5"), qcel("I17")]
     found: List[Cell] = dfc.matching_xy_cells(selectable_simple1.cells, find)
     assert len(found) == 2
     for cell in found:
@@ -298,3 +298,43 @@ def test_offsets(selectable_simple1: Selectable):
     assert dfc.maximum_x_offset(cells) == 25
     assert dfc.minimum_y_offset(cells) == 15
     assert dfc.maximum_y_offset(cells) == 76
+
+
+def test_specific_cell_from_xy(selectable_simple1: Selectable):
+    """
+    Confirm we can use an x and y co-ordinate to get a single cell
+    from a list of cells.
+    """
+
+    cells: List[Cell] = selectable_simple1.excel_ref("D5:G67").cells
+
+    cell: Cell = dfc.specific_cell_from_xy(cells, 3, 9)
+    assert dfc.xycell_to_excel_ref(cell) == "D10"
+
+    cell: Cell = dfc.specific_cell_from_xy(cells, 5, 63)
+    assert dfc.xycell_to_excel_ref(cell) == "F64"
+
+    cell: Cell = dfc.specific_cell_from_xy(cells, 4, 50)
+    assert dfc.xycell_to_excel_ref(cell) == "E51"
+
+
+def test_xycells_to_excel_ref(selectable_simple1: Selectable):
+    """
+    Test that where we are provided a list of selected cells
+    representing an multicell excel reference:
+
+    (a) it is a quadrilateral selection (because it has to be)
+    (b) we can derrive the correctly expressed excel reference
+    from it.
+    """
+
+    for ref in ["D5:G67", "A1:Z89", "J26:Q28"]:
+
+        cells: List[Cell] = selectable_simple1.excel_ref(ref).cells
+        assert dfc.xycells_to_excel_ref(cells) == ref
+
+    # Check we raise for a non quadrilateral selection
+    with pytest.raises(AssertionError):
+        selection: Selectable = selectable_simple1.excel_ref("A1:D10")
+        selection: Selectable = selection | selectable_simple1.excel_ref("Z8")
+        dfc.xycells_to_excel_ref(selection.cells)

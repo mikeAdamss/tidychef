@@ -17,10 +17,24 @@ def assert_quadrilaterals(
     x_axis = (max_x - min_x) + 1
     y_axis = (max_y - min_y) + 1
 
-    assert (x_axis * y_axis) == len(cells)
+    assert (x_axis * y_axis) == len(
+        cells
+    ), "The priovided selection of cells does not equate to a quadrilateral selection"
 
     if return_outlier_indicies:
         return min_x, max_x, min_y, max_y
+
+
+def assert_excel_ref_within_cells(cells: List[BaseCell], excel_ref: str):
+    """
+    Given a list of cells, assert that the cell denoted by
+    the provided excel reference, exists within the list
+    """
+    wanted_cell: BaseCell = cellutils.single_excel_ref_to_basecell(excel_ref)
+    match = [c1 for c1 in cells if any([c1.matches_xy(wanted_cell)])]
+    assert (
+        len(match) == 1
+    ), f"Cell of excel ref {excel_ref} is not contained in the provided selection"
 
 
 def cell_is_within(cells: List[BaseCell], cell: BaseCell) -> bool:
@@ -162,10 +176,10 @@ def minimum_y_offset(cells: List[BaseCell]) -> int:
     return min_y_cell[0].y
 
 
-def specific_cell_from_xy(cells: List, x: int, y: int) -> BaseCell:
+def specific_cell_from_xy(cells: List[BaseCell], x: int, y: int) -> BaseCell:
     """
     Given a list of cells and specific x and y co-ordinates,
-    return the resuested cell.
+    return the requested cell.
     """
     cells_that_match = exactly_matched_xy_cells(cells, [BaseCell(x=x, y=y)])
     assert len(cells_that_match) == 1
@@ -174,7 +188,7 @@ def specific_cell_from_xy(cells: List, x: int, y: int) -> BaseCell:
 
 def xycell_to_excel_ref(cell: BaseCell) -> str:
     """
-    Given a specfic cell return the representative excel reference.
+    Given a single BaseCell object, return the representative excel reference.
     """
     return f"{cellutils.x_to_letters(cell.x)}{cellutils.y_to_number(cell.y)}"
 

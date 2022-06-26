@@ -66,7 +66,7 @@ def y_to_number(excel_number_ref: int):
     return excel_number_ref + 1  # We are 0 indexed, unlike excel
 
 
-def single_excel_ref_to_basecells(excel_ref: str) -> BaseCell:
+def single_excel_ref_to_basecell(excel_ref: str) -> BaseCell:
     """
     Given a single excel cell reference, return a single BaseCell.
     """
@@ -98,8 +98,8 @@ def multi_excel_ref_to_basecells(excel_ref: str) -> List[BaseCell]:
     """
 
     assert ":" in excel_ref
-    start_cell = single_excel_ref_to_basecells(excel_ref.split(":")[0])
-    end_cell = single_excel_ref_to_basecells(excel_ref.split(":")[1])
+    start_cell = single_excel_ref_to_basecell(excel_ref.split(":")[0])
+    end_cell = single_excel_ref_to_basecell(excel_ref.split(":")[1])
 
     start_x = start_cell.x
     start_y = start_cell.y
@@ -126,7 +126,7 @@ class HandlerMatcher:
 
 ref_styles = {
     "single_cell": HandlerMatcher(
-        regex="^[A-Z]+[0-9]+$", handler=single_excel_ref_to_basecells
+        regex="^[A-Z]+[0-9]+$", handler=single_excel_ref_to_basecell
     ),
     "multi_cell": HandlerMatcher(
         regex="^[A-Z]+[0-9]+:[A-Z]+[0-9]+$", handler=multi_excel_ref_to_basecells

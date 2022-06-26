@@ -12,11 +12,8 @@ coverage: ## View test coverage statistics
 coveragehtml: ## Create html report of test coverage, accssible at ./htmlcov/index.html
     poetry run coverage html
 
-isort: ## Run isort to sort out the imports
-    poetry run isort ./*
-
-black: ## Format the code base with black
-    poetry run black ./*
+cleanup: ## Run isort then black (always in that order) to tidy codebase
+    poetry run isort ./* && poetry run black ./*
 
 pyright: ## Run pyright against the code base
     poetry run pyright . --lib
