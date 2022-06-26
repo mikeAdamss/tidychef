@@ -1,8 +1,8 @@
 from typing import List, Optional
 
-from pivoter.models.source.cell import Cell
-from pivoter.models.source.table import LiveTable, Table
-from pivoter.selection.base import Selectable
+from datachef.models.source.cell import Cell
+from datachef.models.source.table import LiveTable, Table
+from datachef.selection.base import Selectable
 
 
 def single_table_test_input(

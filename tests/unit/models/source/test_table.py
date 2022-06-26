@@ -1,8 +1,8 @@
 import pytest
 
-from pivoter.exceptions import InvalidTableSignatures, UnnamedTableError
-from pivoter.models.source.table import LiveTable
-from pivoter.selection.base import Selectable
+from datachef.exceptions import InvalidTableSignatures, UnnamedTableError
+from datachef.models.source.table import LiveTable
+from datachef.selection.base import Selectable
 from tests.fixtures import fixture_simple_one_tab, fixture_simple_two_tabs
 
 

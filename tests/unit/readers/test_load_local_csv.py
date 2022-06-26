@@ -1,8 +1,8 @@
 from pathlib import Path
 
-from pivoter.models.source.input import BaseInput
-from pivoter.readers import reader
-from pivoter.readers.base import BaseReader
+from datachef.models.source.input import BaseInput
+from datachef.readers import reader
+from datachef.readers.base import BaseReader
 from tests.fixtures import path_to_fixture
 
 

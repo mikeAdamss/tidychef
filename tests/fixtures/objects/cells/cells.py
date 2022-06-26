@@ -1,6 +1,6 @@
 from typing import List
 
-from pivoter.models.source.cell import Cell
+from datachef.models.source.cell import Cell
 
 
 def cells_with_valid_values() -> List[Cell]:

@@ -1,4 +1,4 @@
-from pivoter.constants import SupportedLocalFiles
+from datachef.constants import SupportedLocalFiles
 
 
 def test_local_filetype_repr():

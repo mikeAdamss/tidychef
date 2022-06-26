@@ -1,7 +1,6 @@
-from typing import List
 
-from pivoter.models.source.cell import Cell
-from pivoter.selection.base import Selectable
+from datachef.models.source.cell import Cell
+from datachef.selection.base import Selectable
 
 from .helpers import multiple_table_test_input, single_table_test_input
 

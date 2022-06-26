@@ -1,6 +1,6 @@
 import pytest
 
-from pivoter.selection.base import Selectable
+from datachef.selection.base import Selectable
 from tests.fixtures import fixture_simple_one_tab
 
 

@@ -1,7 +1,7 @@
 import pytest
 
-from pivoter.exceptions import FileInputError
-from pivoter.readers.base import BaseReader
+from datachef.exceptions import FileInputError
+from datachef.readers.base import BaseReader
 
 
 def test_base_reader_can_raise_for_no_path_parameter():

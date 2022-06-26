@@ -1,6 +1,6 @@
 import pytest
 
-from pivoter.cardinal.directions import ABOVE, BELOW, DOWN, LEFT, RIGHT, UP
+from datachef.cardinal.directions import ABOVE, BELOW, DOWN, LEFT, RIGHT, UP
 
 
 def test_cardinal_offset_can_be_overwritten():

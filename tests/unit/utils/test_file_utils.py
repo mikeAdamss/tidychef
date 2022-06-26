@@ -2,9 +2,9 @@ from pathlib import Path
 
 import pytest
 
-from pivoter.constants import SUPPORTED_LOCAL_FILETYPES
-from pivoter.exceptions import FileInputError, UnsupportedLocalFileError
-from pivoter.utils import fileutils
+from datachef.constants import SUPPORTED_LOCAL_FILETYPES
+from datachef.exceptions import FileInputError, UnsupportedLocalFileError
+from datachef.utils import fileutils
 from tests.fixtures import path_to_fixture
 
 

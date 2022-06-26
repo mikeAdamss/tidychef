@@ -1,9 +1,8 @@
 import pytest
 
-from pivoter.exceptions import UnnamedTableError
-from pivoter.models.source.table import LiveTable
-from pivoter.readers.reader import read_local
-from pivoter.selection.spreadsheet.xls import XlsInputSelectable
+from datachef.models.source.table import LiveTable
+from datachef.readers.reader import read_local
+from datachef.selection.spreadsheet.xls import XlsInputSelectable
 from tests.fixtures import path_to_fixture
 
 

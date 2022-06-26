@@ -1,7 +1,7 @@
 from typing import List
 
-from pivoter.models.source.cell import BaseCell
-from pivoter.selection import datafuncs as dfc
+from datachef.models.source.cell import BaseCell
+from datachef.selection import datafuncs as dfc
 
 
 def qcel(excel_ref) -> BaseCell:

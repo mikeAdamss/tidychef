@@ -1,8 +1,8 @@
 import pytest
 
-from pivoter.cardinal.directions import DOWN, LEFT, RIGHT, UP
-from pivoter.exceptions import CellsDoNotExistError
-from pivoter.selection.base import Selectable
+from datachef.cardinal.directions import DOWN, LEFT, RIGHT, UP
+from datachef.exceptions import CellsDoNotExistError
+from datachef.selection.base import Selectable
 from tests.fixtures import fixture_simple_one_tab
 
 

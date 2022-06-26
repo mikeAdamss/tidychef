@@ -5,9 +5,9 @@ controlling Input upon Input operators.
 
 import pytest
 
-from pivoter.exceptions import UnalignedTableOperation
-from pivoter.selection import datafuncs as dfc
-from pivoter.selection.base import Selectable
+from datachef.exceptions import UnalignedTableOperation
+from datachef.selection import datafuncs as dfc
+from datachef.selection.base import Selectable
 from tests.fixtures.preconfigured import fixture_simple_one_tab
 
 

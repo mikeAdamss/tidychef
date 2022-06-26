@@ -2,8 +2,8 @@ import uuid
 
 import pytest
 
-from pivoter.selection.base import Selectable
-from pivoter.utils.preview import HtmlPreview
+from datachef.selection.base import Selectable
+from datachef.utils.preview import HtmlPreview
 from tests.fixtures import path_to_fixture
 from tests.fixtures.preconfigured import fixture_simple_one_tab
 

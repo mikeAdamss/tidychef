@@ -1,8 +1,8 @@
 import pytest
 
-from pivoter.exceptions import InvalidCellObjectError
-from pivoter.models.source.cell import Cell
-from pivoter.selection.csv.csv import CsvInputSelectable
+from datachef.exceptions import InvalidCellObjectError
+from datachef.models.source.cell import Cell
+from datachef.selection.csv.csv import CsvInputSelectable
 from tests.fixtures import fixture_with_blanks
 
 blank_values_not_disregarding_whitespace = [""]
