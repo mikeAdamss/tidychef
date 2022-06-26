@@ -9,7 +9,7 @@ _note: not true (yet) at time of writing_.
 
 Baseic usage is explained via a relatively simple example of transforming messy data into neat machine readable data. These kinds of contextual examples are typically the best way to communicate what the library does and why it may meet your own use case(s).
 
-[see the example (opens a new window)](./try.html)  # note: holding file for now
+[see the example (opens a new window)](./example.html)  # note: holding file for now
 
 ## the datachef lab
 
