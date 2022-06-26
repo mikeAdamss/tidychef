@@ -23,7 +23,8 @@ jobs:
 
       - run: pip install poetry
       - run: poetry install
-      - run: poetry make docs
+      - run: poetry run pdoc -html ./datachef --output-dir ./docs
+      - run: cp -a ./_docs/* ./docs/
 
       - run: tar --directory docs/ -hcf artifact.tar .
       - uses: actions/upload-artifact@v3
