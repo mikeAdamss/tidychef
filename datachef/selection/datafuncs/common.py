@@ -11,7 +11,8 @@ def assert_quadrilaterals(
     Assert that the provided list of cells equtes to selection of cells
     that form a quadrilateral shape with no gaps.
 
-    This is a requirement when using some of the preview functionality
+    This is a requirement when attempting to create an excel reference
+    representing a list of cells.
     """
 
     min_x, max_x, min_y, max_y = get_outlier_indicies(cells)
@@ -28,13 +29,13 @@ def assert_quadrilaterals(
 
 
 def cell_is_within(cells: List[BaseCell], cell: BaseCell) -> bool:
-    """Is the cell present with the list of cells?"""
+    """Is the cell present within the list of cells?"""
     find_cell = matching_xy_cells(cells, [cell])
     return len(find_cell) == 1
 
 
 def cell_is_not_within(cells: List[BaseCell], cell: BaseCell) -> bool:
-    """Is the cell absent with the list of cells?"""
+    """Is the cell absent from the list of cells?"""
     return not cell_is_within(cells, cell)
 
 
