@@ -23,6 +23,7 @@ jobs:
 
       - run: pip install poetry
       - run: poetry install
+      - run: rm -rf ./docs
       - run: poetry run pdoc -html ./datachef --output-dir ./docs
       - run: cp -a ./_docs/* ./docs/
 
