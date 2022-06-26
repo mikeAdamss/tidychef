@@ -9,7 +9,7 @@ You can run datacheck via any python interpreter you want to, but the examples a
 
 ## the datachef book
 
-The "datachef boook" is a series jupyter book (connected and organised jupyter notebooks) designed to gradually introduce a new user to the full functionality of datachef via well documented, contextualised examples.
+The "datachef book" is a series jupyter book (connected and organised jupyter notebooks) designed to gradually introduce a new user to the full functionality of datachef via well documented, contextualised examples.
 
 - [see the example (opens a new window)](./example.html) to get an idea what datachef does and if it satisfies your use case(s) 
 - [view the book (opens a new window)](./example.html) 
