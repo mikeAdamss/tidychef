@@ -2,14 +2,16 @@
 
 > :warning: This software is a **work in progress**. Documentation thus far can be viewed at: https://mikeadamss.github.io/datachef/datachef.html#datachef
 
-Datachef is a pet/passion project to create a ground up rewrite and extension of the functionality of https://github.com/sensiblecodeio/databaker
+Datachef is a pet/passion project to create a ground up rewrite and extension of the functionality of https://github.com/sensiblecodeio/databaker. 
 
-Databaker is a great tool, but it's getting a bit old and is wrapping some libraries that are now depreciated, making interoperation with other data related tools (notably pandas) quite challenging. There's also a lot of functionality I want to add that will be difficult it not impossible to add to the existing codebase. This includes things like docstrings, type hinting, api documentation and auto completion that have become much more the expected standard since databaker was first envisioned.
+## Makefile
 
-As much as possible I will support backwards compatibility with databaker scripts, likely with via importing a compatibility module (i.e wrap what will look and act like the databaker api around the datachef api).
+A `Makefile` is included to streamline some recurring developments tasks. Running a naked `make` from the command line will display a simple help menu.
 
-The api signature will be extremely familiar to anyone familiar with databaker, though under the hood the code will be completely different, working in a much more modular and easily extensibly/configurable way.
+_Note: Mac/Linux have Make by default, windows as I understand it would require a bit of work._
 
-There will also a be significant amount of additional functionality to deal with more complex use cases than were orginally envisioned or considered for databaker.
+## Building Documentation
 
-_Note - this page will be replaced with a more standard "this is what the software does" README when datachef is closer to release. If you're reading this we ain't there yet._
+API documentation is build automatically with [pdoc](https://pdoc.dev/) then supplemented with static assets from `_docs`.
+
+This is done automatically on git merge and can be done locally (for previewing changes) via the included `Makefile`.

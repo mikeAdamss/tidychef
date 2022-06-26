@@ -13,5 +13,7 @@ report: ## View the latest report of test coverage
 format: ## Format the codebase with isort and black
 	poetry run isort ./* && poetry run black ./*
 
-docs: ## Build and view current docs
-	poetry run pdoc ./datachef
+docs: ## Combines auto API docs and contents of _docs and serves it locally for preview.
+	poetry run pdoc -html ./datachef --output-dir ./docs
+	cp -a ./_docs/* ./docs/
+	cd docs && python3 -m http.server
