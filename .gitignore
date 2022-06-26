@@ -1,3 +1,7 @@
 __pycache__
 .converage
 .DS_Store
+.coverage
+.ipynb_checkpoints/
+.vscode/
+htmlcov
