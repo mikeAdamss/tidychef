@@ -1,7 +1,7 @@
 from typing import List
 
 from pivoter.models.source.cell import BaseCell
-from pivoter.utils import cellutils
+from pivoter.selection import datafuncs as dfc
 
 
 def qcel(excel_ref) -> BaseCell:
@@ -10,9 +10,8 @@ def qcel(excel_ref) -> BaseCell:
     an appropriate excel reference.
     """
     assert ":" not in excel_ref
-    cells: List[BaseCell] = cellutils.excel_ref_as_wanted_basecells(excel_ref)
-    assert len(cells) == 1
-    return cells[0]
+    cell: BaseCell = dfc.single_excel_ref_to_basecell(excel_ref)
+    return cell
 
 
 def qcels(excel_ref) -> List[BaseCell]:
@@ -21,5 +20,5 @@ def qcels(excel_ref) -> List[BaseCell]:
     an appropriate excel reference.
     """
     assert ":" in excel_ref
-    cells: List[BaseCell] = cellutils.excel_ref_as_wanted_basecells(excel_ref)
+    cells: List[BaseCell] = dfc.multi_excel_ref_to_basecells(excel_ref)
     return cells

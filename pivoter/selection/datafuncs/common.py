@@ -1,3 +1,5 @@
+import re
+from dataclasses import dataclass
 from typing import List, Optional, Tuple
 
 from pivoter.exceptions import CellsDoNotExistError
@@ -115,6 +117,23 @@ def exactly_matching_xy_cell(cells: List[BaseCell], wanted_cell: BaseCell) -> Ba
     return match[0]
 
 
+def any_excel_ref_as_wanted_basecells(excel_ref: str) -> List[BaseCell]:
+    """
+    Convert an excel reference of either the single or multiple cell
+    format into a list of BaseCell objects.
+    """
+
+    # Single style reference, eg: A6, ZA18 etc
+    if re.match("^[A-Z]+[0-9]+$", excel_ref):
+        return [single_excel_ref_to_basecell(excel_ref)]
+
+    # Multi style reference, eg: A1:Z78, G15:AV16 etc
+    elif re.match("^[A-Z]+[0-9]+:[A-Z]+[0-9]+$", excel_ref):
+        return multi_excel_ref_to_basecells(excel_ref)
+    else:
+        raise Exception(f"Could not identify style of excel reference {excel_ref}")
+
+
 def get_outlier_indicies(cells: List[BaseCell]) -> Tuple[int, int, int, int]:
     """
     Given a list of cells, returns maximum and minimum x and y
@@ -174,6 +193,53 @@ def minimum_y_offset(cells: List[BaseCell]) -> int:
     min_y = min([c.y for c in cells])
     min_y_cell = [c for c in cells if c.y == min_y]
     return min_y_cell[0].y
+
+
+def single_excel_ref_to_basecell(excel_ref: str) -> BaseCell:
+    """
+    Given a single excel cell reference, return a single BaseCell.
+    """
+
+    letters = ""
+    number = None
+    for i, letter_or_num in enumerate(excel_ref):
+        try:
+            int(letter_or_num)
+            number = int(excel_ref[i:])
+            break
+        except ValueError:
+            letters += letter_or_num
+
+    assert number
+    assert len(letters) > 0
+
+    x = cellutils.letters_to_x(letters)
+    y = cellutils.number_to_y(number)
+
+    return BaseCell(x=x, y=y)
+
+
+def multi_excel_ref_to_basecells(excel_ref: str) -> List[BaseCell]:
+    """
+    Given an excel reference referring to multiple cells, return a list of
+    wanted BaseCells.
+    """
+
+    assert ":" in excel_ref
+    start_cell = single_excel_ref_to_basecell(excel_ref.split(":")[0])
+    end_cell = single_excel_ref_to_basecell(excel_ref.split(":")[1])
+
+    start_x = start_cell.x
+    start_y = start_cell.y
+    end_x = end_cell.x
+    end_y = end_cell.y
+
+    return_cells = []
+    for x in range(start_x, end_x + 1):
+        for y in range(start_y, end_y + 1):
+            return_cells.append(BaseCell(x=x, y=y))
+
+    return return_cells
 
 
 def specific_cell_from_xy(cells: List[BaseCell], x: int, y: int) -> BaseCell:

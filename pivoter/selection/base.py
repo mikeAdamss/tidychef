@@ -207,9 +207,9 @@ class Selectable(BaseInput):
         """
 
         if ":" in excel_ref:
-            wanted: List[BaseCell] = cellutils.multi_excel_ref_to_basecells(excel_ref)
+            wanted: List[BaseCell] = dfc.multi_excel_ref_to_basecells(excel_ref)
         else:
-            wanted: BaseCell = cellutils.single_excel_ref_to_basecell(excel_ref)
+            wanted: BaseCell = dfc.single_excel_ref_to_basecell(excel_ref)
             wanted = [wanted]
 
         selected = dfc.exactly_matched_xy_cells(self.cells, wanted)
