@@ -8,7 +8,10 @@ def assert_quadrilaterals(
     cells: List[BaseCell], return_outlier_indicies=False
 ) -> Optional[Tuple[int, int, int, int]]:
     """
-    Get the
+    Assert that the provided list of cells equtes to selection of cells
+    that form a quadrilateral shape with no gaps.
+
+    This is a requirement when using some of the preview functionality
     """
 
     min_x, max_x, min_y, max_y = get_outlier_indicies(cells)
