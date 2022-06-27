@@ -13,6 +13,14 @@ def fixture_simple_one_tab():
     )
 
 
+def fixture_simple_small_one_tab():
+    """Simple input of one tab. Cells A1:K20"""
+    return read_local(
+        path_to_fixture("csv", "simple-small.csv"),
+        override_selectable=XlsInputSelectable,
+    )
+
+
 def fixture_with_blanks():
     return read_local(path_to_fixture("csv", "has_blanks.csv"))
 

@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import copy
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 from datachef.configuration import ConfigController
 from datachef.exceptions import IteratingSingleTableError, UnalignedTableOperation
@@ -40,6 +40,9 @@ class BaseInput:
         self.selected_table = selected_table
         self.had_initial_path = had_initial_path
         self.tables = tables
+
+        # An optional label used when working with previews
+        self._label: Optional[str] = None
 
     @property
     def name(self) -> str:
