@@ -1,1 +1,1 @@
-from .html.html import HtmlPreview
+from .previewers.html import HtmlPreview

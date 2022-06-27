@@ -3,7 +3,7 @@ import uuid
 import pytest
 
 from datachef.selection.base import Selectable
-from datachef.utils.preview import HtmlPreview
+from datachef.utils.preview.previewers.html import HtmlPreview
 from tests.fixtures import path_to_fixture
 from tests.fixtures.preconfigured import fixture_simple_one_tab
 
@@ -13,12 +13,12 @@ def selectable_simple1():
     return fixture_simple_one_tab()
 
 
-def test_standard_preview(selectable_simple1: Selectable):
+def test_standard_preview_one_selection(selectable_simple1: Selectable):
     s = selectable_simple1.excel_ref("F2:F10")
     s = s | selectable_simple1.excel_ref("H6")
 
-    p = HtmlPreview(s)
-    html = p._make_preview_as_html_str()
+    p = HtmlPreview()
+    html = p._make_preview_as_html_str([s])
 
     fix = path_to_fixture("preview", "standard.html")
 
@@ -41,12 +41,12 @@ def test_standard_preview(selectable_simple1: Selectable):
             )
 
 
-def test_bound_selection_preview(selectable_simple1: Selectable):
+def test_bound_selection_one_selection_preview(selectable_simple1: Selectable):
     s = selectable_simple1.excel_ref("F2:F10")
     s = s | selectable_simple1.excel_ref("H6")
 
-    p = HtmlPreview(s)
-    html = p._make_preview_as_html_str(bound_selection=True)
+    p = HtmlPreview()
+    html = p._make_preview_as_html_str([s], boundary=True)
 
     fix = path_to_fixture("preview", "standard_bounded.html")
 

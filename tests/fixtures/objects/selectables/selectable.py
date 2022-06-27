@@ -1,4 +1,3 @@
-
 from datachef.models.source.cell import Cell
 from datachef.selection.base import Selectable
 

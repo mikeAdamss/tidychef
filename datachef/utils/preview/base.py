@@ -1,17 +1,15 @@
 from abc import ABCMeta, abstractmethod
 from dataclasses import dataclass
 from pathlib import Path
+from typing import List
 
 from datachef.selection.base import Selectable
 
 
 @dataclass
 class BasePreview(metaclass=ABCMeta):
-
-    selectable: Selectable
-
     @abstractmethod
-    def print(self, to_path: Path = None):
+    def print(selections: List[Selectable], to_path: Path = None, bound_selection=None):
         """
         An inline print of whatever this preview is previewing
         """

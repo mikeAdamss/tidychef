@@ -12,7 +12,7 @@ from datachef.exceptions import (
 from datachef.models.source.cell import BaseCell, Cell
 from datachef.models.source.input import BaseInput
 from datachef.selection import datafuncs as dfc
-from datachef.cardinal.directions import BaseDirection
+
 
 class Selectable(BaseInput):
     """
@@ -148,7 +148,7 @@ class Selectable(BaseInput):
         possibly_y: Optional[int] = None,
     ):
         """
-        Move the entire current selection relatively. Accepts a direction 
+        Move the entire current selection relatively. Accepts a direction
         or raw x and y co-ordinates, examples:
 
         - .shift(RIGHT)
@@ -183,27 +183,6 @@ class Selectable(BaseInput):
         return_self = copy.deepcopy(self)
         return_self.cells = found_cells
         return return_self
-
-    def preview(
-        self, previewer=None, path: Path = False, bound_selection: bool = False
-    ):
-        """
-        Calls .print() via the specified previewer to preview
-        the currently selected cells in context.
-
-        By default the previwer will print an inline html
-        table using Ipython for compatibility with Jupyter.
-
-        bound_selection: Toggle whether to display cells outside
-        of the futhest used x and used y values.
-        """
-        from datachef.utils.preview import HtmlPreview
-
-        if not previewer:
-            previewer = HtmlPreview
-
-        previewer(self).print(bound_selection=bound_selection, path=path)
-
 
     def excel_ref(self, excel_ref: str):
         """

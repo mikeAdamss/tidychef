@@ -1,4 +1,3 @@
-
 class FileInputError(Exception):
     """
     There is an issues with what has been provided as a file input.
@@ -83,8 +82,8 @@ class UnalignedTableOperation(Exception):
 
     def __init__(self):
         self.msg = (
-            "Selection can only be combined if they are taken "
-            "from the exact same table as taken from a single "
+            "Selection can only be combined or previewed in combination"
+            "if they are taken from the exact same table as taken from a single "
             "instance of a parsed input."
         )
 
