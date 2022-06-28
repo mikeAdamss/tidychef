@@ -1,10 +1,4 @@
-from dataclasses import dataclass
 from pathlib import Path
-from typing import List, Optional
-
-from datachef.models.source.cell import BaseCell, Cell
-from datachef.models.source.table import LiveTable, Table
-from datachef.selection.selectable import Selectable
 
 # Fixture dir shorthand
 CSV = "csv"
