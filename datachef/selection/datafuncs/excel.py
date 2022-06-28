@@ -1,6 +1,8 @@
 import re
+from tracemalloc import start
 from typing import List
 
+from datachef.exceptions import BadExcelReferenceError, ReversedExcelRefError
 from datachef.models.source.cell import BaseCell
 from datachef.utils import cellutils
 
@@ -12,7 +14,7 @@ def assert_excel_ref_within_cells(cells: List[BaseCell], excel_ref: str):
     Given a list of cells, assert that the cell denoted by
     the provided excel reference, exists within the list
     """
-    wanted_cell: BaseCell = cellutils.single_excel_ref_to_basecell(excel_ref)
+    wanted_cell: BaseCell = single_excel_ref_to_basecell(excel_ref)
     match = [c1 for c1 in cells if any([c1.matches_xy(wanted_cell)])]
     assert (
         len(match) == 1
@@ -33,7 +35,7 @@ def any_excel_ref_as_wanted_basecells(excel_ref: str) -> List[BaseCell]:
     elif re.match("^[A-Z]+[0-9]+:[A-Z]+[0-9]+$", excel_ref):
         return multi_excel_ref_to_basecells(excel_ref)
     else:
-        raise Exception(f"Could not identify style of excel reference {excel_ref}")
+        raise BadExcelReferenceError(f"Could not identify style of excel reference {excel_ref}")
 
 
 def single_excel_ref_to_basecell(excel_ref: str) -> BaseCell:
@@ -69,6 +71,9 @@ def multi_excel_ref_to_basecells(excel_ref: str) -> List[BaseCell]:
     assert ":" in excel_ref
     start_cell = single_excel_ref_to_basecell(excel_ref.split(":")[0])
     end_cell = single_excel_ref_to_basecell(excel_ref.split(":")[1])
+
+    if start_cell.x > end_cell.x or start_cell.y > end_cell.y:
+        raise ReversedExcelRefError()
 
     start_x = start_cell.x
     start_y = start_cell.y

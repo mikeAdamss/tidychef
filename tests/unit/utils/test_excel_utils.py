@@ -46,19 +46,6 @@ def test_y_to_excel_row():
     assert cellutils.y_to_number(6) == 7
 
 
-def test_single_excel_ref(selectable_simple1: Selectable):
-    """
-    Given a single cell excel reference, return the correct
-    BaseCell
-    """
-
-    for excel_ref, expected in [
-        ["A1", BaseCell(0, 0)],
-        ["C17", BaseCell(2, 16)],
-    ]:
-        assert selectable_simple1.excel_ref(excel_ref).cells[0].matches_xy(expected)
-
-
 def test_x_to_letters():
     """
     Given an x co-ordinate, covert that co-ordinate to the

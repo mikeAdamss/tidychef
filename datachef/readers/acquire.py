@@ -12,7 +12,7 @@ def acquire(
     override_selectable: Selectable = None,
 ) -> Selectable:
     """
-    Wrapper for the reader functions.
+    Principle method for getting new data sources into datachef.
     """
 
     # TODO: check if source if a url

@@ -23,3 +23,9 @@ pyrightbuild: ## Build our docker image for running pyright
 
 pyright: ## Run pyright through docker
 	docker run -v $(PWD):/workspace -w /workspace -it pyrightimage /bin/bash -c "poetry run pyright ./datachef --lib"
+
+checkimports: ## Use pylint to check for unused imports
+	poetry run pylint ./datachef | grep "unused-import"
+
+pylint: ## Run pylint
+	poetry run pylint ./datachef
