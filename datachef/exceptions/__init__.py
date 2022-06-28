@@ -9,5 +9,5 @@ from .common import (
     OutOfBoundsError,
     UnalignedTableOperation,
     UnnamedTableError,
-    UnsupportedLocalFileError,
+    UnsupportedLocalFileError
 )

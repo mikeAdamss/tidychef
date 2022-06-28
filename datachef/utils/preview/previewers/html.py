@@ -6,17 +6,19 @@ suite in place.
 from collections import deque
 from dataclasses import dataclass
 from pathlib import Path
-from typing import List, Optional, Tuple, Union
+from typing import List, Optional
 
 from IPython.display import HTML, display
 
 from datachef.exceptions import UnnamedTableError
-from datachef.models.source.cell import BaseCell, Cell
+from datachef.models.source.cell import Cell
 from datachef.selection import datafuncs as dfc
 from datachef.selection.selectable import Selectable
 from datachef.utils import cellutils
 
 from ..base import BasePreview
+from ..boundary import Boundary
+
 
 
 class HtmlPreview(BasePreview):
@@ -26,53 +28,13 @@ class HtmlPreview(BasePreview):
 
     def _make_preview_as_html_str(
         self,
-        selections: Union[Selectable, Tuple[Selectable]],
+        selections: List[Selectable],
         with_excel_ref: bool = True,
         start: Optional[str] = None,
         end: Optional[str] = None,
     ) -> str:
 
-        is_pristine = not all([s.selections_made() for s in selections])
-
-        if end == "select" and is_pristine:
-            raise Exception(
-                "You cannot bound the preview to only show up to selections when you haven't made any selections!"
-            )
-
-        # Where we have a boundary, first assume its the default - to the bottomright most selected cell
-        if end:
-            max_selected_x = max(dfc.maximum_x_offset(s.cells) for s in selections)
-            max_selected_y = max(dfc.maximum_y_offset(s.cells) for s in selections)
-
-        if start:
-            min_selected_x = max(dfc.minimum_x_offset(s.cells) for s in selections)
-            min_selected_y = max(dfc.minimum_y_offset(s.cells) for s in selections)
-
-        # Allow the user to specify the bottomright most cell to preview until, but only where this
-        # would not obscure cell selections
-        if end and end != "selection":
-            boundary_cell: BaseCell = dfc.single_excel_ref_to_basecell(end)
-            assert (
-                boundary_cell.x >= max_selected_x
-            ), f"You cannot set preview to ignore selected cells. With a boundary point of {end}, you have a column limit of {cellutils.x_to_letters(boundary_cell.x)} but have an x axis selection in column {cellutils.x_to_letters(max_selected_x)}"
-            assert (
-                boundary_cell.y >= max_selected_y
-            ), f"You cannot set preview to ignore selected cells. With a boundary point of {end}, you have a row limit of {cellutils.y_to_number(boundary_cell.y)} but have an y axis selection on row {cellutils.y_to_number(max_selected_y)}"
-            max_selected_x = boundary_cell.x
-            max_selected_y = boundary_cell.y
-
-        # Allow the user to specify the topleft most cell to start tne preview, but only where this
-        # would not obscure cell selections
-        if start and start != "selection":
-            boundary_cell: BaseCell = dfc.single_excel_ref_to_basecell(start)
-            assert (
-                boundary_cell.x <= max_selected_x
-            ), f"You cannot set preview to ignore selected cells. With a boundary point of {end}, you have a column limit of {cellutils.x_to_letters(boundary_cell.x)} but have an x axis selection in column {cellutils.x_to_letters(max_selected_x)}"
-            assert (
-                boundary_cell.y <= max_selected_y
-            ), f"You cannot set preview to ignore selected cells. With a boundary point of {end}, you have a row limit of {cellutils.y_to_number(boundary_cell.y)} but have an y axis selection on row {cellutils.y_to_number(max_selected_y)}"
-            min_selected_x = boundary_cell.x
-            min_selected_y = boundary_cell.y
+        boundary = Boundary(selections, start=start, end=end)
 
         # Keep track of colours based on selection in question
         palette = {}
@@ -152,63 +114,91 @@ class HtmlPreview(BasePreview):
 
         all_cells: List[Cell] = dfc.ensure_human_read_order(selections[0].pcells)
 
+        # ------------------
+        # Cell lookup logic
+        # (for now, this needs to be reworked)
+        #
+        # The below three principle things
+        #
+        # master_selected_cells_index: {
+        #         <arbitrary index for a selection> : <ordered list of cells in that selection>
+        # }
+        #
+        # get_next_selected_cell()   <- function
+        # when passed an index pops and returns the next cell from the dict explained above.
+        #
+        # looked_for_cells {
+        #         <arbitrary index for a selction> : <the NEXT UNUSED cell in this selectio>
+        # }
+        #
+        # It needs some cleaning up, but simply put:
+        # 1. ) We used looked_for_cells to check if the cell being written to the preview is a
+        #     selected cell (as we consider each cell of the table in turn to build the preview).
+        # 2.) We use master_selected_cells_index and get_next_selected_cell() to update looked_for_cells
+        #     whenever a selected cell is written to the preview, so at all times it holds
+        #     the next cell due to appear for every selection. 
+
+
         key_rows = ""
-        selected_cells_index = {}
+        master_selected_cells_index = {}
         for i, s in enumerate(selections):
-            selected_cells_index[i] = deque(dfc.ensure_human_read_order(s.cells))
+            master_selected_cells_index[i] = deque(dfc.ensure_human_read_order(s.cells))
             key_rows += key_row.format(
                 colour=palette[i], value=s._label if s._label else f"selection {i}"
             )
 
         def get_next_selected_cell(i: int) -> Cell:
-            next_cell = selected_cells_index[i].popleft()
+            next_cell = master_selected_cells_index[i].popleft()
             return next_cell
 
         looked_for_cells = {}
-        for i in selected_cells_index.keys():
+        for i in master_selected_cells_index.keys():
             looked_for_cells[i] = get_next_selected_cell(i)
+
+        # -------------------
+        # Html generation logic 
+        # (for now, this needs to be reworked)
+        # 
+        # 1.) Starting with a "row" (a blank string)
+        # 2.) Iterate through the cells building up the html to represent the row
+        # 4.) Append to the list "rows"
 
         rows = []
         row = ""
         row_no = 0
 
+        # This logic is just for creating a excel style header 
+        # row, where the user hasn't specified not to
         if with_excel_ref:
-            # Add header row
             row += td_unselected.format(value="")
             for cell in all_cells:
                 if cell.y == row_no:
-                    if end:
-                        if cell.x > max_selected_x:
+                    if cell.x > boundary.rightmost_point:
                             continue
-                    if start:
-                        if cell.x < min_selected_x:
+                    if cell.x < boundary.leftmost_point:
                             continue
                     row += td_unselected.format(value=cellutils.x_to_letters(cell.x))
                 else:
                     rows.append(tr.format(row=row))
                     row = ""
 
-                    # If we havnt designated a start y position for the preview
-                    # or if the desiganted start y == 0,
-                    # then add the row heading letter
-                    if not start:
-                        row += td_unselected.format(value=cell.y)
-                    elif min_selected_y == 0:
+                    # Add the row number if appropriate
+                    if boundary.contains(cell) and with_excel_ref:
                         row += td_unselected.format(value=cell.y)
                     break
 
         for cell in all_cells:
             if cell.y != row_no:
-                if end:
-                    if cell.y > max_selected_y:
-                        break
+                if cell.y > boundary.lowest_point:
+                    break
                 row_no += 1
                 rows.append(tr.format(row=row))
                 row = ""
-                if with_excel_ref:
-                    if start:
-                        if cell.y < min_selected_y:
-                            continue
+                if all([
+                    with_excel_ref,
+                    cell.y >= boundary.highest_point,
+                    cell.y <= boundary.lowest_point
+                ]):
                     row += td_unselected.format(value=cell.y + 1)
 
             # If one of our selected cells matches the cell being considered
@@ -247,18 +237,11 @@ class HtmlPreview(BasePreview):
                         try:
                             looked_for_cells[match.i] = get_next_selected_cell(match.i)
                         except IndexError:
+                            # Don't pop an empty list, eventually we exhaust all selections
                             ...
             else:
-                if end:
-                    if cell.x > max_selected_x:
-                        continue
-                if start:
-                    if cell.y < min_selected_y:
-                        continue
-                    if cell.x < min_selected_x:
-                        continue
-
-                row += td_unselected.format(value=cell.value)
+                if boundary.contains(cell):
+                    row += td_unselected.format(value=cell.value)
 
         rows.append(tr.format(row=row))
 
@@ -268,7 +251,7 @@ class HtmlPreview(BasePreview):
         except UnnamedTableError:
             table_name = "unnamed table"
 
-        if not is_pristine:
+        if not boundary.is_pristine:
             preview_title = f"Selections made within table: {table_name}"
         else:
             preview_title = f"Pristine (no selections made) view of table: {table_name}"

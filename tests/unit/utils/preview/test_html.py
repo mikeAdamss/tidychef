@@ -106,7 +106,7 @@ def test_standard_small_preview_named_selections(selectable_simple_small1: Selec
     )
 
 
-def test_standard_small_preview_named_selections(selectable_simple_small1: Selectable):
+def test_standard_small_preview_overlap_warnings(selectable_simple_small1: Selectable):
     """
     Test that we can generate the expected preview for a preview of
     two selections where the cell selections overlap.
