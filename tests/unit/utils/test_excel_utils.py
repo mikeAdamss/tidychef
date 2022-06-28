@@ -4,8 +4,7 @@ from typing import List
 import pytest
 
 from datachef.models.source.cell import BaseCell
-from datachef.selection import datafuncs as dfc
-from datachef.selection.base import Selectable
+from datachef.selection.selectable import Selectable
 from datachef.utils import cellutils
 from tests.fixtures import fixture_is_wide, fixture_simple_one_tab
 

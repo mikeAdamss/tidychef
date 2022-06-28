@@ -1,9 +1,6 @@
-from dis import dis
-
 import pytest
 
-from datachef.exceptions import InvalidCellObjectError
-from datachef.selection.base import Selectable
+from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_with_blanks
 
 

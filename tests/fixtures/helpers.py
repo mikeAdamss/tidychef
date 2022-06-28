@@ -4,7 +4,7 @@ from typing import List, Optional
 
 from datachef.models.source.cell import BaseCell, Cell
 from datachef.models.source.table import LiveTable, Table
-from datachef.selection.base import Selectable
+from datachef.selection.selectable import Selectable
 
 # Fixture dir shorthand
 CSV = "csv"

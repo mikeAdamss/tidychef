@@ -4,7 +4,7 @@ from typing import Optional
 
 import pytest
 
-from datachef.selection.base import Selectable
+from datachef.selection.selectable import Selectable
 from datachef.utils.preview.previewer import label
 from datachef.utils.preview.previewers.html import HtmlPreview
 from tests.fixtures import path_to_fixture

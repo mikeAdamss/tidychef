@@ -1,6 +1,4 @@
-# TODO: there's a helper for this
-UPPER_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
+import string
 
 def letters_to_x(excel_letters_ref: str) -> int:
     """
@@ -19,7 +17,7 @@ def letters_to_x(excel_letters_ref: str) -> int:
         x = 26 * (len(excel_letters_ref) - 1)
         excel_letters_ref = excel_letters_ref[-1]
 
-    for i, letter in enumerate(UPPER_ALPHABET):
+    for i, letter in enumerate(string.ascii_uppercase):
         if letter == excel_letters_ref:
             x += i
             break

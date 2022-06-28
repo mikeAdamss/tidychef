@@ -3,7 +3,7 @@ from typing import Optional, Union
 
 from datachef.readers.base import BaseReader
 from datachef.readers.reader import read_local
-from datachef.selection.base import Selectable
+from datachef.selection.selectable import Selectable
 
 
 def acquire(

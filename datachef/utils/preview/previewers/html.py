@@ -14,7 +14,7 @@ from IPython.display import HTML, display
 from datachef.exceptions import UnnamedTableError
 from datachef.models.source.cell import BaseCell, Cell
 from datachef.selection import datafuncs as dfc
-from datachef.selection.base import Selectable
+from datachef.selection.selectable import Selectable
 from datachef.utils import cellutils
 
 from ..base import BasePreview

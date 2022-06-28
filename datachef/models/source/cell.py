@@ -4,7 +4,6 @@ Classes representing a sinlge cell of data.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from types import CellType
 from typing import Optional
 
 from datachef.exceptions import InvalidCellObjectError

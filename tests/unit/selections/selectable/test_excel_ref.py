@@ -1,7 +1,7 @@
 import pytest
 
 from datachef.exceptions import CellsDoNotExistError, LoneValueOnMultipleCellsError
-from datachef.selection.base import Selectable
+from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
 
 

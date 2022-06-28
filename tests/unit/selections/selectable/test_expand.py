@@ -2,7 +2,7 @@ import pytest
 
 from datachef.cardinal.directions import DOWN, LEFT, RIGHT, UP
 from datachef.exceptions import CellsDoNotExistError
-from datachef.selection.base import Selectable
+from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
 
 

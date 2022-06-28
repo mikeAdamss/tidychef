@@ -6,7 +6,7 @@ and its use in a users workflow
 import pytest
 
 from datachef.exceptions import IteratingSingleTableError, UnnamedTableError
-from datachef.selection.base import Selectable
+from datachef.selection.selectable import Selectable
 from tests.fixtures.preconfigured import fixture_simple_one_tab, fixture_simple_two_tabs
 
 

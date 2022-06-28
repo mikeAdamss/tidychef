@@ -1,4 +1,4 @@
-from ..base import Selectable
+from ..selectable import Selectable
 
 
 class CsvInputSelectable(Selectable):

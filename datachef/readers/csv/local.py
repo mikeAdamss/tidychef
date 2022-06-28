@@ -5,7 +5,7 @@ import datachef.exceptions
 from datachef.models.source.cell import Cell
 from datachef.models.source.table import LiveTable, Table
 from datachef.readers.base import BaseReader
-from datachef.selection.base import Selectable
+from datachef.selection.selectable import Selectable
 from datachef.selection.csv.csv import CsvInputSelectable
 
 

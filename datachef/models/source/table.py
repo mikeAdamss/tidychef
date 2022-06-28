@@ -6,8 +6,6 @@ from __future__ import annotations
 
 import copy
 import uuid
-from dataclasses import dataclass
-from os import linesep
 from typing import List, Optional
 
 from datachef.exceptions import InvalidTableSignatures, UnnamedTableError

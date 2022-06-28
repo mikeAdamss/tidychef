@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Any
 
 from datachef.exceptions import FileInputError
-from datachef.selection.base import Selectable
+from datachef.selection.selectable import Selectable
 
 
 @dataclass

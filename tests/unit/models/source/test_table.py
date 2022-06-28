@@ -2,7 +2,7 @@ import pytest
 
 from datachef.exceptions import InvalidTableSignatures, UnnamedTableError
 from datachef.models.source.table import LiveTable
-from datachef.selection.base import Selectable
+from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab, fixture_simple_two_tabs
 
 

@@ -2,7 +2,7 @@ from pathlib import Path
 from typing import Optional
 
 from datachef.exceptions import UnalignedTableOperation
-from datachef.selection.base import Selectable
+from datachef.selection.selectable import Selectable
 
 from .base import BasePreview
 from .previewers.html import HtmlPreview

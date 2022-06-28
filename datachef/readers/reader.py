@@ -8,7 +8,7 @@ from typing import Optional, Union
 
 from datachef.constants import SUPPORTED_LOCAL_FILETYPES
 from datachef.readers import BaseReader, LocalCsvReader
-from datachef.selection.base import Selectable
+from datachef.selection.selectable import Selectable
 from datachef.utils import fileutils
 
 
