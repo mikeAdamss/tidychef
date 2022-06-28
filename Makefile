@@ -18,7 +18,7 @@ docs: ## Combines auto API docs and contents of _docs and serves it locally for 
 	cp -a ./_docs/* ./docs/
 	cd docs && python3 -m http.server
 
-pyrightbuild: ## Build docker image
+pyrightbuild: ## Build our docker image for running pyright
 	docker build -t pyrightimage ./images
 
 pyright: ## Run pyright through docker

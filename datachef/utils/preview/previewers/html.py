@@ -8,7 +8,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Optional, Tuple, Union
 
-from dominate.tags import *
 from IPython.display import HTML, display
 
 from datachef.exceptions import UnnamedTableError
