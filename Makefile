@@ -17,3 +17,9 @@ docs: ## Combines auto API docs and contents of _docs and serves it locally for 
 	poetry run pdoc -html ./datachef --output-dir ./docs
 	cp -a ./_docs/* ./docs/
 	cd docs && python3 -m http.server
+
+pyrightbuild: ## Build docker image
+	docker build -t pyrightimage ./images
+
+pyright: ## Run pyright through docker
+	docker run -v $(PWD):/workspace -w /workspace -it pyrightimage /bin/bash -c "poetry run pyright ./datachef --lib"
