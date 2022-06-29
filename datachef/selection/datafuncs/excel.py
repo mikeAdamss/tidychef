@@ -1,5 +1,4 @@
 import re
-from tracemalloc import start
 from typing import List
 
 from datachef.exceptions import BadExcelReferenceError, ReversedExcelRefError

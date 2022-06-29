@@ -1,7 +1,5 @@
 import csv
-from pathlib import Path
 
-import datachef.exceptions
 from datachef.models.source.cell import Cell
 from datachef.models.source.table import LiveTable, Table
 from datachef.readers.base import BaseReader
