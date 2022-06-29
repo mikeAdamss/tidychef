@@ -23,7 +23,7 @@ def preview(
         for s in selections:
             assert isinstance(
                 s, Selectable
-            ), "Only selections and keyword arguments can be passed to preview"
+            ), f"Only selections and keyword arguments can be passed to preview, got {type(s)}"
         selections = list(selections)
     else:
         selections = [selections]
