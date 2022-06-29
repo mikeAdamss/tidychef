@@ -5,6 +5,8 @@ from typing import Optional
 import pytest
 
 from datachef.selection.selectable import Selectable
+from datachef.models.source.cell import Cell
+from datachef.models.source.table import LiveTable, Table
 from datachef.utils.preview.previewer import label
 from datachef.utils.preview.previewers.html import HtmlPreview
 from tests.fixtures import path_to_fixture
@@ -140,3 +142,27 @@ def test_boundary_to_selection(selectable_simple_small1: Selectable):
     s2 = selectable_simple_small1.excel_ref("F14")
     fixture = path_to_fixture("preview", "boundary-to-selection.html").resolve()
     _assert_compare_html(fixture, s1, s2, start="selection", end="selection")
+
+
+def test_preview_with_a_table_name():
+    """
+    Test that we can generate a named table such that its name is
+    included in the preview.
+    """
+    from datachef.models.source.cell import Cell
+    from datachef.selection.selectable import Selectable
+    from datachef.models.source.table import LiveTable, Table
+
+    t = Table([Cell(0, 0, value = "A1"),
+        Cell(0, 1, value = "B1")]
+        )
+    lt = LiveTable.from_table(t, name = 'Example Table')
+    s = Selectable(
+        is_singleton_table=True,
+        selected_table=lt,
+        had_initial_path="not-a-real-file",
+        tables=None,
+     )
+
+    fixture = path_to_fixture("preview", "tiny-with-table-name.html")
+    _assert_compare_html(fixture, s)
