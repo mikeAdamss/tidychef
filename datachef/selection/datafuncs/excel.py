@@ -11,7 +11,9 @@ from . import common as dfccommon
 def assert_excel_ref_within_cells(cells: List[BaseCell], excel_ref: str):
     """
     Given a list of cells, assert that the cell denoted by
-    the provided excel reference, exists within the list
+    the provided excel reference, exists within the list.
+
+    :param cells: Representing a selection from a tabular data source.
     """
     wanted_cell: BaseCell = single_excel_ref_to_basecell(excel_ref)
     match = [c1 for c1 in cells if any([c1.matches_xy(wanted_cell)])]
@@ -100,11 +102,11 @@ def xycells_to_excel_ref(cells: List[BaseCell]) -> str:
     """
     Given a list of cells representing a solid selection with
     no gaps. Return the representative excel reference.
+
+    :param cells: Representing a selection from a tabular data source.
     """
 
-    min_x, max_x, min_y, max_y = dfccommon.assert_quadrilaterals(
-        cells, return_outlier_indicies=True
-    )
+    min_x, max_x, min_y, max_y = dfccommon.assert_quadrilaterals(cells)
 
     topleft_cell = dfccommon.specific_cell_from_xy(cells, min_x, min_y)
     bottomright_cell = dfccommon.specific_cell_from_xy(cells, max_x, max_y)

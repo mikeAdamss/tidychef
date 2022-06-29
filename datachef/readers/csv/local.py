@@ -1,3 +1,7 @@
+"""
+Holds and defines the local csv reader class.
+"""
+
 import csv
 
 from datachef.models.source.cell import Cell
@@ -12,18 +16,19 @@ class LocalCsvReader(BaseReader):
     A reader to lead in a source where that source is a locally
     held csv file.
     """
+
     def parse(
         self, delimiter=",", selectable: Selectable = CsvInputSelectable
     ) -> Selectable:
         self._raise_if_source_is_not_path()
 
         table = Table()
-        with open(self.source, "r", encoding='utf8') as csv_file:
+        with open(self.source, "r", encoding="utf8") as csv_file:
             filecontent = csv.reader(csv_file, delimiter=delimiter)
 
-            for y, row in enumerate(filecontent):
-                for x, cell_value in enumerate(row):
-                    table.add_cell(Cell(x=x, y=y, value=cell_value))
+            for y_index, row in enumerate(filecontent):
+                for x_index, cell_value in enumerate(row):
+                    table.add_cell(Cell(x=x_index, y=y_index, value=cell_value))
 
         live_table = LiveTable.from_table(table)
 

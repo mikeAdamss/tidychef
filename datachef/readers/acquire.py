@@ -1,3 +1,8 @@
+"""
+Acquire is the principle gateway for acquiring new source data
+making http gets where necessary before passing the source into the readers.
+"""
+
 from pathlib import Path
 from typing import Optional, Union
 

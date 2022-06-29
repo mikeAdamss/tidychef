@@ -18,6 +18,7 @@ class BaseReader(metaclass=ABCMeta):
     """
     Baseclass that all readers inherit from.
     """
+
     source: Any
 
     def _raise_if_source_is_not_path(self):

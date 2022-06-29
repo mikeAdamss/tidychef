@@ -34,7 +34,7 @@ def test_assert_quadrilaterals(selectable_simple1: Selectable):
 
     # Can return correct outlier indicies
     min_x, max_x, min_y, max_y = dfc.assert_quadrilaterals(
-        selectable_simple1.excel_ref("A1:B4").cells, return_outlier_indicies=True
+        selectable_simple1.excel_ref("A1:B4").cells
     )
     assert min_x == 0
     assert max_x == 1

@@ -12,6 +12,7 @@ class BaseDirection:
     :param y: The vertical offset. For example:
     1 = one space down, -1 = one position left.
     """
+
     x: int
     y: int
     locked: bool = False
@@ -25,8 +26,8 @@ class BaseDirection:
         e,g: RIGHT(3), DOWN(5).
 
         For example:
-        
-        RIGHT (the default) == (x:1, y:0) 
+
+        RIGHT (the default) == (x:1, y:0)
         So equates to a representation of one positive
         positional movement on the x axis.
         So RIGHT(3) == (x:4, y:0)
