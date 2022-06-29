@@ -22,7 +22,6 @@ jobs:
           pip install poetry
       - name: Install dependencies via poetry
         run: poetry install
-      - name: Logout some info
-        run: ls -l
+        
       - name: Run unit tests
         run: poetry run pytest
