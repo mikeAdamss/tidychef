@@ -144,7 +144,7 @@ def maximum_y_offset(cells: List[BaseCell]) -> int:
     """
     Given a list of BaseCell's, return the largest y position in use
     """
-    min_y = max([c.y for c in cells])
+    min_y = max(c.y for c in cells)
     min_y_cell = [c for c in cells if c.y == min_y]
     return min_y_cell[0].y
 
@@ -153,7 +153,7 @@ def minimum_x_offset(cells: List[BaseCell]) -> int:
     """
     Given a list of BaseCell's, return the smallest x position in use
     """
-    min_x = min([c.x for c in cells])
+    min_x = min(c.x for c in cells)
     min_x_cell = [c for c in cells if c.x == min_x]
     return min_x_cell[0].x
 
@@ -162,7 +162,7 @@ def minimum_y_offset(cells: List[BaseCell]) -> int:
     """
     Given a list of BaseCell's, return the smallest y position in use
     """
-    min_y = min([c.y for c in cells])
+    min_y = min(c.y for c in cells)
     min_y_cell = [c for c in cells if c.y == min_y]
     return min_y_cell[0].y
 

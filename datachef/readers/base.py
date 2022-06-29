@@ -16,7 +16,7 @@ from datachef.selection.selectable import Selectable
 @dataclass
 class BaseReader(metaclass=ABCMeta):
     """
-    Baseclass that all reads inherit from.
+    Baseclass that all readers inherit from.
     """
     source: Any
 

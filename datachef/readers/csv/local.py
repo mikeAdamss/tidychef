@@ -8,13 +8,17 @@ from datachef.selection.selectable import Selectable
 
 
 class LocalCsvReader(BaseReader):
+    """
+    A reader to lead in a source where that source is a locally
+    held csv file.
+    """
     def parse(
         self, delimiter=",", selectable: Selectable = CsvInputSelectable
     ) -> Selectable:
         self._raise_if_source_is_not_path()
 
         table = Table()
-        with open(self.source, "r") as csv_file:
+        with open(self.source, "r", encoding='utf8') as csv_file:
             filecontent = csv.reader(csv_file, delimiter=delimiter)
 
             for y, row in enumerate(filecontent):
