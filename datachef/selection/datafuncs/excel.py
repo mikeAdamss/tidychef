@@ -35,7 +35,9 @@ def any_excel_ref_as_wanted_basecells(excel_ref: str) -> List[BaseCell]:
     elif re.match("^[A-Z]+[0-9]+:[A-Z]+[0-9]+$", excel_ref):
         return multi_excel_ref_to_basecells(excel_ref)
     else:
-        raise BadExcelReferenceError(f"Could not identify style of excel reference {excel_ref}")
+        raise BadExcelReferenceError(
+            f"Could not identify style of excel reference {excel_ref}"
+        )
 
 
 def single_excel_ref_to_basecell(excel_ref: str) -> BaseCell:

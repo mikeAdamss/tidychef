@@ -48,9 +48,12 @@ class IteratingSingleTableError(Exception):
     exactly one table.
     """
 
-    def __init__(self, msg=(
-            'You cannot iterate this input, as it only consists of a single table'
-        ), *args, **kwargs):
+    def __init__(
+        self,
+        msg=("You cannot iterate this input, as it only consists of a single table"),
+        *args,
+        **kwargs,
+    ):
         super().__init__(msg, *args, **kwargs)
 
 
@@ -60,9 +63,12 @@ class LoneValueOnMultipleCellsError(Exception):
     on a selection of more than one cell.
     """
 
-    def __init__(self, msg=(
-            "You can only use lone_value on a selection of exactly one cell. "
-        ), *args, **kwargs):
+    def __init__(
+        self,
+        msg=("You can only use lone_value on a selection of exactly one cell. "),
+        *args,
+        **kwargs,
+    ):
         super().__init__(msg, *args, **kwargs)
 
 
@@ -85,11 +91,16 @@ class UnalignedTableOperation(Exception):
     a single distinct source of tabulated data.
     """
 
-    def __init__(self, msg=(
+    def __init__(
+        self,
+        msg=(
             "Selection can only be combined or previewed in combination"
             "if they are taken from the exact same table as taken from a single "
             "instance of a parsed input."
-        ), *args, **kwargs):
+        ),
+        *args,
+        **kwargs,
+    ):
         super().__init__(msg, *args, **kwargs)
 
 
@@ -99,10 +110,15 @@ class InvalidTableSignatures(Exception):
     non identical tables.
     """
 
-    def __init__(self, msg=(
+    def __init__(
+        self,
+        msg=(
             "This class:LiveTable is invalid. A LiveTable must be "
             "instantiated from tables with matching signatures."
-        ), *args, **kwargs):
+        ),
+        *args,
+        **kwargs,
+    ):
         super().__init__(msg, *args, **kwargs)
 
 
@@ -112,12 +128,18 @@ class BadShiftParameterError(Exception):
     shift method.
     """
 
-    def __init__(self, msg=(
-        f"The shift method must be called with one of two types of argument{linesep}" 
-        f"1.) By passing in the UP, DOWN, LEFT, RIGHT, ABOVE or BELOW constant, "
-        f"for example: .shift(UP). {linesep}"
-        "2.) By passing in two integer arguments, on each for x index change and y index change"
-        "example: .shift(1, 2)"), *args, **kwargs):
+    def __init__(
+        self,
+        msg=(
+            f"The shift method must be called with one of two types of argument{linesep}"
+            f"1.) By passing in the UP, DOWN, LEFT, RIGHT, ABOVE or BELOW constant, "
+            f"for example: .shift(UP). {linesep}"
+            "2.) By passing in two integer arguments, on each for x index change and y index change"
+            "example: .shift(1, 2)"
+        ),
+        *args,
+        **kwargs,
+    ):
         super().__init__(msg, *args, **kwargs)
 
 
@@ -131,9 +153,15 @@ class OutOfBoundsError(Exception):
     does not exist in the table.
     """
 
-    def __init__(self, msg=(
-        "Invalid operation. This action is attempting to select cells outside "
-        "of the bounds of the input table"), *args, **kwargs):
+    def __init__(
+        self,
+        msg=(
+            "Invalid operation. This action is attempting to select cells outside "
+            "of the bounds of the input table"
+        ),
+        *args,
+        **kwargs,
+    ):
         super().__init__(msg, *args, **kwargs)
 
 
@@ -145,10 +173,15 @@ class ReversedExcelRefError(Exception):
     C5:A2
     """
 
-    def __init__(self, msg=(
-            'Invalid excel reference format. Please provide your reference in the '
-            'standard upmost left to downmost right format, i.e A1:C5 not C5:A1'
-        ), *args, **kwargs):
+    def __init__(
+        self,
+        msg=(
+            "Invalid excel reference format. Please provide your reference in the "
+            "standard upmost left to downmost right format, i.e A1:C5 not C5:A1"
+        ),
+        *args,
+        **kwargs,
+    ):
         super().__init__(msg, *args, **kwargs)
 
 
@@ -158,7 +191,7 @@ class BadExcelReferenceError(Exception):
     the known patterns for excel references.
     """
 
-    def __init__(self, msg=(
-            'Could not understand the provided excel reference'
-        ), *args, **kwargs):
+    def __init__(
+        self, msg=("Could not understand the provided excel reference"), *args, **kwargs
+    ):
         super().__init__(msg, *args, **kwargs)

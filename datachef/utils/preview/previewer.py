@@ -13,7 +13,7 @@ def preview(
     previewer: BasePreview = HtmlPreview,
     path: Path = False,
     end: Optional[str] = None,
-    start: Optional[str] = None
+    start: Optional[str] = None,
 ):
     """
     Create a preview from one of more selections of cells.

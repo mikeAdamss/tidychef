@@ -1,5 +1,6 @@
 import string
 
+
 def letters_to_x(excel_letters_ref: str) -> int:
     """
     Given letters (as per excel column references), return the equivilent

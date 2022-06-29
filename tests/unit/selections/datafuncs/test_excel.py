@@ -22,18 +22,18 @@ def test_assert_excel_ref_within_cells(selectable_simple1: Selectable):
     if cells by passing it an excel reference.
     """
 
-    s = selectable_simple1.excel_ref('F10:H25')
-    dfc.assert_excel_ref_within_cells(s.cells, 'H14')
-    dfc.assert_excel_ref_within_cells(s.cells, 'H20')
-    dfc.assert_excel_ref_within_cells(s.cells, 'G12')
-    dfc.assert_excel_ref_within_cells(s.cells, 'H24')
-    dfc.assert_excel_ref_within_cells(s.cells, 'F10')
+    s = selectable_simple1.excel_ref("F10:H25")
+    dfc.assert_excel_ref_within_cells(s.cells, "H14")
+    dfc.assert_excel_ref_within_cells(s.cells, "H20")
+    dfc.assert_excel_ref_within_cells(s.cells, "G12")
+    dfc.assert_excel_ref_within_cells(s.cells, "H24")
+    dfc.assert_excel_ref_within_cells(s.cells, "F10")
 
     with pytest.raises(AssertionError):
-        dfc.assert_excel_ref_within_cells(s.cells, 'XX200')
-    
+        dfc.assert_excel_ref_within_cells(s.cells, "XX200")
+
     with pytest.raises(AssertionError):
-        dfc.assert_excel_ref_within_cells(s.cells, 'F26')
+        dfc.assert_excel_ref_within_cells(s.cells, "F26")
 
 
 def test_any_excel_ref_as_wanted_basecells():
@@ -84,20 +84,18 @@ def test_any_excel_ref_as_wanted_basecells():
     Test that we can convert any excel reference into BaseCell(s) and
     that an appropriate error is raised for an invalid reference.
     """
-    
-    bcells: List[BaseCell] = dfc.any_excel_ref_as_wanted_basecells('B1:B2')
+
+    bcells: List[BaseCell] = dfc.any_excel_ref_as_wanted_basecells("B1:B2")
     assert len(bcells) == 2
     assert BaseCell(1, 0) in bcells
     assert BaseCell(1, 1) in bcells
 
-    bcells: List[BaseCell] = dfc.any_excel_ref_as_wanted_basecells('G3')
+    bcells: List[BaseCell] = dfc.any_excel_ref_as_wanted_basecells("G3")
     assert len(bcells) == 1
     assert BaseCell(6, 2) in bcells
 
     with pytest.raises(BadExcelReferenceError):
-        dfc.any_excel_ref_as_wanted_basecells('3G')
+        dfc.any_excel_ref_as_wanted_basecells("3G")
 
     with pytest.raises(ReversedExcelRefError):
-        dfc.any_excel_ref_as_wanted_basecells('C5:A1')
-
-
+        dfc.any_excel_ref_as_wanted_basecells("C5:A1")

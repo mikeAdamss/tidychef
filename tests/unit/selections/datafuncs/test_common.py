@@ -15,6 +15,7 @@ from tests.unit.helpers import qcel, qcels
 def selectable_simple1():
     return fixture_simple_one_tab()
 
+
 def test_assert_quadrilaterals(selectable_simple1: Selectable):
     """
     Tests that we can assert a given list of cells

@@ -2,6 +2,7 @@ from datachef import acquire
 from datachef.selection.selectable import Selectable
 from tests.fixtures import path_to_fixture
 
+
 def test_acquire_local():
     """
     Test that the qcquire fuction works with a local csv

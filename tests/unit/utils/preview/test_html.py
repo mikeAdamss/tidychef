@@ -1,13 +1,15 @@
+import os
+import shutil
 import uuid
 from pathlib import Path
 from typing import Optional
 
 import pytest
 
-from datachef.selection.selectable import Selectable
 from datachef.models.source.cell import Cell
 from datachef.models.source.table import LiveTable, Table
-from datachef.utils.preview.previewer import label
+from datachef.selection.selectable import Selectable
+from datachef.utils.preview.previewer import label, preview
 from datachef.utils.preview.previewers.html import HtmlPreview
 from tests.fixtures import path_to_fixture
 from tests.fixtures.preconfigured import fixture_simple_small_one_tab
@@ -150,19 +152,28 @@ def test_preview_with_a_table_name():
     included in the preview.
     """
     from datachef.models.source.cell import Cell
-    from datachef.selection.selectable import Selectable
     from datachef.models.source.table import LiveTable, Table
+    from datachef.selection.selectable import Selectable
 
-    t = Table([Cell(0, 0, value = "A1"),
-        Cell(0, 1, value = "B1")]
-        )
-    lt = LiveTable.from_table(t, name = 'Example Table')
+    t = Table([Cell(0, 0, value="A1"), Cell(0, 1, value="B1")])
+    lt = LiveTable.from_table(t, name="Example Table")
     s = Selectable(
         is_singleton_table=True,
         selected_table=lt,
         had_initial_path="not-a-real-file",
         tables=None,
-     )
+    )
 
     fixture = path_to_fixture("preview", "tiny-with-table-name.html")
     _assert_compare_html(fixture, s)
+
+
+def test_html_to_path(selectable_simple_small1: Selectable):
+    """
+    Confirm that we can write previews to a specified path
+    """
+    this_dir = Path(__file__).parent
+    tmp_file_path = Path(this_dir / f"{str(uuid.uuid4())}.html")
+    preview(selectable_simple_small1, path=tmp_file_path)
+    assert tmp_file_path.exists()
+    os.remove(tmp_file_path)

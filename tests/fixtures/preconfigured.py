@@ -1,9 +1,9 @@
 import pytest
 
 from datachef.models.source.cell import Cell
-from datachef.selection.selectable import Selectable
 from datachef.models.source.table import LiveTable, Table
 from datachef.readers.reader import read_local
+from datachef.selection.selectable import Selectable
 from datachef.selection.spreadsheet.xls import XlsInputSelectable
 from tests.fixtures import path_to_fixture
 

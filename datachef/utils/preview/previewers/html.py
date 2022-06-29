@@ -20,7 +20,6 @@ from ..base import BasePreview
 from ..boundary import Boundary
 
 
-
 class HtmlPreview(BasePreview):
     """
     Class representing a html previewed selection.
@@ -136,8 +135,7 @@ class HtmlPreview(BasePreview):
         #     selected cell (as we consider each cell of the table in turn to build the preview).
         # 2.) We use master_selected_cells_index and get_next_selected_cell() to update looked_for_cells
         #     whenever a selected cell is written to the preview, so at all times it holds
-        #     the next cell due to appear for every selection. 
-
+        #     the next cell due to appear for every selection.
 
         key_rows = ""
         master_selected_cells_index = {}
@@ -156,9 +154,9 @@ class HtmlPreview(BasePreview):
             looked_for_cells[i] = get_next_selected_cell(i)
 
         # -------------------
-        # Html generation logic 
+        # Html generation logic
         # (for now, this needs to be reworked)
-        # 
+        #
         # 1.) Starting with a "row" (a blank string)
         # 2.) Iterate through the cells building up the html to represent the row
         # 4.) Append to the list "rows"
@@ -167,16 +165,16 @@ class HtmlPreview(BasePreview):
         row = ""
         row_no = 0
 
-        # This logic is just for creating a excel style header 
+        # This logic is just for creating a excel style header
         # row, where the user hasn't specified not to
         if with_excel_ref:
             row += td_unselected.format(value="")
             for cell in all_cells:
                 if cell.y == row_no:
                     if cell.x > boundary.rightmost_point:
-                            continue
+                        continue
                     if cell.x < boundary.leftmost_point:
-                            continue
+                        continue
                     row += td_unselected.format(value=cellutils.x_to_letters(cell.x))
                 else:
                     rows.append(tr.format(row=row))
@@ -194,11 +192,13 @@ class HtmlPreview(BasePreview):
                 row_no += 1
                 rows.append(tr.format(row=row))
                 row = ""
-                if all([
-                    with_excel_ref,
-                    cell.y >= boundary.highest_point,
-                    cell.y <= boundary.lowest_point
-                ]):
+                if all(
+                    [
+                        with_excel_ref,
+                        cell.y >= boundary.highest_point,
+                        cell.y <= boundary.lowest_point,
+                    ]
+                ):
                     row += td_unselected.format(value=cell.y + 1)
 
             # If one of our selected cells matches the cell being considered

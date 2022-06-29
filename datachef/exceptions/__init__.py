@@ -1,4 +1,5 @@
 from .common import (
+    BadExcelReferenceError,
     BadShiftParameterError,
     CellsDoNotExistError,
     FileInputError,
@@ -7,9 +8,8 @@ from .common import (
     IteratingSingleTableError,
     LoneValueOnMultipleCellsError,
     OutOfBoundsError,
+    ReversedExcelRefError,
     UnalignedTableOperation,
     UnnamedTableError,
     UnsupportedLocalFileError,
-    ReversedExcelRefError,
-    BadExcelReferenceError
 )
