@@ -19,14 +19,11 @@ def preview(
     Create a preview from one of more selections of cells.
     """
 
-    if isinstance(selections, tuple):
-        for s in selections:
-            assert isinstance(
-                s, Selectable
-            ), f"Only selections and keyword arguments can be passed to preview, got {type(s)}"
-        selections = list(selections)
-    else:
-        selections = [selections]
+    for s in selections:
+        assert isinstance(
+            s, Selectable
+        ), f"Only selections and keyword arguments can be passed to preview, got {type(s)}"
+    selections = list(selections)
 
     if len(set([s.signature for s in selections])) > 1:
         raise UnalignedTableOperation()
