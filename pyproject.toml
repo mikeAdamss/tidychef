@@ -3,6 +3,9 @@ name = "pivoter"
 version = "0.1.0"
 description = "Python package for transforming human readable tables into tidy data"
 authors = ["mikeAdamss <mikelovesbooks@gmail.com>"]
+packages = [
+  {include = "datachef"},
+]
 license = "Apache 2.0"
 
 [tool.poetry.dependencies]
