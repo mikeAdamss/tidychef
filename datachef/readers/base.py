@@ -1,3 +1,9 @@
+"""
+Holds the definition of the reader baseclass: BaseReader
+
+The BaseReader is to provide functionality that is standard to all readers.
+"""
+
 from abc import ABCMeta, abstractmethod
 from dataclasses import dataclass
 from pathlib import Path
@@ -9,6 +15,9 @@ from datachef.selection.selectable import Selectable
 
 @dataclass
 class BaseReader(metaclass=ABCMeta):
+    """
+    Baseclass that all reads inherit from.
+    """
     source: Any
 
     def _raise_if_source_is_not_path(self):

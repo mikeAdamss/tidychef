@@ -1,4 +1,3 @@
-from datachef.readers.base import BaseReader
-from datachef.readers.csv.local import LocalCsvReader
-
-from . import reader
+"""
+Module that informs reading source data that is a csv file.
+"""

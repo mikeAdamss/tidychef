@@ -135,7 +135,7 @@ def maximum_x_offset(cells: List[BaseCell]) -> int:
     """
     Given a list of BaseCell's, return the largest x position in use
     """
-    max_x = max([c.x for c in cells])
+    max_x = max(c.x for c in cells)
     max_x_cell = [c for c in cells if c.x == max_x]
     return max_x_cell[0].x
 

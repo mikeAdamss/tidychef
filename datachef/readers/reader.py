@@ -7,7 +7,8 @@ from pathlib import Path
 from typing import Optional, Union
 
 from datachef.constants import SUPPORTED_LOCAL_FILETYPES
-from datachef.readers import BaseReader, LocalCsvReader
+from datachef.readers.base import BaseReader
+from datachef.readers.csv.local import LocalCsvReader
 from datachef.selection.selectable import Selectable
 from datachef.utils import fileutils
 
@@ -43,5 +44,4 @@ def read_local(
 
     if override_selectable:
         return handler_insantiated.parse(selectable=override_selectable)
-    else:
-        return handler_insantiated.parse()
+    return handler_insantiated.parse()

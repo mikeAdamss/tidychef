@@ -1,4 +1,5 @@
 """
+Code relating to the reading in of data sources.
 .. include:: ../_docs/splashpage.md
 """
 
