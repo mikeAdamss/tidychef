@@ -111,7 +111,7 @@ def test_standard_small_preview_overlap_warnings(selectable_simple_small1: Selec
     Test that we can generate the expected preview for a preview of
     two selections where the cell selections overlap.
     -------------
-    from datachef import acquire, preview, label
+    from datachef import acquire, preview
 
     table = acquire('./tests/fixtures/csv/simple-small.csv')
     s1 = table.excel_ref('B4:C6')
@@ -122,3 +122,21 @@ def test_standard_small_preview_overlap_warnings(selectable_simple_small1: Selec
     s2 = selectable_simple_small1.excel_ref("C5:E7")
     fixture = path_to_fixture("preview", "simple-small-overlap-warning.html").resolve()
     _assert_compare_html(fixture, s1, s2, start="B3", end="G8")
+
+
+def test_boundary_to_selection(selectable_simple_small1: Selectable):
+    """
+    Test that we can generate the expected preview where we want the
+    boundary of the preview to be dictated by the selected cells.
+    -------------
+    from datachef import acquire, preview
+
+    table = acquire('./tests/fixtures/csv/simple-small.csv')
+    s1 = table.excel_ref('B7:G10')
+    s2 = table.excel_ref('F14')
+    preview(s1, s2, start='selection', end='selection', path="./tests/fixtures/preview/boundary-to-selection.html")
+    """
+    s1 = selectable_simple_small1.excel_ref("B7:G10")
+    s2 = selectable_simple_small1.excel_ref("F14")
+    fixture = path_to_fixture("preview", "boundary-to-selection.html").resolve()
+    _assert_compare_html(fixture, s1, s2, start="selection", end="selection")
