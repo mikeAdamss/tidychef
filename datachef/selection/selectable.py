@@ -199,3 +199,15 @@ class Selectable(BaseInput):
         return_self = copy.deepcopy(self)
         return_self.cells = selected
         return return_self
+
+    def filter(self, check: callable):
+        """
+        Selects just the cells that match the provided check
+
+        : param check: a function, lambda or callable class that
+        returns a bool when given a single cell as a parameter.
+        """
+
+        return_self = copy.deepcopy(self)
+        return_self.cells = list(filter(check, self.cells))
+        return return_self

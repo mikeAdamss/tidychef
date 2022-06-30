@@ -278,7 +278,7 @@ def test_matching_xy_cell(selectable_simple1: Selectable):
 
         cells: List[Cell] = selectable_simple1.excel_ref(case.ref).cells
         cell: Cell = dfc.exactly_matching_xy_cell(cells, qcel(case.wanted))
-        found_cell_ref: str = dfc.xycell_to_excel_ref(cell)
+        found_cell_ref: str = dfc.basecell_to_excel_ref(cell)
         assert (
             found_cell_ref == case.wanted
         ), f"Expecting {case.wanted}, from {case.ref}, got {found_cell_ref}"
@@ -309,13 +309,13 @@ def test_specific_cell_from_xy(selectable_simple1: Selectable):
     cells: List[Cell] = selectable_simple1.excel_ref("D5:G67").cells
 
     cell: Cell = dfc.specific_cell_from_xy(cells, 3, 9)
-    assert dfc.xycell_to_excel_ref(cell) == "D10"
+    assert dfc.basecell_to_excel_ref(cell) == "D10"
 
     cell: Cell = dfc.specific_cell_from_xy(cells, 5, 63)
-    assert dfc.xycell_to_excel_ref(cell) == "F64"
+    assert dfc.basecell_to_excel_ref(cell) == "F64"
 
     cell: Cell = dfc.specific_cell_from_xy(cells, 4, 50)
-    assert dfc.xycell_to_excel_ref(cell) == "E51"
+    assert dfc.basecell_to_excel_ref(cell) == "E51"
 
 
 def test_xycells_to_excel_ref(selectable_simple1: Selectable):
@@ -331,10 +331,10 @@ def test_xycells_to_excel_ref(selectable_simple1: Selectable):
     for ref in ["D5:G67", "A1:Z89", "J26:Q28"]:
 
         cells: List[Cell] = selectable_simple1.excel_ref(ref).cells
-        assert dfc.xycells_to_excel_ref(cells) == ref
+        assert dfc.basecells_to_excel_ref(cells) == ref
 
     # Check we raise for a non quadrilateral selection
     with pytest.raises(AssertionError):
         selection: Selectable = selectable_simple1.excel_ref("A1:D10")
         selection: Selectable = selection | selectable_simple1.excel_ref("Z8")
-        dfc.xycells_to_excel_ref(selection.cells)
+        dfc.basecells_to_excel_ref(selection.cells)

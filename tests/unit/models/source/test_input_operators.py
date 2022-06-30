@@ -28,15 +28,15 @@ def test_sub_operator(selectable_simple1: Selectable):
     """
 
     two_rows = selectable_simple1.excel_ref("A1:Z2")
-    assert dfc.xycells_to_excel_ref(two_rows.cells) == "A1:Z2"
+    assert dfc.basecells_to_excel_ref(two_rows.cells) == "A1:Z2"
     assert len(two_rows.cells) == 52
 
     bottom_row = two_rows.excel_ref("A2:Z2")
-    assert dfc.xycells_to_excel_ref(bottom_row.cells) == "A2:Z2"
+    assert dfc.basecells_to_excel_ref(bottom_row.cells) == "A2:Z2"
     assert len(bottom_row.cells) == 26
 
     top_row = two_rows.excel_ref("A1:Z1")
-    assert dfc.xycells_to_excel_ref(top_row.cells) == "A1:Z1"
+    assert dfc.basecells_to_excel_ref(top_row.cells) == "A1:Z1"
     assert len(top_row.cells) == 26
 
     sub1 = two_rows - top_row
@@ -65,20 +65,20 @@ def test_union_operator(selectable_simple1: Selectable):
     """
 
     two_rows = selectable_simple1.excel_ref("A1:Z2")
-    assert dfc.xycells_to_excel_ref(two_rows.cells) == "A1:Z2"
+    assert dfc.basecells_to_excel_ref(two_rows.cells) == "A1:Z2"
     assert len(two_rows.cells) == 52
 
     bottom_row = two_rows.excel_ref("A2:Z2")
-    assert dfc.xycells_to_excel_ref(bottom_row.cells) == "A2:Z2"
+    assert dfc.basecells_to_excel_ref(bottom_row.cells) == "A2:Z2"
     assert len(bottom_row.cells) == 26
 
     top_row = two_rows.excel_ref("A1:Z1")
-    assert dfc.xycells_to_excel_ref(top_row.cells) == "A1:Z1"
+    assert dfc.basecells_to_excel_ref(top_row.cells) == "A1:Z1"
     assert len(top_row.cells) == 26
 
     recombined = bottom_row | top_row
     assert len(recombined.cells) == 52
-    assert dfc.xycells_to_excel_ref(recombined.cells) == "A1:Z2"
+    assert dfc.basecells_to_excel_ref(recombined.cells) == "A1:Z2"
 
 
 def test_union_operator_raises_for_unaligned_tables(

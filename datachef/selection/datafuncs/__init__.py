@@ -24,6 +24,6 @@ from .excel import (
     assert_excel_ref_within_cells,
     multi_excel_ref_to_basecells,
     single_excel_ref_to_basecell,
-    xycell_to_excel_ref,
-    xycells_to_excel_ref,
+    basecell_to_excel_ref,
+    basecells_to_excel_ref,
 )

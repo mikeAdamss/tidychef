@@ -142,7 +142,7 @@ def matching_xy_cells(
 
     :param cells: Representing a selection from a tabular data source.
     """
-    return [c1 for c1 in cells if any([c1.matches_xy(c2) for c2 in wanted_cells])]
+    return [c1 for c1 in cells if any(c1.matches_xy(c2) for c2 in wanted_cells)]
 
 
 def maximum_x_offset(cells: List[BaseCell]) -> int:

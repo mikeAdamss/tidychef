@@ -91,14 +91,14 @@ def multi_excel_ref_to_basecells(excel_ref: str) -> List[BaseCell]:
     return return_cells
 
 
-def xycell_to_excel_ref(cell: BaseCell) -> str:
+def basecell_to_excel_ref(cell: BaseCell) -> str:
     """
     Given a single BaseCell object, return the representative excel reference.
     """
     return f"{cellutils.x_to_letters(cell.x)}{cellutils.y_to_number(cell.y)}"
 
 
-def xycells_to_excel_ref(cells: List[BaseCell]) -> str:
+def basecells_to_excel_ref(cells: List[BaseCell]) -> str:
     """
     Given a list of cells representing a solid selection with
     no gaps. Return the representative excel reference.

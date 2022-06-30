@@ -20,43 +20,43 @@ def test_shift(selectable_simple1: Selectable):
     s = selectable_simple1.excel_ref("B3:D4")
     assert len(s.cells) == 6
     s = s.shift(RIGHT)
-    assert dfc.xycells_to_excel_ref(s.cells) == "C3:E4"
+    assert dfc.basecells_to_excel_ref(s.cells) == "C3:E4"
     assert len(s.cells) == 6
 
     s = selectable_simple1.excel_ref("B3:D4")
     assert len(s.cells) == 6
     s = s.shift(RIGHT(1))
-    assert dfc.xycells_to_excel_ref(s.cells) == "C3:E4"
+    assert dfc.basecells_to_excel_ref(s.cells) == "C3:E4"
     assert len(s.cells) == 6
 
     s = selectable_simple1.excel_ref("B3:D4")
     assert len(s.cells) == 6
     s = s.shift(RIGHT(3))
-    assert dfc.xycells_to_excel_ref(s.cells) == "E3:G4"
+    assert dfc.basecells_to_excel_ref(s.cells) == "E3:G4"
     assert len(s.cells) == 6
 
     s = selectable_simple1.excel_ref("B3:D4")
     assert len(s.cells) == 6
     s = s.shift(RIGHT(3)).shift(DOWN(7))
-    assert dfc.xycells_to_excel_ref(s.cells) == "E10:G11"
+    assert dfc.basecells_to_excel_ref(s.cells) == "E10:G11"
     assert len(s.cells) == 6
 
     s = selectable_simple1.excel_ref("F10:H21")
     assert len(s.cells) == 36
     s = s.shift(LEFT(2)).shift(UP(6))
-    assert dfc.xycells_to_excel_ref(s.cells) == "D4:F15"
+    assert dfc.basecells_to_excel_ref(s.cells) == "D4:F15"
     assert len(s.cells) == 36
 
     s = selectable_simple1.excel_ref("L12:M14")
     assert len(s.cells) == 6
     s = s.shift(3, 3)
-    assert dfc.xycells_to_excel_ref(s.cells) == "O15:P17"
+    assert dfc.basecells_to_excel_ref(s.cells) == "O15:P17"
     assert len(s.cells) == 6
 
     s = selectable_simple1.excel_ref("L12:M14")
     assert len(s.cells) == 6
     s = s.shift(3, -3)
-    assert dfc.xycells_to_excel_ref(s.cells) == "O9:P11"
+    assert dfc.basecells_to_excel_ref(s.cells) == "O9:P11"
     assert len(s.cells) == 6
 
 
