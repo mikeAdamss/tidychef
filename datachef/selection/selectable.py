@@ -1,4 +1,5 @@
 import copy
+import re
 from typing import FrozenSet, List, Optional, Union
 
 from datachef.cardinal.directions import DOWN, LEFT, RIGHT, UP, BaseDirection
@@ -211,3 +212,13 @@ class Selectable(BaseInput):
         return_self = copy.deepcopy(self)
         return_self.cells = list(filter(check, self.cells))
         return return_self
+
+    def re(self, pattern: str):
+        """
+        Filter the current selection of cells to only include
+        cells whose value matches the provided regular expression
+        pattern.
+        """
+        return self.filter(
+            lambda cell: True if re.match(pattern, cell.value) else False
+        )
