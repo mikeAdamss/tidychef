@@ -22,8 +22,8 @@ from .common import (
 from .excel import (
     any_excel_ref_as_wanted_basecells,
     assert_excel_ref_within_cells,
-    multi_excel_ref_to_basecells,
-    single_excel_ref_to_basecell,
     basecell_to_excel_ref,
     basecells_to_excel_ref,
+    multi_excel_ref_to_basecells,
+    single_excel_ref_to_basecell,
 )

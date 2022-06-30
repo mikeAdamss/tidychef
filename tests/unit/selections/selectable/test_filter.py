@@ -1,9 +1,10 @@
-import pytest
 from dataclasses import dataclass
 
+import pytest
+
 from datachef.models.source.cell import Cell
-from datachef.selection.selectable import Selectable
 from datachef.selection import datafuncs as dfc
+from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
 
 
@@ -17,11 +18,11 @@ def test_filter_with_lambda(selectable_simple1: Selectable):
     Confirm that we can filter by passing a lambda function
     """
 
-    s = selectable_simple1.excel_ref('A1:B12')
+    s = selectable_simple1.excel_ref("A1:B12")
     assert len(s.cells) == 24
     s = s.filter(lambda cell: "A" in cell.value)
     assert len(s.cells) == 12
-    assert dfc.basecells_to_excel_ref(s.cells) == 'A1:A12'
+    assert dfc.basecells_to_excel_ref(s.cells) == "A1:A12"
 
 
 def test_filter_with_class(selectable_simple1: Selectable):
@@ -36,11 +37,11 @@ def test_filter_with_class(selectable_simple1: Selectable):
         """
         return "A" in cell.value
 
-    s = selectable_simple1.excel_ref('A1:B12')
+    s = selectable_simple1.excel_ref("A1:B12")
     assert len(s.cells) == 24
     s = s.filter(contains_a)
     assert len(s.cells) == 12
-    assert dfc.basecells_to_excel_ref(s.cells) == 'A1:A12'
+    assert dfc.basecells_to_excel_ref(s.cells) == "A1:A12"
 
 
 def test_filter_with_function(selectable_simple1: Selectable):
@@ -54,13 +55,14 @@ def test_filter_with_function(selectable_simple1: Selectable):
         Filter class to look for cells containing
         the specific letter
         """
+
         letter: str
 
         def __call__(self, cell: Cell):
             return self.letter in cell.value
 
-    s = selectable_simple1.excel_ref('A1:B12')
+    s = selectable_simple1.excel_ref("A1:B12")
     assert len(s.cells) == 24
     s = s.filter(ContainsSpecificLetter("A"))
     assert len(s.cells) == 12
-    assert dfc.basecells_to_excel_ref(s.cells) == 'A1:A12'
+    assert dfc.basecells_to_excel_ref(s.cells) == "A1:A12"
