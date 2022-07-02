@@ -1,6 +1,16 @@
 from os import linesep
 
 
+class BadParamsError(Exception):
+    """
+    Raised where a user is trying to pass in an invalid paraemter
+    or an invlaid combination of same.
+    """
+
+    def __init__(self, msg: str):
+        self.msg = msg
+
+
 class FileInputError(Exception):
     """
     There is an issues with what has been provided as a file input.
@@ -132,8 +142,8 @@ class BadShiftParameterError(Exception):
         self,
         msg=(
             f"The shift method must be called with one of two types of argument{linesep}"
-            f"1.) By passing in the UP, DOWN, LEFT, RIGHT, ABOVE or BELOW constant, "
-            f"for example: .shift(UP). {linesep}"
+            f"1.) By passing in an up, down, left, right, above or below direction, "
+            f"for example: .shift(up). {linesep}"
             "2.) By passing in two integer arguments, on each for x index change and y index change"
             "example: .shift(1, 2)"
         ),

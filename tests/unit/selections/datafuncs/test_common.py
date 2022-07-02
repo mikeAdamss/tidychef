@@ -170,29 +170,6 @@ def test_cells_on_y_index(selectable_simple1: Selectable):
         ), f"Y axis {case.y} from cells {case.ref} should return {case.expected} cells, but got {len(cells_on_index)}"
 
 
-def test_ensure_human_read_order():
-    """
-    Given an unordered list of cells, return them in a human readable
-    order.
-
-    i.e top row to bottom row, left to right
-    """
-
-    cells = [
-        BaseCell(5, 2),
-        BaseCell(12, 12),
-        BaseCell(2, 5),
-        BaseCell(6, 2),
-        BaseCell(3, 16),
-        BaseCell(0, 0),
-    ]
-    ordered = dfc.ensure_human_read_order(cells)
-    assert (
-        str(ordered)
-        == "[BaseCell(x=0, y=0), BaseCell(x=5, y=2), BaseCell(x=6, y=2), BaseCell(x=2, y=5), BaseCell(x=12, y=12), BaseCell(x=3, y=16)]"
-    )
-
-
 def test_exactly_matched_xy_cells(selectable_simple1: Selectable):
     """
     Test that:

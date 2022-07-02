@@ -1,6 +1,6 @@
 import pytest
 
-from datachef.cardinal.directions import DOWN, LEFT, RIGHT, UP
+from datachef.cardinal.directions import down, left, right, up
 from datachef.exceptions import BadShiftParameterError, OutOfBoundsError
 from datachef.selection import datafuncs as dfc
 from datachef.selection.selectable import Selectable
@@ -19,31 +19,31 @@ def test_shift(selectable_simple1: Selectable):
 
     s = selectable_simple1.excel_ref("B3:D4")
     assert len(s.cells) == 6
-    s = s.shift(RIGHT)
+    s = s.shift(right)
     assert dfc.basecells_to_excel_ref(s.cells) == "C3:E4"
     assert len(s.cells) == 6
 
     s = selectable_simple1.excel_ref("B3:D4")
     assert len(s.cells) == 6
-    s = s.shift(RIGHT(1))
+    s = s.shift(right(1))
     assert dfc.basecells_to_excel_ref(s.cells) == "C3:E4"
     assert len(s.cells) == 6
 
     s = selectable_simple1.excel_ref("B3:D4")
     assert len(s.cells) == 6
-    s = s.shift(RIGHT(3))
+    s = s.shift(right(3))
     assert dfc.basecells_to_excel_ref(s.cells) == "E3:G4"
     assert len(s.cells) == 6
 
     s = selectable_simple1.excel_ref("B3:D4")
     assert len(s.cells) == 6
-    s = s.shift(RIGHT(3)).shift(DOWN(7))
+    s = s.shift(right(3)).shift(down(7))
     assert dfc.basecells_to_excel_ref(s.cells) == "E10:G11"
     assert len(s.cells) == 6
 
     s = selectable_simple1.excel_ref("F10:H21")
     assert len(s.cells) == 36
-    s = s.shift(LEFT(2)).shift(UP(6))
+    s = s.shift(left(2)).shift(up(6))
     assert dfc.basecells_to_excel_ref(s.cells) == "D4:F15"
     assert len(s.cells) == 36
 
@@ -78,4 +78,4 @@ def test_shift_out_of_bounds_raises(selectable_simple1: Selectable):
     """
 
     with pytest.raises(OutOfBoundsError):
-        selectable_simple1.excel_ref("Z100").shift(RIGHT)
+        selectable_simple1.excel_ref("Z100").shift(right)

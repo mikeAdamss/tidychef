@@ -2,13 +2,14 @@
 .. include:: ./README.md
 """
 from .common import (
+    all_used_x_indicies,
+    all_used_y_indicies,
     assert_quadrilaterals,
     cell_is_not_within,
     cell_is_within,
     cells_not_in,
     cells_on_x_index,
     cells_on_y_index,
-    ensure_human_read_order,
     exactly_matched_xy_cells,
     exactly_matching_xy_cell,
     get_outlier_indicies,
@@ -17,6 +18,7 @@ from .common import (
     maximum_y_offset,
     minimum_x_offset,
     minimum_y_offset,
+    read_ordered_cells_by_index,
     specific_cell_from_xy,
 )
 from .excel import (
@@ -26,4 +28,10 @@ from .excel import (
     basecells_to_excel_ref,
     multi_excel_ref_to_basecells,
     single_excel_ref_to_basecell,
+)
+from .ordering import (
+    order_cells_leftright_topbottom,
+    order_cells_rightleft_bottomtop,
+    order_cells_topbottom_leftright,
+    order_cells_bottomtop_rightleft
 )

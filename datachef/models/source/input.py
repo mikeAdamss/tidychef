@@ -1,8 +1,7 @@
 """
 Classes representing a single input.
 
-An input would be a single tabulated source. Csv, Excel, ODF or the in memory
-representation of same (to include dataframes).
+An input would be a single tabulated source. Csv, Excel, ODF etc
 """
 
 from __future__ import annotations

@@ -1,5 +1,6 @@
 from .common import (
     BadExcelReferenceError,
+    BadParamsError,
     BadShiftParameterError,
     CellsDoNotExistError,
     FileInputError,

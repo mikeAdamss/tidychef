@@ -1,6 +1,6 @@
 import pytest
 
-from datachef.cardinal.directions import ABOVE, BELOW, DOWN, LEFT, RIGHT, UP
+from datachef.cardinal.directions import above, below, down, right, left, up
 
 
 def test_cardinal_offset_can_be_overwritten():
@@ -11,30 +11,30 @@ def test_cardinal_offset_can_be_overwritten():
     """
 
     for direction, x_expected, y_expected in [
-        [RIGHT, 1, 0],
-        [RIGHT(1), 1, 0],
-        [RIGHT(7), 7, 0],
-        [RIGHT(53465), 53465, 0],
-        [LEFT, -1, 0],
-        [LEFT(1), -1, 0],
-        [LEFT(7), -7, 0],
-        [LEFT(53465), -53465, 0],
-        [DOWN, 0, 1],
-        [DOWN(1), 0, 1],
-        [DOWN(7), 0, 7],
-        [DOWN(53465), 0, 53465],
-        [BELOW, 0, 1],
-        [BELOW(1), 0, 1],
-        [BELOW(7), 0, 7],
-        [BELOW(53465), 0, 53465],
-        [ABOVE, 0, -1],
-        [ABOVE(1), 0, -1],
-        [ABOVE(7), 0, -7],
-        [ABOVE(53465), 0, -53465],
-        [UP, 0, -1],
-        [UP(1), 0, -1],
-        [UP(7), 0, -7],
-        [UP(53465), 0, -53465],
+        [right, 1, 0],
+        [right(1), 1, 0],
+        [right(7), 7, 0],
+        [right(53465), 53465, 0],
+        [left, -1, 0],
+        [left(1), -1, 0],
+        [left(7), -7, 0],
+        [left(53465), -53465, 0],
+        [down, 0, 1],
+        [down(1), 0, 1],
+        [down(7), 0, 7],
+        [down(53465), 0, 53465],
+        [below, 0, 1],
+        [below(1), 0, 1],
+        [below(7), 0, 7],
+        [below(53465), 0, 53465],
+        [above, 0, -1],
+        [above(1), 0, -1],
+        [above(7), 0, -7],
+        [above(53465), 0, -53465],
+        [up, 0, -1],
+        [up(1), 0, -1],
+        [up(7), 0, -7],
+        [up(53465), 0, -53465],
     ]:
         assert direction.x == x_expected
         assert direction.y == y_expected
@@ -47,4 +47,4 @@ def test_cardinal_offset_cannot_be_overwritten_twice():
     """
 
     with pytest.raises(Exception):
-        RIGHT(2)(2)
+        right(2)(2)

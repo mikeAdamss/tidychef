@@ -1,6 +1,6 @@
 import pytest
 
-from datachef.cardinal.directions import DOWN, LEFT, RIGHT, UP
+from datachef.cardinal.directions import down, left, right, up
 from datachef.exceptions import CellsDoNotExistError
 from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
@@ -16,18 +16,18 @@ def test_expand(selectable_simple1: Selectable):
     Test the expand RIGHT commands work.
     """
 
-    s = selectable_simple1.excel_ref("W5:W10").expand(RIGHT)
+    s = selectable_simple1.excel_ref("W5:W10").expand(right)
     assert len(s.cells) == 24
 
-    s = selectable_simple1.excel_ref("E2:H2").expand(UP)
+    s = selectable_simple1.excel_ref("E2:H2").expand(up)
     assert len(s.cells) == 8
 
-    s = selectable_simple1.excel_ref("X17:Y18").expand(LEFT)
+    s = selectable_simple1.excel_ref("X17:Y18").expand(left)
     assert len(s.cells) == 50
 
     s = (
         selectable_simple1.excel_ref("X5") | selectable_simple1.excel_ref("A2")
-    ).expand(DOWN)
+    ).expand(down)
     assert len(s.cells) == 195
 
 

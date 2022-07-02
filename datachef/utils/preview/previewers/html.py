@@ -111,7 +111,7 @@ class HtmlPreview(BasePreview):
         td_unselected = "<td>{value}</td>"
         td_selected = '<td style="background-color:{colour}">{value}</td>'
 
-        all_cells: List[Cell] = dfc.ensure_human_read_order(selections[0].pcells)
+        all_cells: List[Cell] = dfc.order_cells_leftright_topbottom(selections[0].pcells)
 
         # ------------------
         # Cell lookup logic
@@ -140,7 +140,7 @@ class HtmlPreview(BasePreview):
         key_rows = ""
         master_selected_cells_index = {}
         for i, s in enumerate(selections):
-            master_selected_cells_index[i] = deque(dfc.ensure_human_read_order(s.cells))
+            master_selected_cells_index[i] = deque(dfc.order_cells_leftright_topbottom(s.cells))
             key_rows += key_row.format(
                 colour=palette[i], value=s._label if s._label else f"selection {i}"
             )

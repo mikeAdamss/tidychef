@@ -33,5 +33,5 @@ def test_all_non_blanks_from_table(table_with_blanks: Selectable):
     """
     Test that default non blank behaviour filters to all expected cells.
     """
-    table_with_blanks.is_not_blank()
-    assert len(table_with_blanks.cells) == 3
+    table_without_blanks = table_with_blanks.is_not_blank()
+    assert len(table_without_blanks.cells) == 3
