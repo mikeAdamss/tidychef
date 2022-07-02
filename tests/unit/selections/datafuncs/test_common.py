@@ -315,3 +315,25 @@ def test_xycells_to_excel_ref(selectable_simple1: Selectable):
         selection: Selectable = selectable_simple1.excel_ref("A1:D10")
         selection: Selectable = selection | selectable_simple1.excel_ref("Z8")
         dfc.basecells_to_excel_ref(selection.cells)
+
+
+def test_all_used_x_indicies(selectable_simple1: Selectable):
+    """
+    Confirm we can get all unique x indicies within use in
+    a list of cells
+    """
+
+    s = selectable_simple1.excel_ref("D5:F15")
+    x_indicies: List[int] = dfc.all_used_x_indicies(s.cells)
+    assert set(x_indicies) == {3, 4, 5}
+    
+
+def test_all_used_y_indicies(selectable_simple1: Selectable):
+    """
+    Confirm we can get all unique y indicies within use in
+    a list of cells
+    """
+
+    s = selectable_simple1.excel_ref("D5:F15")
+    x_indicies: List[int] = dfc.all_used_y_indicies(s.cells)
+    assert set(x_indicies) == {4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}

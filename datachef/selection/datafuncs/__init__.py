@@ -19,6 +19,8 @@ from .common import (
     minimum_x_offset,
     minimum_y_offset,
     specific_cell_from_xy,
+    all_used_x_indicies,
+    all_used_y_indicies
 )
 from .excel import (
     any_excel_ref_as_wanted_basecells,
