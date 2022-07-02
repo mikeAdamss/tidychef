@@ -18,7 +18,6 @@ from .common import (
     maximum_y_offset,
     minimum_x_offset,
     minimum_y_offset,
-    read_ordered_cells_by_index,
     specific_cell_from_xy,
 )
 from .excel import (

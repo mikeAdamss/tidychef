@@ -3,7 +3,7 @@ Common data functions that do not fall into any of the other categories.
 """
 from typing import List, Optional, Tuple
 
-from datachef.exceptions import BadParamsError, CellsDoNotExistError
+from datachef.exceptions import CellsDoNotExistError
 from datachef.models.source.cell import BaseCell
 
 
@@ -37,36 +37,6 @@ def cell_is_within(cells: List[BaseCell], cell: BaseCell) -> bool:
 def cell_is_not_within(cells: List[BaseCell], cell: BaseCell) -> bool:
     """Is the cell absent from the list of cells?"""
     return not cell_is_within(cells, cell)
-
-
-def read_ordered_cells_by_index(
-    cells: List[BaseCell], x_index: Optional[int] = None, y_index: Optional[int] = None
-):
-    """
-    Given a list of cells, return the cells from
-    the list that are on that either a specific row
-    or column index.
-    """
-
-    cells: List[BaseCell] = ensure_human_read_order(cells)
-
-    if x_index and y_index:
-        raise BadParamsError(
-            "You can read_ordered_cells_by_index() for either a column"
-            "x_index  or column (x_index), not both"
-        )
-    elif x_index:
-        cells: List[BaseCell] = cells_on_x_index(x_index)
-    elif y_index:
-        cells: List[BaseCell] = cells_on_x_index(y_index)
-    else:
-        if not x_index and not y_index:
-            raise BadParamsError(
-                "To read_ordered_cells_by_index() you must specify"
-                " either a y_index (column ) or x_index (row)."
-            )
-
-    return cells
 
 
 def cells_not_in(

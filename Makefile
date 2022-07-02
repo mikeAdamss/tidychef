@@ -7,7 +7,7 @@ help:
 test: ## Run all unit tests and create new coverage report
 	poetry run pytest --cov=datachef --cov-fail-under=100 tests/
 
-report: ## View the latest report of test coverage
+report: ## View the latest report of test coverage (includes missing coverage by line)
 	poetry run coverage report -m
 
 format: ## Format the codebase with isort and black

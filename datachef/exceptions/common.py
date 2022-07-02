@@ -1,16 +1,6 @@
 from os import linesep
 
 
-class BadParamsError(Exception):
-    """
-    Raised where a user is trying to pass in an invalid paraemter
-    or an invlaid combination of same.
-    """
-
-    def __init__(self, msg: str):
-        self.msg = msg
-
-
 class FileInputError(Exception):
     """
     There is an issues with what has been provided as a file input.
@@ -35,11 +25,15 @@ class UnnamedTableError(Exception):
     not have a name/title property.
     """
 
-    def __init__(self):
-        self.msg = (
-            "Cannot find table name/title property as this table does not have one. "
-            "This is typical of (but not exclusive to) csv tables"
-        )
+    def __init__(
+        self,
+        msg=(
+            "Cannot access table name/title property as this table does not have one."
+        ),
+        *args,
+        **kwargs,
+    ):
+        super().__init__(msg, *args, **kwargs)
 
 
 class CellsDoNotExistError(Exception):
@@ -48,8 +42,13 @@ class CellsDoNotExistError(Exception):
     does not exist in the filtered table.
     """
 
-    def __init__(self, unfound_cells):
-        self.msg = f"Requested cells are not in current selection: {unfound_cells}"
+    def __init__(
+        self,
+        msg=("Requested cells are not in current selection."),
+        *args,
+        **kwargs,
+    ):
+        super().__init__(msg, *args, **kwargs)
 
 
 class IteratingSingleTableError(Exception):
