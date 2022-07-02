@@ -111,7 +111,9 @@ class HtmlPreview(BasePreview):
         td_unselected = "<td>{value}</td>"
         td_selected = '<td style="background-color:{colour}">{value}</td>'
 
-        all_cells: List[Cell] = dfc.order_cells_leftright_topbottom(selections[0].pcells)
+        all_cells: List[Cell] = dfc.order_cells_leftright_topbottom(
+            selections[0].pcells
+        )
 
         # ------------------
         # Cell lookup logic

@@ -4,12 +4,12 @@ making http gets where necessary before passing the source into the readers.
 """
 
 from pathlib import Path
-from typing import Optional, Any
+from typing import Any, Optional
 
 from datachef.readers.base import BaseReader
+from datachef.readers.objects.list import ListReader
 from datachef.readers.reader import read_local
 from datachef.selection.selectable import Selectable
-from datachef.readers.objects.list import ListReader
 
 
 def acquire(
@@ -26,9 +26,9 @@ def acquire(
     if isinstance(source, list):
         return ListReader(source).parse()
 
-    # If it's not a python type, then it's either a 
+    # If it's not a python type, then it's either a
     # local or remote source file
-    
+
     # TODO: check if source if a url
     # then write read_remote
 

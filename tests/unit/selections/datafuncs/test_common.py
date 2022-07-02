@@ -326,7 +326,7 @@ def test_all_used_x_indicies(selectable_simple1: Selectable):
     s = selectable_simple1.excel_ref("D5:F15")
     x_indicies: List[int] = dfc.all_used_x_indicies(s.cells)
     assert set(x_indicies) == {3, 4, 5}
-    
+
 
 def test_all_used_y_indicies(selectable_simple1: Selectable):
     """

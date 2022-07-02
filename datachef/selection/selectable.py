@@ -2,7 +2,7 @@ import copy
 import re
 from typing import FrozenSet, List, Optional, Union
 
-from datachef.cardinal.directions import down, left, right, up, Direction
+from datachef.cardinal.directions import Direction, down, left, right, up
 from datachef.exceptions import (
     BadShiftParameterError,
     LoneValueOnMultipleCellsError,
@@ -244,33 +244,43 @@ class Selectable(BaseInput):
         """
 
         if not isinstance(direction, Direction):
-            raise ValueError('Argument direction must be one of: up, down, left, right.')
+            raise ValueError(
+                "Argument direction must be one of: up, down, left, right."
+            )
 
         new_cells = []
 
         if direction._direction == "right":
-            ordered_selected_cells: List[Cell] = dfc.order_cells_leftright_topbottom(self.cells)
+            ordered_selected_cells: List[Cell] = dfc.order_cells_leftright_topbottom(
+                self.cells
+            )
             ordered_pristine_cells: List[Cell] = copy.deepcopy(
                 dfc.order_cells_leftright_topbottom(self.pcells)
             )
             horizontal_traversal = True
 
         elif direction._direction == "left":
-            ordered_selected_cells: List[Cell] = dfc.order_cells_rightleft_bottomtop(self.cells)
+            ordered_selected_cells: List[Cell] = dfc.order_cells_rightleft_bottomtop(
+                self.cells
+            )
             ordered_pristine_cells: List[Cell] = copy.deepcopy(
                 dfc.order_cells_rightleft_bottomtop(self.pcells)
             )
             horizontal_traversal = True
 
         elif direction._direction == "up":
-            ordered_selected_cells: List[Cell] = dfc.order_cells_bottomtop_rightleft(self.cells)
+            ordered_selected_cells: List[Cell] = dfc.order_cells_bottomtop_rightleft(
+                self.cells
+            )
             ordered_pristine_cells: List[Cell] = copy.deepcopy(
                 dfc.order_cells_bottomtop_rightleft(self.pcells)
             )
             horizontal_traversal = False
 
         elif direction._direction == "down":
-            ordered_selected_cells: List[Cell] = dfc.order_cells_topbottom_leftright(self.cells)
+            ordered_selected_cells: List[Cell] = dfc.order_cells_topbottom_leftright(
+                self.cells
+            )
             ordered_pristine_cells: List[Cell] = copy.deepcopy(
                 dfc.order_cells_topbottom_leftright(self.pcells)
             )
@@ -285,9 +295,9 @@ class Selectable(BaseInput):
                 considered_offset = cell.y if horizontal_traversal else cell.x
             elif considered_offset != (cell.y if horizontal_traversal else cell.x):
                 spreading = None
-                considered_offset = (cell.y if horizontal_traversal else cell.x)
+                considered_offset = cell.y if horizontal_traversal else cell.x
 
-            if not (selected_cell_index +1) > len(ordered_selected_cells):
+            if not (selected_cell_index + 1) > len(ordered_selected_cells):
                 if cell.matches_xy(ordered_selected_cells[selected_cell_index]):
                     spreading = cell.value
                     selected_cell_index += 1
@@ -299,14 +309,24 @@ class Selectable(BaseInput):
                     new_cells.append(cell)
                 else:
                     spreading = None
-    
+
         return_self = copy.deepcopy(self)
 
         # Remove cells we're overwriting
         return_self.cells = [
-            c1 for c1 in return_self.cells if not any(c1.matches_xy(c2) for c2 in new_cells)
+            c1
+            for c1 in return_self.cells
+            if not any(c1.matches_xy(c2) for c2 in new_cells)
+        ]
+
+        # We also need to modify the pristine selection
+        return_self.selected_table.pristine.cells = [
+            c1
+            for c1 in return_self.selected_table.pristine.cells
+            if not any(c1.matches_xy(c2) for c2 in new_cells)
         ]
 
         # Add the overwritten cells in
-        return_self.cells = return_self.cells + new_cells
+        return_self.cells += new_cells
+        return_self.selected_table.pristine.cells += new_cells
         return return_self

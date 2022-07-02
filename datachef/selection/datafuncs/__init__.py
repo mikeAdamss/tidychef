@@ -19,8 +19,6 @@ from .common import (
     minimum_x_offset,
     minimum_y_offset,
     specific_cell_from_xy,
-    all_used_x_indicies,
-    all_used_y_indicies
 )
 from .excel import (
     any_excel_ref_as_wanted_basecells,
@@ -31,8 +29,8 @@ from .excel import (
     single_excel_ref_to_basecell,
 )
 from .ordering import (
+    order_cells_bottomtop_rightleft,
     order_cells_leftright_topbottom,
     order_cells_rightleft_bottomtop,
     order_cells_topbottom_leftright,
-    order_cells_bottomtop_rightleft
 )

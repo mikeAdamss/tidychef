@@ -19,9 +19,7 @@ class ListReader(BaseReader):
     ]
     """
 
-    def parse(
-        self, selectable: Selectable = Selectable
-    ) -> Selectable:
+    def parse(self, selectable: Selectable = Selectable) -> Selectable:
         table = Table()
 
         for y_index, row in enumerate(self.source):

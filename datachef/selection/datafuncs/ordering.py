@@ -2,7 +2,8 @@ from socketserver import ThreadingUnixDatagramServer
 from typing import List
 
 from datachef.models.source.cell import BaseCell
-\
+
+
 def order_cells_leftright_topbottom(cells: List[BaseCell]) -> List[BaseCell]:
     """
     Given a list of BaseCell's sort them into a typical human readable order,
@@ -45,5 +46,3 @@ def order_cells_bottomtop_rightleft(cells: List[BaseCell]) -> List[BaseCell]:
     :param cells: Representing a selection from a tabular data source.
     """
     return sorted(cells, key=lambda cell: (cell.x, cell.y), reverse=True)
-
-

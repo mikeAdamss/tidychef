@@ -10,16 +10,18 @@ license = "Apache 2.0"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-isort = "^5.10.1"
-jupyter = "^1.0.0"
-pylint = "^2.14.3"
-pytest-cov = "^3.0.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"
 behave = "^1.2.6"
 black = "^22.3.0"
 pdoc = "^12.0.2"
+nbconvert = "^6.5.0"
+jupyterlab = "^3.4.3"
+jupyter = "^1.0.0"
+isort = "^5.10.1"
+pylint = "^2.14.3"
+pytest-cov = "^3.0.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
