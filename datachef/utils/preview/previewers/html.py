@@ -140,18 +140,27 @@ class HtmlPreview(BasePreview):
         key_rows = ""
         master_selected_cells_index = {}
         for i, s in enumerate(selections):
-            master_selected_cells_index[i] = deque(dfc.order_cells_leftright_topbottom(s.cells))
-            key_rows += key_row.format(
-                colour=palette[i], value=s._label if s._label else f"selection {i}"
-            )
+
+            if s.selections_made():
+                selected_cells = deque(dfc.order_cells_leftright_topbottom(s.cells))
+            else:
+                selected_cells = deque([])
+
+            master_selected_cells_index[i] = selected_cells
+
+            if s.selections_made():
+                key_rows += key_row.format(
+                    colour=palette[i], value=s._label if s._label else f"selection {i}"
+                )
 
         def get_next_selected_cell(i: int) -> Cell:
             next_cell = master_selected_cells_index[i].popleft()
             return next_cell
 
         looked_for_cells = {}
-        for i in master_selected_cells_index.keys():
-            looked_for_cells[i] = get_next_selected_cell(i)
+        for i, cells in master_selected_cells_index.items():
+            if len(cells) > 0:
+                looked_for_cells[i] = get_next_selected_cell(i)
 
         # -------------------
         # Html generation logic

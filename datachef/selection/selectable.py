@@ -243,6 +243,9 @@ class Selectable(BaseInput):
         right with optional offset, i.e right(3)
         """
 
+        if not isinstance(direction, Direction):
+            raise ValueError('Argument direction must be one of: up, down, left, right.')
+
         new_cells = []
 
         if direction._direction == "right":
@@ -272,9 +275,6 @@ class Selectable(BaseInput):
                 dfc.order_cells_topbottom_leftright(self.pcells)
             )
             horizontal_traversal = False
-
-        else:
-            raise NotImplementedError(direction)
 
         selected_cell_index: int = 0
         considered_offset = None

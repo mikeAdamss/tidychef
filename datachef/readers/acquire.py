@@ -26,6 +26,9 @@ def acquire(
     if isinstance(source, list):
         return ListReader(source).parse()
 
+    # If it's not a python type, then it's either a 
+    # local or remote source file
+    
     # TODO: check if source if a url
     # then write read_remote
 
