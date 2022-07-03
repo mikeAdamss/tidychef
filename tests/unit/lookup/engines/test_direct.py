@@ -1,20 +1,21 @@
-from datachef.cardinal.directions import up, down, left, right
-from datachef.lookup.engines.direct import Direct
 from dataclasses import dataclass
+from os import linesep
+
 import pytest
 
-from datachef.selection import filters
-
-from os import linesep
+from datachef.cardinal.directions import down, left, right, up
+from datachef.lookup.engines.direct import Direct
 from datachef.models.source.cell import Cell
+from datachef.selection import datafuncs as dfc
+from datachef.selection import filters
 from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_vertical_dimensions, fixture_wide_band_tab
-from datachef.selection import datafuncs as dfc
 
 
 @pytest.fixture
 def selectable_wide_band_tab():
     return fixture_wide_band_tab()
+
 
 @pytest.fixture
 def selectable_vertical_dimensions():
@@ -27,12 +28,12 @@ def test_direct_left_multiple_options_lookup(selectable_wide_band_tab: Selectabl
     in the required fashion where multiple direct options are
     availible.
     """
-    
+
     dim = (
-        selectable_wide_band_tab.excel_ref('B4').expand(down).is_not_blank() |
-        selectable_wide_band_tab.excel_ref('H4').expand(down).is_not_blank()
+        selectable_wide_band_tab.excel_ref("B4").expand(down).is_not_blank()
+        | selectable_wide_band_tab.excel_ref("H4").expand(down).is_not_blank()
     )
-    assert len(dim.cells) == 8, 'Unexpected selection, have we changed the sample data?'
+    assert len(dim.cells) == 8, "Unexpected selection, have we changed the sample data?"
 
     direct_left_engine = Direct(dim, left, name="Down Test")
 
@@ -48,14 +49,14 @@ def test_direct_left_multiple_options_lookup(selectable_wide_band_tab: Selectabl
         Case("C6", "B6"),
         Case("I4", "H4"),
         Case("J4", "H4"),
-        Case("K5", "H5")
+        Case("K5", "H5"),
     ]:
         ob_cell: Cell = selectable_wide_band_tab.excel_ref(case.obs_ref).cells[0]
         looked_up_cell: Cell = direct_left_engine.resolve(ob_cell)
         looked_up_cell_ref: str = dfc.basecell_to_excel_ref(looked_up_cell)
         assert looked_up_cell_ref == case.expected_cell_ref, (
-            f'Expected lookup to resolve to {case.expected_cell_ref}, got {looked_up_cell_ref}'
-            f' from options of: {linesep}{direct_left_engine._lookups[looked_up_cell.y]}'
+            f"Expected lookup to resolve to {case.expected_cell_ref}, got {looked_up_cell_ref}"
+            f" from options of: {linesep}{direct_left_engine._lookups[looked_up_cell.y]}"
         )
 
 
@@ -65,14 +66,14 @@ def test_direct_right_multiple_options_lookup(selectable_wide_band_tab: Selectab
     in the required fashion where multiple direct options are
     availible.
     """
-    
-    # To save us a fixture We're just going to reverse the logic and lookup from 
+
+    # To save us a fixture We're just going to reverse the logic and lookup from
     # what would be dimension items to what would be observations
     dim = (
-        selectable_wide_band_tab.excel_ref('C4').expand(down).is_not_blank() |
-        selectable_wide_band_tab.excel_ref('I4').expand(down).is_not_blank()
+        selectable_wide_band_tab.excel_ref("C4").expand(down).is_not_blank()
+        | selectable_wide_band_tab.excel_ref("I4").expand(down).is_not_blank()
     )
-    assert len(dim.cells) == 8, 'Unexpected selection, have we changed the sample data?'
+    assert len(dim.cells) == 8, "Unexpected selection, have we changed the sample data?"
 
     direct_left_engine = Direct(dim, right, name="Right Test")
 
@@ -92,8 +93,8 @@ def test_direct_right_multiple_options_lookup(selectable_wide_band_tab: Selectab
         looked_up_cell_ref: str = dfc.basecell_to_excel_ref(looked_up_cell)
         assert looked_up_cell_ref == case.expected_cell_ref, (
             f'Expected lookup from {case.obs_ref} direction "{direct_left_engine.direction._direction}"'
-            f' to resolve to {case.expected_cell_ref}, got {looked_up_cell_ref}'
-            f' from options of: {linesep}{direct_left_engine._lookups[looked_up_cell.y]}'
+            f" to resolve to {case.expected_cell_ref}, got {looked_up_cell_ref}"
+            f" from options of: {linesep}{direct_left_engine._lookups[looked_up_cell.y]}"
         )
 
 
@@ -103,11 +104,18 @@ def test_direct_up_multiple_options_lookup(selectable_vertical_dimensions: Selec
     in the required fashion where multiple direct options are
     availible.
     """
-    
-    dim = selectable_vertical_dimensions.excel_ref('A4').expand(down).expand(right) \
-        .filter(filters.is_not_numeric).is_not_blank()
 
-    assert len(dim.cells) == 12, 'Unexpected selection, have we changed the sample data?'
+    dim = (
+        selectable_vertical_dimensions.excel_ref("A4")
+        .expand(down)
+        .expand(right)
+        .filter(filters.is_not_numeric)
+        .is_not_blank()
+    )
+
+    assert (
+        len(dim.cells) == 12
+    ), "Unexpected selection, have we changed the sample data?"
 
     direct_left_engine = Direct(dim, up, name="Up Test")
 
@@ -127,22 +135,31 @@ def test_direct_up_multiple_options_lookup(selectable_vertical_dimensions: Selec
         looked_up_cell_ref: str = dfc.basecell_to_excel_ref(looked_up_cell)
         assert looked_up_cell_ref == case.expected_cell_ref, (
             f'Expected lookup from {case.obs_ref} direction "{direct_left_engine.direction._direction}"'
-            f' to resolve to {case.expected_cell_ref}, got {looked_up_cell_ref}'
-            f' from options of: {linesep}{direct_left_engine._lookups[looked_up_cell.y]}'
+            f" to resolve to {case.expected_cell_ref}, got {looked_up_cell_ref}"
+            f" from options of: {linesep}{direct_left_engine._lookups[looked_up_cell.y]}"
         )
 
 
-def test_direct_down_multiple_options_lookup(selectable_vertical_dimensions: Selectable):
+def test_direct_down_multiple_options_lookup(
+    selectable_vertical_dimensions: Selectable,
+):
     """
     Test that the direct lookup engine resolve visual relationships
     in the required fashion where multiple direct options are
     availible.
     """
-    
-    dim = selectable_vertical_dimensions.excel_ref('A4').expand(down).expand(right) \
-        .filter(filters.is_not_numeric).is_not_blank()
 
-    assert len(dim.cells) == 12, 'Unexpected selection, have we changed the sample data?'
+    dim = (
+        selectable_vertical_dimensions.excel_ref("A4")
+        .expand(down)
+        .expand(right)
+        .filter(filters.is_not_numeric)
+        .is_not_blank()
+    )
+
+    assert (
+        len(dim.cells) == 12
+    ), "Unexpected selection, have we changed the sample data?"
 
     direct_left_engine = Direct(dim, down, name="Down Test")
 
@@ -162,6 +179,6 @@ def test_direct_down_multiple_options_lookup(selectable_vertical_dimensions: Sel
         looked_up_cell_ref: str = dfc.basecell_to_excel_ref(looked_up_cell)
         assert looked_up_cell_ref == case.expected_cell_ref, (
             f'Expected lookup from {case.obs_ref} direction "{direct_left_engine.direction._direction}"'
-            f' to resolve to {case.expected_cell_ref}, got {looked_up_cell_ref}'
-            f' from options of: {linesep}{direct_left_engine._lookups[looked_up_cell.y]}'
+            f" to resolve to {case.expected_cell_ref}, got {looked_up_cell_ref}"
+            f" from options of: {linesep}{direct_left_engine._lookups[looked_up_cell.y]}"
         )

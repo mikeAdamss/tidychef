@@ -1,5 +1,6 @@
 from os import linesep
 
+
 class BadExcelReferenceError(Exception):
     """
     Raised where the user has provided an excel reference that does not match
@@ -11,7 +12,7 @@ class BadExcelReferenceError(Exception):
     ):
         super().__init__(msg, *args, **kwargs)
 
-        
+
 class BadShiftParameterError(Exception):
     """
     Raised where someone has provided incorrect inputs to the
@@ -31,6 +32,7 @@ class BadShiftParameterError(Exception):
         **kwargs,
     ):
         super().__init__(msg, *args, **kwargs)
+
 
 class ComponentConstructionError(Exception):
     """

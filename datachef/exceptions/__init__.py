@@ -1,3 +1,11 @@
+from .badparams import (
+    BadExcelReferenceError,
+    BadShiftParameterError,
+    ComponentConstructionError,
+    ReversedExcelRefError,
+    UnknownDirectionError,
+    UnsupportedLocalFileError,
+)
 from .common import (
     CellsDoNotExistError,
     FileInputError,
@@ -9,15 +17,4 @@ from .common import (
     UnalignedTableOperation,
     UnnamedTableError,
 )
-from .badparams import (
-    BadExcelReferenceError,
-    BadShiftParameterError,
-    ComponentConstructionError,
-    ReversedExcelRefError,
-    UnsupportedLocalFileError,
-    UnknownDirectionError
-)
-from .lookups import (
-    FailedLookupError,
-    MissingDirectLookupError,
-)
+from .lookups import FailedLookupError, MissingDirectLookupError

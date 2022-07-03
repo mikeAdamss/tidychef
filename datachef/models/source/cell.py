@@ -61,7 +61,7 @@ class BaseCell:
         """
         Get the excel reference of this base cell
         """
-        return f'{cellutils.x_to_letters(self.x)}{cellutils.y_to_number(self.y)}'
+        return f"{cellutils.x_to_letters(self.x)}{cellutils.y_to_number(self.y)}"
 
 
 @dataclass

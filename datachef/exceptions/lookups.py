@@ -1,4 +1,3 @@
-
 class MissingDirectLookupError(Exception):
     """
     Raised where a user has specified a direct lookup but there is
@@ -6,9 +5,13 @@ class MissingDirectLookupError(Exception):
     """
 
     def __init__(
-        self, msg=("Cannot use a direct lookup, no value found in the direction specified"), *args, **kwargs
+        self,
+        msg=("Cannot use a direct lookup, no value found in the direction specified"),
+        *args,
+        **kwargs
     ):
         super().__init__(msg, *args, **kwargs)
+
 
 class FailedLookupError(Exception):
     """
@@ -16,6 +19,9 @@ class FailedLookupError(Exception):
     """
 
     def __init__(
-        self, msg=("Lookup has failed, no relative cell could be resolved."), *args, **kwargs
+        self,
+        msg=("Lookup has failed, no relative cell could be resolved."),
+        *args,
+        **kwargs
     ):
         super().__init__(msg, *args, **kwargs)
