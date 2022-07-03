@@ -1,6 +1,3 @@
-from os import linesep
-
-
 class FileInputError(Exception):
     """
     There is an issues with what has been provided as a file input.

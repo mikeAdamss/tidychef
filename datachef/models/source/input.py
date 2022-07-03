@@ -6,7 +6,6 @@ An input would be a single tabulated source. Csv, Excel, ODF etc
 
 from __future__ import annotations
 
-import copy
 from pathlib import Path
 from typing import List, Optional
 

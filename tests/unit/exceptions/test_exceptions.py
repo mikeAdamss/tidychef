@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 from datachef.exceptions import (
+    BadDimensionConstructor,
     CellsDoNotExistError,
     ComponentConstructionError,
     FailedLookupError,
@@ -37,6 +38,10 @@ def test_exception_defaults_can_be_overwritten():
         ),
         Case(
             FailedLookupError, "Lookup has failed, no relative cell could be resolved."
+        ),
+        Case(
+            BadDimensionConstructor,
+            "Cannot construct dimension, an unrecognised combination of parameters has been supplied.",
         ),
     ]:
 

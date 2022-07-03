@@ -59,10 +59,10 @@ def single_excel_ref_to_basecell(excel_ref: str) -> BaseCell:
     assert number
     assert len(letters) > 0
 
-    x = cellutils.letters_to_x(letters)
-    y = cellutils.number_to_y(number)
+    x_index = cellutils.letters_to_x(letters)
+    y_index = cellutils.number_to_y(number)
 
-    return BaseCell(x=x, y=y)
+    return BaseCell(x=x_index, y=y_index)
 
 
 def multi_excel_ref_to_basecells(excel_ref: str) -> List[BaseCell]:
@@ -84,9 +84,9 @@ def multi_excel_ref_to_basecells(excel_ref: str) -> List[BaseCell]:
     end_y = end_cell.y
 
     return_cells = []
-    for x in range(start_x, end_x + 1):
-        for y in range(start_y, end_y + 1):
-            return_cells.append(BaseCell(x=x, y=y))
+    for x_index in range(start_x, end_x + 1):
+        for y_index in range(start_y, end_y + 1):
+            return_cells.append(BaseCell(x=x_index, y=y_index))
 
     return return_cells
 

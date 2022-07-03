@@ -10,10 +10,10 @@ from datachef.models.source.cell import Cell
 from datachef.selection import datafuncs as dfc
 from datachef.selection.selectable import Selectable
 
-from ..base import BaseLookup
+from ..base import BaseLookupEngine
 
 
-class Direct(BaseLookup):
+class Direct(BaseLookupEngine):
     """
     A class representing a direct lookup.
 

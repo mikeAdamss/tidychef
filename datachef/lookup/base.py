@@ -3,7 +3,7 @@ from abc import ABCMeta, abstractmethod
 from datachef.models.source.cell import Cell
 
 
-class BaseLookup(metaclass=ABCMeta):
+class BaseLookupEngine(metaclass=ABCMeta):
     """
     The base class all engines are built upon.
     """
@@ -27,5 +27,5 @@ class BaseLookup(metaclass=ABCMeta):
         """
         Given a single observation cell, resolve
         the lookup, returning the relevant cell
-        as defined by this visual relationship.
+        value as defined by this visual relationship.
         """

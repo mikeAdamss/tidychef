@@ -17,4 +17,5 @@ from .common import (
     UnalignedTableOperation,
     UnnamedTableError,
 )
+from .construction import BadDimensionConstructor
 from .lookups import FailedLookupError, MissingDirectLookupError

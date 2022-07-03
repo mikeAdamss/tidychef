@@ -1,4 +1,8 @@
-from socketserver import ThreadingUnixDatagramServer
+"""
+Helpers to order a list of cells to represent different ways you
+could read a tablulated display of data in a cell by cell fashion.
+"""
+
 from typing import List
 
 from datachef.models.source.cell import BaseCell
