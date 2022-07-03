@@ -14,6 +14,7 @@ from datachef.configuration import ConfigController
 from datachef.exceptions import IteratingSingleTableError, UnalignedTableOperation
 from datachef.models.source.cell import BaseCell, Cell
 from datachef.selection import datafuncs as dfc
+from datachef.utils.decorators import dontmutate
 
 from .table import LiveTable
 
@@ -83,7 +84,7 @@ class BaseInput:
     @property
     def signature(self):
         """
-        A uuid that uniquely identifies a parsed input source
+        A uuid that uniquely identifies a parsed input source table
         """
         return self.selected_table.filtered._signature
 
@@ -93,6 +94,7 @@ class BaseInput:
         """
         return self.selected_table.selections_made()
 
+    @dontmutate
     def __sub__(self, other_input: BaseInput):
         """
         Implements "-" operator, subtraction
@@ -105,10 +107,10 @@ class BaseInput:
         if self.signature != other_input.signature:
             raise UnalignedTableOperation()
 
-        return_self = copy.deepcopy(self)
-        return_self.cells = dfc.cells_not_in(return_self.cells, other_input.cells)
-        return return_self
+        self.cells = dfc.cells_not_in(self.cells, other_input.cells)
+        return self
 
+    @dontmutate
     def __or__(self, other_input: BaseInput):
         """
         Implements "|" operator, union.
@@ -120,10 +122,9 @@ class BaseInput:
         if self.signature != other_input.signature:
             raise UnalignedTableOperation()
 
-        return_self = copy.deepcopy(self)
-        new_cells = dfc.cells_not_in(other_input.cells, return_self.cells)
-        return_self.cells = return_self.cells + new_cells
-        return return_self
+        new_cells = dfc.cells_not_in(other_input.cells, self.cells)
+        self.cells = self.cells + new_cells
+        return self
 
     def __iter__(self):
         """

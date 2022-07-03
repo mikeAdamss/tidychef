@@ -2,34 +2,33 @@
 Base class for all DSD components
 """
 
-from abc import ABCMeta, abstractmethod
+from abc import ABCMeta
 from dataclasses import dataclass
+from typing import Any, Optional
+
+from datachef.engines.base import BaseEngine
+from datachef.exceptions import ComponentConstructionError
 
 
 @dataclass
 class BaseComponent(metaclass=ABCMeta):
+    """
+    The shared basic definition of a component
 
-    # see: pivoter/hints
-    hints: bool = False
+    :param constant: if this component is a constant against
+    each observation, this holds the value of that constant.
+    """
 
-    def _trigger_hints(self):
-        """
-        Whether to trigger the HINT level logging statments for this component
-        """
-        if self.hints:
-            self.hints()
+    name: Optional[str]
+    relational_engine: Optional[BaseEngine]
+    engine_param1: Optional[Any]
+    engine_param2: Optional[Any]
+    constant: Optional[str]
 
-    def hints(self):
-        """
-        Generates HINT level logging statments for this component.
-
-        To be overwritten per component class if hints are implemented.
-        """
-        ...
-
-    @abstractmethod
-    def get_help_str(self) -> str:
-        """
-        An explanation of what this component is and what it is used for.
-        """
-        ...
+    def validate(self):
+        if self.constant and self.relational_engine:
+            ComponentConstructionError(
+                "A component can either be set with a constant or can have "
+                "an engine specified for unpicking the visual relationship. "
+                "It should never have both"
+            )

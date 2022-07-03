@@ -11,6 +11,7 @@ from datachef.exceptions import (
 from datachef.models.source.cell import BaseCell, Cell
 from datachef.models.source.input import BaseInput
 from datachef.selection import datafuncs as dfc
+from datachef.utils.decorators import dontmutate
 
 
 class Selectable(BaseInput):
@@ -35,6 +36,7 @@ class Selectable(BaseInput):
             raise LoneValueOnMultipleCellsError(len(self.cells))
         return self.cells[0].value
 
+    @dontmutate
     def is_blank(self, disregard_whitespace=True):
         """
         Filters the selection to those cells that are blank.
@@ -42,10 +44,10 @@ class Selectable(BaseInput):
         considered blank. You can change this behaviour
         with the disregard_whitespace keyword.
         """
-        return_self = copy.deepcopy(self)
-        return_self.cells = [x for x in self.cells if x.is_blank(disregard_whitespace)]
-        return return_self
+        self.cells = [x for x in self.cells if x.is_blank(disregard_whitespace)]
+        return self
 
+    @dontmutate
     def is_not_blank(self, disregard_whitespace=True):
         """
         Filters the selection to those cells that are not blank.
@@ -53,12 +55,10 @@ class Selectable(BaseInput):
         considered blank. You can change this behaviour
         with the disregard_whitespace keyword.
         """
-        return_self = copy.deepcopy(self)
-        return_self.cells = [
-            x for x in self.cells if x.is_not_blank(disregard_whitespace)
-        ]
-        return return_self
+        self.cells = [x for x in self.cells if x.is_not_blank(disregard_whitespace)]
+        return self
 
+    @dontmutate
     def expand(self, direction: Direction):
         """
         Given a direction of UP, DOWN, LEFT, RIGHT
@@ -129,10 +129,10 @@ class Selectable(BaseInput):
                         if c.is_right_of(rightmost_used_yi)
                     ]
 
-        return_self = copy.deepcopy(self)
-        return_self.cells += selection
-        return return_self
+        self.cells += selection
+        return self
 
+    @dontmutate
     def fill(self, direction: Direction):
         """
         Creates a new selection from the cells in that direction
@@ -145,6 +145,7 @@ class Selectable(BaseInput):
         self.cells = [x for x in self.cells if x not in did_have]
         return self
 
+    @dontmutate
     def shift(
         self,
         direction_or_x: Union[Direction, int],
@@ -187,10 +188,10 @@ class Selectable(BaseInput):
         if len(found_cells) == 0 and len(wanted_cells) > 0:
             raise OutOfBoundsError()
 
-        return_self = copy.deepcopy(self)
-        return_self.cells = found_cells
-        return return_self
+        self.cells = found_cells
+        return self
 
+    @dontmutate
     def excel_ref(self, excel_ref: str):
         """
         Selects just the cells as indicated by the provided excel style
@@ -205,10 +206,10 @@ class Selectable(BaseInput):
 
         selected = dfc.exactly_matched_xy_cells(self.cells, wanted)
 
-        return_self = copy.deepcopy(self)
-        return_self.cells = selected
-        return return_self
+        self.cells = selected
+        return self
 
+    @dontmutate
     def filter(self, check: callable):
         """
         Selects just the cells that match the provided check
@@ -217,10 +218,10 @@ class Selectable(BaseInput):
         returns a bool when given a single cell as a parameter.
         """
 
-        return_self = copy.deepcopy(self)
-        return_self.cells = list(filter(check, self.cells))
-        return return_self
+        self.cells = list(filter(check, self.cells))
+        return self
 
+    # Decorator unnecessary as we're calling another decorated method
     def re(self, pattern: str):
         """
         Filter the current selection of cells to only include
@@ -231,6 +232,7 @@ class Selectable(BaseInput):
             lambda cell: True if re.match(pattern, cell.value) else False
         )
 
+    @dontmutate
     def spread(self, direction: Direction):
         """
         Spread a cell value into adjoining blank cells.
@@ -310,23 +312,19 @@ class Selectable(BaseInput):
                 else:
                     spreading = None
 
-        return_self = copy.deepcopy(self)
-
         # Remove cells we're overwriting
-        return_self.cells = [
-            c1
-            for c1 in return_self.cells
-            if not any(c1.matches_xy(c2) for c2 in new_cells)
+        self.cells = [
+            c1 for c1 in self.cells if not any(c1.matches_xy(c2) for c2 in new_cells)
         ]
 
         # We also need to modify the pristine selection
-        return_self.selected_table.pristine.cells = [
+        self.selected_table.pristine.cells = [
             c1
-            for c1 in return_self.selected_table.pristine.cells
+            for c1 in self.selected_table.pristine.cells
             if not any(c1.matches_xy(c2) for c2 in new_cells)
         ]
 
         # Add the overwritten cells in
-        return_self.cells += new_cells
-        return_self.selected_table.pristine.cells += new_cells
-        return return_self
+        self.cells += new_cells
+        self.selected_table.pristine.cells += new_cells
+        return self

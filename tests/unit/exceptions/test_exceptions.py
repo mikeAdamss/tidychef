@@ -1,6 +1,10 @@
 from dataclasses import dataclass
 
-from datachef.exceptions import CellsDoNotExistError, UnnamedTableError
+from datachef.exceptions import (
+    CellsDoNotExistError,
+    ComponentConstructionError,
+    UnnamedTableError,
+)
 
 
 def test_exception_defaults_can_be_overwritten():
@@ -22,6 +26,7 @@ def test_exception_defaults_can_be_overwritten():
             UnnamedTableError,
             "Cannot access table name/title property as this table does not have one.",
         ),
+        Case(ComponentConstructionError, "Invalid parameters supplied to constructor."),
     ]:
 
         # Assert initially as expected

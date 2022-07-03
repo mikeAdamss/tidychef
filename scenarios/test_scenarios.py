@@ -1,8 +1,7 @@
-from pathlib import Path
 import os
 import shutil
-
 from os import linesep
+from pathlib import Path
 
 
 ## Get html output of all raw .py notebooks
@@ -29,7 +28,9 @@ def test_all_notebooks():
 
         # Run that notebook
         path_to_notebook = Path(str(scenario.resolve()).replace(".py", ".ipynb"))
-        os.system(f"jupyter-nbconvert --to html --output-dir='{created_dir.resolve()}' --ExecutePreprocessor.timeout=None --execute '{path_to_notebook}'")
+        os.system(
+            f"jupyter-nbconvert --to html --output-dir='{created_dir.resolve()}' --ExecutePreprocessor.timeout=None --execute '{path_to_notebook}'"
+        )
 
         html_name = str(path_to_notebook.name).replace(".ipynb", ".html")
 
@@ -39,8 +40,8 @@ def test_all_notebooks():
         with open(new_output) as f1:
             with open(old_output) as f2:
                 assert f1.read() == f2.read(), (
-                    f'Unexpected output:{linesep}'
-                    f'- the new output : {new_output.resolve()}{linesep}'
-                    f'- created from   : {scenario.resolve()}{linesep}'
-                    f'- does not match : {old_output.resolve()}{linesep}'
+                    f"Unexpected output:{linesep}"
+                    f"- the new output : {new_output.resolve()}{linesep}"
+                    f"- created from   : {scenario.resolve()}{linesep}"
+                    f"- does not match : {old_output.resolve()}{linesep}"
                 )

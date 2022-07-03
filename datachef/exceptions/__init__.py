@@ -13,3 +13,4 @@ from .common import (
     UnnamedTableError,
     UnsupportedLocalFileError,
 )
+from .construction import ComponentConstructionError
