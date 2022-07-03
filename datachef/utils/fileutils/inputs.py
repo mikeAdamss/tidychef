@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import datachef.constants
-import datachef.exceptions.common
+from datachef.exceptions import UnsupportedLocalFileError
 
 
 def identify_local_input_type(input_path: Path) -> str:
@@ -17,6 +17,6 @@ def identify_local_input_type(input_path: Path) -> str:
     ):
         return datachef.constants.SUPPORTED_LOCAL_FILETYPES.CSV
     else:
-        raise datachef.exceptions.common.UnsupportedLocalFileError(
+        raise UnsupportedLocalFileError(
             f"Cannot identify local file type, expecting one of: {datachef.constants.SUPPORTED_LOCAL_FILETYPES}"
         )

@@ -1,6 +1,4 @@
 from .common import (
-    BadExcelReferenceError,
-    BadShiftParameterError,
     CellsDoNotExistError,
     FileInputError,
     InvalidCellObjectError,
@@ -8,9 +6,13 @@ from .common import (
     IteratingSingleTableError,
     LoneValueOnMultipleCellsError,
     OutOfBoundsError,
-    ReversedExcelRefError,
     UnalignedTableOperation,
     UnnamedTableError,
-    UnsupportedLocalFileError,
 )
-from .construction import ComponentConstructionError
+from .badparams import (
+    BadExcelReferenceError,
+    BadShiftParameterError,
+    ComponentConstructionError,
+    ReversedExcelRefError,
+    UnsupportedLocalFileError
+)
