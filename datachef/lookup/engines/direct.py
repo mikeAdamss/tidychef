@@ -69,11 +69,14 @@ class Direct(BaseLookup):
         # there are two availible dimesions on that axis, we need to
         # differentiate the correct one per ob.
 
+        if not isinstance(self.direction, Direction):
+            raise UnknownDirectionError(f'The direction parameter must be of type: {type(Direction)}')
         if self.direction._direction in ["left", "up"]:
             ordered_cells = dfc.order_cells_leftright_topbottom(cells)
         elif self.direction._direction in ["right", "down"]:
             ordered_cells = dfc.order_cells_rightleft_bottomtop(cells)
         else:
+            # Shouldn't happend unless someone is hacking in something
             raise UnknownDirectionError(
                 f"The direction {direction._direction} is unknown."
             )

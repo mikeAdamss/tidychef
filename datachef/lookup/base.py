@@ -21,7 +21,6 @@ class BaseLookup(metaclass=ABCMeta):
         Use the supplied parameters to construct the
         lookup engine in question.
         """
-        ...
 
     @abstractmethod
     def resolve(self, cell: Cell) -> str:
@@ -30,4 +29,3 @@ class BaseLookup(metaclass=ABCMeta):
         the lookup, returning the relevant cell
         as defined by this visual relationship.
         """
-        ...

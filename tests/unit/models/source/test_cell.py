@@ -83,3 +83,11 @@ def test_cell_xy_str():
     Test our cells can print a simple self reference
     """
     assert Cell(x=0, y=0, value="foo")._as_xy_str() == 'x:0, y:0, value = "foo"'
+
+
+def test_cell_repr():
+    """
+    Test the default cell repr returns as expected
+    """
+    assert str(Cell(x=0, y=0, value="foo")) == '<A1, value:"foo", x:0, y:0>'
+    assert str(Cell(x=1, y=10, value="bar")) == '<B11, value:"bar", x:1, y:10>'

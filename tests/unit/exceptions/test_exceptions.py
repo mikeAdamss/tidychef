@@ -3,6 +3,9 @@ from dataclasses import dataclass
 from datachef.exceptions import (
     CellsDoNotExistError,
     ComponentConstructionError,
+    FailedLookupError,
+    MissingDirectLookupError,
+    UnknownDirectionError,
     UnnamedTableError,
 )
 
@@ -27,6 +30,14 @@ def test_exception_defaults_can_be_overwritten():
             "Cannot access table name/title property as this table does not have one.",
         ),
         Case(ComponentConstructionError, "Invalid parameters supplied to constructor."),
+        Case(UnknownDirectionError, "Direction is not a valid direction."),
+        Case(
+            MissingDirectLookupError,
+            "Cannot use a direct lookup, no value found in the direction specified.",
+        ),
+        Case(
+            FailedLookupError, "Lookup has failed, no relative cell could be resolved."
+        ),
     ]:
 
         # Assert initially as expected

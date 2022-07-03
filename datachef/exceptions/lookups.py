@@ -6,7 +6,7 @@ class MissingDirectLookupError(Exception):
 
     def __init__(
         self,
-        msg=("Cannot use a direct lookup, no value found in the direction specified"),
+        msg=("Cannot use a direct lookup, no value found in the direction specified."),
         *args,
         **kwargs
     ):

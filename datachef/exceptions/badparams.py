@@ -90,7 +90,7 @@ class UnknownDirectionError(Exception):
 
     def __init__(
         self,
-        msg=("Direction is not a vlaid direction."),
+        msg=("Direction is not a valid direction."),
         *args,
         **kwargs,
     ):

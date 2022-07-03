@@ -1,9 +1,11 @@
 from dataclasses import dataclass
 from os import linesep
+import copy
 
 import pytest
 
 from datachef.cardinal.directions import down, left, right, up
+from datachef.exceptions import FailedLookupError, MissingDirectLookupError, UnknownDirectionError
 from datachef.lookup.engines.direct import Direct
 from datachef.models.source.cell import Cell
 from datachef.selection import datafuncs as dfc
@@ -75,7 +77,7 @@ def test_direct_right_multiple_options_lookup(selectable_wide_band_tab: Selectab
     )
     assert len(dim.cells) == 8, "Unexpected selection, have we changed the sample data?"
 
-    direct_left_engine = Direct(dim, right, name="Right Test")
+    direct_right_engine = Direct(dim, right, name="Right Test")
 
     @dataclass
     class Case:
@@ -89,12 +91,12 @@ def test_direct_right_multiple_options_lookup(selectable_wide_band_tab: Selectab
         Case("H6", "I6"),
     ]:
         ob_cell: Cell = selectable_wide_band_tab.excel_ref(case.obs_ref).cells[0]
-        looked_up_cell: Cell = direct_left_engine.resolve(ob_cell)
+        looked_up_cell: Cell = direct_right_engine.resolve(ob_cell)
         looked_up_cell_ref: str = dfc.basecell_to_excel_ref(looked_up_cell)
         assert looked_up_cell_ref == case.expected_cell_ref, (
-            f'Expected lookup from {case.obs_ref} direction "{direct_left_engine.direction._direction}"'
+            f'Expected lookup from {case.obs_ref} direction "{direct_right_engine.direction._direction}"'
             f" to resolve to {case.expected_cell_ref}, got {looked_up_cell_ref}"
-            f" from options of: {linesep}{direct_left_engine._lookups[looked_up_cell.y]}"
+            f" from options of: {linesep}{direct_right_engine._lookups[looked_up_cell.y]}"
         )
 
 
@@ -117,7 +119,7 @@ def test_direct_up_multiple_options_lookup(selectable_vertical_dimensions: Selec
         len(dim.cells) == 12
     ), "Unexpected selection, have we changed the sample data?"
 
-    direct_left_engine = Direct(dim, up, name="Up Test")
+    direct_up_engine = Direct(dim, up, name="Up Test")
 
     @dataclass
     class Case:
@@ -131,12 +133,12 @@ def test_direct_up_multiple_options_lookup(selectable_vertical_dimensions: Selec
         Case("D16", "D12"),
     ]:
         ob_cell: Cell = selectable_vertical_dimensions.excel_ref(case.obs_ref).cells[0]
-        looked_up_cell: Cell = direct_left_engine.resolve(ob_cell)
+        looked_up_cell: Cell = direct_up_engine.resolve(ob_cell)
         looked_up_cell_ref: str = dfc.basecell_to_excel_ref(looked_up_cell)
         assert looked_up_cell_ref == case.expected_cell_ref, (
-            f'Expected lookup from {case.obs_ref} direction "{direct_left_engine.direction._direction}"'
+            f'Expected lookup from {case.obs_ref} direction "{direct_up_engine.direction._direction}"'
             f" to resolve to {case.expected_cell_ref}, got {looked_up_cell_ref}"
-            f" from options of: {linesep}{direct_left_engine._lookups[looked_up_cell.y]}"
+            f" from options of: {linesep}{direct_up_engine._lookups[looked_up_cell.y]}"
         )
 
 
@@ -161,7 +163,7 @@ def test_direct_down_multiple_options_lookup(
         len(dim.cells) == 12
     ), "Unexpected selection, have we changed the sample data?"
 
-    direct_left_engine = Direct(dim, down, name="Down Test")
+    direct_down_engine = Direct(dim, down, name="Down Test")
 
     @dataclass
     class Case:
@@ -175,10 +177,68 @@ def test_direct_down_multiple_options_lookup(
         Case("B17", "B20"),
     ]:
         ob_cell: Cell = selectable_vertical_dimensions.excel_ref(case.obs_ref).cells[0]
-        looked_up_cell: Cell = direct_left_engine.resolve(ob_cell)
+        looked_up_cell: Cell = direct_down_engine.resolve(ob_cell)
         looked_up_cell_ref: str = dfc.basecell_to_excel_ref(looked_up_cell)
         assert looked_up_cell_ref == case.expected_cell_ref, (
-            f'Expected lookup from {case.obs_ref} direction "{direct_left_engine.direction._direction}"'
+            f'Expected lookup from {case.obs_ref} direction "{direct_down_engine.direction._direction}"'
             f" to resolve to {case.expected_cell_ref}, got {looked_up_cell_ref}"
-            f" from options of: {linesep}{direct_left_engine._lookups[looked_up_cell.y]}"
+            f" from options of: {linesep}{direct_down_engine._lookups[looked_up_cell.y]}"
         )
+
+
+def test_bad_direction_param(selectable_vertical_dimensions: Selectable):
+    """
+    Test that the appropriate error is raised where an incorrect
+    direction parameter is provided.
+    """
+
+    with pytest.raises(UnknownDirectionError):
+        Direct(selectable_vertical_dimensions, "not a direction", name="Break me")
+
+
+def test_no_direction_lookup(selectable_vertical_dimensions: Selectable):
+    """
+    Test that where a user has specified a direct lookup where one
+    does not exist, a suitable error is raised.
+    """
+
+    dim = selectable_vertical_dimensions.excel_ref('A1')
+    ob: Cell = selectable_vertical_dimensions.excel_ref('B10').cells[0]
+
+    # A1 is not up from B10, so an error should get raised
+    with pytest.raises(MissingDirectLookupError):
+        direct_up_engine = Direct(dim, up, name="Err test, no direct lookup")
+        direct_up_engine.resolve(ob)
+
+
+def test_malformed_class_err(selectable_vertical_dimensions: Selectable):
+    """
+    Conform a suitable error is raised if an unexpected or malformed
+    direction is passed.
+    """
+
+    badup = copy.deepcopy(up)
+    badup._direction = "sideways"
+
+    dim = selectable_vertical_dimensions.excel_ref('A1')
+    ob: Cell = selectable_vertical_dimensions.excel_ref('A10').cells[0]
+
+    # badup should raise an error
+    with pytest.raises(UnknownDirectionError):
+        direct_up_engine = Direct(dim, badup, name="Err test, malformed direction")
+        direct_up_engine.resolve(ob)
+
+
+def test_failed_lookup_err(selectable_vertical_dimensions: Selectable):
+    """
+    Conform a suitable error is raised where we do have cells on the
+    coirrect axis, but none in the considered cardinal direction.
+    """
+
+    dim = selectable_vertical_dimensions.excel_ref('A10')
+    ob: Cell = selectable_vertical_dimensions.excel_ref('A1').cells[0]
+
+    # we have a dimension item in A10 ... but that's not up from A1
+    with pytest.raises(FailedLookupError):
+        direct_up_engine = Direct(dim, up, name="Err test, failed lookup error")
+        direct_up_engine.resolve(ob)
