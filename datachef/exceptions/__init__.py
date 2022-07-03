@@ -14,5 +14,10 @@ from .badparams import (
     BadShiftParameterError,
     ComponentConstructionError,
     ReversedExcelRefError,
-    UnsupportedLocalFileError
+    UnsupportedLocalFileError,
+    UnknownDirectionError
+)
+from .lookups import (
+    FailedLookupError,
+    MissingDirectLookupError,
 )

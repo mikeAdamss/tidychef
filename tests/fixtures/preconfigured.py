@@ -4,6 +4,28 @@ from datachef.selection.spreadsheet.xls import XlsInputSelectable
 from tests.fixtures import path_to_fixture
 
 
+
+def fixture_simple_band_tab():
+    """Slim version of a our sample band data"""
+    return read_local(
+        path_to_fixture("csv", "bands.csv"), override_selectable=XlsInputSelectable
+    )
+
+
+def fixture_wide_band_tab():
+    """Wide version of our sample band data"""
+    return read_local(
+        path_to_fixture("csv", "bands-wide.csv"), override_selectable=XlsInputSelectable
+    )
+
+
+def fixture_vertical_dimensions():
+    """Wide version of our sample band data"""
+    return read_local(
+        path_to_fixture("csv", "vertical-dimensions.csv"), override_selectable=XlsInputSelectable
+    )
+
+
 def fixture_simple_one_tab():
     """Simple input of one tab. Cells A1:Z100"""
     return read_local(

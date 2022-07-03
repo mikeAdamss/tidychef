@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from typing import Optional
 
 from datachef.exceptions import InvalidCellObjectError
+from datachef.utils import cellutils
 
 from .cellformat import CellFormatting
 
@@ -56,6 +57,12 @@ class BaseCell:
         """
         return self.x < x
 
+    def _excel_ref(self):
+        """
+        Get the excel reference of this base cell
+        """
+        return f'{cellutils.x_to_letters(self.x)}{cellutils.y_to_number(self.y)}'
+
 
 @dataclass
 class Cell(BaseCell):
@@ -98,3 +105,13 @@ class Cell(BaseCell):
         with xy co-ordinates and value.
         """
         return f'x:{self.x}, y:{self.y}, value = "{self.value}"'
+
+    def __repr__(self):
+        """
+        Create a representation of this cell in the form:
+        <excel ref: value>
+
+        eg:
+        <A1, value:"value of a1", x:{x}, y:{y}>
+        """
+        return f'<{self._excel_ref()}, value:"{self.value}", x:{self.x}, y:{self.y}>'

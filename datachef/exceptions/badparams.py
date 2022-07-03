@@ -79,3 +79,17 @@ class UnsupportedLocalFileError(Exception):
         **kwargs,
     ):
         super().__init__(msg, *args, **kwargs)
+
+
+class UnknownDirectionError(Exception):
+    """
+    User has passed in a direction that is not a valid direction
+    """
+
+    def __init__(
+        self,
+        msg=("Direction is not a vlaid direction."),
+        *args,
+        **kwargs,
+    ):
+        super().__init__(msg, *args, **kwargs)

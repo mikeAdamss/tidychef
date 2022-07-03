@@ -5,4 +5,7 @@ from .preconfigured import (
     fixture_simple_small_one_tab,
     fixture_simple_two_tabs,
     fixture_with_blanks,
+    fixture_simple_band_tab,
+    fixture_wide_band_tab,
+    fixture_vertical_dimensions
 )
