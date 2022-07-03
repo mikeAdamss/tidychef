@@ -14598,9 +14598,8 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
-<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">up</span><span class="p">,</span> <span class="n">down</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span>
+<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">down</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">preview</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">up</span>
 <span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">filters</span>
-
 
 <span class="c1"># A simple preview</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">acquire</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/bands.csv&quot;</span><span class="p">))</span>
@@ -14695,7 +14694,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Observation selection</span>
-<span class="n">obs</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span>
+<span class="n">obs</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;C4&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span>
 <span class="n">preview</span><span class="p">(</span><span class="n">label</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="s2">&quot;observations&quot;</span><span class="p">))</span>
 </pre></div>
 
@@ -14790,11 +14789,8 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">member</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">contains_string</span><span class="p">(</span><span class="s1">&#39;John&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span>
-<span class="n">preview</span><span class="p">(</span>
-    <span class="n">label</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="s2">&quot;observations&quot;</span><span class="p">),</span>
-    <span class="n">label</span><span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="s2">&quot;Member&quot;</span><span class="p">)</span>
-<span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">member</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">contains_string</span><span class="p">(</span><span class="s2">&quot;John&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span>
+<span class="n">preview</span><span class="p">(</span><span class="n">label</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="s2">&quot;observations&quot;</span><span class="p">),</span> <span class="n">label</span><span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="s2">&quot;Member&quot;</span><span class="p">))</span>
 </pre></div>
 
      </div>
@@ -14892,11 +14888,9 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">properties</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;C4:E4&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">up</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">properties</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;C4:E4&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">up</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span>
 <span class="n">preview</span><span class="p">(</span>
-    <span class="n">label</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="s2">&quot;observations&quot;</span><span class="p">),</span>
-    <span class="n">label</span><span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="s2">&quot;Member&quot;</span><span class="p">),</span>
-    <span class="n">label</span><span class="p">(</span><span class="n">properties</span><span class="p">,</span> <span class="s2">&quot;Properties&quot;</span><span class="p">)</span>
+    <span class="n">label</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="s2">&quot;observations&quot;</span><span class="p">),</span> <span class="n">label</span><span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="s2">&quot;Member&quot;</span><span class="p">),</span> <span class="n">label</span><span class="p">(</span><span class="n">properties</span><span class="p">,</span> <span class="s2">&quot;Properties&quot;</span><span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 
@@ -14999,12 +14993,12 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">band</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;A1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">band</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span>
 <span class="n">preview</span><span class="p">(</span>
     <span class="n">label</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="s2">&quot;observations&quot;</span><span class="p">),</span>
     <span class="n">label</span><span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="s2">&quot;Member&quot;</span><span class="p">),</span>
     <span class="n">label</span><span class="p">(</span><span class="n">properties</span><span class="p">,</span> <span class="s2">&quot;Properties&quot;</span><span class="p">),</span>
-    <span class="n">label</span><span class="p">(</span><span class="n">band</span><span class="p">,</span> <span class="s2">&quot;Band&quot;</span><span class="p">)</span>
+    <span class="n">label</span><span class="p">(</span><span class="n">band</span><span class="p">,</span> <span class="s2">&quot;Band&quot;</span><span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
 
@@ -15112,12 +15106,12 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Shift every selection up 1</span>
-<span class="n">band</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;A1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span>
+<span class="n">band</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span>
 <span class="n">preview</span><span class="p">(</span>
     <span class="n">label</span><span class="p">(</span><span class="n">obs</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">up</span><span class="p">),</span> <span class="s2">&quot;observations&quot;</span><span class="p">),</span>
     <span class="n">label</span><span class="p">(</span><span class="n">member</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">up</span><span class="p">),</span> <span class="s2">&quot;Member&quot;</span><span class="p">),</span>
     <span class="n">label</span><span class="p">(</span><span class="n">properties</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">up</span><span class="p">),</span> <span class="s2">&quot;Properties&quot;</span><span class="p">),</span>
-    <span class="n">label</span><span class="p">(</span><span class="n">band</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">up</span><span class="p">),</span> <span class="s2">&quot;Band&quot;</span><span class="p">)</span>
+    <span class="n">label</span><span class="p">(</span><span class="n">band</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">up</span><span class="p">),</span> <span class="s2">&quot;Band&quot;</span><span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
 
@@ -15225,12 +15219,12 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Shift the band selections right 3</span>
-<span class="n">band</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;A1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span>
+<span class="n">band</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span>
 <span class="n">preview</span><span class="p">(</span>
     <span class="n">label</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="s2">&quot;observations&quot;</span><span class="p">),</span>
     <span class="n">label</span><span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="s2">&quot;Member&quot;</span><span class="p">),</span>
     <span class="n">label</span><span class="p">(</span><span class="n">properties</span><span class="p">,</span> <span class="s2">&quot;Properties&quot;</span><span class="p">),</span>
-    <span class="n">label</span><span class="p">(</span><span class="n">band</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">right</span><span class="p">(</span><span class="mi">3</span><span class="p">)),</span> <span class="s2">&quot;Band&quot;</span><span class="p">)</span>
+    <span class="n">label</span><span class="p">(</span><span class="n">band</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">right</span><span class="p">(</span><span class="mi">3</span><span class="p">)),</span> <span class="s2">&quot;Band&quot;</span><span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
 
@@ -15338,12 +15332,12 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Shift the band selections down</span>
-<span class="n">band</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;A1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span>
+<span class="n">band</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span>
 <span class="n">preview</span><span class="p">(</span>
     <span class="n">label</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="s2">&quot;observations&quot;</span><span class="p">),</span>
     <span class="n">label</span><span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="s2">&quot;Member&quot;</span><span class="p">),</span>
     <span class="n">label</span><span class="p">(</span><span class="n">properties</span><span class="p">,</span> <span class="s2">&quot;Properties&quot;</span><span class="p">),</span>
-    <span class="n">label</span><span class="p">(</span><span class="n">band</span><span class="o">.</span><span class="n">spread</span><span class="p">(</span><span class="n">down</span><span class="p">),</span> <span class="s2">&quot;Band&quot;</span><span class="p">)</span>
+    <span class="n">label</span><span class="p">(</span><span class="n">band</span><span class="o">.</span><span class="n">spread</span><span class="p">(</span><span class="n">down</span><span class="p">),</span> <span class="s2">&quot;Band&quot;</span><span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
 
@@ -15451,9 +15445,11 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Subtracting spreaded selection</span>
-<span class="n">band_spread_all</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;A1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">spread</span><span class="p">(</span><span class="n">down</span><span class="p">)</span>
-<span class="n">band_spread_not_beatles</span> <span class="o">=</span> <span class="n">band_spread_all</span> <span class="o">-</span> <span class="n">band_spread_all</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">contains_string</span><span class="p">(</span><span class="s1">&#39;Beatles&#39;</span><span class="p">))</span>
-<span class="n">preview</span><span class="p">(</span><span class="n">label</span><span class="p">(</span><span class="n">band_spread_not_beatles</span><span class="p">,</span> <span class="s1">&#39;Bands spread down without beatles selected&#39;</span><span class="p">))</span>
+<span class="n">band_spread_all</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">spread</span><span class="p">(</span><span class="n">down</span><span class="p">)</span>
+<span class="n">band_spread_not_beatles</span> <span class="o">=</span> <span class="n">band_spread_all</span> <span class="o">-</span> <span class="n">band_spread_all</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+    <span class="n">filters</span><span class="o">.</span><span class="n">contains_string</span><span class="p">(</span><span class="s2">&quot;Beatles&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">preview</span><span class="p">(</span><span class="n">label</span><span class="p">(</span><span class="n">band_spread_not_beatles</span><span class="p">,</span> <span class="s2">&quot;Bands spread down without beatles selected&quot;</span><span class="p">))</span>
 </pre></div>
 
      </div>

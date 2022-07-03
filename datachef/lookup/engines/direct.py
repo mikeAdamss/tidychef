@@ -70,7 +70,9 @@ class Direct(BaseLookup):
         # differentiate the correct one per ob.
 
         if not isinstance(self.direction, Direction):
-            raise UnknownDirectionError(f'The direction parameter must be of type: {type(Direction)}')
+            raise UnknownDirectionError(
+                f"The direction parameter must be of type: {type(Direction)}"
+            )
         if self.direction._direction in ["left", "up"]:
             ordered_cells = dfc.order_cells_leftright_topbottom(cells)
         elif self.direction._direction in ["right", "down"]:

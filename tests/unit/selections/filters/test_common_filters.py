@@ -10,6 +10,7 @@ from tests.fixtures import fixture_simple_one_tab, fixture_vertical_dimensions
 def selectable_simple1():
     return fixture_simple_one_tab()
 
+
 @pytest.fixture
 def selectable_vertical_dimensions():
     return fixture_vertical_dimensions()
@@ -30,8 +31,11 @@ def test_filter_is_numeric(selectable_vertical_dimensions: Selectable):
     Test the is_numeric filter behaves as expected
     """
 
-    s = selectable_vertical_dimensions.excel_ref("D12:E19").is_not_blank() \
+    s = (
+        selectable_vertical_dimensions.excel_ref("D12:E19")
+        .is_not_blank()
         .filter(filters.is_numeric)
+    )
     assert len(s.cells) == 10
     assert dfc.basecells_to_excel_ref(s.cells) == "D14:E18"
 
@@ -41,7 +45,10 @@ def test_filter_is_not_numeric(selectable_vertical_dimensions: Selectable):
     Test the is_not_numeric filter behaves as expected
     """
 
-    s = selectable_vertical_dimensions.excel_ref("D12:E19").is_not_blank() \
+    s = (
+        selectable_vertical_dimensions.excel_ref("D12:E19")
+        .is_not_blank()
         .filter(filters.is_not_numeric)
+    )
     assert len(s.cells) == 2
     assert dfc.basecells_to_excel_ref(s.cells) == "D12:E12"

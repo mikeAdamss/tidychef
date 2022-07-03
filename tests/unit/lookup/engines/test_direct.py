@@ -1,11 +1,15 @@
+import copy
 from dataclasses import dataclass
 from os import linesep
-import copy
 
 import pytest
 
 from datachef.cardinal.directions import down, left, right, up
-from datachef.exceptions import FailedLookupError, MissingDirectLookupError, UnknownDirectionError
+from datachef.exceptions import (
+    FailedLookupError,
+    MissingDirectLookupError,
+    UnknownDirectionError,
+)
 from datachef.lookup.engines.direct import Direct
 from datachef.models.source.cell import Cell
 from datachef.selection import datafuncs as dfc
@@ -202,8 +206,8 @@ def test_no_direction_lookup(selectable_vertical_dimensions: Selectable):
     does not exist, a suitable error is raised.
     """
 
-    dim = selectable_vertical_dimensions.excel_ref('A1')
-    ob: Cell = selectable_vertical_dimensions.excel_ref('B10').cells[0]
+    dim = selectable_vertical_dimensions.excel_ref("A1")
+    ob: Cell = selectable_vertical_dimensions.excel_ref("B10").cells[0]
 
     # A1 is not up from B10, so an error should get raised
     with pytest.raises(MissingDirectLookupError):
@@ -220,8 +224,8 @@ def test_malformed_class_err(selectable_vertical_dimensions: Selectable):
     badup = copy.deepcopy(up)
     badup._direction = "sideways"
 
-    dim = selectable_vertical_dimensions.excel_ref('A1')
-    ob: Cell = selectable_vertical_dimensions.excel_ref('A10').cells[0]
+    dim = selectable_vertical_dimensions.excel_ref("A1")
+    ob: Cell = selectable_vertical_dimensions.excel_ref("A10").cells[0]
 
     # badup should raise an error
     with pytest.raises(UnknownDirectionError):
@@ -235,8 +239,8 @@ def test_failed_lookup_err(selectable_vertical_dimensions: Selectable):
     coirrect axis, but none in the considered cardinal direction.
     """
 
-    dim = selectable_vertical_dimensions.excel_ref('A10')
-    ob: Cell = selectable_vertical_dimensions.excel_ref('A1').cells[0]
+    dim = selectable_vertical_dimensions.excel_ref("A10")
+    ob: Cell = selectable_vertical_dimensions.excel_ref("A1").cells[0]
 
     # we have a dimension item in A10 ... but that's not up from A1
     with pytest.raises(FailedLookupError):
