@@ -60,19 +60,6 @@ class ComponentMatcher(metaclass=ABCMeta):
     select the appropriate child component
     based on the combination, number, pattern
     and type of the args and kwargs provided.
-
-    The purpose of this abstraction is that some
-    components will only be valid in combination
-    (or invalid in lack of combination) with other
-    components.
-
-    Example: a DSD cannot have a MeasureType component
-    and a Measure component in combination, though
-    both are valid components in isolation.
-
-    This pattern helps us defer that cross
-    component validation until all components have
-    been successfully instantiated and validated.
     """
 
     inventory: List[ComponentVariant]
