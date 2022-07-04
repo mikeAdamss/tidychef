@@ -10,7 +10,7 @@ def dontcallme(*args, **kwargs):
     If the matcher matches where we don't expect it to, tell us
     about it.
     """
-    raise NotImplementedError('Component matcher has unexpectedly succeeded.')
+    raise NotImplementedError("Component matcher has unexpectedly succeeded.")
 
 
 def get_component_variant(component_class: object) -> ComponentVariant:
@@ -30,6 +30,7 @@ def single_component_variant() -> ComponentVariant:
 
 class SomeException(Exception):
     ...
+
 
 class Matcher(ComponentMatcher):
     inventory = [get_component_variant(dontcallme)]
@@ -68,7 +69,7 @@ def test_component_matcher_bad_matches():
 
     # Too many args
     with pytest.raises(SomeException) as err_info:
-        Matcher("foo",  "bar", "baz")
+        Matcher("foo", "bar", "baz")
     assert "Expected 2 args, got 3" in str(err_info.value)
 
     # Wrong number of keywords
@@ -79,7 +80,10 @@ def test_component_matcher_bad_matches():
     # Args of the wrong type
     with pytest.raises(SomeException) as err_info:
         Matcher("foo", "bar", foo=99)
-    assert f"Argument 0 must be of type: <class 'int'>, got foo as <class 'str'>" in str(err_info.value)
+    assert (
+        f"Argument 0 must be of type: <class 'int'>, got foo as <class 'str'>"
+        in str(err_info.value)
+    )
 
     # do we have the required kwargs
     with pytest.raises(SomeException) as err_info:

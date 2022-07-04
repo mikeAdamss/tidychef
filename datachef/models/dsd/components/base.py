@@ -97,9 +97,7 @@ class ComponentMatcher(metaclass=ABCMeta):
             for i, arg in enumerate(args):
                 arg_type = potential_match.arg_types[i]
                 if not isinstance(arg, arg_type):
-                    potential_match.failed_on = (
-                        f"Argument {i} must be of type: {arg_type}, got {arg} as {type(arg)}."
-                    )
+                    potential_match.failed_on = f"Argument {i} must be of type: {arg_type}, got {arg} as {type(arg)}."
                     break
             if potential_match.failed_on:
                 continue
@@ -115,14 +113,16 @@ class ComponentMatcher(metaclass=ABCMeta):
                 continue
 
             # are there any additional kwargs provided that we're not expecting
-            additional_kwargs = [k for k in kwargs.keys() if k not in potential_match.required_kwargs]
+            additional_kwargs = [
+                k for k in kwargs.keys() if k not in potential_match.required_kwargs
+            ]
             for additional_kwarg in additional_kwargs:
                 if additional_kwarg not in potential_match.optional_kwargs:
                     potential_match.failed_on = (
-                            f'Keyword argument "{additional_kwarg}" is neither:'
-                            f"a required kwarg from: {potential_match.required_kwargs}"
-                            f"an optional kwarg from: {potential_match.optional_kwargs}"
-                        )
+                        f'Keyword argument "{additional_kwarg}" is neither:'
+                        f"a required kwarg from: {potential_match.required_kwargs}"
+                        f"an optional kwarg from: {potential_match.optional_kwargs}"
+                    )
                     break
             if potential_match.failed_on:
                 continue
