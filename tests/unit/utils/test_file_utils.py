@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from datachef.constants import SUPPORTED_LOCAL_FILETYPES
+from datachef.constants.files import SUPPORTED_LOCAL_FILETYPES
 from datachef.exceptions import FileInputError, UnsupportedLocalFileError
 from datachef.utils import fileutils
 from tests.fixtures import path_to_fixture

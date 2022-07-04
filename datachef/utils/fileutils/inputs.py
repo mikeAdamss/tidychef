@@ -1,6 +1,6 @@
 from pathlib import Path
 
-import datachef.constants
+from datachef.constants.files import SUPPORTED_LOCAL_FILETYPES
 from datachef.exceptions import UnsupportedLocalFileError
 
 
@@ -13,10 +13,10 @@ def identify_local_input_type(input_path: Path) -> str:
     assert isinstance(input_path, Path)
 
     if str(input_path.absolute()).endswith(
-        datachef.constants.SUPPORTED_LOCAL_FILETYPES.CSV
+        SUPPORTED_LOCAL_FILETYPES.CSV
     ):
-        return datachef.constants.SUPPORTED_LOCAL_FILETYPES.CSV
+        return SUPPORTED_LOCAL_FILETYPES.CSV
     else:
         raise UnsupportedLocalFileError(
-            f"Cannot identify local file type, expecting one of: {datachef.constants.SUPPORTED_LOCAL_FILETYPES}"
+            f"Cannot identify local file type, expecting one of: {SUPPORTED_LOCAL_FILETYPES}"
         )
