@@ -1,13 +1,11 @@
 from datachef.exceptions import BadDimensionConstructor
-
-from .variants import ComponentDimensionConstant
-
-from datachef.models.dsd.components.base import ComponentFactory
+from datachef.models.dsd.components.base import ComponentMatcher
 
 from ..base import ComponentVariant
+from .variants import ComponentDimensionConstant
 
 
-class Dimension(ComponentFactory):
+class Dimension(ComponentMatcher):
     """
     A constructor for selecting the appropriate dimension component.
     """
@@ -15,8 +13,8 @@ class Dimension(ComponentFactory):
     contextual_exception = BadDimensionConstructor
     inventory = [
         ComponentVariant(
-            component_class = ComponentDimensionConstant,
-            arg_types = [str],
-            required_kwargs = ["constant"]
-            )
+            component_class=ComponentDimensionConstant,
+            arg_types=[str],
+            required_kwargs=["constant"],
+        )
     ]

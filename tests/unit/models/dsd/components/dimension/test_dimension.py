@@ -1,7 +1,8 @@
 import pytest
 
 from datachef.models.dsd.components.dimension import (
-    Dimension, ComponentDimensionConstant
+    ComponentDimensionConstant,
+    Dimension,
 )
 
 
@@ -16,10 +17,10 @@ def test_dimension_constant_constructor():
         f"Expecting dimension type {ComponentDimensionConstant}"
         f", for {dimension.component}"
     )
-    
-    dimension.component._post_init() # Does nothing for constants, just for coverage
+
+    dimension.component._post_init()  # Does nothing for constants, just for coverage
     resolved = dimension.component.resolve()
-    assert resolved == 'foo', f'Expecting "foo", got {resolved}'
+    assert resolved == "foo", f'Expecting "foo", got {resolved}'
 
 
 def test_failed_construction_repr():

@@ -9,13 +9,14 @@ from typing import Any, List, Optional
 
 from datachef.constants.urls import CONSTRUCTING_DIMENSIONS
 
+
 class BaseComponent(metaclass=ABCMeta):
     """
     The shared basic definition of a component
     """
 
     def __init__(self, *args, **kwargs):
-        self._post_init(*args, **kwargs) # pragma: no cover
+        self._post_init(*args, **kwargs)  # pragma: no cover
 
     @abstractmethod
     def _post_init(self, *args, **kwargs):
@@ -53,9 +54,9 @@ class ComponentVariant:
 
 
 @dataclass
-class ComponentFactory(metaclass=ABCMeta):
+class ComponentMatcher(metaclass=ABCMeta):
     """
-    A base factory class, set_component will
+    A base matching class, set_component will
     select the appropriate child component
     based on the combination, number, pattern
     and type of the args and kwargs provided.
@@ -69,7 +70,7 @@ class ComponentFactory(metaclass=ABCMeta):
     and a Measure component in combination, though
     both are valid components in isolation.
 
-    The factory pattern helps us defer that cross
+    This pattern helps us defer that cross
     component validation until all components have
     been successfully instantiated and validated.
     """
@@ -84,47 +85,60 @@ class ComponentFactory(metaclass=ABCMeta):
     def component(self) -> BaseComponent:
         return self._component
 
-    def set_component(self, *args, **kwargs) -> BaseComponent: 
+    def set_component(self, *args, **kwargs) -> BaseComponent:
 
         for potential_match in self.inventory:
+            potential_match.failed_on = None
 
             # do we have the expected number of arguments
             largs = len(args)
             lpargs = len(potential_match.arg_types)
             if largs != lpargs:
-                potential_match.failed_on = f'Expected {largs} args, got {lpargs}'
+                potential_match.failed_on = f"Expected {lpargs} args, got {largs}"
                 continue
 
             # do we have the minimum number of keyword arguments
             lkwargs = len(kwargs)
             lpkwargs = len(potential_match.required_kwargs)
             if lkwargs < lpkwargs:
-                potential_match.failed_on = f'Got {lkwargs} keyword arguments, but requires at least {lpkwargs}'
+                potential_match.failed_on = (
+                    f"Got {lkwargs} keyword arguments, but requires at least {lpkwargs}"
+                )
                 continue
 
             # do the arg types match that which we are expecting
             for i, arg in enumerate(args):
                 arg_type = potential_match.arg_types[i]
                 if not isinstance(arg, arg_type):
-                    potential_match.failed_on = f'Argument {i} must be of type: {arg_type}.'
-                    continue
+                    potential_match.failed_on = (
+                        f"Argument {i} must be of type: {arg_type}, got {arg} as {type(arg)}."
+                    )
+                    break
+            if potential_match.failed_on:
+                continue
 
             # do the required kwargs match that which we are expecting
             for kwarg in potential_match.required_kwargs:
-                if kwarg not in kwargs:
-                    potential_match.failed_on = f'A keyword argument of {kwarg} is required.'
-                    continue
+                if kwarg not in kwargs.keys():
+                    potential_match.failed_on = (
+                        f"A keyword argument of {kwarg} is required."
+                    )
+                    break
+            if potential_match.failed_on:
+                continue
 
-            # are there any optional kwargs provided that we're not expecting
-            if potential_match.optional_kwargs:
-                for extra_kwarg in [k for k in kwargs if k not in potential_match.required_kwargs]:
-                    if extra_kwarg not in potential_match.optional_kwargs:
-                        potential_match.failed_on = (
-                            f'Keyword argument {extra_kwarg} is neither:'
-                            f'a required kwarg from: {potential_match.required_kwargs}'
-                            f'an optional kwarg from: {potential_match.optional_kwargs}'
+            # are there any additional kwargs provided that we're not expecting
+            additional_kwargs = [k for k in kwargs.keys() if k not in potential_match.required_kwargs]
+            for additional_kwarg in additional_kwargs:
+                if additional_kwarg not in potential_match.optional_kwargs:
+                    potential_match.failed_on = (
+                            f'Keyword argument "{additional_kwarg}" is neither:'
+                            f"a required kwarg from: {potential_match.required_kwargs}"
+                            f"an optional kwarg from: {potential_match.optional_kwargs}"
                         )
-                        continue 
+                    break
+            if potential_match.failed_on:
+                continue
 
             component_variant_matched: ComponentVariant = potential_match
             break

@@ -12,9 +12,7 @@ def identify_local_input_type(input_path: Path) -> str:
 
     assert isinstance(input_path, Path)
 
-    if str(input_path.absolute()).endswith(
-        SUPPORTED_LOCAL_FILETYPES.CSV
-    ):
+    if str(input_path.absolute()).endswith(SUPPORTED_LOCAL_FILETYPES.CSV):
         return SUPPORTED_LOCAL_FILETYPES.CSV
     else:
         raise UnsupportedLocalFileError(
