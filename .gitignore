@@ -7,3 +7,4 @@ __pycache__
 htmlcov
 docs
 scenarios/created
+scenarios.ipynb

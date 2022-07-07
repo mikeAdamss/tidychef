@@ -1,13 +1,17 @@
 """
 Base classes for all DSD components
 """
+import inspect
 
 from abc import ABCMeta, abstractmethod
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from os import linesep
 from typing import Any, List, Optional
 
+from datachef.models.source.cell import BaseCell, Cell
 from datachef.constants.urls import CONSTRUCTING_DIMENSIONS
+
+from datachef.exceptions import ComponentConstructionError
 
 
 class BaseComponent(metaclass=ABCMeta):
@@ -25,6 +29,13 @@ class BaseComponent(metaclass=ABCMeta):
         the given subclass of BaseComponent
         """
 
+    @abstractmethod
+    def resolve(self, cell: Cell) -> BaseCell:
+        """
+        Return the value of a component relative to
+        a given observation cell.
+        """
+
 
 @dataclass
 class ComponentVariant:
@@ -35,9 +46,10 @@ class ComponentVariant:
 
     component_class: BaseComponent
     arg_types: List[Any]
-    required_kwargs: List[str]
+    required_kwargs: List[str] = field(default_factory = lambda: [])
+    optional_kwargs: List[str] = field(default_factory = lambda: [])
+
     failed_on: Optional[str] = None
-    optional_kwargs: Optional[List[str]] = None
 
     def __repr__(self):
         """
@@ -54,16 +66,16 @@ class ComponentVariant:
 
 
 @dataclass
-class ComponentMatcher(metaclass=ABCMeta):
+class ComponentConstructor(metaclass=ABCMeta):
     """
-    A base matching class, set_component will
-    select the appropriate child component
+    A matching and constructing class, set_component
+    will select the appropriate child component
     based on the combination, number, pattern
     and type of the args and kwargs provided.
     """
 
     inventory: List[ComponentVariant]
-    contextual_exception: Exception
+    contextual_exception: ComponentConstructionError
 
     def __init__(self, *args, **kwargs):
         self._component = self.set_component(*args, **kwargs)
@@ -96,9 +108,14 @@ class ComponentMatcher(metaclass=ABCMeta):
             # do the arg types match that which we are expecting
             for i, arg in enumerate(args):
                 arg_type = potential_match.arg_types[i]
-                if not isinstance(arg, arg_type):
-                    potential_match.failed_on = f"Argument {i} must be of type: {arg_type}, got {arg} as {type(arg)}."
-                    break
+                if inspect.isclass(arg):
+                    if arg != arg_type:
+                        potential_match.failed_on = f'Argument {i+1} of {len(potential_match.arg_types)} must be of type: {arg_type}, has type: {arg}.'
+                        break
+                else:
+                    if not isinstance(arg, arg_type):
+                        potential_match.failed_on = f'Argument {i+1} of {len(potential_match.arg_types)} must be of type: {arg_type}, "{arg}" has type: {type(arg)}.'
+                        break
             if potential_match.failed_on:
                 continue
 
@@ -132,7 +149,7 @@ class ComponentMatcher(metaclass=ABCMeta):
 
         else:
             raise self.contextual_exception(
-                f"Unable to identify required dimension type from provided parameters, must be on of: {linesep}"
+                f"Unable to identify required dimension type from provided parameters, must be one of: {linesep}"
                 f"{self.inventory}{linesep}"
                 f"for more detailed help please see: {CONSTRUCTING_DIMENSIONS}"
             )

@@ -8,11 +8,7 @@ class BaseLookupEngine(metaclass=ABCMeta):
     The base class all engines are built upon.
     """
 
-    def __init__(self, *args, name: str, **kwargs):
-
-        # Always get a compnent name, so we can give
-        # meaningful feedback where issues are encountered
-        self.name = name
+    def __init__(self, *args, **kwargs):
         self._post_init(*args, **kwargs)
 
     @abstractmethod

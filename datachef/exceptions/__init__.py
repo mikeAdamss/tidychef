@@ -1,7 +1,6 @@
 from .badparams import (
     BadExcelReferenceError,
     BadShiftParameterError,
-    ComponentConstructionError,
     ReversedExcelRefError,
     UnknownDirectionError,
     UnsupportedLocalFileError,
@@ -17,5 +16,6 @@ from .common import (
     UnalignedTableOperation,
     UnnamedTableError,
 )
-from .construction import BadDimensionConstructor
+from .construction import DimensionConstructionError, ComponentConstructionError
 from .lookups import FailedLookupError, MissingDirectLookupError
+from .cells import NonExistentCellComparissonError, InvlaidCellPositionError

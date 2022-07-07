@@ -1,2 +1,2 @@
-from .constructor import Dimension
-from .variants import ComponentDimensionConstant
+from .construction import Dimension
+from .variants import ComponentDimensionConstant, ComponentDimensionDirect

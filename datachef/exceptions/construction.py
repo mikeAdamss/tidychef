@@ -1,4 +1,9 @@
-class BadDimensionConstructor(Exception):
+
+class ComponentConstructionError(Exception):
+    """Base class for component construciton errors"""
+    ...
+
+class DimensionConstructionError(ComponentConstructionError):
     """
     User has passed in a bad combination of params to a dimension constructor.
     """

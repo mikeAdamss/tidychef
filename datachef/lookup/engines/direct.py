@@ -13,7 +13,7 @@ from datachef.selection.selectable import Selectable
 from ..base import BaseLookupEngine
 
 
-class Direct(BaseLookupEngine):
+class Directly(BaseLookupEngine):
     """
     A class representing a direct lookup.
 
@@ -99,10 +99,10 @@ class Direct(BaseLookupEngine):
         potential_cells: List[Cell] = self._lookups.get(self._index(cell))
         if not potential_cells:
             raise MissingDirectLookupError(
-                f"We're using a direct lookup for {self.name} but there "
-                f'are no specified value in the direction: "{self.direction._direction}" '
-                f"relative to cell: {cell}, in x position {cell.x}, y position {cell.y}",
-                f"Availible values are {self._lookups}",
+                f'We\'re using a direct lookup for but no selected cells have '
+                f' been provided in the direction: "{self.direction._direction}" '
+                f'relative to cell: {cell._excel_ref()}, in x position {cell.x}, '
+                f'y position {cell.y}'
             )
 
         checker = {
@@ -122,7 +122,7 @@ class Direct(BaseLookupEngine):
         if not chosen_cell:
             raise FailedLookupError(
                 f"Couldn't find a relative value for cell {cell}"
-                f"in {self.name} with direction {self.direction._direction}"
+                f" with direction {self.direction._direction}"
             )
 
         return chosen_cell

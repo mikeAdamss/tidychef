@@ -1,7 +1,7 @@
 import pytest
 
-from datachef.exceptions import InvalidCellObjectError
-from datachef.models.source.cell import Cell
+from datachef.exceptions import InvalidCellObjectError, InvlaidCellPositionError, NonExistentCellComparissonError
+from datachef.models.source.cell import Cell, VirtualCell
 from datachef.selection.csv.csv import CsvInputSelectable
 from tests.fixtures import fixture_with_blanks
 
@@ -91,3 +91,43 @@ def test_cell_repr():
     """
     assert str(Cell(x=0, y=0, value="foo")) == '<A1, value:"foo", x:0, y:0>'
     assert str(Cell(x=1, y=10, value="bar")) == '<B11, value:"bar", x:1, y:10>'
+
+
+def test_virt_cell_positional_err():
+    """
+    Confirm the appropriate error is raised where we are trying to use
+    a virtual cell for a positional comparison
+    """
+
+    vcell = VirtualCell(value="foo")
+    with pytest.raises(NonExistentCellComparissonError):
+        vcell.is_right_of("_")
+
+
+def test_cannot_excel_reference_invalid_cells():
+    """
+    Make sure that if we have an invalid or missing cell
+    position an appropriate error is raised.
+    """
+
+    cell = Cell(x=0, y=None, value="foo")
+    with pytest.raises(InvlaidCellPositionError):
+        cell._excel_ref()
+
+
+def test_virt_cell_excel_ref():
+    """
+    The excel ref of a virtual cell should not error but
+    neither should it return an excel reference.
+    """
+    vcell = VirtualCell(value="foo")
+    assert vcell._excel_ref() == 'VIRTUAL CELL'
+
+
+def test_virt_cell_repr():
+    """
+    The __repr__ a virtual cell should not error but
+    neither should it return an excel reference.
+    """
+    vcell = VirtualCell(value="foo")
+    assert str(vcell) == '<VIRTUAL CELL, value:"foo">'

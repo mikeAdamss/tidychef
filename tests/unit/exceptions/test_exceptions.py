@@ -1,13 +1,14 @@
 from dataclasses import dataclass
 
 from datachef.exceptions import (
-    BadDimensionConstructor,
+    DimensionConstructionError,
     CellsDoNotExistError,
-    ComponentConstructionError,
+    NonExistentCellComparissonError,
     FailedLookupError,
     MissingDirectLookupError,
     UnknownDirectionError,
     UnnamedTableError,
+    InvlaidCellPositionError
 )
 
 
@@ -30,7 +31,6 @@ def test_exception_defaults_can_be_overwritten():
             UnnamedTableError,
             "Cannot access table name/title property as this table does not have one.",
         ),
-        Case(ComponentConstructionError, "Invalid parameters supplied to constructor."),
         Case(UnknownDirectionError, "Direction is not a valid direction."),
         Case(
             MissingDirectLookupError,
@@ -40,9 +40,17 @@ def test_exception_defaults_can_be_overwritten():
             FailedLookupError, "Lookup has failed, no relative cell could be resolved."
         ),
         Case(
-            BadDimensionConstructor,
+            DimensionConstructionError,
             "Cannot construct dimension, an unrecognised combination of parameters has been supplied.",
         ),
+        Case(
+            NonExistentCellComparissonError,
+            "You cannot make a postitional comparisson between a cell parsed from a source input and a virtual cell."
+        ),
+        Case(
+            InvlaidCellPositionError,
+            "A cell with any postional values must exist on both the x and y axis."
+        )
     ]:
 
         # Assert initially as expected
