@@ -2,12 +2,16 @@
 Classes representing a sinlge cell of data.
 """
 from __future__ import annotations
-from os import linesep
 
 from dataclasses import dataclass
+from os import linesep
 from typing import Optional
 
-from datachef.exceptions import InvlaidCellPositionError, InvalidCellObjectError, NonExistentCellComparissonError
+from datachef.exceptions import (
+    InvalidCellObjectError,
+    InvlaidCellPositionError,
+    NonExistentCellComparissonError,
+)
 from datachef.utils import cellutils
 
 from .cellformat import CellFormatting
@@ -30,12 +34,12 @@ class BaseCell:
         """
         if self.x is None or self.y is None:
             raise NonExistentCellComparissonError(
-                'You cannot reference or use for comparison the '
-                'positional information of a virtual cell as it '
-                'does not exist in the source data, i.e it has no '
-                f'position information.{linesep}'
+                "You cannot reference or use for comparison the "
+                "positional information of a virtual cell as it "
+                "does not exist in the source data, i.e it has no "
+                f"position information.{linesep}"
                 f'The value of the cell in question is "{self.value}"'
-                )
+            )
 
     def matches_xy(self, other_cell: BaseCell):
         """
@@ -88,13 +92,13 @@ class BaseCell:
 
         if any([x_ref and not y_ref, y_ref and not x_ref]):
             raise InvlaidCellPositionError(
-                'Every cell object must have both an x and y position or neither.'
-                f'Got cell with x: {self.x} and y: {self.y}'
-                )
+                "Every cell object must have both an x and y position or neither."
+                f"Got cell with x: {self.x} and y: {self.y}"
+            )
 
         if x_ref and y_ref:
             return f"{x_ref}{y_ref}"
-        return 'VIRTUAL CELL'
+        return "VIRTUAL CELL"
 
 
 @dataclass

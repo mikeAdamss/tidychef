@@ -2,16 +2,14 @@
 Base classes for all DSD components
 """
 import inspect
-
 from abc import ABCMeta, abstractmethod
 from dataclasses import dataclass, field
 from os import linesep
 from typing import Any, List, Optional
 
-from datachef.models.source.cell import BaseCell, Cell
 from datachef.constants.urls import CONSTRUCTING_DIMENSIONS
-
 from datachef.exceptions import ComponentConstructionError
+from datachef.models.source.cell import BaseCell, Cell
 
 
 class BaseComponent(metaclass=ABCMeta):
@@ -46,8 +44,8 @@ class ComponentVariant:
 
     component_class: BaseComponent
     arg_types: List[Any]
-    required_kwargs: List[str] = field(default_factory = lambda: [])
-    optional_kwargs: List[str] = field(default_factory = lambda: [])
+    required_kwargs: List[str] = field(default_factory=lambda: [])
+    optional_kwargs: List[str] = field(default_factory=lambda: [])
 
     failed_on: Optional[str] = None
 
@@ -110,7 +108,7 @@ class ComponentConstructor(metaclass=ABCMeta):
                 arg_type = potential_match.arg_types[i]
                 if inspect.isclass(arg):
                     if arg != arg_type:
-                        potential_match.failed_on = f'Argument {i+1} of {len(potential_match.arg_types)} must be of type: {arg_type}, has type: {arg}.'
+                        potential_match.failed_on = f"Argument {i+1} of {len(potential_match.arg_types)} must be of type: {arg_type}, has type: {arg}."
                         break
                 else:
                     if not isinstance(arg, arg_type):

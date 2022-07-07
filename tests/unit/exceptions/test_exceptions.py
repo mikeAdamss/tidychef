@@ -1,14 +1,14 @@
 from dataclasses import dataclass
 
 from datachef.exceptions import (
-    DimensionConstructionError,
     CellsDoNotExistError,
-    NonExistentCellComparissonError,
+    DimensionConstructionError,
     FailedLookupError,
+    InvlaidCellPositionError,
     MissingDirectLookupError,
+    NonExistentCellComparissonError,
     UnknownDirectionError,
     UnnamedTableError,
-    InvlaidCellPositionError
 )
 
 
@@ -45,12 +45,12 @@ def test_exception_defaults_can_be_overwritten():
         ),
         Case(
             NonExistentCellComparissonError,
-            "You cannot make a postitional comparisson between a cell parsed from a source input and a virtual cell."
+            "You cannot make a postitional comparisson between a cell parsed from a source input and a virtual cell.",
         ),
         Case(
             InvlaidCellPositionError,
-            "A cell with any postional values must exist on both the x and y axis."
-        )
+            "A cell with any postional values must exist on both the x and y axis.",
+        ),
     ]:
 
         # Assert initially as expected

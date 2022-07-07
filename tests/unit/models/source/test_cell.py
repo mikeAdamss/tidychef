@@ -1,6 +1,10 @@
 import pytest
 
-from datachef.exceptions import InvalidCellObjectError, InvlaidCellPositionError, NonExistentCellComparissonError
+from datachef.exceptions import (
+    InvalidCellObjectError,
+    InvlaidCellPositionError,
+    NonExistentCellComparissonError,
+)
 from datachef.models.source.cell import Cell, VirtualCell
 from datachef.selection.csv.csv import CsvInputSelectable
 from tests.fixtures import fixture_with_blanks
@@ -121,7 +125,7 @@ def test_virt_cell_excel_ref():
     neither should it return an excel reference.
     """
     vcell = VirtualCell(value="foo")
-    assert vcell._excel_ref() == 'VIRTUAL CELL'
+    assert vcell._excel_ref() == "VIRTUAL CELL"
 
 
 def test_virt_cell_repr():

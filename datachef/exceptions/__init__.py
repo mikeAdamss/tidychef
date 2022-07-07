@@ -5,6 +5,7 @@ from .badparams import (
     UnknownDirectionError,
     UnsupportedLocalFileError,
 )
+from .cells import InvlaidCellPositionError, NonExistentCellComparissonError
 from .common import (
     CellsDoNotExistError,
     FileInputError,
@@ -16,6 +17,5 @@ from .common import (
     UnalignedTableOperation,
     UnnamedTableError,
 )
-from .construction import DimensionConstructionError, ComponentConstructionError
+from .construction import ComponentConstructionError, DimensionConstructionError
 from .lookups import FailedLookupError, MissingDirectLookupError
-from .cells import NonExistentCellComparissonError, InvlaidCellPositionError

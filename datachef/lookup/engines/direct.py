@@ -99,10 +99,10 @@ class Directly(BaseLookupEngine):
         potential_cells: List[Cell] = self._lookups.get(self._index(cell))
         if not potential_cells:
             raise MissingDirectLookupError(
-                f'We\'re using a direct lookup for but no selected cells have '
+                f"We're using a direct lookup for but no selected cells have "
                 f' been provided in the direction: "{self.direction._direction}" '
-                f'relative to cell: {cell._excel_ref()}, in x position {cell.x}, '
-                f'y position {cell.y}'
+                f"relative to cell: {cell._excel_ref()}, in x position {cell.x}, "
+                f"y position {cell.y}"
             )
 
         checker = {

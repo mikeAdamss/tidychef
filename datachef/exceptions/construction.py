@@ -1,7 +1,8 @@
-
 class ComponentConstructionError(Exception):
     """Base class for component construciton errors"""
+
     ...
+
 
 class DimensionConstructionError(ComponentConstructionError):
     """

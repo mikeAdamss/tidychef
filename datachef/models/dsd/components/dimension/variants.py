@@ -1,11 +1,12 @@
 from dataclasses import dataclass
 from typing import Union
 
+from datachef.cardinal.directions import Direction
+from datachef.lookup.engines.direct import Directly
 from datachef.models.dsd.components.base import BaseComponent
 from datachef.models.source.cell import Cell, VirtualCell
 from datachef.selection.selectable import Selectable
-from datachef.lookup.engines.direct import Directly
-from datachef.cardinal.directions import Direction
+
 
 @dataclass
 class ComponentDimensionConstant(BaseComponent):
@@ -54,16 +55,14 @@ class ComponentDimensionDirect(BaseComponent):
 
     _post_init_ran: bool = False
 
-
     def _post_init(self):
         """
         Instantiate the engine class so we can resolve
         this dimension relative to any observation.
         """
-        
+
         self.engine = self.engine(self.selection, self.direction)
         self._post_init_ran = True
-
 
     def resolve(self, ob_cell: Cell) -> Cell:
         """

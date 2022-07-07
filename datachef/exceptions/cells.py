@@ -1,4 +1,3 @@
-
 class NonExistentCellComparissonError(Exception):
     """
     User is trying to to make a positional comparison between an
@@ -28,9 +27,7 @@ class InvlaidCellPositionError(Exception):
 
     def __init__(
         self,
-        msg=(
-            "A cell with any postional values must exist on both the x and y axis."
-        ),
+        msg=("A cell with any postional values must exist on both the x and y axis."),
         *args,
         **kwargs,
     ):

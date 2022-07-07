@@ -77,17 +77,17 @@ def test_component_matcher_bad_matches():
         MyConstructor("foo", "bar", "baz")
     msg_fragment = "Got 0 keyword arguments, but requires at least 1"
     assert msg_fragment in str(err_info.value), (
-        f'Could not find message: {msg_fragment} in:{linesep*2}'
-        f'{err_info.value}{linesep}'
+        f"Could not find message: {msg_fragment} in:{linesep*2}"
+        f"{err_info.value}{linesep}"
     )
 
     # Args of the wrong type
     with pytest.raises(SomeException) as err_info:
         MyConstructor("foo", "bar", "eps", foo=99)
-    msg_fragment = 'Argument 1 of 3 must be of type: <class \'int\'>, "foo" has type: <class \'str\'>'
+    msg_fragment = "Argument 1 of 3 must be of type: <class 'int'>, \"foo\" has type: <class 'str'>"
     assert msg_fragment in str(err_info.value), (
-        f'Could not find message: {msg_fragment} in:{linesep*2}'
-        f'{str(err_info.value).split(linesep)}{linesep}'
+        f"Could not find message: {msg_fragment} in:{linesep*2}"
+        f"{str(err_info.value).split(linesep)}{linesep}"
     )
 
     # Args of the wrong type that are classes
@@ -95,8 +95,8 @@ def test_component_matcher_bad_matches():
         MyConstructor(0, True, NotImplementedError, foo=99)
     msg_fragment = "Argument 3 of 3 must be of type: <class 'Exception'>, has type: <class 'NotImplementedError'>."
     assert msg_fragment in str(err_info.value), (
-        f'Could not find message: {msg_fragment} in:{linesep*2}'
-        f'{str(err_info.value).split(linesep)}{linesep}'
+        f"Could not find message: {msg_fragment} in:{linesep*2}"
+        f"{str(err_info.value).split(linesep)}{linesep}"
     )
 
     # do we have the required kwargs
