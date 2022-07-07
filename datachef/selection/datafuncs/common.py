@@ -51,24 +51,24 @@ def cells_not_in(
     ]
 
 
-def cells_on_x_index(cells: List[BaseCell], xi: int) -> List[BaseCell]:
+def cells_on_x_index(cells: List[BaseCell], x_index: int) -> List[BaseCell]:
     """
     Return a list from the provided cells that are on the specific x index.
 
     :param cells: Representing a selection from a tabular data source.
     :xi: A horizontal index, the column number of a tabulated data source
     """
-    return [c for c in cells if c.x == xi]
+    return [c for c in cells if c.x == x_index]
 
 
-def cells_on_y_index(cells: List[BaseCell], yi: int) -> List[BaseCell]:
+def cells_on_y_index(cells: List[BaseCell], y_index: int) -> List[BaseCell]:
     """
     Return a list from the provided cells that are on the specific y index
 
     :param cells: Representing a selection from a tabular data source.
     :yi: A horizontal index, the column number of a tabulated data source
     """
-    return [c for c in cells if c.y == yi]
+    return [c for c in cells if c.y == y_index]
 
 
 def exactly_matched_xy_cells(
@@ -177,14 +177,14 @@ def minimum_y_offset(cells: List[BaseCell]) -> int:
     return min_y_cell[0].y
 
 
-def specific_cell_from_xy(cells: List[BaseCell], x: int, y: int) -> BaseCell:
+def specific_cell_from_xy(cells: List[BaseCell], x_index: int, y_index: int) -> BaseCell:
     """
     Given a list of cells and specific x and y co-ordinates,
     return the requested cell.
 
     :param cells: Representing a selection from a tabular data source.
     """
-    cells_that_match = exactly_matched_xy_cells(cells, [BaseCell(x=x, y=y)])
+    cells_that_match = exactly_matched_xy_cells(cells, [BaseCell(x=x_index, y=y_index)])
     assert len(cells_that_match) == 1
     return cells_that_match[0]
 

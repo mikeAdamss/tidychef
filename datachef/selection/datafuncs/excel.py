@@ -33,10 +33,10 @@ def any_excel_ref_as_wanted_basecells(excel_ref: str) -> List[BaseCell]:
         return [single_excel_ref_to_basecell(excel_ref)]
 
     # Multi style reference, eg: A1:Z78, G15:AV16 etc
-    elif re.match("^[A-Z]+[0-9]+:[A-Z]+[0-9]+$", excel_ref):
+    if re.match("^[A-Z]+[0-9]+:[A-Z]+[0-9]+$", excel_ref):
         return multi_excel_ref_to_basecells(excel_ref)
-    else:
-        raise BadExcelReferenceError(
+    
+    raise BadExcelReferenceError(
             f"Could not identify style of excel reference {excel_ref}"
         )
 
