@@ -49,3 +49,6 @@ Each "scenario" consists of:
 
 The comparisson will be triggered using pytest but as a separate test stage, so code coverage will not be effected. This is _supplementary_ to the standard unit tests, not instead of.
 
+##scenarios
+
+The following scenarios are ran with every datachef build.

@@ -6,5 +6,6 @@ __pycache__
 .vscode/
 htmlcov
 docs
+_docs/splashpage.md
 scenarios/created
 scenarios.ipynb

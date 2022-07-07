@@ -17,8 +17,10 @@ format: ## Format the codebase with isort and black
 	poetry run isort ./* && poetry run black ./*
 
 docs: ## Combines auto API docs and contents of _docs and serves it locally for preview.
+	poetry run python3 ./expand_docs.py
 	poetry run pdoc -html ./datachef --output-dir ./docs
-	cp -a ./_docs/* ./docs/
+	cp -a ./scenarios/expected/ ./docs/
+	cp ./_docs/splashpage.md ./docs/splashpage.md
 	cd docs && python3 -m http.server
 
 pyrightbuild: ## Build our docker image for running pyright
