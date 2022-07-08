@@ -317,11 +317,12 @@ class Selectable(LiveTable):
         ]
 
         # We also need to modify the pristine selection
-        self.pristine = [
+        self.pristine.cells = [
             c1
             for c1 in self.pcells
             if not any(c1.matches_xy(c2) for c2 in new_cells)
         ]
+        self.pristine.cells += new_cells
 
         # Add the overwritten cells in
         self.cells += new_cells
