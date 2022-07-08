@@ -7,7 +7,6 @@ from dataclasses import dataclass, field
 from os import linesep
 from typing import Any, List, Optional
 
-from datachef.constants.urls import CONSTRUCTING_DIMENSIONS
 from datachef.exceptions import ComponentConstructionError
 from datachef.models.source.cell import BaseCell, Cell
 
@@ -47,21 +46,6 @@ class ComponentVariant:
     required_kwargs: List[str] = field(default_factory=lambda: [])
     optional_kwargs: List[str] = field(default_factory=lambda: [])
 
-    failed_on: Optional[str] = None
-
-    def __repr__(self):
-        """
-        A string representation of this style of component
-        """
-        return (
-            f"{linesep}{self.component_class}{linesep}"
-            f"Requires args by type: {self.arg_types}{linesep}"
-            f"Expected kwargs: {self.required_kwargs}{linesep}"
-            f"Optional kwargs: {self.optional_kwargs}{linesep}"
-            f"----- unmatched because -----{linesep}"
-            f"{self.failed_on}{linesep}"
-        )
-
 
 @dataclass
 class ComponentConstructor(metaclass=ABCMeta):
@@ -85,22 +69,18 @@ class ComponentConstructor(metaclass=ABCMeta):
     def set_component(self, *args, **kwargs) -> BaseComponent:
 
         for potential_match in self.inventory:
-            potential_match.failed_on = None
+            failed = False
 
             # do we have the expected number of arguments
             largs = len(args)
             lpargs = len(potential_match.arg_types)
             if largs != lpargs:
-                potential_match.failed_on = f"Expected {lpargs} args, got {largs}"
                 continue
 
             # do we have the minimum number of keyword arguments
             lkwargs = len(kwargs)
             lpkwargs = len(potential_match.required_kwargs)
             if lkwargs < lpkwargs:
-                potential_match.failed_on = (
-                    f"Got {lkwargs} keyword arguments, but requires at least {lpkwargs}"
-                )
                 continue
 
             # do the arg types match that which we are expecting
@@ -108,23 +88,21 @@ class ComponentConstructor(metaclass=ABCMeta):
                 arg_type = potential_match.arg_types[i]
                 if inspect.isclass(arg):
                     if arg != arg_type:
-                        potential_match.failed_on = f"Argument {i+1} of {len(potential_match.arg_types)} must be of type: {arg_type}, has type: {arg}."
+                        failed = True
                         break
                 else:
                     if not isinstance(arg, arg_type):
-                        potential_match.failed_on = f'Argument {i+1} of {len(potential_match.arg_types)} must be of type: {arg_type}, "{arg}" has type: {type(arg)}.'
+                        failed = True
                         break
-            if potential_match.failed_on:
+            if failed:
                 continue
 
             # do the required kwargs match that which we are expecting
             for kwarg in potential_match.required_kwargs:
                 if kwarg not in kwargs.keys():
-                    potential_match.failed_on = (
-                        f"A keyword argument of {kwarg} is required."
-                    )
+                    failed = True
                     break
-            if potential_match.failed_on:
+            if failed:
                 continue
 
             # are there any additional kwargs provided that we're not expecting
@@ -133,13 +111,9 @@ class ComponentConstructor(metaclass=ABCMeta):
             ]
             for additional_kwarg in additional_kwargs:
                 if additional_kwarg not in potential_match.optional_kwargs:
-                    potential_match.failed_on = (
-                        f'Keyword argument "{additional_kwarg}" is neither:'
-                        f"a required kwarg from: {potential_match.required_kwargs}"
-                        f"an optional kwarg from: {potential_match.optional_kwargs}"
-                    )
+                    failed = True
                     break
-            if potential_match.failed_on:
+            if failed:
                 continue
 
             component_variant_matched: ComponentVariant = potential_match
@@ -147,9 +121,8 @@ class ComponentConstructor(metaclass=ABCMeta):
 
         else:
             raise self.contextual_exception(
-                f"Unable to identify required dimension type from provided parameters, must be one of: {linesep}"
-                f"{self.inventory}{linesep}"
-                f"for more detailed help please see: {CONSTRUCTING_DIMENSIONS}"
+                f"Unable to identify required {self.name} component from the provided parameters."
+                f" For more help and explanation please see: {self.help_url}"
             )
 
         return component_variant_matched.component_class(*args, **kwargs)

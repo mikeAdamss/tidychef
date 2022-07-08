@@ -3,20 +3,18 @@ import re
 from typing import FrozenSet, List, Optional, Union
 
 from datachef.cardinal.directions import Direction, down, left, right, up
-from datachef.exceptions import (
-    BadShiftParameterError,
-    LoneValueOnMultipleCellsError,
-    OutOfBoundsError,
-)
+from datachef.exceptions import (BadShiftParameterError,
+                                 LoneValueOnMultipleCellsError,
+                                 OutOfBoundsError)
 from datachef.models.source.cell import BaseCell, Cell
-from datachef.models.source.input import BaseInput
+from datachef.models.source.table import LiveTable
 from datachef.selection import datafuncs as dfc
 from datachef.utils.decorators import dontmutate
 
 
-class Selectable(BaseInput):
+class Selectable(LiveTable):
     """
-    Inherits from BaseInput to add the following selection methods that are generic to all tabulated source inputs.
+    Inherits from LiveTable to add the following selection methods that are generic to all tabulated inputs.
     """
 
     def assert_one(self):
@@ -168,19 +166,19 @@ class Selectable(BaseInput):
         if isinstance(direction_or_x, int):
             if not isinstance(possibly_y, int):
                 raise BadShiftParameterError()
-            x = direction_or_x
-            y = possibly_y
+            x_offset = direction_or_x
+            y_offset = possibly_y
         elif isinstance(direction_or_x, Direction):
             assert (
                 not possibly_y
             ), "Where passing a direction into shift, that must be the only argument"
-            x = direction_or_x.x
-            y = direction_or_x.y
+            x_offset = direction_or_x.x
+            y_offset = direction_or_x.y
         else:
             raise BadShiftParameterError()
 
         wanted_cells: List[BaseCell] = [
-            BaseCell(x=c.x + x, y=c.y + y) for c in self.cells
+            BaseCell(x=c.x + x_offset, y=c.y + y_offset) for c in self.cells
         ]
 
         found_cells = dfc.matching_xy_cells(self.pcells, wanted_cells)
@@ -247,12 +245,13 @@ class Selectable(BaseInput):
 
         if not isinstance(direction, Direction):
             raise ValueError(
-                "Argument direction must be one of: up, down, left, right."
+                "Argument direction must be one of: up, down,"
+                "left, right, above, below"
             )
 
         new_cells = []
 
-        if direction._direction == "right":
+        if direction.name == "right":
             ordered_selected_cells: List[Cell] = dfc.order_cells_leftright_topbottom(
                 self.cells
             )
@@ -261,7 +260,7 @@ class Selectable(BaseInput):
             )
             horizontal_traversal = True
 
-        elif direction._direction == "left":
+        elif direction.name == "left":
             ordered_selected_cells: List[Cell] = dfc.order_cells_rightleft_bottomtop(
                 self.cells
             )
@@ -270,7 +269,7 @@ class Selectable(BaseInput):
             )
             horizontal_traversal = True
 
-        elif direction._direction == "up":
+        elif direction.name == "up":
             ordered_selected_cells: List[Cell] = dfc.order_cells_bottomtop_rightleft(
                 self.cells
             )
@@ -279,7 +278,7 @@ class Selectable(BaseInput):
             )
             horizontal_traversal = False
 
-        elif direction._direction == "down":
+        elif direction.name == "down":
             ordered_selected_cells: List[Cell] = dfc.order_cells_topbottom_leftright(
                 self.cells
             )
@@ -293,7 +292,7 @@ class Selectable(BaseInput):
         spreading = None
         for cell in ordered_pristine_cells:
 
-            if considered_offset == None:
+            if considered_offset is None:
                 considered_offset = cell.y if horizontal_traversal else cell.x
             elif considered_offset != (cell.y if horizontal_traversal else cell.x):
                 spreading = None
@@ -318,13 +317,12 @@ class Selectable(BaseInput):
         ]
 
         # We also need to modify the pristine selection
-        self.selected_table.pristine.cells = [
+        self.pristine = [
             c1
-            for c1 in self.selected_table.pristine.cells
+            for c1 in self.pcells
             if not any(c1.matches_xy(c2) for c2 in new_cells)
         ]
 
         # Add the overwritten cells in
         self.cells += new_cells
-        self.selected_table.pristine.cells += new_cells
         return self

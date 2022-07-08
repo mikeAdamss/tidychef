@@ -1,6 +1,7 @@
 """
 Holds and defines the reader for create a selection from a list of lists
 """
+import copy
 
 from datachef.models.source.cell import Cell
 from datachef.models.source.table import LiveTable, Table
@@ -26,11 +27,7 @@ class ListReader(BaseReader):
             for x_index, cell_value in enumerate(row):
                 table.add_cell(Cell(x=x_index, y=y_index, value=cell_value))
 
-        live_table = LiveTable.from_table(table)
-
         return selectable(
-            is_singleton_table=True,
-            selected_table=live_table,
-            had_initial_path=self.source,
-            tables=None,
+            table,
+            copy.deepcopy(table)
         )

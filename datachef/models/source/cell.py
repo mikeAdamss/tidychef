@@ -148,12 +148,13 @@ class Cell(BaseCell):
                 return True
             else:
                 return False
-        elif not self.value:
+
+        if not self.value:
             return True
-        else:
-            raise InvalidCellObjectError(
-                f"Error with {self._as_xy_str()} A cell should have a str or nan/None value"
-            )
+
+        raise InvalidCellObjectError(
+            f"Error with {self._as_xy_str()} A cell should have a str or nan/None value"
+        )
 
     def is_not_blank(self, disregard_whitespace: bool = True):
         """

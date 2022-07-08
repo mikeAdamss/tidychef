@@ -39,21 +39,6 @@ class CellsDoNotExistError(Exception):
         super().__init__(msg, *args, **kwargs)
 
 
-class IteratingSingleTableError(Exception):
-    """
-    User is trying to iterate through an input that consists of
-    exactly one table.
-    """
-
-    def __init__(
-        self,
-        msg=("You cannot iterate this input, as it only consists of a single table"),
-        *args,
-        **kwargs,
-    ):
-        super().__init__(msg, *args, **kwargs)
-
-
 class LoneValueOnMultipleCellsError(Exception):
     """
     Raised when a user attempts to use the Input.long_value() method

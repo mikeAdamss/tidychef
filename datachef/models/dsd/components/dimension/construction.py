@@ -1,4 +1,5 @@
 from datachef.cardinal.directions import Direction
+from datachef.constants.urls import CONSTRUCTING_DIMENSIONS
 from datachef.exceptions import DimensionConstructionError
 from datachef.lookup.engines.direct import Directly
 from datachef.models.dsd.components.base import ComponentConstructor
@@ -13,6 +14,8 @@ class Dimension(ComponentConstructor):
     A constructor for selecting the appropriate dimension component.
     """
 
+    help_url = CONSTRUCTING_DIMENSIONS
+    name = "dimension"
     contextual_exception = DimensionConstructionError
     inventory = [
         ComponentVariant(

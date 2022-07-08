@@ -258,7 +258,7 @@ class HtmlPreview(BasePreview):
 
         # Get table name
         try:
-            table_name = selections[0].selected_table.name
+            table_name = selections[0].name
         except UnnamedTableError:
             table_name = "unnamed table"
 

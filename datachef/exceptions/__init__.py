@@ -11,7 +11,6 @@ from .common import (
     FileInputError,
     InvalidCellObjectError,
     InvalidTableSignatures,
-    IteratingSingleTableError,
     LoneValueOnMultipleCellsError,
     OutOfBoundsError,
     UnalignedTableOperation,

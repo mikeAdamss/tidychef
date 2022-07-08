@@ -177,7 +177,9 @@ def minimum_y_offset(cells: List[BaseCell]) -> int:
     return min_y_cell[0].y
 
 
-def specific_cell_from_xy(cells: List[BaseCell], x_index: int, y_index: int) -> BaseCell:
+def specific_cell_from_xy(
+    cells: List[BaseCell], x_index: int, y_index: int
+) -> BaseCell:
     """
     Given a list of cells and specific x and y co-ordinates,
     return the requested cell.

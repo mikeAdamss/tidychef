@@ -2,6 +2,7 @@
 Holds and defines the local csv reader class.
 """
 
+import copy
 import csv
 
 from datachef.models.source.cell import Cell
@@ -30,11 +31,6 @@ class LocalCsvReader(BaseReader):
                 for x_index, cell_value in enumerate(row):
                     table.add_cell(Cell(x=x_index, y=y_index, value=cell_value))
 
-        live_table = LiveTable.from_table(table)
-
         return selectable(
-            is_singleton_table=True,
-            selected_table=live_table,
-            had_initial_path=self.source,
-            tables=None,
+            table, copy.deepcopy(table), source=self.source
         )

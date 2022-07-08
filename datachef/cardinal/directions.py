@@ -15,7 +15,7 @@ class Direction:
 
     x: int
     y: int
-    _direction: str
+    name: str
     _locked: bool = False
     _horizontal_axis: Optional[bool] = None
 
@@ -61,7 +61,7 @@ class Direction:
             elif self.y == 1:
                 y = relative_change
                 x = self.x
-        return Direction(x, y, self._direction, _locked=True)
+        return Direction(x, y, self.name, _locked=True)
 
 
 up = Direction(0, -1, "up", _horizontal_axis=False)

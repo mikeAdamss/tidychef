@@ -5,13 +5,18 @@ Classes representing a single cell of data.
 from __future__ import annotations
 
 import copy
+from pathlib import Path
 import uuid
-from typing import List, Optional
+from typing import List, Optional, Union
 
-from datachef.exceptions import InvalidTableSignatures, UnnamedTableError
-
-from .cell import Cell
-
+from datachef.exceptions import (
+    InvalidTableSignatures,
+    UnalignedTableOperation,
+    UnnamedTableError,
+)
+from datachef.models.source.cell import BaseCell, Cell
+from datachef.selection import datafuncs as dfc
+from datachef.utils.decorators import dontmutate
 
 class Table:
     """
@@ -41,10 +46,15 @@ class LiveTable:
     filtering down of one.
     """
 
-    def __init__(self, pristine: Table, filtered: Table, _name: str = None):
+    def __init__(self, pristine: Table, filtered: Table, _name: str = None, source: str = None):
         self.pristine: Table = pristine
         self.filtered: Table = filtered
         self._name: Optional[str] = _name
+        self.source: Union[Path, str] = source
+
+        # An optional label used when working with previews
+        self._label: Optional[str] = None
+
         self.validate()
 
     @property
@@ -57,6 +67,29 @@ class LiveTable:
         else:
             raise UnnamedTableError()
 
+    @property
+    def cells(self) -> List[Cell]:
+        """
+        Accessor for currently selected cells from the
+        currently selected table
+        """
+        return self.filtered.cells
+
+    @cells.setter
+    def cells(self, cells: List[Cell]):
+        """
+        Setter for the cells property
+        """
+        self.filtered.cells = cells
+
+    @property
+    def pcells(self) -> List[BaseCell]:
+        """
+        Accessor for the pristine cells from the
+        currently selected table
+        """
+        return self.pristine.cells
+
     def selections_made(self) -> bool:
         """
         Have any selections been made
@@ -67,6 +100,13 @@ class LiveTable:
     def name(self, name: str):
         self._name = name
 
+    @property
+    def title(self) -> str:
+        """
+        Alternate call to name for databaker backwards compatibility
+        """
+        return self.name
+
     def validate(self):
         """
         Confirm class is validly constructed.
@@ -75,12 +115,60 @@ class LiveTable:
             raise InvalidTableSignatures()
 
     @staticmethod
-    def from_table(table: Table, name: str = None) -> LiveTable:
+    def from_table(table: Table, source: Union[Path, str], name: str = None) -> LiveTable:
         """
         Given a table and optional it's name, create a livetable.
         """
         return LiveTable(
-            pristine=table,
-            filtered=copy.deepcopy(table),
+            table,
+            copy.deepcopy(table),
             _name=name,
+            source=source,
         )
+
+    @property
+    def signature(self):
+        """
+        A uuid that uniquely identifies a parsed input source table
+        """
+        return self.filtered._signature
+
+    @dontmutate
+    def __sub__(self, other_input: LiveTable):
+        """
+        Implements "-" operator, subtraction
+
+        Allows subtraction of one selection from the same distinct
+        and currently selected table from another. Provided they
+        are derrived from the same initial BaseInput.
+        """
+
+        if self.signature != other_input.signature:
+            raise UnalignedTableOperation()
+
+        self.cells = dfc.cells_not_in(self.cells, other_input.cells)
+        return self
+
+    @dontmutate
+    def __or__(self, other_input: LiveTable):
+        """
+        Implements "|" operator, union.
+
+        Allows the union of one selection from the same distinct
+        and currently selected table with another. Provided they
+        are derrived from the same initial BaseInput.
+        """
+        if self.signature != other_input.signature:
+            raise UnalignedTableOperation()
+
+        new_cells = dfc.cells_not_in(other_input.cells, self.cells)
+        self.cells = self.cells + new_cells
+        return self
+
+    def __iter__(self):
+        """
+        We're not really iterating table objects, we're just moving the
+        pointer to the selected table then returning the updated self
+        """
+        for cell in self.cells:
+            yield cell

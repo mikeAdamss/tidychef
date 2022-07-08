@@ -98,7 +98,7 @@ def test_direct_right_multiple_options_lookup(selectable_wide_band_tab: Selectab
         looked_up_cell: Cell = direct_right_engine.resolve(ob_cell)
         looked_up_cell_ref: str = dfc.basecell_to_excel_ref(looked_up_cell)
         assert looked_up_cell_ref == case.expected_cell_ref, (
-            f'Expected lookup from {case.obs_ref} direction "{direct_right_engine.direction._direction}"'
+            f'Expected lookup from {case.obs_ref} direction "{direct_right_engine.direction.name}"'
             f" to resolve to {case.expected_cell_ref}, got {looked_up_cell_ref}"
             f" from options of: {linesep}{direct_right_engine._lookups[looked_up_cell.y]}"
         )
@@ -222,7 +222,7 @@ def test_malformed_class_err(selectable_vertical_dimensions: Selectable):
     """
 
     badup = copy.deepcopy(up)
-    badup._direction = "sideways"
+    badup.name = "sideways"
 
     dim = selectable_vertical_dimensions.excel_ref("A1")
     ob: Cell = selectable_vertical_dimensions.excel_ref("A10").cells[0]

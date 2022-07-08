@@ -5,8 +5,9 @@ and its use in a users workflow
 
 import pytest
 
-from datachef.exceptions import IteratingSingleTableError, UnnamedTableError
+from datachef.exceptions import UnnamedTableError
 from datachef.selection.selectable import Selectable
+from datachef.models.source.input import BaseInput
 from tests.fixtures.preconfigured import fixture_simple_one_tab, fixture_simple_two_tabs
 
 
@@ -20,26 +21,7 @@ def selectable_of2_simple1():
     return fixture_simple_two_tabs()
 
 
-def test_cannot_iterate_single_table_inputs(selectable_simple1: Selectable):
-    """
-    Confirm the appropriate error is raised where a user tries to
-    iterate through an input consisting of exactly one table.
-    """
-
-    with pytest.raises(IteratingSingleTableError):
-        for table in selectable_simple1:
-            """never triggered"""
-
-
-def test_selectable_name_property_returns_name(selectable_of2_simple1: Selectable):
-    """
-    If a table is named, confirm we can access the name
-    property.
-    """
-    assert selectable_of2_simple1.name == "I am table 1"
-
-
-def test_can_iterate_multiple_table_inputs(selectable_of2_simple1: Selectable):
+def test_can_iterate_multiple_table_inputs(selectable_of2_simple1: BaseInput):
     """
     Confirm the user can iterate through the tables in the expected
     manner.
@@ -55,12 +37,12 @@ def test_can_iterate_multiple_table_inputs(selectable_of2_simple1: Selectable):
 
 # Note: title as an alternate property acvessor for name is included
 # for backwards compatibiity with the databaker library
-def test_input_title_property_returns_name(selectable_of2_simple1: Selectable):
+def test_input_title_property_returns_name(selectable_of2_simple1: BaseInput):
     """
     If a table is named, confirm we can access the name
     via the alt property title.
     """
-    assert selectable_of2_simple1.title == "I am table 1"
+    assert selectable_of2_simple1.tables[0].title == "I am table 1"
 
 
 def test_input_name_property_unset_raises_err(selectable_simple1: Selectable):

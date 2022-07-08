@@ -35,10 +35,10 @@ def any_excel_ref_as_wanted_basecells(excel_ref: str) -> List[BaseCell]:
     # Multi style reference, eg: A1:Z78, G15:AV16 etc
     if re.match("^[A-Z]+[0-9]+:[A-Z]+[0-9]+$", excel_ref):
         return multi_excel_ref_to_basecells(excel_ref)
-    
+
     raise BadExcelReferenceError(
-            f"Could not identify style of excel reference {excel_ref}"
-        )
+        f"Could not identify style of excel reference {excel_ref}"
+    )
 
 
 def single_excel_ref_to_basecell(excel_ref: str) -> BaseCell:
@@ -112,5 +112,8 @@ def basecells_to_excel_ref(cells: List[BaseCell]) -> str:
     bottomright_cell = dfccommon.specific_cell_from_xy(cells, max_x, max_y)
 
     ref1 = f"{cellutils.x_to_letters(topleft_cell.x)}{cellutils.y_to_number(topleft_cell.y)}"
-    ref2 = f"{cellutils.x_to_letters(bottomright_cell.x)}{cellutils.y_to_number(bottomright_cell.y)}"
+    ref2 = (
+        f"{cellutils.x_to_letters(bottomright_cell.x)}"
+        f"{cellutils.y_to_number(bottomright_cell.y)}"
+    )
     return f"{ref1}:{ref2}"

@@ -4,6 +4,7 @@ from datachef.exceptions import InvalidTableSignatures, UnnamedTableError
 from datachef.models.source.table import LiveTable
 from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab, fixture_simple_two_tabs
+from datachef.models.source.input import BaseInput
 
 
 @pytest.fixture
@@ -22,9 +23,8 @@ def test_livetable_name_setter_and_getter(selectable_simple1: Selectable):
     on the LiveTable class
     """
 
-    ltable: LiveTable = selectable_simple1.selected_table
-    ltable.name = "foo"
-    assert ltable.name == "foo"
+    selectable_simple1.name = "foo"
+    assert selectable_simple1.name == "foo"
 
 
 def test_livetable_name_getter_unnamed_table_err(
@@ -35,13 +35,12 @@ def test_livetable_name_getter_unnamed_table_err(
     we try and access an unset name property.
     """
 
-    ltable: LiveTable = selectable_simple1.selected_table
     with pytest.raises(UnnamedTableError):
-        ltable.name
+        selectable_simple1.name
 
 
 def test_livetable_with_unmatched_signatues_raises(
-    selectable_of2_simple1: Selectable,
+    selectable_of2_simple1: BaseInput,
 ):
     """
     Test that where we create a class:LiveTable from two tables with
@@ -53,3 +52,12 @@ def test_livetable_with_unmatched_signatues_raises(
             selectable_of2_simple1.tables[0].pristine,
             selectable_of2_simple1.tables[1].pristine,
         )
+
+def test_selectable_name_property_returns_name(selectable_of2_simple1: BaseInput):
+    """
+    If a table is named, confirm we can access the name
+    property.
+    """
+
+    for tab in selectable_of2_simple1:
+        assert "I am table 1" == tab.name or  "I am table 2" == tab.name

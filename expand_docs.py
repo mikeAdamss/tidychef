@@ -3,8 +3,7 @@ Simple script to add some dynamic elements to our documentation
 """
 
 from os import linesep
-
-from pathlib import Path 
+from pathlib import Path
 
 this_dir = Path(__file__).parent
 
@@ -16,7 +15,9 @@ with open(raw_splashpage) as f:
 
 scenario_dir = Path(this_dir / "scenarios" / "expected").glob("*.html")
 for scenario in scenario_dir:
-    page_lines.append(f'* https://mikeadamss.github.io/datachef/{scenario.name}{linesep}')
+    page_lines.append(
+        f"* https://mikeadamss.github.io/datachef/{scenario.name}{linesep}"
+    )
 
 with open(splashpage, "w") as f:
     f.writelines(page_lines)

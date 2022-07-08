@@ -156,12 +156,8 @@ def test_preview_with_a_table_name():
     from datachef.selection.selectable import Selectable
 
     t = Table([Cell(0, 0, value="A1"), Cell(0, 1, value="B1")])
-    lt = LiveTable.from_table(t, name="Example Table")
     s = Selectable(
-        is_singleton_table=True,
-        selected_table=lt,
-        had_initial_path="not-a-real-file",
-        tables=None,
+        t, t, _name="Example Table"
     )
 
     fixture = path_to_fixture("preview", "tiny-with-table-name.html")

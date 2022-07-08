@@ -1,3 +1,7 @@
+"""
+Common filters.
+"""
+
 from dataclasses import dataclass
 
 from datachef.models.source.cell import Cell

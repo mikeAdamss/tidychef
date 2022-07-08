@@ -73,15 +73,13 @@ class Directly(BaseLookupEngine):
             raise UnknownDirectionError(
                 f"The direction parameter must be of type: {type(Direction)}"
             )
-        if self.direction._direction in ["left", "up"]:
+        if self.direction.name in ["left", "up"]:
             ordered_cells = dfc.order_cells_leftright_topbottom(cells)
-        elif self.direction._direction in ["right", "down"]:
+        elif self.direction.name in ["right", "down"]:
             ordered_cells = dfc.order_cells_rightleft_bottomtop(cells)
         else:
             # Shouldn't happend unless someone is hacking in something
-            raise UnknownDirectionError(
-                f"The direction {direction._direction} is unknown."
-            )
+            raise UnknownDirectionError(f"The direction {direction.name} is unknown.")
 
         self._lookups = {}
         for cell in ordered_cells:
@@ -100,7 +98,7 @@ class Directly(BaseLookupEngine):
         if not potential_cells:
             raise MissingDirectLookupError(
                 f"We're using a direct lookup for but no selected cells have "
-                f' been provided in the direction: "{self.direction._direction}" '
+                f' been provided in the direction: "{self.direction.name}" '
                 f"relative to cell: {cell._excel_ref()}, in x position {cell.x}, "
                 f"y position {cell.y}"
             )
@@ -114,7 +112,7 @@ class Directly(BaseLookupEngine):
 
         chosen_cell = None
         for pcell in potential_cells:
-            if checker[self.direction._direction](cell, pcell):
+            if checker[self.direction.name](cell, pcell):
                 chosen_cell = pcell
             else:
                 break
@@ -122,7 +120,7 @@ class Directly(BaseLookupEngine):
         if not chosen_cell:
             raise FailedLookupError(
                 f"Couldn't find a relative value for cell {cell}"
-                f" with direction {self.direction._direction}"
+                f" with direction {self.direction.name}"
             )
 
         return chosen_cell
