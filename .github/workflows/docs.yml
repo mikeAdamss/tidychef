@@ -26,8 +26,10 @@ jobs:
       - run: pip install poetry
       - run: poetry install
 
-      - name: Unbundle test resources # We want to include the scanrio htmls in the technical documentation
-        run: poetry run python3 ./resources/bundler unbundle
+      # We want to unzip the test scenarios as we're adding their expected html
+      # outputs to the technical documentation. 
+      - name: Unbundle test resources
+        run: poetry run python3 ./resources/bundler.py unbundle
         
       - run: rm -rf ./docs
       - run: poetry run python3 ./expand_docs.py

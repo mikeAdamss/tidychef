@@ -2,8 +2,8 @@
 Simple script to add some dynamic elements to our documentation.
 
 Principally by adding links to the html output of our scenarios to
-the techical documentation (so a browsing user can easily browse
-the bahaviour were confirming).
+the techical documentation (so a browsing user can easily view
+the behaviour were confirming per build).
 """
 
 from os import linesep
