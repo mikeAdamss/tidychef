@@ -4,7 +4,7 @@ Holds and defines the reader for create a selection from a list of lists
 import copy
 
 from datachef.models.source.cell import Cell
-from datachef.models.source.table import LiveTable, Table
+from datachef.models.source.table import Table
 from datachef.readers.base import BaseReader
 from datachef.selection.selectable import Selectable
 
