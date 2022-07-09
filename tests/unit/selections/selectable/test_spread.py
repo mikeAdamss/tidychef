@@ -1,5 +1,6 @@
-import pytest
 import copy
+
+import pytest
 
 from datachef import acquire
 from datachef.cardinal.directions import down, left, right, up
@@ -14,7 +15,7 @@ def test_spread_standard_directions():
 
     s: Selectable = acquire(
         [
-        #      A      B        C        D      E
+            #      A      B        C        D      E
             ["   ", "   ", "       ", "   ", "   "],  # 1
             ["   ", "   ", "       ", "   ", "   "],  # 2
             ["   ", "foo", "bar    ", "baz", "   "],  # 3
@@ -70,7 +71,7 @@ def test_spread_with_until():
 
     s: Selectable = acquire(
         [
-        #      A      B        C        D      E
+            #      A      B        C        D      E
             ["   ", "   ", "       ", "   ", "   "],  # 1
             ["   ", "   ", "       ", "   ", "   "],  # 2
             ["   ", "foo", "bar    ", "baz", "   "],  # 3
@@ -80,8 +81,8 @@ def test_spread_with_until():
         ]
     )
 
-    until = s.excel_ref('B5').expand(right)
-    selected = s.excel_ref('B3').expand(right).is_not_blank().spread(down, until=until)
+    until = s.excel_ref("B5").expand(right)
+    selected = s.excel_ref("B3").expand(right).is_not_blank().spread(down, until=until)
     assert len(selected.cells) == 6
 
 

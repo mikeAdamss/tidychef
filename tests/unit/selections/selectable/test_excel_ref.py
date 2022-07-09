@@ -1,6 +1,10 @@
 import pytest
 
-from datachef.exceptions import BadExcelReferenceError, CellsDoNotExistError, LoneValueOnMultipleCellsError
+from datachef.exceptions import (
+    BadExcelReferenceError,
+    CellsDoNotExistError,
+    LoneValueOnMultipleCellsError,
+)
 from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
 

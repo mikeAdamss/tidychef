@@ -156,9 +156,7 @@ def test_preview_with_a_table_name():
     from datachef.selection.selectable import Selectable
 
     t = Table([Cell(0, 0, value="A1"), Cell(0, 1, value="B1")])
-    s = Selectable(
-        t, t, _name="Example Table"
-    )
+    s = Selectable(t, t, _name="Example Table")
 
     fixture = path_to_fixture("preview", "tiny-with-table-name.html")
     _assert_compare_html(fixture, s)

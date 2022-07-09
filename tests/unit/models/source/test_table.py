@@ -1,10 +1,10 @@
 import pytest
 
 from datachef.exceptions import InvalidTableSignatures, UnnamedTableError
+from datachef.models.source.input import BaseInput
 from datachef.models.source.table import LiveTable
 from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab, fixture_simple_two_tabs
-from datachef.models.source.input import BaseInput
 
 
 @pytest.fixture
@@ -53,6 +53,7 @@ def test_livetable_with_unmatched_signatues_raises(
             selectable_of2_simple1.tables[1].pristine,
         )
 
+
 def test_selectable_name_property_returns_name(selectable_of2_simple1: BaseInput):
     """
     If a table is named, confirm we can access the name
@@ -60,4 +61,4 @@ def test_selectable_name_property_returns_name(selectable_of2_simple1: BaseInput
     """
 
     for tab in selectable_of2_simple1:
-        assert "I am table 1" == tab.name or  "I am table 2" == tab.name
+        assert "I am table 1" == tab.name or "I am table 2" == tab.name

@@ -17,4 +17,3 @@ def test_conform_selection_iteration(selectable_simple1: Selectable):
 
     for cell in selectable_simple1:
         assert isinstance(cell, Cell)
-

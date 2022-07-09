@@ -21,7 +21,7 @@ resource_dir = Path(repo_base / "resources")
 # Ipynb checkpoints, we dont want to store them
 checkpoints_to_remove = [
     Path(scenario_dir / ".ipynb_checkpoints"),
-    Path(scenario_dir / "expected" / ".ipynb_checkpoints")
+    Path(scenario_dir / "expected" / ".ipynb_checkpoints"),
 ]
 
 # Outputs
@@ -31,13 +31,13 @@ scenarios_storage_path = Path(resource_dir / "scenarios")
 def bundle():
     """
     A function to bundle (zip) the .html and .ipynb resources
-    used for testing. 
+    used for testing.
     """
-    
+
     # Make sure we have our expected subject directories
     assert scenario_dir.exists(), (
-        'Cannot bundle scenarios directory as no scenario '
-        'directory currently exists.'
+        "Cannot bundle scenarios directory as no scenario "
+        "directory currently exists."
     )
 
     # remove the created dir from scenarios if present, these are ephemeral files
@@ -50,7 +50,7 @@ def bundle():
             shutil.rmtree(ckpoint_path)
 
     # bundle up the scenarios dir
-    shutil.make_archive(scenarios_storage_path, 'zip', scenario_dir)
+    shutil.make_archive(scenarios_storage_path, "zip", scenario_dir)
 
 
 def unbundle():
@@ -58,22 +58,20 @@ def unbundle():
     A function to unbundle (unzip) the .html and .ipynb resources
     used for testing and place them in the appropriate places
     """
-    
+
     import zipfile
-    with zipfile.ZipFile(f'{scenarios_storage_path.resolve()}.zip', 'r') as zip_ref:
+
+    with zipfile.ZipFile(f"{scenarios_storage_path.resolve()}.zip", "r") as zip_ref:
         zip_ref.extractall(scenario_dir)
 
 
-
-
-
 if __name__ == "__main__":
-    if sys.argv[1] == 'bundle':
+    if sys.argv[1] == "bundle":
         bundle()
-    elif sys.argv[1] == 'unbundle':
+    elif sys.argv[1] == "unbundle":
         unbundle()
     else:
         raise ValueError(
-            'The first argument to the bundler must be either bundle'
-            f' or unbundle, got {sys.argv[1]}'
-            )
+            "The first argument to the bundler must be either bundle"
+            f" or unbundle, got {sys.argv[1]}"
+        )

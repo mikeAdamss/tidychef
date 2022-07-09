@@ -5,10 +5,12 @@ import re
 from typing import FrozenSet, List, Optional, Union
 
 from datachef.cardinal.directions import Direction, down, left, right, up
-from datachef.exceptions import (BadExcelReferenceError,
-                                BadShiftParameterError,
-                                 LoneValueOnMultipleCellsError,
-                                 OutOfBoundsError)
+from datachef.exceptions import (
+    BadExcelReferenceError,
+    BadShiftParameterError,
+    LoneValueOnMultipleCellsError,
+    OutOfBoundsError,
+)
 from datachef.models.source.cell import BaseCell, Cell
 from datachef.models.source.table import LiveTable
 from datachef.selection import datafuncs as dfc
@@ -204,7 +206,7 @@ class Selectable(LiveTable):
         if re.match("^[A-Z]+[0-9]+:[A-Z]+[0-9]+$", excel_ref):
             wanted: List[BaseCell] = dfc.multi_excel_ref_to_basecells(excel_ref)
             selected = dfc.exactly_matched_xy_cells(self.cells, wanted)
-        
+
         # Single column and row reference
         # eg: 'F19'
         elif re.match("^[A-Z]+[0-9]+$", excel_ref):
@@ -217,7 +219,7 @@ class Selectable(LiveTable):
         elif re.match("^[0-9]+$", excel_ref):
             wanted_y_index: int = dfc.single_excel_row_to_y_index(excel_ref)
             selected = [c for c in self.cells if c.y == wanted_y_index]
-        
+
         # An excel reference that is one of more column letter
         # eg: 'H'
         elif re.match("^[A-Z]+$", excel_ref):
@@ -226,7 +228,7 @@ class Selectable(LiveTable):
 
         # Unknown excel reference
         else:
-            raise BadExcelReferenceError(f'Unrecognised excel reference {excel_ref}')
+            raise BadExcelReferenceError(f"Unrecognised excel reference {excel_ref}")
 
         self.cells = selected
         return self
@@ -266,7 +268,7 @@ class Selectable(LiveTable):
         :param direction: A cardinal direction: up, down, left
         right with optional offset, i.e right(3)
         "param barrier" A selection of cells we do not want
-        the spread to spread into 
+        the spread to spread into
         """
 
         if not isinstance(direction, Direction):
@@ -284,14 +286,13 @@ class Selectable(LiveTable):
             "above": dfc.order_cells_bottomtop_rightleft,
             "down": dfc.order_cells_topbottom_leftright,
             "below": dfc.order_cells_topbottom_leftright,
-
         }.get(direction.name)
 
         if not orderer:
             raise ValueError(
-                'Unable to determine required cell consideration'
-                f' order from direction: {direction}'
-                )
+                "Unable to determine required cell consideration"
+                f" order from direction: {direction}"
+            )
 
         ordered_selected_cells: List[Cell] = orderer(self.cells)
         ordered_pristine_cells: List[Cell] = copy.deepcopy(orderer(self.pcells))
@@ -303,7 +304,9 @@ class Selectable(LiveTable):
 
             if considered_offset is None:
                 considered_offset = cell.y if direction._horizontal_axis else cell.x
-            elif considered_offset != (cell.y if direction._horizontal_axis else cell.x):
+            elif considered_offset != (
+                cell.y if direction._horizontal_axis else cell.x
+            ):
                 spreading = None
                 considered_offset = cell.y if direction._horizontal_axis else cell.x
 
@@ -331,9 +334,7 @@ class Selectable(LiveTable):
 
         # We also need to modify the pristine selection
         self.pristine.cells = [
-            c1
-            for c1 in self.pcells
-            if not any(c1.matches_xy(c2) for c2 in new_cells)
+            c1 for c1 in self.pcells if not any(c1.matches_xy(c2) for c2 in new_cells)
         ]
         self.pristine.cells += new_cells
 

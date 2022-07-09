@@ -6,8 +6,8 @@ and its use in a users workflow
 import pytest
 
 from datachef.exceptions import UnnamedTableError
-from datachef.selection.selectable import Selectable
 from datachef.models.source.input import BaseInput
+from datachef.selection.selectable import Selectable
 from tests.fixtures.preconfigured import fixture_simple_one_tab, fixture_simple_two_tabs
 
 

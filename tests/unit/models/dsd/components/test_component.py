@@ -18,7 +18,7 @@ def get_component_variant(component_class: object) -> ComponentVariant:
         component_class=component_class,
         arg_types=[int, bool, Exception],
         required_kwargs=["foo"],
-        optional_kwargs=["bar", "baz"]
+        optional_kwargs=["bar", "baz"],
     )
 
 

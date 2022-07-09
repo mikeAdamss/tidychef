@@ -31,6 +31,4 @@ class LocalCsvReader(BaseReader):
                 for x_index, cell_value in enumerate(row):
                     table.add_cell(Cell(x=x_index, y=y_index, value=cell_value))
 
-        return selectable(
-            table, copy.deepcopy(table), source=self.source
-        )
+        return selectable(table, copy.deepcopy(table), source=self.source)

@@ -17,7 +17,7 @@ with open(raw_splashpage) as f:
     page_lines = f.readlines()
 
 scenarios = Path(this_dir / "scenarios" / "expected").glob("*.html")
-assert len(list(scenarios)) > 0, 'No scenarios found, aborting build.'
+assert len(list(scenarios)) > 0, "No scenarios found, aborting build."
 for scenario in scenarios:
     page_lines.append(
         f"- https://mikeadamss.github.io/datachef/{scenario.name}{linesep}"

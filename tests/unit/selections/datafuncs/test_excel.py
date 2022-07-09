@@ -105,8 +105,8 @@ def test_single_excel_row_to_y_index(selectable_simple1: Selectable):
     Confirm that passing in an excel reference consisting of a single
     row number exhbits the expected behaviour.
     """
-    s = selectable_simple1.excel_ref('1')
-    assert dfc.basecells_to_excel_ref(s.cells) == 'A1:Z1'
+    s = selectable_simple1.excel_ref("1")
+    assert dfc.basecells_to_excel_ref(s.cells) == "A1:Z1"
 
 
 def test_single_excel_column_to_x_index(selectable_simple1: Selectable):
@@ -114,5 +114,5 @@ def test_single_excel_column_to_x_index(selectable_simple1: Selectable):
     Confirm that passing in an excel reference consisting of a column
     refernce in the form of letters exhbits the expected behaviour.
     """
-    s = selectable_simple1.excel_ref('A')
-    assert dfc.basecells_to_excel_ref(s.cells) == 'A1:A100'
+    s = selectable_simple1.excel_ref("A")
+    assert dfc.basecells_to_excel_ref(s.cells) == "A1:A100"

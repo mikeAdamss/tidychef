@@ -57,21 +57,14 @@ def fixture_simple_two_tabs():
     """Simple input of two tabs. Cells A1:Z100"""
 
     test_input_path = path_to_fixture("csv", "simple.csv")
-    selectable1 = read_local(
-        test_input_path, override_selectable=XlsInputSelectable
-    )
+    selectable1 = read_local(test_input_path, override_selectable=XlsInputSelectable)
     table1 = LiveTable.from_table(
         selectable1.pristine, name="I am table 1", source=test_input_path
     )
 
-    selectable2 = read_local(
-        test_input_path, override_selectable=XlsInputSelectable
-    )
+    selectable2 = read_local(test_input_path, override_selectable=XlsInputSelectable)
     table2 = LiveTable.from_table(
         selectable2.pristine, name="I am table 2", source=test_input_path
     )
 
-    return BaseInput(
-        had_initial_path=test_input_path,
-        tables=[table1, table2]
-    )
+    return BaseInput(had_initial_path=test_input_path, tables=[table1, table2])

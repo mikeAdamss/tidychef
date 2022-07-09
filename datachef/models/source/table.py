@@ -5,8 +5,8 @@ Classes representing a single cell of data.
 from __future__ import annotations
 
 import copy
-from pathlib import Path
 import uuid
+from pathlib import Path
 from typing import List, Optional, Union
 
 from datachef.exceptions import (
@@ -17,6 +17,7 @@ from datachef.exceptions import (
 from datachef.models.source.cell import BaseCell, Cell
 from datachef.selection import datafuncs as dfc
 from datachef.utils.decorators import dontmutate
+
 
 class Table:
     """
@@ -46,7 +47,9 @@ class LiveTable:
     filtering down of one.
     """
 
-    def __init__(self, pristine: Table, filtered: Table, _name: str = None, source: str = None):
+    def __init__(
+        self, pristine: Table, filtered: Table, _name: str = None, source: str = None
+    ):
         self.pristine: Table = pristine
         self.filtered: Table = filtered
         self._name: Optional[str] = _name
@@ -115,7 +118,9 @@ class LiveTable:
             raise InvalidTableSignatures()
 
     @staticmethod
-    def from_table(table: Table, source: Union[Path, str], name: str = None) -> LiveTable:
+    def from_table(
+        table: Table, source: Union[Path, str], name: str = None
+    ) -> LiveTable:
         """
         Given a table and optional it's name, create a livetable.
         """
