@@ -8,7 +8,7 @@ test: ## Run all unit tests and create new coverage report
 	poetry run pytest --cov=datachef --cov-fail-under=100 tests/
 
 scenarios: ## Run our scenario notebooks, make sure the output matches whats expected
-	poetry run pytest ./scenarios
+	poetry run pytest -rx ./scenarios
 
 report: ## View the latest report of test coverage (includes missing coverage by line)
 	poetry run coverage report -m
