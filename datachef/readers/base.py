@@ -23,7 +23,7 @@ class BaseReader(metaclass=ABCMeta):
 
     def _raise_if_source_is_not_path(self):
         """
-        Raise if the source is no a Path object.
+        Raise if the source is not a Path object.
         """
         if not isinstance(self.source, Path):
             raise FileInputError("The source needs to be pathlib.Path object")

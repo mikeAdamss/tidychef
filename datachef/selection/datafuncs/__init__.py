@@ -21,6 +21,8 @@ from .common import (
     specific_cell_from_xy,
 )
 from .excel import (
+    single_excel_column_to_x_index,
+    single_excel_row_to_y_index,
     any_excel_ref_as_wanted_basecells,
     assert_excel_ref_within_cells,
     basecell_to_excel_ref,

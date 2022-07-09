@@ -1,4 +1,5 @@
 import pytest
+import copy
 
 from datachef import acquire
 from datachef.cardinal.directions import down, left, right, up
@@ -13,12 +14,13 @@ def test_spread_standard_directions():
 
     s: Selectable = acquire(
         [
-            ["   ", "   ", "       ", "   ", "   "],
-            ["   ", "   ", "       ", "   ", "   "],
-            ["   ", "foo", "bar    ", "baz", "   "],
-            ["   ", "   ", "       ", "   ", "   "],
-            ["   ", "   ", "blocked", "   ", "   "],
-            ["   ", "   ", "       ", "   ", "   "],
+        #      A      B        C        D      E
+            ["   ", "   ", "       ", "   ", "   "],  # 1
+            ["   ", "   ", "       ", "   ", "   "],  # 2
+            ["   ", "foo", "bar    ", "baz", "   "],  # 3
+            ["   ", "   ", "       ", "   ", "   "],  # 4
+            ["   ", "   ", "blocked", "   ", "   "],  # 5
+            ["   ", "   ", "       ", "   ", "   "],  # 6
         ]
     )
 
@@ -38,14 +40,15 @@ def test_spread_standard_directions():
     assert u.excel_ref("B1").lone_value() == "foo"
     assert u.excel_ref("B2").lone_value() == "foo"
 
-    # if call 'blocked' is included in the selection
-    # that vall value will be spread.
+    # if the cell labelled 'blocked' is included in the selection
+    # it will also spread in the down direction
     d = s.is_not_blank()
     d = d.spread(down)
     assert len(d.cells) == 12
     assert d.excel_ref("C3").lone_value().strip() == "bar"
     assert d.excel_ref("C4").lone_value().strip() == "bar"
     assert d.excel_ref("C5").lone_value() == "blocked"
+    assert d.excel_ref("C6").lone_value() == "blocked"
 
     # if call 'blocked' is not included in the selection
     # the spread of 'bar' will stop upon encountering that
@@ -54,5 +57,46 @@ def test_spread_standard_directions():
     d = d.spread(down)
     assert len(d.cells) == 10
 
+    # Check bad direction arguments raise a value error
     with pytest.raises(ValueError):
         s.spread("not-a-direction")
+
+
+def test_spread_with_until():
+    """
+    Confirm we can pass in a selection as "until" that
+    blocks the spread of cells.
+    """
+
+    s: Selectable = acquire(
+        [
+        #      A      B        C        D      E
+            ["   ", "   ", "       ", "   ", "   "],  # 1
+            ["   ", "   ", "       ", "   ", "   "],  # 2
+            ["   ", "foo", "bar    ", "baz", "   "],  # 3
+            ["   ", "   ", "       ", "   ", "   "],  # 4
+            ["   ", "   ", "       ", "   ", "   "],  # 5
+            ["   ", "   ", "       ", "   ", "   "],  # 6
+        ]
+    )
+
+    until = s.excel_ref('B5').expand(right)
+    selected = s.excel_ref('B3').expand(right).is_not_blank().spread(down, until=until)
+    assert len(selected.cells) == 6
+
+
+def test_spread_exceptions():
+    """
+    Test that malformed or bad parameters to spread raise appropriate errors
+    """
+
+    s: Selectable = acquire([])
+
+    # Check bad direction arguments raise a value error
+    with pytest.raises(ValueError):
+        s.spread("not-a-direction")
+
+    with pytest.raises(ValueError):
+        bad_direction = copy.deepcopy(up)
+        bad_direction.name = "whoops!"
+        s.spread(bad_direction)

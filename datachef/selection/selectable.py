@@ -1,9 +1,12 @@
+from __future__ import annotations
+
 import copy
 import re
 from typing import FrozenSet, List, Optional, Union
 
 from datachef.cardinal.directions import Direction, down, left, right, up
-from datachef.exceptions import (BadShiftParameterError,
+from datachef.exceptions import (BadExcelReferenceError,
+                                BadShiftParameterError,
                                  LoneValueOnMultipleCellsError,
                                  OutOfBoundsError)
 from datachef.models.source.cell import BaseCell, Cell
@@ -193,16 +196,37 @@ class Selectable(LiveTable):
     def excel_ref(self, excel_ref: str):
         """
         Selects just the cells as indicated by the provided excel style
-        reference: "A6", "B17:B24": etc.
+        reference: "A6", "B17:B24", "9", "GH" etc.
         """
 
-        if ":" in excel_ref:
+        # Multi excel reference:
+        # eg: 'B2:F5'
+        if re.match("^[A-Z]+[0-9]+:[A-Z]+[0-9]+$", excel_ref):
             wanted: List[BaseCell] = dfc.multi_excel_ref_to_basecells(excel_ref)
-        else:
+            selected = dfc.exactly_matched_xy_cells(self.cells, wanted)
+        
+        # Single column and row reference
+        # eg: 'F19'
+        elif re.match("^[A-Z]+[0-9]+$", excel_ref):
             wanted: BaseCell = dfc.single_excel_ref_to_basecell(excel_ref)
             wanted = [wanted]
+            selected = dfc.exactly_matched_xy_cells(self.cells, wanted)
 
-        selected = dfc.exactly_matched_xy_cells(self.cells, wanted)
+        # An excel reference that is a single row number
+        # eg: '4'
+        elif re.match("^[0-9]+$", excel_ref):
+            wanted_y_index: int = dfc.single_excel_row_to_y_index(excel_ref)
+            selected = [c for c in self.cells if c.y == wanted_y_index]
+        
+        # An excel reference that is one of more column letter
+        # eg: 'H'
+        elif re.match("^[A-Z]+$", excel_ref):
+            wanted_x_index: int = dfc.single_excel_column_to_x_index(excel_ref)
+            selected = [c for c in self.cells if c.x == wanted_x_index]
+
+        # Unknown excel reference
+        else:
+            raise BadExcelReferenceError(f'Unrecognised excel reference {excel_ref}')
 
         self.cells = selected
         return self
@@ -231,7 +255,7 @@ class Selectable(LiveTable):
         )
 
     @dontmutate
-    def spread(self, direction: Direction):
+    def spread(self, direction: Direction, until: Optional[Selectable] = None):
         """
         Spread a cell value into adjoining blank cells.
 
@@ -241,6 +265,8 @@ class Selectable(LiveTable):
 
         :param direction: A cardinal direction: up, down, left
         right with optional offset, i.e right(3)
+        "param barrier" A selection of cells we do not want
+        the spread to spread into 
         """
 
         if not isinstance(direction, Direction):
@@ -251,41 +277,24 @@ class Selectable(LiveTable):
 
         new_cells = []
 
-        if direction.name == "right":
-            ordered_selected_cells: List[Cell] = dfc.order_cells_leftright_topbottom(
-                self.cells
-            )
-            ordered_pristine_cells: List[Cell] = copy.deepcopy(
-                dfc.order_cells_leftright_topbottom(self.pcells)
-            )
-            horizontal_traversal = True
+        orderer = {
+            "right": dfc.order_cells_leftright_topbottom,
+            "left": dfc.order_cells_rightleft_bottomtop,
+            "up": dfc.order_cells_bottomtop_rightleft,
+            "above": dfc.order_cells_bottomtop_rightleft,
+            "down": dfc.order_cells_topbottom_leftright,
+            "below": dfc.order_cells_topbottom_leftright,
 
-        elif direction.name == "left":
-            ordered_selected_cells: List[Cell] = dfc.order_cells_rightleft_bottomtop(
-                self.cells
-            )
-            ordered_pristine_cells: List[Cell] = copy.deepcopy(
-                dfc.order_cells_rightleft_bottomtop(self.pcells)
-            )
-            horizontal_traversal = True
+        }.get(direction.name)
 
-        elif direction.name == "up":
-            ordered_selected_cells: List[Cell] = dfc.order_cells_bottomtop_rightleft(
-                self.cells
-            )
-            ordered_pristine_cells: List[Cell] = copy.deepcopy(
-                dfc.order_cells_bottomtop_rightleft(self.pcells)
-            )
-            horizontal_traversal = False
+        if not orderer:
+            raise ValueError(
+                'Unable to determine required cell consideration'
+                f' order from direction: {direction}'
+                )
 
-        elif direction.name == "down":
-            ordered_selected_cells: List[Cell] = dfc.order_cells_topbottom_leftright(
-                self.cells
-            )
-            ordered_pristine_cells: List[Cell] = copy.deepcopy(
-                dfc.order_cells_topbottom_leftright(self.pcells)
-            )
-            horizontal_traversal = False
+        ordered_selected_cells: List[Cell] = orderer(self.cells)
+        ordered_pristine_cells: List[Cell] = copy.deepcopy(orderer(self.pcells))
 
         selected_cell_index: int = 0
         considered_offset = None
@@ -293,10 +302,10 @@ class Selectable(LiveTable):
         for cell in ordered_pristine_cells:
 
             if considered_offset is None:
-                considered_offset = cell.y if horizontal_traversal else cell.x
-            elif considered_offset != (cell.y if horizontal_traversal else cell.x):
+                considered_offset = cell.y if direction._horizontal_axis else cell.x
+            elif considered_offset != (cell.y if direction._horizontal_axis else cell.x):
                 spreading = None
-                considered_offset = cell.y if horizontal_traversal else cell.x
+                considered_offset = cell.y if direction._horizontal_axis else cell.x
 
             if not (selected_cell_index + 1) > len(ordered_selected_cells):
                 if cell.matches_xy(ordered_selected_cells[selected_cell_index]):
@@ -305,6 +314,10 @@ class Selectable(LiveTable):
                     continue
 
             if spreading is not None:
+                if until:
+                    if any(cell.matches_xy(c) for c in until.cells):
+                        spreading = None
+                        continue
                 if cell.is_blank():
                     cell.value = spreading
                     new_cells.append(cell)
@@ -324,6 +337,6 @@ class Selectable(LiveTable):
         ]
         self.pristine.cells += new_cells
 
-        # Add the overwritten cells in
+        # Add the overwritten cells into the current selection
         self.cells += new_cells
         return self

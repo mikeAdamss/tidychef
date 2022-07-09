@@ -25,12 +25,9 @@ def read_local(
     can be passed in via override_reader.
 
     The Selectable class returned can be overwritten using
-    override_selectable. This is to enable source file
-    specific methods (such as .excel_ref()) that don't necessarily
-    make sense as standard with all input types (such as csv).
-
-    The above functionality is provided as best effort for edge
-    cases and will not be supported or even possible in all instances.
+    override_selectable. This is to given an advacned user
+    some control over the palette of selection methods made
+    availible for a given source.
     """
 
     input_path: Path = fileutils.ensure_existing_path(path_or_str)

@@ -1,5 +1,10 @@
+"""
+Data functions related to excel referencing of x.y positioned cells.
+"""
 import re
 from typing import List
+
+from pyrsistent import s
 
 from datachef.exceptions import BadExcelReferenceError, ReversedExcelRefError
 from datachef.models.source.cell import BaseCell
@@ -39,6 +44,22 @@ def any_excel_ref_as_wanted_basecells(excel_ref: str) -> List[BaseCell]:
     raise BadExcelReferenceError(
         f"Could not identify style of excel reference {excel_ref}"
     )
+
+
+def single_excel_row_to_y_index(excel_ref: str) -> int:
+    """
+    Given a single row number as an excel reference, return
+    a list of basecells.
+    """
+    return cellutils.number_to_y(int(excel_ref))
+
+
+def single_excel_column_to_x_index(excel_ref: str) -> str:
+    """
+    Given a single column latter as an excel reference, return
+    a list of basecells.
+    """
+    return cellutils.letters_to_x(excel_ref)
 
 
 def single_excel_ref_to_basecell(excel_ref: str) -> BaseCell:

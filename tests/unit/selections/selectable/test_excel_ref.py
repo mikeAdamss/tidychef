@@ -1,6 +1,6 @@
 import pytest
 
-from datachef.exceptions import CellsDoNotExistError, LoneValueOnMultipleCellsError
+from datachef.exceptions import BadExcelReferenceError, CellsDoNotExistError, LoneValueOnMultipleCellsError
 from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
 
@@ -39,3 +39,15 @@ def test_excel_referece_out_of_bounds_error(
 
     with pytest.raises(CellsDoNotExistError) as exc_info:
         selectable_simple1.excel_ref("AA2")
+
+
+def test_excel_referece_bad_reference_error(
+    selectable_simple1: Selectable,
+):
+    """
+    Test that we cannot select using an excel reference for cells that
+    are not within the current selection
+    """
+
+    with pytest.raises(BadExcelReferenceError) as exc_info:
+        selectable_simple1.excel_ref("*nope")
