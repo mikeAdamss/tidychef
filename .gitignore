@@ -7,5 +7,4 @@ __pycache__
 htmlcov
 docs
 _docs/splashpage.md
-scenarios/created
-scenarios.ipynb
+scenarios

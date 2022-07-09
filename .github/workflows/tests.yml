@@ -22,6 +22,9 @@ jobs:
           pip install poetry
       - name: Install dependencies via poetry
         run: poetry install
+
+      - name: Unbundle test resources
+        run: poetry run python3 ./resources/bundler unbundle
         
       - name: Run unit tests
         run: poetry run pytest --cov=datachef --cov-fail-under=100 tests/

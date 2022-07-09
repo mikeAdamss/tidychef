@@ -34,3 +34,9 @@ checkimports: ## Use pylint to check for unused imports
 
 pylint: ## Run pylint
 	poetry run pylint ./datachef
+
+unbundle: ## Unbundle (unzip) html and ipynb test resources
+	poetry run python3 ./resources/bundler.py unbundle
+
+bundle: ## Bundle (zip) html and ipynb test resources
+	poetry run python3 ./resources/bundler.py bundle
