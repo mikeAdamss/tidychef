@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "pivoter"
+name = "datachef"
 version = "0.1.0"
 description = "Python package for transforming human readable tables into tidy data"
 authors = ["mikeAdamss <mikelovesbooks@gmail.com>"]

@@ -1,54 +1,35 @@
 ## installation
 
-Datachef can be installed from pypi via `pip install datachef`
+Datachef can be installed from pypi via 
+
+```
+pip install datachef
+```
 
 _note: not true (yet) at time of writing_.
 
-You can run datacheck via any python interpreter you want to, but the examples and documentation will tend to use Jupyter notebooks/labs/books as its html rendering works particularly well with the datachef preview functionality. 
+You can run datacheck via any python interpreter you want to, but the examples and documentation will tend to use Jupyter notebooks/labs/books as its html features work particularly well for examples.
 
+## users vs developers
 
-## the datachef book
+Regardless of which category you fall into, its advisable to start your interactions with datachef via the scenarios (see next section).
 
-The "datachef book" is a series jupyter book (connected and organised jupyter notebooks) designed to gradually introduce a new user to the full functionality of datachef via well documented, contextualised examples.
+If you are looking for development and/or technical information - in addition to the API documentation (see "Submodules" in the left hand menu) the [datachef github repo](https://github.com/mikeAdamss/datachef) also contains details on design choices, guidelines for contributing and an explanation of how datachef can be extended and customised. 
 
-- [see the example (opens a new window)](./example.html) to get an idea what datachef does and if it satisfies your use case(s) 
-- [view the book (opens a new window)](./example.html) 
+## scenarios explained
 
-_# note: both the above links are just to a holding file for now._
+Scenarios are Jupyter notebook examples used for both regression testing and as examples for onboarding new users.
 
+Scenarios are organised numerically with the ordering roughly equating to the learning curve for a new user.
 
-## real life use cases
+Scenarios are also rated as "basic", "intermediate" and "advanced" so you can look ahead for further examples and guidance on a given topic.
 
-A repository of data transformation examples using datachef. These are all real life use cases showing the transformation of messy open data to well strcutured machine readable data.
+A fourth category of "examples" follows in its own discrete section. These are full working examples using messy opendata sources from the web.
 
-[TODO - link wont work!]()
+## scenarios...
 
-_note: as a interim during development, if you open any of the py files in `./datachef/scenarios` with a jupyter notebook or lab and run them, you should get an idea of the functionality we're building out here_.
+If you want to run these scenarios interactively, you can download a zip file of all scenarios as `.ipynb` - 
+https://github.com/mikeAdamss/datachef/raw/main/resources/scenarios.zip
 
-## development
+To browse the html output of the scenarios, select from the following:
 
-In addition to the API documentation (see "Submodules" in the left hand menu) the [datachef github repo](https://github.com/mikeAdamss/datachef) also contains details on design choices, guidelines for contributing and an explanation of how datachef can be extended and customised. 
-
-
-## test strategy
-
-We have two rounds of testing that new builds of the codebase must pass.
-
-**1.) Unit Tests**
-
-100% test coverage is required before a build will succeed.
-
-**2.) Scenarios**
-
-Optional tests of more complex interactions. Uses jupyter notebooks to confirm that the output under each new code release remains as expected. This serves as both a primitive form of regression and behavioural testing.
-
-Each "scenario" consists of:
-
-- A `.py` representation of a notebook stored in `./scenarios/scenarios`
-- The expected html output of said notebook once ran stored in `./scenarios/expected`
-
-The comparisson will be triggered using pytest but as a separate test stage, so code coverage will not be effected. This is _supplementary_ to the standard unit tests, not instead of.
-
-##scenarios
-
-The following scenarios are ran with every datachef build.
