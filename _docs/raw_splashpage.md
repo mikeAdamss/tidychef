@@ -18,7 +18,7 @@ If you are looking for development and/or technical information - in addition to
 
 ## scenarios explained
 
-Scenarios are Jupyter notebook examples used for both regression testing and as examples for onboarding new users.
+Scenarios are Jupyter notebook examples used for both regression testing and as an extensive set of tutorials and examples for onboarding new users.
 
 Scenarios are organised numerically with the ordering roughly equating to the learning curve for a new user.
 

@@ -134,7 +134,7 @@ class Cell(BaseCell):
     x: Optional[str] = None
     y: Optional[str] = None
 
-    # Optional as some tabullated formats (eg csv) do not have
+    # Optional as some tabulated formats (eg csv) do not have
     # cell formatting.
     cellformat: Optional[CellFormatting] = None
 

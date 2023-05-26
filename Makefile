@@ -8,7 +8,7 @@ install: ## Installs datacheck into a poetry venv
 	poetry install
 
 test: install ## Run all unit tests and create new coverage report
-	poetry run pytest --cov=datachef --cov-fail-under=100 ./tests/
+	poetry run pytest --cov-report term-missing --cov=datachef --cov-fail-under=100 ./tests/
 
 scenarios: install ## Run our scenario notebooks, make sure the output matches whats expected
 	poetry run pytest -rx ./scenarios

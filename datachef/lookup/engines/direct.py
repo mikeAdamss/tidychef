@@ -15,30 +15,15 @@ from ..base import BaseLookupEngine
 
 class Directly(BaseLookupEngine):
     """
-    A class representing a direct lookup.
-
-    i.e for any given observation the required
-    value is directly inline along either the
-    vertical or horizontal axis.
+    A class to resolve a direct lookup between
+    an observation cell and the value from the
     """
 
-    def _index(self, cell: Cell):
-        """
-        Get the x or y offset we're interested in.
-
-        By default its the along the principle direction
-        of travel, i.e cell.x (column index) for a
-        horixontal lookups else y (row index).
-        """
-        if self.direction._horizontal_axis:
-            return cell.y
-        return cell.x
-
-    def _post_init(self, selection: Selectable, direction: Direction):
+    def __init__(self, selection: Selectable, direction: Direction):
         """
 
         :param: The value items that define this
-        component, eg: in case of a dimesion, these
+        component, eg: in case of a dimension, these
         would be the dimensional values.
         """
         self.direction: Direction = direction
@@ -48,7 +33,7 @@ class Directly(BaseLookupEngine):
         # along a single axis, we'll create a
         # dict so we can just pluck out
         # the required lookup cell using the
-        # relevent x or y offset of the
+        # relevant x or y offset of the
         # observation cell in question.
 
         # The complication comes from having
@@ -66,7 +51,7 @@ class Directly(BaseLookupEngine):
         # | dim1.5 |     | ob  | ob  |     | dim2.5 |     | [ob]  |  [ob] |
         #
         # If you consider each [ob] cells and a lookup for direction:left,
-        # there are two availible dimesions on that axis, we need to
+        # there are two available dimensions on that axis, we need to
         # differentiate the correct one per ob.
 
         if not isinstance(self.direction, Direction):
@@ -78,7 +63,7 @@ class Directly(BaseLookupEngine):
         elif self.direction.name in ["right", "down"]:
             ordered_cells = dfc.order_cells_rightleft_bottomtop(cells)
         else:
-            # Shouldn't happend unless someone is hacking in something
+            # Shouldn't happen
             raise UnknownDirectionError(f"The direction {direction.name} is unknown.")
 
         self._lookups = {}
@@ -86,6 +71,18 @@ class Directly(BaseLookupEngine):
             if self._index(cell) not in self._lookups:
                 self._lookups[self._index(cell)] = []
             self._lookups[self._index(cell)].append(cell)
+
+    def _index(self, cell: Cell):
+        """
+        Get the x or y offset we're interested in.
+
+        By default its the along the principle direction
+        of travel, i.e cell.x (column index) for a
+        horizontal lookups else y (row index).
+        """
+        if self.direction._horizontal_axis:
+            return cell.y
+        return cell.x
 
     def resolve(self, cell: Cell) -> Cell:
         """

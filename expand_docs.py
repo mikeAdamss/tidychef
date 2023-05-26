@@ -19,12 +19,12 @@ with open(raw_splashpage) as f:
 scenarios = Path(this_dir / "scenarios" / "html_scenario_fixtures").glob("*.html")
 scenario_file_list = list([x.name for x in scenarios])
 print(scenario_file_list)
-assert len(list(scenario_file_list)) > 0, "No scenarios found, aborting build. Have you ran 'make unbundle?'"
+assert (
+    len(list(scenario_file_list)) > 0
+), "No scenarios found, aborting build. Have you ran 'make unbundle?'"
 for scenario in scenario_file_list:
-    page_lines.append(
-        f"[{scenario}](/{scenario}){linesep}"
-    )
+    page_lines.append(f"[{scenario}](/{scenario}){linesep}")
 
 with open(splashpage, "w") as f:
     for line in page_lines:
-        f.write(line+linesep)
+        f.write(line + linesep)

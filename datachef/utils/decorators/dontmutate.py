@@ -7,11 +7,15 @@ def dontmutate(method):
     Decorates a method so that where returning self
     any operations are made on a _copy_ of self.
 
-    Without this, the following pattern:
-    f2 = f1.do_something()
+    Without this, the following patterns:
 
-    Would change the value of f1 as well as assigning
-    said new value to f2.
+    selection2 = selection1.do_something()
+    or
+    match2 = match.regex("foo")
+
+    Would change the value in the righthand
+    classes (selection1 and match) as well
+    as their lefthand assignations.
     """
 
     @wraps(method)
