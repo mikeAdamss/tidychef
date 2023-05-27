@@ -1,6 +1,6 @@
 from typing import List
 
-from datachef.cardinal.directions import Direction
+from datachef.cardinal.directions import BaseDirection, Direction
 from datachef.exceptions import (
     FailedLookupError,
     MissingDirectLookupError,
@@ -19,14 +19,14 @@ class Directly(BaseLookupEngine):
     an observation cell and the value from the
     """
 
-    def __init__(self, selection: Selectable, direction: Direction):
+    def __init__(self, selection: Selectable, direction: BaseDirection):
         """
 
         :param: The value items that define this
         component, eg: in case of a dimension, these
         would be the dimensional values.
         """
-        self.direction: Direction = direction
+        self.direction: BaseDirection = direction
         cells = selection.cells
 
         # Given we know the relationship is always
@@ -54,9 +54,9 @@ class Directly(BaseLookupEngine):
         # there are two available dimensions on that axis, we need to
         # differentiate the correct one per ob.
 
-        if not isinstance(self.direction, Direction):
+        if not isinstance(self.direction, BaseDirection):
             raise UnknownDirectionError(
-                f"The direction parameter must be of type: {type(Direction)}"
+                f"The direction parameter must be of type: {type(BaseDirection)}"
             )
         if self.direction.name in ["left", "up"]:
             ordered_cells = dfc.order_cells_leftright_topbottom(cells)

@@ -10,7 +10,15 @@ Datachef is a pet/passion project to create a ground up rewrite and extension of
 
 A `Makefile` is included to streamline some recurring developments tasks. Running a naked `make` from the command line will display a simple help menu.
 
-_Note: Mac/Linux have Make by default, windows as I understand it would require a bit of work._
+_Note: Mac and most Linux distributions have Make by default, windows as I understand it would require a bit of work._
+
+---
+
+## Development
+
+TODO
+
+---
 
 ## Building Documentation
 

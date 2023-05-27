@@ -4,7 +4,7 @@ import copy
 import re
 from typing import FrozenSet, List, Optional, Union
 
-from datachef.cardinal.directions import Direction, down, left, right, up
+from datachef.cardinal.directions import BaseDirection, Direction, down, left, right, up
 from datachef.exceptions import (
     BadExcelReferenceError,
     BadShiftParameterError,
@@ -173,7 +173,7 @@ class Selectable(LiveTable):
                 raise BadShiftParameterError()
             x_offset = direction_or_x
             y_offset = possibly_y
-        elif isinstance(direction_or_x, Direction):
+        elif isinstance(direction_or_x, BaseDirection):
             assert (
                 not possibly_y
             ), "Where passing a direction into shift, that must be the only argument"
@@ -271,7 +271,7 @@ class Selectable(LiveTable):
         the spread to spread into
         """
 
-        if not isinstance(direction, Direction):
+        if not isinstance(direction, BaseDirection):
             raise ValueError(
                 "Argument direction must be one of: up, down,"
                 "left, right, above, below"

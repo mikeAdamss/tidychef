@@ -1,9 +1,14 @@
 from dataclasses import dataclass
 from typing import Optional
 
+from datachef.utils.decorators import dontmutate
 
+class BaseDirection:
+    ...
+
+@dontmutate
 @dataclass
-class Direction:
+class Direction(BaseDirection):
     """
     A class representing a cardinal direction.
 
