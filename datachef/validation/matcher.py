@@ -1,5 +1,7 @@
 import re
+from typing import Optional
 
+from datachef.exceptions import NoMatcherSpecifiedError
 from datachef.models.source.cell import Cell
 from datachef.utils.decorators import dontmutate
 from datachef.validation.base import BaseValidation
@@ -16,8 +18,8 @@ class Matcher(BaseValidation):
     """
 
     def __init__(self):
-        self.match_regex = False
-        self.regex_pattern = None
+        self.match_regex: bool = False
+        self.regex_pattern: Optional[str] = None
 
     def _pristine(self):
         """
@@ -30,21 +32,20 @@ class Matcher(BaseValidation):
         When called, apply whichever validation method
         is toggled on for this instance of Matcher
         """
-        if self.match_regex:
-            self.__regex_implemented(cell)
-        else:
-            # Catch and help any users calling with configuring
-            raise Exception(
-                f"""
-                You are passing a cell to a Matcher that has not
-                been configured with a matching strategy.
+        try:
+            if self.match_regex:
+                self.__regex_implemented(cell)
+            else:
+                # Catch and help any users calling with configuring
+                raise NoMatcherSpecifiedError()
+        except NoMatcherSpecifiedError as err:
+            raise err
+        except Exception as err:
+            if self.print_not_raise_exception:
+                print(str(err))
+            else:
+                raise err
 
-                Examples of correct usage:
-
-                match.regex("foo")
-                match.one_of("foo", "bar", "baz")
-            """
-            )
 
     # -----
     # regex

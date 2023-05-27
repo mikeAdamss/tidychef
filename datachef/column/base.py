@@ -89,7 +89,7 @@ class BaseColumn(metaclass=ABCMeta):
         """
         return cell
 
-    def resolve_column_value_from_obs(self, observation_cell: Cell) -> Cell:
+    def resolve_column_cell_from_obs_cell(self, observation_cell: Cell) -> Cell:
         """
         Use the provided lookup engine to return the value
         of this Column against a given observation, according
@@ -109,10 +109,10 @@ class BaseColumn(metaclass=ABCMeta):
         """
         Takes a selection of observations and generates
         tuples of:
-        <observation_cell> : <column value>
+        <observation_cell> : <column cell>
 
         This is intended for sanity checking, NOT
         doing the actual lookups.
         """
         for observation_cell in observation_selection.cells:
-            yield observation_cell, self.resolve_column_value_from_obs(observation_cell)
+            yield observation_cell, self.resolve_column_cell_from_obs_cell(observation_cell)

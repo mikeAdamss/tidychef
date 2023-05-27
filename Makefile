@@ -13,9 +13,6 @@ test: install ## Run all unit tests and create new coverage report
 scenarios: install ## Run our scenario notebooks, make sure the output matches whats expected
 	poetry run pytest -rx ./scenarios
 
-report: install ## View the latest report of test coverage (includes missing coverage by line)
-	poetry run coverage report -m
-
 format: ## Format the codebase with isort and black
 	poetry run isort ./* && poetry run black ./*
 
@@ -29,7 +26,7 @@ docs: install ## Combines auto API docs and contents of _docs and serves it loca
 pyrightbuild: ## Build our docker image for running pyright
 	docker build -t pyrightimage ./images
 
-pyright: ## Run pyright through docker
+pyright: pyrightbuild ## Run pyright through docker
 	docker run -v $(PWD):/workspace -w /workspace -it pyrightimage /bin/bash -c "poetry run pyright ./datachef --lib"
 
 checkimports: install ## Use pylint to check for unused imports

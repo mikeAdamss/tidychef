@@ -1,8 +1,6 @@
 from datachef.column.base import BaseColumn
 from datachef.lookup.base import BaseLookupEngine
 from datachef.models.source.cell import Cell
-from datachef.selection.selectable import Selectable
-from datachef.validation.base import BaseValidation
 
 
 class Column(BaseColumn):
@@ -26,20 +24,7 @@ class Column(BaseColumn):
         # Apply
         # -----
 
-        apply_long_form = kwargs.get("apply", None)
-        apply_short_form = kwargs.get("a", None)
-
-        assert not (
-            apply_long_form and apply_short_form
-        ), "Either specify validation with validation= or v= , not both."
-
-        if apply_long_form:
-            self.apply = apply_long_form
-        elif apply_short_form:
-            self.apply = apply_short_form
-        else:
-            self.apply = None
-
+        self.apply = kwargs.get("apply", None)
         if self.apply:
             assert callable(
                 self.apply
@@ -49,19 +34,12 @@ class Column(BaseColumn):
         # Validation
         # ----------
 
-        validation_long_form = kwargs.get("validation", None)
-        validation_short_form = kwargs.get("v", None)
+        self.validation = kwargs.get("validation", None)
+        if self.validation:
+            assert callable(
+                self.validation
+            ), "Value of Kwarg 'validation' must be a python callable"
 
-        assert not (
-            validation_long_form and validation_short_form
-        ), "Either specify validation with validation= or v= , not both."
-
-        if validation_short_form:
-            self.validation = validation_short_form
-        elif validation_long_form:
-            self.validation = validation_long_form
-        else:
-            self.validation = None
 
     def _post_lookup(self, cell: Cell):
         """

@@ -18,3 +18,4 @@ from .common import (
 )
 from .construction import ComponentConstructionError, DimensionConstructionError
 from .lookups import FailedLookupError, MissingDirectLookupError
+from .validation import NoMatcherSpecifiedError

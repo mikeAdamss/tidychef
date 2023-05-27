@@ -1,9 +1,11 @@
 import pytest
 
+from datachef import acquire
 from datachef.column.base import BaseColumn
 from datachef.lookup.engines.constant import Constant
 from datachef.models.source.cell import VirtualCell
 from tests.fixtures import fixture_simple_one_tab
+from tests.fixtures import path_to_fixture
 
 
 @pytest.fixture
@@ -19,7 +21,7 @@ def test_resolving_base_column_value_from_observation():
     ob_cell = VirtualCell("value unused as we're using a constant lookup")
 
     col = BaseColumn("This", Constant("foo"))
-    assert col.resolve_column_value_from_obs(ob_cell).value == "foo"
+    assert col.resolve_column_cell_from_obs_cell(ob_cell).value == "foo"
 
 
 def test_base_column_assertions():
@@ -44,9 +46,25 @@ def test_base_column_assertions():
             True,
         )
 
-    # Does not raise for correct arguments
+    # Does not raise for incorrect arguments
     BaseColumn("I r a label", Constant("foo"))
 
 
-def test_base_column_pre_init():
-    ...
+def test_base_column_lookup_preview():
+    """
+    Test that a user can create the generator to
+    preview lookups.
+    """
+
+    column = BaseColumn("I r a label", Constant("foo"))
+
+    path_to_csv = path_to_fixture("csv", "bands.csv")
+    observations_selection = acquire(path_to_csv).excel_ref("C7:E10")
+
+    count = 0
+    for ob_cell, looked_up_cell in column.lookup_preview(observations_selection):
+        assert (
+            ob_cell == observations_selection.cells[count] and
+            looked_up_cell.value == "foo"
+            )
+        count += 1

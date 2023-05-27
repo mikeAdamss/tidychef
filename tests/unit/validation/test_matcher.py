@@ -1,5 +1,6 @@
 import pytest
 
+from datachef.exceptions import NoMatcherSpecifiedError
 from datachef.models.source.cell import Cell
 from datachef.validation import Matcher
 
@@ -41,7 +42,7 @@ def test_regex_matcher():
         match(non_matching_cell)
 
 
-def test_error_for_calling_unconfigured():
+def test_error_for_no_matches_specified():
     """
     Test that the expected Exception is raised
     where an observation is passed to a matcher
@@ -50,5 +51,22 @@ def test_error_for_calling_unconfigured():
 
     match = Matcher()
 
-    with pytest.raises(Exception):
+    with pytest.raises(NoMatcherSpecifiedError):
         match("foo")
+
+def test_errors_do_not_raise_specified():
+    """
+    Test that we can configure the matcher
+    to print errors rather than raising them.
+    """
+
+    match = Matcher().regex("foo")
+
+    # Should raise as "donkeys" != "foo"
+    non_matching_cell = Cell(value="donkeys")
+    with pytest.raises(AssertionError):
+        match(non_matching_cell)
+
+    # Should no longer raise
+    match.print_not_raise_exception = True
+    match(non_matching_cell)

@@ -13,19 +13,25 @@ def test_resolving_column_value_from_observation():
     ob_cell = VirtualCell("value unused as we're using a constant lookup")
 
     col = Column("This", Constant("foo"))
-    assert col.resolve_column_value_from_obs(ob_cell).value == "foo"
+    assert col.resolve_column_cell_from_obs_cell(ob_cell).value == "foo"
 
 
-def test_apply_can_be_passed_in_short_and_long_form():
+def test_apply_can_be_specified():
     """
-    Test that a user can pass in a callable via
-    either apply= or a=
+    Test that apply= works as expected
     """
 
     ob_cell = VirtualCell("value unused as we're using a constant lookup")
 
     col = Column("This", Constant("foo"), apply=lambda x: x + "-bar")
-    assert col.resolve_column_value_from_obs(ob_cell).value == "foo-bar"
+    assert col.resolve_column_cell_from_obs_cell(ob_cell).value == "foo-bar"
 
-    col = Column("This", Constant("foo"), a=lambda x: x + "-baz")
-    assert col.resolve_column_value_from_obs(ob_cell).value == "foo-baz"
+def test_validation_can_be_specified():
+    """
+    Test that validation= works as expected
+    """
+
+    ob_cell = VirtualCell("value unused as we're using a constant lookup")
+
+    col = Column("This", Constant("foo"), validation=lambda x: x)
+    assert col.resolve_column_cell_from_obs_cell(ob_cell).value == "foo"
