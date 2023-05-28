@@ -26,6 +26,7 @@ def test_apply_can_be_specified():
     col = Column("This", Constant("foo"), apply=lambda x: x + "-bar")
     assert col.resolve_column_cell_from_obs_cell(ob_cell).value == "foo-bar"
 
+
 def test_validation_can_be_specified():
     """
     Test that validation= works as expected

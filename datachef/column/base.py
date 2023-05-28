@@ -115,4 +115,6 @@ class BaseColumn(metaclass=ABCMeta):
         doing the actual lookups.
         """
         for observation_cell in observation_selection.cells:
-            yield observation_cell, self.resolve_column_cell_from_obs_cell(observation_cell)
+            yield observation_cell, self.resolve_column_cell_from_obs_cell(
+                observation_cell
+            )

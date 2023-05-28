@@ -40,7 +40,6 @@ class Column(BaseColumn):
                 self.validation
             ), "Value of Kwarg 'validation' must be a python callable"
 
-
     def _post_lookup(self, cell: Cell):
         """
         If someone has passed in a callable with the apply= keyword,

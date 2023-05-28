@@ -10,7 +10,7 @@ def dontmutate(method):
     Without this, the following patterns:
 
     selection2 = selection1.do_something()
-    
+
     match2 = match.regex("foo")
 
     Would change the value in the righthand

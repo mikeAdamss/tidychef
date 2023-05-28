@@ -3,8 +3,10 @@ from typing import Optional
 
 from datachef.utils.decorators import dontmutate
 
+
 class BaseDirection:
     ...
+
 
 @dontmutate
 @dataclass

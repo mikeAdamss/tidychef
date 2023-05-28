@@ -54,6 +54,7 @@ def test_error_for_no_matches_specified():
     with pytest.raises(NoMatcherSpecifiedError):
         match("foo")
 
+
 def test_errors_do_not_raise_specified():
     """
     Test that we can configure the matcher

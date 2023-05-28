@@ -1,8 +1,9 @@
 from abc import ABCMeta, abstractmethod
 from typing import Any, List, Optional
 
-from datachef.selection.selectable import Selectable
 from datachef.column.base import BaseColumn
+from datachef.selection.selectable import Selectable
+
 
 class BaseOutput(metaclass=ABCMeta):
     """

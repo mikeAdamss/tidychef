@@ -47,7 +47,11 @@ class Selectable(LiveTable):
         considered blank. You can change this behaviour
         with the disregard_whitespace keyword.
         """
-        self.cells = [x for x in self.cells if x.is_blank(disregard_whitespace=disregard_whitespace)]
+        self.cells = [
+            x
+            for x in self.cells
+            if x.is_blank(disregard_whitespace=disregard_whitespace)
+        ]
         return self
 
     @dontmutate
@@ -58,7 +62,11 @@ class Selectable(LiveTable):
         considered blank. You can change this behaviour
         with the disregard_whitespace keyword.
         """
-        self.cells = [x for x in self.cells if x.is_not_blank(disregard_whitespace=disregard_whitespace)]
+        self.cells = [
+            x
+            for x in self.cells
+            if x.is_not_blank(disregard_whitespace=disregard_whitespace)
+        ]
         return self
 
     @dontmutate
@@ -181,7 +189,7 @@ class Selectable(LiveTable):
         else:
             raise BadShiftParameterError()
 
-        #y_offset = 0 if not possibly_y else possibly_y
+        # y_offset = 0 if not possibly_y else possibly_y
         wanted_cells: List[BaseCell] = [
             BaseCell(x=c.x + x_offset, y=c.y + y_offset) for c in self.cells
         ]
@@ -230,10 +238,11 @@ class Selectable(LiveTable):
             end_y_index: int = dfc.single_excel_row_to_y_index(end_y)
             if start_y_index >= end_y_index:
                 raise BadExcelReferenceError(
-                    f'Excel ref "{excel_ref}" is invalid. {end_y_index} must be higher than {start_y_index}')
+                    f'Excel ref "{excel_ref}" is invalid. {end_y_index} must be higher than {start_y_index}'
+                )
             selected = [
                 c for c in self.cells if c.y >= start_y_index and c.y <= end_y_index
-                ]
+            ]
 
         # An excel reference that is one column letter
         # eg: 'H'
@@ -250,8 +259,11 @@ class Selectable(LiveTable):
             end_x_index: int = dfc.single_excel_column_to_x_index(right_letters)
             if start_x_index >= end_x_index:
                 raise BadExcelReferenceError(
-                    f'Excel ref "{excel_ref}" is invalid. {right_letters} much be higher than {left_letters}')
-            selected = [c for c in self.cells if c.x >= start_x_index and c.x <= end_x_index]
+                    f'Excel ref "{excel_ref}" is invalid. {right_letters} much be higher than {left_letters}'
+                )
+            selected = [
+                c for c in self.cells if c.x >= start_x_index and c.x <= end_x_index
+            ]
 
         # Unknown excel reference
         else:

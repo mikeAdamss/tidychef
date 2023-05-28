@@ -4,8 +4,7 @@ from datachef import acquire
 from datachef.column.base import BaseColumn
 from datachef.lookup.engines.constant import Constant
 from datachef.models.source.cell import VirtualCell
-from tests.fixtures import fixture_simple_one_tab
-from tests.fixtures import path_to_fixture
+from tests.fixtures import fixture_simple_one_tab, path_to_fixture
 
 
 @pytest.fixture
@@ -64,7 +63,7 @@ def test_base_column_lookup_preview():
     count = 0
     for ob_cell, looked_up_cell in column.lookup_preview(observations_selection):
         assert (
-            ob_cell == observations_selection.cells[count] and
-            looked_up_cell.value == "foo"
-            )
+            ob_cell == observations_selection.cells[count]
+            and looked_up_cell.value == "foo"
+        )
         count += 1

@@ -2,15 +2,16 @@ from typing import List
 
 import tabulate
 
-from datachef.selection.selectable import Selectable
 from datachef.column.base import BaseColumn
 from datachef.output.base import BaseOutput
+from datachef.selection.selectable import Selectable
+
 
 class TidyData(BaseOutput):
     """
     A class to generate a basic representation of the
     data as tidy data.
-    
+
     Example:
 
     | Value | Sex     | Age  |
@@ -20,11 +21,12 @@ class TidyData(BaseOutput):
     | 4     | Female  | 18   |
     """
 
-    def __init__(self,
-                 observations: Selectable,
-                 columns: List[BaseColumn],
-                 observation_label: str = "Value"
-                 ):
+    def __init__(
+        self,
+        observations: Selectable,
+        columns: List[BaseColumn],
+        observation_label: str = "Value",
+    ):
         """
         A class to hold tidy data representations of a data source
         """
@@ -39,7 +41,7 @@ class TidyData(BaseOutput):
     def __str__(self):
         """
         When printed, display what the ouput will
-        look like in a use friendly way. 
+        look like in a use friendly way.
         """
         if not self.data:
             self.transform()
@@ -55,7 +57,7 @@ class TidyData(BaseOutput):
         [
             [header1,header2,header3],
             [observation1, column2value1, column3value1]
-            ...etc... 
+            ...etc...
         ]
 
         Once this method has been ran, this internal
@@ -78,7 +80,9 @@ class TidyData(BaseOutput):
             for observation in self.observations:
                 line = [observation.value]
                 for column in self.columns:
-                    line.append(column.resolve_column_cell_from_obs_cell(observation).value)
+                    line.append(
+                        column.resolve_column_cell_from_obs_cell(observation).value
+                    )
                 grid.append(line)
 
             self.data = grid

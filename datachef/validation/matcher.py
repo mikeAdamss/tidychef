@@ -46,7 +46,6 @@ class Matcher(BaseValidation):
             else:
                 raise err
 
-
     # -----
     # regex
     # -----
