@@ -25,6 +25,9 @@ def test_expand(selectable_simple1: Selectable):
     s = selectable_simple1.excel_ref("X17:Y18").expand(left)
     assert len(s.cells) == 50
 
+    s = selectable_simple1.excel_ref("A:C").expand(left)
+    assert len(s.cells) == 300
+
     s = (
         selectable_simple1.excel_ref("X5") | selectable_simple1.excel_ref("A2")
     ).expand(down)

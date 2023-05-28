@@ -10,6 +10,7 @@ from datachef.exceptions import BadExcelReferenceError, ReversedExcelRefError
 from datachef.models.source.cell import BaseCell
 from datachef.utils import cellutils
 
+
 from . import common as dfccommon
 
 
@@ -45,11 +46,10 @@ def any_excel_ref_as_wanted_basecells(excel_ref: str) -> List[BaseCell]:
         f"Could not identify style of excel reference {excel_ref}"
     )
 
-
 def single_excel_row_to_y_index(excel_ref: str) -> int:
     """
     Given a single row number as an excel reference, return
-    a list of basecells.
+    the y offset value
     """
     return cellutils.number_to_y(int(excel_ref))
 
@@ -57,7 +57,7 @@ def single_excel_row_to_y_index(excel_ref: str) -> int:
 def single_excel_column_to_x_index(excel_ref: str) -> str:
     """
     Given a single column latter as an excel reference, return
-    a list of basecells.
+    the x inde.
     """
     return cellutils.letters_to_x(excel_ref)
 

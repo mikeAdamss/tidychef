@@ -26,10 +26,18 @@ Scenarios are also rated as "basic", "intermediate" and "advanced" so you can lo
 
 A fourth category of "examples" follows in its own discrete section. These are full working examples using messy opendata sources from the web.
 
-## scenarios...
+## scenarios
 
 If you want to run these scenarios interactively, you can download a zip file of all scenarios as `.ipynb` - 
 https://github.com/mikeAdamss/datachef/raw/main/resources/scenarios.zip
 
 To browse the html output of the scenarios, select from the following:
 
+## customization, addons and extensions
+
+Data is a complex domain, so Datachef is designed to be easily adapted for use cases beyond that covered by its initial functionality. This can be done freely and easily without any changes to the core library being necessary. 
+
+The following scenarios walk through how to do this:
+
+- DOC: Simple Example
+- DOC: Everything is abstract and everything has a keyword

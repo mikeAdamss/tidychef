@@ -47,7 +47,7 @@ class Selectable(LiveTable):
         considered blank. You can change this behaviour
         with the disregard_whitespace keyword.
         """
-        self.cells = [x for x in self.cells if x.is_blank(disregard_whitespace)]
+        self.cells = [x for x in self.cells if x.is_blank(disregard_whitespace=disregard_whitespace)]
         return self
 
     @dontmutate
@@ -58,7 +58,7 @@ class Selectable(LiveTable):
         considered blank. You can change this behaviour
         with the disregard_whitespace keyword.
         """
-        self.cells = [x for x in self.cells if x.is_not_blank(disregard_whitespace)]
+        self.cells = [x for x in self.cells if x.is_not_blank(disregard_whitespace=disregard_whitespace)]
         return self
 
     @dontmutate
@@ -155,8 +155,7 @@ class Selectable(LiveTable):
         possibly_y: Optional[int] = None,
     ):
         """
-        Move the entire current selection relatively. Accepts a direction
-        or raw x and y co-ordinates, examples:
+        Move the entire current selection relatively, examples:
 
         - .shift(right)
         - .shift(right(5))
@@ -182,6 +181,7 @@ class Selectable(LiveTable):
         else:
             raise BadShiftParameterError()
 
+        #y_offset = 0 if not possibly_y else possibly_y
         wanted_cells: List[BaseCell] = [
             BaseCell(x=c.x + x_offset, y=c.y + y_offset) for c in self.cells
         ]
@@ -206,6 +206,7 @@ class Selectable(LiveTable):
         if re.match("^[A-Z]+[0-9]+:[A-Z]+[0-9]+$", excel_ref):
             wanted: List[BaseCell] = dfc.multi_excel_ref_to_basecells(excel_ref)
             selected = dfc.exactly_matched_xy_cells(self.cells, wanted)
+            # TODO - guarnatee sensible ordering
 
         # Single column and row reference
         # eg: 'F19'
@@ -220,11 +221,37 @@ class Selectable(LiveTable):
             wanted_y_index: int = dfc.single_excel_row_to_y_index(excel_ref)
             selected = [c for c in self.cells if c.y == wanted_y_index]
 
-        # An excel reference that is one of more column letter
+        # An excel reference that is a multiple row numbers
+        # eg: '4:6'
+        elif re.match("^[0-9]+:[0-9]+$", excel_ref):
+            start_y = excel_ref.split(":")[0]
+            end_y = excel_ref.split(":")[1]
+            start_y_index: int = dfc.single_excel_row_to_y_index(start_y)
+            end_y_index: int = dfc.single_excel_row_to_y_index(end_y)
+            if start_y_index >= end_y_index:
+                raise BadExcelReferenceError(
+                    f'Excel ref "{excel_ref}" is invalid. {end_y_index} must be higher than {start_y_index}')
+            selected = [
+                c for c in self.cells if c.y >= start_y_index and c.y <= end_y_index
+                ]
+
+        # An excel reference that is one column letter
         # eg: 'H'
         elif re.match("^[A-Z]+$", excel_ref):
             wanted_x_index: int = dfc.single_excel_column_to_x_index(excel_ref)
             selected = [c for c in self.cells if c.x == wanted_x_index]
+
+        # An excel reference that is a range of column letters
+        # eg: 'H:J'
+        elif re.match("^[A-Z]+:[A-Z]+$", excel_ref):
+            left_letters = excel_ref.split(":")[0]
+            right_letters = excel_ref.split(":")[1]
+            start_x_index: int = dfc.single_excel_column_to_x_index(left_letters)
+            end_x_index: int = dfc.single_excel_column_to_x_index(right_letters)
+            if start_x_index >= end_x_index:
+                raise BadExcelReferenceError(
+                    f'Excel ref "{excel_ref}" is invalid. {right_letters} much be higher than {left_letters}')
+            selected = [c for c in self.cells if c.x >= start_x_index and c.x <= end_x_index]
 
         # Unknown excel reference
         else:
@@ -267,8 +294,9 @@ class Selectable(LiveTable):
 
         :param direction: A cardinal direction: up, down, left
         right with optional offset, i.e right(3)
-        "param barrier" A selection of cells we do not want
-        the spread to spread into
+        :param until: A selection of cells we do not want
+        the spread to spread into. Encountering any of these
+        cells will end the spread.
         """
 
         if not isinstance(direction, BaseDirection):

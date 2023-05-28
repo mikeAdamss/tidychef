@@ -55,3 +55,11 @@ def test_excel_referece_bad_reference_error(
 
     with pytest.raises(BadExcelReferenceError) as exc_info:
         selectable_simple1.excel_ref("*nope")
+
+    with pytest.raises(BadExcelReferenceError) as exc_info:
+        selectable_simple1.excel_ref("8:4")
+
+    with pytest.raises(BadExcelReferenceError) as exc_info:
+        selectable_simple1.excel_ref("D:A")
+
+        

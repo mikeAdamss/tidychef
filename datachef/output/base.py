@@ -18,29 +18,6 @@ class BaseOutput(metaclass=ABCMeta):
     case to use case and should remain decoupled.
     """
 
-    def __init__(self,
-                 observations: Selectable,
-                 columns: List[BaseColumn],
-                 *args,
-                 **kwargs
-                 ):
-        """
-        A class to hold tidy data representations of a data source.
-        """
-        self._post_init(observations, columns, *args, **kwargs)
-        
-    @abstractmethod
-    def _post_init(self,
-                 observations: Selectable,
-                 columns: List[BaseColumn],
-                 *args,
-                 **kwargs
-                 ):
-        """
-        This is where we hook into whatever the custom behaviour
-        of the child class is.
-        """
-
     @abstractmethod
     def __str__(self):
         """

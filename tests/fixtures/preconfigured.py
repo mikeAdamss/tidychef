@@ -13,7 +13,15 @@ def fixture_simple_band_tab():
 
 
 def fixture_wide_band_tab():
-    """Wide version of our sample band data"""
+    """
+    Wide version of our sample band data
+    
+    remote:
+    https://github.com/mikeAdamss/datachef/blob/main/tests/fixtures/csv/bands-wide.csv
+
+    local:
+    datachef/tests/fixtures/csv/bands-wide.csv
+    """
     return read_local(
         path_to_fixture("csv", "bands-wide.csv"), override_selectable=XlsInputSelectable
     )
