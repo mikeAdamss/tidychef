@@ -1,5 +1,6 @@
 from os import linesep
 
+
 class BadExcelReferenceError(Exception):
     """
     Raised where the user has provided an excel reference that does not match
@@ -34,10 +35,11 @@ class BadShiftParameterError(Exception):
 
 
 class OutputPassedToPreview(Exception):
-    """
-    """
+    """ """
+
     def __init__(self, msg):
         self.msg = msg
+
 
 class ReversedExcelRefError(Exception):
     """
