@@ -29,7 +29,10 @@ class TidyData(BaseOutput):
         self.data = None
 
     # Note: representations are confirmed via scenarios
-    def __repr__(self):
+    def __get_representation(self):
+        """
+        Representation logic shared by __str__ and __repr__
+        """
         if not self.data:
             self.transform()
 
@@ -47,30 +50,13 @@ class TidyData(BaseOutput):
             return ""
 
         return tabulate.tabulate(data_rows, headers=header_row)
+
+    def __repr__(self):
+        return self.__get_representation()
 
     # Note: string representations are confirmed via scenarios
     def __str__(self):  # pragma: no cover
-        """
-        When printed, display what the ouput will
-        look like in a use friendly way.
-        """
-        if not self.data:
-            self.transform()
-
-        header_row = self.data[0]
-        data_rows = self.data[1:]
-
-        # If we're in a notebook, give a nice
-        # html display
-        if in_notebook():
-            header_row = self.data[0]
-            data_rows = self.data[1:]
-            display(
-                HTML(tabulate.tabulate(data_rows, headers=header_row, tablefmt="html"))
-            )
-            return ""
-
-        return tabulate.tabulate(data_rows, headers=header_row)
+        return self.__get_representation()
 
     def transform(self):
         """
