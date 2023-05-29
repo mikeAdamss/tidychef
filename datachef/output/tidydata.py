@@ -28,7 +28,7 @@ class TidyData(BaseOutput):
 
         # Don't transform until told to, but once we have
         # only do it once.
-        self.data = None
+        self._data = None
 
     # Note: representations are confirmed via scenarios
     # as contextually changing formatting is a difficult
@@ -37,16 +37,16 @@ class TidyData(BaseOutput):
         """
         Representation logic shared by __str__ and __repr__
         """
-        if not self.data:
-            self.transform()
+        if not self._data:
+            self._transform()
 
-        header_row = self.data[0]
-        data_rows = self.data[1:]
+        header_row = self._data[0]
+        data_rows = self._data[1:]
 
         # If we're in a notebook, create a nice html display
         if in_notebook():
-            header_row = self.data[0]
-            data_rows = self.data[1:]
+            header_row = self._data[0]
+            data_rows = self._data[1:]
             display(
                 HTML(tabulate.tabulate(data_rows, headers=header_row, tablefmt="html"))
             )
@@ -61,7 +61,7 @@ class TidyData(BaseOutput):
     def __str__(self):  # pragma: no cover
         return self.__get_representation()
 
-    def transform(self):
+    def _transform(self):
         """
         Uses the column relationships defined to create an
         internal (to this class) representation of tidy data.
@@ -70,12 +70,14 @@ class TidyData(BaseOutput):
 
         [
             [header1,header2,header3],
+
             [observation1, column2value1, column3value1]
+
             ...etc...
         ]
 
         Once this method has been ran, this internal
-        representation can be access via ".data".
+        representation can be access via "._data".
 
         This result is cached so future calls to transform
         will not repopulate this attribute and will be
@@ -83,7 +85,7 @@ class TidyData(BaseOutput):
         preview functionality ahead of time without repeating
         a potentially resource intensive process.
         """
-        if not self.data:
+        if not self._data:
             grid = []
 
             header_row = [self.observation_label]
@@ -99,7 +101,7 @@ class TidyData(BaseOutput):
                     )
                 grid.append(line)
 
-            self.data = grid
+            self._data = grid
 
     def to_csv(self, path: Union[str, Path], *args, **kwargs):
         """
@@ -110,8 +112,8 @@ class TidyData(BaseOutput):
         through to the csv.csvwriter() constructor.
         https://docs.python.org/3/library/csv.html
         """
-        if not self.data:
-            self.transform()
+        if not self._data:
+            self._transform()
 
         if isinstance(path, str):
             if not isinstance(path, (Path, str)):
@@ -129,5 +131,5 @@ class TidyData(BaseOutput):
 
         with open(path, "w") as csvfile:
             tidywriter = csv.writer(csvfile, *args, **kwargs)
-            for row in self.data:
+            for row in self._data:
                 tidywriter.writerow(row)

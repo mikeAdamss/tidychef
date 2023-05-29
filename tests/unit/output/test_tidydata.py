@@ -13,20 +13,13 @@ from tests.fixtures.helpers import path_to_fixture
 from tests.unit.helpers import assert_csvs_match
 
 
+
 @pytest.fixture
-def selectable_wide_band_tab():
-    return fixture_wide_band_tab()
-
-
-def test_tidydata_constructor_and_ouput(selectable_wide_band_tab: Selectable):
+def tidy() -> TidyData:
     """
-    Test tidy constructor works as expected with
-    a simple use case.
+    A relatively simple definition of a populated TidyData class.
     """
-
-    # -------------------------
-    # Creating a data selection
-    # -------------------------
+    selectable_wide_band_tab: Selectable = fixture_wide_band_tab()
 
     observations = selectable_wide_band_tab.excel_ref("B4:K6").filter(
         filters.is_numeric
@@ -47,18 +40,25 @@ def test_tidydata_constructor_and_ouput(selectable_wide_band_tab: Selectable):
         ],
     )
 
-    # -------------------------
-    # Confirm transform happens
-    # -------------------------
+    return tidy
 
-    assert tidy.data is None
-    tidy.transform()
-    assert tidy.data is not None
 
-    # ---------------------------------------
-    # Confirm transformed data is as expected
-    # ---------------------------------------
+def test_tidydata_can_be_transformed(tidy: TidyData):
+    """
+    Test that calling _transform() result in a populated
+    ._data attribute.
+    """
+    assert tidy._data is None
+    tidy._transform()
+    assert tidy._data is not None
 
+def test_tidydata_internal_representation_is_as_expected(tidy: TidyData):
+    """
+    Test that the ._data attribute of TidyData contains the expected
+    data once _transform() has been called.
+    """
+
+    tidy._transform()
     expected_data = [
         ["Value", "Genre", "Assets", "Member"],
         ["1", "Rock & Roll", "Houses", "John"],
@@ -80,11 +80,13 @@ def test_tidydata_constructor_and_ouput(selectable_wide_band_tab: Selectable):
         ["8", "Rock & Roll", "Cars", "Charlie"],
         ["12", "Rock & Roll", "Boats", "Charlie"],
     ]
-    assert tidy.data == expected_data
+    assert tidy._data == expected_data
 
-    # ------------------------------------------
-    # Confirm data is output to csv as expected
-    # -----------------------------------------
+def test_tidydata_can_be_written_to_csv(tidy: TidyData):
+    """
+    Tests that a TidyData objects can be written to a
+    csv file via the to_csb method.
+    """
 
     here = Path(__file__).parent
     test_csv_output_path = Path(here / "temporary.csv")

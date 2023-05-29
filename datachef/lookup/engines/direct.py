@@ -16,7 +16,15 @@ from ..base import BaseLookupEngine
 class Directly(BaseLookupEngine):
     """
     A class to resolve a direct lookup between
-    an observation cell and the value from the
+    a given observation cell and the appropriate
+    cell from the selection of cells this class
+    is constructed with.
+    
+    This appropriate cell is resolved based on the
+    specified cardinal direction.
+
+    Where no value exists in the direction specified
+    an exception is raised.
     """
 
     def __init__(self, selection: Selectable, direction: BaseDirection):
@@ -93,12 +101,12 @@ class Directly(BaseLookupEngine):
 
         potential_cells: List[Cell] = self._lookups.get(self._index(cell))
         if not potential_cells:
-            raise MissingDirectLookupError(
-                f"We're using a direct lookup for but no selected cells have "
-                f' been provided in the direction: "{self.direction.name}" '
-                f"relative to cell: {cell._excel_ref()}, in x position {cell.x}, "
-                f"y position {cell.y}"
-            )
+            raise MissingDirectLookupError(f'''
+                We're using a direct lookup but no cells have 
+                been provided to Directly class with direction: "{self.direction.name}
+                relative to cell: {cell._excel_ref()}, in x position {cell.x},
+                y position {cell.y}
+            ''')
 
         checker = {
             "left": lambda cell, pcell: cell.x > pcell.x,

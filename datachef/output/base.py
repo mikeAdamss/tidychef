@@ -33,7 +33,7 @@ class BaseOutput(metaclass=ABCMeta):
         """
 
     @abstractmethod
-    def transform(self):
+    def _transform(self):
         """
         The logic for resolving the relationships.
         """
