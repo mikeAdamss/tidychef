@@ -39,7 +39,9 @@ def test_tidydata_constructor_and_ouput(selectable_wide_band_tab: Selectable):
         ],
     )
 
+    assert tidy.data is None
     tidy.transform()
+    assert tidy.data is not None
 
     expected_data = [
         ["Value", "Genre", "Assets", "Member"],

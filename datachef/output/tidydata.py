@@ -1,25 +1,15 @@
 from typing import List
 
+from IPython.core.display import display, HTML
 import tabulate
 
 from datachef.column.base import BaseColumn
 from datachef.output.base import BaseOutput
 from datachef.selection.selectable import Selectable
+from datachef.utils.notebooks.ipython import in_notebook
 
 
 class TidyData(BaseOutput):
-    """
-    A class to generate a basic representation of the
-    data as tidy data.
-
-    Example:
-
-    | Value | Sex     | Age  |
-    | 1     | Male    | 18   |
-    | 2     | Male    | 45   |
-    | 3     | Female  | 32   |
-    | 4     | Female  | 18   |
-    """
 
     def __init__(
         self,
@@ -28,7 +18,8 @@ class TidyData(BaseOutput):
         observation_label: str = "Value",
     ):
         """
-        A class to hold tidy data representations of a data source
+        A class to generate a basic representation of the
+        data as tidy data.
         """
         self.observations = observations
         self.columns = columns
@@ -38,14 +29,48 @@ class TidyData(BaseOutput):
         # only do it once.
         self.data = None
 
-    def __str__(self):
+    # Note: representations are confirmed via scenarios
+    def __repr__(self):
+        if not self.data:
+            self.transform()
+
+        header_row = self.data[0]
+        data_rows = self.data[1:]
+
+        # If we're in a notebook, give a nice
+        # html display
+        if in_notebook():
+            header_row = self.data[0]
+            data_rows = self.data[1:]
+            display(HTML(tabulate.tabulate(data_rows, headers=header_row, tablefmt="html")))
+            return ""
+        
+        return tabulate.tabulate(data_rows, headers=header_row)
+
+
+    # Note: string representations are confirmed via scenarios
+    def __str__(self):  # pragma: no cover
         """
         When printed, display what the ouput will
         look like in a use friendly way.
         """
         if not self.data:
             self.transform()
-        tabulate(self.data)
+
+        header_row = self.data[0]
+        data_rows = self.data[1:]
+
+        # If we're in a notebook, give a nice
+        # html display
+        if in_notebook():
+            header_row = self.data[0]
+            data_rows = self.data[1:]
+            display(HTML(tabulate.tabulate(data_rows, headers=header_row, tablefmt="html")))
+            return ""
+        
+        return tabulate.tabulate(data_rows, headers=header_row)
+        
+
 
     def transform(self):
         """

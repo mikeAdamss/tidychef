@@ -5,7 +5,7 @@ from datachef.models.source.cell import Cell
 
 class BaseLookupEngine(metaclass=ABCMeta):
     """
-    The base class all engines are built upon.
+    The base class all lookup engines are built upon.
     """
 
     @abstractmethod

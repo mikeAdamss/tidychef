@@ -14,7 +14,7 @@ class Column(BaseColumn):
     are extracted via the apply=keyword
 
     2. It allows the validation of data extracted via
-    the validation= or v= keywords.
+    the validation= keyword.
     """
 
     def _pre_init(self, label: str, engine: BaseLookupEngine, *args, **kwargs):
@@ -34,6 +34,7 @@ class Column(BaseColumn):
         # Validation
         # ----------
 
+        # TODO - list of callables?
         self.validation = kwargs.get("validation", None)
         if self.validation:
             assert callable(
