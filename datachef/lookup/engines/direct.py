@@ -19,7 +19,7 @@ class Directly(BaseLookupEngine):
     a given observation cell and the appropriate
     cell from the selection of cells this class
     is constructed with.
-    
+
     This appropriate cell is resolved based on the
     specified cardinal direction.
 
@@ -101,12 +101,14 @@ class Directly(BaseLookupEngine):
 
         potential_cells: List[Cell] = self._lookups.get(self._index(cell))
         if not potential_cells:
-            raise MissingDirectLookupError(f'''
+            raise MissingDirectLookupError(
+                f"""
                 We're using a direct lookup but no cells have 
                 been provided to Directly class with direction: "{self.direction.name}
                 relative to cell: {cell._excel_ref()}, in x position {cell.x},
                 y position {cell.y}
-            ''')
+            """
+            )
 
         checker = {
             "left": lambda cell, pcell: cell.x > pcell.x,

@@ -1,3 +1,5 @@
+import os
+import uuid
 from pathlib import Path
 
 import pytest
@@ -11,7 +13,6 @@ from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_wide_band_tab
 from tests.fixtures.helpers import path_to_fixture
 from tests.unit.helpers import assert_csvs_match
-
 
 
 @pytest.fixture
@@ -52,6 +53,7 @@ def test_tidydata_can_be_transformed(tidy: TidyData):
     tidy._transform()
     assert tidy._data is not None
 
+
 def test_tidydata_internal_representation_is_as_expected(tidy: TidyData):
     """
     Test that the ._data attribute of TidyData contains the expected
@@ -82,10 +84,11 @@ def test_tidydata_internal_representation_is_as_expected(tidy: TidyData):
     ]
     assert tidy._data == expected_data
 
+
 def test_tidydata_can_be_written_to_csv(tidy: TidyData):
     """
     Tests that a TidyData objects can be written to a
-    csv file via the to_csb method.
+    csv file via the to_csv method.
     """
 
     here = Path(__file__).parent
@@ -95,3 +98,37 @@ def test_tidydata_can_be_written_to_csv(tidy: TidyData):
     correct_csv_fixture_path: Path = path_to_fixture("csv", "test_output.csv")
 
     assert_csvs_match(test_csv_output_path, correct_csv_fixture_path)
+
+
+def test_tidydata_written_to_a_path_indicated_by_a_string(tidy: TidyData):
+    """
+    Tests that the to_csv method can take a string
+    as an argument in place of path.
+    """
+    outputted_to: Path = tidy.to_csv("temp.csv")
+    os.remove(outputted_to)
+
+
+def test_tidydata_to_csv_raises_for_incorrect_types_for_output_path(tidy: TidyData):
+    """
+    Confirm the exception is raised where incorrect types
+    are passed in for the output destination.
+    """
+
+    for wrong_type in [True, 1, None, False]:
+        with pytest.raises(ValueError):
+            tidy.to_csv(wrong_type)
+
+
+def test_tidydata_to_csv_raises_specifying_a_non_existent_output_directory(
+    tidy: TidyData,
+):
+    """
+    Confirm the exception is raised where we specify a directory
+    path for an output and that directory path does not exist
+    """
+
+    here = Path(__file__).parent
+    bad_path = Path(here / str(uuid.uuid4()) / "should-never-exist.csv")
+    with pytest.raises(FileNotFoundError):
+        tidy.to_csv(bad_path)

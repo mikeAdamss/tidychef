@@ -103,33 +103,37 @@ class TidyData(BaseOutput):
 
             self._data = grid
 
-    def to_csv(self, path: Union[str, Path], *args, **kwargs):
+    def to_csv(self, path: Union[str, Path], *args, **kwargs) -> Path:
         """
         Output the TidyData to a csv file.
 
         This method wraps the standard csv python library,
-        the *args and **kwargs provided here are those passed
+        the *args and **kwargs provided here are passed
         through to the csv.csvwriter() constructor.
         https://docs.python.org/3/library/csv.html
+
+        Returns a Path object representing the file that
+        has been written to.
         """
         if not self._data:
             self._transform()
 
-        if isinstance(path, str):
-            if not isinstance(path, (Path, str)):
-                raise Exception(
-                    "To use a direct file input, you must provide a pathlib.Path object or a str representing one"
-                )
+        if not isinstance(path, (Path, str)):
+            raise ValueError(
+                "To output to a file you must provide a pathlib.Path object or a str"
+            )
 
         if isinstance(path, str):
             path = Path(path)
 
         if not path.parent.exists():
-            raise Exception(
-                f'The specified directory "{path.parent.absolute()}" for the file "{path.name}" does not exist.'
+            raise FileNotFoundError(
+                f'The specified output directory "{path.parent.absolute()}" for the file "{path.name}" does not exist.'
             )
 
         with open(path, "w") as csvfile:
             tidywriter = csv.writer(csvfile, *args, **kwargs)
             for row in self._data:
                 tidywriter.writerow(row)
+
+        return path
