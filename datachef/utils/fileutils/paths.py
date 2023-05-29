@@ -14,7 +14,7 @@ def ensure_existing_path(maybe_path: Union[Path, str]) -> Path:
 
     if not isinstance(maybe_path, (Path, str)):
         raise FileInputError(
-            "To use a direct file input, you must provide a pathlib.Path objdct or a str representing one"
+            "To use a direct file input, you must provide a pathlib.Path object or a str representing one"
         )
 
     if isinstance(maybe_path, str):

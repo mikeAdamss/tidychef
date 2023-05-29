@@ -22,5 +22,18 @@ class BaseOutput(metaclass=ABCMeta):
     @abstractmethod
     def __str__(self):
         """
-        What happens when someone prints this output.
+        What happens when someone prints this object.
+        """
+
+    @abstractmethod
+    def __repr__(self):
+        """
+        What happens when someone wants to view a representation
+        of this object.
+        """
+
+    @abstractmethod
+    def transform(self):
+        """
+        The logic for resolving the relationships.
         """

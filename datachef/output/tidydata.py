@@ -1,4 +1,6 @@
-from typing import List
+import csv
+from pathlib import Path
+from typing import List, Union
 
 import tabulate
 from IPython.core.display import HTML, display
@@ -49,6 +51,7 @@ class TidyData(BaseOutput):
             )
             return ""
 
+        # Else return something that'll make sense in a terminal
         return tabulate.tabulate(data_rows, headers=header_row)
 
     def __repr__(self):
@@ -97,3 +100,33 @@ class TidyData(BaseOutput):
                 grid.append(line)
 
             self.data = grid
+
+    def to_csv(self, path: Union[str, Path], *args, **kwargs):
+        """
+        Output the TidyData to a csv file.
+
+        This method wraps the standard csv python library,
+        the *args and **kwargs provided here are those passed
+        through to the csv.csvwriter() constructor.
+        https://docs.python.org/3/library/csv.html
+        """
+
+        if isinstance(path, str):
+            if not isinstance(path, (Path, str)):
+                raise Exception(
+                    "To use a direct file input, you must provide a pathlib.Path object or a str representing one"
+                )
+
+        if isinstance(path, str):
+            path = Path(path)
+
+        if not path.parent.exists():
+            raise Exception(
+                f'The specified directory "{path.parent.absolute()}" for the file "{path.name}" does not exist.'
+            )
+
+        with open(path, "w") as csvfile:
+            tidywriter = csv.writer(csvfile, *args, **kwargs)
+            for row in self.data:
+                tidywriter.writerow(row)
+
