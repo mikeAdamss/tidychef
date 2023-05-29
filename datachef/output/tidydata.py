@@ -1,7 +1,7 @@
 from typing import List
 
-from IPython.core.display import display, HTML
 import tabulate
+from IPython.core.display import HTML, display
 
 from datachef.column.base import BaseColumn
 from datachef.output.base import BaseOutput
@@ -10,7 +10,6 @@ from datachef.utils.notebooks.ipython import in_notebook
 
 
 class TidyData(BaseOutput):
-
     def __init__(
         self,
         observations: Selectable,
@@ -42,11 +41,12 @@ class TidyData(BaseOutput):
         if in_notebook():
             header_row = self.data[0]
             data_rows = self.data[1:]
-            display(HTML(tabulate.tabulate(data_rows, headers=header_row, tablefmt="html")))
+            display(
+                HTML(tabulate.tabulate(data_rows, headers=header_row, tablefmt="html"))
+            )
             return ""
-        
-        return tabulate.tabulate(data_rows, headers=header_row)
 
+        return tabulate.tabulate(data_rows, headers=header_row)
 
     # Note: string representations are confirmed via scenarios
     def __str__(self):  # pragma: no cover
@@ -65,12 +65,12 @@ class TidyData(BaseOutput):
         if in_notebook():
             header_row = self.data[0]
             data_rows = self.data[1:]
-            display(HTML(tabulate.tabulate(data_rows, headers=header_row, tablefmt="html")))
+            display(
+                HTML(tabulate.tabulate(data_rows, headers=header_row, tablefmt="html"))
+            )
             return ""
-        
-        return tabulate.tabulate(data_rows, headers=header_row)
-        
 
+        return tabulate.tabulate(data_rows, headers=header_row)
 
     def transform(self):
         """
