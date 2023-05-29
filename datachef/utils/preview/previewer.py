@@ -1,7 +1,8 @@
 from pathlib import Path
 from typing import Optional
 
-from datachef.exceptions import UnalignedTableOperation
+from datachef.exceptions import OutputPassedToPreview, UnalignedTableOperation
+from datachef.output.base import BaseOutput
 from datachef.selection.selectable import Selectable
 
 from .base import BasePreview
@@ -18,6 +19,18 @@ def preview(
     """
     Create a preview from one of more selections of cells.
     """
+    if isinstance(selections[0], BaseOutput):
+        raise OutputPassedToPreview(
+            """
+            You cannot call preview an output.
+            
+            A preview displays the source data (and optionally, the visual relationships
+            you've declared within it). Once you have created an output you are no longer
+            using this source data.
+
+            If you want to view your output inline, just print() it.
+            """
+        )
 
     for s in selections:
         assert isinstance(

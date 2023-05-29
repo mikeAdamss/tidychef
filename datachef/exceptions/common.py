@@ -66,8 +66,8 @@ class InvalidCellObjectError(Exception):
 
 class UnalignedTableOperation(Exception):
     """
-    Raised where a user it trying to combine selections from two
-    distinct inputs to synthasise a new input.
+    Raised where a user it trying to combine cell selections from two
+    distinctly separate inputs.
 
     This is invalid, as each input represents a subset (up to the whole of)
     a single distinct source of tabulated data.

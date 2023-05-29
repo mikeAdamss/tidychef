@@ -31,7 +31,9 @@ class TidyData(BaseOutput):
         self.data = None
 
     # Note: representations are confirmed via scenarios
-    def __get_representation(self):
+    # as contextually changing formatting is a difficult
+    # thing to check with unit tests.
+    def __get_representation(self):  # pragma: no cover
         """
         Representation logic shared by __str__ and __repr__
         """
@@ -41,8 +43,7 @@ class TidyData(BaseOutput):
         header_row = self.data[0]
         data_rows = self.data[1:]
 
-        # If we're in a notebook, give a nice
-        # html display
+        # If we're in a notebook, create a nice html display
         if in_notebook():
             header_row = self.data[0]
             data_rows = self.data[1:]
@@ -54,10 +55,9 @@ class TidyData(BaseOutput):
         # Else return something that'll make sense in a terminal
         return tabulate.tabulate(data_rows, headers=header_row)
 
-    def __repr__(self):
+    def __repr__(self):  # pragma: no cover
         return self.__get_representation()
 
-    # Note: string representations are confirmed via scenarios
     def __str__(self):  # pragma: no cover
         return self.__get_representation()
 
@@ -110,6 +110,8 @@ class TidyData(BaseOutput):
         through to the csv.csvwriter() constructor.
         https://docs.python.org/3/library/csv.html
         """
+        if not self.data:
+            self.transform()
 
         if isinstance(path, str):
             if not isinstance(path, (Path, str)):
@@ -129,4 +131,3 @@ class TidyData(BaseOutput):
             tidywriter = csv.writer(csvfile, *args, **kwargs)
             for row in self.data:
                 tidywriter.writerow(row)
-

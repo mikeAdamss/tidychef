@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pytest
 
 from datachef.cardinal.directions import above, left
@@ -7,6 +9,8 @@ from datachef.output.tidydata import TidyData
 from datachef.selection import filters
 from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_wide_band_tab
+from tests.fixtures.helpers import path_to_fixture
+from tests.unit.helpers import assert_csvs_match
 
 
 @pytest.fixture
@@ -19,6 +23,10 @@ def test_tidydata_constructor_and_ouput(selectable_wide_band_tab: Selectable):
     Test tidy constructor works as expected with
     a simple use case.
     """
+
+    # -------------------------
+    # Creating a data selection
+    # -------------------------
 
     observations = selectable_wide_band_tab.excel_ref("B4:K6").filter(
         filters.is_numeric
@@ -39,9 +47,17 @@ def test_tidydata_constructor_and_ouput(selectable_wide_band_tab: Selectable):
         ],
     )
 
+    # -------------------------
+    # Confirm transform happens
+    # -------------------------
+
     assert tidy.data is None
     tidy.transform()
     assert tidy.data is not None
+
+    # ---------------------------------------
+    # Confirm transformed data is as expected
+    # ---------------------------------------
 
     expected_data = [
         ["Value", "Genre", "Assets", "Member"],
@@ -65,3 +81,15 @@ def test_tidydata_constructor_and_ouput(selectable_wide_band_tab: Selectable):
         ["12", "Rock & Roll", "Boats", "Charlie"],
     ]
     assert tidy.data == expected_data
+
+    # ------------------------------------------
+    # Confirm data is output to csv as expected
+    # -----------------------------------------
+
+    here = Path(__file__).parent
+    test_csv_output_path = Path(here / "temporary.csv")
+    tidy.to_csv(test_csv_output_path)
+
+    correct_csv_fixture_path: Path = path_to_fixture("csv", "test_output.csv")
+
+    assert_csvs_match(test_csv_output_path, correct_csv_fixture_path)

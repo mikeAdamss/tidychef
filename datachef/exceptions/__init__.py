@@ -1,6 +1,7 @@
 from .badparams import (
     BadExcelReferenceError,
     BadShiftParameterError,
+    OutputPassedToPreview,
     ReversedExcelRefError,
     UnknownDirectionError,
     UnsupportedLocalFileError,

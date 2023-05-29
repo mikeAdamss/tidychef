@@ -58,6 +58,7 @@ class Selectable(LiveTable):
     def is_not_blank(self, disregard_whitespace=True):
         """
         Filters the selection to those cells that are not blank.
+
         By default a cell with just whitespace in it is
         considered blank. You can change this behaviour
         with the disregard_whitespace keyword.

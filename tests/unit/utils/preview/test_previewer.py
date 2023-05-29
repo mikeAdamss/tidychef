@@ -1,10 +1,10 @@
 import pytest
 
-from datachef.exceptions import UnalignedTableOperation
+from datachef.exceptions import OutputPassedToPreviewError ,UnalignedTableOperation
 from datachef.selection.selectable import Selectable
 from datachef.utils.preview.previewer import preview
 from tests.fixtures.preconfigured import fixture_simple_small_one_tab
-
+from datachef.output.tidydata import TidyData
 
 @pytest.fixture
 def selectable_simple_small1():
@@ -53,3 +53,15 @@ def test_previwer_with_mixed_table_raises(
 
     with pytest.raises(UnalignedTableOperation):
         preview(selectable_simple_small1, selectable_simple_small2)
+
+def test_passing_an_output_to_preview_raises():
+    """
+    Test that where users have tried to pass an output
+    class to the input preview, the expected error is
+    raised.
+    """
+
+    with pytest.raises(OutputPassedToPreview):
+        # Note, empty args as its just checking the type
+        # not the contents.
+        preview(TidyData("",[]))

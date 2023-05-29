@@ -21,7 +21,7 @@ from datachef.utils.decorators import dontmutate
 
 class Table:
     """
-    Represents a table of data in the form of a list of cells.
+    Represents a table of data in the form of a list of cell objects.
     """
 
     def __init__(self, cells: Optional[List[Cell]] = None):
@@ -106,7 +106,7 @@ class LiveTable:
     @property
     def title(self) -> str:
         """
-        Alternate call to name for databaker backwards compatibility
+        Alternate call to name
         """
         return self.name
 
