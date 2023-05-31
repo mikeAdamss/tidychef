@@ -21,6 +21,7 @@ class Matcher(BaseValidation):
         self.match_regex: bool = False
         self.regex_pattern: Optional[str] = None
 
+    # TODO - do we need this if we have dontmutate?
     def _pristine(self):
         """
         Returns Matcher to a pristine state
@@ -36,8 +37,15 @@ class Matcher(BaseValidation):
             if self.match_regex:
                 self.__regex_implemented(cell)
             else:
-                # Catch and help any users calling with configuring
-                raise NoMatcherSpecifiedError()
+                # Catch and help any users calling without configuring
+                raise NoMatcherSpecifiedError("""
+                    You are passing a cell to a Matcher that has not
+                    been configured with a matching strategy.
+
+                    Examples of correct usage:
+
+                    match.regex("foo")
+                    """)
         except NoMatcherSpecifiedError as err:
             raise err
         except Exception as err:

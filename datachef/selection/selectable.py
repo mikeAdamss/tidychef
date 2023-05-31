@@ -4,10 +4,11 @@ import copy
 import re
 from typing import FrozenSet, List, Optional, Union
 
-from datachef.cardinal.directions import BaseDirection, Direction, down, left, right, up
+from datachef.cardinal.directions import BaseDirection, Direction, down, left, right, up, above, below
 from datachef.exceptions import (
     BadExcelReferenceError,
     BadShiftParameterError,
+    CardinalDeclarationWithOffset,
     LoneValueOnMultipleCellsError,
     OutOfBoundsError,
 )
@@ -19,7 +20,7 @@ from datachef.utils.decorators import dontmutate
 
 class Selectable(LiveTable):
     """
-    Inherits from LiveTable to add the following selection methods that are generic to all tabulated inputs.
+    Inherits from LiveTable to add cell selection methods that are generic to all tabulated inputs.
     """
 
     def assert_one(self):
@@ -70,6 +71,9 @@ class Selectable(LiveTable):
         ]
         return self
 
+    # TODO, condsider
+    # until= to control expand size/distance
+    # allowing offsets for the same reason (be wary of confusing the user)
     @dontmutate
     def expand(self, direction: Direction):
         """
@@ -80,32 +84,58 @@ class Selectable(LiveTable):
         - Will also accept ABOVE and BELOW as direction, as they
         are aliases of UP and DOWN respectively.
         """
+        selection: List[BaseCell] = []
 
+        if direction._locked:
+            raise CardinalDeclarationWithOffset('''
+            You cannot pass an offset into a direction
+            in the context of declaring an absolute direction.
+        
+            i.e .expand(up) or .fill(up) is ok, expand(up(1)) or
+            fill(up(1) is not.
+            ''')
+        
+        # To begin with, the potential cells is equal to all cells
+        # not currently selected.
         potential_cells: List[Cell] = dfc.cells_not_in(self.pcells, self.cells)
 
-        selection: List[BaseCell] = []
-        if direction in [up, down]:  # so also above and below
+        if direction in [up, down, above, below]:
 
+            # Only consider things on the same horizontal(x) index as a cell
+            # that's already selected.
             all_used_x_indicies: FrozenSet[int] = set(c.x for c in self.cells)
+
+            # Now consider each relevant x index
             for xi in all_used_x_indicies:
+
+                # All cells on this index (i.e in this column)
                 selected_cells_on_xi = dfc.cells_on_x_index(self.cells, xi)
 
+                # Not currently selected cells on this index
                 potential_cells_on_xi: List[Cell] = [
                     c for c in potential_cells if c.x == xi
                 ]
 
-                if direction == up:
-                    uppermost_used_yi = dfc.minimum_y_offset(selected_cells_on_xi)
+                if direction in [up, above]:
+                    # Note: A vertical index value works in reverse to a visual relationship,
+                    # the higher the index number -> the high the row number -> the LOWER it is
+                    # in visual terms.
+                    largest_used_yi = dfc.minimum_y_offset(selected_cells_on_xi)
+                    # Add cells from the potential selection to the
+                    # actual selection if they meet the criteria.
                     selection += [
                         c
                         for c in potential_cells_on_xi
-                        if c.is_above(uppermost_used_yi)
+                        if c.is_above(largest_used_yi) # above: visually
                     ]
 
-                if direction == down:
+                if direction in [down, below]:
+                    # Note: A vertical index value works in reverse to a visual relationship,
+                    # the lower the index number -> the lower the row number -> the HIGHER it is
+                    # in visual terms.
                     lowest_used_xi = dfc.maximum_y_offset(selected_cells_on_xi)
                     selection += [
-                        c for c in potential_cells_on_xi if c.is_below(lowest_used_xi)
+                        c for c in potential_cells_on_xi if c.is_below(lowest_used_xi) # below: visually
                     ]
 
         if direction in [left, right]:
@@ -152,6 +182,7 @@ class Selectable(LiveTable):
 
         :direction: One of: up, down, left, right
         """
+
         did_have = copy.deepcopy(self.cells)
         self = self.expand(direction)
         self.cells = [x for x in self.cells if x not in did_have]
@@ -173,7 +204,7 @@ class Selectable(LiveTable):
 
         :param direction_or_x: Either a direction of the raw x offset
         of a direction.
-        :param possibly_y: Either none or the raw y offset of a direciton
+        :param possibly_y: Either none or the raw y offset of a direction
         """
 
         if isinstance(direction_or_x, int):
@@ -190,15 +221,17 @@ class Selectable(LiveTable):
         else:
             raise BadShiftParameterError()
 
-        # y_offset = 0 if not possibly_y else possibly_y
         wanted_cells: List[BaseCell] = [
             BaseCell(x=c.x + x_offset, y=c.y + y_offset) for c in self.cells
         ]
 
         found_cells = dfc.matching_xy_cells(self.pcells, wanted_cells)
 
+        # TODO - compare cell counts before and after instead?
         if len(found_cells) == 0 and len(wanted_cells) > 0:
-            raise OutOfBoundsError()
+            raise OutOfBoundsError(
+                "You are attempting to shift your selection "
+                "entirely outside of the boundary of the table.")
 
         self.cells = found_cells
         return self
@@ -296,14 +329,20 @@ class Selectable(LiveTable):
             lambda cell: True if re.match(pattern, cell.value) else False
         )
 
+    # TODO: raise exception: AmbiguousCellValueSpread
+    # an error for then we have two selections on an axis and spread
+    # along that axis - which value the user wants to spread is ambiguous
     @dontmutate
     def spread(self, direction: Direction, until: Optional[Selectable] = None):
         """
         Spread a cell value into adjoining blank cells.
 
         If no offset is specified with the direction, then the
-        spread will continue until terminated by the border of
-        used cells or when it encounters a non blank cell.
+        spread will continue until terminated by:
+        
+        - encountering any cell defined by the "until" kwarg
+        - it encounters a non blank cell
+        - it reaches the border of the table
 
         :param direction: A cardinal direction: up, down, left
         right with optional offset, i.e right(3)

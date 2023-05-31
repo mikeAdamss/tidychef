@@ -31,6 +31,7 @@ class HtmlPreview(BasePreview):
         with_excel_ref: bool = True,
         start: Optional[str] = None,
         end: Optional[str] = None,
+        multiple_selection_warning: bool = True
     ) -> str:
 
         boundary = Boundary(selections, start=start, end=end)
@@ -197,6 +198,9 @@ class HtmlPreview(BasePreview):
                     break
 
         for cell in all_cells:
+
+            # This is just for adding a row number where we want
+            # an excel style preview
             if cell.y != row_no:
                 if cell.y > boundary.lowest_point:
                     break
@@ -232,7 +236,7 @@ class HtmlPreview(BasePreview):
                         value=matched[0].cell.value, colour=palette[matched[0].i]
                     )
 
-                if len(matched) > 1:
+                if len(matched) > 1 and multiple_selection_warning:
                     row += td_selected.format(
                         value=matched[0].cell.value, colour=warning_colour
                     )
@@ -280,11 +284,12 @@ class HtmlPreview(BasePreview):
         path: Path = None,
         start: Optional[str] = None,
         end: Optional[str] = None,
+        multiple_selection_warning: bool = True
     ):
         """
         An inline print of whatever this preview is previewing
         """
-        html_as_str = self._make_preview_as_html_str(selections, start=start, end=end)
+        html_as_str = self._make_preview_as_html_str(selections, start=start, end=end, multiple_selection_warning=multiple_selection_warning)
         if path:
             self._to_path(path, html_as_str)
         else:

@@ -5,7 +5,7 @@ from datachef.models.source.cell import Cell
 
 class Column(BaseColumn):
     """
-    The most basic implementation of a class that represents
+    A basic implementation of a class that represents
     something that can be resolve into a column of data.
 
     This class differs from BaseColumn because:
@@ -43,9 +43,8 @@ class Column(BaseColumn):
 
     def _post_lookup(self, cell: Cell):
         """
-        If someone has passed in a callable with the apply= keyword,
-        the apply said callable to any cell found for this column before
-        returning it
+        Makes use of apply and/or validation callables where the
+        user has provided them.
         """
 
         # Apply any modifications

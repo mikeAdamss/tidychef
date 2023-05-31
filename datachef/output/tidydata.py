@@ -77,7 +77,7 @@ class TidyData(BaseOutput):
         ]
 
         Once this method has been ran, this internal
-        representation can be access via "._data".
+        representation can be accessed via "._data".
 
         This result is cached so future calls to transform
         will not repopulate this attribute and will be
@@ -113,7 +113,7 @@ class TidyData(BaseOutput):
         https://docs.python.org/3/library/csv.html
 
         Returns a Path object representing the file that
-        has been written to.
+        has been written to, principally for testing.
         """
         if not self._data:
             self._transform()

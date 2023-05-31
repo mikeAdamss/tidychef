@@ -54,6 +54,10 @@ class BaseCell:
         """
         When compared to a y index, is this
         cell above it?
+
+        We mean "above" in visual terms, i.e
+        does it have a lower vertical offset
+        from the top of the table. 
         """
         self._confirm_not_virtual()
         return self.y < y
@@ -62,6 +66,10 @@ class BaseCell:
         """
         When compared to a y index, is this
         cell below it?
+
+        We mean "below" in visual terms, i.e
+        does it have a higher vertical offset
+        from the top of the table.
         """
         self._confirm_not_virtual()
         return self.y > y
@@ -82,7 +90,7 @@ class BaseCell:
         self._confirm_not_virtual()
         return self.x < x
 
-    def _excel_ref(self):
+    def _excel_ref(self) -> str:
         """
         Get the excel reference of the cell
         """
@@ -170,6 +178,16 @@ class Cell(BaseCell):
         return f'x:{self.x}, y:{self.y}, value = "{self.value}"'
 
     def __repr__(self):
+        """
+        Create a representation of this cell in the form:
+        <excel ref: value>
+
+        eg:
+        <A1, value:"value of a1", x:{x}, y:{y}>
+        """
+        return f'<{self._excel_ref()}, value:"{self.value}", x:{self.x}, y:{self.y}>'
+
+    def __str__(self):
         """
         Create a representation of this cell in the form:
         <excel ref: value>

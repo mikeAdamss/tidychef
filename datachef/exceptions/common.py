@@ -114,13 +114,5 @@ class OutOfBoundsError(Exception):
     does not exist in the table.
     """
 
-    def __init__(
-        self,
-        msg=(
-            "Invalid operation. This action is attempting to select cells outside "
-            "of the bounds of the input table"
-        ),
-        *args,
-        **kwargs,
-    ):
-        super().__init__(msg, *args, **kwargs)
+    def __init__(self, msg):
+        self.msg = msg

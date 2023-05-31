@@ -111,8 +111,8 @@ class BaseColumn(metaclass=ABCMeta):
         tuples of:
         <observation_cell> : <column cell>
 
-        This is intended for sanity checking, NOT
-        doing the actual lookups.
+        This is intended for sanity checking during
+        development, not for doing the actual transform.
         """
         for observation_cell in observation_selection.cells:
             yield observation_cell, self.resolve_column_cell_from_obs_cell(

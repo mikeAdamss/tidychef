@@ -26,6 +26,38 @@ class Direction(BaseDirection):
     _locked: bool = False
     _horizontal_axis: Optional[bool] = None
 
+    # Convenience properties
+    # These are principally for making it more obvious
+    # where conditionals involve aliased directions.
+
+    @property
+    def is_upwards(self) -> bool:
+        """
+        Is direction.name one of ["up", "above"]
+        """
+        return self.name in ["up", "above"]
+    
+    @property
+    def is_downwards(self) -> bool:
+        """
+        Is direction.name one of ["down", "below"]
+        """
+        return self.name in ["down", "below"]
+    
+    @property
+    def is_left(self) -> bool:
+        """
+        Is direction.name "left"
+        """
+        return self.name == "left"
+    
+    @property
+    def is_right(self) -> bool:
+        """
+        Is direction.name "right"
+        """
+        return self.name == "right"
+
     def __call__(self, relative_change: int):
         """
         Passing in an integer a parameter enables us to

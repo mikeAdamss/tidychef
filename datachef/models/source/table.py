@@ -132,12 +132,13 @@ class LiveTable:
         )
 
     @property
-    def signature(self):
+    def signature(self) -> str:
         """
         A uuid that uniquely identifies a parsed input source table
         """
         return self.filtered._signature
 
+    # TODO - type hint this
     @dontmutate
     def __sub__(self, other_input: LiveTable):
         """
@@ -154,6 +155,7 @@ class LiveTable:
         self.cells = dfc.cells_not_in(self.cells, other_input.cells)
         return self
 
+    # TODO - type hint this
     @dontmutate
     def __or__(self, other_input: LiveTable):
         """
@@ -161,7 +163,7 @@ class LiveTable:
 
         Allows the union of one selection from the same distinct
         and currently selected table with another. Provided they
-        are derrived from the same initial BaseInput.
+        are derived from the same initial BaseInput.
         """
         if self.signature != other_input.signature:
             raise UnalignedTableOperation()
@@ -170,10 +172,12 @@ class LiveTable:
         self.cells = self.cells + new_cells
         return self
 
+    # TODO - type hint this
     def __iter__(self):
         """
-        We're not really iterating table objects, we're just moving the
-        pointer to the selected table then returning the updated self
         """
         for cell in self.cells:
             yield cell
+
+    def __str__(self):
+        return str(self.cells)
