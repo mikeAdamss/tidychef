@@ -35,7 +35,6 @@ class BadShiftParameterError(Exception):
 
 
 class CardinalDeclarationWithOffset(Exception):
-    
     def __init__(self, msg):
         self.msg = msg
 

@@ -174,8 +174,7 @@ class LiveTable:
 
     # TODO - type hint this
     def __iter__(self):
-        """
-        """
+        """ """
         for cell in self.cells:
             yield cell
 

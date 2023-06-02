@@ -1,12 +1,13 @@
-
 class AmbiguousLookupError(Exception):
     """
-    Raised where a user has configured a lookup engine such that it 
+    Raised where a user has configured a lookup engine such that it
     cannot concretely resolve a lookup against one of more observation
     cells.
     """
+
     def __init__(self, msg):
         self.msg = msg
+
 
 class MissingDirectLookupError(Exception):
     """

@@ -15,7 +15,7 @@ def preview(
     path: Path = False,
     end: Optional[str] = None,
     start: Optional[str] = None,
-    multiple_selection_warning: bool = True
+    multiple_selection_warning: bool = True,
 ):
     """
     Create a preview from one of more selections of cells.
@@ -42,7 +42,13 @@ def preview(
     if len(set([s.signature for s in selections])) > 1:
         raise UnalignedTableOperation()
 
-    previewer().print(selections, end=end, start=start, path=path, multiple_selection_warning=multiple_selection_warning)
+    previewer().print(
+        selections,
+        end=end,
+        start=start,
+        path=path,
+        multiple_selection_warning=multiple_selection_warning,
+    )
 
 
 def label(selection: Selectable, label: str) -> Selectable:

@@ -4,7 +4,16 @@ import copy
 import re
 from typing import FrozenSet, List, Optional, Union
 
-from datachef.cardinal.directions import BaseDirection, Direction, down, left, right, up, above, below
+from datachef.cardinal.directions import (
+    BaseDirection,
+    Direction,
+    above,
+    below,
+    down,
+    left,
+    right,
+    up,
+)
 from datachef.exceptions import (
     BadExcelReferenceError,
     BadShiftParameterError,
@@ -87,14 +96,16 @@ class Selectable(LiveTable):
         selection: List[BaseCell] = []
 
         if direction._locked:
-            raise CardinalDeclarationWithOffset('''
+            raise CardinalDeclarationWithOffset(
+                """
             You cannot pass an offset into a direction
             in the context of declaring an absolute direction.
         
             i.e .expand(up) or .fill(up) is ok, expand(up(1)) or
             fill(up(1) is not.
-            ''')
-        
+            """
+            )
+
         # To begin with, the potential cells is equal to all cells
         # not currently selected.
         potential_cells: List[Cell] = dfc.cells_not_in(self.pcells, self.cells)
@@ -126,7 +137,7 @@ class Selectable(LiveTable):
                     selection += [
                         c
                         for c in potential_cells_on_xi
-                        if c.is_above(largest_used_yi) # above: visually
+                        if c.is_above(largest_used_yi)  # above: visually
                     ]
 
                 if direction in [down, below]:
@@ -135,7 +146,9 @@ class Selectable(LiveTable):
                     # in visual terms.
                     lowest_used_xi = dfc.maximum_y_offset(selected_cells_on_xi)
                     selection += [
-                        c for c in potential_cells_on_xi if c.is_below(lowest_used_xi) # below: visually
+                        c
+                        for c in potential_cells_on_xi
+                        if c.is_below(lowest_used_xi)  # below: visually
                     ]
 
         if direction in [left, right]:
@@ -231,7 +244,8 @@ class Selectable(LiveTable):
         if len(found_cells) == 0 and len(wanted_cells) > 0:
             raise OutOfBoundsError(
                 "You are attempting to shift your selection "
-                "entirely outside of the boundary of the table.")
+                "entirely outside of the boundary of the table."
+            )
 
         self.cells = found_cells
         return self
@@ -339,7 +353,7 @@ class Selectable(LiveTable):
 
         If no offset is specified with the direction, then the
         spread will continue until terminated by:
-        
+
         - encountering any cell defined by the "until" kwarg
         - it encounters a non blank cell
         - it reaches the border of the table

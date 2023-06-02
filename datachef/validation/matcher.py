@@ -38,14 +38,16 @@ class Matcher(BaseValidation):
                 self.__regex_implemented(cell)
             else:
                 # Catch and help any users calling without configuring
-                raise NoMatcherSpecifiedError("""
+                raise NoMatcherSpecifiedError(
+                    """
                     You are passing a cell to a Matcher that has not
                     been configured with a matching strategy.
 
                     Examples of correct usage:
 
                     match.regex("foo")
-                    """)
+                    """
+                )
         except NoMatcherSpecifiedError as err:
             raise err
         except Exception as err:

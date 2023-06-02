@@ -57,7 +57,7 @@ class BaseCell:
 
         We mean "above" in visual terms, i.e
         does it have a lower vertical offset
-        from the top of the table. 
+        from the top of the table.
         """
         self._confirm_not_virtual()
         return self.y < y

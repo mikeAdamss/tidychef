@@ -31,7 +31,7 @@ class HtmlPreview(BasePreview):
         with_excel_ref: bool = True,
         start: Optional[str] = None,
         end: Optional[str] = None,
-        multiple_selection_warning: bool = True
+        multiple_selection_warning: bool = True,
     ) -> str:
 
         boundary = Boundary(selections, start=start, end=end)
@@ -284,12 +284,17 @@ class HtmlPreview(BasePreview):
         path: Path = None,
         start: Optional[str] = None,
         end: Optional[str] = None,
-        multiple_selection_warning: bool = True
+        multiple_selection_warning: bool = True,
     ):
         """
         An inline print of whatever this preview is previewing
         """
-        html_as_str = self._make_preview_as_html_str(selections, start=start, end=end, multiple_selection_warning=multiple_selection_warning)
+        html_as_str = self._make_preview_as_html_str(
+            selections,
+            start=start,
+            end=end,
+            multiple_selection_warning=multiple_selection_warning,
+        )
         if path:
             self._to_path(path, html_as_str)
         else:

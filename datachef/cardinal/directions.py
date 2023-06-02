@@ -36,21 +36,21 @@ class Direction(BaseDirection):
         Is direction.name one of ["up", "above"]
         """
         return self.name in ["up", "above"]
-    
+
     @property
     def is_downwards(self) -> bool:
         """
         Is direction.name one of ["down", "below"]
         """
         return self.name in ["down", "below"]
-    
+
     @property
     def is_left(self) -> bool:
         """
         Is direction.name "left"
         """
         return self.name == "left"
-    
+
     @property
     def is_right(self) -> bool:
         """
@@ -104,10 +104,9 @@ class Direction(BaseDirection):
 
 
 up = Direction(0, -1, "up", _horizontal_axis=False)
+above = Direction(0, -1, "above", _horizontal_axis=False)
 down = Direction(0, 1, "down", _horizontal_axis=False)
+below = Direction(0, 1, "below", _horizontal_axis=False)
 right = Direction(1, 0, "right", _horizontal_axis=True)
 left = Direction(-1, 0, "left", _horizontal_axis=True)
 
-# Aliases
-above = up
-below = down

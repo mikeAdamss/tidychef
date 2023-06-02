@@ -1,38 +1,33 @@
 from collections import defaultdict
 from dataclasses import dataclass, field
-from typing import Union
-
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Union
 
 from datachef.cardinal.directions import Direction
-from datachef.exceptions import (
-    AmbiguousLookupError,
-    OutOfBoundsError
-)
+from datachef.exceptions import AmbiguousLookupError, OutOfBoundsError
 from datachef.models.source.cell import Cell
 from datachef.selection.selectable import Selectable
 
 from ..base import BaseLookupEngine
 
-HIGHEST = "highest"
-HIGHEST_VALUE = 9999999999999
-LOWEST = "lowest"
-LOWEST_VALUE = 0
+HIGHEST = 9999999999999
+LOWEST = 0
+
 
 @dataclass
 class CellRange:
     """
     A class representing a range of cells
     """
-    low: int               
-    high: int              
+
+    low: int
+    high: int
     cell: Cell
     is_horizontal: bool
 
     @property
     def is_vertical(self) -> bool:
         return not self.is_horizontal
-    
+
     def contains(self, cell: Cell) -> bool:
         """
         Does this cell contain the range
@@ -43,10 +38,7 @@ class CellRange:
         else:
             offset = cell.y
 
-        return (
-                offset >= self.low and
-                offset < self.high 
-            )
+        return offset >= self.low and offset < self.high
 
     def spans_higher_range_than(self, cell: Cell) -> bool:
         """
@@ -56,7 +48,7 @@ class CellRange:
         if self.is_horizontal:
             return self.low > cell.x
         else:
-            return self.low > cell.y 
+            return self.low > cell.y
 
     def spans_lower_range_than(self, cell: Cell) -> bool:
         """
@@ -66,19 +58,17 @@ class CellRange:
         if self.is_horizontal:
             return self.high <= cell.x
         else:
-            return self.high <= cell.y 
+            return self.high <= cell.y
 
 
-@dataclass
 class CellRanges:
     """
     A class representing multiple cell ranges
-    """ 
-    direction: Direction
-    defined: Dict[int, Cell] = field(default_factory=lambda: defaultdict(dict))
-    range_counter: int = 0
-    _break_points: Optional[Dict[int, Cell]] = None
-    _ordered_break_points: Optional[List[int]] = None
+    """
+
+    def __init__(self, cells: Selectable, direction: Direction):
+        self.direction: Direction = direction
+        self._populate(cells)
 
     @property
     def axis_text(self) -> str:
@@ -88,102 +78,86 @@ class CellRanges:
     def is_horizontal(self) -> bool:
         return self.direction._horizontal_axis
 
-    @property
-    def has_only_one_range(self) -> bool:
-        return len(self.list_of_ranges) == 1
-    
-    def add(self, low: int, high: int, cell: int):
-        self.defined.update({
-            self.range_counter: Cell(
-                low=self.get_break_point_index_by_index(low),
-                high=self.get_break_point_index_by_index(high),
-                cell=self.get_breakpoint_cell_by_index(cell),
-                is_horizontal=self.is_horizontal
-            )
-        })
-        self.range_counter +=  1
+    def _populate(self, selection: Selectable):
+        """ """
 
-    def get_breakpoint_cell_by_index(self, i: int) -> Cell:
-        assert all(
-            self._break_points, self._ordered_break_points
-        ), "You need to self.populate_break_points() before using them"
-
-        return self._break_points.copy()[i]
-    
-    def get_break_point_index_by_index(self, i: Union[str, int]) -> int:
-        assert all(
-            self._break_points, self._ordered_break_points
-        ), "You need to self.populate_break_points() before using them"
-
-        if i == HIGHEST:
-            return HIGHEST_VALUE
-        elif LOWEST:
-            return LOWEST_VALUE
-        else:
-            return self._ordered_break_points.copy()[i]
-
-    def calculate_break_points(self, selection: Selectable):
-        """
-        Creates to populate the break points attribute
-        with a dict in the form:
-        {<order>: <cell>}
-
-        example:
-
-        {
-            0: <lookup Cell for lowest range>,
-
-            1: <lookup Cell for range in the middle>,
-
-            2: <lookup Cell for highest range>
-        }
-
-        This method of construction is principally to
-        confirm that a single <order> key is not used
-        to represent more than one cell - a sign
-        the engine has been incorrectly configured.
-        """
-
+        break_points = {}
         for cell in selection.cells:
-
-            axis_offset = cell.x if self.is_horizontal else cell.y   
-            if axis_offset in self._break_points.keys():
+            axis_offset = cell.x if self.is_horizontal else cell.y
+            if axis_offset in break_points.keys():
                 raise AmbiguousLookupError(
                     f"""
                     Aborting. You have defined two or more equally valid closest:{self.direction.name}" relationships,
                     you cannot do this as it creates an ambiguous lookup.
                     
-                    You are trying to add '{cell}' but we already have: '{self._break_points[cell.y]}'.
+                    You are trying to add '{cell}' but we already have: '{break_points[axis_offset]}'.
                     
                     Both of these cells have a {self.axis_text} offsets of '{axis_offset}'. 
-                    and so are equally close on this axis for a given observation cell.
+                    and so are equally close along this axis from a given observation cell.
                     """
                 )
+            break_points.update({axis_offset: cell})
 
-            if self.is_horizontal:
-                self._break_points.update({axis_offset: cell})
-            else:
-                self._break_points.update({axis_offset: cell})
+        ordered_break_points = [int(k) for k in break_points.keys()]
+        assert len(ordered_break_points) == len(selection.cells)
+        ordered_break_points.sort()
 
-        self._ordered_break_points = [int(k) for k in self._break_points.keys()]
-        self._ordered_break_points.sort()
+        self.ordered_cell_ranges = {}
 
-    # def __repr__(self):
-    #     """
-    #     Reproduce the defined ranges as a dict.
-    #     This functionality is purely a convenience for test purposes.
-    #     """
-    #     d = {}
-    #     cell_range: CellRange
-    #     for i, cell_range in self.defined.items():
-    #         d.update({
-    #             i: {
-    #                 "starts_at": cell_range.low,
-    #                 "ends_at": cell_range.high,
-    #                 "cell": cell_range.cell
-    #             }
-    #         })
-    #     return d
+        print(ordered_break_points)
+        if self.direction.is_left or self.direction.is_upwards:
+            for i in range(0, len(ordered_break_points)):
+
+                low = ordered_break_points[i]
+
+                if i == len(ordered_break_points) - 1:
+                    high = HIGHEST
+                else:
+                    high = ordered_break_points[i + 1]
+
+                self.ordered_cell_ranges[i] = CellRange(
+                    low=low,
+                    high=high,
+                    cell=break_points[ordered_break_points[i]],
+                    is_horizontal=self.is_horizontal,
+                )
+
+        else:
+            for i in range(0, len(ordered_break_points)):
+
+                high = ordered_break_points[i]
+
+                if i == 0:
+                    low = LOWEST
+                else:
+                    low = ordered_break_points[i-1]
+
+                self.ordered_cell_ranges[i] = CellRange(
+                    low=low,
+                    high=high,
+                    cell=break_points[ordered_break_points[i]],
+                    is_horizontal=self.is_horizontal,
+                )
+
+    def _as_dict(self):
+        """
+        Reproduce the defined ranges as a dict.
+        This functionality is purely for debugging and test purposes.
+        """
+        d = {}
+        cell_range: CellRange
+        for i, cell_range in self.ordered_cell_ranges.items():
+            d.update(
+                {
+                    str(i): {
+                        "starts_at": str(cell_range.low),
+                        "ends_at": str(cell_range.high),
+                        "cell": str(cell_range.cell),
+                        "axis": str(self.axis_text),
+                    }
+                }
+            )
+        return d
 
 
 class Closest(BaseLookupEngine):
@@ -192,39 +166,7 @@ class Closest(BaseLookupEngine):
         Creates a lookup engine for dimensions defined with the CLOSEST relationship.
         """
         self.direction = direction
-
-        ranges = CellRanges(direction)
-        ranges.calculate_break_points(selection)
-
-        if not ranges.looking_horizontally:
-
-            if ranges.has_only_one_range:
-                ranges.add(low=0, high=HIGHEST, cell=0)
-
-            else:
-                # If there's many, iterate to create the ranges
-                for i in range(0, len(ranges._ordered_break_point_list) - 1):
-                    ranges.add(low=i,high=i - 1,cell=i)
-                    # Add the next one - ASSUMING ITS THE LAST
-                    # if its not, the next iteration will overwrite
-                    # the range and its default highest offset
-                    ranges.add(low=i,high=i-1,cell=i)
-            self.out_of_bounds = min([x.low for x in ranges.defined.values()])
-
-        self.ranges = ranges
-        self.range_count = len(ranges.defined)
-        self.start_index = int(len(ranges.defined) / 2)
-
-        # this is explained in self.lookup()
-        self.bumped = True
-
-
-
-
-
-
-
-
+        self.ranges = CellRanges(selection, direction)
 
     def _bump_as_too_low(self, index, cell, ceiling, floor):
         "move the index down as as the cell was beneath/less-than the last ranged we looked at"
@@ -258,10 +200,9 @@ class Closest(BaseLookupEngine):
                 index = self.range_count
         return self.resolve(cell, index=index, ceiling=ceiling, floor=floor)
 
-
     def __confirm_within_bounds(self, cell: Cell):
         """
-        Raise an exception if we're trying to resolve a lookup for a 
+        Raise an exception if we're trying to resolve a lookup for a
         cell that is out of bounds, making a lookup impossible.
 
         example: we're trying to resolve a closest relations to the left
@@ -277,22 +218,24 @@ class Closest(BaseLookupEngine):
                 The boundary (furthest cell index) out of the cells you provided
                 on the `{axis}` axis has an offset of `{boundary}`.
                 """
-        
+
         out_of_bounds = [
             self.direction.is_upwards and cell.is_above(self.out_of_bounds),
             self.direction.is_downwards and cell.is_below(self.out_of_bounds),
             self.direction.is_left and cell.is_left_of(self.out_of_bounds),
-            self.direction.is_right and cell.is_right_of(self.out_of_bounds)
+            self.direction.is_right and cell.is_right_of(self.out_of_bounds),
         ]
 
         if True in out_of_bounds:
             axis = "x" if self.direction._horizontal_axis else "y"
-            raise OutOfBoundsError(err_str.format(
-                cell=cell,
-                direction=self.direction.is_downwards,
-                axis=axis,
-                boundary=self.out_of_bounds
-            ))
+            raise OutOfBoundsError(
+                err_str.format(
+                    cell=cell,
+                    direction=self.direction.is_downwards,
+                    axis=axis,
+                    boundary=self.out_of_bounds,
+                )
+            )
 
     def resolve(self, cell: Cell, index=None, ceiling=None, floor=0) -> Cell:
         """
@@ -312,7 +255,7 @@ class Closest(BaseLookupEngine):
             ceiling: int = len(self.ranges)
             index: int = self.start_index
             self.__confirm_within_bounds(cell)
-        
+
         r = self.ranges[index]
         found_it = False
 

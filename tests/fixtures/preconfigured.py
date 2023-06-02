@@ -6,7 +6,15 @@ from tests.fixtures import path_to_fixture
 
 
 def fixture_simple_band_tab():
-    """Slim version of a our sample band data"""
+    """
+    Slim version of a our sample band data
+
+    remote:
+    https://github.com/mikeAdamss/datachef/blob/main/tests/fixtures/csv/bands.csv
+
+    local:
+    datachef/tests/fixtures/csv/bands.csv
+    """
     return read_local(
         path_to_fixture("csv", "bands.csv"), override_selectable=XlsInputSelectable
     )
@@ -36,7 +44,14 @@ def fixture_vertical_dimensions():
 
 
 def fixture_simple_one_tab():
-    """Simple input of one tab. Cells A1:Z100"""
+    """
+    Simple input of one tab. Cells A1:Z100
+    remote:
+    https://github.com/mikeAdamss/datachef/blob/main/tests/fixtures/csv/simple.csv
+
+    local:
+    datachef/tests/fixtures/csv/simple.csv
+    """
     return read_local(
         path_to_fixture("csv", "simple.csv"), override_selectable=XlsInputSelectable
     )
@@ -55,6 +70,15 @@ def fixture_with_blanks():
 
 
 def fixture_is_wide():
+    """
+    Wide version of simple data
+
+    remote:
+    https://github.com/mikeAdamss/datachef/blob/main/tests/fixtures/csv/wide.csv
+
+    local:
+    datachef/tests/fixtures/csv/wide.csv
+    """
     return read_local(
         path_to_fixture("csv", "wide.csv"), override_selectable=XlsInputSelectable
     )
