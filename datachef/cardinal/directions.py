@@ -109,4 +109,3 @@ down = Direction(0, 1, "down", _horizontal_axis=False)
 below = Direction(0, 1, "below", _horizontal_axis=False)
 right = Direction(1, 0, "right", _horizontal_axis=True)
 left = Direction(-1, 0, "left", _horizontal_axis=True)
-

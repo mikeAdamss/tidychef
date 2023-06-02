@@ -4,15 +4,16 @@ from typing import List
 
 import pytest
 
-from datachef.cardinal.directions import Direction, up, down, left, right, above, below
+from datachef.cardinal.directions import Direction, above, below, down, left, right, up
 from datachef.lookup.engines.closest import CellRanges
 from datachef.selection.selectable import Selectable
 from tests.fixtures import (
     fixture_simple_band_tab,
-    fixture_wide_band_tab,
     fixture_simple_one_tab,
-    path_to_fixture
+    fixture_wide_band_tab,
+    path_to_fixture,
 )
+
 
 @pytest.fixture
 def selectable_simple_table() -> Selectable:
@@ -25,12 +26,14 @@ def selectable_simple_table() -> Selectable:
     """
     return fixture_simple_one_tab()
 
+
 @pytest.fixture
 def selectable_simple_band_tab() -> Selectable:
     """
     Sample data, simple band table
     """
     return fixture_simple_band_tab()
+
 
 @pytest.fixture
 def selectable_wide_band_tab() -> Selectable:
@@ -39,7 +42,14 @@ def selectable_wide_band_tab() -> Selectable:
     """
     return fixture_wide_band_tab()
 
-def assert_breakpoints_as_dict_matches(cells: Selectable, cell_ranges: CellRanges, fixture: str, dictionary_expected, dictionary_got):
+
+def assert_breakpoints_as_dict_matches(
+    cells: Selectable,
+    cell_ranges: CellRanges,
+    fixture: str,
+    dictionary_expected,
+    dictionary_got,
+):
     """
     Helper to check that a dictionary of breakpoints
     taken from a CellRanges class matches an expected
@@ -63,33 +73,38 @@ def assert_breakpoints_as_dict_matches(cells: Selectable, cell_ranges: CellRange
     {json.dumps(dictionary_got, indent=2, default=lambda x: str(x))}
     """
 
-    assert len(dictionary_expected) == len(dictionary_got), f'Dictionaries have different lengths. {display}'
+    assert len(dictionary_expected) == len(
+        dictionary_got
+    ), f"Dictionaries have different lengths. {display}"
     for expected_principle_key, expected_principle_value in dictionary_expected.items():
-        assert expected_principle_key in dictionary_got.keys(), (
-            f'Missing dictionary key {expected_principle_key}. {display}'
-        )
+        assert (
+            expected_principle_key in dictionary_got.keys()
+        ), f"Missing dictionary key {expected_principle_key}. {display}"
 
         for expected_sub_key, expected_sub_value in expected_principle_value.items():
 
-            assert expected_sub_key in dictionary_got[expected_principle_key].keys(), (
-                f'Field {expected_sub_key} from dictionary_expected is not in dictionary_got. {display}'
-            )
+            assert (
+                expected_sub_key in dictionary_got[expected_principle_key].keys()
+            ), f"Field {expected_sub_key} from dictionary_expected is not in dictionary_got. {display}"
 
-            assert expected_sub_value == dictionary_got[expected_principle_key][expected_sub_key], (
-                f'Value {expected_sub_value} from dictionary_expected is not in dictionary_got. {display}'
-            )
+            assert (
+                expected_sub_value
+                == dictionary_got[expected_principle_key][expected_sub_key]
+            ), f"Value {expected_sub_value} from dictionary_expected is not in dictionary_got. {display}"
+
 
 def test_cell_ranges(
-        selectable_simple_band_tab: Selectable,
-        selectable_wide_band_tab: Selectable,
-        selectable_simple_table: Selectable):
+    selectable_simple_band_tab: Selectable,
+    selectable_wide_band_tab: Selectable,
+    selectable_simple_table: Selectable,
+):
     """
     Test the CellRanges constructor constructs ranges correctly
     """
 
-    cells = selectable_simple_band_tab.excel_ref('A3').is_not_blank()
+    cells = selectable_simple_band_tab.excel_ref("A3").is_not_blank()
     cell_ranges = CellRanges(cells, up)
- 
+
     @dataclass
     class Case:
         description: str
@@ -104,58 +119,58 @@ def test_cell_ranges(
             excel_cells=["A3"],
             selectable=selectable_simple_band_tab,
             json_fixture="band_upwards_A3.json",
-            direction=up
-            ),
+            direction=up,
+        ),
         Case(
             description="Band tab, 'above' vertical range to A3",
             excel_cells=["A3"],
             selectable=selectable_simple_band_tab,
             json_fixture="band_upwards_A3.json",
-            direction=above
-            ),
+            direction=above,
+        ),
         Case(
             description="Band tab, 'down' vertical range to A3",
             excel_cells=["A3"],
             selectable=selectable_simple_band_tab,
             json_fixture="band_downwards_A3.json",
-            direction=down
-            ),
+            direction=down,
+        ),
         Case(
             description="Band tab, 'below' vertical range to A3",
             excel_cells=["A3"],
             selectable=selectable_simple_band_tab,
             json_fixture="band_downwards_A3.json",
-            direction=below
-            ),
+            direction=below,
+        ),
         Case(
             description="Band tab wide, 'left' horizontal range to A3, G3",
             excel_cells=["A3", "G3"],
             selectable=selectable_wide_band_tab,
             json_fixture="band_left_A3_G3.json",
-            direction=left
-            ),
+            direction=left,
+        ),
         Case(
             description="Band tab wide, 'left' horizontal range to B3, G3",
             excel_cells=["B3", "G3"],
             selectable=selectable_wide_band_tab,
             json_fixture="band_left_B3_G3.json",
-            direction=left
-            ),
+            direction=left,
+        ),
         Case(
             description="Simple tab, 'left' horizontal range to F6, W2",
             excel_cells=["F6", "W2"],
             selectable=selectable_simple_table,
             json_fixture="simple_left_F6_W2.json",
-            direction=left
-            ),
+            direction=left,
+        ),
         Case(
             description="Simple tab, 'right' horizontal range to F6, W2",
             excel_cells=["F6", "W2"],
             selectable=selectable_simple_table,
             json_fixture="simple_right_F6_W2.json",
-            direction=right
-            )
-        ]:
+            direction=right,
+        ),
+    ]:
 
         # Select the specified cell(s)
         my_cells = case.selectable.excel_ref(case.excel_cells[0])
@@ -176,5 +191,5 @@ def test_cell_ranges(
             cell_ranges,
             case.json_fixture,
             json_fixture,
-            cell_ranges._as_dict())
-            
+            cell_ranges._as_dict(),
+        )

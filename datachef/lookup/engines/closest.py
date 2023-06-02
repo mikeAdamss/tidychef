@@ -130,7 +130,7 @@ class CellRanges:
                 if i == 0:
                     low = LOWEST
                 else:
-                    low = ordered_break_points[i-1]
+                    low = ordered_break_points[i - 1]
 
                 self.ordered_cell_ranges[i] = CellRange(
                     low=low,

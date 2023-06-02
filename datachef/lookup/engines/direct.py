@@ -27,14 +27,14 @@ class Directly(BaseLookupEngine):
     an exception is raised.
     """
 
-    def __init__(self, selection: Selectable, direction: BaseDirection):
+    def __init__(self, selection: Selectable, direction: Direction):
         """
 
         :param: The value items that define this
         component, eg: in case of a dimension, these
         would be the dimensional values.
         """
-        self.direction: BaseDirection = direction
+        self.direction: Direction = direction
         cells = selection.cells
 
         # Given we know the relationship is always
@@ -66,9 +66,9 @@ class Directly(BaseLookupEngine):
             raise UnknownDirectionError(
                 f"The direction parameter must be of type: {type(BaseDirection)}"
             )
-        if self.direction.name in ["left", "up"]:
+        if self.direction.is_left or self.direction.is_upwards:
             ordered_cells = dfc.order_cells_leftright_topbottom(cells)
-        elif self.direction.name in ["right", "down"]:
+        elif self.direction.is_right or self.direction.is_downwards:
             ordered_cells = dfc.order_cells_rightleft_bottomtop(cells)
         else:
             # Shouldn't happen
@@ -114,7 +114,9 @@ class Directly(BaseLookupEngine):
             "left": lambda cell, pcell: cell.x > pcell.x,
             "right": lambda cell, pcell: cell.x < pcell.x,
             "up": lambda cell, pcell: cell.y > pcell.y,
+            "above": lambda cell, pcell: cell.y > pcell.y,
             "down": lambda cell, pcell: cell.y < pcell.y,
+            "below": lambda cell, pcell: cell.y < pcell.y,
         }
 
         chosen_cell = None

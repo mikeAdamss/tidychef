@@ -3,9 +3,7 @@ from pathlib import Path
 # TODO - necessary?
 
 # Fixture dir shorthand
-allowed_fixtures_locations = [
-    "csv", "preview", "json/closest"
-    ]
+allowed_fixtures_locations = ["csv", "preview", "json/closest"]
 fixture_locations_as_str = ",".join(allowed_fixtures_locations)
 
 fixture_dir = Path(__file__).parent

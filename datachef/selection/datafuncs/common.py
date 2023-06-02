@@ -87,13 +87,15 @@ def exactly_matched_xy_cells(
     unfound_cells = cells_not_in(wanted_cells, cells)
 
     if len(unfound_cells) > 0:
-        raise CellsDoNotExistError(f'''
+        raise CellsDoNotExistError(
+            f"""
             Cannot find cell(s):
             {unfound_cells}
 
             In existing cells:
             {cells}
-        ''')
+        """
+        )
 
     return matching_xy_cells(cells, wanted_cells)
 
