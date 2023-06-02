@@ -21,7 +21,7 @@ def selectable_simple_table() -> Selectable:
     Sample table, cells are based on excel ref
 
     A1 = "A1Val
-    Z20 = "Z20-Val"
+    Z20 = "Z20Val"
     etc
     """
     return fixture_simple_one_tab()

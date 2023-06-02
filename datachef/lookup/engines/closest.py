@@ -66,9 +66,11 @@ class CellRanges:
     A class representing multiple cell ranges
     """
 
-    def __init__(self, cells: Selectable, direction: Direction):
+    def __init__(self, selection: Selectable, direction: Direction):
         self.direction: Direction = direction
-        self._populate(cells)
+        self.highest_possible_offset: Optional[int] = None
+        self.lowest_possible_offset: Optional[int] = None
+        self._populate(selection)
 
     @property
     def axis_text(self) -> str:
@@ -77,6 +79,9 @@ class CellRanges:
     @property
     def is_horizontal(self) -> bool:
         return self.direction._horizontal_axis
+    
+    def get_range_by_index(self, index: int) -> CellRange:
+        return self.ordered_cell_ranges[index]
 
     def _populate(self, selection: Selectable):
         """ """
@@ -104,14 +109,17 @@ class CellRanges:
 
         self.ordered_cell_ranges = {}
 
-        print(ordered_break_points)
         if self.direction.is_left or self.direction.is_upwards:
             for i in range(0, len(ordered_break_points)):
 
                 low = ordered_break_points[i]
 
+                if i == 0:
+                    self.lowest_possible_offset = low
+
                 if i == len(ordered_break_points) - 1:
                     high = HIGHEST
+                    self.highest_possible_offset = HIGHEST
                 else:
                     high = ordered_break_points[i + 1]
 
@@ -126,9 +134,13 @@ class CellRanges:
             for i in range(0, len(ordered_break_points)):
 
                 high = ordered_break_points[i]
+ 
+                if i == len(ordered_break_points) - 1:
+                    self.highest_possible_offset = high
 
                 if i == 0:
                     low = LOWEST
+                    self.lowest_possible_offset = LOWEST
                 else:
                     low = ordered_break_points[i - 1]
 
@@ -138,6 +150,8 @@ class CellRanges:
                     cell=break_points[ordered_break_points[i]],
                     is_horizontal=self.is_horizontal,
                 )
+
+        assert len(self.ordered_cell_ranges) == len(selection.cells)
 
     def _as_dict(self):
         """
@@ -161,15 +175,19 @@ class CellRanges:
 
 
 class Closest(BaseLookupEngine):
-    def __init__(self, selection: Selectable, direction: Direction):
+    def __init__(self, direction: Direction, selection: Selectable):
         """
-        Creates a lookup engine for dimensions defined with the CLOSEST relationship.
+        Creates a lookup engine to column values defined vis
+        the closest visual relationship.
         """
         self.direction = direction
         self.ranges = CellRanges(selection, direction)
 
-    def _bump_as_too_low(self, index, cell, ceiling, floor):
-        "move the index down as as the cell was beneath/less-than the last ranged we looked at"
+    def _look_at_higher_range(self, index, cell, ceiling, floor):
+        """
+        move the considered index up as as the cell was beneath/less-than
+        the last ranged we looked at
+        """
         assert (
             index == ceiling
         ), "If we`re specified the cell is in a lower range, ceiling should be set to last index"
@@ -184,8 +202,10 @@ class Closest(BaseLookupEngine):
                 index = 0
         return self.resolve(cell, index=index, ceiling=ceiling, floor=floor)
 
-    def _bump_as_too_high(self, index, cell, ceiling, floor):
-        "move the index up as as the cell was above/greater-than the last ranged we looked at"
+    def _look_at_lower_range(self, index, cell, ceiling, floor):
+        """
+        move the index down as as the cell was above/greater-than the last ranged we looked at
+        """
         assert (
             index == floor
         ), "If we`re specified the cell is in a higher range, floor should be set to last index"
@@ -218,12 +238,12 @@ class Closest(BaseLookupEngine):
                 The boundary (furthest cell index) out of the cells you provided
                 on the `{axis}` axis has an offset of `{boundary}`.
                 """
-
+        
         out_of_bounds = [
-            self.direction.is_upwards and cell.is_above(self.out_of_bounds),
-            self.direction.is_downwards and cell.is_below(self.out_of_bounds),
-            self.direction.is_left and cell.is_left_of(self.out_of_bounds),
-            self.direction.is_right and cell.is_right_of(self.out_of_bounds),
+            self.direction.is_upwards and cell.is_above(self.ranges.lowest_possible_offset),
+            self.direction.is_downwards and cell.is_below(self.ranges.highest_possible_offset),
+            self.direction.is_left and cell.is_left_of(self.ranges.lowest_possible_offset),
+            self.direction.is_right and cell.is_right_of(self.ranges.highest_possible_offset),
         ]
 
         if True in out_of_bounds:
@@ -233,7 +253,9 @@ class Closest(BaseLookupEngine):
                     cell=cell,
                     direction=self.direction.is_downwards,
                     axis=axis,
-                    boundary=self.out_of_bounds,
+                    boundary=self.ranges.lowest_possible_offset if any([
+                        self.direction.is_upwards, self.direction.is_left])
+                        else self.ranges.highest_possible_offset
                 )
             )
 
@@ -252,46 +274,27 @@ class Closest(BaseLookupEngine):
         if ceiling is None or index is None:
             assert ceiling is None
             assert index is None
-            ceiling: int = len(self.ranges)
-            index: int = self.start_index
+            ceiling: int = len(self.ranges.ordered_cell_ranges)
+            index: int = 0
             self.__confirm_within_bounds(cell)
+ 
+        considered_range: CellRange = self.ranges.get_range_by_index(index)
 
-        r = self.ranges[index]
-        found_it = False
+        if considered_range.spans_higher_range_than(cell):
+            return self._look_at_higher_range(index, cell, ceiling=index, floor=floor)
+        elif considered_range.spans_lower_range_than(cell):
+            return self._look_at_lower_range(index, cell, ceiling=ceiling, floor=index)
+        else:
+            assert considered_range.contains(cell), (f'''
+            Cell {cell} is neither higher nor lower than the range in question
+            so should be contained within.
 
-        if self.direction.name in ["above", "up"]:
-            if cell.y < r["lowest_offset"]:
-                return self._bump_as_too_low(index, cell, ceiling=index, floor=floor)
-            elif cell.y > r["highest_offset"]:
-                return self._bump_as_too_high(index, cell, ceiling=ceiling, floor=index)
-            else:
-                found_it = True
+            If you are seeing this error, it's a programming error.
 
-        if self.direction.name in ["below", "down"]:
-            if cell.y > r["highest_offset"]:
-                return self._bump_as_too_high(index, cell, ceiling=ceiling, floor=index)
-            elif cell.y < r["lowest_offset"]:
-                return self._bump_as_too_low(index, cell, ceiling=index, floor=floor)
-            else:
-                found_it = True
+            Range:
+            {self.ranges.ordered_cell_ranges[index]}
+            ''')
 
-        if self.direction.name == "left":
-            if cell.x < r["lowest_offset"]:
-                return self._bump_as_too_low(index, cell, ceiling=index, floor=floor)
-            elif cell.x > r["highest_offset"]:
-                return self._bump_as_too_high(index, cell, ceiling=ceiling, floor=index)
-            else:
-                found_it = True
-
-        if self.direction.name == "right":
-            if cell.x > r["highest_offset"]:
-                return self._bump_as_too_high(index, cell, ceiling=ceiling, floor=index)
-            elif cell.x < r["lowest_offset"]:
-                return self._bump_as_too_low(index, cell, ceiling=index, floor=floor)
-            else:
-                found_it = True
-
-        if found_it:
             # cells are implicitly selected right->down-a-row->right as you look at a tabulated
             # (i.e as per standard human reading convention) so we'll cache this index as there's
             # a decent chance the next obs lookup is in the same range
@@ -305,4 +308,4 @@ class Closest(BaseLookupEngine):
             self.index = None
 
             # Apply str level cell value override if applicable
-            return cell
+            return considered_range.cell
