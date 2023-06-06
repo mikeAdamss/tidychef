@@ -58,6 +58,20 @@ class Direction(BaseDirection):
         """
         return self.name == "right"
 
+    @property
+    def is_horizontal(self) -> bool:
+        """
+        Is left or right
+        """
+        return self.is_right or self.is_left
+
+    @property
+    def is_vertical(self) -> bool:
+        """
+        Is is up, down, above or below
+        """
+        return self.is_upwards or self.is_downwards
+    
     def __call__(self, relative_change: int):
         """
         Passing in an integer a parameter enables us to

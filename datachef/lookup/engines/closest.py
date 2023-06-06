@@ -22,30 +22,35 @@ class CellRange:
     low: int
     high: int
     cell: Cell
-    is_horizontal: bool
-
-    @property
-    def is_vertical(self) -> bool:
-        return not self.is_horizontal
+    direction: Direction
 
     def contains(self, cell: Cell) -> bool:
         """
         Does this cell contain the range
         in question.
         """
-        if self.is_horizontal:
+        if self.direction.is_horizontal:
             offset = cell.x
         else:
             offset = cell.y
 
-        return offset >= self.low and offset < self.high
+        # if self.direction.is_left and offset == self.high:
+        #     return True
+        # if self.direction.is_right and offset == self.low:
+        #     return True
+        # if self.direction.is_upwards and offset == self.high:
+        #     return True
+        # if self.direction.is_downwards and offset == self.low:
+        #     return True
+
+        return offset >= self.low and offset <= self.high
 
     def spans_higher_range_than(self, cell: Cell) -> bool:
         """
         Does this range cover a range of indexes higher that the
         index of a given cell.
         """
-        if self.is_horizontal:
+        if self.direction.is_horizontal:
             return self.low > cell.x
         else:
             return self.low > cell.y
@@ -55,10 +60,10 @@ class CellRange:
         Does this range cover a range of indexes lower that the
         index of a given cell.
         """
-        if self.is_horizontal:
-            return self.high <= cell.x
+        if self.direction.is_horizontal:
+            return self.high < cell.x
         else:
-            return self.high <= cell.y
+            return self.high < cell.y
 
 
 class CellRanges:
@@ -74,12 +79,8 @@ class CellRanges:
 
     @property
     def axis_text(self) -> str:
-        return "horizontal/x" if self.is_horizontal else "vertical/y"
+        return "horizontal/x" if self.direction.is_horizontal else "vertical/y"
 
-    @property
-    def is_horizontal(self) -> bool:
-        return self.direction._horizontal_axis
-    
     def get_range_by_index(self, index: int) -> CellRange:
         return self.ordered_cell_ranges[index]
 
@@ -88,7 +89,7 @@ class CellRanges:
 
         break_points = {}
         for cell in selection.cells:
-            axis_offset = cell.x if self.is_horizontal else cell.y
+            axis_offset = cell.x if self.direction.is_horizontal else cell.y
             if axis_offset in break_points.keys():
                 raise AmbiguousLookupError(
                     f"""
@@ -127,7 +128,7 @@ class CellRanges:
                     low=low,
                     high=high,
                     cell=break_points[ordered_break_points[i]],
-                    is_horizontal=self.is_horizontal,
+                    direction=self.direction,
                 )
 
         else:
@@ -148,7 +149,7 @@ class CellRanges:
                     low=low,
                     high=high,
                     cell=break_points[ordered_break_points[i]],
-                    is_horizontal=self.is_horizontal,
+                    direction=self.direction,
                 )
 
         assert len(self.ordered_cell_ranges) == len(selection.cells)
@@ -182,6 +183,7 @@ class Closest(BaseLookupEngine):
         """
         self.direction = direction
         self.ranges = CellRanges(selection, direction)
+        self.bumped = False
 
     def _look_at_higher_range(self, index, cell, ceiling, floor):
         """
@@ -209,15 +211,15 @@ class Closest(BaseLookupEngine):
         assert (
             index == floor
         ), "If we`re specified the cell is in a higher range, floor should be set to last index"
-        if self.bumped == False and index != self.range_count:
+        if self.bumped == False and index != len(self.ranges.ordered_cell_ranges):
             index = index + 1
             self.bumped = True
         else:
             potential_range = ceiling - floor
             new_index = index + int(potential_range / 2)
             index = new_index if new_index != index else new_index + 1
-            if index > self.range_count:
-                index = self.range_count
+            if index > len(self.ranges.ordered_cell_ranges):
+                index = len(self.ranges.ordered_cell_ranges)
         return self.resolve(cell, index=index, ceiling=ceiling, floor=floor)
 
     def __confirm_within_bounds(self, cell: Cell):

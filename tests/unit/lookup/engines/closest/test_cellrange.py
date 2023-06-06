@@ -1,11 +1,12 @@
 from dataclasses import dataclass
 
+from datachef.cardinal.directions import up, down, left, right
 from datachef.lookup.engines.closest import CellRange
 from datachef.models.source.cell import Cell
 from tests.unit.helpers import qcel
 
 
-def test_cell_range_contains_logic_horizontally():
+def test_cell_range_contains_horizontally():
     """
     Test that the contains method returns as expected
     for a given horizontal range of cells.
@@ -21,7 +22,7 @@ def test_cell_range_contains_logic_horizontally():
         low=5,  # F in excel terms
         high=10,  # K in excel terms
         cell=unused_cell,
-        is_horizontal=True,
+        direction=right,
     )
 
     @dataclass
@@ -35,8 +36,8 @@ def test_cell_range_contains_logic_horizontally():
         Case(excel_ref="E1", should_be_found=False),
         Case(excel_ref="F1", should_be_found=True),
         Case(excel_ref="I1", should_be_found=True),
-        Case(excel_ref="J1", should_be_found=True),
-        Case(excel_ref="K1", should_be_found=False),
+        Case(excel_ref="K1", should_be_found=True),
+        Case(excel_ref="L1", should_be_found=False),
         Case(excel_ref="ZB1", should_be_found=False),
     ]:
         query_cell = qcel(case.excel_ref)
@@ -50,7 +51,7 @@ def test_cell_range_contains_logic_horizontally():
             """
 
 
-def test_cell_range_contains_logic_vertically():
+def test_cell_range_contains_vertically():
     """
     Test that the contains method returns as expected
     for a given vertical range of cells.
@@ -62,7 +63,7 @@ def test_cell_range_contains_logic_vertically():
 
     # A range on the vertical/y axis
     # denotes a range spanning rows 5-10 in excel terms
-    cell_range = CellRange(low=4, high=9, cell=unused_cell, is_horizontal=False)
+    cell_range = CellRange(low=4, high=9, cell=unused_cell, direction=up)
 
     @dataclass
     class Case:
@@ -75,8 +76,8 @@ def test_cell_range_contains_logic_vertically():
         Case(excel_ref="E3", should_be_found=False),
         Case(excel_ref="F4", should_be_found=False),
         Case(excel_ref="A5", should_be_found=True),
-        Case(excel_ref="J9", should_be_found=True),
-        Case(excel_ref="K10", should_be_found=False),
+        Case(excel_ref="J10", should_be_found=True),
+        Case(excel_ref="K11", should_be_found=False),
         Case(excel_ref="Z198928", should_be_found=False),
     ]:
         query_cell = qcel(case.excel_ref)
@@ -103,7 +104,7 @@ def test_cell_range_spans_higher_range_than_vertically():
 
     # A range on the vertical/y axis
     # denotes a range spanning rows 5-10 in excel terms
-    cell_range = CellRange(low=4, high=9, cell=unused_cell, is_horizontal=False)
+    cell_range = CellRange(low=4, high=9, cell=unused_cell, direction=up)
 
     @dataclass
     class Case:
@@ -122,7 +123,7 @@ def test_cell_range_spans_higher_range_than_vertically():
             cell_range.spans_higher_range_than(query_cell) is case.is_lower_than_range
         ), f"""
             Cell '{query_cell}' from excel reference {case.excel_ref}
-            Axis of range is vertical/y, so {query_cell.y} is the relevant attribute.
+            Direction is {cell_range.direction.name}, so {query_cell.y} is the relevant attribute.
 
             Returning as:
             cell_range.spans_higher_range_than(cell) == {not case.is_lower_than_range}
@@ -152,7 +153,7 @@ def test_cell_range_spans_lower_range_than_vertically():
 
     # A range on the vertical/y axis
     # denotes a range spanning rows 5-10 in excel terms
-    cell_range = CellRange(low=4, high=9, cell=unused_cell, is_horizontal=False)
+    cell_range = CellRange(low=4, high=9, cell=unused_cell, direction=down)
 
     @dataclass
     class Case:
@@ -162,14 +163,15 @@ def test_cell_range_spans_lower_range_than_vertically():
     for case in [
         Case(excel_ref="A1", is_higher_than_range=False),
         Case(excel_ref="A9", is_higher_than_range=False),
-        Case(excel_ref="A10", is_higher_than_range=True),
+        Case(excel_ref="A10", is_higher_than_range=False),
+        Case(excel_ref="A11", is_higher_than_range=True),
     ]:
         query_cell = qcel(case.excel_ref)
         assert (
             cell_range.spans_lower_range_than(query_cell) is case.is_higher_than_range
         ), f"""
             Cell '{query_cell}' from excel reference {case.excel_ref}
-            Axis of range is vertical/y, so {query_cell.y} is the relevant attribute.
+            Direction is {cell_range.direction.name}, so {query_cell.y} is the relevant attribute.
 
             Returning as:
             cell_range.spans_higher_range_than(cell) == {not case.is_higher_than_range}
@@ -200,7 +202,7 @@ def test_cell_range_spans_lower_range_than_horizontally():
     # A range on the vertical/y axis
     # denotes a range spanning rows 5-10 in excel terms
     cell_range = CellRange(
-        low=5, high=10, cell=unused_cell, is_horizontal=True  # F  # K
+        low=5, high=10, cell=unused_cell, direction=right  # F  # K
     )
 
     @dataclass
@@ -212,14 +214,15 @@ def test_cell_range_spans_lower_range_than_horizontally():
         Case(excel_ref="A1", is_higher_than_range=False),
         Case(excel_ref="F3", is_higher_than_range=False),
         Case(excel_ref="J4", is_higher_than_range=False),
-        Case(excel_ref="K5", is_higher_than_range=True),
+        Case(excel_ref="K5", is_higher_than_range=False),
+        Case(excel_ref="L5", is_higher_than_range=True)
     ]:
         query_cell = qcel(case.excel_ref)
         assert (
             cell_range.spans_lower_range_than(query_cell) is case.is_higher_than_range
         ), f"""
             Cell '{query_cell}' from excel reference {case.excel_ref}
-            Axis of range is horizontal/x, so {query_cell.y} is the relevant attribute.
+            Direction is {cell_range.direction.name}, so {query_cell.y} is the relevant attribute.
 
             Returning as:
             cell_range.spans_higher_range_than(cell) == {not case.is_higher_than_range}
@@ -252,7 +255,7 @@ def test_cell_range_spans_higher_range_than_horizontally():
     # A range on the vertical/y axis
     # denotes a range spanning rows 5-10 in excel terms
     cell_range = CellRange(
-        low=5, high=10, cell=unused_cell, is_horizontal=True  # F  # K
+        low=5, high=10, cell=unused_cell, direction=left  # F  # K
     )
 
     @dataclass
@@ -271,7 +274,7 @@ def test_cell_range_spans_higher_range_than_horizontally():
             cell_range.spans_higher_range_than(query_cell) is case.is_lower_than_range
         ), f"""
             Cell '{query_cell}' from excel reference {case.excel_ref}
-            Axis of range is horizontal/x, so {query_cell.y} is the relevant attribute.
+            Direction is {cell_range.direction.name}, so {query_cell.y} is the relevant attribute.
 
             Returning as:
             cell_range.spans_higher_range_than(cell) == {not case.is_lower_than_range}
