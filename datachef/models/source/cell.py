@@ -113,7 +113,7 @@ class BaseCell:
 class VirtualCell(BaseCell):
     """
     Where we are establishing relationships between a concrete cell
-    from the tablulated data source and a constant or external value
+    from the tabulated data source and a constant or external value
     we do so via a virtual cell.
 
     VirtualCells are unique amongst cell variants in that they can

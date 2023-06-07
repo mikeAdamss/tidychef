@@ -6,10 +6,10 @@ from datachef.models.source.cell import Cell
 from tests.unit.helpers import qcel
 
 
-def test_cell_range_contains_horizontally():
+def test_cell_range_contains_direction_right():
     """
     Test that the contains method returns as expected
-    for a given horizontal range of cells.
+    for a lookup of direction right
     """
 
     # A random cell
@@ -33,9 +33,6 @@ def test_cell_range_contains_horizontally():
     # Lookups that should be found
     for case in [
         Case(excel_ref="B1", should_be_found=False),
-        Case(excel_ref="E1", should_be_found=False),
-        Case(excel_ref="F1", should_be_found=True),
-        Case(excel_ref="I1", should_be_found=True),
         Case(excel_ref="K1", should_be_found=True),
         Case(excel_ref="L1", should_be_found=False),
         Case(excel_ref="ZB1", should_be_found=False),
@@ -50,11 +47,51 @@ def test_cell_range_contains_horizontally():
                 of low '{cell_range.low}', high '{cell_range.high}' but is '{not case.should_be_found}'.
             """
 
-
-def test_cell_range_contains_vertically():
+def test_cell_range_contains_direction_left():
     """
     Test that the contains method returns as expected
-    for a given vertical range of cells.
+    for a lookup of direction left
+    """
+
+    # A random cell
+    # Has no relevance here, just to satisfy constructor.
+    unused_cell = Cell(x=0, y=0, value="_")
+
+    # A range on the horizontal/x axis
+    # denotes a range spanning columns F-J in excel terms
+    cell_range = CellRange(
+        low=5,  # F in excel terms
+        high=10,  # K in excel terms
+        cell=unused_cell,
+        direction=left,
+    )
+
+    @dataclass
+    class Case:
+        excel_ref: str
+        should_be_found: bool
+
+    # Lookups that should be found
+    for case in [
+        Case(excel_ref="E1", should_be_found=False),
+        Case(excel_ref="F1", should_be_found=True),
+        Case(excel_ref="K1", should_be_found=True),
+        Case(excel_ref="L27", should_be_found=False),
+    ]:
+        query_cell = qcel(case.excel_ref)
+        assert case.should_be_found is cell_range.contains(
+            query_cell
+        ), f"""
+                Cell '{query_cell}' from excel_ref '{case.excel_ref}'
+                
+                Should be '{case.should_be_found}' for .contains() in horizontal range
+                of low '{cell_range.low}', high '{cell_range.high}' but is '{not case.should_be_found}'.
+            """
+        
+def test_cell_range_contains_direction_up():
+    """
+    Test that the contains method returns as expected
+    for a lookup of direction up
     """
 
     # A random cell
@@ -73,7 +110,6 @@ def test_cell_range_contains_vertically():
     # Lookups that should be found
     for case in [
         Case(excel_ref="B1", should_be_found=False),
-        Case(excel_ref="E3", should_be_found=False),
         Case(excel_ref="F4", should_be_found=False),
         Case(excel_ref="A5", should_be_found=True),
         Case(excel_ref="J10", should_be_found=True),
@@ -91,6 +127,42 @@ def test_cell_range_contains_vertically():
             """
 
 
+def test_cell_range_contains_direction_down():
+    """
+    Test that the contains method returns as expected
+    for a lookup of direction down
+    """
+
+    # A random cell
+    # Has no relevance here, just to satisfy constructor.
+    unused_cell = Cell(x=0, y=0, value="_")
+
+    # A range on the vertical/y axis
+    # denotes a range spanning rows 5-10 in excel terms
+    cell_range = CellRange(low=4, high=9, cell=unused_cell, direction=down)
+
+    @dataclass
+    class Case:
+        excel_ref: str
+        should_be_found: bool
+
+    # Lookups that should be found
+    for case in [
+        Case(excel_ref="B4", should_be_found=False),
+        Case(excel_ref="F5", should_be_found=True),
+        Case(excel_ref="Z10", should_be_found=True),
+        Case(excel_ref="WZ11", should_be_found=False),
+    ]:
+        query_cell = qcel(case.excel_ref)
+        assert case.should_be_found is cell_range.contains(
+            query_cell
+        ), f"""
+                Cell '{query_cell}' from excel_ref '{case.excel_ref}'
+                
+                Should be '{case.should_be_found}' for .contains() in vertical range
+                of low '{cell_range.low}', high '{cell_range.high}' but is '{not case.should_be_found}'.
+            """
+        
 def test_cell_range_spans_higher_range_than_vertically():
     """
     Test the CellRange.spans_higher_range_than() method can correctly

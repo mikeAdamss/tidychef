@@ -34,15 +34,6 @@ class CellRange:
         else:
             offset = cell.y
 
-        # if self.direction.is_left and offset == self.high:
-        #     return True
-        # if self.direction.is_right and offset == self.low:
-        #     return True
-        # if self.direction.is_upwards and offset == self.high:
-        #     return True
-        # if self.direction.is_downwards and offset == self.low:
-        #     return True
-
         return offset >= self.low and offset <= self.high
 
     def spans_higher_range_than(self, cell: Cell) -> bool:
