@@ -34,7 +34,7 @@ jobs:
       - run: rm -rf ./docs
       - run: poetry run python3 ./expand_docs.py
       - run: poetry run pdoc -html ./datachef --output-dir ./docs
-      - run: cp -a ./scenarios/expected/ ./docs/
+      - run: cp -a ./scenarios/html_scenario_fixtures/ ./docs/
       - run: cp ./_docs/splashpage.md ./docs/splashpage.md
 
       - run: tar --directory docs/ -hcf artifact.tar .

@@ -67,7 +67,7 @@ class Direction(BaseDirection):
 
     def _confirm_pristine(self):
         """
-        There are some cenarios where we want to disallow
+        There are some scenarios where we want to disallow
         the passing in of directional offsets.
         """
         if self._locked:
