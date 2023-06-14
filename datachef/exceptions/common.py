@@ -106,12 +106,25 @@ class InvalidTableSignatures(Exception):
 
 class OutOfBoundsError(Exception):
     """
-    Raised when a users attempts to select cells outside of the
-    boundary of the pristine table of input cells.
+    Raised when a users attempts to select or reference a cell
+    outside of the boundary of the pristine table of input cells.
 
     Example: Selecting every cell then shifting RIGHT 1 position
     would be trying to select a rightmost column of data that
     does not exist in the table.
+    """
+
+    def __init__(self, msg):
+        self.msg = msg
+
+
+class ImpossibleLookupError(Exception):
+    """
+    Raised when a user is attempting a lookup that is impossible
+    to resolve.
+
+    For example: looming up to a cell that is "above" directionally
+    when no cells in the direction have been selected.
     """
 
     def __init__(self, msg):

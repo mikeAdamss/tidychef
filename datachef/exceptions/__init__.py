@@ -11,6 +11,7 @@ from .cells import InvlaidCellPositionError, NonExistentCellComparissonError
 from .common import (
     CellsDoNotExistError,
     FileInputError,
+    ImpossibleLookupError,
     InvalidCellObjectError,
     InvalidTableSignatures,
     LoneValueOnMultipleCellsError,

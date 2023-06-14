@@ -36,15 +36,17 @@ class Table:
 
 class LiveTable:
     """
-    A "live" table represents two things:
+    A "live" table is the representation of a changing selection of cells as
+    taken from a single tabulated input, it revolves around the control of
+    two things:
 
     1.) "pristine" - The pristine table as pulled from the source.
-    2.) "filtered" - The current subset of cells (up to all) as selected from the pristine table.
+    2.) "filtered" - The current subset of cells (up to all) as selected from the
+                     pristine table.
 
     Keeping track of the pristine cell selection (the initial table) allows us to
-    extend a Table of cells (.filtered) via comparing it with the pristine Table
-    (.pristine). This enables the extension of a cell selection as well as the
-    filtering down of one.
+    extend a Table of cells (.filtered) via comparing the two. This enables the
+    easy extension of a cell selection as well as the filtering down of one.
     """
 
     def __init__(

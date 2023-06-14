@@ -6,7 +6,7 @@
     "axis": "horizontal/x"
 },
   "1": {
-    "starts_at": "5",
+    "starts_at": "6",
     "ends_at": "22",
     "cell": "<W2, value:\"W2val\", x:22, y:1>",
     "axis": "horizontal/x"

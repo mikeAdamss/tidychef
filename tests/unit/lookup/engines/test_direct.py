@@ -140,7 +140,7 @@ def test_direct_up_multiple_options_lookup(selectable_vertical_dimensions: Selec
         looked_up_cell: Cell = direct_up_engine.resolve(ob_cell)
         looked_up_cell_ref: str = dfc.basecell_to_excel_ref(looked_up_cell)
         assert looked_up_cell_ref == case.expected_cell_ref, (
-            f'Expected lookup from {case.obs_ref} direction "{direct_up_engine.direction._direction}"'
+            f'Expected lookup from {case.obs_ref} direction "{direct_up_engine.direction.name}"'
             f" to resolve to {case.expected_cell_ref}, got {looked_up_cell_ref}"
             f" from options of: {linesep}{direct_up_engine._lookups[looked_up_cell.y]}"
         )
@@ -184,7 +184,7 @@ def test_direct_down_multiple_options_lookup(
         looked_up_cell: Cell = direct_down_engine.resolve(ob_cell)
         looked_up_cell_ref: str = dfc.basecell_to_excel_ref(looked_up_cell)
         assert looked_up_cell_ref == case.expected_cell_ref, (
-            f'Expected lookup from {case.obs_ref} direction "{direct_down_engine.direction._direction}"'
+            f'Expected lookup from {case.obs_ref} direction "{direct_down_engine.direction.name}"'
             f" to resolve to {case.expected_cell_ref}, got {looked_up_cell_ref}"
             f" from options of: {linesep}{direct_down_engine._lookups[looked_up_cell.y]}"
         )

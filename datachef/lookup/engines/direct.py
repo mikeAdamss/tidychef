@@ -88,7 +88,7 @@ class Directly(BaseLookupEngine):
         of travel, i.e cell.x (column index) for a
         horizontal lookups else y (row index).
         """
-        if self.direction._horizontal_axis:
+        if self.direction.is_horizontal:
             return cell.y
         return cell.x
 

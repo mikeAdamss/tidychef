@@ -24,11 +24,10 @@ class Direction(BaseDirection):
     y: int
     name: str
     _locked: bool = False
-    _horizontal_axis: Optional[bool] = None
 
-    # Convenience properties
-    # These are principally for making it more obvious
-    # where conditionals involve aliased directions.
+    # TODO
+    # police passing it over offset overides
+    # where they should not be used
 
     @property
     def is_upwards(self) -> bool:
@@ -71,7 +70,7 @@ class Direction(BaseDirection):
         Is is up, down, above or below
         """
         return self.is_upwards or self.is_downwards
-    
+
     def __call__(self, relative_change: int):
         """
         Passing in an integer a parameter enables us to
@@ -100,7 +99,7 @@ class Direction(BaseDirection):
                 "You cannot modify a cardinal directions offset value more than once"
             )
 
-        if self._horizontal_axis:
+        if self.is_horizontal:
             if self.x == -1:
                 x = -relative_change
                 y = self.y
@@ -117,9 +116,9 @@ class Direction(BaseDirection):
         return Direction(x, y, self.name, _locked=True)
 
 
-up = Direction(0, -1, "up", _horizontal_axis=False)
-above = Direction(0, -1, "above", _horizontal_axis=False)
-down = Direction(0, 1, "down", _horizontal_axis=False)
-below = Direction(0, 1, "below", _horizontal_axis=False)
-right = Direction(1, 0, "right", _horizontal_axis=True)
-left = Direction(-1, 0, "left", _horizontal_axis=True)
+up = Direction(0, -1, "up")
+above = Direction(0, -1, "above")
+down = Direction(0, 1, "down")
+below = Direction(0, 1, "below")
+right = Direction(1, 0, "right")
+left = Direction(-1, 0, "left")

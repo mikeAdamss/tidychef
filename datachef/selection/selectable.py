@@ -397,12 +397,10 @@ class Selectable(LiveTable):
         for cell in ordered_pristine_cells:
 
             if considered_offset is None:
-                considered_offset = cell.y if direction._horizontal_axis else cell.x
-            elif considered_offset != (
-                cell.y if direction._horizontal_axis else cell.x
-            ):
+                considered_offset = cell.y if direction.is_horizontal else cell.x
+            elif considered_offset != (cell.y if direction.is_horizontal else cell.x):
                 spreading = None
-                considered_offset = cell.y if direction._horizontal_axis else cell.x
+                considered_offset = cell.y if direction.is_horizontal else cell.x
 
             if not (selected_cell_index + 1) > len(ordered_selected_cells):
                 if cell.matches_xy(ordered_selected_cells[selected_cell_index]):
