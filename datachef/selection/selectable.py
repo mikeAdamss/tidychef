@@ -17,7 +17,6 @@ from datachef.cardinal.directions import (
 from datachef.exceptions import (
     BadExcelReferenceError,
     BadShiftParameterError,
-    CardinalDeclarationWithOffset,
     LoneValueOnMultipleCellsError,
     OutOfBoundsError,
 )
@@ -80,7 +79,7 @@ class Selectable(LiveTable):
         ]
         return self
 
-    # TODO, condsider
+    # TODO, consider
     # until= to control expand size/distance
     # allowing offsets for the same reason (be wary of confusing the user)
     @dontmutate
@@ -93,18 +92,8 @@ class Selectable(LiveTable):
         - Will also accept ABOVE and BELOW as direction, as they
         are aliases of UP and DOWN respectively.
         """
+        direction._confirm_pristine()
         selection: List[BaseCell] = []
-
-        if direction._locked:
-            raise CardinalDeclarationWithOffset(
-                """
-            You cannot pass an offset into a direction
-            in the context of declaring an absolute direction.
-        
-            i.e .expand(up) or .fill(up) is ok, expand(up(1)) or
-            fill(up(1) is not.
-            """
-            )
 
         # To begin with, the potential cells is equal to all cells
         # not currently selected.
@@ -195,7 +184,6 @@ class Selectable(LiveTable):
 
         :direction: One of: up, down, left, right
         """
-
         did_have = copy.deepcopy(self.cells)
         self = self.expand(direction)
         self.cells = [x for x in self.cells if x not in did_have]
@@ -262,7 +250,7 @@ class Selectable(LiveTable):
         if re.match("^[A-Z]+[0-9]+:[A-Z]+[0-9]+$", excel_ref):
             wanted: List[BaseCell] = dfc.multi_excel_ref_to_basecells(excel_ref)
             selected = dfc.exactly_matched_xy_cells(self.cells, wanted)
-            # TODO - guarnatee sensible ordering
+            # TODO - guarantee sensible ordering?
 
         # Single column and row reference
         # eg: 'F19'

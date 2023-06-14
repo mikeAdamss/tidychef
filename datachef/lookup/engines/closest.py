@@ -85,14 +85,7 @@ class CellRanges:
         return "horizontal/x" if self.direction.is_horizontal else "vertical/y"
 
     def get_range_by_index(self, index: int) -> CellRange:
-        try:
-            return self.ordered_cell_ranges[index]
-        except KeyError as err:
-            raise Exception(
-                f"""
-                Cannot find index {index} in {self.ordered_cell_ranges.keys()}
-                """
-            ) from err
+        return self.ordered_cell_ranges[index]
 
     def _populate(self, selection: Selectable):
         """ """
@@ -204,12 +197,6 @@ class Closest(BaseLookupEngine):
             new_index = index - int(potential_range / 2)
             new_index = new_index if new_index != index else new_index - 1
 
-            if new_index < 0:
-                # Don't allow infinitely checking lowest index
-                # If this is happening, we've made incorrect changes
-                new_index = 0
-                assert index != 0
-
         return self.resolve(cell, index=new_index, ceiling=index, floor=floor)
 
     def _resolve_at_higher_range(self, index, cell, ceiling, floor):
@@ -225,8 +212,6 @@ class Closest(BaseLookupEngine):
             potential_range = ceiling - floor
             new_index = index + int(potential_range / 2)
             new_index = new_index if new_index != index else new_index + 1
-            if new_index > len(self.ranges.ordered_cell_ranges):
-                new_index = len(self.ranges.ordered_cell_ranges)
 
         return self.resolve(cell, index=new_index, ceiling=ceiling, floor=index)
 

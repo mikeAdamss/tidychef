@@ -1,6 +1,7 @@
 import pytest
 
 from datachef.cardinal.directions import above, below, down, left, right, up
+from datachef.exceptions import CardinalDeclarationWithOffset
 
 
 def test_cardinal_offset_can_be_overwritten():
@@ -48,3 +49,17 @@ def test_cardinal_offset_cannot_be_overwritten_twice():
 
     with pytest.raises(Exception):
         right(2)(2)
+
+
+def test_confirm_pristine():
+    """
+    Test that we raise for non pristine directions
+    where appropriate
+    """
+
+    # Should not raise
+    up._confirm_pristine()
+
+    # Should raise
+    with pytest.raises(CardinalDeclarationWithOffset):
+        up(2)._confirm_pristine()

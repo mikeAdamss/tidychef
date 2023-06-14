@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Optional
 
+from datachef.exceptions import CardinalDeclarationWithOffset
 from datachef.utils.decorators import dontmutate
 
 
@@ -64,12 +65,21 @@ class Direction(BaseDirection):
         """
         return self.is_right or self.is_left
 
-    @property
-    def is_vertical(self) -> bool:
+    def _confirm_pristine(self):
         """
-        Is is up, down, above or below
+        There are some cenarios where we want to disallow
+        the passing in of directional offsets.
         """
-        return self.is_upwards or self.is_downwards
+        if self._locked:
+            raise CardinalDeclarationWithOffset(
+                """
+                You cannot pass an offset into a direction
+                in the context of declaring an absolute direction.
+            
+                i.e .expand(up) or .fill(up) is ok, expand(up(1)) or
+                fill(up(1) is not.
+                """
+            )
 
     def __call__(self, relative_change: int):
         """
