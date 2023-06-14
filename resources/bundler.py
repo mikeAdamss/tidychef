@@ -21,7 +21,7 @@ resource_dir = Path(repo_base / "resources")
 # Ipynb checkpoints, we dont want to store them
 checkpoints_to_remove = [
     Path(scenario_dir / ".ipynb_checkpoints"),
-    Path(scenario_dir / "expected" / ".ipynb_checkpoints"),
+    Path(scenario_dir / "html_scenario_fixtures" / ".ipynb_checkpoints"),
 ]
 
 # Outputs
