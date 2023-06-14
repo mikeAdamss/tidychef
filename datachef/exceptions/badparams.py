@@ -39,6 +39,26 @@ class CardinalDeclarationWithOffset(Exception):
         self.msg = msg
 
 
+class WithinAxisDeclarationError(Exception):
+    """
+    Raised where a user is attempting a within lookup but is
+    mixing axis.
+
+    i.e we must be scanning between two directions along a
+    single axis, eg:
+
+    - left to right
+    - up to down
+    - below to above
+    etc
+
+    We cannot scan up to left, above to right etc.
+    """
+
+    def __init__(self, msg):
+        self.msg = msg
+
+
 class OutputPassedToPreview(Exception):
     """ """
 

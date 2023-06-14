@@ -89,3 +89,51 @@ def test_order_cells_bottomtop_rightleft():
         str(ordered)
         == "[BaseCell(x=12, y=12), BaseCell(x=6, y=14), BaseCell(x=6, y=2), BaseCell(x=5, y=2), BaseCell(x=3, y=16), BaseCell(x=2, y=5), BaseCell(x=0, y=0)]"
     )
+
+
+def test_order_cells_rightleft_topbottom():
+    """
+    COrder cells left to right moving from the bottom row to the
+    top row.
+    """
+
+    cells = [
+        BaseCell(5, 2),
+        BaseCell(12, 12),
+        BaseCell(11, 12),
+        BaseCell(2, 12),
+        BaseCell(2, 5),
+        BaseCell(6, 2),
+        BaseCell(6, 14),
+        BaseCell(3, 16),
+        BaseCell(0, 0),
+    ]
+    ordered = dfc.order_cells_rightleft_topbottom(cells)
+    assert (
+        str(ordered)
+        == "[BaseCell(x=3, y=16), BaseCell(x=6, y=14), BaseCell(x=12, y=12), BaseCell(x=11, y=12), BaseCell(x=2, y=12), BaseCell(x=2, y=5), BaseCell(x=6, y=2), BaseCell(x=5, y=2), BaseCell(x=0, y=0)]"
+    )
+
+
+def test_order_cells_topbottom_rightleft():
+    """
+    COrder cells left to right moving from the bottom row to the
+    top row.
+    """
+
+    cells = [
+        BaseCell(5, 2),
+        BaseCell(12, 12),
+        BaseCell(11, 12),
+        BaseCell(2, 12),
+        BaseCell(2, 5),
+        BaseCell(6, 2),
+        BaseCell(6, 14),
+        BaseCell(3, 16),
+        BaseCell(0, 0),
+    ]
+    ordered = dfc.order_cells_topbottom_rightleft(cells)
+    assert (
+        str(ordered)
+        == "[BaseCell(x=0, y=0), BaseCell(x=6, y=2), BaseCell(x=5, y=2), BaseCell(x=2, y=5), BaseCell(x=12, y=12), BaseCell(x=11, y=12), BaseCell(x=2, y=12), BaseCell(x=6, y=14), BaseCell(x=3, y=16)]"
+    )

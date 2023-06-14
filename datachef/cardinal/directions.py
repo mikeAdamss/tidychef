@@ -65,6 +65,13 @@ class Direction(BaseDirection):
         """
         return self.is_right or self.is_left
 
+    @property
+    def is_vertical(self) -> bool:
+        """
+        Is up, down, above or below
+        """
+        return self.is_upwards or self.is_downwards
+
     def _confirm_pristine(self):
         """
         There are some scenarios where we want to disallow

@@ -34,5 +34,7 @@ from .ordering import (
     order_cells_bottomtop_rightleft,
     order_cells_leftright_topbottom,
     order_cells_rightleft_bottomtop,
+    order_cells_rightleft_topbottom,
     order_cells_topbottom_leftright,
+    order_cells_topbottom_rightleft,
 )
