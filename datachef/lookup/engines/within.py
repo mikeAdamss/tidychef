@@ -93,7 +93,6 @@ class Within(BaseLookupEngine):
         """
         Order cells appropriately based on how the lookup engine has been configured
         """
-        cells = copy.deepcopy(cells)
 
         # Right
         if any([self.direction_of_travel.is_right and self.direction.is_downwards]):
@@ -115,9 +114,9 @@ class Within(BaseLookupEngine):
 
         # Upwards
         elif any([self.direction_of_travel.is_upwards and self.direction.is_right]):
-            return dfc.order_cells_bottomtop_rightleft(cells)
-        elif any([self.direction_of_travel.is_downwards and self.direction.is_left]):
             return dfc.order_cells_bottomtop_leftright(cells)
+        elif any([self.direction_of_travel.is_upwards and self.direction.is_left]):
+            return dfc.order_cells_bottomtop_rightleft(cells)
 
     def _feasible_cells(self, cell: Cell) -> List[Cell]:
         """
@@ -142,6 +141,62 @@ class Within(BaseLookupEngine):
                 c.x <= x_end,
                 c.is_above(cell.y)
             ])]
+        
+        if self.direction_of_travel.is_right and self.direction.is_downwards:
+            x_start = cell.x + self.start.x
+            x_end = cell.x + self.end.x
+            return [c for c in self.cells if all([
+                c.x >= x_start,
+                c.x <= x_end,
+                c.is_below(cell.y)
+            ])]
+        
+        if self.direction_of_travel.is_left and self.direction.is_downwards:
+            x_start = cell.x + self.end.x
+            x_end = cell.x + self.start.x
+            return [c for c in self.cells if all([
+                c.x >= x_start,
+                c.x <= x_end,
+                c.is_below(cell.y)
+            ])]
+        
+        if self.direction_of_travel.is_upwards and self.direction.is_right:
+            y_start = cell.y + self.end.y
+            y_end = cell.y + self.start.y
+            return [c for c in self.cells if all([
+                c.y >= y_start,
+                c.y <= y_end,
+                c.is_right_of(cell.x)
+            ])]
+        
+        if self.direction_of_travel.is_upwards and self.direction.is_left:
+            y_start = cell.y + self.end.y
+            y_end = cell.y + self.start.y
+            return [c for c in self.cells if all([
+                c.y >= y_start,
+                c.y <= y_end,
+                c.is_left_of(cell.x)
+            ])]
+        
+        if self.direction_of_travel.is_downwards and self.direction.is_left:
+            y_start = cell.y + self.start.y
+            y_end = cell.y + self.end.y
+            return [c for c in self.cells if all([
+                c.y >= y_start,
+                c.y <= y_end,
+                c.is_left_of(cell.x)
+            ])]
+        
+        
+        if self.direction_of_travel.is_downwards and self.direction.is_right:
+            y_start = cell.y + self.start.y
+            y_end = cell.y + self.end.y
+            return [c for c in self.cells if all([
+                c.y >= y_start,
+                c.y <= y_end,
+                c.is_right_of(cell.x)
+            ])]
+        
 
     def resolve(self, cell: Cell) -> Cell:
         """
@@ -162,12 +217,14 @@ class Within(BaseLookupEngine):
                 Start:  {self.start}
                 End:    {self.end}
 
+                Direction of traversal:
+                {self.direction}
+
                 Relative to observation cell {cell}
 
                 Column cells were:
                 {self.cells}                    
                 ''')
         ordered_feasible_cells = self._order(feasible_cells)
+        assert len(ordered_feasible_cells) == len(feasible_cells)
         return ordered_feasible_cells[0]
-
-        
