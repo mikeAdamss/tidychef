@@ -7,7 +7,7 @@ from tests.fixtures import path_to_fixture
 
 def test_acquire_local_csv():
     """
-    Test that the qcquire fuction works with a local csv
+    Test that the acquire fuction works with a local csv
     """
 
     csv_path = path_to_fixture("csv", "simple-small.csv")

@@ -4,17 +4,6 @@ from typing import Union
 from datachef.exceptions import FileInputError
 
 
-def string_looks_like_a_path(maybe_path: str) -> bool:
-    """
-    Given a string, does it look like a path?
-    """
-    try:
-        Path(maybe_path).exists()
-        return True
-    except:
-        return False
-
-
 def ensure_existing_path(maybe_path: Union[Path, str]) -> Path:
     """
     When given a Path or str representing an existing path, ensure that:

@@ -5,7 +5,6 @@ from .badparams import (
     OutputPassedToPreview,
     ReversedExcelRefError,
     UnknownDirectionError,
-    UnsupportedLocalFileError,
     WithinAxisDeclarationError,
 )
 from .cells import InvlaidCellPositionError, NonExistentCellComparissonError

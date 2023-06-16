@@ -86,20 +86,6 @@ class ReversedExcelRefError(Exception):
         super().__init__(msg, *args, **kwargs)
 
 
-class UnsupportedLocalFileError(Exception):
-    """
-    User has passed in a local file of a type not currently supported.
-    """
-
-    def __init__(
-        self,
-        msg=("Provided file type is not supported."),
-        *args,
-        **kwargs,
-    ):
-        super().__init__(msg, *args, **kwargs)
-
-
 class UnknownDirectionError(Exception):
     """
     User has passed in a direction that is not a valid direction

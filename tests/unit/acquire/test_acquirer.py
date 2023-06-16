@@ -5,7 +5,7 @@ import pytest
 
 from datachef import acquire
 from datachef.acquire.base import BaseReader
-from datachef.exceptions import FileInputError
+from datachef.exceptions import FileInputError, UnnamedTableError
 from datachef.models.source.input import BaseInput
 from datachef.selection.selectable import Selectable
 from tests.fixtures import path_to_fixture
@@ -41,3 +41,23 @@ def test_pre_hook():
 
     # Now it works
     acquire.csv.local(csv_path, pre_hook=lambda x: Path(str(x.resolve()) + ".csv"))
+
+
+def test_post_hook():
+    """
+    Test the post hook callable works as intended
+    """
+
+    csv_path: Path = path_to_fixture("csv", "simple.csv", assert_exists=False)
+
+    # Originally has no table so raises
+    with pytest.raises(UnnamedTableError):
+        table: Selectable = acquire.csv.local(csv_path)
+        assert table.name == "foo"
+
+    def table_name_adding_hook(selection: Selectable):
+        selection._name = "foo"
+        return selection
+
+    table: Selectable = acquire.csv.local(csv_path, post_hook=table_name_adding_hook)
+    assert table.name == "foo"
