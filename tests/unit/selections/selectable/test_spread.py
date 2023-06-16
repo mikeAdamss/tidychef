@@ -13,9 +13,9 @@ def test_spread_standard_directions():
     unextended cardinal directions.
     """
 
-    s: Selectable = acquire(
+    s: Selectable = acquire.python.list_of_lists(
         [
-            #      A      B        C        D      E
+            #  A      B        C        D      E
             ["   ", "   ", "       ", "   ", "   "],  # 1
             ["   ", "   ", "       ", "   ", "   "],  # 2
             ["   ", "foo", "bar    ", "baz", "   "],  # 3
@@ -69,9 +69,9 @@ def test_spread_with_until():
     blocks the spread of cells.
     """
 
-    s: Selectable = acquire(
+    s: Selectable = acquire.python.list_of_lists(
         [
-            #      A      B        C        D      E
+            #  A      B        C        D      E
             ["   ", "   ", "       ", "   ", "   "],  # 1
             ["   ", "   ", "       ", "   ", "   "],  # 2
             ["   ", "foo", "bar    ", "baz", "   "],  # 3
@@ -91,7 +91,7 @@ def test_spread_exceptions():
     Test that malformed or bad parameters to spread raise appropriate errors
     """
 
-    s: Selectable = acquire([])
+    s: Selectable = acquire.python.list_of_lists([])
 
     # Check bad direction arguments raise a value error
     with pytest.raises(ValueError):

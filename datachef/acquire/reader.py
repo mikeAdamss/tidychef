@@ -7,8 +7,8 @@ from pathlib import Path
 from typing import Optional, Union
 
 from datachef.constants.files import SUPPORTED_LOCAL_FILETYPES
-from datachef.readers.base import BaseReader
-from datachef.readers.csv.local import LocalCsvReader
+from datachef.acquire.base import BaseReader
+from datachef.acquire.csv.local import LocalCsvReader
 from datachef.selection.selectable import Selectable
 from datachef.utils import fileutils
 

@@ -58,7 +58,7 @@ def test_base_column_lookup_preview():
     column = BaseColumn("I r a label", Constant("foo"))
 
     path_to_csv = path_to_fixture("csv", "bands.csv")
-    observations_selection = acquire(path_to_csv).excel_ref("C7:E10")
+    observations_selection = acquire.csv.local(path_to_csv).excel_ref("C7:E10")
 
     count = 0
     for ob_cell, looked_up_cell in column.lookup_preview(observations_selection):
