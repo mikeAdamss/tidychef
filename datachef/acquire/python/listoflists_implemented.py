@@ -1,5 +1,5 @@
 """
-Holds and defines the reader for create a selection from a list of lists
+Holds the code that defines the python list_of_lists reader.
 """
 import copy
 from typing import Any
@@ -19,7 +19,7 @@ from pathlib import Path
 from datachef.selection.selectable import Selectable
 from datachef.utils import fileutils
 
-from ..acquirer import acquirer
+from ..main import acquirer
 
 
 def list_of_lists(source: Union[str, Path],

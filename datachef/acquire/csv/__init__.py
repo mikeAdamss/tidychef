@@ -1,4 +1,4 @@
 """
 Module used for acquiring source data from csv files
 """
-from .local import local
+from .local_implemented import local

@@ -56,13 +56,30 @@ def fixture_simple_one_tab():
 
 
 def fixture_simple_small_one_tab():
-    """Simple input of one tab. Cells A1:K20"""
+    """
+    Simple input of one tab. Cells A1:K20
+    
+    remote:
+    https://github.com/mikeAdamss/datachef/blob/main/tests/fixtures/csv/simple-small.csv
+
+    local:
+    datachef/tests/fixtures/csv/simple-small.csv
+    """
     return acquire.csv.local(
         path_to_fixture("csv", "simple-small.csv")
     )
 
 
 def fixture_with_blanks():
+    """
+    Simple data with blanks in it
+
+    remote:
+    https://github.com/mikeAdamss/datachef/blob/main/tests/fixtures/csv/has_blanks.csv
+
+    local:
+    datachef/tests/fixtures/csv/has_blanks.csv
+    """
     return acquire.csv.local(path_to_fixture("csv", "has_blanks.csv"))
 
 
@@ -86,12 +103,12 @@ def fixture_simple_two_tabs():
     """Simple input of two tabs. Cells A1:Z100"""
 
     test_input_path = path_to_fixture("csv", "simple.csv")
-    selectable1 = acquire.csv.local(test_input_path)
+    selectable1: Selectable = acquire.csv.local(test_input_path)
     table1 = LiveTable.from_table(
         selectable1.pristine, name="I am table 1", source=test_input_path
     )
 
-    selectable2 = acquire.csv.local(test_input_path)
+    selectable2: Selectable = acquire.csv.local(test_input_path)
     table2 = LiveTable.from_table(
         selectable2.pristine, name="I am table 2", source=test_input_path
     )

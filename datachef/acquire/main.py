@@ -1,6 +1,15 @@
 """
-Acquire is the principle gateway for acquiring new source data
-making http gets where necessary before passing the source into the readers.
+Source code for the acquirer class that power the data acquisition methods.
+
+You would not typically be calling this directly outside of advanced users
+utilising kwargs for unanticipated and/or niche uses cases.
+
+In the vast majority of cirumstances it is both easier and more reliable
+to use the provided wrappers.
+
+acquire.csv.local()
+acquire.csv.remote()
+etc...
 """
 from pathlib import Path
 from typing import Any, Optional, Callable
@@ -19,6 +28,12 @@ def acquirer(
         post_hook: Optional[Callable] = None,
         **kwargs) -> Selectable:
         """
+        The basic acquiring function that all of the other
+        acquire functions call.
+
+        You would not typically be calling this directly
+        outside of advanced users utilising kwargs for
+        unanticipated and/or niche uses cases.
         """
 
         # Execute pre load hook

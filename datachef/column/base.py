@@ -105,7 +105,7 @@ class BaseColumn(metaclass=ABCMeta):
 
     def lookup_preview(
         self, observation_selection: Selectable
-    ) -> Generator[Tuple[str, str], None, None]:
+    ) -> Generator[Tuple[Cell, Cell], None, None]:
         """
         Takes a selection of observations and generates
         tuples of:

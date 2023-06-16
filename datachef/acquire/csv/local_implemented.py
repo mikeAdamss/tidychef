@@ -1,5 +1,5 @@
 """
-Holds and defines the local csv reader class.
+Holds the code that defines the local csv reader.
 """
 
 import copy
@@ -15,7 +15,6 @@ from datachef.selection.csv.csv import CsvInputSelectable
 from datachef.selection.selectable import Selectable
 
 
-from dataclasses import dataclass
 from ..base import BaseReader
 from typing import Any, Optional, Callable, Union
 from pathlib import Path
@@ -23,8 +22,7 @@ from pathlib import Path
 from datachef.selection.selectable import Selectable
 from datachef.utils import fileutils
 
-from ..acquirer import acquirer
-
+from ..main import acquirer
 
 
 def local(source: Union[str, Path],
@@ -43,12 +41,13 @@ def local(source: Union[str, Path],
     https://docs.python.org/3/library/csv.html
     """
 
-    # Ensure that what has been passed in is or can be a Path
-    # object and that the file exists.
-    source_path: Path = fileutils.ensure_existing_path(source)
+    assert isinstance(source, (str, Path)), ("""
+        The source you're passing to acquire.csv.local() needs to
+        be either a Path object or a string representing such.
+        """)
 
     return acquirer(
-        source_path, LocalCsvReader,
+        source, LocalCsvReader,
         selectable,
         pre_hook=pre_hook,
         post_hook=post_hook,
@@ -64,6 +63,9 @@ class LocalCsvReader(BaseReader):
     def parse(
         source: Any, selectable: Selectable = CsvInputSelectable, delimiter=",", **kwargs
     ) -> Selectable:
+        
+        source: Path = fileutils.ensure_existing_path(source)
+
         table = Table()
         with open(source, "r", encoding="utf8") as csv_file:
             file_content = csv.reader(csv_file, delimiter=delimiter, **kwargs)
