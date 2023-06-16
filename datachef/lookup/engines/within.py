@@ -1,8 +1,7 @@
 from typing import List
-import copy 
 
 from datachef.cardinal.directions import Direction
-from datachef.exceptions import WithinAxisDeclarationError, ImpossibleLookupError
+from datachef.exceptions import ImpossibleLookupError, WithinAxisDeclarationError
 from datachef.models.source.cell import Cell
 from datachef.selection import datafuncs as dfc
 from datachef.selection.selectable import Selectable
@@ -81,7 +80,7 @@ class Within(BaseLookupEngine):
                 - name: "{end.name}", class: {end} 
             """
             )
-        
+
         self.start: Direction = start
         self.end: Direction = end
         self.direction_of_travel: Direction = end
@@ -98,7 +97,7 @@ class Within(BaseLookupEngine):
         if any([self.direction_of_travel.is_right and self.direction.is_downwards]):
             return dfc.order_cells_leftright_topbottom(cells)
         elif any([self.direction_of_travel.is_right and self.direction.is_upwards]):
-            return  dfc.order_cells_leftright_bottomtop(cells)
+            return dfc.order_cells_leftright_bottomtop(cells)
 
         # Left
         elif any([self.direction_of_travel.is_left and self.direction.is_downwards]):
@@ -127,76 +126,74 @@ class Within(BaseLookupEngine):
         if self.direction_of_travel.is_right and self.direction.is_upwards:
             x_start = cell.x + self.start.x
             x_end = cell.x + self.end.x
-            return [c for c in self.cells if all([
-                c.x >= x_start,
-                c.x <= x_end,
-                c.is_above(cell.y)
-            ])]
-        
+            return [
+                c
+                for c in self.cells
+                if all([c.x >= x_start, c.x <= x_end, c.is_above(cell.y)])
+            ]
+
         if self.direction_of_travel.is_left and self.direction.is_upwards:
             x_start = cell.x + self.end.x
             x_end = cell.x + self.start.x
-            return [c for c in self.cells if all([
-                c.x >= x_start,
-                c.x <= x_end,
-                c.is_above(cell.y)
-            ])]
-        
+            return [
+                c
+                for c in self.cells
+                if all([c.x >= x_start, c.x <= x_end, c.is_above(cell.y)])
+            ]
+
         if self.direction_of_travel.is_right and self.direction.is_downwards:
             x_start = cell.x + self.start.x
             x_end = cell.x + self.end.x
-            return [c for c in self.cells if all([
-                c.x >= x_start,
-                c.x <= x_end,
-                c.is_below(cell.y)
-            ])]
-        
+            return [
+                c
+                for c in self.cells
+                if all([c.x >= x_start, c.x <= x_end, c.is_below(cell.y)])
+            ]
+
         if self.direction_of_travel.is_left and self.direction.is_downwards:
             x_start = cell.x + self.end.x
             x_end = cell.x + self.start.x
-            return [c for c in self.cells if all([
-                c.x >= x_start,
-                c.x <= x_end,
-                c.is_below(cell.y)
-            ])]
-        
+            return [
+                c
+                for c in self.cells
+                if all([c.x >= x_start, c.x <= x_end, c.is_below(cell.y)])
+            ]
+
         if self.direction_of_travel.is_upwards and self.direction.is_right:
             y_start = cell.y + self.end.y
             y_end = cell.y + self.start.y
-            return [c for c in self.cells if all([
-                c.y >= y_start,
-                c.y <= y_end,
-                c.is_right_of(cell.x)
-            ])]
-        
+            return [
+                c
+                for c in self.cells
+                if all([c.y >= y_start, c.y <= y_end, c.is_right_of(cell.x)])
+            ]
+
         if self.direction_of_travel.is_upwards and self.direction.is_left:
             y_start = cell.y + self.end.y
             y_end = cell.y + self.start.y
-            return [c for c in self.cells if all([
-                c.y >= y_start,
-                c.y <= y_end,
-                c.is_left_of(cell.x)
-            ])]
-        
+            return [
+                c
+                for c in self.cells
+                if all([c.y >= y_start, c.y <= y_end, c.is_left_of(cell.x)])
+            ]
+
         if self.direction_of_travel.is_downwards and self.direction.is_left:
             y_start = cell.y + self.start.y
             y_end = cell.y + self.end.y
-            return [c for c in self.cells if all([
-                c.y >= y_start,
-                c.y <= y_end,
-                c.is_left_of(cell.x)
-            ])]
-        
-        
+            return [
+                c
+                for c in self.cells
+                if all([c.y >= y_start, c.y <= y_end, c.is_left_of(cell.x)])
+            ]
+
         if self.direction_of_travel.is_downwards and self.direction.is_right:
             y_start = cell.y + self.start.y
             y_end = cell.y + self.end.y
-            return [c for c in self.cells if all([
-                c.y >= y_start,
-                c.y <= y_end,
-                c.is_right_of(cell.x)
-            ])]
-        
+            return [
+                c
+                for c in self.cells
+                if all([c.y >= y_start, c.y <= y_end, c.is_right_of(cell.x)])
+            ]
 
     def resolve(self, cell: Cell) -> Cell:
         """
@@ -210,7 +207,8 @@ class Within(BaseLookupEngine):
         feasible_cells = self._feasible_cells(cell)
 
         if len(feasible_cells) == 0:
-            raise ImpossibleLookupError(f'''
+            raise ImpossibleLookupError(
+                f"""
                 Within lookup cannot be resolved, there is no
                 cell to find within the constraints:
                                         
@@ -224,7 +222,8 @@ class Within(BaseLookupEngine):
 
                 Column cells were:
                 {self.cells}                    
-                ''')
+                """
+            )
         ordered_feasible_cells = self._order(feasible_cells)
         assert len(ordered_feasible_cells) == len(feasible_cells)
         return ordered_feasible_cells[0]

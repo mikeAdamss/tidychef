@@ -31,6 +31,7 @@ from .excel import (
     single_excel_row_to_y_index,
 )
 from .ordering import (
+    order_cells_bottomtop_leftright,
     order_cells_bottomtop_rightleft,
     order_cells_leftright_bottomtop,
     order_cells_leftright_topbottom,
@@ -38,5 +39,4 @@ from .ordering import (
     order_cells_rightleft_topbottom,
     order_cells_topbottom_leftright,
     order_cells_topbottom_rightleft,
-    order_cells_bottomtop_leftright
 )

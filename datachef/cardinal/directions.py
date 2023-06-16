@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Optional
 
 from datachef.exceptions import CardinalDeclarationWithOffset
 from datachef.utils.decorators import dontmutate

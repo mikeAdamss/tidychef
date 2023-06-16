@@ -2,9 +2,9 @@ import pytest
 
 from datachef import acquire
 from datachef.column.base import BaseColumn
-from datachef.selection.selectable import Selectable
 from datachef.lookup.engines.constant import Constant
 from datachef.models.source.cell import VirtualCell
+from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab, path_to_fixture
 
 

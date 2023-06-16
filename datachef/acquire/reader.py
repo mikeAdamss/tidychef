@@ -6,9 +6,9 @@ Wrappers and utilities bringing together the functionality within
 from pathlib import Path
 from typing import Optional, Union
 
-from datachef.constants.files import SUPPORTED_LOCAL_FILETYPES
 from datachef.acquire.base import BaseReader
 from datachef.acquire.csv.local_implemented import LocalCsvReader
+from datachef.constants.files import SUPPORTED_LOCAL_FILETYPES
 from datachef.selection.selectable import Selectable
 from datachef.utils import fileutils
 

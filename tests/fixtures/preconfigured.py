@@ -1,6 +1,6 @@
+from datachef import acquire
 from datachef.models.source.input import BaseInput
 from datachef.models.source.table import LiveTable, Table
-from datachef import acquire
 from datachef.selection.selectable import Selectable
 from tests.fixtures import path_to_fixture
 
@@ -15,9 +15,7 @@ def fixture_simple_band_tab():
     local:
     datachef/tests/fixtures/csv/bands.csv
     """
-    return acquire.csv.local(
-        path_to_fixture("csv", "bands.csv")
-    )
+    return acquire.csv.local(path_to_fixture("csv", "bands.csv"))
 
 
 def fixture_wide_band_tab():
@@ -30,15 +28,12 @@ def fixture_wide_band_tab():
     local:
     datachef/tests/fixtures/csv/bands-wide.csv
     """
-    return acquire.csv.local(
-        path_to_fixture("csv", "bands-wide.csv"))
+    return acquire.csv.local(path_to_fixture("csv", "bands-wide.csv"))
 
 
 def fixture_vertical_dimensions():
     """Wide version of our sample band data"""
-    return acquire.csv.local(
-        path_to_fixture("csv", "vertical-dimensions.csv")
-    )
+    return acquire.csv.local(path_to_fixture("csv", "vertical-dimensions.csv"))
 
 
 def fixture_simple_one_tab():
@@ -50,24 +45,20 @@ def fixture_simple_one_tab():
     local:
     datachef/tests/fixtures/csv/simple.csv
     """
-    return acquire.csv.local(
-        path_to_fixture("csv", "simple.csv")
-    )
+    return acquire.csv.local(path_to_fixture("csv", "simple.csv"))
 
 
 def fixture_simple_small_one_tab():
     """
     Simple input of one tab. Cells A1:K20
-    
+
     remote:
     https://github.com/mikeAdamss/datachef/blob/main/tests/fixtures/csv/simple-small.csv
 
     local:
     datachef/tests/fixtures/csv/simple-small.csv
     """
-    return acquire.csv.local(
-        path_to_fixture("csv", "simple-small.csv")
-    )
+    return acquire.csv.local(path_to_fixture("csv", "simple-small.csv"))
 
 
 def fixture_with_blanks():
@@ -93,9 +84,7 @@ def fixture_is_wide():
     local:
     datachef/tests/fixtures/csv/wide.csv
     """
-    return acquire.csv.local(
-        path_to_fixture("csv", "wide.csv")
-    )
+    return acquire.csv.local(path_to_fixture("csv", "wide.csv"))
 
 
 # TODO - use excel when we have a real excel reader

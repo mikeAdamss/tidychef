@@ -11,42 +11,37 @@ acquire.csv.local()
 acquire.csv.remote()
 etc...
 """
-from pathlib import Path
-from typing import Any, Optional, Callable
+from typing import Any, Callable, Optional
 
 from datachef.acquire.base import BaseReader
 from datachef.selection.selectable import Selectable
-from datachef.utils import fileutils
 
-from dataclasses import dataclass
 
 def acquirer(
-        source: Any,
-        reader: Optional[BaseReader] = None,
-        selectable: Optional[Selectable] = None,
-        pre_hook: Optional[Callable] = None,
-        post_hook: Optional[Callable] = None,
-        **kwargs) -> Selectable:
-        """
-        The basic acquiring function that all of the other
-        acquire functions call.
+    source: Any,
+    reader: Optional[BaseReader] = None,
+    selectable: Optional[Selectable] = None,
+    pre_hook: Optional[Callable] = None,
+    post_hook: Optional[Callable] = None,
+    **kwargs
+) -> Selectable:
+    """
+    The basic acquiring function that all of the other
+    acquire functions call.
 
-        You would not typically be calling this directly
-        outside of advanced users utilising kwargs for
-        unanticipated and/or niche uses cases.
-        """
+    You would not typically be calling this directly
+    outside of advanced users utilising kwargs for
+    unanticipated and/or niche uses cases.
+    """
 
-        # Execute pre load hook
-        if pre_hook:
-            source = pre_hook(source)
+    # Execute pre load hook
+    if pre_hook:
+        source = pre_hook(source)
 
-        parsed = reader.parse(
-            source,
-            selectable=selectable,
-            **kwargs)
-        
-        # Execute post load hook
-        if post_hook:
-            parsed = post_hook(parsed)
-        
-        return parsed
+    parsed = reader.parse(source, selectable=selectable, **kwargs)
+
+    # Execute post load hook
+    if post_hook:
+        parsed = post_hook(parsed)
+
+    return parsed

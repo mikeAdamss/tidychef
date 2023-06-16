@@ -2,36 +2,29 @@
 Holds the code that defines the python list_of_lists reader.
 """
 import copy
-from typing import Any
+from pathlib import Path
+from typing import Callable, Optional, Union
 
+from datachef.acquire.base import BaseReader
 from datachef.models.source.cell import Cell
 from datachef.models.source.table import Table
-from datachef.acquire.base import BaseReader
 from datachef.selection.selectable import Selectable
 
-
-
-from dataclasses import dataclass
 from ..base import BaseReader
-from typing import Any, Optional, Callable, Union
-from pathlib import Path
-
-from datachef.selection.selectable import Selectable
-from datachef.utils import fileutils
-
 from ..main import acquirer
 
 
-def list_of_lists(source: Union[str, Path],
-                selectable: Selectable = Selectable,
-                pre_hook:Optional[Callable] = None,
-                post_hook: Optional[Callable] = None,
-                **kwargs
-                ) -> Selectable:
+def list_of_lists(
+    source: Union[str, Path],
+    selectable: Selectable = Selectable,
+    pre_hook: Optional[Callable] = None,
+    post_hook: Optional[Callable] = None,
+    **kwargs
+) -> Selectable:
     """
     A reader to create a selectable from a list of python
     lists, with each cell entry being a simple string.
-    
+
     Regarding ordering we traverse the x axis then the y axis,
     i.e standard human reading order.
 
@@ -42,15 +35,16 @@ def list_of_lists(source: Union[str, Path],
     ]
     """
     return acquirer(
-        source, ListOfListsReader,
+        source,
+        ListOfListsReader,
         selectable,
         pre_hook=pre_hook,
         post_hook=post_hook,
         **kwargs
     )
 
-class ListOfListsReader(BaseReader):
 
+class ListOfListsReader(BaseReader):
     def parse(source, selectable: Selectable = Selectable) -> Selectable:
         table = Table()
 

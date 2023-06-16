@@ -4,8 +4,6 @@ Data functions related to excel referencing of x.y positioned cells.
 import re
 from typing import List
 
-from pyrsistent import s
-
 from datachef.exceptions import BadExcelReferenceError, ReversedExcelRefError
 from datachef.models.source.cell import BaseCell
 from datachef.utils import cellutils

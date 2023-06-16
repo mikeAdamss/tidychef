@@ -165,6 +165,7 @@ def test_order_cells_leftright_bottomtop():
         == "[BaseCell(x=0, y=0), BaseCell(x=2, y=12), BaseCell(x=2, y=5), BaseCell(x=3, y=16), BaseCell(x=5, y=2), BaseCell(x=6, y=14), BaseCell(x=6, y=2), BaseCell(x=11, y=12), BaseCell(x=12, y=12)]"
     )
 
+
 def test_order_cells_bottomtop_leftright():
     """
     Example cell read order:

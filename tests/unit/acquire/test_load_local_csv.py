@@ -37,4 +37,3 @@ def test_read_local_csv_from_str():
 
     assert sheet.cells == sheet.pcells
     assert len(sheet.cells) == 2600  # A-Z for 100 rows
-

@@ -14,6 +14,7 @@ def string_looks_like_a_path(maybe_path: str) -> bool:
     except:
         return False
 
+
 def ensure_existing_path(maybe_path: Union[Path, str]) -> Path:
     """
     When given a Path or str representing an existing path, ensure that:
