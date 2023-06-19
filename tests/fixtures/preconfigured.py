@@ -1,6 +1,6 @@
 from datachef import acquire
 from datachef.models.source.input import BaseInput
-from datachef.models.source.table import LiveTable, Table
+from datachef.models.source.table import LiveTable
 from datachef.selection.selectable import Selectable
 from tests.fixtures import path_to_fixture
 

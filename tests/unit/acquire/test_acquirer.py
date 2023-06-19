@@ -1,12 +1,10 @@
 from pathlib import Path
-from typing import Union
 
 import pytest
 
 from datachef import acquire
 from datachef.acquire.base import BaseReader
 from datachef.exceptions import FileInputError, UnnamedTableError
-from datachef.models.source.input import BaseInput
 from datachef.selection.selectable import Selectable
 from tests.fixtures import path_to_fixture
 

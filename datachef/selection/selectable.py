@@ -24,6 +24,7 @@ from datachef.models.source.cell import BaseCell, Cell
 from datachef.models.source.table import LiveTable
 from datachef.selection import datafuncs as dfc
 from datachef.utils.decorators import dontmutate
+from datachef.selection.datafuncs.ordering import order_cells_leftright_topbottom
 
 
 class Selectable(LiveTable):
@@ -417,7 +418,9 @@ class Selectable(LiveTable):
             c1 for c1 in self.pcells if not any(c1.matches_xy(c2) for c2 in new_cells)
         ]
         self.pristine.cells += new_cells
+        self.pristine.cells = order_cells_leftright_topbottom(self.pristine.cells)
 
         # Add the overwritten cells into the current selection
         self.cells += new_cells
+
         return self

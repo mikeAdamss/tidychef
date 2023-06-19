@@ -4,6 +4,5 @@ Code relating to the reading in of data sources.
 """
 from datachef.cardinal.directions import above, below, down, left, right, up
 from datachef.selection import filters
-from datachef.utils.preview.previewer import label, preview
 
-from . import acquire, models, utils
+from . import acquire, models, utils, notebook

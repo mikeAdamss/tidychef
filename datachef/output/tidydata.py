@@ -8,7 +8,7 @@ from IPython.core.display import HTML, display
 from datachef.column.base import BaseColumn
 from datachef.output.base import BaseOutput
 from datachef.selection.selectable import Selectable
-from datachef.utils.notebooks.ipython import in_notebook
+from datachef.notebook.ipython import in_notebook
 
 
 class TidyData(BaseOutput):

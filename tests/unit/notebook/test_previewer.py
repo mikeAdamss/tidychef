@@ -3,7 +3,7 @@ import pytest
 from datachef.exceptions import OutputPassedToPreview, UnalignedTableOperation
 from datachef.output.tidydata import TidyData
 from datachef.selection.selectable import Selectable
-from datachef.utils.preview.previewer import preview
+from datachef.notebook.preview.html.main import preview
 from tests.fixtures.preconfigured import fixture_simple_small_one_tab
 
 
@@ -20,7 +20,7 @@ def selectable_simple_small2():
 def test_preview_is_callable(selectable_simple_small1: Selectable):
     """
     Confirm sure that the preview callable can be called with
-    a varianle number of selections, i.e *args but only of
+    a variable number of selections, i.e *args but only of
     type Selectable.
     """
 

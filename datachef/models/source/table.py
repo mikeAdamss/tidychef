@@ -57,10 +57,20 @@ class LiveTable:
         self._name: Optional[str] = _name
         self.source: Union[Path, str] = source
 
-        # An optional label used when working with previews
+        # Optional label for a given selection that's used when
+        # working with previews
         self._label: Optional[str] = None
 
         self.validate()
+
+    @dontmutate
+    def label_as(self, label: str):
+        """
+        Assign a label to this specific selection
+        """
+        assert isinstance(label, str), "A label for a selection must be of type string"
+        self._label = label
+        return self
 
     @property
     def name(self):
