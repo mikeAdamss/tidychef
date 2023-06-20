@@ -4,17 +4,12 @@ from os import linesep
 
 import pytest
 
-from datachef.cardinal.directions import down, left, right, up
-from datachef.exceptions import (
-    FailedLookupError,
-    MissingDirectLookupError,
-    UnknownDirectionError,
-)
 from datachef.lookup.engines.horizontal_condition import HorizontalCondition
 from datachef.models.source.cell import Cell
 from datachef.selection import datafuncs as dfc
 from datachef.selection import filters
 from datachef.selection.selectable import Selectable
+from datachef.column.column import Column
 from tests.fixtures import fixture_wide_band_tab
 from datachef.exceptions import BadConditionalResolverError
 
@@ -62,3 +57,12 @@ def test_single_horizontal_conditional():
     resolved = horizontal_conditional.resolve("", {"foo": "fooval", "bar": "barval"})
     assert resolved == "foovalbarval"
 
+
+def test_horizontal_conditional_wrapper():
+    """
+    Test the Column class HorizontalConditional wrapper
+    is working as expected.   
+    """
+    column = Column.horizontal_condition("",
+        resolver = lambda x: x["foo"]+x["bar"])
+    column.resolve_column_cell_from_obs_cell("", {"foo": "fooval", "bar": "barval"}) == "foovalbarval"
