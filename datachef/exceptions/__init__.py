@@ -18,6 +18,8 @@ from .common import (
     OutOfBoundsError,
     UnalignedTableOperation,
     UnnamedTableError,
+    MissingLabelError,
+    AbsentColumnValueError
 )
 from .construction import ComponentConstructionError, DimensionConstructionError
 from .lookups import AmbiguousLookupError, FailedLookupError, MissingDirectLookupError

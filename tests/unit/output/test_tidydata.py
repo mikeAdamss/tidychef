@@ -6,7 +6,8 @@ import pytest
 
 from datachef.cardinal.directions import above, left
 from datachef.column import Column
-from datachef.lookup import Constant, Directly
+from datachef.lookup.engines.constant import Constant
+from datachef.lookup.engines.direct import Directly
 from datachef.output.tidydata import TidyData
 from datachef.selection import filters
 from datachef.selection.selectable import Selectable
@@ -33,12 +34,10 @@ def tidy() -> TidyData:
     )
 
     tidy = TidyData(
-        observations,
-        [
-            Column("Genre", Constant("Rock & Roll")),
-            Column("Assets", Directly(assets, above)),
-            Column("Member", Directly(member, left)),
-        ],
+        observations.label_as("Value"),
+        Column(Constant("Genre", "Rock & Roll")),
+        Column(Directly("Assets", assets, above)),
+        Column(Directly("Member", member, left))
     )
 
     return tidy

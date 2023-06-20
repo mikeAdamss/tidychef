@@ -4,7 +4,7 @@ from datachef.cardinal.directions import Direction
 from datachef.exceptions import ImpossibleLookupError, WithinAxisDeclarationError
 from datachef.models.source.cell import Cell
 from datachef.selection import datafuncs as dfc
-from datachef.selection.selectable import Selectable
+from datachef.models.source.table import LiveTable
 
 from ..base import BaseLookupEngine
 
@@ -12,7 +12,8 @@ from ..base import BaseLookupEngine
 class Within(BaseLookupEngine):
     def __init__(
         self,
-        selection: Selectable,
+        label: str,
+        selection: LiveTable,
         direction: Direction,
         start: Direction,
         end: Direction,
@@ -49,6 +50,7 @@ class Within(BaseLookupEngine):
         With the header cell we're "looking up" being the first of the cells we've labelled
         1-9 (in that order) that is a cell we've also defined via the selection parameter.
         """
+        self.label = label
 
         # Don't allow incorrect construction
         invalid_combinations = [

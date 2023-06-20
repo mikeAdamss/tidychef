@@ -41,7 +41,7 @@ def test_direct_left_multiple_options_lookup(selectable_wide_band_tab: Selectabl
     )
     assert len(dim.cells) == 8, "Unexpected selection, have we changed the sample data?"
 
-    direct_left_engine = Directly(dim, left)
+    direct_left_engine = Directly("", dim, left)
 
     @dataclass
     class Case:
@@ -81,7 +81,7 @@ def test_direct_right_multiple_options_lookup(selectable_wide_band_tab: Selectab
     )
     assert len(dim.cells) == 8, "Unexpected selection, have we changed the sample data?"
 
-    direct_right_engine = Directly(dim, right)
+    direct_right_engine = Directly("", dim, right)
 
     @dataclass
     class Case:
@@ -123,7 +123,7 @@ def test_direct_up_multiple_options_lookup(selectable_vertical_dimensions: Selec
         len(dim.cells) == 12
     ), "Unexpected selection, have we changed the sample data?"
 
-    direct_up_engine = Directly(dim, up)
+    direct_up_engine = Directly("", dim, up)
 
     @dataclass
     class Case:
@@ -167,7 +167,7 @@ def test_direct_down_multiple_options_lookup(
         len(dim.cells) == 12
     ), "Unexpected selection, have we changed the sample data?"
 
-    direct_down_engine = Directly(dim, down)
+    direct_down_engine = Directly("", dim, down)
 
     @dataclass
     class Case:
@@ -197,7 +197,7 @@ def test_bad_direction_param(selectable_vertical_dimensions: Selectable):
     """
 
     with pytest.raises(UnknownDirectionError):
-        Directly(selectable_vertical_dimensions, "not a direction")
+        Directly("", selectable_vertical_dimensions, "not a direction")
 
 
 def test_no_direction_lookup(selectable_vertical_dimensions: Selectable):
@@ -211,7 +211,7 @@ def test_no_direction_lookup(selectable_vertical_dimensions: Selectable):
 
     # A1 is not up from B10, so an error should get raised
     with pytest.raises(MissingDirectLookupError):
-        direct_up_engine = Directly(dim, up)
+        direct_up_engine = Directly("", dim, up)
         direct_up_engine.resolve(ob)
 
 
@@ -229,7 +229,7 @@ def test_malformed_class_err(selectable_vertical_dimensions: Selectable):
 
     # badup should raise an error
     with pytest.raises(UnknownDirectionError):
-        direct_up_engine = Directly(dim, badup)
+        direct_up_engine = Directly("", dim, badup)
         direct_up_engine.resolve(ob)
 
 
@@ -244,5 +244,5 @@ def test_failed_lookup_err(selectable_vertical_dimensions: Selectable):
 
     # we have a dimension item in A10 ... but that's not up from A1
     with pytest.raises(FailedLookupError):
-        direct_up_engine = Directly(dim, up)
+        direct_up_engine = Directly("", dim, up)
         direct_up_engine.resolve(ob)

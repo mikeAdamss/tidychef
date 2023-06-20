@@ -56,7 +56,7 @@ def test_previwer_with_mixed_table_raises(
         preview(selectable_simple_small1, selectable_simple_small2)
 
 
-def test_passing_an_output_to_preview_raises():
+def test_passing_an_output_to_preview_raises(selectable_simple_small1: Selectable):
     """
     Test that where users have tried to pass an output
     class to the input preview the expected error is
@@ -66,4 +66,8 @@ def test_passing_an_output_to_preview_raises():
     with pytest.raises(OutputPassedToPreview):
         # Note, empty args as its just checking the type
         # not the contents and should fail immediately
-        preview(TidyData("", []))
+        preview(
+            TidyData(
+                selectable_simple_small1.label_as("foo"), [
+                selectable_simple_small1.label_as("foo")
+            ]))

@@ -69,7 +69,7 @@ def test_closest_right(selectable_simple_table: Selectable):
                 cells = cells | selectable_simple_table.excel_ref(excel_ref)
 
         # Create the ranges
-        closest_engine = Closest(case.direction, cells)
+        closest_engine = Closest("", cells, case.direction)
 
         for expected_result in case.expect_results:
 
@@ -127,7 +127,7 @@ def test_closest_left(selectable_simple_table: Selectable):
                 cells = cells | selectable_simple_table.excel_ref(excel_ref)
 
         # Create the ranges
-        closest_engine = Closest(case.direction, cells)
+        closest_engine = Closest("", cells, case.direction)
 
         for expected_result in case.expect_results:
 

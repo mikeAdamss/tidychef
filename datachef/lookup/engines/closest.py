@@ -5,7 +5,7 @@ from typing import Dict, Optional
 from datachef.cardinal.directions import Direction
 from datachef.exceptions import AmbiguousLookupError, ImpossibleLookupError
 from datachef.models.source.cell import Cell
-from datachef.selection.selectable import Selectable
+from datachef.models.source.table import LiveTable
 
 from ..base import BaseLookupEngine
 
@@ -74,7 +74,7 @@ class CellRanges:
     A class representing multiple cell ranges
     """
 
-    def __init__(self, selection: Selectable, direction: Direction):
+    def __init__(self, selection: LiveTable, direction: Direction):
         self.direction: Direction = direction
         self.highest_possible_offset: Optional[int] = None
         self.lowest_possible_offset: Optional[int] = None
@@ -87,7 +87,7 @@ class CellRanges:
     def get_range_by_index(self, index: int) -> CellRange:
         return self.ordered_cell_ranges[index]
 
-    def _populate(self, selection: Selectable):
+    def _populate(self, selection: LiveTable):
         """ """
 
         break_points = {}
@@ -170,7 +170,7 @@ class CellRanges:
 
 
 class Closest(BaseLookupEngine):
-    def __init__(self, direction: Direction, selection: Selectable):
+    def __init__(self, label: str, selection: LiveTable, direction: Direction):
         """
         Creates a lookup engine to column values defined vis
         the closest visual relationship.
@@ -182,6 +182,7 @@ class Closest(BaseLookupEngine):
         self.ranges = CellRanges(selection, direction)
         self.bumped = True
         self.start_index = None
+        self.label = label
 
     def _resolve_at_lower_range(self, index, cell, ceiling, floor):
         """

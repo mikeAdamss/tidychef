@@ -7,7 +7,7 @@ def test_constant_lookup_engine():
     Test that the constant lookup works
     """
 
-    constant_engine = Constant("Some constant")
+    constant_engine = Constant("", "Some constant")
 
     for case in [
         Cell(x="1", y="3", value="foo"),

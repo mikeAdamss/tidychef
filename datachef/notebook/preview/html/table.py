@@ -35,7 +35,7 @@ INLINE_CSS = """
 
 def get_preview_table_as_html(
     selections: List[Selectable],
-    with_excel_ref: bool = True,
+    with_excel_notations: bool = True,
     start: Optional[str] = None,
     end: Optional[str] = None,
     multiple_selection_warning: bool = True,

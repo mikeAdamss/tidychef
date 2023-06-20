@@ -7,8 +7,9 @@ from datachef.exceptions import (
     UnknownDirectionError,
 )
 from datachef.models.source.cell import Cell
+from datachef.models.source.table import LiveTable
 from datachef.selection import datafuncs as dfc
-from datachef.selection.selectable import Selectable
+#from datachef.selection.selectable import Selectable
 
 from ..base import BaseLookupEngine
 
@@ -27,13 +28,14 @@ class Directly(BaseLookupEngine):
     an exception is raised.
     """
 
-    def __init__(self, selection: Selectable, direction: Direction):
+    def __init__(self, label: str, selection: LiveTable, direction: Direction):
         """
 
         :param: The value items that define this
         component, eg: in case of a dimension, these
         would be the dimensional values.
         """
+        self.label = label
         self.direction: Direction = direction
         cells = selection.cells
 

@@ -129,3 +129,25 @@ class ImpossibleLookupError(Exception):
 
     def __init__(self, msg):
         self.msg = msg
+
+
+class MissingLabelError(Exception):
+    """
+    Raised where a user is trying to construct an output with a 
+    selection of cells but has not yet labelled that selection of
+    cells
+    """
+
+    def __init__(self, msg):
+        self.msg = msg
+
+
+class AbsentColumnValueError(Exception):
+    """
+    Raised where a user is trying access a column value
+    via a column label but no value exists under said
+    column for the row in question.
+    """
+
+    def __init__(self, msg):
+        self.msg = msg

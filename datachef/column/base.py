@@ -14,43 +14,26 @@ class BaseColumn(metaclass=ABCMeta):
 
     def __init__(
         self,
-        label: str,
         engine: BaseLookupEngine,
         *args,
         **kwargs,
     ):
-        """ """
-
-        # Note, its not expected (nor recommended), but these booleans
-        # are to allow an advanced user to toggle off the assertions
-        # via _pre_init() if they're trying to do something particularly
-        # whacky.
-        self.assert_label = True
-        self.assert_engine = True
 
         # See _pre_init() docstring
-        self._pre_init(self, label, engine, *args, **kwargs)
+        self._pre_init(self, engine, *args, **kwargs)
 
-        # Assert the things that we should always have
-        if self.assert_label:
-            assert isinstance(
-                label, str
-            ), f"{label} is not a valid argument. This should be of type str"
+        assert isinstance(
+            engine, BaseLookupEngine
+        ), f"{engine} is not a valid argument"
 
-        if self.assert_engine:
-            assert isinstance(
-                engine, BaseLookupEngine
-            ), f"{engine} is not a valid argument"  # TODO - list the options once we have them
-
-        self.label = label
         self.engine = engine
+        self.label = engine.label
 
         # See _post_init() docstring
-        self._post_init(self, label, engine, *args, **kwargs)
+        self._post_init(self, engine, *args, **kwargs)
 
     def _pre_init(
         self,
-        label: str,
         engine: BaseLookupEngine,
         *args,
         **kwargs,
@@ -89,7 +72,7 @@ class BaseColumn(metaclass=ABCMeta):
         """
         return cell
 
-    def resolve_column_cell_from_obs_cell(self, observation_cell: Cell) -> Cell:
+    def resolve_column_cell_from_obs_cell(self, observation_cell: Cell, *args) -> Cell:
         """
         Use the provided lookup engine to return the value
         of this Column against a given observation, according
@@ -99,7 +82,7 @@ class BaseColumn(metaclass=ABCMeta):
         this particular Column is applying custom handling of
         some sort.
         """
-        cell = self.engine.resolve(observation_cell)
+        cell = self.engine.resolve(observation_cell, *args)
         cell = self._post_lookup(cell)
         return cell
 

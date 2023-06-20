@@ -20,7 +20,7 @@ def test_resolving_base_column_value_from_observation():
 
     ob_cell = VirtualCell("value unused as we're using a constant lookup")
 
-    col = BaseColumn("This", Constant("foo"))
+    col = BaseColumn(Constant("This", "foo"))
     assert col.resolve_column_cell_from_obs_cell(ob_cell).value == "foo"
 
 
@@ -32,22 +32,14 @@ def test_base_column_assertions():
     we'll just use a Constant lookup engine.
     """
 
-    # Incorrect type for label
-    with pytest.raises(AssertionError):
-        BaseColumn(
-            True,
-            Constant("foo"),
-        )
-
     # Incorrect type for lookup engine
     with pytest.raises(AssertionError):
         BaseColumn(
-            "I r a label",
             True,
         )
 
     # Does not raise for incorrect arguments
-    BaseColumn("I r a label", Constant("foo"))
+    BaseColumn(Constant("I r a label", "foo"))
 
 
 def test_base_column_lookup_preview(all_cells_from_a_tab: Selectable):
@@ -56,7 +48,7 @@ def test_base_column_lookup_preview(all_cells_from_a_tab: Selectable):
     preview lookups.
     """
 
-    column = BaseColumn("I r a label", Constant("foo"))
+    column = BaseColumn(Constant("I r a label", "foo"))
 
     observations_selection = all_cells_from_a_tab.excel_ref("C7:E10")
 

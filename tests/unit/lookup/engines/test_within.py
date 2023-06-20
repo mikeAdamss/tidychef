@@ -38,7 +38,7 @@ def test_within_direction_up_traversal_leftright(selectable_simple_table: Select
     ages = selectable_simple_table.excel_ref("B2") | selectable_simple_table.excel_ref(
         "F2"
     )
-    engine = Within(ages, above, start=left(1), end=right(1))
+    engine = Within("", ages, above, start=left(1), end=right(1))
 
     @dataclass
     class Case:
@@ -73,7 +73,7 @@ def test_within_direction_up_traversal_rightleft(selectable_simple_table: Select
         | selectable_simple_table.excel_ref("D2")
         | selectable_simple_table.excel_ref("F2")
     )
-    engine = Within(ages, above, start=right(1), end=left(1))
+    engine = Within("", ages, above, start=right(1), end=left(1))
 
     @dataclass
     class Case:
@@ -108,7 +108,7 @@ def test_within_direction_down_traversal_rightleft(selectable_simple_table: Sele
         | selectable_simple_table.excel_ref("D4")
         | selectable_simple_table.excel_ref("G4")
     )
-    engine = Within(ages, below, start=right(1), end=left(1))
+    engine = Within("", ages, below, start=right(1), end=left(1))
 
     @dataclass
     class Case:
@@ -143,7 +143,7 @@ def test_within_direction_down_traversal_leftright(selectable_simple_table: Sele
         | selectable_simple_table.excel_ref("D4")
         | selectable_simple_table.excel_ref("G4")
     )
-    engine = Within(ages, below, start=left(1), end=right(1))
+    engine = Within("", ages, below, start=left(1), end=right(1))
 
     @dataclass
     class Case:
@@ -178,7 +178,7 @@ def test_within_direction_left_traversal_downup(selectable_simple_table: Selecta
     ages = selectable_simple_table.excel_ref("A5") | selectable_simple_table.excel_ref(
         "D5"
     )
-    engine = Within(ages, left, start=down(2), end=up(1))
+    engine = Within("", ages, left, start=down(2), end=up(1))
 
     @dataclass
     class Case:
@@ -215,7 +215,7 @@ def test_within_direction_right_traversal_downup(selectable_simple_table: Select
     ages = selectable_simple_table.excel_ref("C5") | selectable_simple_table.excel_ref(
         "F3"
     )
-    engine = Within(ages, right, start=down(2), end=up(3))
+    engine = Within("", ages, right, start=down(2), end=up(3))
 
     @dataclass
     class Case:
@@ -262,7 +262,7 @@ def test_within_direction_left_traversal_updown(selectable_simple_table: Selecta
         | selectable_simple_table.excel_ref("D4")
         | selectable_simple_table.excel_ref("D9")
     )
-    engine = Within(ages, left, start=up(3), end=down(3))
+    engine = Within("", ages, left, start=up(3), end=down(3))
 
     @dataclass
     class Case:
@@ -317,7 +317,7 @@ def test_within_direction_right_traversal_updown(selectable_simple_table: Select
         | selectable_simple_table.excel_ref("F4")
         | selectable_simple_table.excel_ref("F9")
     )
-    engine = Within(ages, right, start=up(3), end=down(3))
+    engine = Within("", ages, right, start=up(3), end=down(3))
 
     @dataclass
     class Case:
@@ -353,7 +353,7 @@ def test_axis_declaration_error():
     raises the expected error
     """
     with pytest.raises(WithinAxisDeclarationError):
-        Within([], up, left(1), up(1))
+        Within("", [], up, left(1), up(1))
 
 
 def test_impossible_lookup_error(selectable_simple_table: Selectable):
@@ -372,7 +372,7 @@ def test_impossible_lookup_error(selectable_simple_table: Selectable):
     ages = selectable_simple_table.excel_ref("A5")
 
     # Looking RIGHT for ages column header - where there's no selected cells
-    engine = Within(ages, right, start=down(2), end=up(1))
+    engine = Within("", ages, right, start=down(2), end=up(1))
 
     with pytest.raises(ImpossibleLookupError):
         ob_cell = selectable_simple_table.excel_ref("B5")

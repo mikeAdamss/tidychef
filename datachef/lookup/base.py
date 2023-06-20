@@ -7,9 +7,10 @@ class BaseLookupEngine(metaclass=ABCMeta):
     """
     The base class all lookup engines are built upon.
     """
+    label: str
 
     @abstractmethod
-    def resolve(self, cell: Cell) -> Cell:
+    def resolve(self, cell: Cell, *args) -> Cell:
         """
         Given a single observation cell, resolve
         the lookup, returning the relevant cell
