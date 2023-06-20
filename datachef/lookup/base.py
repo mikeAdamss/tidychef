@@ -7,6 +7,7 @@ class BaseLookupEngine(metaclass=ABCMeta):
     """
     The base class all lookup engines are built upon.
     """
+
     label: str
 
     @abstractmethod

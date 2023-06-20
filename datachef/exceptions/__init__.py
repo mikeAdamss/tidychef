@@ -9,17 +9,18 @@ from .badparams import (
 )
 from .cells import InvlaidCellPositionError, NonExistentCellComparissonError
 from .common import (
+    AbsentColumnValueError,
     CellsDoNotExistError,
     FileInputError,
     ImpossibleLookupError,
     InvalidCellObjectError,
     InvalidTableSignatures,
     LoneValueOnMultipleCellsError,
+    MissingLabelError,
     OutOfBoundsError,
     UnalignedTableOperation,
     UnnamedTableError,
-    MissingLabelError,
-    AbsentColumnValueError
+    BadConditionalResolverError
 )
 from .construction import ComponentConstructionError, DimensionConstructionError
 from .lookups import AmbiguousLookupError, FailedLookupError, MissingDirectLookupError

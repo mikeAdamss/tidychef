@@ -9,9 +9,10 @@ from datachef.exceptions import (
 from datachef.models.source.cell import Cell
 from datachef.models.source.table import LiveTable
 from datachef.selection import datafuncs as dfc
-#from datachef.selection.selectable import Selectable
 
 from ..base import BaseLookupEngine
+
+# from datachef.selection.selectable import Selectable
 
 
 class Directly(BaseLookupEngine):

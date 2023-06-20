@@ -1,9 +1,9 @@
 import pytest
 
 from datachef.exceptions import OutputPassedToPreview, UnalignedTableOperation
+from datachef.notebook.preview.html.main import preview
 from datachef.output.tidydata import TidyData
 from datachef.selection.selectable import Selectable
-from datachef.notebook.preview.html.main import preview
 from tests.fixtures.preconfigured import fixture_simple_small_one_tab
 
 
@@ -68,6 +68,7 @@ def test_passing_an_output_to_preview_raises(selectable_simple_small1: Selectabl
         # not the contents and should fail immediately
         preview(
             TidyData(
-                selectable_simple_small1.label_as("foo"), [
-                selectable_simple_small1.label_as("foo")
-            ]))
+                selectable_simple_small1.label_as("foo"),
+                [selectable_simple_small1.label_as("foo")],
+            )
+        )

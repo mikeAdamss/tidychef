@@ -5,4 +5,4 @@ Code relating to the reading in of data sources.
 from datachef.cardinal.directions import above, below, down, left, right, up
 from datachef.selection import filters
 
-from . import acquire, models, utils, notebook
+from . import acquire, models, notebook, utils

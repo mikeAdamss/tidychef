@@ -1,14 +1,15 @@
 from pathlib import Path
 from typing import Optional
 
+from IPython.display import HTML, display
+
 from datachef.exceptions import OutputPassedToPreview, UnalignedTableOperation
 from datachef.output.base import BaseOutput
 from datachef.selection.selectable import Selectable
 
-from IPython.display import HTML, display
-
 from ...ipython import in_notebook
 from .table import get_preview_table_as_html
+
 
 def preview(
     *selections,
@@ -16,7 +17,7 @@ def preview(
     end: Optional[str] = None,
     start: Optional[str] = None,
     multiple_selection_warning: bool = True,
-    force_preview: bool = False
+    force_preview: bool = False,
 ):
     """
     Create a preview from one of more selections of cells.
@@ -34,9 +35,10 @@ def preview(
             If you want to preview an output you can just print() it.
             """
         )
-    
+
     if not path and not in_notebook and not force_preview:
-        raise Exception('''
+        raise Exception(
+            """
             To preview, you must do one of:
 
             - (a) Pass a path= keyword to preview to specify the destination of the
@@ -45,7 +47,8 @@ def preview(
 
              To override this error and attempt a preview anyway pass
              force_preivew=True into the preview() constructor.
-        ''')
+        """
+        )
 
     for s in selections:
         assert isinstance(
@@ -56,7 +59,6 @@ def preview(
     if len(set([s.signature for s in selections])) > 1:
         raise UnalignedTableOperation()
 
-    
     html_as_str = get_preview_table_as_html(
         selections,
         end=end,
@@ -72,4 +74,3 @@ def preview(
             display(HTML(html_as_str))
         else:
             print(html_as_str)
-

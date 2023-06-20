@@ -37,7 +37,7 @@ def tidy() -> TidyData:
         observations.label_as("Value"),
         Column(Constant("Genre", "Rock & Roll")),
         Column(Directly("Assets", assets, above)),
-        Column(Directly("Member", member, left))
+        Column(Directly("Member", member, left)),
     )
 
     return tidy

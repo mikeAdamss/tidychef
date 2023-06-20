@@ -1,9 +1,11 @@
+from typing import Callable
+
 from datachef.column.base import BaseColumn
 from datachef.lookup.base import BaseLookupEngine
-from datachef.models.source.cell import Cell
 from datachef.lookup.engines.constant import Constant
 from datachef.lookup.engines.horizontal_condition import HorizontalCondition
-from typing import Callable
+from datachef.models.source.cell import Cell
+
 
 class Column(BaseColumn):
     """
@@ -20,24 +22,20 @@ class Column(BaseColumn):
     """
 
     @staticmethod
-    def horizontal_condition(column_label:str, resolver: Callable, priority=0):
+    def horizontal_condition(column_label: str, resolver: Callable, priority=0):
         """
-        Creates a column that populates based on the 
+        Creates a column that populates based on the
         values resolved for one or more other columns.
         """
-        return Column(
-            HorizontalCondition(column_label, resolver, priority=priority)
-        )
+        return Column(HorizontalCondition(column_label, resolver, priority=priority))
 
     @staticmethod
-    def constant(column_label:str, constant: str):
+    def constant(column_label: str, constant: str):
         """
         Create a column that has one specific value for every
         entry.
         """
-        return Column(
-            Constant(column_label, constant)
-        )
+        return Column(Constant(column_label, constant))
 
     def _pre_init(self, engine: BaseLookupEngine, *args, **kwargs):
         """ """

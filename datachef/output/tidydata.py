@@ -1,35 +1,36 @@
 import csv
 from pathlib import Path
-from typing import List, Union, Dict
+from typing import Dict, List, Union
 
 import tabulate
-from IPython.core.display import HTML, display
+from IPython.core.display import display
 
 from datachef.column.base import BaseColumn
+from datachef.lookup.engines.horizontal_condition import HorizontalCondition
+from datachef.notebook.ipython import in_notebook
 from datachef.output.base import BaseOutput
 from datachef.selection.selectable import Selectable
-from datachef.notebook.ipython import in_notebook
-from datachef.lookup.engines.horizontal_condition import HorizontalCondition
+
 
 class TidyData(BaseOutput):
-    def __init__(
-        self,
-        observations: Selectable,
-        *columns
-    ):
+    def __init__(self, observations: Selectable, *columns):
         """
         A class to generate a basic representation of the
         data as tidy data.
         """
 
-        assert len(columns) > 0, "You need to pass at least one column like object to TidyData"
+        assert (
+            len(columns) > 0
+        ), "You need to pass at least one column like object to TidyData"
 
-        assert observations.label is not None, '''
+        assert (
+            observations.label is not None
+        ), """
                 You must have labelled your observation selection before passing
                 it to the TidyData constructor.
 
                 You can do so with the .label_as() method.
-            '''
+            """
 
         self.observations = observations
         self.columns: List[BaseColumn] = columns
@@ -52,9 +53,7 @@ class TidyData(BaseOutput):
         if in_notebook():
             header_row = self._data[0]
             data_rows = self._data[1:]
-            display(
-                tabulate.tabulate(data_rows, headers=header_row, tablefmt="html")
-            )
+            display(tabulate.tabulate(data_rows, headers=header_row, tablefmt="html"))
             return ""
 
         # Else return something that'll make sense in a terminal
@@ -101,27 +100,44 @@ class TidyData(BaseOutput):
                 column_value_dict: Dict[str, str] = {}
 
                 # Resolve the standard columns first
-                standard_columns = [x for x in self.columns if not isinstance(x.engine, HorizontalCondition)]
+                standard_columns = [
+                    x
+                    for x in self.columns
+                    if not isinstance(x.engine, HorizontalCondition)
+                ]
                 for column in standard_columns:
-                    ob_value = column.resolve_column_cell_from_obs_cell(observation).value
+                    ob_value = column.resolve_column_cell_from_obs_cell(
+                        observation
+                    ).value
                     line.append(ob_value)
                     column_value_dict[column.label] = ob_value
 
                 # Now we know the standard column values, resolve the
                 # horizontal conditions
-                condition_columns = [x for x in self.columns if isinstance(x.engine, HorizontalCondition)]
+                condition_columns = [
+                    x for x in self.columns if isinstance(x.engine, HorizontalCondition)
+                ]
                 priorities = set([x.engine.priority for x in condition_columns])
                 for i in priorities:
                     for column in condition_columns:
                         if column.engine.priority == i:
-                            ob_value = column.resolve_column_cell_from_obs_cell(observation, column_value_dict)
+                            ob_value = column.resolve_column_cell_from_obs_cell(
+                                observation, column_value_dict
+                            )
                             line.append(ob_value)
                             column_value_dict[column.label] = ob_value
                 grid.append(line)
 
             self._data = grid
 
-    def to_csv(self, path: Union[str, Path], write_headers=True, write_mode='w', *args, **kwargs) -> Path:
+    def to_csv(
+        self,
+        path: Union[str, Path],
+        write_headers=True,
+        write_mode="w",
+        *args,
+        **kwargs,
+    ) -> Path:
         """
         Output the TidyData to a csv file.
 

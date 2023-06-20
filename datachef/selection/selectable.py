@@ -18,18 +18,18 @@ from datachef.exceptions import (
     BadExcelReferenceError,
     BadShiftParameterError,
     LoneValueOnMultipleCellsError,
+    MissingLabelError,
     OutOfBoundsError,
-    MissingLabelError
 )
+from datachef.lookup.engines.closest import Closest
+from datachef.lookup.engines.direct import Directly
+from datachef.lookup.engines.within import Within
 from datachef.models.source.cell import BaseCell, Cell
 from datachef.models.source.table import LiveTable
 from datachef.selection import datafuncs as dfc
-from datachef.utils.decorators import dontmutate
 from datachef.selection.datafuncs.ordering import order_cells_leftright_topbottom
-from datachef.lookup.engines.direct import Directly
-from datachef.lookup.engines.closest import Closest
-from datachef.lookup.engines.within import Within
-from datachef.lookup.engines.constant import Constant
+from datachef.utils.decorators import dontmutate
+
 
 class Selectable(LiveTable):
     """
@@ -437,17 +437,19 @@ class Selectable(LiveTable):
         """
 
         if not self._label:
-            raise MissingLabelError('''
+            raise MissingLabelError(
+                """
                 You are trying to create a lookup engine for a selection of
                 cells using the .resolve_observations_directly() method but
                 have not yet assigned a label to said selection of cells.
 
                 Please use the .label_as() method to assign a label before
                 attempting this.
-            ''')
-        
+            """
+            )
+
         return Directly(self.label, self, direction)
-    
+
     def resolve_closest(self, direction: Direction) -> Closest:
         """
         Creates and returns a class:Closest lookup engine
@@ -456,18 +458,22 @@ class Selectable(LiveTable):
         """
 
         if not self._label:
-            raise MissingLabelError('''
+            raise MissingLabelError(
+                """
                 You are trying to create a lookup engine for a selection of
                 cells using the .resolve_observations_closest() method but
                 have not yet assigned a label to said selection of cells.
 
                 Please use the .label_as() method to assign a label before
                 attempting this.
-            ''')
-        
+            """
+            )
+
         return Closest(self.label, self, direction)
-    
-    def resolve_within(self, direction: Direction, start: Direction, end: Direction) -> Within:
+
+    def resolve_within(
+        self, direction: Direction, start: Direction, end: Direction
+    ) -> Within:
         """
         Creates and returns a class:Within lookup engine
         that can resolve the correct cell from this selection
@@ -475,13 +481,15 @@ class Selectable(LiveTable):
         """
 
         if not self.label:
-            raise MissingLabelError('''
+            raise MissingLabelError(
+                """
                 You are trying to create a lookup engine for a selection of
                 cells using the .resolve_observations_within() method but have
                 not yet assigned a label to said selection of cells.
 
                 Please use the .label_as() method to assign a label before
                 attempting this.
-            ''')
-        
+            """
+            )
+
         return Within(self.label, self, direction, start, end)

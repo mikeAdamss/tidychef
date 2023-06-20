@@ -1,5 +1,3 @@
-from typing import Any
-
 from datachef.models.source.cell import Cell, VirtualCell
 
 from ..base import BaseLookupEngine

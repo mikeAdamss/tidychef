@@ -2,8 +2,8 @@ from os import linesep
 
 import pytest
 
-from datachef.selection.selectable import Selectable
 from datachef.notebook.preview.boundary import Boundary
+from datachef.selection.selectable import Selectable
 from tests.fixtures.preconfigured import fixture_simple_small_one_tab
 
 

@@ -12,11 +12,12 @@ from typing import List, Optional, Union
 from datachef.exceptions import (
     InvalidTableSignatures,
     UnalignedTableOperation,
-    UnnamedTableError
+    UnnamedTableError,
 )
 from datachef.models.source.cell import BaseCell, Cell
 from datachef.selection import datafuncs as dfc
 from datachef.utils.decorators import dontmutate
+
 
 class Table:
     """
@@ -68,7 +69,7 @@ class LiveTable:
         Accessor for current label of current selection of cells.
         """
         return self._label
-    
+
     @dontmutate
     def label_as(self, label: str):
         """

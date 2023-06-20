@@ -4,10 +4,11 @@ suite in place.
 """
 
 from typing import List, Optional
-from datachef.selection.selectable import Selectable
-from ..boundary import Boundary
-from .components import SelectionKeys, HtmlCell
 
+from datachef.selection.selectable import Selectable
+
+from ..boundary import Boundary
+from .components import HtmlCell, SelectionKeys
 
 # Simple CSS to make it pretty-ish
 INLINE_CSS = """
@@ -33,6 +34,7 @@ INLINE_CSS = """
     </style>
     """
 
+
 def get_preview_table_as_html(
     selections: List[Selectable],
     with_excel_notations: bool = True,
@@ -40,9 +42,7 @@ def get_preview_table_as_html(
     end: Optional[str] = None,
     multiple_selection_warning: bool = True,
 ) -> str:
-    """
-    
-    """
+    """ """
 
     selection_keys = SelectionKeys()
     for selection in selections:
@@ -55,11 +55,14 @@ def get_preview_table_as_html(
 
     boundary = Boundary(selections, start=start, end=end)
     all_cells: Selectable = selections[0].pcells
-    all_cells = [cell for cell in all_cells if
-                 cell.x >= boundary.leftmost_point and
-                 cell.x <= boundary.rightmost_point and
-                 cell.y >= boundary.highest_point and
-                 cell.y <= boundary.lowest_point]
+    all_cells = [
+        cell
+        for cell in all_cells
+        if cell.x >= boundary.leftmost_point
+        and cell.x <= boundary.rightmost_point
+        and cell.y >= boundary.highest_point
+        and cell.y <= boundary.lowest_point
+    ]
 
     html_cell_rows = []
     last_y = 0
@@ -78,18 +81,12 @@ def get_preview_table_as_html(
                 colour = selection_key.colour
 
         if found == 1:
-            row.append(
-                HtmlCell(cell.value, colour=colour)
-            )
+            row.append(HtmlCell(cell.value, colour=colour))
         elif found > 1:
             selection_keys.show_warning = True
-            row.append(
-                HtmlCell(cell.value, colour=selection_keys.warning_colour)
-            )
+            row.append(HtmlCell(cell.value, colour=selection_keys.warning_colour))
         else:
-            row.append(
-                HtmlCell(cell.value)
-            )
+            row.append(HtmlCell(cell.value))
     # final row
     html_cell_rows.append(row)
 
@@ -114,7 +111,7 @@ def get_preview_table_as_html(
     cell_table_row_html = ""
     for row in html_cell_rows:
         row: List[HtmlCell]
-        row_as_html = ''.join([x.as_html() for x in row])
+        row_as_html = "".join([x.as_html() for x in row])
         cell_table_row_html += f"<tr>{row_as_html}</tr>\n"
 
     # ------------
@@ -135,13 +132,3 @@ def get_preview_table_as_html(
             </body>
         </html>
     """
-
-
-    
-
-
-
-
-
-
-
