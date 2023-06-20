@@ -1,7 +1,10 @@
 from typing import Callable, Dict
 
+from datachef.exceptions import (
+    BadConditionalResolverError,
+    HorizontalConditionalHeaderError,
+)
 from datachef.models.source.cell import Cell
-from datachef.exceptions import BadConditionalResolverError, HorizontalConditionalHeaderError
 
 from ..base import BaseLookupEngine
 
@@ -11,7 +14,10 @@ class HorizontalCondition(BaseLookupEngine):
     A lookup engine to populate the contents of a column based
     on the values resolved for the other columns on the row.
     """
-    def __init__(self, label: str, resolver: Callable[[Dict[str, str]], str], priority: int = 0):
+
+    def __init__(
+        self, label: str, resolver: Callable[[Dict[str, str]], str], priority: int = 0
+    ):
         self.label = label
         self.resolver = resolver
         self.priority = priority
@@ -19,23 +25,28 @@ class HorizontalCondition(BaseLookupEngine):
     def resolve(self, _: Cell, cells_on_row: Dict[str, str]) -> str:
         """
         For a given observation row (as denoted by the unused Cell argument),
-        resolve the  
+        resolve the
         """
 
         if not isinstance(cells_on_row, dict):
-            raise BadConditionalResolverError(f'''
+            raise BadConditionalResolverError(
+                f"""
                 A condition resolver should take an argument of type:
                 Dict[str, str] and return type str.
                                               
                 The resolver for {self.label} is incorrect, it has
                 input_type: {type(cells_on_row)}
-                ''')
-        
-        if any([
-            any([not isinstance(x, str) for x in cells_on_row.keys()]),
-            any([not isinstance(x, str) for x in cells_on_row.values()])
-        ]):
-            raise BadConditionalResolverError(f'''
+                """
+            )
+
+        if any(
+            [
+                any([not isinstance(x, str) for x in cells_on_row.keys()]),
+                any([not isinstance(x, str) for x in cells_on_row.values()]),
+            ]
+        ):
+            raise BadConditionalResolverError(
+                f"""
                 A condition resolver should take an argument of type:
                 Dict[str, str] and return type str.
                                               
@@ -43,13 +54,14 @@ class HorizontalCondition(BaseLookupEngine):
                 
                 keys of type: {set([type(x) for x in cells_on_row.keys()])}
                 values of type: {set([type(x) for x in cells_on_row.values()])}
-            ''')
-            
+            """
+            )
 
         try:
             column_value = self.resolver(cells_on_row)
             if not isinstance(column_value, str):
-                raise BadConditionalResolverError(f'''
+                raise BadConditionalResolverError(
+                    f"""
                     A condition resolver should take an argument of type:
                     Dict[str, str] and return type str.
                                                     
@@ -57,9 +69,10 @@ class HorizontalCondition(BaseLookupEngine):
 
                     return type: {type(column_value)}
                     return value: {column_value} 
-                    ''')
+                    """
+                )
             return column_value
-        
+
         except KeyError as err:
             raise HorizontalConditionalHeaderError(
                 f"""

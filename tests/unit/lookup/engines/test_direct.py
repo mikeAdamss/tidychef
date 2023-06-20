@@ -5,15 +5,15 @@ from os import linesep
 import pytest
 
 from datachef.cardinal.directions import down, left, right, up
+from datachef.column.column import Column
 from datachef.exceptions import (
     FailedLookupError,
     MissingDirectLookupError,
+    MissingLabelError,
     UnknownDirectionError,
-    MissingLabelError
 )
 from datachef.lookup.engines.direct import Directly
 from datachef.models.source.cell import Cell
-from datachef.column.column import Column
 from datachef.selection import datafuncs as dfc
 from datachef.selection import filters
 from datachef.selection.selectable import Selectable
@@ -258,7 +258,9 @@ def test_directly_wrapper_via_selectable(selectable_vertical_dimensions: Selecta
 
     column_selection = selectable_vertical_dimensions.excel_ref("A1").label_as("foo")
     ob: Cell = selectable_vertical_dimensions.excel_ref("A10").cells[0]
-    resolved_cell: Cell = Column(column_selection.resolve_directly(up)).resolve_column_cell_from_obs_cell(ob)
+    resolved_cell: Cell = Column(
+        column_selection.resolve_directly(up)
+    ).resolve_column_cell_from_obs_cell(ob)
     assert resolved_cell._excel_ref() == "A1"
 
 

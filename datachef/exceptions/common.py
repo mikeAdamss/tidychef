@@ -140,7 +140,7 @@ class MissingLabelError(Exception):
 
     def __init__(self, msg):
         self.msg = msg
-        
+
 
 class BadConditionalResolverError(Exception):
     """
@@ -151,6 +151,7 @@ class BadConditionalResolverError(Exception):
 
     def __init__(self, msg):
         self.msg = msg
+
 
 class HorizontalConditionalHeaderError(Exception):
     """
