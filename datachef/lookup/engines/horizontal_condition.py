@@ -1,7 +1,7 @@
 from typing import Callable, Dict
 
 from datachef.models.source.cell import Cell
-from datachef.exceptions import BadConditionalResolverError
+from datachef.exceptions import BadConditionalResolverError, HorizontalConditionalHeaderError
 
 from ..base import BaseLookupEngine
 
@@ -61,7 +61,7 @@ class HorizontalCondition(BaseLookupEngine):
             return column_value
         
         except KeyError as err:
-            raise Exception(
+            raise HorizontalConditionalHeaderError(
                 f"""
                 Unable to resolve lookup for "{self.label}".
                                                

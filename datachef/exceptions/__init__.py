@@ -9,7 +9,6 @@ from .badparams import (
 )
 from .cells import InvlaidCellPositionError, NonExistentCellComparissonError
 from .common import (
-    AbsentColumnValueError,
     CellsDoNotExistError,
     FileInputError,
     ImpossibleLookupError,
@@ -20,7 +19,8 @@ from .common import (
     OutOfBoundsError,
     UnalignedTableOperation,
     UnnamedTableError,
-    BadConditionalResolverError
+    BadConditionalResolverError,
+    HorizontalConditionalHeaderError
 )
 from .construction import ComponentConstructionError, DimensionConstructionError
 from .lookups import AmbiguousLookupError, FailedLookupError, MissingDirectLookupError

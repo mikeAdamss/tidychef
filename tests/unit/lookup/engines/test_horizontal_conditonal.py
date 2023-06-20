@@ -11,7 +11,7 @@ from datachef.selection import filters
 from datachef.selection.selectable import Selectable
 from datachef.column.column import Column
 from tests.fixtures import fixture_wide_band_tab
-from datachef.exceptions import BadConditionalResolverError
+from datachef.exceptions import BadConditionalResolverError, HorizontalConditionalHeaderError
 
 def test_horizontal_resolver_exceptions():
     """
@@ -58,11 +58,30 @@ def test_single_horizontal_conditional():
     assert resolved == "foovalbarval"
 
 
-def test_horizontal_conditional_wrapper():
+def test_single_horizontal_conditional_raises_for_missing_key():
     """
-    Test the Column class HorizontalConditional wrapper
-    is working as expected.   
+    Test a single simple horizontal conditional
     """
+
+    horizontal_conditional = HorizontalCondition(
+        "",
+        resolver = lambda x: x["foo"]+x["bar"]
+    )
+
+    resolved = horizontal_conditional.resolve("", {"foo": "fooval", "bar": "barval"})
+    assert resolved == "foovalbarval"
+
+
+def test_horizontal_conditional_header_error_raises():
+    """
+    Test the exception HorizontalConditionalHeaderError
+    is raised where expected.  
+    """
+
+    # Expect a column of baz
     column = Column.horizontal_condition("",
-        resolver = lambda x: x["foo"]+x["bar"])
-    column.resolve_column_cell_from_obs_cell("", {"foo": "fooval", "bar": "barval"}) == "foovalbarval"
+        resolver = lambda x: x["baz"])
+    
+    # But provide no columns at all.
+    with pytest.raises(HorizontalConditionalHeaderError):
+        column.resolve_column_cell_from_obs_cell("", {})

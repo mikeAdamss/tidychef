@@ -140,24 +140,23 @@ class MissingLabelError(Exception):
 
     def __init__(self, msg):
         self.msg = msg
-
-
-class AbsentColumnValueError(Exception):
-    """
-    Raised where a user is trying access a column value
-    via a column label but no value exists under said
-    column for the row in question.
-    """
-
-    def __init__(self, msg):
-        self.msg = msg
-
+        
 
 class BadConditionalResolverError(Exception):
     """
     Raised where a user has specified a HorizontalCondition
     lookup engine that has incorrect arguments or returns
     as incorrect types.
+    """
+
+    def __init__(self, msg):
+        self.msg = msg
+
+class HorizontalConditionalHeaderError(Exception):
+    """
+    Raised where a user has specified a HorizontalCondition
+    lookup engine but its failing to resolve as an expected
+    column value is missing.
     """
 
     def __init__(self, msg):
