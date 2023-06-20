@@ -9,9 +9,11 @@ from datachef.exceptions import (
     FailedLookupError,
     MissingDirectLookupError,
     UnknownDirectionError,
+    MissingLabelError
 )
 from datachef.lookup.engines.direct import Directly
 from datachef.models.source.cell import Cell
+from datachef.column.column import Column
 from datachef.selection import datafuncs as dfc
 from datachef.selection import filters
 from datachef.selection.selectable import Selectable
@@ -246,3 +248,27 @@ def test_failed_lookup_err(selectable_vertical_dimensions: Selectable):
     with pytest.raises(FailedLookupError):
         direct_up_engine = Directly("", dim, up)
         direct_up_engine.resolve(ob)
+
+
+def test_directly_wrapper_via_selectable(selectable_vertical_dimensions: Selectable):
+    """
+    Test that directly can be correctly instantiated via the wrapper
+    provided by the Selectiable class.
+    """
+
+    column_selection = selectable_vertical_dimensions.excel_ref("A1").label_as("foo")
+    ob: Cell = selectable_vertical_dimensions.excel_ref("A10").cells[0]
+    resolved_cell: Cell = Column(column_selection.resolve_directly(up)).resolve_column_cell_from_obs_cell(ob)
+    assert resolved_cell._excel_ref() == "A1"
+
+
+def test_directly_raises(selectable_vertical_dimensions: Selectable):
+    """
+    Test that where we try and instantiate a Directly lookup engine without
+    a label the expected error is raised.
+    """
+
+    column_selection = selectable_vertical_dimensions.excel_ref("A1")
+
+    with pytest.raises(MissingLabelError):
+        Column(column_selection.resolve_directly(up))

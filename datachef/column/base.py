@@ -22,7 +22,12 @@ class BaseColumn(metaclass=ABCMeta):
         # See _pre_init() docstring
         self._pre_init(self, engine, *args, **kwargs)
 
-        assert isinstance(engine, BaseLookupEngine), f"{engine} is not a valid argument"
+        assert isinstance(engine, BaseLookupEngine), (f'''
+                {engine} is not a valid argument.
+                
+                Argument must be a type or subtype of BaseLookupEngine:
+                Within, Closest, Directly etc
+        ''')
 
         self.engine = engine
         self.label = engine.label
