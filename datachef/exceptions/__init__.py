@@ -19,6 +19,7 @@ from .common import (
     LoneValueOnMultipleCellsError,
     MissingLabelError,
     OutOfBoundsError,
+    PreviewBoundarySpecificationError,
     UnalignedTableOperation,
     UnnamedTableError,
 )

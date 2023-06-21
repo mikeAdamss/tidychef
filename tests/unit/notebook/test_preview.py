@@ -1,9 +1,13 @@
+import os
+from pathlib import Path
+
 import pytest
 
 from datachef.exceptions import OutputPassedToPreview, UnalignedTableOperation
 from datachef.notebook.preview.html.main import preview
 from datachef.output.tidydata import TidyData
 from datachef.selection.selectable import Selectable
+from tests.fixtures.helpers import path_to_fixture
 from tests.fixtures.preconfigured import fixture_simple_small_one_tab
 
 
@@ -72,3 +76,24 @@ def test_passing_an_output_to_preview_raises(selectable_simple_small1: Selectabl
                 [selectable_simple_small1.label_as("foo")],
             )
         )
+
+
+def test_output_preview_to_path_works(selectable_simple_small1: Selectable):
+    """
+    Test that the ability to output the html preview to
+    a path works.
+    """
+
+    here = Path(__file__).parent
+    test_output_path = Path(here / "deleteme.html")
+
+    preview(selectable_simple_small1, path=test_output_path)
+    with open(test_output_path) as f:
+        new_content = f.read()
+    os.remove(test_output_path)
+
+    html_fixture = path_to_fixture("preview", "simple-output.html")
+    with open(html_fixture) as f:
+        fixture_content = f.read()
+
+    assert new_content == fixture_content

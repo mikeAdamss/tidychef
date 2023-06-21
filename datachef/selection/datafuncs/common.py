@@ -117,6 +117,12 @@ def get_outlier_indicies(cells: List[BaseCell]) -> Tuple[int, int, int, int]:
     Given a list of cells, returns maximum and minimum x and y
     values from cells within that selecton.
 
+    returns:
+    - min_x
+    - max_x
+    - min_y
+    - max_y
+
     :param cells: Representing a selection from a tabular data source.
     """
     min_x: int = minimum_x_offset(cells)

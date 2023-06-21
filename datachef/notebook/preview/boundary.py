@@ -1,83 +1,94 @@
-from typing import List
+from typing import Dict, List, Union
 
-from datachef.models.source.cell import BaseCell, Cell
+from datachef.exceptions import PreviewBoundarySpecificationError
+from datachef.models.source.cell import Cell
 from datachef.selection import datafuncs as dfc
 from datachef.selection.selectable import Selectable
-from datachef.utils import cellutils
 
 
 class Boundary:
     """
     Class to calculate and help manage the boundary of
-    the cells we wish to display in this preview
+    the cells we wish to display in this preview.
     """
 
     def __init__(
         self,
         selections: List[Selectable],
-        start: str = None,
-        end: str = None,
-        with_excel: bool = True,
+        bounded: Union[str, Dict[str, str]] = None,
     ):
 
-        self.with_excel: bool = with_excel
-        self.max_selected_x: int = max(
-            dfc.maximum_x_offset(s.pcells) for s in selections
-        )
-        self.max_selected_y: int = max(
-            dfc.maximum_y_offset(s.pcells) for s in selections
-        )
-        self.min_selected_x: int = min(
-            dfc.minimum_x_offset(s.pcells) for s in selections
-        )
-        self.min_selected_y: int = min(
-            dfc.minimum_y_offset(s.pcells) for s in selections
-        )
+        self.bounded = bounded
+        if bounded is None:
+            pcells = selections[0].pcells
+            self.max_selected_x: int = dfc.maximum_x_offset(pcells)
+            self.max_selected_y: int = dfc.maximum_y_offset(pcells)
+            self.min_selected_x: int = dfc.minimum_x_offset(pcells)
+            self.min_selected_y: int = dfc.minimum_y_offset(pcells)
 
-        # If not cells have highlighted on all selection
-        # i.e we're previewing the source as-is,
-        # then it is considered pristine
-        self.is_pristine: bool = not all([s.selections_made() for s in selections])
-
-        if start:
-            if start != "selection":
-                boundary_cell: BaseCell = dfc.single_excel_ref_to_basecell(start)
-                assert (
-                    boundary_cell.x > self.min_selected_x
-                ), f"You cannot set preview to ignore selected cells. With a boundary point of {end}, you have a column limit of {cellutils.x_to_letters(boundary_cell.x)} but have an x axis selection in column {cellutils.x_to_letters(self.min_selected_x)}"
-                assert (
-                    boundary_cell.y > self.min_selected_y
-                ), f"You cannot set preview to ignore selected cells. With a boundary point of {end}, you have a row limit of {cellutils.y_to_number(boundary_cell.y)} but have an y axis selection on row {cellutils.y_to_number(self.min_selected_y)}"
-                self.min_selected_x = boundary_cell.x
-                self.min_selected_y = boundary_cell.y
-            elif start == "selection":
-                self.min_selected_x: int = min(
-                    dfc.minimum_x_offset(s.cells) for s in selections
-                )
-                self.min_selected_y: int = min(
-                    dfc.minimum_y_offset(s.cells) for s in selections
-                )
-
-        if end:
-            if end != "selection":
-                boundary_cell: BaseCell = dfc.single_excel_ref_to_basecell(end)
-                assert (
-                    boundary_cell.x < self.max_selected_x
-                ), f"You cannot set preview to ignore selected cells. With a boundary point of {end}, you have a column limit of {cellutils.x_to_letters(boundary_cell.x)} but have an x axis selection in column {cellutils.x_to_letters(self.max_selected_x)}"
-                assert (
-                    boundary_cell.y < self.max_selected_y
-                ), f"You cannot set preview to ignore selected cells. With a boundary point of {end}, you have a row limit of {cellutils.y_to_number(boundary_cell.y)} but have an y axis selection on row {cellutils.y_to_number(self.max_selected_y)}"
-                self.max_selected_x = boundary_cell.x
-                self.max_selected_y = boundary_cell.y
+        else:
+            bad_bounded_arg = False
+            if isinstance(bounded, str):
+                cells_wanted = dfc.multi_excel_ref_to_basecells(bounded)
+                (
+                    self.min_selected_x,
+                    self.max_selected_x,
+                    self.min_selected_y,
+                    self.max_selected_y,
+                ) = dfc.get_outlier_indicies(cells_wanted)
             else:
-                self.max_selected_x: int = max(
-                    dfc.maximum_x_offset(s.cells) for s in selections
-                )
-                self.max_selected_y: int = max(
-                    dfc.maximum_y_offset(s.cells) for s in selections
-                )
+                if not isinstance(bounded, dict):
+                    bad_bounded_arg = True
+                else:
+                    if (
+                        "start_xy" not in bounded.keys()
+                        or "end_xy" not in bounded.keys()
+                    ):
+                        bad_bounded_arg = True
+                    else:
+                        if (
+                            "," not in bounded["start_xy"]
+                            or "," not in bounded["end_xy"]
+                        ):
+                            bad_bounded_arg = True
+                        else:
+                            if any(
+                                [
+                                    not bounded["start_xy"].split(",")[0].isnumeric(),
+                                    not bounded["start_xy"].split(",")[1].isnumeric(),
+                                    not bounded["end_xy"].split(",")[0].isnumeric(),
+                                    not bounded["end_xy"].split(",")[1].isnumeric(),
+                                ]
+                            ):
+                                bad_bounded_arg = True
+                            else:
+                                if int(bounded["start_xy"].split(",")[0]) > int(
+                                    bounded["end_xy"].split(",")[0]
+                                ) or int(bounded["start_xy"].split(",")[1]) > int(
+                                    bounded["end_xy"].split(",")[1]
+                                ):
+                                    bad_bounded_arg = True
 
-    # Some syntactic sugar to make x and y positions easier to work with
+                if bad_bounded_arg:
+                    raise PreviewBoundarySpecificationError(
+                        """
+                        You have provided incorrect arguments for the boundary= keyword.
+
+                        Valid arguments are:
+                        An multicell excel style reference, i.e A1:C5
+                        
+                        Or a dictionary in the form:
+                        {"start_xy": "<startx>,<starty>", "end_xy": "<endx>,<endy>"}
+
+                        Example (for A1:C5)
+                        {"start_xy": "0,0", "end_xy": "2,4"}
+                    """
+                    )
+
+                self.min_selected_x = int(bounded["start_xy"].split(",")[0])
+                self.max_selected_x = int(bounded["end_xy"].split(",")[0])
+                self.min_selected_y = int(bounded["start_xy"].split(",")[1])
+                self.max_selected_y = int(bounded["end_xy"].split(",")[1])
 
     @property
     def highest_point(self):
@@ -120,36 +131,3 @@ class Boundary:
                 cell.y <= self.max_selected_y,
             ]
         )
-
-    def __repr__(self):
-        """
-        Simple print representing the defined boundary in a human readable way
-        """
-        left = (
-            cellutils.x_to_letters(self.leftmost_point)
-            if self.with_excel
-            else self.leftmost_point
-        )
-        right = (
-            cellutils.x_to_letters(self.rightmost_point)
-            if self.with_excel
-            else self.rightmost_point
-        )
-        top = (
-            cellutils.y_to_number(self.highest_point)
-            if self.with_excel
-            else self.leftmost_point
-        )
-        bottom = (
-            cellutils.y_to_number(self.lowest_point)
-            if self.with_excel
-            else self.rightmost_point
-        )
-
-        return f"""
-                {top}
-                |
-{left:>10} ---------- {right}
-                |
-                {bottom}
-        """

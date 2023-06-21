@@ -162,3 +162,13 @@ class HorizontalConditionalHeaderError(Exception):
 
     def __init__(self, msg):
         self.msg = msg
+
+
+class PreviewBoundarySpecificationError(Exception):
+    """
+    Raised where a user is trying to create a preview with a
+    set boundary but has provided incorrect parameters.
+    """
+
+    def __init__(self, msg):
+        self.msg = msg

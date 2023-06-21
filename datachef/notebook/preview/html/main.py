@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Optional
+from typing import Dict, Union
 
 from IPython.display import HTML, display
 
@@ -13,11 +13,13 @@ from .table import get_preview_table_as_html
 
 def preview(
     *selections,
-    path: Path = False,
-    end: Optional[str] = None,
-    start: Optional[str] = None,
+    path: Path = None,
+    bounded: Union[str, Dict[str, str]] = None,
+    border_cells: str = "lightgrey",
+    blank_cells: str = "white",
+    warning_colour: str = "#ff8080",
+    with_excel_notations=True,
     multiple_selection_warning: bool = True,
-    force_preview: bool = False,
 ):
     """
     Create a preview from one of more selections of cells.
@@ -36,20 +38,6 @@ def preview(
             """
         )
 
-    if not path and not in_notebook and not force_preview:
-        raise Exception(
-            """
-            To preview, you must do one of:
-
-            - (a) Pass a path= keyword to preview to specify the destination of the
-                 html preview.
-             -(b) Be running the code in a Jupyter/Ipython notebook
-
-             To override this error and attempt a preview anyway pass
-             force_preivew=True into the preview() constructor.
-        """
-        )
-
     for s in selections:
         assert isinstance(
             s, Selectable
@@ -61,16 +49,16 @@ def preview(
 
     html_as_str = get_preview_table_as_html(
         selections,
-        end=end,
-        start=start,
+        bounded=bounded,
         multiple_selection_warning=multiple_selection_warning,
+        with_excel_notations=with_excel_notations,
+        border_cells=border_cells,
+        warning_colour=warning_colour,
+        blank_cells=blank_cells,
     )
 
     if path:
-        # Write  to a a place!
-        ...
+        with open(path, "w") as f:
+            f.write(html_as_str)
     else:
-        if in_notebook:
-            display(HTML(html_as_str))
-        else:
-            print(html_as_str)
+        display(HTML(html_as_str))

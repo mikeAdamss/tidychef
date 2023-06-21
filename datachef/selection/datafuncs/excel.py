@@ -90,7 +90,14 @@ def multi_excel_ref_to_basecells(excel_ref: str) -> List[BaseCell]:
     wanted BaseCells.
     """
 
-    assert ":" in excel_ref
+    assert (
+        ":" in excel_ref
+    ), """
+        A multi cell excel reference should be in the format:
+        <letter(s)><number>:<letter(s)><number>
+
+        {excel_ref} is missing a colon, ":"
+    """
     start_cell = single_excel_ref_to_basecell(excel_ref.split(":")[0])
     end_cell = single_excel_ref_to_basecell(excel_ref.split(":")[1])
 

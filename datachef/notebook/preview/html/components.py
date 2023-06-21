@@ -4,7 +4,6 @@ from typing import Dict, List
 from datachef.models.source.cell import Cell
 from datachef.selection.selectable import Selectable
 
-WARNING_COLOUR = "#ff8080"
 COLOURS = [
     "cyan",
     "#99ff99",
@@ -51,9 +50,6 @@ class SelectionKeys:
         self.colour_choice = 0
         self._keys: List[SelectionKey] = []
 
-        self.show_warning = False
-        self.warning_colour = WARNING_COLOUR
-
     def add_selection_key(self, selection: Selectable):
         self._keys.append(SelectionKey(selection, self.colour_choice))
         self.colour_choice += 1
@@ -68,7 +64,7 @@ class HtmlCell:
     Simple html representation of a single cell
     """
 
-    def __init__(self, value: str, colour="white"):
+    def __init__(self, value: str, colour: str):
         self.value = value
         self.colour = colour
 
