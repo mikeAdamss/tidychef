@@ -10,6 +10,7 @@ from datachef.models.source.cell import Cell
 from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
 from tests.unit.helpers import qcel
+from datachef.exceptions import MissingLabelError
 
 
 @dataclass
@@ -156,3 +157,16 @@ def test_closest_left(selectable_simple_table: Selectable):
             """
 
             assert expected_result.resolved_ref == resulting_cell._excel_ref(), msg
+
+
+def test_selectable_closest_wrapper_works(selectable_simple_table: Selectable):
+    """
+    Test that the selectable wrapper for Closest works as expected
+    """
+    assert isinstance(
+        selectable_simple_table.excel_ref("A1").label_as("foo").resolve_closest(up), Closest
+        )
+
+    # Constructor should raise if called on an unlabelled selection
+    with pytest.raises(MissingLabelError):
+        selectable_simple_table.excel_ref("A1").resolve_closest(up)

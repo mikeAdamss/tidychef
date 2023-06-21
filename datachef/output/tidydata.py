@@ -39,7 +39,7 @@ class TidyData(BaseOutput):
         # only do it once.
         self._data = None
 
-    def __get_representation(self):
+    def __get_representation(self): # pragma: no cover
         """
         Representation logic shared by __str__ and __repr__
         """
@@ -51,10 +51,8 @@ class TidyData(BaseOutput):
 
         # If we're in a notebook, create a nice html display
         if in_notebook():
-            header_row = self._data[0]
-            data_rows = self._data[1:]
             display(tabulate.tabulate(data_rows, headers=header_row, tablefmt="html"))
-            return ""
+            return 
 
         # Else return something that'll make sense in a terminal
         return tabulate.tabulate(data_rows, headers=header_row)

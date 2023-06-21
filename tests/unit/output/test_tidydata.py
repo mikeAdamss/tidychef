@@ -104,7 +104,7 @@ def test_tidydata_written_to_a_path_indicated_by_a_string(tidy: TidyData):
     Tests that the to_csv method can take a string
     as an argument in place of path.
     """
-    outputted_to: Path = tidy.to_csv("temp.csv")
+    outputted_to: Path = tidy.to_csv("temp.csv", write_headers=False)
     os.remove(outputted_to)
 
 
@@ -131,3 +131,35 @@ def test_tidydata_to_csv_raises_specifying_a_non_existent_output_directory(
     bad_path = Path(here / str(uuid.uuid4()) / "should-never-exist.csv")
     with pytest.raises(FileNotFoundError):
         tidy.to_csv(bad_path)
+
+
+def test_create_tidydata_with_condition_column():
+    """
+    Test a TidyData object can be instantiated with condition columns
+    that depend on each other with a strict priority specified.
+    """
+    selectable_wide_band_tab: Selectable = fixture_wide_band_tab()
+
+    observations = selectable_wide_band_tab.excel_ref("B4:K6").filter(
+        filters.is_numeric
+    )
+    assets = selectable_wide_band_tab.excel_ref("2").is_not_blank()
+    member = (
+        selectable_wide_band_tab.excel_ref("4:7")
+        .is_not_blank()
+        .filter(filters.is_not_numeric)
+    )
+
+    TidyData(
+        observations.label_as("Value"),
+        Column(Constant("Genre", "Rock & Roll")),
+        Column(Directly("Assets", assets, above)),
+        Column(Directly("Member", member, left)),
+        Column.horizontal_condition("Condition1",
+            lambda col: col["Member"] + " " + col["Assets"] 
+        ),
+        Column.horizontal_condition("Condition2",
+            lambda col: col["Condition1"] + "foo",
+            priority=1
+        )
+    )._transform()
