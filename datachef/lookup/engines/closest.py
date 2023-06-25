@@ -172,7 +172,7 @@ class CellRanges:
 class Closest(BaseLookupEngine):
     def __init__(self, label: str, selection: LiveTable, direction: Direction):
         """
-        Creates a lookup engine to column values defined vis
+        Creates a lookup engine to column values defined via
         the closest visual relationship.
 
         :param: Direction: one of up,down,left,right,above,below

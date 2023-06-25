@@ -1,3 +1,4 @@
+import copy
 import os
 import uuid
 from pathlib import Path
@@ -14,7 +15,7 @@ from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_wide_band_tab
 from tests.fixtures.helpers import path_to_fixture
 from tests.unit.helpers import assert_csvs_match
-
+from datachef.exceptions import MisalignedHeadersError
 
 @pytest.fixture
 def tidy() -> TidyData:
@@ -82,6 +83,37 @@ def test_tidydata_internal_representation_is_as_expected(tidy: TidyData):
         ["12", "Rock & Roll", "Boats", "Charlie"],
     ]
     assert tidy._data == expected_data
+    assert len(tidy) == 19
+
+
+def test_tidydata_from_many(tidy: TidyData):
+    """
+    Test that the TidyData.from_many() static method works
+    as expected.
+    """
+    assert len(tidy) == 19
+
+    big_tidy = TidyData.from_tidy(tidy, tidy)
+
+    # double, minus 1 as we dont need two copies of the
+    # header row.
+    assert len(big_tidy) == 37
+
+
+def test_tidydata_from_many_misaligned_headers(tidy: TidyData):
+    """
+    Test that the TidyData.from_many() static method raises an
+    appropriate error where tables with different header
+    columns are used.
+    """
+
+    # Alter the Value column to Value2 in tidy2
+    tidy2 = copy.deepcopy(tidy)
+    tidy2._transform()
+    tidy2._data[0] = ["Value2", "Genre", "Assets", "Member"]
+
+    with pytest.raises(MisalignedHeadersError):
+        TidyData.from_tidy(tidy, tidy2)
 
 
 def test_tidydata_can_be_written_to_csv(tidy: TidyData):
@@ -155,11 +187,10 @@ def test_create_tidydata_with_condition_column():
         Column(Constant("Genre", "Rock & Roll")),
         Column(Directly("Assets", assets, above)),
         Column(Directly("Member", member, left)),
-        Column.horizontal_condition("Condition1",
-            lambda col: col["Member"] + " " + col["Assets"] 
+        Column.horizontal_condition(
+            "Condition1", lambda col: col["Member"] + " " + col["Assets"]
         ),
-        Column.horizontal_condition("Condition2",
-            lambda col: col["Condition1"] + "foo",
-            priority=1
-        )
+        Column.horizontal_condition(
+            "Condition2", lambda col: col["Condition1"] + "foo", priority=1
+        ),
     )._transform()

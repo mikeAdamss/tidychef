@@ -99,7 +99,9 @@ def test_output_preview_to_path_works(selectable_simple_small1: Selectable):
     assert new_content == fixture_content
 
 
-def test_output_preview_to_path_works_with_no_excel_ref(selectable_simple_small1: Selectable):
+def test_output_preview_to_path_works_with_no_excel_ref(
+    selectable_simple_small1: Selectable,
+):
     """
     Test that the ability to output the html preview to
     a path works.

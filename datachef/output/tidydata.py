@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 import csv
 from pathlib import Path
-from typing import Dict, List, Union
+from typing import Dict, List, Union, Tuple
 
 import tabulate
 from IPython.core.display import display
@@ -10,6 +12,7 @@ from datachef.lookup.engines.horizontal_condition import HorizontalCondition
 from datachef.notebook.ipython import in_notebook
 from datachef.output.base import BaseOutput
 from datachef.selection.selectable import Selectable
+from datachef.exceptions import MisalignedHeadersError
 
 
 class TidyData(BaseOutput):
@@ -52,7 +55,7 @@ class TidyData(BaseOutput):
         # If we're in a notebook, create a nice html display
         if in_notebook():
             display(tabulate.tabulate(data_rows, headers=header_row, tablefmt="html"))
-            return 
+            return ""
 
         # Else return something that'll make sense in a terminal
         return tabulate.tabulate(data_rows, headers=header_row)
@@ -62,6 +65,71 @@ class TidyData(BaseOutput):
 
     def __str__(self):  # pragma: no cover
         return self.__get_representation()
+
+    def __len__(self):
+        self._transform()
+        return len(self._data)
+
+    @staticmethod
+    def from_tidy(*tidy_data_objects: TidyData) -> TidyData:
+        """
+        Creates a class:TidyData object from multiple class:TidyData objects
+        provided in the form:
+        
+        TidyData.from_tidy(tidydata1, tidydata2, tidydata3)
+        """
+        return TidyData.from_tidy_list(list(tidy_data_objects))
+
+    @staticmethod
+    def from_tidy_list(tidy_data_objects: List[TidyData]) -> TidyData:
+        """
+        Creates a class:TidyData object from a list of class:TidyData objects
+        provided in the form:
+
+        TidyData.from_tidy_list([tidydata1, tidydata2, tidydata3])
+        """
+
+        for tidy_data_object in tidy_data_objects:
+            assert isinstance(tidy_data_object,TidyData), ('''
+            Only objects of type TidyData can be passed into
+            TidyData.from_many().
+            ''')
+
+        assert len(tidy_data_objects) > 1, ('''
+            You need to pass 2 or more objects of class TidyData
+            into TidyData.from_many()
+        ''')
+
+        tidy_data = tidy_data_objects[0]
+        for remaining_tidy_data in tidy_data_objects[1:]:
+            tidy_data += remaining_tidy_data
+
+        return tidy_data
+
+    def __add__(self, other_tidy_data: TidyData):
+        # Make sure all transforms have happened
+        self._transform()
+        other_tidy_data._transform()
+
+        # Error if we're joining two TidyData objects
+        # with different headers
+        if self._data[0] != other_tidy_data._data[0]:
+            raise MisalignedHeadersError(f'''
+                You are attempting to sum two tidy data
+                outputs but they do not have the same
+                column headers.
+
+                TidyData1 headers:
+                {self._data[0]}
+
+                TidyData2 headers:
+                {other_tidy_data._data[0]}
+            ''')
+        
+        # Since the headers match, join all but the header
+        # row from the new source
+        self._data += other_tidy_data._data[1:]
+        return self
 
     def _transform(self):
         """

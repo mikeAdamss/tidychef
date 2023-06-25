@@ -1,17 +1,18 @@
 import json
 from dataclasses import dataclass
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 import pytest
 
-from datachef.cardinal.directions import Direction, above, below, down, left, right, up
-from datachef.exceptions import ImpossibleLookupError, WithinAxisDeclarationError
+from datachef.cardinal.directions import above, below, down, left, right, up
+from datachef.exceptions import (
+    ImpossibleLookupError,
+    MissingLabelError,
+    WithinAxisDeclarationError,
+)
 from datachef.lookup.engines.within import Within
-from datachef.models.source.cell import Cell
 from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
-from tests.unit.helpers import qcel
-from datachef.exceptions import MissingLabelError
 
 
 @pytest.fixture
@@ -379,14 +380,18 @@ def test_impossible_lookup_error(selectable_simple_table: Selectable):
         ob_cell = selectable_simple_table.excel_ref("B5")
         engine.resolve(ob_cell.cells[0])
 
+
 def test_selectable_within_wrapper_works(selectable_simple_table: Selectable):
     """
     Test that the selectable wrapper for Within works as expected
     """
     assert isinstance(
-        selectable_simple_table.excel_ref("A1").label_as("foo").resolve_within(up, left(1), right(1)), Within
-        )
+        selectable_simple_table.excel_ref("A1")
+        .label_as("foo")
+        .finds_observations_within(up, left(1), right(1)),
+        Within,
+    )
 
     # Constructor should raise if called on an unlabelled selection
     with pytest.raises(MissingLabelError):
-        selectable_simple_table.excel_ref("A1").resolve_within(up, left(1), right(1))
+        selectable_simple_table.excel_ref("A1").finds_observations_within(up, left(1), right(1))

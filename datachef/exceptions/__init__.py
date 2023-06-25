@@ -17,6 +17,7 @@ from .common import (
     InvalidCellObjectError,
     InvalidTableSignatures,
     LoneValueOnMultipleCellsError,
+    MisalignedHeadersError,
     MissingLabelError,
     OutOfBoundsError,
     PreviewBoundarySpecificationError,

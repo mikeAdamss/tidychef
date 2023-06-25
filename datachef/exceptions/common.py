@@ -172,3 +172,14 @@ class PreviewBoundarySpecificationError(Exception):
 
     def __init__(self, msg):
         self.msg = msg
+
+
+class MisalignedHeadersError(Exception):
+    """
+    Raised where a user is attempting to join together two
+    TidyData outputs but those outputs do not have the
+    same column headers.
+    """
+
+    def __init__(self, msg):
+        self.msg = msg

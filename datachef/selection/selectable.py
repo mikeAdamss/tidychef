@@ -30,6 +30,22 @@ from datachef.selection import datafuncs as dfc
 from datachef.selection.datafuncs.ordering import order_cells_leftright_topbottom
 from datachef.utils.decorators import dontmutate
 
+def _reverse_direction(direction: Direction):
+    """
+    Helper to reverse the provided direction to help make
+    the api conceptually easier for users.
+    """
+    if direction.name in ["down", "below"]:
+        return up
+    elif direction.name in ["up", "above"]:
+        return down
+    elif direction.name == "left":
+        return right
+    elif direction.name == "right":
+        return left
+    else:
+        Exception(f'Unable to identify direction: {direction}')
+
 
 class Selectable(LiveTable):
     """
@@ -429,7 +445,7 @@ class Selectable(LiveTable):
 
         return self
 
-    def resolve_directly(self, direction: Direction) -> Directly:
+    def finds_observations_directly(self, direction: Direction) -> Directly:
         """
         Creates and returns a class:Directly lookup engine
         that can resolve the correct cell from this selection
@@ -448,9 +464,15 @@ class Selectable(LiveTable):
             """
             )
 
-        return Directly(self.label, self, direction)
+        # The constructor we provide to the user advertises that the column
+        # lookup engines "finds the observations" but this is purely a
+        # conceptual trick to make a more user friendly api.
+        # In reality that's exactly backwards, an observation actually finds
+        # a column value (by being passed to the lookup engine constructed below).
+        # As such we need to reverse the stated direction.
+        return Directly(self.label, self, _reverse_direction(direction))
 
-    def resolve_closest(self, direction: Direction) -> Closest:
+    def finds_observations_closest(self, direction: Direction) -> Closest:
         """
         Creates and returns a class:Closest lookup engine
         that can resolve the correct cell from this selection
@@ -469,9 +491,15 @@ class Selectable(LiveTable):
             """
             )
 
-        return Closest(self.label, self, direction)
+       # The constructor we provide to the user advertises that the column
+        # lookup engines "finds the observations" but this is purely a
+        # conceptual trick to make a more user friendly api.
+        # In reality that's exactly backwards, an observation actually finds
+        # a column value (by being passed to the lookup engine constructed below).
+        # As such we need to reverse the stated direction.
+        return Closest(self.label, self,  _reverse_direction(direction))
 
-    def resolve_within(
+    def finds_observations_within(
         self, direction: Direction, start: Direction, end: Direction
     ) -> Within:
         """
@@ -492,4 +520,20 @@ class Selectable(LiveTable):
             """
             )
 
-        return Within(self.label, self, direction, start, end)
+        # The constructor we provide to the user advertises that the column
+        # lookup engines "finds the observations" but this is purely a
+        # conceptual trick to make a more user friendly api.
+        # In reality that's exactly backwards, an observation actually finds
+        # a column value (by being passed to the lookup engine constructed below).
+        # As such we need to reverse the stated direction.
+        # In the case of Within we also need to reverse the direction of
+        # parsing and offsetting.
+        new_start = copy.deepcopy(start)
+        new_start.x = 0 - end.x
+        new_start.y = 0 - end.y
+
+        new_end = copy.deepcopy(end)
+        new_end.x = 0 - start.x
+        new_end.y = 0 - start.y
+
+        return Within(self.label, self, _reverse_direction(direction), new_start, new_end)

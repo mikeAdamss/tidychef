@@ -195,4 +195,4 @@ class Cell(BaseCell):
         eg:
         <A1, value:"value of a1", x:{x}, y:{y}>
         """
-        return f'<{self._excel_ref()}, value:"{self.value}", x:{self.x}, y:{self.y}>'
+        return self.__repr__()

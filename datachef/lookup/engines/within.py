@@ -90,6 +90,12 @@ class Within(BaseLookupEngine):
 
         self.cells: List[Cell] = selection.cells
 
+    def __repr__(self):
+        """
+        Representation of this class
+        """
+        return f"Within Lookup Engine: Direction {self.direction.name}, start: {self.start}, end: {self.end}"
+
     def _order(self, cells: List[Cell]):
         """
         Order cells appropriately based on how the lookup engine has been configured
@@ -203,6 +209,8 @@ class Within(BaseLookupEngine):
         appropriate cell as declared via this
         visual relationship.
         """
+
+        assert isinstance(cell, Cell)
 
         # Discard non feasible cells to avoid the overhead of ordering
         # cells that cant be the lookup
