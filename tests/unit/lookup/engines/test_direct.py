@@ -250,9 +250,9 @@ def test_failed_lookup_err(selectable_vertical_dimensions: Selectable):
         direct_up_engine.resolve(ob)
 
 
-def test_directly_wrapper_via_selectable(selectable_vertical_dimensions: Selectable):
+def test_directly_wrapper_via_selectable_down(selectable_vertical_dimensions: Selectable):
     """
-    Test that directly can be correctly instantiated via the wrapper
+    Test that directly down can be correctly instantiated via the wrapper
     provided by the Selectiable class.
     """
 

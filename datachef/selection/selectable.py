@@ -35,6 +35,7 @@ def _reverse_direction(direction: Direction):
     Helper to reverse the provided direction to help make
     the api conceptually easier for users.
     """
+
     if direction.name in ["down", "below"]:
         return up
     elif direction.name in ["up", "above"]:
@@ -44,7 +45,7 @@ def _reverse_direction(direction: Direction):
     elif direction.name == "right":
         return left
     else:
-        Exception(f'Unable to identify direction: {direction}')
+        raise Exception(f'Unable to identify direction: {direction}')
 
 
 class Selectable(LiveTable):

@@ -90,12 +90,6 @@ class Within(BaseLookupEngine):
 
         self.cells: List[Cell] = selection.cells
 
-    def __repr__(self):
-        """
-        Representation of this class
-        """
-        return f"Within Lookup Engine: Direction {self.direction.name}, start: {self.start}, end: {self.end}"
-
     def _order(self, cells: List[Cell]):
         """
         Order cells appropriately based on how the lookup engine has been configured
