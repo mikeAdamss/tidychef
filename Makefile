@@ -41,5 +41,8 @@ unbundle: install ## Unbundle (unzip) html and ipynb test resources
 bundle: install ## Bundle (zip) html and ipynb test resources
 	poetry run python3 ./resources/bundler.py bundle
 
-jupyter: ## Open up a jupyter lab to view the scenarios (this will occupy your termaial)
-	poetry run jupyter lab
+book:
+	python -m venv ./jupyterbook/venv
+	. ./jupyterbook/venv/bin/activate
+	pip install .
+	jupyter-book build jupyterbook

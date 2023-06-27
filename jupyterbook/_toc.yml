@@ -1,0 +1,23 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+
+- file: simple
+  sections:
+    - file: simple/loading-csv-data
+    - file: simple/loading-xlsx-data
+
+- file: intermediate
+  sections:
+    - file: intermediate/1
+
+- file: advanced
+  sections:
+    - file: advanced/1
+
+- file: examples
+  sections:
+    - file: examples/1-simple-bands

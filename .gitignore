@@ -4,6 +4,8 @@ __pycache__
 .coverage
 .ipynb_checkpoints/
 .vscode/
+jupyterbook/_build/
+jupyterbook/venv/
 htmlcov
 docs
 _docs/splashpage.md
