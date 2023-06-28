@@ -11,7 +11,7 @@ acquire.csv.local()
 acquire.csv.remote()
 etc...
 """
-from typing import Any, Callable, Optional
+from typing import Any, Callable, Optional, List, Union
 
 from datachef.acquire.base import BaseReader
 from datachef.selection.selectable import Selectable
@@ -24,7 +24,7 @@ def acquirer(
     pre_hook: Optional[Callable] = None,
     post_hook: Optional[Callable] = None,
     **kwargs
-) -> Selectable:
+) -> Union[List[Selectable], Selectable]:
     """
     The basic acquiring function that all of the other
     acquire functions call.
