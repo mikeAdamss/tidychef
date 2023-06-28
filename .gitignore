@@ -10,3 +10,4 @@ htmlcov
 docs
 _docs/splashpage.md
 scenarios
+*.cache

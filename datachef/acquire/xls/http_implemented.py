@@ -3,28 +3,32 @@ Holds the code that defines the local xlsx reader.
 """
 
 import copy
+import io
 from pathlib import Path
 from typing import Any, Callable, List, Optional, Union
 
-import openpyxl
+import xlrd
+import requests
 
 from datachef.acquire.base import BaseReader
 from datachef.models.source.cell import Cell
 from datachef.models.source.table import Table
 from datachef.selection.selectable import Selectable
 from datachef.selection.xlsx.xlsx import XlsxInputSelectable
-from datachef.utils import fileutils
+from datachef.utils.http.caching import get_cached_session
 
 from ..base import BaseReader
 from ..main import acquirer
 
 
-def local(
+def http(
     source: Union[str, Path],
     selectable: Selectable = Selectable,
     pre_hook: Optional[Callable] = None,
     post_hook: Optional[Callable] = None,
-    **kwargs
+    session: requests.Session = None,
+    cache: bool = True,
+    **kwargs,
 ) -> Selectable:
     """
     Read data from a Path (or string representing a path)
@@ -46,15 +50,17 @@ def local(
 
     return acquirer(
         source,
-        LocalXlsxReader,
+        HttpXlsReader,
         selectable,
         pre_hook=pre_hook,
         post_hook=post_hook,
-        **kwargs
+        session=session,
+        cache=cache,
+        **kwargs,
     )
 
 
-class LocalXlsxReader(BaseReader):
+class HttpXlsReader(BaseReader):
     """
     A reader to lead in a source where that source is a locally
     held xlsx file.
@@ -63,25 +69,42 @@ class LocalXlsxReader(BaseReader):
     def parse(
         source: Any,
         selectable: Selectable = XlsxInputSelectable,
-        data_only=True,
-        **kwargs
+        session: requests.Session = None,
+        cache: bool = True,
+        **kwargs,
     ) -> List[Selectable]:
 
-        source: Path = fileutils.ensure_existing_path(source, **kwargs)
+        if cache:
+            session = get_cached_session()
+        else:
+            session = requests.session()
 
-        workbook: openpyxl.Workbook = openpyxl.load_workbook(
-            source, data_only=data_only
-        )
+        response: requests.Response = session.get(source)
+        if not response.ok:
+            raise requests.exceptions.HTTPError(
+                f"""
+                Unable to get url: {source}
+                {response}
+                """
+            )
+
+        bio = io.BytesIO()
+        bio.write(response.content)
+        bio.seek(0)
+
+        workbook: xlrd.Book = xlrd.open_workbook(bio)
+        assert isinstance(workbook, xlrd.Book)
 
         datachef_selectables = []
-        worksheet_names = workbook.get_sheet_names()
+        worksheet_names = workbook.sheet_names()
         for worksheet_name in worksheet_names:
 
-            worksheet = workbook.get_sheet_by_name(worksheet_name)
+            worksheet = workbook.sheet_by_name(worksheet_name, **kwargs)
 
             table = Table()
-            for y, row in enumerate(worksheet.iter_rows()):
-                for x, cell in enumerate(row):
+            num_rows = worksheet.nrows
+            for y in range(0, num_rows):
+                for x, cell in enumerate(worksheet.row(y)):
                     table.add_cell(Cell(x=x, y=y, value=cell.value))
 
             datachef_selectables.append(

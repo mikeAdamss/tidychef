@@ -80,7 +80,7 @@ class HttpXlsxReader(BaseReader):
         else:
             session = requests.session()
 
-        response: requests.Response = session.get(source)
+        response: requests.Response = session.get(source, **kwargs)
         if not response.ok:
             raise requests.exceptions.HTTPError(
                 f"""

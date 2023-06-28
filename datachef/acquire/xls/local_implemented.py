@@ -7,8 +7,7 @@ import io
 from pathlib import Path
 from typing import Any, Callable, List, Optional, Union
 
-import openpyxl
-import requests
+import xlrd
 
 from datachef.acquire.base import BaseReader
 from datachef.models.source.cell import Cell
@@ -21,13 +20,11 @@ from ..base import BaseReader
 from ..main import acquirer
 
 
-def http(
+def local(
     source: Union[str, Path],
     selectable: Selectable = Selectable,
     pre_hook: Optional[Callable] = None,
     post_hook: Optional[Callable] = None,
-    session: requests.Session = None,
-    cache: bool = True,
     **kwargs,
 ) -> Selectable:
     """
@@ -50,60 +47,39 @@ def http(
 
     return acquirer(
         source,
-        HttpXlsxReader,
+        LocalXlsReader,
         selectable,
         pre_hook=pre_hook,
         post_hook=post_hook,
-        session=session,
-        cache=cache,
         **kwargs,
     )
 
 
-class HttpXlsxReader(BaseReader):
+class LocalXlsReader(BaseReader):
     """
     A reader to lead in a source where that source is a locally
-    held xlsx file.
+    held xls file.
     """
 
     def parse(
         source: Any,
         selectable: Selectable = XlsxInputSelectable,
-        data_only=True,
-        session: requests.Session = None,
-        cache: bool = True,
         **kwargs,
     ) -> List[Selectable]:
 
-        if cache:
-            session = get_cached_session()
-        else:
-            session = requests.session()
-
-        response: requests.Response = session.get(source)
-        if not response.ok:
-            raise requests.exceptions.HTTPError(
-                f"""
-                Unable to get url: {source}
-                {response}
-                """
-            )
-
-        bio = io.BytesIO()
-        bio.write(response.content)
-        bio.seek(0)
-
-        workbook: openpyxl.Workbook = openpyxl.load_workbook(bio, data_only=data_only)
+        workbook: xlrd.Book = xlrd.open_workbook(source)
+        assert isinstance(workbook, xlrd.Book)
 
         datachef_selectables = []
-        worksheet_names = workbook.get_sheet_names()
+        worksheet_names = workbook.sheet_names()
         for worksheet_name in worksheet_names:
 
-            worksheet = workbook.get_sheet_by_name(worksheet_name)
+            worksheet = workbook.sheet_by_name(worksheet_name, **kwargs)
 
             table = Table()
-            for y, row in enumerate(worksheet.iter_rows()):
-                for x, cell in enumerate(row):
+            num_rows = worksheet.nrows
+            for y in range(0, num_rows):
+                for x, cell in enumerate(worksheet.row(y)):
                     table.add_cell(Cell(x=x, y=y, value=cell.value))
 
             datachef_selectables.append(
