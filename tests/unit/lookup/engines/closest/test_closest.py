@@ -164,7 +164,9 @@ def test_selectable_closest_wrapper_works(selectable_simple_table: Selectable):
     Test that the selectable wrapper for Closest works as expected
     """
     assert isinstance(
-        selectable_simple_table.excel_ref("A1").label_as("foo").finds_observations_closest(down),
+        selectable_simple_table.excel_ref("A1")
+        .label_as("foo")
+        .finds_observations_closest(down),
         Closest,
     )
 

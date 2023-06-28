@@ -1,5 +1,5 @@
 """
 Module used for acquiring source data
 """
-from . import csv, xlsx, python
+from . import csv, python, xlsx
 from .main import acquirer

@@ -4,15 +4,15 @@ Holds the code that defines the local xlsx reader.
 
 import copy
 from pathlib import Path
-from typing import Any, Callable, Optional, Union, List
+from typing import Any, Callable, List, Optional, Union
 
 import openpyxl
 
 from datachef.acquire.base import BaseReader
 from datachef.models.source.cell import Cell
 from datachef.models.source.table import Table
-from datachef.selection.xlsx.xlsx import XlsxInputSelectable
 from datachef.selection.selectable import Selectable
+from datachef.selection.xlsx.xlsx import XlsxInputSelectable
 from datachef.utils import fileutils
 
 from ..base import BaseReader
@@ -32,7 +32,7 @@ def local(
 
     This local xlsx reader uses openpyxl:
     https://openpyxl.readthedocs.io/en/stable/index.html
-    
+
     Any kwargs passed to this function are propogated to
     the openpyxl.load_workbook() method
     """
@@ -69,7 +69,9 @@ class LocalXlsxReader(BaseReader):
 
         source: Path = fileutils.ensure_existing_path(source)
 
-        workbook: openpyxl.Workbook = openpyxl.load_workbook(source, data_only=data_only)
+        workbook: openpyxl.Workbook = openpyxl.load_workbook(
+            source, data_only=data_only
+        )
 
         datachef_selectables = []
         worksheet_names = workbook.get_sheet_names()
@@ -80,8 +82,11 @@ class LocalXlsxReader(BaseReader):
             table = Table()
             for y, row in enumerate(worksheet.iter_rows()):
                 for x, cell in enumerate(row):
-                        table.add_cell(Cell(x=x, y=y, value=cell.value))
+                    table.add_cell(Cell(x=x, y=y, value=cell.value))
 
-            datachef_selectables.append(selectable(table, copy.deepcopy(table),
-                                                   source=source, _name=worksheet_name))
+            datachef_selectables.append(
+                selectable(
+                    table, copy.deepcopy(table), source=source, _name=worksheet_name
+                )
+            )
         return datachef_selectables

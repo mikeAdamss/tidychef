@@ -2,17 +2,17 @@ from __future__ import annotations
 
 import csv
 from pathlib import Path
-from typing import Dict, List, Union, Tuple
+from typing import Dict, List, Tuple, Union
 
 import tabulate
 from IPython.core.display import display
 
 from datachef.column.base import BaseColumn
+from datachef.exceptions import MisalignedHeadersError
 from datachef.lookup.engines.horizontal_condition import HorizontalCondition
 from datachef.notebook.ipython import in_notebook
 from datachef.output.base import BaseOutput
 from datachef.selection.selectable import Selectable
-from datachef.exceptions import MisalignedHeadersError
 
 
 class TidyData(BaseOutput):
@@ -42,7 +42,7 @@ class TidyData(BaseOutput):
         # only do it once.
         self._data = None
 
-    def __get_representation(self): # pragma: no cover
+    def __get_representation(self):  # pragma: no cover
         """
         Representation logic shared by __str__ and __repr__
         """
@@ -75,7 +75,7 @@ class TidyData(BaseOutput):
         """
         Creates a class:TidyData object from multiple class:TidyData objects
         provided in the form:
-        
+
         TidyData.from_tidy(tidydata1, tidydata2, tidydata3)
         """
         return TidyData.from_tidy_list(list(tidy_data_objects))
@@ -90,15 +90,19 @@ class TidyData(BaseOutput):
         """
 
         for tidy_data_object in tidy_data_objects:
-            assert isinstance(tidy_data_object,TidyData), ('''
+            assert isinstance(
+                tidy_data_object, TidyData
+            ), """
             Only objects of type TidyData can be passed into
             TidyData.from_many().
-            ''')
+            """
 
-        assert len(tidy_data_objects) > 1, ('''
+        assert (
+            len(tidy_data_objects) > 1
+        ), """
             You need to pass 2 or more objects of class TidyData
             into TidyData.from_many()
-        ''')
+        """
 
         tidy_data = tidy_data_objects[0]
         for remaining_tidy_data in tidy_data_objects[1:]:
@@ -114,7 +118,8 @@ class TidyData(BaseOutput):
         # Error if we're joining two TidyData objects
         # with different headers
         if self._data[0] != other_tidy_data._data[0]:
-            raise MisalignedHeadersError(f'''
+            raise MisalignedHeadersError(
+                f"""
                 You are attempting to sum two tidy data
                 outputs but they do not have the same
                 column headers.
@@ -124,8 +129,9 @@ class TidyData(BaseOutput):
 
                 TidyData2 headers:
                 {other_tidy_data._data[0]}
-            ''')
-        
+            """
+            )
+
         # Since the headers match, join all but the header
         # row from the new source
         self._data += other_tidy_data._data[1:]

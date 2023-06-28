@@ -30,6 +30,7 @@ from datachef.selection import datafuncs as dfc
 from datachef.selection.datafuncs.ordering import order_cells_leftright_topbottom
 from datachef.utils.decorators import dontmutate
 
+
 def _reverse_direction(direction: Direction):
     """
     Helper to reverse the provided direction to help make
@@ -45,7 +46,7 @@ def _reverse_direction(direction: Direction):
     elif direction.name == "right":
         return left
     else:
-        raise Exception(f'Unable to identify direction: {direction}')
+        raise Exception(f"Unable to identify direction: {direction}")
 
 
 class Selectable(LiveTable):
@@ -492,13 +493,13 @@ class Selectable(LiveTable):
             """
             )
 
-       # The constructor we provide to the user advertises that the column
+        # The constructor we provide to the user advertises that the column
         # lookup engines "finds the observations" but this is purely a
         # conceptual trick to make a more user friendly api.
         # In reality that's exactly backwards, an observation actually finds
         # a column value (by being passed to the lookup engine constructed below).
         # As such we need to reverse the stated direction.
-        return Closest(self.label, self,  _reverse_direction(direction))
+        return Closest(self.label, self, _reverse_direction(direction))
 
     def finds_observations_within(
         self, direction: Direction, start: Direction, end: Direction
@@ -537,4 +538,6 @@ class Selectable(LiveTable):
         new_end.x = 0 - start.x
         new_end.y = 0 - start.y
 
-        return Within(self.label, self, _reverse_direction(direction), new_start, new_end)
+        return Within(
+            self.label, self, _reverse_direction(direction), new_start, new_end
+        )

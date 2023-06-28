@@ -7,6 +7,7 @@ import pytest
 
 from datachef.cardinal.directions import above, left
 from datachef.column import Column
+from datachef.exceptions import MisalignedHeadersError
 from datachef.lookup.engines.constant import Constant
 from datachef.lookup.engines.direct import Directly
 from datachef.output.tidydata import TidyData
@@ -15,7 +16,7 @@ from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_wide_band_tab
 from tests.fixtures.helpers import path_to_fixture
 from tests.unit.helpers import assert_csvs_match
-from datachef.exceptions import MisalignedHeadersError
+
 
 @pytest.fixture
 def tidy() -> TidyData:

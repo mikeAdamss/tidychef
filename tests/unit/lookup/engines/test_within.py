@@ -394,4 +394,6 @@ def test_selectable_within_wrapper_works(selectable_simple_table: Selectable):
 
     # Constructor should raise if called on an unlabelled selection
     with pytest.raises(MissingLabelError):
-        selectable_simple_table.excel_ref("A1").finds_observations_within(up, left(1), right(1))
+        selectable_simple_table.excel_ref("A1").finds_observations_within(
+            up, left(1), right(1)
+        )

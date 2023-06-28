@@ -2,20 +2,21 @@
 Holds the code that defines the local csv reader.
 """
 
-import io
-import validators
 import copy
 import csv
+import io
 from pathlib import Path
 from typing import Any, Callable, Optional, Union
 
 import requests
+import validators
 
 from datachef.acquire.base import BaseReader
 from datachef.models.source.cell import Cell
 from datachef.models.source.table import Table
 from datachef.selection.csv.csv import CsvInputSelectable
 from datachef.selection.selectable import Selectable
+from datachef.utils.http.caching import get_cached_session
 
 from ..base import BaseReader
 from ..main import acquirer
@@ -26,7 +27,9 @@ def http(
     selectable: Selectable = Selectable,
     pre_hook: Optional[Callable] = None,
     post_hook: Optional[Callable] = None,
-    **kwargs
+    session: requests.Session = None,
+    cache: bool = True,
+    **kwargs,
 ) -> Selectable:
     """
     Read data from a url with the http or https
@@ -41,7 +44,9 @@ def http(
         selectable,
         pre_hook=pre_hook,
         post_hook=post_hook,
-        **kwargs
+        session=session,
+        cache=cache,
+        **kwargs,
     )
 
 
@@ -55,20 +60,30 @@ class HttpCsvReader(BaseReader):
         source: Any,
         selectable: Selectable = CsvInputSelectable,
         delimiter=",",
-        **kwargs
+        session: requests.Session = None,
+        cache: bool = True,
+        **kwargs,
     ) -> Selectable:
-        
-        response: requests.Response = requests.get(source)
+
+        if not session:
+            if cache:
+                session = get_cached_session()
+            else:
+                session = requests.session()
+
+        response: requests.Response = session.get(source)
         if not response.ok:
-            raise requests.exceptions.HTTPError(f'''
+            raise requests.exceptions.HTTPError(
+                f"""
                 Unable to get url: {source}
                 {response}
-                ''')
-    
+                """
+            )
+
         sio = io.StringIO()
         sio.write(response.text)
         sio.seek(0)
-        
+
         table = Table()
         file_content = csv.reader(sio, delimiter=delimiter, **kwargs)
 

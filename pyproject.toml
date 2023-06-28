@@ -15,6 +15,9 @@ requests = "^2.31.0"
 validators = "^0.20.0"
 pytest-mock = "^3.11.1"
 openpyxl = "^3.1.2"
+cachecontrol = "^0.13.1"
+filelock = "^3.12.2"
+xlrd = "^2.0.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"

@@ -11,7 +11,7 @@ acquire.csv.local()
 acquire.csv.remote()
 etc...
 """
-from typing import Any, Callable, Optional, List, Union
+from typing import Any, Callable, List, Optional, Union
 
 from datachef.acquire.base import BaseReader
 from datachef.selection.selectable import Selectable

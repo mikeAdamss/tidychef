@@ -1,8 +1,9 @@
 import copy
-import pytest
 from dataclasses import dataclass
 
-from datachef.cardinal.directions import up, down, left, right, above, below, Direction
+import pytest
+
+from datachef.cardinal.directions import Direction, above, below, down, left, right, up
 from datachef.selection.selectable import _reverse_direction
 
 
@@ -23,7 +24,7 @@ def test_reverse_direction():
         Case(original=below, reversed=up),
         Case(original=left, reversed=right),
         Case(original=right, reversed=left),
-        ]:
+    ]:
 
         assert _reverse_direction(case.original) == case.reversed
 
