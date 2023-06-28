@@ -23,12 +23,6 @@ docs: install ## Combines auto API docs and contents of _docs and serves it loca
 	cp ./_docs/splashpage.md ./docs/splashpage.md
 	cd docs && python3 -m http.server
 
-pyrightbuild: ## Build our docker image for running pyright
-	docker build -t pyrightimage ./images
-
-pyright: pyrightbuild ## Run pyright through docker
-	docker run -v $(PWD):/workspace -w /workspace -it pyrightimage /bin/bash -c "poetry run pyright ./datachef --lib"
-
 checkimports: install ## Use pylint to check for unused imports
 	poetry run pylint ./datachef | grep "unused-import"
 
