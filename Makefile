@@ -42,7 +42,9 @@ bundle: install ## Bundle (zip) html and ipynb test resources
 	poetry run python3 ./resources/bundler.py bundle
 
 book:
+	rm -rf ./jupyterbook/_build
+	rm -rf ./jupyterbook/venv
 	python -m venv ./jupyterbook/venv
 	. ./jupyterbook/venv/bin/activate
 	pip install .
-	jupyter-book build jupyterbook
+	jupyter-book build jupyterbook/ --all

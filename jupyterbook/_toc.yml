@@ -5,10 +5,10 @@ format: jb-book
 root: intro
 chapters:
 
-- file: simple
+- file: basics
   sections:
-    - file: simple/loading-csv-data
-    - file: simple/loading-xlsx-data
+    - file: basics/acquire
+    - file: basics/preview
 
 - file: intermediate
   sections:

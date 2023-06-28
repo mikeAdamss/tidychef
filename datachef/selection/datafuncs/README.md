@@ -1,4 +1,4 @@
-### Datafunctions
+# Datafunctions
 
 Datafunctions are stand alone functions that operate on basic cell (typically `BaseCell`) or primitve python variables.
 

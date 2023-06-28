@@ -1,4 +1,4 @@
-## Filters
+# Filters
 
 Filters are stand alone callables that return a boolean value when given a parameter of a single cell. As an example `contains_string("foo")` is a filter that that will return `True` if a cells value contains the text "foo", else it will return `False`.
 
@@ -12,7 +12,7 @@ Filters are intended to be passed as parametes to the `Selection.filter()` metho
 
 Filters are largely interchangable so the submodules are just used as a convienient way to categorise them by purpose.
 
-### Why filters and not methods?
+## Why filters and not methods?
 
 So I could have offered up the `contains_string` example as `table.contains_string("foo")` easily enough and I'll admit to being tempted, but there' a subtle design distinction here:
 

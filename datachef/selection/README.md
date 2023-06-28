@@ -1,4 +1,4 @@
-## Selection
+# Selection
 
 The selection module holds two distinct submodules that define how you conditional create and modify selections of cells taken from a given tabulated data source.
 
