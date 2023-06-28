@@ -14,7 +14,7 @@ import validators
 from datachef.acquire.base import BaseReader
 from datachef.models.source.cell import Cell
 from datachef.models.source.table import Table
-from datachef.selection.csv.csv import CsvInputSelectable
+from datachef.selection.csv.csv import CsvSelectable
 from datachef.selection.selectable import Selectable
 from datachef.utils.http.caching import get_cached_session
 
@@ -24,13 +24,13 @@ from ..main import acquirer
 
 def http(
     source: Union[str, Path],
-    selectable: Selectable = Selectable,
+    selectable: Selectable = CsvSelectable,
     pre_hook: Optional[Callable] = None,
     post_hook: Optional[Callable] = None,
     session: requests.Session = None,
     cache: bool = True,
     **kwargs,
-) -> Selectable:
+) -> CsvSelectable:
     """
     Read data from a url with the http or https
     scheme.
@@ -58,12 +58,12 @@ class HttpCsvReader(BaseReader):
 
     def parse(
         source: Any,
-        selectable: Selectable = CsvInputSelectable,
+        selectable: Selectable = CsvSelectable,
         delimiter=",",
         session: requests.Session = None,
         cache: bool = True,
         **kwargs,
-    ) -> Selectable:
+    ) -> CsvSelectable:
 
         if not session:
             if cache:

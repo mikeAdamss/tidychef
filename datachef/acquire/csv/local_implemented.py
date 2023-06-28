@@ -10,7 +10,7 @@ from typing import Any, Callable, Optional, Union
 from datachef.acquire.base import BaseReader
 from datachef.models.source.cell import Cell
 from datachef.models.source.table import Table
-from datachef.selection.csv.csv import CsvInputSelectable
+from datachef.selection.csv.csv import CsvSelectable
 from datachef.selection.selectable import Selectable
 from datachef.utils import fileutils
 
@@ -20,11 +20,11 @@ from ..main import acquirer
 
 def local(
     source: Union[str, Path],
-    selectable: Selectable = Selectable,
+    selectable: Selectable = CsvSelectable,
     pre_hook: Optional[Callable] = None,
     post_hook: Optional[Callable] = None,
     **kwargs
-) -> Selectable:
+) -> CsvSelectable:
     """
     Read data from a Path (or string representing a path)
     present on the same machine where datachef is running.
@@ -60,10 +60,10 @@ class LocalCsvReader(BaseReader):
 
     def parse(
         source: Any,
-        selectable: Selectable = CsvInputSelectable,
+        selectable: Selectable = CsvSelectable,
         delimiter=",",
         **kwargs
-    ) -> Selectable:
+    ) -> CsvSelectable:
 
         source: Path = fileutils.ensure_existing_path(source)
 

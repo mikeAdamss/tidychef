@@ -6,7 +6,7 @@ from datachef.exceptions import (
     NonExistentCellComparissonError,
 )
 from datachef.models.source.cell import Cell, VirtualCell
-from datachef.selection.csv.csv import CsvInputSelectable
+from datachef.selection.csv.csv import CsvSelectable
 from tests.fixtures import fixture_with_blanks
 
 blank_values_not_disregarding_whitespace = [""]
@@ -18,7 +18,7 @@ def table_with_blanks():
     return fixture_with_blanks()
 
 
-def test_is_blank_on_valid_cell_values(table_with_blanks: CsvInputSelectable):
+def test_is_blank_on_valid_cell_values(table_with_blanks: CsvSelectable):
     """
     Confirm that the truthy blank value of a cell with an
     unsupported type as value raises the appropriate error.
@@ -31,7 +31,7 @@ def test_is_blank_on_valid_cell_values(table_with_blanks: CsvInputSelectable):
             ), f"cell {cell._as_xy_str()} was expected to be but is not blank"
 
 
-def test_is_not_blank_on_valid_cell_values(table_with_blanks: CsvInputSelectable):
+def test_is_not_blank_on_valid_cell_values(table_with_blanks: CsvSelectable):
     """
     Confirm that the truthy blank value of a cell with an
     unsupported type as value raises the appropriate error.
@@ -45,7 +45,7 @@ def test_is_not_blank_on_valid_cell_values(table_with_blanks: CsvInputSelectable
 
 
 def test_is_blank_on_valid_cell_values_without_disregarding_whitespace(
-    table_with_blanks: CsvInputSelectable,
+    table_with_blanks: CsvSelectable,
 ):
     """
     Confirm that the truthy blank value of a cell with an
@@ -60,7 +60,7 @@ def test_is_blank_on_valid_cell_values_without_disregarding_whitespace(
 
 
 def test_is_blank_on_invalid_cell_value_types_raises_err(
-    table_with_blanks: CsvInputSelectable,
+    table_with_blanks: CsvSelectable,
 ):
     """
     Confirm that the truthy blank value of a cell with an

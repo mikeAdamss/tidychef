@@ -69,7 +69,7 @@ def get_preview_table_as_html(
     ]
 
     html_cell_rows = []
-    last_y = 0
+    last_y = boundary.highest_point
     row = []
     show_warning = False
 
@@ -81,15 +81,13 @@ def get_preview_table_as_html(
             letters = cellutils.x_to_letters(i)
             row.append(HtmlCell(letters, border_cells))
         html_cell_rows.append(row)
-        row = [HtmlCell(1, border_cells)]
+        row = [HtmlCell(last_y+1, border_cells)]
 
-    row_num = 2
     for cell in all_cells:
         if cell.y != last_y:
             html_cell_rows.append(row)
             if with_excel_notations:
-                row = [HtmlCell(row_num, border_cells)]
-                row_num += 1
+                row = [HtmlCell(cell.y+1, border_cells)]
             else:
                 row = []
             last_y = cell.y
@@ -106,6 +104,8 @@ def get_preview_table_as_html(
             if multiple_selection_warning:
                 row.append(HtmlCell(cell.value, colour=warning_colour))
                 show_warning = True
+            else:
+                row.append(HtmlCell(cell.value, colour=colour))
         else:
             row.append(HtmlCell(cell.value, blank_cells))
 
@@ -152,5 +152,6 @@ def get_preview_table_as_html(
                     {cell_table_row_html}
                 </table>
             </body>
+            <br>
         </html>
     """

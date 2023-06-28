@@ -1,7 +1,7 @@
 from ..selectable import Selectable
 
 
-class XlsxInputSelectable(Selectable):
+class XlsxSelectable(Selectable):
     """
     Class representing an Xlsx input
     """

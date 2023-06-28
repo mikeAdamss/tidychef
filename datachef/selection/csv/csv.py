@@ -1,9 +1,9 @@
 from ..selectable import Selectable
 
 
-class CsvInputSelectable(Selectable):
+class CsvSelectable(Selectable):
     """
-    Class representing a CSV input
+    Class representing a CSV selectable
     """
 
     ...

@@ -9,6 +9,9 @@ chapters:
   sections:
     - file: basics/acquire
     - file: basics/preview
+    - file: basics/selection-operators
+    - file: basics/selection-expand-fill
+    - file: basics/selection-warnings
 
 - file: intermediate
   sections:

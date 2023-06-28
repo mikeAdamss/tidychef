@@ -14,7 +14,7 @@ from datachef.acquire.base import BaseReader
 from datachef.models.source.cell import Cell
 from datachef.models.source.table import Table
 from datachef.selection.selectable import Selectable
-from datachef.selection.xlsx.xlsx import XlsxInputSelectable
+from datachef.selection.xls.xls import XlsSelectable
 from datachef.utils.http.caching import get_cached_session
 
 from ..base import BaseReader
@@ -23,13 +23,13 @@ from ..main import acquirer
 
 def http(
     source: Union[str, Path],
-    selectable: Selectable = Selectable,
+    selectable: Selectable = XlsSelectable,
     pre_hook: Optional[Callable] = None,
     post_hook: Optional[Callable] = None,
     session: requests.Session = None,
     cache: bool = True,
     **kwargs,
-) -> Selectable:
+) -> List[XlsSelectable]:
     """
     Read data from a Path (or string representing a path)
     present on the same machine where datachef is running.
@@ -68,11 +68,11 @@ class HttpXlsReader(BaseReader):
 
     def parse(
         source: Any,
-        selectable: Selectable = XlsxInputSelectable,
+        selectable: Selectable = XlsSelectable,
         session: requests.Session = None,
         cache: bool = True,
         **kwargs,
-    ) -> List[Selectable]:
+    ) -> List[XlsSelectable]:
 
         if cache:
             session = get_cached_session()
@@ -92,7 +92,7 @@ class HttpXlsReader(BaseReader):
         bio.write(response.content)
         bio.seek(0)
 
-        workbook: xlrd.Book = xlrd.open_workbook(bio)
+        workbook: xlrd.Book = xlrd.open_workbook(file_contents=bio.read())
         assert isinstance(workbook, xlrd.Book)
 
         datachef_selectables = []
@@ -105,7 +105,7 @@ class HttpXlsReader(BaseReader):
             num_rows = worksheet.nrows
             for y in range(0, num_rows):
                 for x, cell in enumerate(worksheet.row(y)):
-                    table.add_cell(Cell(x=x, y=y, value=cell.value))
+                    table.add_cell(Cell(x=x, y=y, value=cell.value if cell.value else ""))
 
             datachef_selectables.append(
                 selectable(

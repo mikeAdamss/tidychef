@@ -85,6 +85,9 @@ class Selectable(LiveTable):
             if x.is_blank(disregard_whitespace=disregard_whitespace)
         ]
         return self
+    
+    def __len__(self):
+        return len(self.cells)
 
     @dontmutate
     def is_not_blank(self, disregard_whitespace=True):
