@@ -18,6 +18,7 @@ chapters:
     - file: basics/selection-simple-useful
     - file: basics/tidydata-columns-direct
     - file: basics/tidydata-closest
+    - file: basics/tidydata-constants
 
 - file: intermediate
   sections:
