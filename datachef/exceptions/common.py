@@ -76,7 +76,7 @@ class UnalignedTableOperation(Exception):
     def __init__(
         self,
         msg=(
-            "Selection can only be combined or previewed in combination"
+            "Selections can only be combined or previewed in combination "
             "if they are taken from the exact same table as taken from a single "
             "instance of a parsed input."
         ),

@@ -12,6 +12,12 @@ chapters:
     - file: basics/selection-operators
     - file: basics/selection-expand-fill
     - file: basics/selection-warnings
+    - file: basics/selection-shift
+    - file: basics/selection-regex
+    - file: basics/selection-filters
+    - file: basics/selection-simple-useful
+    - file: basics/tidydata-columns-direct
+    - file: basics/tidydata-closest
 
 - file: intermediate
   sections:

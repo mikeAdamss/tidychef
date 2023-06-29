@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import copy
 import re
-from typing import FrozenSet, List, Optional, Union
+from typing import FrozenSet, List, Optional, Union, Callable
 
 from datachef.cardinal.directions import (
     BaseDirection,
@@ -254,7 +254,6 @@ class Selectable(LiveTable):
 
         found_cells = dfc.matching_xy_cells(self.pcells, wanted_cells)
 
-        # TODO - compare cell counts before and after instead?
         if len(found_cells) == 0 and len(wanted_cells) > 0:
             raise OutOfBoundsError(
                 "You are attempting to shift your selection "
@@ -335,7 +334,7 @@ class Selectable(LiveTable):
         return self
 
     @dontmutate
-    def filter(self, check: callable):
+    def filter(self, check: Callable):
         """
         Selects just the cells that match the provided check
 
@@ -353,8 +352,9 @@ class Selectable(LiveTable):
         cells whose value matches the provided regular expression
         pattern.
         """
+
         return self.filter(
-            lambda cell: True if re.match(pattern, cell.value) else False
+            lambda cell: True if re.match(pattern, cell.value) is not None else False
         )
 
     # TODO: raise exception: AmbiguousCellValueSpread
