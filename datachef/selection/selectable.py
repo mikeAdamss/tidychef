@@ -61,6 +61,7 @@ class Selectable(LiveTable):
         assert (
             len(self.cells) == 1
         ), f"Selection contains {len(self.cells)} cells, not 1"
+        return self
 
     def lone_value(self) -> str:
         """

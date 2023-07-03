@@ -12,6 +12,7 @@ from datachef.selection.selectable import Selectable
 from datachef.selection.csv.csv import CsvSelectable
 from datachef.selection.xlsx.xlsx import XlsxSelectable
 from datachef.selection.xls.xls import XlsSelectable
+from datachef.validation.matcher import matches
 
 from datachef.output.tidydata import TidyData
 from datachef.column.column import Column

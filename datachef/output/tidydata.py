@@ -13,6 +13,7 @@ from datachef.lookup.engines.horizontal_condition import HorizontalCondition
 from datachef.notebook.ipython import in_notebook
 from datachef.output.base import BaseOutput
 from datachef.selection.selectable import Selectable
+from datachef.utils.decorators import dontmutate
 
 
 class TidyData(BaseOutput):
@@ -69,6 +70,34 @@ class TidyData(BaseOutput):
     def __len__(self):
         self._transform()
         return len(self._data)
+    
+    def to_dict(self):
+        """
+        Outputs the TidyData as a pandas style dictionary, i.e
+
+        {
+            column1: [column1value1, column1value2, column1value3],
+            column2: [column2value1, column2value2, column2value3],
+            etc
+        }
+        """
+        self._transform()
+        output_dict = {}
+
+        count = 0
+        translater = {}
+
+        for column_name in self._data[0]:
+            output_dict[column_name] = []
+            translater[count] = column_name
+            count += 1
+
+        
+        for row in self._data[1:]:
+            for i, item in enumerate(row):
+                output_dict[translater[i]].append(item)
+
+        return output_dict
 
     @staticmethod
     def from_tidy(*tidy_data_objects: TidyData) -> TidyData:
@@ -110,6 +139,7 @@ class TidyData(BaseOutput):
 
         return tidy_data
 
+    @dontmutate
     def __add__(self, other_tidy_data: TidyData):
         # Make sure all transforms have happened
         self._transform()
@@ -207,14 +237,13 @@ class TidyData(BaseOutput):
         path: Union[str, Path],
         write_headers=True,
         write_mode="w",
-        *args,
         **kwargs,
-    ) -> Path:
+    ):
         """
         Output the TidyData to a csv file.
 
         This method wraps the standard csv python library,
-        the *args and **kwargs provided here are passed
+        the **kwargs provided here are passed
         through to the csv.csvwriter() constructor.
         https://docs.python.org/3/library/csv.html
 
@@ -238,10 +267,8 @@ class TidyData(BaseOutput):
             )
 
         with open(path, write_mode) as csvfile:
-            tidywriter = csv.writer(csvfile, *args, **kwargs)
+            tidywriter = csv.writer(csvfile, **kwargs)
             for i, row in enumerate(self._data):
                 if i == 0 and not write_headers:
                     continue
                 tidywriter.writerow(row)
-
-        return path
