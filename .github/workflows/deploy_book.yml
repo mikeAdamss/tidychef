@@ -19,7 +19,7 @@ jobs:
       with:
         python-version: 3.9
 
-    - name: Create teh book via a venv
+    - name: Create the book via a venv
       run: |
           rm -rf ./jupyterbook/_build
           rm -rf ./jupyterbook/venv
