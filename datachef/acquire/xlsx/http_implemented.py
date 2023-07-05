@@ -104,7 +104,9 @@ class HttpXlsxReader(BaseReader):
             table = Table()
             for y, row in enumerate(worksheet.iter_rows()):
                 for x, cell in enumerate(row):
-                    table.add_cell(Cell(x=x, y=y, value=str(cell.value) if cell.value else ""))
+                    table.add_cell(
+                        Cell(x=x, y=y, value=str(cell.value) if cell.value else "")
+                    )
 
             datachef_selectables.append(
                 selectable(

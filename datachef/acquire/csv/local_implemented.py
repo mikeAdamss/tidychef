@@ -59,10 +59,7 @@ class LocalCsvReader(BaseReader):
     """
 
     def parse(
-        source: Any,
-        selectable: Selectable = CsvSelectable,
-        delimiter=",",
-        **kwargs
+        source: Any, selectable: Selectable = CsvSelectable, delimiter=",", **kwargs
     ) -> CsvSelectable:
 
         source: Path = fileutils.ensure_existing_path(source)

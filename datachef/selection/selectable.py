@@ -2,32 +2,22 @@ from __future__ import annotations
 
 import copy
 import re
-from typing import FrozenSet, List, Optional, Union, Callable
+from typing import Callable, FrozenSet, List, Optional, Union
 
-from datachef.cardinal.directions import (
-    BaseDirection,
-    Direction,
-    above,
-    below,
-    down,
-    left,
-    right,
-    up,
-)
-from datachef.exceptions import (
-    BadExcelReferenceError,
-    BadShiftParameterError,
-    LoneValueOnMultipleCellsError,
-    MissingLabelError,
-    OutOfBoundsError,
-)
+from datachef.cardinal.directions import (BaseDirection, Direction, above,
+                                          below, down, left, right, up)
+from datachef.exceptions import (BadExcelReferenceError,
+                                 BadShiftParameterError,
+                                 LoneValueOnMultipleCellsError,
+                                 MissingLabelError,
+                                 OutOfBoundsError,
+                                 IncorrectAssertionError)
 from datachef.lookup.engines.closest import Closest
 from datachef.lookup.engines.direct import Directly
 from datachef.lookup.engines.within import Within
 from datachef.models.source.cell import BaseCell, Cell
 from datachef.models.source.table import LiveTable
 from datachef.selection import datafuncs as dfc
-from datachef.selection.datafuncs.ordering import order_cells_leftright_topbottom
 from datachef.utils.decorators import dontmutate
 
 
@@ -333,6 +323,54 @@ class Selectable(LiveTable):
 
         self.cells = selected
         return self
+    
+    def assert_selections(self, are_one_of: Optional[List[str]]=None, match: Optional[str]=None, using: Optional[Callable] = None):
+        """
+        Wrapper to allow for simple assertions against currently selected
+        cell values.
+        """
+
+        # First lets police inputs a bit
+        msg = '''
+                To use the .assert_selections() method you must pass in
+                one (and ONLY one) keyword argument from the following.
+
+                are_of_of   : A list of string values
+                match       : A regular expression
+                using       : A callable that will raise an AssertionError
+                              should any of hte currently selected cells
+                              not match a specific criteria.
+                '''
+        
+        # Raise if no kwarg has been provided
+        if all([
+            are_one_of is None,
+            match is None,
+            using is None
+            ]):
+            raise IncorrectAssertionError(msg)
+        
+        # Raise if more that one kwarg has been provided
+        if len([x for x in [are_one_of, match, using] if x is not None]) > 1:
+            raise IncorrectAssertionError(msg)
+
+        if are_one_of:
+            for cell in self.cells:
+                assert cell.value in are_one_of, (
+                    f"Cell value: '{cell.value}' not in {are_one_of}"
+                )
+
+        if match:
+            for cell in self.cells:
+                assert re.match(match, cell.value), (
+                    f"Cell value: '{cell.value}' does not match regular expression '{match}'"
+                )
+        
+        if using:
+            for cell in self.cells:
+                using(cell)
+                
+        return self
 
     @dontmutate
     def filter(self, check: Callable):
@@ -357,99 +395,6 @@ class Selectable(LiveTable):
         return self.filter(
             lambda cell: True if re.match(pattern, cell.value) is not None else False
         )
-
-    # TODO: raise exception: AmbiguousCellValueSpread
-    # an error for then we have two selections on an axis and spread
-    # along that axis - which value the user wants to spread is ambiguous
-    @dontmutate
-    def spread(self, direction: Direction, until: Optional[Selectable] = None):
-        """
-        Spread a cell value into adjoining blank cells.
-
-        If no offset is specified with the direction, then the
-        spread will continue until terminated by:
-
-        - encountering any cell defined by the "until" kwarg
-        - it encounters a non blank cell
-        - it reaches the border of the table
-
-        :param direction: A cardinal direction: up, down, left
-        right with optional offset, i.e right(3)
-        :param until: A selection of cells we do not want
-        the spread to spread into. Encountering any of these
-        cells will end the spread.
-        """
-
-        if not isinstance(direction, BaseDirection):
-            raise ValueError(
-                "Argument direction must be one of: up, down,"
-                "left, right, above, below"
-            )
-
-        new_cells = []
-
-        orderer = {
-            "right": dfc.order_cells_leftright_topbottom,
-            "left": dfc.order_cells_rightleft_bottomtop,
-            "up": dfc.order_cells_bottomtop_rightleft,
-            "above": dfc.order_cells_bottomtop_rightleft,
-            "down": dfc.order_cells_topbottom_leftright,
-            "below": dfc.order_cells_topbottom_leftright,
-        }.get(direction.name)
-
-        if not orderer:
-            raise ValueError(
-                "Unable to determine required cell consideration"
-                f" order from direction: {direction}"
-            )
-
-        ordered_selected_cells: List[Cell] = orderer(self.cells)
-        ordered_pristine_cells: List[Cell] = copy.deepcopy(orderer(self.pcells))
-
-        selected_cell_index: int = 0
-        considered_offset = None
-        spreading = None
-        for cell in ordered_pristine_cells:
-
-            if considered_offset is None:
-                considered_offset = cell.y if direction.is_horizontal else cell.x
-            elif considered_offset != (cell.y if direction.is_horizontal else cell.x):
-                spreading = None
-                considered_offset = cell.y if direction.is_horizontal else cell.x
-
-            if not (selected_cell_index + 1) > len(ordered_selected_cells):
-                if cell.matches_xy(ordered_selected_cells[selected_cell_index]):
-                    spreading = cell.value
-                    selected_cell_index += 1
-                    continue
-
-            if spreading is not None:
-                if until:
-                    if any(cell.matches_xy(c) for c in until.cells):
-                        spreading = None
-                        continue
-                if cell.is_blank():
-                    cell.value = spreading
-                    new_cells.append(cell)
-                else:
-                    spreading = None
-
-        # Remove cells we're overwriting
-        self.cells = [
-            c1 for c1 in self.cells if not any(c1.matches_xy(c2) for c2 in new_cells)
-        ]
-
-        # We also need to modify the pristine selection
-        self.pristine.cells = [
-            c1 for c1 in self.pcells if not any(c1.matches_xy(c2) for c2 in new_cells)
-        ]
-        self.pristine.cells += new_cells
-        self.pristine.cells = order_cells_leftright_topbottom(self.pristine.cells)
-
-        # Add the overwritten cells into the current selection
-        self.cells += new_cells
-
-        return self
 
     def finds_observations_directly(self, direction: Direction) -> Directly:
         """

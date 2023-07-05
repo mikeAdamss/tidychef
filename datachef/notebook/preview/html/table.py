@@ -81,13 +81,13 @@ def get_preview_table_as_html(
             letters = cellutils.x_to_letters(i)
             row.append(HtmlCell(letters, border_cells))
         html_cell_rows.append(row)
-        row = [HtmlCell(last_y+1, border_cells)]
+        row = [HtmlCell(last_y + 1, border_cells)]
 
     for cell in all_cells:
         if cell.y != last_y:
             html_cell_rows.append(row)
             if with_excel_notations:
-                row = [HtmlCell(cell.y+1, border_cells)]
+                row = [HtmlCell(cell.y + 1, border_cells)]
             else:
                 row = []
             last_y = cell.y

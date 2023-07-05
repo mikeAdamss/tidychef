@@ -48,6 +48,10 @@ class ListOfListsReader(BaseReader):
     def parse(source, selectable: Selectable = Selectable) -> Selectable:
         table = Table()
 
+        assert (
+            len(set([len(x) for x in source])) == 1
+        ), "All rows must be the same length"
+
         for y_index, row in enumerate(source):
             for x_index, cell_value in enumerate(row):
                 table.add_cell(Cell(x=x_index, y=y_index, value=str(cell_value)))

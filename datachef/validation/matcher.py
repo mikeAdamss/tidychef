@@ -81,4 +81,5 @@ class Matcher(BaseValidation):
             self.regex_pattern, cell.value
         ), f'Value of cell "{cell}" does not match provided regex pattern "{self.regex_pattern}".'
 
+
 matches = Matcher()

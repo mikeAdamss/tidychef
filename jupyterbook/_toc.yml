@@ -16,6 +16,7 @@ chapters:
     - file: basics/selection-regex
     - file: basics/selection-filters
     - file: basics/selection-simple-useful
+    - file: basics/selection-assertions
     - file: basics/tidydata-columns-direct
     - file: basics/tidydata-closest
     - file: basics/tidydata-constants
@@ -30,6 +31,7 @@ chapters:
     - file: intermediate/pandas
     - file: intermediate/validation
     - file: intermediate/within
+    - file: intermediate/best-practice
 
 - file: advanced
   sections:

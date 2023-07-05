@@ -61,10 +61,7 @@ class LocalXlsxReader(BaseReader):
     """
 
     def parse(
-        source: Any,
-        selectable: Selectable = XlsxSelectable,
-        data_only=True,
-        **kwargs
+        source: Any, selectable: Selectable = XlsxSelectable, data_only=True, **kwargs
     ) -> List[XlsxSelectable]:
 
         source: Path = fileutils.ensure_existing_path(source, **kwargs)
@@ -82,7 +79,9 @@ class LocalXlsxReader(BaseReader):
             table = Table()
             for y, row in enumerate(worksheet.iter_rows()):
                 for x, cell in enumerate(row):
-                    table.add_cell(Cell(x=x, y=y, value=str(cell.value) if cell.value else ""))
+                    table.add_cell(
+                        Cell(x=x, y=y, value=str(cell.value) if cell.value else "")
+                    )
 
             datachef_selectables.append(
                 selectable(

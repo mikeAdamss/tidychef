@@ -70,7 +70,7 @@ class TidyData(BaseOutput):
     def __len__(self):
         self._transform()
         return len(self._data)
-    
+
     def to_dict(self):
         """
         Outputs the TidyData as a pandas style dictionary, i.e
@@ -92,7 +92,6 @@ class TidyData(BaseOutput):
             translater[count] = column_name
             count += 1
 
-        
         for row in self._data[1:]:
             for i, item in enumerate(row):
                 output_dict[translater[i]].append(item)
