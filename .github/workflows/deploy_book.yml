@@ -23,7 +23,7 @@ jobs:
 
     - name: Create teh book via a venv
       run: |
-        	rm -rf ./jupyterbook/_build
+          rm -rf ./jupyterbook/_build
           rm -rf ./jupyterbook/venv
           python -m venv ./jupyterbook/venv
           . ./jupyterbook/venv/bin/activate
