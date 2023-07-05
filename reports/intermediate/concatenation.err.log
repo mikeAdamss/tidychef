@@ -1,0 +1,68 @@
+Traceback (most recent call last):
+  File "/Users/michaeladams/.pyenv/versions/3.9.7/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/michaeladams/.pyenv/versions/3.9.7/lib/python3.9/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/michaeladams/.pyenv/versions/3.9.7/lib/python3.9/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Users/michaeladams/.pyenv/versions/3.9.7/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/Users/michaeladams/.pyenv/versions/3.9.7/lib/python3.9/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/Users/michaeladams/.pyenv/versions/3.9.7/lib/python3.9/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/michaeladams/.pyenv/versions/3.9.7/lib/python3.9/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# Now we try and concatenate them - and get an error!
+
+tidydata1 + tidydata2
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mMisalignedHeadersError[0m                    Traceback (most recent call last)
+Cell [0;32mIn[9], line 3[0m
+[1;32m      1[0m [38;5;66;03m# Now we try and concatenate them - and get an error![39;00m
+[0;32m----> 3[0m [43mtidydata1[49m[43m [49m[38;5;241;43m+[39;49m[43m [49m[43mtidydata2[49m
+
+File [0;32m~/.pyenv/versions/3.9.7/lib/python3.9/site-packages/datachef/utils/decorators/dontmutate.py:24[0m, in [0;36mdontmutate.<locals>.wrapper[0;34m(self, *args, **kwargs)[0m
+[1;32m     21[0m [38;5;129m@wraps[39m(method)
+[1;32m     22[0m [38;5;28;01mdef[39;00m [38;5;21mwrapper[39m([38;5;28mself[39m, [38;5;241m*[39margs, [38;5;241m*[39m[38;5;241m*[39mkwargs):
+[1;32m     23[0m     [38;5;28mself[39m [38;5;241m=[39m copy[38;5;241m.[39mdeepcopy([38;5;28mself[39m)
+[0;32m---> 24[0m     [38;5;28;01mreturn[39;00m [43mmethod[49m[43m([49m[38;5;28;43mself[39;49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+
+File [0;32m~/.pyenv/versions/3.9.7/lib/python3.9/site-packages/datachef/output/tidydata.py:150[0m, in [0;36mTidyData.__add__[0;34m(self, other_tidy_data)[0m
+[1;32m    147[0m [38;5;66;03m# Error if we're joining two TidyData objects[39;00m
+[1;32m    148[0m [38;5;66;03m# with different headers[39;00m
+[1;32m    149[0m [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39m_data[[38;5;241m0[39m] [38;5;241m!=[39m other_tidy_data[38;5;241m.[39m_data[[38;5;241m0[39m]:
+[0;32m--> 150[0m     [38;5;28;01mraise[39;00m MisalignedHeadersError(
+[1;32m    151[0m         [38;5;124mf[39m[38;5;124m"""[39m
+[1;32m    152[0m [38;5;124m        You are attempting to sum two tidy data[39m
+[1;32m    153[0m [38;5;124m        outputs but they do not have the same[39m
+[1;32m    154[0m [38;5;124m        column headers.[39m
+[1;32m    155[0m 
+[1;32m    156[0m [38;5;124m        TidyData1 headers:[39m
+[1;32m    157[0m [38;5;124m        [39m[38;5;132;01m{[39;00m[38;5;28mself[39m[38;5;241m.[39m_data[[38;5;241m0[39m][38;5;132;01m}[39;00m
+[1;32m    158[0m 
+[1;32m    159[0m [38;5;124m        TidyData2 headers:[39m
+[1;32m    160[0m [38;5;124m        [39m[38;5;132;01m{[39;00mother_tidy_data[38;5;241m.[39m_data[[38;5;241m0[39m][38;5;132;01m}[39;00m
+[1;32m    161[0m [38;5;124m    [39m[38;5;124m"""[39m
+[1;32m    162[0m     )
+[1;32m    164[0m [38;5;66;03m# Since the headers match, join all but the header[39;00m
+[1;32m    165[0m [38;5;66;03m# row from the new source[39;00m
+[1;32m    166[0m [38;5;28mself[39m[38;5;241m.[39m_data [38;5;241m+[39m[38;5;241m=[39m other_tidy_data[38;5;241m.[39m_data[[38;5;241m1[39m:]
+
+[0;31mMisalignedHeadersError[0m: 
+                You are attempting to sum two tidy data
+                outputs but they do not have the same
+                column headers.
+
+                TidyData1 headers:
+                ['Observations', 'Period', 'Dataset Identifier Code', 'Houses']
+
+                TidyData2 headers:
+                ['Value', 'Period', 'Dataset Identifier Code', 'Houses']
+            
+
