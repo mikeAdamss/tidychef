@@ -26,6 +26,7 @@ jobs:
           python -m venv ./jupyterbook/venv
           . ./jupyterbook/venv/bin/activate
           pip install .
+          pip install jupyter-book
           jupyter-book build jupyterbook/ --all
 
     # Push the book's HTML to github-pages
