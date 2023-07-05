@@ -29,4 +29,4 @@ book: ## Create the jupyter book in /jupyterbook/_build
 
 publish: ## Publish the jupyter book to github pages
 	poetry run pip install ghp-import
-	ghp-import -n -p -f ./jupyterbook/_build/html
+	poetry run ghp-import -n -p -f ./jupyterbook/_build/html
