@@ -96,9 +96,6 @@ class Selectable(LiveTable):
         ]
         return self
 
-    # TODO, consider
-    # until= to control expand size/distance
-    # allowing offsets for the same reason (be wary of confusing the user)
     @dontmutate
     def expand(self, direction: Direction):
         """
@@ -369,7 +366,7 @@ class Selectable(LiveTable):
         if using:
             for cell in self.cells:
                 using(cell)
-                
+
         return self
 
     @dontmutate

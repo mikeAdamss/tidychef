@@ -1,4 +1,5 @@
 from pathlib import Path
+import shutil
 
 import pytest
 import requests
@@ -49,3 +50,24 @@ def test_http_exception(mocker):
             "datachef/main/tests/fixtures/csv/bands.csv",
             session=mock_session,
         )
+
+def test_caching(mocker):
+    """
+    For non 2xx responses a http error is raised.
+    """
+
+    # Remove any longering .cache
+    cache_dir = Path(".cache")
+    if cache_dir.exists():
+        shutil.rmtree(cache_dir)
+
+    # Run a cache-less get
+    acquire.csv.http(
+            "https://raw.githubusercontent.com/mikeAdamss/"
+            "datachef/main/tests/fixtures/csv/bands.csv",
+            cache=False
+        )
+    
+    # Confirm no .cache directory has been created.
+    cache_dir = Path(".cache")
+    assert not cache_dir.exists()

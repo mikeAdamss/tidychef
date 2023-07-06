@@ -137,8 +137,12 @@ def test_tidydata_written_to_a_path_indicated_by_a_string(tidy: TidyData):
     Tests that the to_csv method can take a string
     as an argument in place of path.
     """
-    outputted_to: Path = tidy.to_csv("temp.csv", write_headers=False)
-    os.remove(outputted_to)
+
+    output_name = "temp.csv"
+    tidy.to_csv(output_name, write_headers=False)
+    
+    assert Path(output_name).exists()
+    os.remove(output_name)
 
 
 def test_tidydata_to_csv_raises_for_incorrect_types_for_output_path(tidy: TidyData):
