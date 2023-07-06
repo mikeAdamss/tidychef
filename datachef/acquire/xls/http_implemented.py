@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any, Callable, List, Optional, Union
 
 import requests
+import validators
 import xlrd
 
 from datachef.acquire.base import BaseReader
@@ -41,12 +42,7 @@ def http(
     the openpyxl.load_workbook() method
     """
 
-    assert isinstance(
-        source, (str, Path)
-    ), """
-        The source you're passing to acquire.csv.local() needs to
-        be either a Path object or a string representing such.
-        """
+    assert validators.url(source), f"'{source}' is not a valid http/https url."
 
     return acquirer(
         source,
@@ -74,10 +70,11 @@ class HttpXlsReader(BaseReader):
         **kwargs,
     ) -> List[XlsSelectable]:
 
-        if cache:
-            session = get_cached_session()
-        else:
-            session = requests.session()
+        if not session:
+            if cache:
+                session = get_cached_session()
+            else:
+                session = requests.session()
 
         response: requests.Response = session.get(source)
         if not response.ok:

@@ -62,3 +62,11 @@ def test_selectable_name_property_returns_name(selectable_of2_simple1: BaseInput
 
     for tab in selectable_of2_simple1:
         assert "I am table 1" == tab.name or "I am table 2" == tab.name
+
+
+def test_tables_have_expected_length(selectable_simple1: Selectable):
+    """
+    Test that tables return the expected len
+    """
+
+    assert len(selectable_simple1) == 2600

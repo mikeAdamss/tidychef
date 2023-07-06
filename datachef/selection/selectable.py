@@ -4,14 +4,24 @@ import copy
 import re
 from typing import Callable, FrozenSet, List, Optional, Union
 
-from datachef.cardinal.directions import (BaseDirection, Direction, above,
-                                          below, down, left, right, up)
-from datachef.exceptions import (BadExcelReferenceError,
-                                 BadShiftParameterError,
-                                 LoneValueOnMultipleCellsError,
-                                 MissingLabelError,
-                                 OutOfBoundsError,
-                                 IncorrectAssertionError)
+from datachef.cardinal.directions import (
+    BaseDirection,
+    Direction,
+    above,
+    below,
+    down,
+    left,
+    right,
+    up,
+)
+from datachef.exceptions import (
+    BadExcelReferenceError,
+    BadShiftParameterError,
+    IncorrectAssertionError,
+    LoneValueOnMultipleCellsError,
+    MissingLabelError,
+    OutOfBoundsError,
+)
 from datachef.lookup.engines.closest import Closest
 from datachef.lookup.engines.direct import Directly
 from datachef.lookup.engines.within import Within
@@ -76,9 +86,6 @@ class Selectable(LiveTable):
             if x.is_blank(disregard_whitespace=disregard_whitespace)
         ]
         return self
-    
-    def __len__(self):
-        return len(self.cells)
 
     @dontmutate
     def is_not_blank(self, disregard_whitespace=True):
@@ -320,15 +327,20 @@ class Selectable(LiveTable):
 
         self.cells = selected
         return self
-    
-    def assert_selections(self, are_one_of: Optional[List[str]]=None, match: Optional[str]=None, using: Optional[Callable] = None):
+
+    def assert_selections(
+        self,
+        are_one_of: Optional[List[str]] = None,
+        match: Optional[str] = None,
+        using: Optional[Callable] = None,
+    ):
         """
         Wrapper to allow for simple assertions against currently selected
         cell values.
         """
 
         # First lets police inputs a bit
-        msg = '''
+        msg = """
                 To use the .assert_selections() method you must pass in
                 one (and ONLY one) keyword argument from the following.
 
@@ -337,32 +349,28 @@ class Selectable(LiveTable):
                 using       : A callable that will raise an AssertionError
                               should any of hte currently selected cells
                               not match a specific criteria.
-                '''
-        
+                """
+
         # Raise if no kwarg has been provided
-        if all([
-            are_one_of is None,
-            match is None,
-            using is None
-            ]):
+        if all([are_one_of is None, match is None, using is None]):
             raise IncorrectAssertionError(msg)
-        
+
         # Raise if more that one kwarg has been provided
         if len([x for x in [are_one_of, match, using] if x is not None]) > 1:
             raise IncorrectAssertionError(msg)
 
         if are_one_of:
             for cell in self.cells:
-                assert cell.value in are_one_of, (
-                    f"Cell value: '{cell.value}' not in {are_one_of}"
-                )
+                assert (
+                    cell.value in are_one_of
+                ), f"Cell value: '{cell.value}' not in {are_one_of}"
 
         if match:
             for cell in self.cells:
-                assert re.match(match, cell.value), (
-                    f"Cell value: '{cell.value}' does not match regular expression '{match}'"
-                )
-        
+                assert re.match(
+                    match, cell.value
+                ), f"Cell value: '{cell.value}' does not match regular expression '{match}'"
+
         if using:
             for cell in self.cells:
                 using(cell)

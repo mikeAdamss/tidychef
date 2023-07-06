@@ -140,7 +140,7 @@ def test_tidydata_written_to_a_path_indicated_by_a_string(tidy: TidyData):
 
     output_name = "temp.csv"
     tidy.to_csv(output_name, write_headers=False)
-    
+
     assert Path(output_name).exists()
     os.remove(output_name)
 

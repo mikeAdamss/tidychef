@@ -2,11 +2,11 @@ from .badparams import (
     BadExcelReferenceError,
     BadShiftParameterError,
     CardinalDeclarationWithOffset,
+    IncorrectAssertionError,
     OutputPassedToPreview,
     ReversedExcelRefError,
     UnknownDirectionError,
     WithinAxisDeclarationError,
-    IncorrectAssertionError,
 )
 from .cells import InvlaidCellPositionError, NonExistentCellComparissonError
 from .common import (

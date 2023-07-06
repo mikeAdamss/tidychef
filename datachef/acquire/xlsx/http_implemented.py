@@ -9,6 +9,7 @@ from typing import Any, Callable, List, Optional, Union
 
 import openpyxl
 import requests
+import validators
 
 from datachef.acquire.base import BaseReader
 from datachef.models.source.cell import Cell
@@ -41,12 +42,7 @@ def http(
     the openpyxl.load_workbook() method
     """
 
-    assert isinstance(
-        source, (str, Path)
-    ), """
-        The source you're passing to acquire.csv.local() needs to
-        be either a Path object or a string representing such.
-        """
+    assert validators.url(source), f"'{source}' is not a valid http/https url."
 
     return acquirer(
         source,
@@ -75,10 +71,11 @@ class HttpXlsxReader(BaseReader):
         **kwargs,
     ) -> List[XlsxSelectable]:
 
-        if cache:
-            session = get_cached_session()
-        else:
-            session = requests.session()
+        if not session:
+            if cache:
+                session = get_cached_session()
+            else:
+                session = requests.session()
 
         response: requests.Response = session.get(source, **kwargs)
         if not response.ok:

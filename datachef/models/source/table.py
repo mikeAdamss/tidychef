@@ -79,6 +79,9 @@ class LiveTable:
         self._label = label
         return self
 
+    def __len__(self):
+        return len(self.cells)
+
     @property
     def name(self):
         """
