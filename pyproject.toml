@@ -50,6 +50,6 @@ python =
     3.11: py311
 
 [testenv]
-allowlist_externals = pytest
-commands = pytest --cov-report term-missing --cov=datachef --cov-fail-under=100 ./tests/
+allowlist_externals = pytest, poetry
+commands = poetry install && poetry run pytest --cov-report term-missing --cov=datachef --cov-fail-under=100 ./tests/
 """
