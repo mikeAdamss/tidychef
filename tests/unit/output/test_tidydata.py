@@ -1,12 +1,12 @@
 import copy
+import json
 import os
 import uuid
 from pathlib import Path
-import json
 
 import pytest
 
-from datachef.cardinal.directions import above, left, below, right
+from datachef.cardinal.directions import above, below, left, right
 from datachef.column import Column
 from datachef.exceptions import MisalignedHeadersError
 from datachef.lookup.engines.constant import Constant
@@ -209,16 +209,28 @@ def test_tidydata_converted_to_dict():
     """
     selectable_wide_band_tab: Selectable = fixture_wide_band_tab()
 
-    observations = selectable_wide_band_tab.filter(filters.is_numeric).label_as("Observation")
-    bands = (selectable_wide_band_tab.excel_ref("A3") | selectable_wide_band_tab.excel_ref("G3")).label_as("Band")
-    assets = selectable_wide_band_tab.excel_ref('2').is_not_blank().label_as("Asset")
-    members = (selectable_wide_band_tab.excel_ref("B") | selectable_wide_band_tab.excel_ref("H")).is_not_blank().label_as("Member")
+    observations = selectable_wide_band_tab.filter(filters.is_numeric).label_as(
+        "Observation"
+    )
+    bands = (
+        selectable_wide_band_tab.excel_ref("A3")
+        | selectable_wide_band_tab.excel_ref("G3")
+    ).label_as("Band")
+    assets = selectable_wide_band_tab.excel_ref("2").is_not_blank().label_as("Asset")
+    members = (
+        (
+            selectable_wide_band_tab.excel_ref("B")
+            | selectable_wide_band_tab.excel_ref("H")
+        )
+        .is_not_blank()
+        .label_as("Member")
+    )
 
     tidy_data = TidyData(
         observations,
         Column(bands.finds_observations_closest(right)),
         Column(assets.finds_observations_directly(below)),
-        Column(members.finds_observations_directly(right))
+        Column(members.finds_observations_directly(right)),
     )
 
     tidy_as_dict = tidy_data.to_dict()

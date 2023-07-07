@@ -99,6 +99,55 @@ def test_output_preview_to_path_works(selectable_simple_small1: Selectable):
     assert new_content == fixture_content
 
 
+def test_multiple_selection_warnings(selectable_simple_small1: Selectable):
+    """
+    Test that multiple selection warnings are being shown
+    as intended.
+    """
+
+    selection_one = selectable_simple_small1.excel_ref("A")
+    selection_two = selectable_simple_small1.excel_ref("4")
+
+    preview(selection_one, selection_two, path="multiple_selection_warning.html")
+
+    with open("multiple_selection_warning.html") as f:
+        preview_got = f.read()
+    os.remove("multiple_selection_warning.html")
+
+    with open(path_to_fixture("preview", "multiple_selection_warning.html")) as f:
+        preview_expected = f.read()
+
+    assert preview_got == preview_expected
+
+
+def test_multiple_selection_warnings_can_be_toggled_off(
+    selectable_simple_small1: Selectable,
+):
+    """
+    Test that multiple selection warnings are being shown
+    as intended.
+    """
+
+    selection_one = selectable_simple_small1.excel_ref("A")
+    selection_two = selectable_simple_small1.excel_ref("4")
+
+    preview(
+        selection_one,
+        selection_two,
+        multiple_selection_warning=False,
+        path="multiple_selection_warning_off.html",
+    )
+
+    with open("multiple_selection_warning_off.html") as f:
+        preview_got = f.read()
+    os.remove("multiple_selection_warning_off.html")
+
+    with open(path_to_fixture("preview", "multiple_selection_warning_off.html")) as f:
+        preview_expected = f.read()
+
+    assert preview_got == preview_expected
+
+
 def test_output_preview_to_path_works_with_no_excel_ref(
     selectable_simple_small1: Selectable,
 ):
