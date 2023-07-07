@@ -24,4 +24,5 @@ jobs:
     - name: Test with tox
       run: |
         poetry install
+        poetry shell
         tox
