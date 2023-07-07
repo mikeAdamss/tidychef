@@ -33,6 +33,6 @@ Datachef is directly inspired by the excellent python package [databaker](https:
 
 While I freely acknowledge taking inspiration from databakers method naming conventions (databaker has an excellent api for cell selection) and the great conceptual work done by that team, datachef is an entirely new codebase with completely new and different approaches to similar problems as well as a greatly slimmed down dependency chain (databaker is largely a wrapper, datachef a self contained thing in of itself) and uses a much more object orientated and consciously extensible design paradime.
 
-Datachef also contains significant advances in functionality, performance at scale and test coverage.
+Datachef also contains significant advances in functionality, performance, test coverage and documentation.
 
 That is to say, I liked [databaker](https://github.com/sensiblecodeio/databaker) and successfully worked with it on multiple projects for tidying messy data sources over the course of almost a decade, this software is the culmination of that work and the lessons learned from that time.
