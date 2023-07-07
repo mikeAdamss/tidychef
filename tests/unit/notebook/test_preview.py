@@ -48,7 +48,7 @@ def test_preview_is_callable(selectable_simple_small1: Selectable):
         preview(s1, s2, None, s4, s5)
 
 
-def test_previwer_with_mixed_table_raises(
+def test_previewer_with_mixed_table_raises(
     selectable_simple_small1: Selectable, selectable_simple_small2: Selectable
 ):
     """

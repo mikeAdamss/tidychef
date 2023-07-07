@@ -2,10 +2,11 @@ import copy
 import os
 import uuid
 from pathlib import Path
+import json
 
 import pytest
 
-from datachef.cardinal.directions import above, left
+from datachef.cardinal.directions import above, left, below, right
 from datachef.column import Column
 from datachef.exceptions import MisalignedHeadersError
 from datachef.lookup.engines.constant import Constant
@@ -199,3 +200,30 @@ def test_create_tidydata_with_condition_column():
             "Condition2", lambda col: col["Condition1"] + "foo", priority=1
         ),
     )._transform()
+
+
+def test_tidydata_converted_to_dict():
+    """
+    Test a TidyData object can be instantiated with condition columns
+    that depend on each other with a strict priority specified.
+    """
+    selectable_wide_band_tab: Selectable = fixture_wide_band_tab()
+
+    observations = selectable_wide_band_tab.filter(filters.is_numeric).label_as("Observation")
+    bands = (selectable_wide_band_tab.excel_ref("A3") | selectable_wide_band_tab.excel_ref("G3")).label_as("Band")
+    assets = selectable_wide_band_tab.excel_ref('2').is_not_blank().label_as("Asset")
+    members = (selectable_wide_band_tab.excel_ref("B") | selectable_wide_band_tab.excel_ref("H")).is_not_blank().label_as("Member")
+
+    tidy_data = TidyData(
+        observations,
+        Column(bands.finds_observations_closest(right)),
+        Column(assets.finds_observations_directly(below)),
+        Column(members.finds_observations_directly(right))
+    )
+
+    tidy_as_dict = tidy_data.to_dict()
+
+    with open(path_to_fixture("json", "tidydata_to_dict.json")) as f:
+        tidy_as_dict_fixture = json.load(f)
+
+    assert tidy_as_dict == tidy_as_dict_fixture
