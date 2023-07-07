@@ -35,7 +35,7 @@ def test_read_local_xls_from_str():
     Test local file loader for csv from str
     """
     xls_path: Path = path_to_fixture("xls", "sample.xls")
-    sheets: List[XlsSelectable] = acquire.xls.local(xls_path)
+    sheets: List[XlsSelectable] = acquire.xls.local(str(xls_path.absolute()))
     sheet = sheets[0]
 
     assert sheet.cells == sheet.pcells
