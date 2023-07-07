@@ -409,7 +409,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expand">expand()</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-validation">When to use Validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-vs-assertions">Validation Vs Assertions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-validation-assertions">When to use Validation &amp; Assertions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-wide-and-validate-narrow">Select Wide and Validate Narrow</a></li>
 </ul>
             </nav>
@@ -509,28 +510,41 @@ document.write(`
 <p>Whereas a statement of <code class="docutils literal notranslate"><span class="pre">table.excel_ref(&quot;B155&quot;).expand(down).expand(right)</span></code> would automatically extract the additional data upon a re run of the script with <strong>no code update required</strong>.</p>
 </section>
 </section>
-<section id="when-to-use-validation">
-<h2>When to use Validation<a class="headerlink" href="#when-to-use-validation" title="Permalink to this heading">#</a></h2>
-<p>If you’re doing a one off transform you’ve not intention of repeating (you’re quickly pulling some data apart of populate a dataframe or somesuch) then you could argue that validation is overkill.</p>
-<p>If you’re intending run your code more than once you should be implementing some form of validation. Even if its just one of the lightweight methods documented elsewhere in this Jupyterbook.</p>
-<p>If you’re setting up any kind of RAP processes, you should also certainly be investing time in a quality validation callable (or other mechanism) suitable for your pipeline process and use case(s).</p>
+<section id="validation-vs-assertions">
+<h2>Validation Vs Assertions<a class="headerlink" href="#validation-vs-assertions" title="Permalink to this heading">#</a></h2>
+<p>These are superficially similar things using overlapping mechanics but there is a distinction that’s important to understand here:</p>
+<ul class="simple">
+<li><p>Assertions via the <code class="docutils literal notranslate"><span class="pre">&lt;selectable&gt;.assert_selections()</span></code> method run against <strong>selections</strong> so police your <em>extraction logic</em>.</p></li>
+<li><p>Validations via the <code class="docutils literal notranslate"><span class="pre">Column(validation=)</span></code> constructor keyword run against the <strong>output</strong> so police your <em>final product</em>.</p></li>
+</ul>
+<p>Consider the following scenarios:</p>
+<ul class="simple">
+<li><p>1.) You want to select an “anchor cell” or a selection of cells for the sole purpose of subtracting it from another selection. It could be important to confirm these selections are accurate but because they’re not directly extracted values then <code class="docutils literal notranslate"><span class="pre">validation=</span></code> will never see them (just the consequence of them) so the <code class="docutils literal notranslate"><span class="pre">assert_seletions()</span></code> is more appropriate.</p></li>
+<li><p>2.) You’re are using <code class="docutils literal notranslate"><span class="pre">apply=</span></code> to cleanse cell value data at the point of extraction and need to make sure the correct things are happening, the <code class="docutils literal notranslate"><span class="pre">assert_seletions()</span></code> method will <strong>never see these cleansed values</strong>, but <code class="docutils literal notranslate"><span class="pre">validation=</span></code> will.</p></li>
+</ul>
+<p>Some nuances on where to use each follows but the pithy version is “use both strategies, wherever possible and as much as its practical to do so”.</p>
+</section>
+<section id="when-to-use-validation-assertions">
+<h2>When to use Validation &amp; Assertions<a class="headerlink" href="#when-to-use-validation-assertions" title="Permalink to this heading">#</a></h2>
+<p>If you’re doing a one off transform you’ve not intention of repeating (you’re quickly pulling some data apart of populate a dataframe, chart etc) then you could argue that validation is overkill.</p>
+<p>If you’re intending run your code more than once against a changeable data source you should be implementing some form of validation. Even if its just one of the lightweight methods documented elsewhere in this Jupyterbook.</p>
+<p>If you’re setting up any kind of RAP processes, you should almost certainly be investing time in a quality validation callable (or other mechanism) suitable for your pipeline process and use case(s).</p>
+<p>Assertions are more light touch and as a general rule you should be getting into the habit of using them liberally.</p>
 </section>
 <section id="select-wide-and-validate-narrow">
 <h2>Select Wide and Validate Narrow<a class="headerlink" href="#select-wide-and-validate-narrow" title="Permalink to this heading">#</a></h2>
-<p>Sharp obervers will have noticed you can us regex to select cells and also use regex to validate cells, isn’t this redundant?</p>
-<p>No, because there are very different goals for selection vs validation, as a general rule:</p>
+<p>Sharp observers will have noticed you can us regex to select cells and also use regex to assert selection and even validate extracted values - isn’t this redundant?</p>
+<p>No, because there are very different goals for selection vs validation (to include assertions), as a general rule:</p>
 <ul class="simple">
 <li><p>You want to keep your <strong>selection techniques wide</strong> so that the cells get selected <em>even if they contain invalid values</em> (perhaps <strong>especially</strong> if they contain invalid values) - provided ofc these calls are located structurally where valid values should be.</p></li>
 <li><p>Your validation then needs to be <strong>narrow</strong>, <strong>precise</strong> and <strong>unforgiving</strong>.</p></li>
 </ul>
-<p>You can sum this up with one pithy phrase:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">You</span> <span class="n">cannot</span> <span class="n">stop</span> <span class="n">human</span> <span class="n">users</span> <span class="kn">from</span> <span class="nn">making</span> <span class="n">human</span> <span class="n">errors</span> <span class="ow">in</span> <span class="n">hand</span> <span class="n">crafted</span> <span class="n">visual</span> <span class="n">data</span> <span class="n">tables</span><span class="p">,</span> <span class="n">but</span> <span class="n">you</span> <span class="n">CAN</span> <span class="nb">set</span> <span class="n">things</span> <span class="n">up</span> <span class="n">so</span> <span class="n">you</span> <span class="n">KNOW</span> <span class="n">when</span> <span class="n">such</span> <span class="n">an</span> <span class="n">error</span> <span class="ow">is</span> <span class="n">encountered</span><span class="o">.</span>
-</pre></div>
-</div>
-<p>Think about it, if you use a strict regular expression to select <em>only valid values</em> then this just means you completely skip the invalid values.</p>
+<p>You can sum this up with the following statement:</p>
+<p><strong>You cannot stop human beings making human errors when publishing updated versions of data sources, but you CAN set things up so you know WHEN and precisely WHERE any such error is encountered.</strong></p>
+<p>Consider this - if you use a strict regular expression to select <em>only valid values</em> then this just means you completely skip the invalid values.</p>
 <ul class="simple">
 <li><p>What if its just a typo? “Maale” in place of Male? Do you want “Male” to be missing from your output?</p></li>
-<li><p>What if you use an <code class="docutils literal notranslate"><span class="pre">is_numeric</span></code> filter but user adds a data marker of <code class="docutils literal notranslate"><span class="pre">*</span></code> in place of an observation?</p></li>
+<li><p>What if you use an <code class="docutils literal notranslate"><span class="pre">is_numeric</span></code> filter but a user adds a data marker of <code class="docutils literal notranslate"><span class="pre">*</span></code> in place of an observation?</p></li>
 </ul>
 <p>My point is there are nuances here, you <strong>dont</strong> want to process invalid values, but you <strong>do</strong> (on balance) want to select them (if they’re located where valid values should be) because you need to know about them and you validation <em>should</em> tell you about the issue.</p>
 <p>The trick here is to use your validation strategy to make it <strong>obvious</strong> where and precisely what the problem is so it can be trivially addressed. Judicious and well targeted usage of validation and assertions will get you that.</p>
@@ -610,7 +624,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expand">expand()</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-validation">When to use Validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-vs-assertions">Validation Vs Assertions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-validation-assertions">When to use Validation &amp; Assertions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-wide-and-validate-narrow">Select Wide and Validate Narrow</a></li>
 </ul>
   </nav></div>

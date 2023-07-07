@@ -838,15 +838,15 @@ document.write(`
 <span class="g g-Whitespace">     </span><span class="mi">23</span>     <span class="bp">self</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 <span class="ne">---&gt; </span><span class="mi">24</span>     <span class="k">return</span> <span class="n">method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="nn">File ~/.pyenv/versions/3.9.7/lib/python3.9/site-packages/datachef/selection/selectable.py:249,</span> in <span class="ni">Selectable.shift</span><span class="nt">(self, direction_or_x, possibly_y)</span>
-<span class="g g-Whitespace">    </span><span class="mi">246</span> <span class="n">found_cells</span> <span class="o">=</span> <span class="n">dfc</span><span class="o">.</span><span class="n">matching_xy_cells</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pcells</span><span class="p">,</span> <span class="n">wanted_cells</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">248</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">found_cells</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">wanted_cells</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">249</span>     <span class="k">raise</span> <span class="n">OutOfBoundsError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">250</span>         <span class="s2">&quot;You are attempting to shift your selection &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">251</span>         <span class="s2">&quot;entirely outside of the boundary of the table.&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">252</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">254</span> <span class="bp">self</span><span class="o">.</span><span class="n">cells</span> <span class="o">=</span> <span class="n">found_cells</span>
-<span class="g g-Whitespace">    </span><span class="mi">255</span> <span class="k">return</span> <span class="bp">self</span>
+<span class="nn">File ~/.pyenv/versions/3.9.7/lib/python3.9/site-packages/datachef/selection/selectable.py:253,</span> in <span class="ni">Selectable.shift</span><span class="nt">(self, direction_or_x, possibly_y)</span>
+<span class="g g-Whitespace">    </span><span class="mi">250</span> <span class="n">found_cells</span> <span class="o">=</span> <span class="n">dfc</span><span class="o">.</span><span class="n">matching_xy_cells</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pcells</span><span class="p">,</span> <span class="n">wanted_cells</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">252</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">found_cells</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">wanted_cells</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">253</span>     <span class="k">raise</span> <span class="n">OutOfBoundsError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">254</span>         <span class="s2">&quot;You are attempting to shift your selection &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">255</span>         <span class="s2">&quot;entirely outside of the boundary of the table.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">256</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">258</span> <span class="bp">self</span><span class="o">.</span><span class="n">cells</span> <span class="o">=</span> <span class="n">found_cells</span>
+<span class="g g-Whitespace">    </span><span class="mi">259</span> <span class="k">return</span> <span class="bp">self</span>
 
 <span class="ne">OutOfBoundsError</span>: You are attempting to shift your selection entirely outside of the boundary of the table.
 </pre></div>
