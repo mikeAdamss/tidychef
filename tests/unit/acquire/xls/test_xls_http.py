@@ -7,15 +7,15 @@ import requests
 from pytest_mock import mocker
 
 from datachef import acquire
-from datachef.selection.selectable import Selectable
+from datachef.selection.xls.xls import XlsSelectable
 
 
 def test_xls_via_http():
     """
-    Test that we can get a simple csv via http
+    Test that we can get a simple xls via http
     """
 
-    selections: List[Selectable] = acquire.xls.http(
+    selections: List[XlsSelectable] = acquire.xls.http(
         "https://raw.githubusercontent.com/mikeAdamss/"
         "datachef/main/tests/fixtures/xls/sample.xls"
     )
