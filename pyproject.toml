@@ -51,5 +51,7 @@ python =
 
 [testenv]
 allowlist_externals = pytest, poetry
-commands = poetry run pytest --cov-report term-missing --cov=datachef --cov-fail-under=100 ./tests/
+commands = 
+    poetry install
+    poetry run pytest --cov-report term-missing --cov=datachef --cov-fail-under=100 ./tests/
 """
