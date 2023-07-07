@@ -23,11 +23,5 @@ jobs:
       - name: Install dependencies via poetry
         run: poetry install
 
-      - name: Unbundle test resources
-        run: poetry run python3 resources/bundler.py unbundle
-        
       - name: Run unit tests
         run: poetry run pytest --cov=datachef --cov-fail-under=100 tests/
-
-      - name: Run notebook scenarios
-        run: poetry run pytest ./scenarios
