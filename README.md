@@ -1,6 +1,6 @@
 # Datachef
 
-![The test coverage for datachef is 100%](./coverage-100.svg)
+[![Tests](https://github.com/mikeAdamss/datachef/actions/workflows/tests.yml/badge.svg?branch=main&event=check_run)](https://github.com/mikeAdamss/datachef/actions/workflows/tests.yml)![The test coverage for datachef is 100%](./coverage-100.svg)
 
 > :warning: This software is a **work in progress**.
 
