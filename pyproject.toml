@@ -9,7 +9,7 @@ packages = [
 license = "Apache 2.0"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.7"
 tabulate = "^0.9.0"
 requests = "^2.31.0"
 validators = "^0.20.0"
@@ -22,10 +22,10 @@ xlrd = "^2.0.1"
 pytest = "^7.1.2"
 black = "^22.3.0"
 isort = "^5.10.1"
-pylint = "^2.14.3"
 pytest-cov = "^3.0.0"
 jupyter-book = "^0.15.1"
 pytest-mock = "^3.11.1"
+tox = "^4.6.4"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -35,3 +35,21 @@ build-backend = "poetry.core.masonry.api"
 pythonpath = [
   "."
 ]
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py37, py38, py39, py310, py311
+
+[gh-actions]
+python =
+    3.7: py37
+    3.8: py38
+    3.9: py39
+    3.10: py310
+    3.11: py311
+
+[testenv]
+allowlist_externals = pytest
+commands = pytest --cov-report term-missing --cov=datachef --cov-fail-under=100 ./tests/
+"""
