@@ -5,6 +5,9 @@ format: jb-book
 root: intro
 chapters:
 
+- file: how-to-use-this-book
+- file: dot-notation-explained
+
 - file: basics
   sections:
     - file: basics/acquire
@@ -16,7 +19,7 @@ chapters:
     - file: basics/selection-regex
     - file: basics/selection-filters
     - file: basics/selection-simple-useful
-    - file: basics/selection-assertions
+    - file: basics/selection-validate
     - file: basics/tidydata-columns-direct
     - file: basics/tidydata-closest
     - file: basics/tidydata-constants

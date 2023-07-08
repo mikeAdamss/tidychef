@@ -12,4 +12,5 @@ def test_lists_of_lists():
     )
 
     assert len(selection) == 6
-    assert selection.excel_ref("A").assert_selections(are_one_of=["1", "4"])
+    assert len(selection.excel_ref('A')) == 2
+    assert len(selection.excel_ref('1')) == 3

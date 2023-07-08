@@ -17,7 +17,7 @@ into something that looks like this:
 ![](./jupyterbook/images/bands-after.png)
 _Note: image cropped for reasons of practicality._
 
-Datachef is **simple enough for even novice python users or analysts to quickly become productive** but also has an advanced feature set and is designed to be readily and easily extended (adding new source of tabulated data, new output formats, domain specific validation etc are all possible and documented in detail).
+Datachef is **designed to allow even novice python users or analysts to quickly become productive** but also has an advanced feature set and is designed to be readily and easily extended (adding new source of tabulated data, new output formats, domain specific validation etc are all possible and documented in detail).
 
 Documentation, examples and in depth training material [can be found here](https://mikeadamss.github.io/datachef/intro.html#).
 

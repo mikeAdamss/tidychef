@@ -61,7 +61,7 @@ class LiveTable:
         # working with previews
         self._label: Optional[str] = None
 
-        self.validate()
+        self.confirm_valid()
 
     @property
     def label(self):
@@ -132,7 +132,7 @@ class LiveTable:
         """
         return self.name
 
-    def validate(self):
+    def confirm_valid(self):
         """
         Confirm class is validly constructed.
         """

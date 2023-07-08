@@ -55,7 +55,7 @@ class Column(BaseColumn):
         # ----------
 
         # TODO - list of callables?
-        self.validation = kwargs.get("validation", None)
+        self.validation = kwargs.get("validate", None)
         if self.validation:
             assert callable(
                 self.validation

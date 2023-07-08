@@ -11,6 +11,5 @@ from datachef.selection.csv.csv import CsvSelectable
 from datachef.selection.selectable import Selectable
 from datachef.selection.xls.xls import XlsSelectable
 from datachef.selection.xlsx.xlsx import XlsxSelectable
-from datachef.validation.matcher import matches
 
-from . import acquire, models, notebook, utils
+from . import acquire, models, notebook, utils, against

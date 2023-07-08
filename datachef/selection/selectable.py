@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from os import linesep
 import copy
 import re
 from typing import Callable, FrozenSet, List, Optional, Union
@@ -17,7 +18,7 @@ from datachef.cardinal.directions import (
 from datachef.exceptions import (
     BadExcelReferenceError,
     BadShiftParameterError,
-    IncorrectAssertionError,
+    CellValidationError,
     LoneValueOnMultipleCellsError,
     MissingLabelError,
     OutOfBoundsError,
@@ -29,6 +30,7 @@ from datachef.models.source.cell import BaseCell, Cell
 from datachef.models.source.table import LiveTable
 from datachef.selection import datafuncs as dfc
 from datachef.utils.decorators import dontmutate
+from datachef.against.implementations.base import BaseValidator
 
 
 def _reverse_direction(direction: Direction):
@@ -328,52 +330,29 @@ class Selectable(LiveTable):
         self.cells = selected
         return self
 
-    def assert_selections(
+    def validate(
         self,
-        are_one_of: Optional[List[str]] = None,
-        match: Optional[str] = None,
-        using: Optional[Callable] = None,
+        validator: BaseValidator,
+        raise_first_error: bool = False
     ):
         """
-        Wrapper to allow for simple assertions against currently selected
-        cell values.
+        Validates current cell selection by passing each currently
+        selected cell to the provided validator.
+
+        Pass raise_first_error=True if you just want the first
+        invalid value message.
         """
 
-        # First lets police inputs a bit
-        msg = """
-                To use the .assert_selections() method you must pass in
-                one (and ONLY one) keyword argument from the following.
-
-                are_of_of   : A list of string values
-                match       : A regular expression
-                using       : A callable that will raise an AssertionError
-                              should any of hte currently selected cells
-                              not match a specific criteria.
-                """
-
-        # Raise if no kwarg has been provided
-        if all([are_one_of is None, match is None, using is None]):
-            raise IncorrectAssertionError(msg)
-
-        # Raise if more that one kwarg has been provided
-        if len([x for x in [are_one_of, match, using] if x is not None]) > 1:
-            raise IncorrectAssertionError(msg)
-
-        if are_one_of:
-            for cell in self.cells:
-                assert (
-                    cell.value in are_one_of
-                ), f"Cell value: '{cell.value}' not in {are_one_of}"
-
-        if match:
-            for cell in self.cells:
-                assert re.match(
-                    match, cell.value
-                ), f"Cell value: '{cell.value}' does not match regular expression '{match}'"
-
-        if using:
-            for cell in self.cells:
-                using(cell)
+        validation_errors = []
+        for cell in self.cells:
+            if not validator(cell):
+                if raise_first_error:
+                    raise CellValidationError(validator.msg(cell))
+                else:
+                    validation_errors.append(validator.msg(cell))
+                
+        if len(validation_errors) > 0:
+            raise CellValidationError(f"{linesep}".join(validation_errors))
 
         return self
 
