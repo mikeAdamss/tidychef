@@ -19,7 +19,7 @@ _Note: image cropped for reasons of practicality._
 
 Datachef is **designed to allow even novice python users or analysts to quickly become productive** but also has an advanced feature set and is designed to be readily and easily extended (adding new source of tabulated data, new output formats, domain specific validation etc are all possible and documented in detail).
 
-Documentation, examples and in depth training material [can be found here](https://mikeadamss.github.io/datachef/intro.html#).
+Examples, in depth training material and technical documentation [can be found here](https://mikeadamss.github.io/datachef/intro.html#).
 
 ## Installation
 
@@ -35,4 +35,4 @@ While I freely acknowledge taking inspiration from databakers method naming conv
 
 Datachef also contains significant advances in functionality, performance, test coverage and documentation.
 
-That is to say, I liked [databaker](https://github.com/sensiblecodeio/databaker) and successfully worked with it on multiple projects for tidying messy data sources over the course of almost a decade, this software is the culmination of that work and the lessons learned from that time.
+That is to say, I liked [databaker](https://github.com/sensiblecodeio/databaker) and successfully worked with it on multiple RAP projects over the course of almost a decade, this software is the culmination of that work and the lessons learned from that time.
