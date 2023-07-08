@@ -98,14 +98,3 @@ class UnknownDirectionError(Exception):
         **kwargs,
     ):
         super().__init__(msg, *args, **kwargs)
-
-
-class IncorrectAssertionError(Exception):
-    """
-    Raised where a user is trying to define assertions for
-    the assert_selections() method but has passed in
-    invalid parameters.
-    """
-
-    def __init__(self, msg):
-        self.msg = msg

@@ -2,7 +2,6 @@ from .badparams import (
     BadExcelReferenceError,
     BadShiftParameterError,
     CardinalDeclarationWithOffset,
-    IncorrectAssertionError,
     OutputPassedToPreview,
     ReversedExcelRefError,
     UnknownDirectionError,
@@ -26,6 +25,4 @@ from .common import (
     UnalignedTableOperation,
     UnnamedTableError,
 )
-from .construction import ComponentConstructionError, DimensionConstructionError
 from .lookups import AmbiguousLookupError, FailedLookupError, MissingDirectLookupError
-from .validation import NoMatcherSpecifiedError

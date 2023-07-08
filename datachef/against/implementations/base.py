@@ -18,7 +18,7 @@ class BaseValidator(metaclass=ABCMeta):
         """
         Confirm that a single cell is valid.
         """
-        ...
+        
 
     @abstractmethod
     def msg(self, cell: Cell) -> str:
@@ -27,4 +27,4 @@ class BaseValidator(metaclass=ABCMeta):
         to provide some contextual information to
         the user
         """
-        ...
+        

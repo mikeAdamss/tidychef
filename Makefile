@@ -28,5 +28,5 @@ publish: ## Publish the jupyter book to github pages
 	poetry run pip install ghp-import
 	poetry run ghp-import -n -p -f ./jupyterbook/_build/html
 
-tox: ## Use tox to run tests against all python versions
+tox: install ## Use tox to run tests against all python versions
 	poetry run tox

@@ -1,4 +1,3 @@
-import re
 from dataclasses import dataclass
 from typing import List
 
@@ -28,4 +27,4 @@ class ItemsValidator(BaseValidator):
         if len(self.items) < 11:
             return f'"{cell.value}" not in list: {self.items}'
         else:
-            return f"{cell.value} not in list."
+            return f'"{cell.value}" not in list.'
