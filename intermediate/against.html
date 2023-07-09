@@ -206,7 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../advanced.html">Advanced</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../advanced/1.html">Advanced1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advanced/advanced-acquisition.html">Advanced Acquisition</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -716,9 +716,9 @@ Should be False: False
 </ul>
 <p>So in terms of possibilities…</p>
 <ul class="simple">
-<li><p>If you’re desired output uses codelists - create a validator to compare your extracted to said codelists.</p></li>
-<li><p>If you’re desired output has schemas - create a validator to compare your extracted to said schema.</p></li>
-<li><p>If you’re desired output ends up on a restful api - create a validator to pull the valid values off said api and validate against them.</p></li>
+<li><p>If you’re desired output uses codelists - create a validator to compare your extracted values to said codelists.</p></li>
+<li><p>If you’re desired output has schemas - create a validator to compare your extracted values to said schema.</p></li>
+<li><p>If you’re desired output ends up on a restful api - create a validator to pull the valid values off said api and validate your extracted values against them.</p></li>
 <li><p>etc etc</p></li>
 </ul>
 <p>You can always of course just validate your extracted data after its written to disk (a completely sensible thing to do) via <code class="docutils literal notranslate"><span class="pre">&lt;whatever</span> <span class="pre">your</span> <span class="pre">tool</span> <span class="pre">of</span> <span class="pre">choice</span> <span class="pre">is&gt;</span></code>, but there is an argument for validating early and often (and while you have context for exactly <em>what</em> in the ETL process has caused the issue).</p>

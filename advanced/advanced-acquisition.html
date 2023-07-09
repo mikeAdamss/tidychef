@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Advanced1 &#8212; My sample book</title>
+    <title>Advanced Acquisition &#8212; My sample book</title>
   
   
   
@@ -61,7 +61,7 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'advanced/1';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'advanced/advanced-acquisition';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Examples" href="../examples.html" />
@@ -206,7 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../advanced.html">Advanced</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Advanced1</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Advanced Acquisition</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -284,7 +284,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fadvanced/1.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fadvanced/advanced-acquisition.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -314,7 +314,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/advanced/1.ipynb" target="_blank"
+      <li><a href="../_sources/advanced/advanced-acquisition.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -383,7 +383,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -394,11 +396,22 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Advanced1</h1>
+    <h1>Advanced Acquisition</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-hook">pre_hook=</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-scenario">Example Scenario</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -408,15 +421,129 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="advanced1">
-<h1>Advanced1<a class="headerlink" href="#advanced1" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="advanced-acquisition">
+<h1>Advanced Acquisition<a class="headerlink" href="#advanced-acquisition" title="Permalink to this heading">#</a></h1>
+<p>This section explains some of the more advanced things you can do with the <code class="docutils literal notranslate"><span class="pre">acquire</span></code> module.</p>
+<section id="pre-hook">
+<h2>pre_hook=<a class="headerlink" href="#pre-hook" title="Permalink to this heading">#</a></h2>
+<p>A pre hook is an optional keyword of type callable that you can provide to any <code class="docutils literal notranslate"><span class="pre">acquire</span></code> methods that:</p>
+<ul class="simple">
+<li><p>does something with the argument you pass as source</p></li>
+<li><p>passes back a variable that will be used as the new source source by “acquire”.</p></li>
+</ul>
+<p>The code is <a class="reference external" href="https://github.com/mikeAdamss/datachef/blob/ece2764eba4d7b19fa3817de75c0fc0e71b6de68/datachef/acquire/main.py#L38">here</a> and is not complicated (it’s literally two lines).</p>
+<p>It is however a <em>very useful</em> two lines, examples follow:</p>
+<section id="example-scenario">
+<h3>Example Scenario<a class="headerlink" href="#example-scenario" title="Permalink to this heading">#</a></h3>
+<p>For our example scenario we’re going to use a <strong>url to a json api</strong> (a tiny one we’ve made ourselves) as a source.</p>
+<p>You can view the contents of the api <a class="reference external" href="https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/json/api.json">here</a>.</p>
+<p>Our requirements are as follows:</p>
+<ul class="simple">
+<li><p>We need to get the url of our source from that api.</p></li>
+<li><p>The api for the json api will <strong>not</strong> change.</p></li>
+<li><p>The urls listed <strong>will</strong> change.</p></li>
+<li><p>We want to always acquire the url with “bands-wide” in the path, there will always be one but the numher of other urls and its positioning within that list will change.</p></li>
+<li><p>We want an exception if there’s anything other than exactly one “bands-wide” url.</p></li>
+<li><p>We want that “bands-wide” url to be passed along to the <code class="docutils literal notranslate"><span class="pre">acquire</span></code> function and used to create our selectable.</p></li>
+</ul>
+<p>Example follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="c1"># First we&#39;ll create a simple pre hook that meets our requirements.</span>
+<span class="k">def</span> <span class="nf">select_band_csv</span><span class="p">(</span><span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    pre hook function to get the correct url from a list of urls</span>
+<span class="sd">    provided by a json api.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+    <span class="n">url_dict</span><span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="n">url_wanted</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">url_dict</span><span class="p">[</span><span class="s2">&quot;datasets&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;bands-wide&quot;</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">url_wanted</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">url_wanted</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Now let&#39;s try it out</span>
+<span class="n">select_band_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/json/api.json&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv&#39;
 </pre></div>
 </div>
 </div>
 </div>
+<p>And now let’s see how we use this re hook as a keyword argument to the acquire module.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span><span class="p">,</span> <span class="n">CsvSelectable</span>
+
+<span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span>
+    <span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/json/api.json&quot;</span><span class="p">,</span>
+    <span class="n">pre_hook</span><span class="o">=</span><span class="n">select_band_csv</span><span class="p">)</span>
+
+<span class="n">preview</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <table>
+                
+            </table>
+
+            <body>
+                <h2>Unnamed Table</h2>
+                <table>
+                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td><td style="background-color:lightgrey">G</td><td style="background-color:lightgrey">H</td><td style="background-color:lightgrey">I</td><td style="background-color:lightgrey">J</td><td style="background-color:lightgrey">K</td></tr>
+<tr><td style="background-color:lightgrey">1</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">2</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Houses</td><td style="background-color:white">Cars</td><td style="background-color:white">Boats</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Houses</td><td style="background-color:white">Cars</td><td style="background-color:white">Boats</td></tr>
+<tr><td style="background-color:lightgrey">3</td><td style="background-color:white">Beatles</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Rolling Stones</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">4</td><td style="background-color:white"></td><td style="background-color:white">John</td><td style="background-color:white">1</td><td style="background-color:white">5</td><td style="background-color:white">9</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Keith</td><td style="background-color:white">2</td><td style="background-color:white">6</td><td style="background-color:white">10</td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:white"></td><td style="background-color:white">Paul</td><td style="background-color:white">2</td><td style="background-color:white">6</td><td style="background-color:white">10</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Mick</td><td style="background-color:white">3</td><td style="background-color:white">7</td><td style="background-color:white">11</td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:white"></td><td style="background-color:white">George</td><td style="background-color:white">2</td><td style="background-color:white">7</td><td style="background-color:white">11</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Charlie</td><td style="background-color:white">3</td><td style="background-color:white">8</td><td style="background-color:white">12</td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:white"></td><td style="background-color:white">Ringo</td><td style="background-color:white">4</td><td style="background-color:white">8</td><td style="background-color:white">12</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Ronnie</td><td style="background-color:white">5</td><td style="background-color:white">9</td><td style="background-color:white">13</td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+
+                </table>
+            </body>
+            <br>
+        </html>
+    </div></div>
+</div>
+<p>And voila! We’re dynamically selecting the csv we want from the options presented by a json api.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span style="color:green">Note - as per datachef standard approch we wouldn’t necessarily recommend you write these in line (though you can) but rather we’d recommend that pre-hooks of this source should be created and reused across your ETL processes.</span></p></th>
+</tr>
+</thead>
+</table>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -477,6 +604,23 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-hook">pre_hook=</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-scenario">Example Scenario</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
