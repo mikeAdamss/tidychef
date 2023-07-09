@@ -39,7 +39,7 @@ chapters:
 
 - file: advanced
   sections:
-    - file: advanced/1
+    - file: advanced/advanced-acquisition
 
 - file: examples
   sections:
