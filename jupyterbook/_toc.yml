@@ -33,8 +33,8 @@ chapters:
     - file: intermediate/horizontal-conditions
     - file: intermediate/pandas
     - file: intermediate/validation
-    - file: intermediate/against
     - file: intermediate/within
+    - file: intermediate/against
     - file: intermediate/best-practice
 
 - file: advanced

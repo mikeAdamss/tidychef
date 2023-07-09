@@ -6,9 +6,9 @@
 
 > :warning: This software is a **work in progress**.
 
-Datachef is a python framework to enable “data extraction for humans” via simple python beginner friendly "recipes". It aims at allowing users to quick transform tabulated data sources using visual relationships (human readable only data) into simple machine readable formats.
+Datachef is a python framework to enable “data extraction for humans” via simple python beginner friendly "recipes". It aims at allowing users to easily transform tabulated data sources that use visual relationships (human readable only data) into simple machine readable "tidy data" in a way that supports usage in [RAP](https://analysisfunction.civilservice.gov.uk/policy-store/reproducible-analytical-pipelines-strategy/#:~:text=Reproducible%20Analytical%20Pipelines%20(RAPs)%20are,auditable%2C%20efficient%20and%20high%20quality.) processing.
 
-i.e: it allows you to easily turn something that looks like this: 
+i.e: it allows you to reliably turn something that looks like this: 
 
 ![](./jupyterbook/images/bands-before.png)
 
@@ -29,10 +29,6 @@ pip install datachef
 
 ## Acknowlagements
 
-Datachef is directly inspired by the excellent python package [databaker](https://github.com/sensiblecodeio/databaker) created by [The Sensible Code Company](https://sensiblecode.io/) in partnership with the United Kingdoms [Office For National Statistics](https://www.ons.gov.uk/).
+Datachef is directly inspired by the python package [databaker](https://github.com/sensiblecodeio/databaker) created by [The Sensible Code Company](https://sensiblecode.io/) in partnership with the United Kingdoms [Office For National Statistics](https://www.ons.gov.uk/).
 
-While I freely acknowledge taking inspiration from databakers method naming conventions (databaker has an excellent api for cell selection) and the great conceptual work done by that team, datachef is an entirely new codebase with completely new and different approaches to similar problems as well as a greatly slimmed down dependency chain (databaker is largely a wrapper, datachef a self contained thing in of itself) and uses a much more object orientated and consciously extensible design paradime.
-
-Datachef also contains significant advances in functionality, performance, test coverage and documentation.
-
-That is to say, I liked [databaker](https://github.com/sensiblecodeio/databaker) and successfully worked with it on multiple RAP projects over the course of almost a decade, this software is the culmination of that work and the lessons learned from that time.
+While I liked [databaker](https://github.com/sensiblecodeio/databaker) and successfully worked with it on multiple [RAP](https://analysisfunction.civilservice.gov.uk/policy-store/reproducible-analytical-pipelines-strategy/#:~:text=Reproducible%20Analytical%20Pipelines%20(RAPs)%20are,auditable%2C%20efficient%20and%20high%20quality.) projects over the course of almost a decade, this software should be considered the culmination of that work and the lessons learned from that time.
