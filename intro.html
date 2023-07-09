@@ -64,7 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="The Basics" href="basics.html" />
+    <link rel="next" title="How to use this book" href="how-to-use-this-book.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -156,6 +156,8 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="how-to-use-this-book.html">How to use this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dot-notation-explained.html">Dot Notation Explained</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="basics.html">The Basics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="basics/acquire.html">Acquire</a></li>
 
@@ -170,7 +172,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="basics/selection-regex.html">Selection: Regex</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basics/selection-filters.html">Selection: Filters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basics/selection-simple-useful.html">Selection: Simple &amp; Useful</a></li>
-<li class="toctree-l2"><a class="reference internal" href="basics/selection-assertions.html">Selection: Assertions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics/selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basics/tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basics/tidydata-closest.html">TidyData: Closest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basics/tidydata-constants.html">TidyData: Constants</a></li>
@@ -196,8 +198,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="intermediate/pandas.html">Pandas</a></li>
 
 
-<li class="toctree-l2"><a class="reference internal" href="intermediate/validation.html">Basic Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intermediate/validation.html">TidyData: Column: validate=</a></li>
 <li class="toctree-l2"><a class="reference internal" href="intermediate/within.html">TidyData: Within</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intermediate/against.html">Against (Creating New Validators)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="intermediate/best-practice.html">Best Practice</a></li>
 </ul>
 </li>
@@ -406,23 +409,18 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="what-is-datachef">
 <h1>What is Datachef<a class="headerlink" href="#what-is-datachef" title="Permalink to this heading">#</a></h1>
-<p>Datachef is a python framework to enable “data extraction for humans”, principally aimed at data sources using visual relatioships.</p>
-<p>i.e, it allows you to quickly and easily transform something that looks like this:</p>
+<p>Datachef is a python framework to enable “data extraction for humans” via simple python beginner friendly “recipes”. It aims at allowing users to easily transform tabulated data sources that use visual relationships (human readable only data) into simple machine readable “tidy data” in a way that supports usage in <a class="reference external" href="https://analysisfunction.civilservice.gov.uk/policy-store/reproducible-analytical-pipelines-strategy/#:~:text=Reproducible%20Analytical%20Pipelines%20(RAPs)%20are,auditable%2C%20efficient%20and%20high%20quality.">RAP</a> processing.</p>
+<p>i.e: it allows you to reliably turn something that looks like this:</p>
 <p><img alt="" src="_images/bands-before.png" /></p>
 <p>into something that looks like this:</p>
 <p><img alt="" src="_images/bands-after.png" /></p>
 <p><em>Note: the above image was cropped short for practical reasons</em>.</p>
 <p>Datachef provides a simple api suitable for <strong>data analysts or people just beginning their journey with python</strong> but is built to be <em>highly</em> extensible as needed and can be configured to support even the most niche use cases and/or domain specific tabulated data sources.</p>
-<p>To be clear - you 100% <em>can</em> do virtually anything we’re doing here with Pandas or <code class="docutils literal notranslate"><span class="pre">&lt;insert</span> <span class="pre">your</span> <span class="pre">own</span> <span class="pre">preference&gt;</span></code>, you cannot however do it anywhere near as quickly or easily</p>
-<ul class="simple">
-<li><p>To get a sense of what this looks like in practice, it’s probably worth browsing the first few examples:</p></li>
-<li><p>To learn how to use Datachef just work through the <code class="docutils literal notranslate"><span class="pre">Basics</span></code> by the end of which you’ll be able to write your first few extraction scripts and understand most of what you’ll see in the examples.</p></li>
-<li><p>Once you’ve got the hand of that it’s worth tackling <code class="docutils literal notranslate"><span class="pre">Intermediate</span></code> as well. After this you should be able to work through and understand all of the examples.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">Advanced</span></code> section is more aimed at the programmers and creating custom behaviour, though anyone that’s done the first two sections should be able to tackle it with some patience.</p></li>
-</ul>
 <p>Table of contents:</p>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="how-to-use-this-book.html">How to use this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dot-notation-explained.html">Dot Notation Explained</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basics.html">The Basics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intermediate.html">Intermediate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced</a></li>
@@ -463,11 +461,11 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="right-next"
-       href="basics.html"
+       href="how-to-use-this-book.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">The Basics</p>
+        <p class="prev-next-title">How to use this book</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

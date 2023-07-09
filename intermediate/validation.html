@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Basic Validation &#8212; My sample book</title>
+    <title>TidyData: Column: validate= &#8212; My sample book</title>
   
   
   
@@ -157,6 +157,8 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../how-to-use-this-book.html">How to use this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dot-notation-explained.html">Dot Notation Explained</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../basics.html">The Basics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../basics/acquire.html">Acquire</a></li>
 
@@ -171,7 +173,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-regex.html">Selection: Regex</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-filters.html">Selection: Filters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-simple-useful.html">Selection: Simple &amp; Useful</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../basics/selection-assertions.html">Selection: Assertions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-closest.html">TidyData: Closest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-constants.html">TidyData: Constants</a></li>
@@ -197,8 +199,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="pandas.html">Pandas</a></li>
 
 
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Basic Validation</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">TidyData: Column: validate=</a></li>
 <li class="toctree-l2"><a class="reference internal" href="within.html">TidyData: Within</a></li>
+<li class="toctree-l2"><a class="reference internal" href="against.html">Against (Creating New Validators)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="best-practice.html">Best Practice</a></li>
 </ul>
 </li>
@@ -393,7 +396,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Basic Validation</h1>
+    <h1>TidyData: Column: validate=</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -403,12 +406,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-vs-validate">validate= vs .validate()</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-data">Source Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#column-the-validation-keyword">Column: the validation= keyword</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-regex-validation">Simple Regex Validation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-lazy-evaluation">A Note on Lazy Evaluation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-custom-validation-example">A Custom Validation Example</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validating-against-an-external-source-of-truth">Validating Against An External Source Of Truth</a></li>
 </ul>
             </nav>
         </div>
@@ -420,10 +421,29 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="basic-validation">
-<h1>Basic Validation<a class="headerlink" href="#basic-validation" title="Permalink to this heading">#</a></h1>
-<p>The following is an introduction to basic validation in datachef and usage of the built in <code class="docutils literal notranslate"><span class="pre">matches</span></code> module.</p>
-<p>Note - while <code class="docutils literal notranslate"><span class="pre">matches</span></code> is useful for getting up and running in validation, its more important to understand the concepts here so you can implement something appropriate for your own use cases.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="tidydata-column-validate">
+<h1>TidyData: Column: validate=<a class="headerlink" href="#tidydata-column-validate" title="Permalink to this heading">#</a></h1>
+<p>The following is an introduction to basic validation in datachef and usage of the <code class="docutils literal notranslate"><span class="pre">validate=</span></code> keyword provided by the <code class="docutils literal notranslate"><span class="pre">Column</span></code> class when constructing <code class="docutils literal notranslate"><span class="pre">TidyData</span></code>.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span style="color:green">Note - this keyword uses exactly the same <code class="docutils literal notranslate"><span class="pre">against</span></code> module we used when explaining <code class="docutils literal notranslate"><span class="pre">selection.validate()</span></code> method earlier in this documentation - the difference here is intent (explained below in more detail).</span></p></th>
+</tr>
+</thead>
+</table>
+<section id="validate-vs-validate">
+<h2>validate= vs .validate()<a class="headerlink" href="#validate-vs-validate" title="Permalink to this heading">#</a></h2>
+<p>The key difference to understand is as follow:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;selectable&gt;.validate()</span></code> method run against <strong>selections</strong> so police your <em>extraction logic</em>.</p></li>
+<li><p>Validations via the <code class="docutils literal notranslate"><span class="pre">Column(validation=)</span></code> keyword runs against the <strong>output</strong> so police your <em>final product</em>.</p></li>
+</ul>
+<p>Consider the following scenarios:</p>
+<ul class="simple">
+<li><p>1.) You want to select an “anchor cell” or a selection of cells for the sole purpose of subtracting it from another selection. It could be important to confirm these selections are accurate but because they’re not directly extracted values then <code class="docutils literal notranslate"><span class="pre">validation=</span></code> will never see them (just the consequence of them) so the <code class="docutils literal notranslate"><span class="pre">&lt;selectable&gt;.validate()</span></code> is more appropriate.</p></li>
+<li><p>2.) You’re are using <code class="docutils literal notranslate"><span class="pre">apply=</span></code> to cleanse cell value data <em>at the point of extraction</em> and need to make sure the correct things are happening, the <code class="docutils literal notranslate"><span class="pre">&lt;selectable&gt;.validate()</span></code> method will <strong>never see these cleansed values</strong>, but <code class="docutils literal notranslate"><span class="pre">validation=</span></code> will.</p></li>
+</ul>
+<p>There are nuances on where its best to use each but the pithy version is “use both strategies, wherever possible and as much as its practical to do so”.</p>
+</section>
 <section id="source-data">
 <h2>Source Data<a class="headerlink" href="#source-data" title="Permalink to this heading">#</a></h2>
 <p>The data source we’re using for these examples is shown below:</p>
@@ -492,16 +512,6 @@ document.write(`
     </div></div>
 </div>
 </section>
-<section id="column-the-validation-keyword">
-<h2>Column: the validation= keyword<a class="headerlink" href="#column-the-validation-keyword" title="Permalink to this heading">#</a></h2>
-<p>It’s important to understand how Column validation works:</p>
-<ul class="simple">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">Column</span></code> class has a keyword argument of <code class="docutils literal notranslate"><span class="pre">valiation=</span></code></p></li>
-<li><p>This keyword expects a callable (function,lambda function or callable class)</p></li>
-<li><p>Whatever callable is passed will <em>typically</em> raise an exception when presented with the <code class="docutils literal notranslate"><span class="pre">Cell</span></code> object to populate said column which is not valid.</p></li>
-</ul>
-<p><em>Note - I say “typically” here as validators are intended to be highly customised and defined in large part by the user base. Raising an immediate exception is the simplest thing you could do, but by no means the only thing you could do.</em></p>
-</section>
 <section id="simple-regex-validation">
 <h2>Simple Regex Validation<a class="headerlink" href="#simple-regex-validation" title="Permalink to this heading">#</a></h2>
 <p>For this example we’re going to use the <code class="docutils literal notranslate"><span class="pre">matches</span></code> module. This has a simple regex validator that works in exactly the way explained above.</p>
@@ -510,7 +520,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">XlsxSelectable</span><span class="p">,</span> <span class="n">matches</span><span class="p">,</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">down</span><span class="p">,</span> <span class="n">right</span>
+<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">XlsxSelectable</span><span class="p">,</span> <span class="n">against</span><span class="p">,</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">down</span><span class="p">,</span> <span class="n">right</span>
 
 <span class="n">tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsxSelectable</span><span class="p">]</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">)</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">tables</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span>
@@ -521,117 +531,8 @@ document.write(`
 <span class="c1"># Note: matches a regex of capital M followed by anything</span>
 <span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
     <span class="n">observations</span><span class="p">,</span>
-    <span class="n">Column</span><span class="p">(</span><span class="n">dataset_identifier_code</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">down</span><span class="p">),</span> <span class="n">validation</span><span class="o">=</span><span class="n">matches</span><span class="o">.</span><span class="n">regex</span><span class="p">(</span><span class="s2">&quot;M.*&quot;</span><span class="p">))</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">dataset_identifier_code</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">down</span><span class="p">),</span> <span class="n">validate</span><span class="o">=</span><span class="n">against</span><span class="o">.</span><span class="n">regex</span><span class="p">(</span><span class="s2">&quot;M.*&quot;</span><span class="p">))</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Runs without error.</p>
-<p>Whereas in the following example we change the regex so the data no longer matches that which is expected - note the exception.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">XlsxSelectable</span><span class="p">,</span> <span class="n">matches</span><span class="p">,</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">down</span><span class="p">,</span> <span class="n">right</span>
-
-<span class="n">tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsxSelectable</span><span class="p">]</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">)</span>
-<span class="n">table</span> <span class="o">=</span> <span class="n">tables</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span>
-
-<span class="n">observations</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B7:H10&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Observations&quot;</span><span class="p">)</span>
-<span class="n">housing</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B6&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Dataset Identifier Code&quot;</span><span class="p">)</span>
-
-<span class="c1"># Note: matches a regex of capital Z followed by anything</span>
-<span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
-    <span class="n">observations</span><span class="p">,</span>
-    <span class="n">Column</span><span class="p">(</span><span class="n">dataset_identifier_code</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">down</span><span class="p">),</span> <span class="n">validation</span><span class="o">=</span><span class="n">matches</span><span class="o">.</span><span class="n">regex</span><span class="p">(</span><span class="s2">&quot;Z.*&quot;</span><span class="p">))</span>
-<span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">16</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="c1"># Note: matches a regex of capital Z followed by anything</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="n">observations</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="n">Column</span><span class="p">(</span><span class="n">dataset_identifier_code</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">down</span><span class="p">),</span> <span class="n">validation</span><span class="o">=</span><span class="n">matches</span><span class="o">.</span><span class="n">regex</span><span class="p">(</span><span class="s2">&quot;Z.*&quot;</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">16</span> <span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
-
-<span class="nn">File ~/.pyenv/versions/3.9.7/lib/python3.9/site-packages/datachef/output/tidydata.py:68,</span> in <span class="ni">TidyData.__str__</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">     </span><span class="mi">67</span> <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
-<span class="ne">---&gt; </span><span class="mi">68</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_representation</span><span class="p">()</span>
-
-<span class="nn">File ~/.pyenv/versions/3.9.7/lib/python3.9/site-packages/datachef/output/tidydata.py:51,</span> in <span class="ni">TidyData.__get_representation</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">     </span><span class="mi">47</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">48</span><span class="sd"> Representation logic shared by __str__ and __repr__</span>
-<span class="g g-Whitespace">     </span><span class="mi">49</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">51</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_transform</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">53</span> <span class="n">header_row</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">54</span> <span class="n">data_rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-
-<span class="nn">File ~/.pyenv/versions/3.9.7/lib/python3.9/site-packages/datachef/output/tidydata.py:210,</span> in <span class="ni">TidyData._transform</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">204</span> <span class="n">standard_columns</span> <span class="o">=</span> <span class="p">[</span>
-<span class="g g-Whitespace">    </span><span class="mi">205</span>     <span class="n">x</span>
-<span class="g g-Whitespace">    </span><span class="mi">206</span>     <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span>
-<span class="g g-Whitespace">    </span><span class="mi">207</span>     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">engine</span><span class="p">,</span> <span class="n">HorizontalCondition</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">208</span> <span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">209</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">standard_columns</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">210</span>     <span class="n">ob_value</span> <span class="o">=</span> <span class="n">column</span><span class="o">.</span><span class="n">resolve_column_cell_from_obs_cell</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">211</span>         <span class="n">observation</span>
-<span class="g g-Whitespace">    </span><span class="mi">212</span>     <span class="p">)</span><span class="o">.</span><span class="n">value</span>
-<span class="g g-Whitespace">    </span><span class="mi">213</span>     <span class="n">line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ob_value</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">214</span>     <span class="n">column_value_dict</span><span class="p">[</span><span class="n">column</span><span class="o">.</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">ob_value</span>
-
-<span class="nn">File ~/.pyenv/versions/3.9.7/lib/python3.9/site-packages/datachef/column/base.py:91,</span> in <span class="ni">BaseColumn.resolve_column_cell_from_obs_cell</span><span class="nt">(self, observation_cell, *args)</span>
-<span class="g g-Whitespace">     </span><span class="mi">81</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">82</span><span class="sd"> Use the provided lookup engine to return the value</span>
-<span class="g g-Whitespace">     </span><span class="mi">83</span><span class="sd"> of this Column against a given observation, according</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">     </span><span class="mi">88</span><span class="sd"> some sort.</span>
-<span class="g g-Whitespace">     </span><span class="mi">89</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">90</span> <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">observation_cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">91</span> <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_post_lookup</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">92</span> <span class="k">return</span> <span class="n">cell</span>
-
-<span class="nn">File ~/.pyenv/versions/3.9.7/lib/python3.9/site-packages/datachef/column/column.py:76,</span> in <span class="ni">Column._post_lookup</span><span class="nt">(self, cell)</span>
-<span class="g g-Whitespace">     </span><span class="mi">74</span> <span class="c1"># Validate</span>
-<span class="g g-Whitespace">     </span><span class="mi">75</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">76</span>     <span class="bp">self</span><span class="o">.</span><span class="n">validation</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">78</span> <span class="k">return</span> <span class="n">cell</span>
-
-<span class="nn">File ~/.pyenv/versions/3.9.7/lib/python3.9/site-packages/datachef/validation/matcher.py:57,</span> in <span class="ni">Matcher.__call__</span><span class="nt">(self, cell)</span>
-<span class="g g-Whitespace">     </span><span class="mi">55</span>     <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">56</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">57</span>     <span class="k">raise</span> <span class="n">err</span>
-
-<span class="nn">File ~/.pyenv/versions/3.9.7/lib/python3.9/site-packages/datachef/validation/matcher.py:38,</span> in <span class="ni">Matcher.__call__</span><span class="nt">(self, cell)</span>
-<span class="g g-Whitespace">     </span><span class="mi">36</span> <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">37</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">match_regex</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">38</span>         <span class="bp">self</span><span class="o">.</span><span class="n">__regex_implemented</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">39</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">40</span>         <span class="c1"># Catch and help any users calling without configuring</span>
-<span class="g g-Whitespace">     </span><span class="mi">41</span>         <span class="k">raise</span> <span class="n">NoMatcherSpecifiedError</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">42</span><span class="w">             </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">43</span><span class="sd">             You are passing a cell to a Matcher that has not</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">     </span><span class="mi">49</span><span class="sd">             &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">50</span>         <span class="p">)</span>
-
-<span class="nn">File ~/.pyenv/versions/3.9.7/lib/python3.9/site-packages/datachef/validation/matcher.py:80,</span> in <span class="ni">Matcher.__regex_implemented</span><span class="nt">(self, cell)</span>
-<span class="g g-Whitespace">     </span><span class="mi">76</span> <span class="k">def</span> <span class="nf">__regex_implemented</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">77</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">78</span><span class="sd">     Actually do regex matching</span>
-<span class="g g-Whitespace">     </span><span class="mi">79</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">---&gt; </span><span class="mi">80</span>     <span class="k">assert</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">81</span>         <span class="bp">self</span><span class="o">.</span><span class="n">regex_pattern</span><span class="p">,</span> <span class="n">cell</span><span class="o">.</span><span class="n">value</span>
-<span class="g g-Whitespace">     </span><span class="mi">82</span>     <span class="p">),</span> <span class="sa">f</span><span class="s1">&#39;Value of cell &quot;</span><span class="si">{</span><span class="n">cell</span><span class="si">}</span><span class="s1">&quot; does not match provided regex pattern &quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">regex_pattern</span><span class="si">}</span><span class="s1">&quot;.&#39;</span>
-
-<span class="ne">AssertionError</span>: Value of cell &quot;&lt;B6, value:&quot;MVO6&quot;, x:1, y:5&gt;&quot; does not match provided regex pattern &quot;Z.*&quot;.
 </pre></div>
 </div>
 </div>
@@ -641,218 +542,6 @@ document.write(`
 <h2>A Note on Lazy Evaluation<a class="headerlink" href="#a-note-on-lazy-evaluation" title="Permalink to this heading">#</a></h2>
 <p>One thing you many notice about the above is that the validation error does not occur until we try and print the <code class="docutils literal notranslate"><span class="pre">tidy_data</span></code> variable, this is because the <code class="docutils literal notranslate"><span class="pre">TidyData</span></code> class uses <em>lazy evaluation</em>.</p>
 <p>Simply put, this means the tidy data is never extracted until the last possible moment that is has to be, in this case when the users goes to print the results.</p>
-</section>
-<section id="a-custom-validation-example">
-<h2>A Custom Validation Example<a class="headerlink" href="#a-custom-validation-example" title="Permalink to this heading">#</a></h2>
-<p>For this example we’re going to create a custom validation callable.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-<span class="kn">from</span> <span class="nn">datachef.models.source.cell</span> <span class="kn">import</span> <span class="n">Cell</span>
-<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">XlsxSelectable</span><span class="p">,</span> <span class="n">matches</span><span class="p">,</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">down</span><span class="p">,</span> <span class="n">right</span>
-
-<span class="k">def</span> <span class="nf">code_validator</span><span class="p">(</span><span class="n">cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Custom validator that validates that a code is 4 characters</span>
-<span class="sd">    long and begins with a capital M</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">cell</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;M&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">True</span>
-    <span class="k">return</span> <span class="kc">False</span>
-
-<span class="n">tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsxSelectable</span><span class="p">]</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">)</span>
-<span class="n">table</span> <span class="o">=</span> <span class="n">tables</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span>
-
-<span class="n">observations</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B7:H10&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Observations&quot;</span><span class="p">)</span>
-<span class="n">housing</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B6&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Housing&quot;</span><span class="p">)</span>
-
-<span class="c1"># Note: matches a regex of capital Z followed by anything</span>
-<span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
-    <span class="n">observations</span><span class="p">,</span>
-    <span class="n">Column</span><span class="p">(</span><span class="n">dataset_identifier_code</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">down</span><span class="p">),</span> <span class="n">validation</span><span class="o">=</span><span class="n">code_validator</span><span class="p">)</span>
-<span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><table>
-<thead>
-<tr><th style="text-align: right;">  Observations</th><th>Dataset Identifier Codes   </th></tr>
-</thead>
-<tbody>
-<tr><td style="text-align: right;">           5.6</td><td>Public new housing         </td></tr>
-<tr><td style="text-align: right;">           9.8</td><td>Private new housing        </td></tr>
-<tr><td style="text-align: right;">           8.8</td><td>Total new housing          </td></tr>
-<tr><td style="text-align: right;">           3  </td><td>Infrastructure new work    </td></tr>
-<tr><td style="text-align: right;">           4.3</td><td>Public other new work      </td></tr>
-<tr><td style="text-align: right;">           3.7</td><td>Private industrial new work</td></tr>
-<tr><td style="text-align: right;">           1.9</td><td>Private commercial new work</td></tr>
-<tr><td style="text-align: right;">           2  </td><td>Public new housing         </td></tr>
-<tr><td style="text-align: right;">           5.6</td><td>Private new housing        </td></tr>
-<tr><td style="text-align: right;">           4.8</td><td>Total new housing          </td></tr>
-<tr><td style="text-align: right;">           0.2</td><td>Infrastructure new work    </td></tr>
-<tr><td style="text-align: right;">          -0.2</td><td>Public other new work      </td></tr>
-<tr><td style="text-align: right;">           9.7</td><td>Private industrial new work</td></tr>
-<tr><td style="text-align: right;">           3.5</td><td>Private commercial new work</td></tr>
-<tr><td style="text-align: right;">           5.5</td><td>Public new housing         </td></tr>
-<tr><td style="text-align: right;">           4.5</td><td>Private new housing        </td></tr>
-<tr><td style="text-align: right;">           4.7</td><td>Total new housing          </td></tr>
-<tr><td style="text-align: right;">          -2.9</td><td>Infrastructure new work    </td></tr>
-<tr><td style="text-align: right;">          -2.9</td><td>Public other new work      </td></tr>
-<tr><td style="text-align: right;">          24.4</td><td>Private industrial new work</td></tr>
-<tr><td style="text-align: right;">           5.9</td><td>Private commercial new work</td></tr>
-<tr><td style="text-align: right;">          11.7</td><td>Public new housing         </td></tr>
-<tr><td style="text-align: right;">           7.5</td><td>Private new housing        </td></tr>
-<tr><td style="text-align: right;">           8.5</td><td>Total new housing          </td></tr>
-<tr><td style="text-align: right;">          -6.8</td><td>Infrastructure new work    </td></tr>
-<tr><td style="text-align: right;">          -3.3</td><td>Public other new work      </td></tr>
-<tr><td style="text-align: right;">          16.1</td><td>Private industrial new work</td></tr>
-<tr><td style="text-align: right;">           5.3</td><td>Private commercial new work</td></tr>
-</tbody>
-</table></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="validating-against-an-external-source-of-truth">
-<h2>Validating Against An External Source Of Truth<a class="headerlink" href="#validating-against-an-external-source-of-truth" title="Permalink to this heading">#</a></h2>
-<p>The most powerful form of validation is to compare values to an external source of truth, be that via a scheme, codelists, api or pretty much any “master list” of acceptable values.</p>
-<p>For this example we’re going to use a simple json file.</p>
-<p>First we create the json file and write it to <code class="docutils literal notranslate"><span class="pre">./validation.json</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
-
-<span class="c1"># Note: I&#39;ve only populated Housing, but you could specify multiple</span>
-<span class="c1"># columns this way.</span>
-<span class="n">valid</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;Housing&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;Public new housing&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Private new housing&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Total new housing&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Infrastructure new work&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Public other new work&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Private industrial new work&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Private commercial new work&quot;</span>
-        <span class="p">]</span>
-<span class="p">}</span>
-
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./validation.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">valid</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now we have our json file here’s (one implementation) of how you could use it for Column value validation.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-<span class="kn">from</span> <span class="nn">datachef.models.source.cell</span> <span class="kn">import</span> <span class="n">Cell</span>
-<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">XlsxSelectable</span><span class="p">,</span> <span class="n">matches</span><span class="p">,</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">down</span><span class="p">,</span> <span class="n">right</span>
-
-<span class="k">class</span> <span class="nc">Validator</span><span class="p">:</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Use the column name to get a list of valid values for</span>
-<span class="sd">        this column</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./validation.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">validation_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">valid_values</span><span class="o">=</span> <span class="n">validation_dict</span><span class="p">[</span><span class="n">column</span><span class="p">]</span>
-
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Its valid if the cell value is in the list of valid</span>
-<span class="sd">        values for this column</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">assert</span> <span class="n">cell</span><span class="o">.</span><span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">valid_values</span><span class="p">,</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">            Cell value </span><span class="si">{</span><span class="n">cell</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s1"> not in list of</span>
-<span class="s1">            valid values: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">valid_values</span><span class="si">}</span>
-<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
-
-<span class="n">tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsxSelectable</span><span class="p">]</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">)</span>
-<span class="n">table</span> <span class="o">=</span> <span class="n">tables</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span>
-
-<span class="n">observations</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B7:H10&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Observations&quot;</span><span class="p">)</span>
-<span class="n">housing</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B5&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Housing&quot;</span><span class="p">)</span>
-
-<span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
-    <span class="n">observations</span><span class="p">,</span>
-    <span class="n">Column</span><span class="p">(</span><span class="n">housing</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">down</span><span class="p">),</span> <span class="n">validation</span><span class="o">=</span><span class="n">Validator</span><span class="p">(</span><span class="s2">&quot;Housing&quot;</span><span class="p">))</span>
-<span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>As a final example, we’ll change the validation json and remove most of the valid values and see what happens (it’ll raise an exception when we go to print and the Column gets evaluated because it’ll contains multiple values that cannot be asserted when passed to <code class="docutils literal notranslate"><span class="pre">Validator(&quot;Housing&quot;)</span></code>).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
-
-<span class="c1"># Note: I&#39;ve only populated Housing, but you could specify multiple</span>
-<span class="c1"># columns this way.</span>
-<span class="n">valid</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;Housing&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;Public new housing&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Private new housing&quot;</span>
-        <span class="p">]</span>
-<span class="p">}</span>
-
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./validation-dict2.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">valid</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-<span class="kn">from</span> <span class="nn">datachef.models.source.cell</span> <span class="kn">import</span> <span class="n">Cell</span>
-<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">XlsxSelectable</span><span class="p">,</span> <span class="n">matches</span><span class="p">,</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">down</span><span class="p">,</span> <span class="n">right</span>
-
-<span class="k">class</span> <span class="nc">Validator</span><span class="p">:</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Use the column name to get a list of valid values for</span>
-<span class="sd">        this column</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./validation-dict2.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">validation_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">valid_values</span><span class="o">=</span> <span class="n">validation_dict</span><span class="p">[</span><span class="n">column</span><span class="p">]</span>
-
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Its valid if the cell value is in the list of valid</span>
-<span class="sd">        values for this column</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">assert</span> <span class="n">cell</span><span class="o">.</span><span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">valid_values</span><span class="p">,</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">            Cell value </span><span class="si">{</span><span class="n">cell</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s1"> not in list of</span>
-<span class="s1">            valid values: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">valid_values</span><span class="si">}</span>
-<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
-
-<span class="n">tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsxSelectable</span><span class="p">]</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">)</span>
-<span class="n">table</span> <span class="o">=</span> <span class="n">tables</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span>
-
-<span class="n">observations</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B7:H10&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Observations&quot;</span><span class="p">)</span>
-<span class="n">housing</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B5&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Housing&quot;</span><span class="p">)</span>
-
-<span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
-    <span class="n">observations</span><span class="p">,</span>
-    <span class="n">Column</span><span class="p">(</span><span class="n">housing</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">down</span><span class="p">),</span> <span class="n">validation</span><span class="o">=</span><span class="n">Validator</span><span class="p">(</span><span class="s2">&quot;Housing&quot;</span><span class="p">))</span>
-<span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 </section>
 
@@ -923,12 +612,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-vs-validate">validate= vs .validate()</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-data">Source Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#column-the-validation-keyword">Column: the validation= keyword</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-regex-validation">Simple Regex Validation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-lazy-evaluation">A Note on Lazy Evaluation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-custom-validation-example">A Custom Validation Example</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validating-against-an-external-source-of-truth">Validating Against An External Source Of Truth</a></li>
 </ul>
   </nav></div>
 

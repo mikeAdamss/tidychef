@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Pandas &#8212; My sample book</title>
+    <title>Against (Creating New Validators) &#8212; My sample book</title>
   
   
   
@@ -61,11 +61,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'intermediate/pandas';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'intermediate/against';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="TidyData: Column: validate=" href="validation.html" />
-    <link rel="prev" title="TidyData: Horizontal Conditions" href="horizontal-conditions.html" />
+    <link rel="next" title="Best Practice" href="best-practice.html" />
+    <link rel="prev" title="TidyData: Within" href="within.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -196,12 +196,12 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.html">Pandas</a></li>
 
 
 <li class="toctree-l2"><a class="reference internal" href="validation.html">TidyData: Column: validate=</a></li>
 <li class="toctree-l2"><a class="reference internal" href="within.html">TidyData: Within</a></li>
-<li class="toctree-l2"><a class="reference internal" href="against.html">Against (Creating New Validators)</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Against (Creating New Validators)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="best-practice.html">Best Practice</a></li>
 </ul>
 </li>
@@ -284,7 +284,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fintermediate/pandas.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fintermediate/against.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -314,7 +314,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/intermediate/pandas.ipynb" target="_blank"
+      <li><a href="../_sources/intermediate/against.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -396,7 +396,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Pandas</h1>
+    <h1>Against (Creating New Validators)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -406,11 +406,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pandas</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#source-data">Source Data</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tidydata-to-dict">TidyData.to_dict()</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">How it works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-new-validator">Create a new Validator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#putting-it-all-together">Putting it all together</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#source-data">Source Data</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-steps">Further steps</a></li>
+</ul>
             </nav>
         </div>
     </div>
@@ -421,25 +424,144 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="pandas">
-<h1>Pandas<a class="headerlink" href="#pandas" title="Permalink to this heading">#</a></h1>
-<p>The following is a quick note on how to transfer data extracted via datachef into a pandas dataframe.</p>
-<table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p><span style="color:green">Note - pandas is a huge and ever evolving ecosphere all of itself. As such we’re not going to bring it into datachef as a dependency (it has very differnet goals and we like our simple dependency chain). We do however provide the following conveniences for quickly shunting tidy data outputs into pandas in a suitably decoupled way</span></p></th>
-</tr>
-</thead>
-</table>
+  <section class="tex2jax_ignore mathjax_ignore" id="against-creating-new-validators">
+<h1>Against (Creating New Validators)<a class="headerlink" href="#against-creating-new-validators" title="Permalink to this heading">#</a></h1>
+<p>You will have seen use the <code class="docutils literal notranslate"><span class="pre">against</span></code> module as part of <span class="xref myst">selection validation</span> and <span class="xref myst">column validation</span>.</p>
+<p>This <code class="docutils literal notranslate"><span class="pre">against</span></code> module is really just a wrapper around some simple validation classes, this document explains what they are, how they work and how to make your own.</p>
+<section id="how-it-works">
+<h2>How it works<a class="headerlink" href="#how-it-works" title="Permalink to this heading">#</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">Validator</span></code> in datachef is any class that inherits from <a class="reference external" href="https://github.com/mikeAdamss/datachef/blob/main/datachef/against/implementations/base.py">datachef.against.implementation.base.BaseValidator</a>.</p>
+<p>As a convenience the code for for this class is shown below (don’t worry, it’s actually very straight forward).</p>
+<p><img alt="" src="../_images/validator-base.png" /></p>
+<p>So a validator does exactly two things:</p>
+<ul class="simple">
+<li><ol class="arabic simple">
+<li><p>Returns True or False when passed a Cell is passed to the class as an argument</p></li>
+</ol>
+</li>
+<li><ol class="arabic simple" start="2">
+<li><p>Returns a str message explaining the issue when its <code class="docutils literal notranslate"><span class="pre">.msg()</span></code> method is called with a Cell as an argument.</p></li>
+</ol>
+</li>
+</ul>
+<p><em>Note - The bits around <em>abc</em> and <em>abstract classes</em> are just programmer boiler plate, all they do is tell you if you forget to create one of the two listed methods (a useful thing!) otherwise you can safely ignore these bits as boiler plate</em>.</p>
+<p>Now lets see that in action in its simplest form. We’ll use the <a class="reference external" href="https://github.com/mikeAdamss/datachef/blob/main/datachef/against/implementations/regex.py">RegexValidator</a></p>
+<p><em>Note - <strong>RegexValidator</strong> is the class that you’ve been using all along whenever you do <code class="docutils literal notranslate"><span class="pre">against.regex()</span></code>. The <code class="docutils literal notranslate"><span class="pre">against</span></code> module is effectively just syntactic sugar to keep the api nice an user friendly.</em> Look <a class="reference external" href="https://github.com/mikeAdamss/datachef/blob/main/datachef/against/wrapper.py">here</a> for how that works.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef.models.source.cell</span> <span class="kn">import</span> <span class="n">Cell</span>
+<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">against</span>
+
+<span class="c1"># Create a simple Cell object for testing</span>
+<span class="n">fake_cell</span> <span class="o">=</span> <span class="n">Cell</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;foo&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create a validator using &quot;foo&quot; as a regex - this will be return True (foo matches foo)</span>
+<span class="n">validator</span> <span class="o">=</span> <span class="n">against</span><span class="o">.</span><span class="n">regex</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Should be True: </span><span class="si">{</span><span class="n">validator</span><span class="p">(</span><span class="n">fake_cell</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create a validator using &quot;bar&quot; as a regex - this will be return False (foo does not match bar)</span>
+<span class="n">validator</span> <span class="o">=</span> <span class="n">against</span><span class="o">.</span><span class="n">regex</span><span class="p">(</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Should be False: </span><span class="si">{</span><span class="n">validator</span><span class="p">(</span><span class="n">fake_cell</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Lastly lets call .msg() on our failed validation and print it</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">validator</span><span class="o">.</span><span class="n">msg</span><span class="p">(</span><span class="n">fake_cell</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Should be True: True
+Should be False: False
+&quot;foo&quot; does not match pattern: &quot;bar&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lastly, let’s have a look at the <a class="reference external" href="https://github.com/mikeAdamss/datachef/blob/main/datachef/against/implementations/regex.py">RegexValidator</a></p>
+<p><img alt="" src="../_images/validator-regex.png" /></p>
+<p>Now look at the code we’ve populated the methods with to create our mighty regex implementation of a <code class="docutils literal notranslate"><span class="pre">BaseValidator</span></code> (all 4 lines of it)… not that complicated is it?</p>
 </section>
+<section id="create-a-new-validator">
+<h2>Create a new Validator<a class="headerlink" href="#create-a-new-validator" title="Permalink to this heading">#</a></h2>
+<p>For this example we’re going to create a validator that confirms that a selected cell holds a value that is considered numerical (you’ll notice this code is the code from the regex validator with a handful of small changes which we’ll list below).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="kn">from</span> <span class="nn">datachef.models.source.cell</span> <span class="kn">import</span> <span class="n">Cell</span>
+<span class="kn">from</span> <span class="nn">datachef.against.implementations.base</span> <span class="kn">import</span> <span class="n">BaseValidator</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">NumericValidator</span><span class="p">(</span><span class="n">BaseValidator</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Is the value property of the Cell numeric</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">cell</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">msg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Provide a contextually meaningful</span>
+<span class="sd">        message to the user where cell</span>
+<span class="sd">        value is not numeric</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&quot;</span><span class="si">{</span><span class="n">cell</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s1">&quot; is not numeric&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Changes we made</p>
+<ul class="simple">
+<li><p>We’ve removed the <code class="docutils literal notranslate"><span class="pre">pattern</span></code> variables since our validator doesn’t need arguments.</p></li>
+<li><p>We’ve used the <code class="docutils literal notranslate"><span class="pre">isnumeric</span></code> method (that all python strings have) to return True or False when
+the class gets called (via <code class="docutils literal notranslate"><span class="pre">__call__</span></code>).</p></li>
+<li><p>We’ve updated the message.</p></li>
+<li><p>We’ve updated the docstrings and name of the class.</p></li>
+<li><p>We’ve removed <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">re</span></code> since we’re not using it.</p></li>
+</ul>
+<p>Now lets try it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef.models.source.cell</span> <span class="kn">import</span> <span class="n">Cell</span>
+
+<span class="c1"># Create a simple Cell object for testing</span>
+<span class="c1"># Note the value here is numeric!</span>
+<span class="n">valid_cell</span> <span class="o">=</span> <span class="n">Cell</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+
+<span class="c1"># Try it out - this will be return True (1 is numeric)</span>
+<span class="n">validator</span> <span class="o">=</span> <span class="n">NumericValidator</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Should be True: </span><span class="si">{</span><span class="n">validator</span><span class="p">(</span><span class="n">valid_cell</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Now lets try a Cell with a non numeric value</span>
+<span class="n">invalid_cell</span> <span class="o">=</span> <span class="n">Cell</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;foo&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Should be False: </span><span class="si">{</span><span class="n">validator</span><span class="p">(</span><span class="n">invalid_cell</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Lastly lets call .msg() on our failed validation and print it</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">validator</span><span class="o">.</span><span class="n">msg</span><span class="p">(</span><span class="n">fake_cell</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Should be True: True
+Should be False: False
+&quot;foo&quot; is not numeric
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="putting-it-all-together">
+<h2>Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Permalink to this heading">#</a></h2>
+<p>Now lets see our new validator is action using the <code class="docutils literal notranslate"><span class="pre">&lt;selectable&gt;.validate()</span></code> method.</p>
+<p>You could equally use this new validator with <code class="docutils literal notranslate"><span class="pre">Columns(validate=)</span></code> (exactly the same validator class is used in both instances).</p>
 <section id="source-data">
-<h1>Source Data<a class="headerlink" href="#source-data" title="Permalink to this heading">#</a></h1>
+<h3>Source Data<a class="headerlink" href="#source-data" title="Permalink to this heading">#</a></h3>
 <p>The data source we’re using for these examples is shown below:</p>
 <p>The <a class="reference external" href="https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv">full data source can be viewed here</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span><span class="p">,</span> <span class="n">CsvSelectable</span><span class="p">,</span> <span class="n">Column</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span><span class="p">,</span> <span class="n">CsvSelectable</span>
 
-<span class="n">Column</span><span class="o">.</span><span class="n">horizontal_condition</span>
 <span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv&quot;</span><span class="p">)</span>
 <span class="n">preview</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
 </pre></div>
@@ -493,37 +615,23 @@ document.write(`
         </html>
     </div></div>
 </div>
-</section>
-<section id="tidydata-to-dict">
-<h1>TidyData.to_dict()<a class="headerlink" href="#tidydata-to-dict" title="Permalink to this heading">#</a></h1>
-<p>The following is an example of using the <code class="docutils literal notranslate"><span class="pre">TidyData.from_dict()</span></code> method.</p>
-<p>Note - the dict in question is the same structure sed by the pandas <code class="docutils literal notranslate"><span class="pre">DataFrame.from_dict()</span></code> method - this will form our mechanism of handover.</p>
+<p>For this example we’re going to select <strong>all non blank values from columns C &amp; D and run our new validator against them</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span><span class="p">,</span> <span class="n">CsvSelectable</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">below</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span><span class="p">,</span> <span class="n">CsvSelectable</span>
 
 <span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv&quot;</span><span class="p">)</span>
 
-<span class="n">observations</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">is_numeric</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Observation&quot;</span><span class="p">)</span>
-<span class="n">bands</span> <span class="o">=</span> <span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;A3&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;G3&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Band&quot;</span><span class="p">)</span>
-<span class="n">assets</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Asset&quot;</span><span class="p">)</span>
-<span class="n">members</span> <span class="o">=</span> <span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Member&quot;</span><span class="p">)</span>
-<span class="n">preview</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">bands</span><span class="p">,</span> <span class="n">assets</span><span class="p">,</span> <span class="n">members</span><span class="p">)</span>
+<span class="c1"># Select them</span>
+<span class="n">selection</span> <span class="o">=</span> <span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span> <span class="o">|</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span>
 
-<span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
-    <span class="n">observations</span><span class="p">,</span>
-    <span class="n">Column</span><span class="p">(</span><span class="n">bands</span><span class="o">.</span><span class="n">finds_observations_closest</span><span class="p">(</span><span class="n">right</span><span class="p">)),</span>
-    <span class="n">Column</span><span class="p">(</span><span class="n">assets</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">below</span><span class="p">)),</span>
-    <span class="n">Column</span><span class="p">(</span><span class="n">members</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">right</span><span class="p">))</span>
-<span class="p">)</span>
+<span class="c1"># Preview the selection - PRIOR to validation</span>
+<span class="c1"># note - for the sake of this example, you&#39;d just do it in one typically</span>
+<span class="n">preview</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span>
 
-<span class="c1"># See the non dict tidydata</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
-
-<span class="c1"># Now see it in dictionary form.</span>
-<span class="c1"># We&#39;ll use json to prettyify the dict version</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">tidy_data</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="c1"># Noe validate it</span>
+<span class="n">numeric_validator</span> <span class="o">=</span> <span class="n">NumericValidator</span><span class="p">()</span>
+<span class="n">selection</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">numeric_validator</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -555,19 +663,7 @@ document.write(`
             <table>
                 
             <tr>
-                <td style="background-color:cyan">Observation</td>
-            <tr>
-        
-            <tr>
-                <td style="background-color:#99ff99">Band</td>
-            <tr>
-        
-            <tr>
-                <td style="background-color:#eeccff">Asset</td>
-            <tr>
-        
-            <tr>
-                <td style="background-color:#ffe066">Member</td>
+                <td style="background-color:cyan">Unnamed Selection: 0</td>
             <tr>
         
             </table>
@@ -577,172 +673,57 @@ document.write(`
                 <table>
                     <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td><td style="background-color:lightgrey">G</td><td style="background-color:lightgrey">H</td><td style="background-color:lightgrey">I</td><td style="background-color:lightgrey">J</td><td style="background-color:lightgrey">K</td></tr>
 <tr><td style="background-color:lightgrey">1</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
-<tr><td style="background-color:lightgrey">2</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#eeccff">Houses</td><td style="background-color:#eeccff">Cars</td><td style="background-color:#eeccff">Boats</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#eeccff">Houses</td><td style="background-color:#eeccff">Cars</td><td style="background-color:#eeccff">Boats</td></tr>
-<tr><td style="background-color:lightgrey">3</td><td style="background-color:#99ff99">Beatles</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#99ff99">Rolling Stones</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
-<tr><td style="background-color:lightgrey">4</td><td style="background-color:white"></td><td style="background-color:#ffe066">John</td><td style="background-color:cyan">1</td><td style="background-color:cyan">5</td><td style="background-color:cyan">9</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#ffe066">Keith</td><td style="background-color:cyan">2</td><td style="background-color:cyan">6</td><td style="background-color:cyan">10</td></tr>
-<tr><td style="background-color:lightgrey">5</td><td style="background-color:white"></td><td style="background-color:#ffe066">Paul</td><td style="background-color:cyan">2</td><td style="background-color:cyan">6</td><td style="background-color:cyan">10</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#ffe066">Mick</td><td style="background-color:cyan">3</td><td style="background-color:cyan">7</td><td style="background-color:cyan">11</td></tr>
-<tr><td style="background-color:lightgrey">6</td><td style="background-color:white"></td><td style="background-color:#ffe066">George</td><td style="background-color:cyan">2</td><td style="background-color:cyan">7</td><td style="background-color:cyan">11</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#ffe066">Charlie</td><td style="background-color:cyan">3</td><td style="background-color:cyan">8</td><td style="background-color:cyan">12</td></tr>
-<tr><td style="background-color:lightgrey">7</td><td style="background-color:white"></td><td style="background-color:#ffe066">Ringo</td><td style="background-color:cyan">4</td><td style="background-color:cyan">8</td><td style="background-color:cyan">12</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#ffe066">Ronnie</td><td style="background-color:cyan">5</td><td style="background-color:cyan">9</td><td style="background-color:cyan">13</td></tr>
+<tr><td style="background-color:lightgrey">2</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:cyan">Houses</td><td style="background-color:cyan">Cars</td><td style="background-color:white">Boats</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Houses</td><td style="background-color:white">Cars</td><td style="background-color:white">Boats</td></tr>
+<tr><td style="background-color:lightgrey">3</td><td style="background-color:white">Beatles</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Rolling Stones</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">4</td><td style="background-color:white"></td><td style="background-color:white">John</td><td style="background-color:cyan">1</td><td style="background-color:cyan">5</td><td style="background-color:white">9</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Keith</td><td style="background-color:white">2</td><td style="background-color:white">6</td><td style="background-color:white">10</td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:white"></td><td style="background-color:white">Paul</td><td style="background-color:cyan">2</td><td style="background-color:cyan">6</td><td style="background-color:white">10</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Mick</td><td style="background-color:white">3</td><td style="background-color:white">7</td><td style="background-color:white">11</td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:white"></td><td style="background-color:white">George</td><td style="background-color:cyan">2</td><td style="background-color:cyan">7</td><td style="background-color:white">11</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Charlie</td><td style="background-color:white">3</td><td style="background-color:white">8</td><td style="background-color:white">12</td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:white"></td><td style="background-color:white">Ringo</td><td style="background-color:cyan">4</td><td style="background-color:cyan">8</td><td style="background-color:white">12</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Ronnie</td><td style="background-color:white">5</td><td style="background-color:white">9</td><td style="background-color:white">13</td></tr>
 <tr><td style="background-color:lightgrey">8</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
 
                 </table>
             </body>
             <br>
         </html>
-    </div><div class="output text_html"><table>
-<thead>
-<tr><th style="text-align: right;">  Observation</th><th>Band          </th><th>Asset  </th><th>Member  </th></tr>
-</thead>
-<tbody>
-<tr><td style="text-align: right;">            1</td><td>Beatles       </td><td>Houses </td><td>John    </td></tr>
-<tr><td style="text-align: right;">            5</td><td>Beatles       </td><td>Cars   </td><td>John    </td></tr>
-<tr><td style="text-align: right;">            9</td><td>Beatles       </td><td>Boats  </td><td>John    </td></tr>
-<tr><td style="text-align: right;">            2</td><td>Rolling Stones</td><td>Houses </td><td>Keith   </td></tr>
-<tr><td style="text-align: right;">            6</td><td>Rolling Stones</td><td>Cars   </td><td>Keith   </td></tr>
-<tr><td style="text-align: right;">           10</td><td>Rolling Stones</td><td>Boats  </td><td>Keith   </td></tr>
-<tr><td style="text-align: right;">            2</td><td>Beatles       </td><td>Houses </td><td>Paul    </td></tr>
-<tr><td style="text-align: right;">            6</td><td>Beatles       </td><td>Cars   </td><td>Paul    </td></tr>
-<tr><td style="text-align: right;">           10</td><td>Beatles       </td><td>Boats  </td><td>Paul    </td></tr>
-<tr><td style="text-align: right;">            3</td><td>Rolling Stones</td><td>Houses </td><td>Mick    </td></tr>
-<tr><td style="text-align: right;">            7</td><td>Rolling Stones</td><td>Cars   </td><td>Mick    </td></tr>
-<tr><td style="text-align: right;">           11</td><td>Rolling Stones</td><td>Boats  </td><td>Mick    </td></tr>
-<tr><td style="text-align: right;">            2</td><td>Beatles       </td><td>Houses </td><td>George  </td></tr>
-<tr><td style="text-align: right;">            7</td><td>Beatles       </td><td>Cars   </td><td>George  </td></tr>
-<tr><td style="text-align: right;">           11</td><td>Beatles       </td><td>Boats  </td><td>George  </td></tr>
-<tr><td style="text-align: right;">            3</td><td>Rolling Stones</td><td>Houses </td><td>Charlie </td></tr>
-<tr><td style="text-align: right;">            8</td><td>Rolling Stones</td><td>Cars   </td><td>Charlie </td></tr>
-<tr><td style="text-align: right;">           12</td><td>Rolling Stones</td><td>Boats  </td><td>Charlie </td></tr>
-<tr><td style="text-align: right;">            4</td><td>Beatles       </td><td>Houses </td><td>Ringo   </td></tr>
-<tr><td style="text-align: right;">            8</td><td>Beatles       </td><td>Cars   </td><td>Ringo   </td></tr>
-<tr><td style="text-align: right;">           12</td><td>Beatles       </td><td>Boats  </td><td>Ringo   </td></tr>
-<tr><td style="text-align: right;">            5</td><td>Rolling Stones</td><td>Houses </td><td>Ronnie  </td></tr>
-<tr><td style="text-align: right;">            9</td><td>Rolling Stones</td><td>Cars   </td><td>Ronnie  </td></tr>
-<tr><td style="text-align: right;">           13</td><td>Rolling Stones</td><td>Boats  </td><td>Ronnie  </td></tr>
-</tbody>
-</table></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-  &quot;Observation&quot;: [
-    &quot;1&quot;,
-    &quot;5&quot;,
-    &quot;9&quot;,
-    &quot;2&quot;,
-    &quot;6&quot;,
-    &quot;10&quot;,
-    &quot;2&quot;,
-    &quot;6&quot;,
-    &quot;10&quot;,
-    &quot;3&quot;,
-    &quot;7&quot;,
-    &quot;11&quot;,
-    &quot;2&quot;,
-    &quot;7&quot;,
-    &quot;11&quot;,
-    &quot;3&quot;,
-    &quot;8&quot;,
-    &quot;12&quot;,
-    &quot;4&quot;,
-    &quot;8&quot;,
-    &quot;12&quot;,
-    &quot;5&quot;,
-    &quot;9&quot;,
-    &quot;13&quot;
-  ],
-  &quot;Band&quot;: [
-    &quot;Beatles&quot;,
-    &quot;Beatles&quot;,
-    &quot;Beatles&quot;,
-    &quot;Rolling Stones&quot;,
-    &quot;Rolling Stones&quot;,
-    &quot;Rolling Stones&quot;,
-    &quot;Beatles&quot;,
-    &quot;Beatles&quot;,
-    &quot;Beatles&quot;,
-    &quot;Rolling Stones&quot;,
-    &quot;Rolling Stones&quot;,
-    &quot;Rolling Stones&quot;,
-    &quot;Beatles&quot;,
-    &quot;Beatles&quot;,
-    &quot;Beatles&quot;,
-    &quot;Rolling Stones&quot;,
-    &quot;Rolling Stones&quot;,
-    &quot;Rolling Stones&quot;,
-    &quot;Beatles&quot;,
-    &quot;Beatles&quot;,
-    &quot;Beatles&quot;,
-    &quot;Rolling Stones&quot;,
-    &quot;Rolling Stones&quot;,
-    &quot;Rolling Stones&quot;
-  ],
-  &quot;Asset&quot;: [
-    &quot;Houses&quot;,
-    &quot;Cars&quot;,
-    &quot;Boats&quot;,
-    &quot;Houses&quot;,
-    &quot;Cars&quot;,
-    &quot;Boats&quot;,
-    &quot;Houses&quot;,
-    &quot;Cars&quot;,
-    &quot;Boats&quot;,
-    &quot;Houses&quot;,
-    &quot;Cars&quot;,
-    &quot;Boats&quot;,
-    &quot;Houses&quot;,
-    &quot;Cars&quot;,
-    &quot;Boats&quot;,
-    &quot;Houses&quot;,
-    &quot;Cars&quot;,
-    &quot;Boats&quot;,
-    &quot;Houses&quot;,
-    &quot;Cars&quot;,
-    &quot;Boats&quot;,
-    &quot;Houses&quot;,
-    &quot;Cars&quot;,
-    &quot;Boats&quot;
-  ],
-  &quot;Member&quot;: [
-    &quot;John&quot;,
-    &quot;John&quot;,
-    &quot;John&quot;,
-    &quot;Keith&quot;,
-    &quot;Keith&quot;,
-    &quot;Keith&quot;,
-    &quot;Paul&quot;,
-    &quot;Paul&quot;,
-    &quot;Paul&quot;,
-    &quot;Mick&quot;,
-    &quot;Mick&quot;,
-    &quot;Mick&quot;,
-    &quot;George&quot;,
-    &quot;George&quot;,
-    &quot;George&quot;,
-    &quot;Charlie&quot;,
-    &quot;Charlie&quot;,
-    &quot;Charlie&quot;,
-    &quot;Ringo&quot;,
-    &quot;Ringo&quot;,
-    &quot;Ringo&quot;,
-    &quot;Ronnie&quot;,
-    &quot;Ronnie&quot;,
-    &quot;Ronnie&quot;
-  ]
-}
+    </div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">CellValidationError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">14</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="c1"># Noe validate it</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">numeric_validator</span> <span class="o">=</span> <span class="n">NumericValidator</span><span class="p">()</span>
+<span class="ne">---&gt; </span><span class="mi">14</span> <span class="n">selection</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">numeric_validator</span><span class="p">)</span>
+
+<span class="nn">File ~/.pyenv/versions/3.9.7/lib/python3.9/site-packages/datachef/selection/selectable.py:355,</span> in <span class="ni">Selectable.validate</span><span class="nt">(self, validator, raise_first_error)</span>
+<span class="g g-Whitespace">    </span><span class="mi">352</span>             <span class="n">validation_errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">validator</span><span class="o">.</span><span class="n">msg</span><span class="p">(</span><span class="n">cell</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">354</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">validation_errors</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">355</span>     <span class="k">raise</span> <span class="n">CellValidationError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">linesep</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">validation_errors</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">357</span> <span class="k">return</span> <span class="bp">self</span>
+
+<span class="ne">CellValidationError</span>: &quot;Houses&quot; is not numeric
+<span class="s2">&quot;Cars&quot;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">numeric</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>A dictionary like the above can be passed directly into pandas trivially as per the following</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
-<span class="c1"># ..</span>
-<span class="c1"># ...</span>
-<span class="c1"># the code from the above example</span>
-<span class="c1"># ...</span>
-<span class="c1"># ..</span>
-
-
-<span class="n">tidy_data_dict</span> <span class="o">=</span> <span class="n">tidy_data</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-<span class="n">dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">tidy_data_dict</span><span class="p">)</span>
-</pre></div>
-</div>
+</section>
+</section>
+<section id="further-steps">
+<h2>Further steps<a class="headerlink" href="#further-steps" title="Permalink to this heading">#</a></h2>
+<p>At this point we’re approaching the point where a lesson in datachef becomes a lesson in python (so this is probably more one for the programmers) but consider the following.</p>
+<ul class="simple">
+<li><p>Validators are simple python classes and can be freely constructed.</p></li>
+<li><p>For any given RAP process or data project you will <strong>always</strong> have a source of truth.</p></li>
+<li><p>Validators can give you conxtual information <em>during the transformation process</em> regarding exactly <em>what and where</em> the issue is.</p></li>
+</ul>
+<p>So in terms of possibilities…</p>
+<ul class="simple">
+<li><p>If you’re desired output uses codelists - create a validator to compare your extracted to said codelists.</p></li>
+<li><p>If you’re desired output has schemas - create a validator to compare your extracted to said schema.</p></li>
+<li><p>If you’re desired output ends up on a restful api - create a validator to pull the valid values off said api and validate against them.</p></li>
+<li><p>etc etc</p></li>
+</ul>
+<p>You can always of course just validate your extracted data after its written to disk (a completely sensible thing to do) via <code class="docutils literal notranslate"><span class="pre">&lt;whatever</span> <span class="pre">your</span> <span class="pre">tool</span> <span class="pre">of</span> <span class="pre">choice</span> <span class="pre">is&gt;</span></code>, but there is an argument for validating early and often (and while you have context for exactly <em>what</em> in the ETL process has caused the issue).</p>
+<p>As always it will depend on your own use case and requirements.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -777,20 +758,20 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="horizontal-conditions.html"
+       href="within.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">TidyData: Horizontal Conditions</p>
+        <p class="prev-next-title">TidyData: Within</p>
       </div>
     </a>
     <a class="right-next"
-       href="validation.html"
+       href="best-practice.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">TidyData: Column: validate=</p>
+        <p class="prev-next-title">Best Practice</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -812,11 +793,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pandas</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#source-data">Source Data</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tidydata-to-dict">TidyData.to_dict()</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">How it works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-new-validator">Create a new Validator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#putting-it-all-together">Putting it all together</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#source-data">Source Data</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-steps">Further steps</a></li>
+</ul>
   </nav></div>
 
 </div></div>
