@@ -2,19 +2,14 @@ from abc import ABCMeta, abstractmethod
 
 from datachef.models.source.cell import Cell
 
-
 class BaseValidator(metaclass=ABCMeta):
     """
-    The standard Matcher used to provide validation
-    of the data being extracted.
-
-    Please note - all Matcher methods should operate
-    against a single Cell at a time and throw an
-    AssertionError where a Cell is not valid.
+    The standard Matcher used to validate a
+    single cell object.
     """
 
     @abstractmethod
-    def __call__(self, cell: Cell):
+    def __call__(self, cell: Cell) -> bool:
         """
         Confirm that a single cell is valid.
         """
