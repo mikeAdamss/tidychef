@@ -1,0 +1,6 @@
+{
+    "name": "Mock dataset 1 on simple mock json api",
+    "data_urls": [
+        "https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv"
+    ]
+}
