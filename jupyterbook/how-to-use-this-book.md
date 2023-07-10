@@ -15,6 +15,6 @@ Once you've done this you'll be able to read and understand a large number of re
 
 - Like Chapter 1, **[Chapter 2: Intermediate](https://mikeadamss.github.io/datachef/intermediate.html) and the [intermediate examples](https://mikeadamss.github.io/datachef/examples/intermediate/intermediate.html) are also complementary** and completing the former should allow you to understand the latter.
 
-- The [advanced](https://mikeadamss.github.io/datachef/advanced.html) section is a more developer-esque section (thought it should be within reach of an experienced datachef user as well) so should be considered optional. There are some useful things there and you probably _should_ tackle it (and its examples) it using datachef regularly, but you can be firmly up and running for a while and even producing reliable repeatable data pipelines before tackling this content.
+- The [Chapter 3: Advanced](https://mikeadamss.github.io/datachef/advanced.html) section is a more developer-esque section (thought it should be within reach of an experienced datachef user as well) so should be considered optional. There are some useful things there and you probably _should_ tackle it (and its examples) it using datachef regularly, but you can be firmly up and running for a while and even producing reliable repeatable data pipelines before tackling this content.
 
-- The [techical reference](https://mikeadamss.github.io/datachef/technical.html) section is purely for the programmers amongst you.
+- The [Chapter 5: Technical Reference](https://mikeadamss.github.io/datachef/technical.html) section is purely for the programmers amongst you.
