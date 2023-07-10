@@ -13,8 +13,3 @@ into something that looks like this:
 _Note: the above image was cropped short for practical reasons_.
 
 Datachef provides a simple api suitable for **data analysts or people just beginning their journey with python** but is built to be _highly_ extensible as needed and can be configured to support even the most niche use cases and/or domain specific tabulated data sources.
-
-Table of contents:
-
-```{tableofcontents}
-```
