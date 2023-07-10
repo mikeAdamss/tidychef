@@ -1,4 +1,4 @@
-# What is Datachef
+# Datachef
 
 Datachef is a python framework to enable “data extraction for humans” via simple python beginner friendly "recipes". It aims at allowing users to easily transform tabulated data sources that use visual relationships (human readable only data) into simple machine readable "tidy data" in a way that supports usage in [RAP](https://analysisfunction.civilservice.gov.uk/policy-store/reproducible-analytical-pipelines-strategy/#:~:text=Reproducible%20Analytical%20Pipelines%20(RAPs)%20are,auditable%2C%20efficient%20and%20high%20quality.) processing.
 
