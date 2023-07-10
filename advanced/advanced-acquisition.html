@@ -64,8 +64,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'advanced/advanced-acquisition';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Examples" href="../examples.html" />
-    <link rel="prev" title="Advanced" href="../advanced.html" />
+    <link rel="next" title="Custom Selectables" href="custom-selectables.html" />
+    <link rel="prev" title="Chapter 3: Advanced" href="../advanced.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -159,7 +159,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../how-to-use-this-book.html">How to use this book</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dot-notation-explained.html">Dot Notation Explained</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../basics.html">The Basics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics.html">Chapter 1: Basics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../basics/acquire.html">Acquire</a></li>
 
 
@@ -180,7 +180,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../intermediate.html">Intermediate</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../intermediate.html">Chapter 2: Intermediate</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/apply.html">Apply</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/concatenation.html">TidyData: Concatenation</a></li>
 
@@ -192,10 +192,6 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/iterating.html">Iterating Tables/Sheets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/horizontal-conditions.html">TidyData: Horizontal Conditions</a></li>
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/pandas.html">Pandas</a></li>
 
 
@@ -205,14 +201,19 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/best-practice.html">Best Practice</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../advanced.html">Advanced</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../advanced.html">Chapter 3: Advanced</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Advanced Acquisition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom-selectables.html">Custom Selectables</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../examples/1-simple-bands.html">Example 1: Simple Bands Table</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Chapter 4: Examples</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/basic/basic.html">Basic Examples</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/basic/bands.html">Example 1: Simple Bands Table</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../technical.html">Chapter 5: Technical Reference</a></li>
 </ul>
 
     </div>
@@ -410,6 +411,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-scenario">Example Scenario</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#post-hook">post_hook=</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-bried-explanation-of-selectables">A Bried Explanation Of Selectables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-acquire-selectable-keyword">Using the acquire(selectable=) keyword.</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -442,7 +448,7 @@ document.write(`
 <li><p>We need to get the url of our source from that api.</p></li>
 <li><p>The api for the json api will <strong>not</strong> change.</p></li>
 <li><p>The urls listed <strong>will</strong> change.</p></li>
-<li><p>We want to always acquire the url with “bands-wide” in the path, there will always be one but the numher of other urls and its positioning within that list will change.</p></li>
+<li><p>We want to always acquire the url with “bands-wide” in the path, there will always be one but the number of other urls and its positioning within that list will change.</p></li>
 <li><p>We want an exception if there’s anything other than exactly one “bands-wide” url.</p></li>
 <li><p>We want that “bands-wide” url to be passed along to the <code class="docutils literal notranslate"><span class="pre">acquire</span></code> function and used to create our selectable.</p></li>
 </ul>
@@ -474,7 +480,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>And now let’s see how we use this re hook as a keyword argument to the acquire module.</p>
+<p>And now let’s see how we use this pre hook as a keyword argument to the acquire module.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span><span class="p">,</span> <span class="n">CsvSelectable</span>
@@ -536,12 +542,104 @@ document.write(`
     </div></div>
 </div>
 <p>And voila! We’re dynamically selecting the csv we want from the options presented by a json api.</p>
+</section>
+</section>
+<section id="post-hook">
+<h2>post_hook=<a class="headerlink" href="#post-hook" title="Permalink to this heading">#</a></h2>
+<p>The post hook follows a similar concept but <strong>is executed after the data is acquired</strong> so operates on whatever is being returned by acquire.</p>
+<p>For example:</p>
+<ul class="simple">
+<li><p>For <code class="docutils literal notranslate"><span class="pre">acquire.csv.local()</span></code> it operates against a single <code class="docutils literal notranslate"><span class="pre">CsvSelectable</span></code> object.</p></li>
+<li><p>For <code class="docutils literal notranslate"><span class="pre">acquire.xlsx.local()</span></code> it operates against a <strong>list</strong> of <code class="docutils literal notranslate"><span class="pre">XlsxSelectable</span></code> objects.</p></li>
+</ul>
+<p>In all cases whatever your <code class="docutils literal notranslate"><span class="pre">post_hook</span></code> returns is what acquire will return.</p>
+<p>As with the pre hook the implementation is nice and simple (see <a class="reference external" href="https://github.com/mikeAdamss/datachef/blob/ece2764eba4d7b19fa3817de75c0fc0e71b6de68/datachef/acquire/main.py#L44">these two lines</a>).</p>
+<p>For this example we’ll be a little more ambitious and use a callable class.</p>
+<p><code class="docutils literal notranslate"><span class="pre">NamedSheets</span></code> takes a list of table/tab/sheet names that we want and will filter out those we do not want as part of the acquisition function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">NamedSheets</span><span class="p">:</span>
+     <span class="n">sheet_names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+
+     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sheets</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsxSelectable</span><span class="p">]):</span>
+          <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sheets</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sheet_names</span><span class="p">]</span>
+          
+<span class="n">tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsxSelectable</span><span class="p">]</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span>
+     <span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span>
+     <span class="n">post_hook</span><span class="o">=</span><span class="n">NamedSheets</span><span class="p">([</span><span class="s2">&quot;Table 3a&quot;</span><span class="p">,</span> <span class="s2">&quot;Table 3b&quot;</span><span class="p">]))</span>
+
+<span class="c1"># To show it worked, we&#39;ll just iterate and print the table names</span>
+<span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
+     <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Table 3a
+Table 3b
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="a-bried-explanation-of-selectables">
+<h2>A Bried Explanation Of Selectables<a class="headerlink" href="#a-bried-explanation-of-selectables" title="Permalink to this heading">#</a></h2>
+<p>There will be more on this in the next section, but a datachef <code class="docutils literal notranslate"><span class="pre">Selectable</span></code> is the primary class we use for selecting cells.</p>
 <table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p><span style="color:green">Note - as per datachef standard approch we wouldn’t necessarily recommend you write these in line (though you can) but rather we’d recommend that pre-hooks of this source should be created and reused across your ETL processes.</span></p></th>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">datachef.selection.selectable.Selectable</span></code></p></td>
+<td><p>The common class <strong>all</strong> selectables inherit from. This is where the selection methods all tabulated sources have in common reside</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">datachef.selection.csv.csv.CsvSelectable</span></code></p></td>
+<td><p>Extends <code class="docutils literal notranslate"><span class="pre">Selectable</span></code> so we can add methods that only make sense in the context of processing csv source data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">datachef.selection.xls.xls.XlsSelectable</span></code></p></td>
+<td><p>Extends <code class="docutils literal notranslate"><span class="pre">Selectable</span></code> so we can add methods that only make sense in the context of processing xls source data</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">datachef.selection.xlsx.xlsx.XlsxSelectable</span></code></p></td>
+<td><p>Extends <code class="docutils literal notranslate"><span class="pre">Selectable</span></code> so we can add methods that only make sense in the context of processing xlsx source data</p></td>
+</tr>
+</tbody>
 </table>
+<p>As an example, imagine a colourful xlsx file - would it not be potentially useful to create a cell colour based selector? Possibly yes, but such a selector would uses <strong>xlsx only properties</strong> and as such would make no sense and almost certainly not work when called against data ingested from other data formats. The above pattern allows us to create such a method but only expose it to users using xlsx sources.</p>
+<p>In other words, <strong>selectables enable context appropriate methods</strong>.</p>
+<section id="using-the-acquire-selectable-keyword">
+<h3>Using the acquire(selectable=) keyword.<a class="headerlink" href="#using-the-acquire-selectable-keyword" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">acquire</span></code> function allows you to overrdie the type of selectable class the data is populating via the <code class="docutils literal notranslate"><span class="pre">selectable=</span></code> keyword.</p>
+<p>As an (entirely specious and rather pointless) example, lets overwrite the Selectable for <code class="docutils literal notranslate"><span class="pre">acquire.xlsx.http()</span></code> such that it returns us a <code class="docutils literal notranslate"><span class="pre">XlsSelectable</span></code> rather than the <code class="docutils literal notranslate"><span class="pre">XlsxSelectable</span></code> it usually does.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">XlsSelectable</span>
+
+<span class="n">tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsSelectable</span><span class="p">]</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span>
+                                                <span class="n">selectable</span><span class="o">=</span><span class="n">XlsSelectable</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;datachef.selection.xls.xls.XlsSelectable&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>…but… why would you want to do this?</p>
+<p>Because <code class="docutils literal notranslate"><span class="pre">Selectables</span></code> are designed to be easily extended with powerful custom behaviours and methods, and you <strong>don’t want to have to create a new acquire mechanisms</strong> every time you wish to do so.</p>
+<p>Don’t worry, this technique will be detailed with examples in the next section, for our purposes here you just need to understand <em>how</em> you override the <code class="docutils literal notranslate"><span class="pre">Selectable</span></code> class during data acquistion.</p>
 </section>
 </section>
 </section>
@@ -583,15 +681,15 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Advanced</p>
+        <p class="prev-next-title">Chapter 3: Advanced</p>
       </div>
     </a>
     <a class="right-next"
-       href="../examples.html"
+       href="custom-selectables.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Examples</p>
+        <p class="prev-next-title">Custom Selectables</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -615,6 +713,11 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-hook">pre_hook=</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-scenario">Example Scenario</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#post-hook">post_hook=</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-bried-explanation-of-selectables">A Bried Explanation Of Selectables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-acquire-selectable-keyword">Using the acquire(selectable=) keyword.</a></li>
 </ul>
 </li>
 </ul>

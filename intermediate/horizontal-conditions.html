@@ -159,7 +159,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../how-to-use-this-book.html">How to use this book</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dot-notation-explained.html">Dot Notation Explained</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../basics.html">The Basics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics.html">Chapter 1: Basics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../basics/acquire.html">Acquire</a></li>
 
 
@@ -180,7 +180,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intermediate.html">Intermediate</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intermediate.html">Chapter 2: Intermediate</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="apply.html">Apply</a></li>
 <li class="toctree-l2"><a class="reference internal" href="concatenation.html">TidyData: Concatenation</a></li>
 
@@ -192,10 +192,6 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l2"><a class="reference internal" href="iterating.html">Iterating Tables/Sheets</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">TidyData: Horizontal Conditions</a></li>
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="pandas.html">Pandas</a></li>
 
 
@@ -205,14 +201,19 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="best-practice.html">Best Practice</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../advanced.html">Advanced</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../advanced.html">Chapter 3: Advanced</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../advanced/advanced-acquisition.html">Advanced Acquisition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advanced/custom-selectables.html">Custom Selectables</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../examples/1-simple-bands.html">Example 1: Simple Bands Table</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Chapter 4: Examples</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/basic/basic.html">Basic Examples</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/basic/bands.html">Example 1: Simple Bands Table</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../technical.html">Chapter 5: Technical Reference</a></li>
 </ul>
 
     </div>
@@ -406,16 +407,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">TidyData: Horizontal Conditions</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#source-data">Source Data</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax">Syntax</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-horizontal-condition-dictionary">The Horizontal Condition Dictionary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-data">Source Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax">Syntax</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-horizontal-condition-dictionary">The Horizontal Condition Dictionary</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#condition-singer-in-the-beatles">Condition: Singer In The Beatles</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-design">A Note On Design</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#condition-singer-in-the-beatles">Condition: Singer In The Beatles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-design">A Note On Design</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -426,12 +425,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="tidydata-horizontal-conditions">
+  <section class="tex2jax_ignore mathjax_ignore" id="tidydata-horizontal-conditions">
 <h1>TidyData: Horizontal Conditions<a class="headerlink" href="#tidydata-horizontal-conditions" title="Permalink to this heading">#</a></h1>
 <p>When extracting data there will be columns whose value will depend conditionally on the values of other columns. In Datachef we handle this scenario with what we call <code class="docutils literal notranslate"><span class="pre">HorizontalConditions</span></code>.</p>
-</section>
 <section id="source-data">
-<h1>Source Data<a class="headerlink" href="#source-data" title="Permalink to this heading">#</a></h1>
+<h2>Source Data<a class="headerlink" href="#source-data" title="Permalink to this heading">#</a></h2>
 <p>The data source we’re using for these examples is shown below:</p>
 <p>The <a class="reference external" href="https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv">full data source can be viewed here</a>.</p>
 <div class="cell docutils container">
@@ -494,14 +492,14 @@ document.write(`
 </div>
 </section>
 <section id="syntax">
-<h1>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading">#</a></h1>
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading">#</a></h2>
 <p>The basic syntax for constructing a horizontal conditional is as follows:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Column</span><span class="o">.</span><span class="n">horizontal_condition</span><span class="p">(</span><span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="nb">callable</span><span class="o">&gt;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">&lt;callable&gt;</span></code> is a python function or lambda function that operates upon a dictionary.</p>
 <section id="the-horizontal-condition-dictionary">
-<h2>The Horizontal Condition Dictionary<a class="headerlink" href="#the-horizontal-condition-dictionary" title="Permalink to this heading">#</a></h2>
+<h3>The Horizontal Condition Dictionary<a class="headerlink" href="#the-horizontal-condition-dictionary" title="Permalink to this heading">#</a></h3>
 <p>The dictionary in question consists of:</p>
 <ul class="simple">
 <li><p>keys: the names of the extracted columns</p></li>
@@ -538,7 +536,7 @@ document.write(`
 </section>
 </section>
 <section id="condition-singer-in-the-beatles">
-<h1>Condition: Singer In The Beatles<a class="headerlink" href="#condition-singer-in-the-beatles" title="Permalink to this heading">#</a></h1>
+<h2>Condition: Singer In The Beatles<a class="headerlink" href="#condition-singer-in-the-beatles" title="Permalink to this heading">#</a></h2>
 <p>For our first example, we’ll create a horizontal condition columns to identify which band members are singers in the beatles.</p>
 <p>You;ve seen this example before, so mainly focus on the new <code class="docutils literal notranslate"><span class="pre">Column.horizontal_condition()</span></code> syntax.</p>
 <div class="cell docutils container">
@@ -673,7 +671,7 @@ document.write(`
 </div>
 </section>
 <section id="a-note-on-design">
-<h1>A Note On Design<a class="headerlink" href="#a-note-on-design" title="Permalink to this heading">#</a></h1>
+<h2>A Note On Design<a class="headerlink" href="#a-note-on-design" title="Permalink to this heading">#</a></h2>
 <p>There is not (and never will be) any version of a “vertical condition” in datachef.</p>
 <p>When working with datasets of unknown length we try to always support (or at least leave open the door to) the concept of data streaming, a horizontal condition meets that criteria as it works within the context of a single “tidy row” of “tidy data” so can be iterated, streamed or potentially even distributed for processing relatively easily - none of which works if row 5 is informed by row 4 etc.</p>
 <p>If you find yourself needing to lookup vertically into your extracted columns:</p>
@@ -682,6 +680,7 @@ document.write(`
 <li><p>(b) Are you really trying to create tidy data or are you trying to create something else?</p></li>
 <li><p>(c) If you need to - then just shunt it into pandas for post processing, you’re working on a data series and that’s not a paradime datachef was built to support.</p></li>
 </ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -751,16 +750,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">TidyData: Horizontal Conditions</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#source-data">Source Data</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax">Syntax</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-horizontal-condition-dictionary">The Horizontal Condition Dictionary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-data">Source Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax">Syntax</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-horizontal-condition-dictionary">The Horizontal Condition Dictionary</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#condition-singer-in-the-beatles">Condition: Singer In The Beatles</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-design">A Note On Design</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#condition-singer-in-the-beatles">Condition: Singer In The Beatles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-design">A Note On Design</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
