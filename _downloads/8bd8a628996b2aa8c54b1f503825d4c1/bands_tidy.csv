@@ -1,0 +1,25 @@
+Value,Band,Asset,Name
+1,Beatles,Houses,John
+5,Beatles,Cars,John
+9,Beatles,Boats,John
+2,Rolling Stones,Houses,Keith
+6,Rolling Stones,Cars,Keith
+10,Rolling Stones,Boats,Keith
+2,Beatles,Houses,Paul
+6,Beatles,Cars,Paul
+10,Beatles,Boats,Paul
+3,Rolling Stones,Houses,Mick
+7,Rolling Stones,Cars,Mick
+11,Rolling Stones,Boats,Mick
+2,Beatles,Houses,George
+7,Beatles,Cars,George
+11,Beatles,Boats,George
+3,Rolling Stones,Houses,Charlie
+8,Rolling Stones,Cars,Charlie
+12,Rolling Stones,Boats,Charlie
+4,Beatles,Houses,Ringo
+8,Beatles,Cars,Ringo
+12,Beatles,Boats,Ringo
+5,Rolling Stones,Houses,Ronnie
+9,Rolling Stones,Cars,Ronnie
+13,Rolling Stones,Boats,Ronnie

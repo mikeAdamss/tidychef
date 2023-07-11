@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Example 1: Simple Bands Table &#8212; My sample book</title>
+    <title>Bands &#8212; My sample book</title>
   
   
   
@@ -208,7 +208,8 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../../examples.html">Chapter 4: Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="basic.html">Basic Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Example 1: Simple Bands Table</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Bands</a></li>
+
 </ul>
 </li>
 </ul>
@@ -384,7 +385,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -395,11 +398,25 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Example 1: Simple Bands Table</h1>
+    <h1>Bands</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Bands</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source">Source</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specification">Specification</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#outputs">Outputs</a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -409,15 +426,114 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="example-1-simple-bands-table">
-<h1>Example 1: Simple Bands Table<a class="headerlink" href="#example-1-simple-bands-table" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="bands">
+<h1>Bands<a class="headerlink" href="#bands" title="Permalink to this heading">#</a></h1>
+<section id="source">
+<h2>Source<a class="headerlink" href="#source" title="Permalink to this heading">#</a></h2>
+<p>For this example we’re extracting the following table:</p>
+<p><img alt="" src="../../_images/bands-before.png" /></p>
+<p>From a csv source which can be viewed <a class="reference external" href="https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv">here</a>.</p>
+</section>
+<section id="specification">
+<h2>Specification<a class="headerlink" href="#specification" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>We want a “Value” column to hold the observations</p></li>
+<li><p>We want other columns of: “Band”, “Name”, “Asset”</p></li>
+<li><p>We want to preview selections inline.</p></li>
+<li><p>We want to output one tidy data csv as “bands_tidy.csv”</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span><span class="p">,</span> <span class="n">CsvSelectable</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">below</span>
+
+<span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv&quot;</span><span class="p">)</span>
+
+<span class="n">observations</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">is_numeric</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">)</span>
+<span class="n">bands</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Band&quot;</span><span class="p">)</span>
+<span class="n">assets</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Asset&quot;</span><span class="p">)</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Name&quot;</span><span class="p">)</span>
+<span class="n">preview</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">bands</span><span class="p">,</span> <span class="n">assets</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span>
+
+<span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
+    <span class="n">observations</span><span class="p">,</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">bands</span><span class="o">.</span><span class="n">finds_observations_closest</span><span class="p">(</span><span class="n">right</span><span class="p">)),</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">assets</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">below</span><span class="p">)),</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">names</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">right</span><span class="p">))</span>
+<span class="p">)</span>
+
+<span class="n">tidy_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;bands_tidy.csv&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <table>
+                
+            <tr>
+                <td style="background-color:cyan">Value</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#99ff99">Band</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#eeccff">Asset</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#ffe066">Name</td>
+            <tr>
+        
+            </table>
+
+            <body>
+                <h2>Unnamed Table</h2>
+                <table>
+                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td><td style="background-color:lightgrey">G</td><td style="background-color:lightgrey">H</td><td style="background-color:lightgrey">I</td><td style="background-color:lightgrey">J</td><td style="background-color:lightgrey">K</td></tr>
+<tr><td style="background-color:lightgrey">1</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">2</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#eeccff">Houses</td><td style="background-color:#eeccff">Cars</td><td style="background-color:#eeccff">Boats</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#eeccff">Houses</td><td style="background-color:#eeccff">Cars</td><td style="background-color:#eeccff">Boats</td></tr>
+<tr><td style="background-color:lightgrey">3</td><td style="background-color:#99ff99">Beatles</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#99ff99">Rolling Stones</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">4</td><td style="background-color:white"></td><td style="background-color:#ffe066">John</td><td style="background-color:cyan">1</td><td style="background-color:cyan">5</td><td style="background-color:cyan">9</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#ffe066">Keith</td><td style="background-color:cyan">2</td><td style="background-color:cyan">6</td><td style="background-color:cyan">10</td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:white"></td><td style="background-color:#ffe066">Paul</td><td style="background-color:cyan">2</td><td style="background-color:cyan">6</td><td style="background-color:cyan">10</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#ffe066">Mick</td><td style="background-color:cyan">3</td><td style="background-color:cyan">7</td><td style="background-color:cyan">11</td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:white"></td><td style="background-color:#ffe066">George</td><td style="background-color:cyan">2</td><td style="background-color:cyan">7</td><td style="background-color:cyan">11</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#ffe066">Charlie</td><td style="background-color:cyan">3</td><td style="background-color:cyan">8</td><td style="background-color:cyan">12</td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:white"></td><td style="background-color:#ffe066">Ringo</td><td style="background-color:cyan">4</td><td style="background-color:cyan">8</td><td style="background-color:cyan">12</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#ffe066">Ronnie</td><td style="background-color:cyan">5</td><td style="background-color:cyan">9</td><td style="background-color:cyan">13</td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+
+                </table>
+            </body>
+            <br>
+        </html>
+    </div></div>
 </div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="outputs">
+<h1>Outputs<a class="headerlink" href="#outputs" title="Permalink to this heading">#</a></h1>
+<p>The output generated by the above example can be <a class="reference download internal" download="" href="../../_downloads/8bd8a628996b2aa8c54b1f503825d4c1/bands_tidy.csv"><span class="xref download myst">downloaded</span></a> or <a class="reference external" href="https://raw.githubusercontent.com/mikeAdamss/datachef/jupyterbook/_build/html/examples/basic/bands_tidy_csv">viewed online</a>.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -478,6 +594,26 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Bands</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source">Source</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specification">Specification</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#outputs">Outputs</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
