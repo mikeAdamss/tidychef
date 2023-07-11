@@ -65,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Chapter 5: Technical Reference" href="../../technical.html" />
-    <link rel="prev" title="Bands" href="bands.html" />
+    <link rel="prev" title="Source" href="oic-1a-table.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -209,6 +209,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../../examples.html">Chapter 4: Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="basic.html">Basic Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="bands.html">Bands</a></li>
+
+
+<li class="toctree-l3"><a class="reference internal" href="oic-1a-table.html">Source</a></li>
 
 
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">Monthly GDP Tables: GVA</a></li>
@@ -543,10 +546,9 @@ document.write(`
 
 <span class="n">observations</span> <span class="o">=</span> <span class="p">(</span><span class="n">anchor</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span> <span class="o">-</span> <span class="n">cdid</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">)</span>
 
-<span class="c1"># Preview some aount inline but also write the full preview to path so web users can view it</span>
+<span class="c1"># Create a bounded preview inline but also write the full preview to path</span>
 <span class="n">preview</span><span class="p">(</span><span class="n">anchor</span><span class="p">,</span> <span class="n">identifier</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">cdid</span><span class="p">,</span> <span class="n">time_period</span><span class="p">,</span> <span class="n">observations</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A4:Z16&quot;</span><span class="p">)</span>
 <span class="n">preview</span><span class="p">(</span><span class="n">anchor</span><span class="p">,</span> <span class="n">identifier</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">cdid</span><span class="p">,</span> <span class="n">time_period</span><span class="p">,</span> <span class="n">observations</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;monthly-gdp-gva-table.html&quot;</span><span class="p">)</span>
-
 
 <span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
     <span class="n">observations</span><span class="p">,</span>
@@ -3732,12 +3734,12 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="bands.html"
+       href="oic-1a-table.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Bands</p>
+        <p class="prev-next-title">Source</p>
       </div>
     </a>
     <a class="right-next"

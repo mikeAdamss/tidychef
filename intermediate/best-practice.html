@@ -211,6 +211,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="../examples/basic/bands.html">Bands</a></li>
 
 
+<li class="toctree-l3"><a class="reference internal" href="../examples/basic/oic-1a-table.html">Source</a></li>
+
+
 <li class="toctree-l3"><a class="reference internal" href="../examples/basic/monthly-gdp-tables.html">Monthly GDP Tables: GVA</a></li>
 
 
@@ -447,7 +450,7 @@ document.write(`
 </section>
 <section id="conditional-is-better-then-explicit">
 <h2>Conditional Is Better Then Explicit<a class="headerlink" href="#conditional-is-better-then-explicit" title="Permalink to this heading">#</a></h2>
-<p>If you want to create a robust repeatable recipe for a RAP process then a conditional selection (particularly simple conditions such as <code class="docutils literal notranslate"><span class="pre">.expand()</span></code> and <code class="docutils literal notranslate"><span class="pre">.fill()</span></code>) are typically better than explicit <code class="docutils literal notranslate"><span class="pre">.excel_ref()</span></code> statements.</p>
+<p>If you want to create a robust repeatable recipe then a conditional selection (particularly simple conditions such as <code class="docutils literal notranslate"><span class="pre">.expand()</span></code> and <code class="docutils literal notranslate"><span class="pre">.fill()</span></code>) are typically better than explicit <code class="docutils literal notranslate"><span class="pre">.excel_ref()</span></code> statements.</p>
 <p>This is because <em>many</em> tabulated sources are intended to be extended over time.</p>
 <p>Consider the following:</p>
 <div class="cell docutils container">
@@ -523,7 +526,7 @@ document.write(`
 <h2>When to use Validation<a class="headerlink" href="#when-to-use-validation" title="Permalink to this heading">#</a></h2>
 <p>If you’re doing a one off transform you’ve not intention of repeating (you’re quickly pulling some data apart of populate a dataframe, chart etc) then you could (possibly) argue that validation is overkill.</p>
 <p>If you’re intending run your code more than once against a changeable data source you should be implementing some form of validation. Even if its just one of the lightweight default methods provided by datachef that are documented elsewhere in this Jupyterbook.</p>
-<p>If you’re setting up any kind of RAP processes, you should almost certainly be investing time in a quality validation approach suitable for your pipeline processes and use case(s).</p>
+<p>If you’re setting up any kind of ETL pipeline, you should almost certainly be investing time in a quality validation approach suitable for your pipeline processes and use case(s).</p>
 </section>
 <section id="select-wide-and-validate-narrow">
 <h2>Select Wide and Validate Narrow<a class="headerlink" href="#select-wide-and-validate-narrow" title="Permalink to this heading">#</a></h2>
