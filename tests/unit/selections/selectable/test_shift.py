@@ -1,6 +1,6 @@
 import pytest
 
-from datachef.cardinal.directions import down, left, right, up
+from datachef.direction.directions import down, left, right, up
 from datachef.exceptions import BadShiftParameterError, OutOfBoundsError
 from datachef.selection import datafuncs as dfc
 from datachef.selection.selectable import Selectable

@@ -4,7 +4,7 @@ from typing import Dict, List
 
 import pytest
 
-from datachef.cardinal.directions import above, below, down, left, right, up
+from datachef.direction.directions import above, below, down, left, right, up
 from datachef.exceptions import (
     ImpossibleLookupError,
     MissingLabelError,

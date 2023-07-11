@@ -4,7 +4,7 @@ from typing import List
 
 import pytest
 
-from datachef.cardinal.directions import Direction, above, below, down, left, right, up
+from datachef.direction.directions import Direction, above, below, down, left, right, up
 from datachef.lookup.engines.closest import CellRanges
 from datachef.selection.selectable import Selectable
 from tests.fixtures import (

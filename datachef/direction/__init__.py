@@ -1,0 +1,1 @@
+from .directions import up, down, left, right, above, below

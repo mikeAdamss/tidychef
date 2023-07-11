@@ -2,7 +2,7 @@ import json
 from dataclasses import dataclass
 from typing import Dict, Optional
 
-from datachef.cardinal.directions import Direction
+from datachef.direction.directions import Direction
 from datachef.exceptions import AmbiguousLookupError, ImpossibleLookupError
 from datachef.models.source.cell import Cell
 from datachef.models.source.table import LiveTable

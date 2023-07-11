@@ -1,6 +1,6 @@
 from typing import List
 
-from datachef.cardinal.directions import BaseDirection, Direction
+from datachef.direction.directions import BaseDirection, Direction
 from datachef.exceptions import (
     FailedLookupError,
     MissingDirectLookupError,

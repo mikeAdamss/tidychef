@@ -5,7 +5,7 @@ import copy
 import re
 from typing import Callable, FrozenSet, List, Optional, Union
 
-from datachef.cardinal.directions import (
+from datachef.direction.directions import (
     BaseDirection,
     Direction,
     above,

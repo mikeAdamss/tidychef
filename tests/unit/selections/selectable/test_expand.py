@@ -1,6 +1,6 @@
 import pytest
 
-from datachef.cardinal.directions import down, left, right, up
+from datachef.direction.directions import down, left, right, up
 from datachef.exceptions import CellsDoNotExistError
 from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab

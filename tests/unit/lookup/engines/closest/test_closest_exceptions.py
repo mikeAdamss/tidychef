@@ -4,7 +4,7 @@ from typing import Dict, List, Optional
 
 import pytest
 
-from datachef.cardinal.directions import Direction, above, below, down, left, right, up
+from datachef.direction.directions import Direction, above, below, down, left, right, up
 from datachef.exceptions import AmbiguousLookupError, ImpossibleLookupError
 from datachef.lookup.engines.closest import Closest
 from datachef.selection.selectable import Selectable

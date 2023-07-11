@@ -1,6 +1,6 @@
 from typing import List
 
-from datachef.cardinal.directions import Direction
+from datachef.direction.directions import Direction
 from datachef.exceptions import ImpossibleLookupError, WithinAxisDeclarationError
 from datachef.models.source.cell import Cell
 from datachef.models.source.table import LiveTable
