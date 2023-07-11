@@ -443,7 +443,10 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span><span class="p">,</span> <span class="n">XlsSelectable</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">right</span>
+<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">datachef.direction</span> <span class="kn">import</span> <span class="n">right</span>
+<span class="kn">from</span> <span class="nn">datachef.output</span> <span class="kn">import</span> <span class="n">Column</span>
+<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsSelectable</span>
 
 <span class="n">Column</span><span class="o">.</span><span class="n">horizontal_condition</span>
 <span class="n">tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsSelectable</span><span class="p">]</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/xls/within-sample.xls&quot;</span><span class="p">)</span>
@@ -605,9 +608,11 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span><span class="p">,</span> <span class="n">XlsSelectable</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">down</span>
+<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">datachef.direction</span> <span class="kn">import</span> <span class="n">right</span><span class="p">,</span> <span class="n">down</span><span class="p">,</span> <span class="n">left</span>
+<span class="kn">from</span> <span class="nn">datachef.output</span> <span class="kn">import</span> <span class="n">Column</span><span class="p">,</span> <span class="n">TidyData</span>
+<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsSelectable</span>
 
-<span class="n">Column</span><span class="o">.</span><span class="n">horizontal_condition</span>
 <span class="n">tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsSelectable</span><span class="p">]</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/xls/within-sample.xls&quot;</span><span class="p">)</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
@@ -808,15 +813,12 @@ document.write(`
 <p>Consider the following data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span><span class="p">,</span> <span class="n">Selectable</span><span class="p">,</span>
-    <span class="n">Column</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">TidyData</span><span class="p">,</span>
-    <span class="n">Column</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">down</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">filters</span>
+<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">Selectable</span>
 
 <span class="c1"># Note acquire.python.list_of_lists is a constructor that takes a python object</span>
 <span class="c1"># it&#39;s intended purely for testing and/or quickly mocking up tabulated data</span>
-<span class="n">table</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Selectable</span><span class="p">]</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">list_of_lists</span><span class="p">(</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">Selectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">list_of_lists</span><span class="p">(</span>
     <span class="p">[</span>
         <span class="p">[</span><span class="s2">&quot;Both&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;Male&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;Female&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">],</span>
         <span class="p">[</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;Retired&quot;</span><span class="p">,</span> <span class="s2">&quot;Working Age&quot;</span><span class="p">,</span> <span class="s2">&quot;Child&quot;</span><span class="p">,</span> <span class="s2">&quot;Retired&quot;</span><span class="p">,</span> <span class="s2">&quot;Working Age&quot;</span><span class="p">,</span> <span class="s2">&quot;Child&quot;</span><span class="p">],</span>

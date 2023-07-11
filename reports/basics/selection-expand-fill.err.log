@@ -18,27 +18,21 @@ Traceback (most recent call last):
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
 from typing import List
-from datachef import acquire
-from datachef.selection import XlsxSelectable
+from datachef import acquire, preview, XlsxSelectable
 
 tables: List[XlsxSelectable] = acquire.xlsx.http("https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx")
-tables[7].excel_ref('A1:A2').assert_one()
+preview(tables[7], bounded="A4:H10")
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mAssertionError[0m                            Traceback (most recent call last)
-[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_77148/1822173736.py[0m in [0;36m<module>[0;34m[0m
-[1;32m      4[0m [0;34m[0m[0m
-[1;32m      5[0m [0mtables[0m[0;34m:[0m [0mList[0m[0;34m[[0m[0mXlsxSelectable[0m[0;34m][0m [0;34m=[0m [0macquire[0m[0;34m.[0m[0mxlsx[0m[0;34m.[0m[0mhttp[0m[0;34m([0m[0;34m"https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 6[0;31m [0mtables[0m[0;34m[[0m[0;36m7[0m[0;34m][0m[0;34m.[0m[0mexcel_ref[0m[0;34m([0m[0;34m'A1:A2'[0m[0;34m)[0m[0;34m.[0m[0massert_one[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m
-[0;32m~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/selection/selectable.py[0m in [0;36massert_one[0;34m(self)[0m
-[1;32m     63[0m         assert (
-[1;32m     64[0m             [0mlen[0m[0;34m([0m[0mself[0m[0;34m.[0m[0mcells[0m[0;34m)[0m [0;34m==[0m [0;36m1[0m[0;34m[0m[0;34m[0m[0m
-[0;32m---> 65[0;31m         ), f"Selection contains {len(self.cells)} cells, not 1"
-[0m[1;32m     66[0m         [0;32mreturn[0m [0mself[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     67[0m [0;34m[0m[0m
+[0;31mImportError[0m                               Traceback (most recent call last)
+[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_77086/44220803.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      1[0m [0;32mfrom[0m [0mtyping[0m [0;32mimport[0m [0mList[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 2[0;31m [0;32mfrom[0m [0mdatachef[0m [0;32mimport[0m [0macquire[0m[0;34m,[0m [0mpreview[0m[0;34m,[0m [0mXlsxSelectable[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      3[0m [0;34m[0m[0m
+[1;32m      4[0m [0mtables[0m[0;34m:[0m [0mList[0m[0;34m[[0m[0mXlsxSelectable[0m[0;34m][0m [0;34m=[0m [0macquire[0m[0;34m.[0m[0mxlsx[0m[0;34m.[0m[0mhttp[0m[0;34m([0m[0;34m"https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m [0mpreview[0m[0;34m([0m[0mtables[0m[0;34m[[0m[0;36m7[0m[0;34m][0m[0;34m,[0m [0mbounded[0m[0;34m=[0m[0;34m"A4:H10"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mAssertionError[0m: Selection contains 2 cells, not 1
-AssertionError: Selection contains 2 cells, not 1
+[0;31mImportError[0m: cannot import name 'XlsxSelectable' from 'datachef' (/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/__init__.py)
+ImportError: cannot import name 'XlsxSelectable' from 'datachef' (/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/__init__.py)
 
