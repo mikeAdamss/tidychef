@@ -1,17 +1,19 @@
 Traceback (most recent call last):
-  File "/Users/michaeladams/.pyenv/versions/3.9.7/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
-    executenb(
-  File "/Users/michaeladams/.pyenv/versions/3.9.7/lib/python3.9/site-packages/nbclient/client.py", line 1305, in execute
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 64, in single_nb_execution
+    **kwargs,
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 1204, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/Users/michaeladams/.pyenv/versions/3.9.7/lib/python3.9/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
-    return loop.run_until_complete(inner)
-  File "/Users/michaeladams/.pyenv/versions/3.9.7/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
     return future.result()
-  File "/Users/michaeladams/.pyenv/versions/3.9.7/lib/python3.9/site-packages/nbclient/client.py", line 705, in async_execute
-    await self.async_execute_cell(
-  File "/Users/michaeladams/.pyenv/versions/3.9.7/lib/python3.9/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 664, in async_execute
+    cell, index, execution_count=self.code_cells_executed + 1
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 965, in async_execute_cell
     await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "/Users/michaeladams/.pyenv/versions/3.9.7/lib/python3.9/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
@@ -22,20 +24,20 @@ table: CsvSelectable = acquire.csv.http("https://raw.githubusercontent.com/mikeA
 table.excel_ref('B').is_not_blank().validate(against.regex("John"), raise_first_error=True)
 ------------------
 
-
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mCellValidationError[0m                       Traceback (most recent call last)
-Cell [0;32mIn[5], line 5[0m
-[1;32m      1[0m [38;5;28;01mfrom[39;00m [38;5;21;01mdatachef[39;00m [38;5;28;01mimport[39;00m acquire, CsvSelectable, against
-[1;32m      3[0m table: CsvSelectable [38;5;241m=[39m acquire[38;5;241m.[39mcsv[38;5;241m.[39mhttp([38;5;124m"[39m[38;5;124mhttps://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv[39m[38;5;124m"[39m)
-[0;32m----> 5[0m [43mtable[49m[38;5;241;43m.[39;49m[43mexcel_ref[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43mB[39;49m[38;5;124;43m'[39;49m[43m)[49m[38;5;241;43m.[39;49m[43mis_not_blank[49m[43m([49m[43m)[49m[38;5;241;43m.[39;49m[43mvalidate[49m[43m([49m[43magainst[49m[38;5;241;43m.[39;49m[43mregex[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43mJohn[39;49m[38;5;124;43m"[39;49m[43m)[49m[43m,[49m[43m [49m[43mraise_first_error[49m[38;5;241;43m=[39;49m[38;5;28;43;01mTrue[39;49;00m[43m)[49m
-
-File [0;32m~/.pyenv/versions/3.9.7/lib/python3.9/site-packages/datachef/selection/selectable.py:350[0m, in [0;36mSelectable.validate[0;34m(self, validator, raise_first_error)[0m
-[1;32m    348[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m validator(cell):
-[1;32m    349[0m     [38;5;28;01mif[39;00m raise_first_error:
-[0;32m--> 350[0m         [38;5;28;01mraise[39;00m CellValidationError(validator[38;5;241m.[39mmsg(cell))
-[1;32m    351[0m     [38;5;28;01melse[39;00m:
-[1;32m    352[0m         validation_errors[38;5;241m.[39mappend(validator[38;5;241m.[39mmsg(cell))
+[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_69293/140728050.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      3[0m [0mtable[0m[0;34m:[0m [0mCsvSelectable[0m [0;34m=[0m [0macquire[0m[0;34m.[0m[0mcsv[0m[0;34m.[0m[0mhttp[0m[0;34m([0m[0;34m"https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      4[0m [0;34m[0m[0m
+[0;32m----> 5[0;31m [0mtable[0m[0;34m.[0m[0mexcel_ref[0m[0;34m([0m[0;34m'B'[0m[0;34m)[0m[0;34m.[0m[0mis_not_blank[0m[0;34m([0m[0;34m)[0m[0;34m.[0m[0mvalidate[0m[0;34m([0m[0magainst[0m[0;34m.[0m[0mregex[0m[0;34m([0m[0;34m"John"[0m[0;34m)[0m[0;34m,[0m [0mraise_first_error[0m[0;34m=[0m[0;32mTrue[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;32m~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/selection/selectable.py[0m in [0;36mvalidate[0;34m(self, validator, raise_first_error)[0m
+[1;32m    348[0m             [0;32mif[0m [0;32mnot[0m [0mvalidator[0m[0;34m([0m[0mcell[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    349[0m                 [0;32mif[0m [0mraise_first_error[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 350[0;31m                     [0;32mraise[0m [0mCellValidationError[0m[0;34m([0m[0mvalidator[0m[0;34m.[0m[0mmsg[0m[0;34m([0m[0mcell[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    351[0m                 [0;32melse[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    352[0m                     [0mvalidation_errors[0m[0;34m.[0m[0mappend[0m[0;34m([0m[0mvalidator[0m[0;34m.[0m[0mmsg[0m[0;34m([0m[0mcell[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 
 [0;31mCellValidationError[0m: "Paul" does not match pattern: "John"
+CellValidationError: "Paul" does not match pattern: "John"
 
