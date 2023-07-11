@@ -22,6 +22,7 @@ book: ## Create the jupyter book in /jupyterbook/_build
 	python -m venv ./jupyterbook/venv
 	. ./jupyterbook/venv/bin/activate
 	pip install .
+	pip install jupyter-book
 	jupyter-book build jupyterbook/ --all
 
 publish: ## Publish the jupyter book to github pages

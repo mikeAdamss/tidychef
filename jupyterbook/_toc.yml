@@ -47,5 +47,6 @@ chapters:
     - file: examples/basic/basic
       sections:
         - file: examples/basic/bands
+        - file: examples/basic/monthly-gdp-tables
 
 - file: technical
