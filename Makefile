@@ -25,6 +25,11 @@ book: ## Create the jupyter book in /jupyterbook/_build
 	pip install jupyter-book
 	jupyter-book build jupyterbook/ --all
 
+	python -m venv ./jupyterbook/pdoc_venv
+	. ./jupyterbook/pdoc_venv/bin/activate
+	pip install pdoc
+	pdoc ./datachef -o ./jupyterbook/_build/html/api_docs
+
 publish: ## Publish the jupyter book to github pages
 	poetry run pip install ghp-import
 	poetry run ghp-import -n -p -f ./jupyterbook/_build/html

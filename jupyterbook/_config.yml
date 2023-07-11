@@ -31,6 +31,8 @@ sphinx:
   confoverrides:
     python:
       sys.path: ['./venv/bin/python']
+  extensions:
+    - sphinx.ext.napoleon
 
 # Add a bibtex file so that we can create citations
 bibtex_bibfiles:

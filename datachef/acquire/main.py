@@ -26,12 +26,15 @@ def acquirer(
     **kwargs
 ) -> Union[List[Selectable], Selectable]:
     """
-    The basic acquiring function that all of the other
-    acquire functions call.
-
-    You would not typically be calling this directly
-    outside of advanced users utilising kwargs for
-    unanticipated and/or niche uses cases.
+    :param path: The path of the file to wrap
+    :type path: str
+    :param field_storage: The :class:`FileStorage` instance to wrap
+    :type field_storage: FileStorage
+    :param temporary: Whether or not to delete the file when the File
+    instance is destructed
+    :type temporary: bool
+    :returns: A buffered writable file descriptor
+    :rtype: BufferedFileStorage
     """
 
     # Execute pre load hook
