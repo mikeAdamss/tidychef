@@ -31,4 +31,4 @@ pip install datachef
 
 Datachef is directly inspired by the python package [databaker](https://github.com/sensiblecodeio/databaker) created by [The Sensible Code Company](https://sensiblecode.io/) in partnership with the United Kingdoms [Office For National Statistics](https://www.ons.gov.uk/).
 
-While I liked [databaker](https://github.com/sensiblecodeio/databaker) and successfully worked with it on multiple [RAP](https://analysisfunction.civilservice.gov.uk/policy-store/reproducible-analytical-pipelines-strategy/#:~:text=Reproducible%20Analytical%20Pipelines%20(RAPs)%20are,auditable%2C%20efficient%20and%20high%20quality.) projects over the course of almost a decade, this software should be considered the culmination of that work and the lessons learned from that time.
+While I liked [databaker](https://github.com/sensiblecodeio/databaker) and successfully worked with it on multiple ETL projects over the course of almost a decade, this software should be considered the culmination of that work and the lessons learned from that time.
