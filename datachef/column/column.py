@@ -26,6 +26,13 @@ class Column(BaseColumn):
         """
         Creates a column that populates based on the
         values resolved for one or more other columns.
+
+        :param column_label: The label we wish to give to the column.
+        :param resolver: A callable to resolve the horizontal condition logic.
+        :priority: controls order of resolution for all present HorizontalCondition objects, 
+        lower values are resolved first.
+        :return: A Column object populated with a configured HorizontalCondition
+        lookup engine.
         """
         return Column(HorizontalCondition(column_label, resolver, priority=priority))
 
@@ -34,12 +41,20 @@ class Column(BaseColumn):
         """
         Create a column that has one specific value for every
         entry.
+
+        :param column_label: The label we wish to give to the column.
+        :param constant: The constant value we wish to populate the column.
+        :return: A Column object populated with a configured Constant lookup engine.
         """
         return Column(Constant(column_label, constant))
 
     def _pre_init(self, engine: BaseLookupEngine, *args, **kwargs):
-        """ """
+        """
+        Things to be applied before the bulk of the BaeColumn
+        init logic.
 
+        :engine: The lookup engine in use by this column.
+        """
         # -----
         # Apply
         # -----
@@ -61,10 +76,13 @@ class Column(BaseColumn):
                 self.validation
             ), "Value of Kwarg 'validation' must be a python callable"
 
-    def _post_lookup(self, cell: Cell):
+    def _post_lookup(self, cell: Cell) -> Cell:
         """
         Makes use of apply and/or validation callables where the
         user has provided them.
+
+        :param cell: A single instance of a datachef Cell object.
+        :return: A single instance of a datachef Cell object.
         """
 
         # Apply any modifications

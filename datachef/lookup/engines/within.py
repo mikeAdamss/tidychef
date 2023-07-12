@@ -49,6 +49,15 @@ class Within(BaseLookupEngine):
 
         With the header cell we're "looking up" being the first of the cells we've labelled
         1-9 (in that order) that is a cell we've also defined via the selection parameter.
+
+        :param label: The label of the column informed
+        by this lookup engine.
+        :param Selection: the selection of cells that hold the column values being looked to.
+        :param direction: cardinal direction declaration.
+        :param start: a direction with an altered positional offset to indicate beginning of
+        cell range to scan.
+        :param end: a direction with an altered positional offset to indicate end of
+        cell range to scan.
         """
         self.label = label
 
@@ -90,9 +99,12 @@ class Within(BaseLookupEngine):
 
         self.cells: List[Cell] = selection.cells
 
-    def _order(self, cells: List[Cell]):
+    def _order(self, cells: List[Cell]) -> List[Cell]:
         """
         Order cells appropriately based on how the lookup engine has been configured
+
+        :param cells: A list of cells to be ordered.
+        :return: The ordered list of cells.
         """
 
         # Right
@@ -121,8 +133,12 @@ class Within(BaseLookupEngine):
 
     def _feasible_cells(self, cell: Cell) -> List[Cell]:
         """
-        Filters cells to a list of cells that are valid within
-        the start= and end= params relative to the cell in question.
+        Filters cells known to the engine to create a list of cells that are
+        valid within the start= and end= params relative to the cell in question.
+
+        :param cell: The datachef cell we're trying to resolve the column 
+        cell for.
+        :return: A list of cells that are feasible
         """
 
         if self.direction_of_travel.is_right and self.direction.is_upwards:
@@ -202,6 +218,9 @@ class Within(BaseLookupEngine):
         Given an observation cell, return the
         appropriate cell as declared via this
         visual relationship.
+
+        :param cell: The datachef Cell we want to resolve a column Cell for.
+        :return: The column Cell we're resolved.
         """
 
         assert isinstance(cell, Cell)

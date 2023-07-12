@@ -13,15 +13,8 @@ class UnnamedTableError(Exception):
     not have a name/title property.
     """
 
-    def __init__(
-        self,
-        msg=(
-            "Cannot access table name/title property as this table does not have one."
-        ),
-        *args,
-        **kwargs,
-    ):
-        super().__init__(msg, *args, **kwargs)
+    def __init__(self, msg):
+        self.msg = msg
 
 
 class CellsDoNotExistError(Exception):
@@ -30,13 +23,8 @@ class CellsDoNotExistError(Exception):
     does not exist in the filtered table.
     """
 
-    def __init__(
-        self,
-        msg=("Requested cells are not in current selection."),
-        *args,
-        **kwargs,
-    ):
-        super().__init__(msg, *args, **kwargs)
+    def __init__(self, msg):
+        self.msg = msg
 
 
 class LoneValueOnMultipleCellsError(Exception):
@@ -45,13 +33,8 @@ class LoneValueOnMultipleCellsError(Exception):
     on a selection of more than one cell.
     """
 
-    def __init__(
-        self,
-        msg=("You can only use lone_value on a selection of exactly one cell. "),
-        *args,
-        **kwargs,
-    ):
-        super().__init__(msg, *args, **kwargs)
+    def __init__(self, msg):
+        self.msg = msg
 
 
 class InvalidCellObjectError(Exception):
@@ -73,17 +56,8 @@ class UnalignedTableOperation(Exception):
     a single distinct source of tabulated data.
     """
 
-    def __init__(
-        self,
-        msg=(
-            "Selections can only be combined or previewed in combination "
-            "if they are taken from the exact same table as taken from a single "
-            "instance of a parsed input."
-        ),
-        *args,
-        **kwargs,
-    ):
-        super().__init__(msg, *args, **kwargs)
+    def __init__(self, msg):
+        self.msg = msg
 
 
 class InvalidTableSignatures(Exception):
@@ -92,16 +66,8 @@ class InvalidTableSignatures(Exception):
     non identical tables.
     """
 
-    def __init__(
-        self,
-        msg=(
-            "This class:LiveTable is invalid. A LiveTable must be "
-            "instantiated from tables with matching signatures."
-        ),
-        *args,
-        **kwargs,
-    ):
-        super().__init__(msg, *args, **kwargs)
+    def __init__(self, msg):
+        self.msg = msg
 
 
 class OutOfBoundsError(Exception):

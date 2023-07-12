@@ -77,6 +77,11 @@ def test_any_excel_ref_as_wanted_basecells():
         for cell in case.cells:
             assert cell in cells, f"Cell {cell} missing from expected cells {cells}"
 
+    # Confirm error raises for bad excel reference
+    with pytest.raises(BadExcelReferenceError):
+        dfc.any_excel_ref_as_wanted_basecells("foo")
+
+
 
 def test_any_excel_ref_as_wanted_basecells():
     """

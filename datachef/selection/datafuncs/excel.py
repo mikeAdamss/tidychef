@@ -124,7 +124,10 @@ def multi_excel_ref_to_basecells(excel_ref: str) -> List[BaseCell]:
     end_cell = single_excel_ref_to_basecell(excel_ref.split(":")[1])
 
     if start_cell.x > end_cell.x or start_cell.y > end_cell.y:
-        raise ReversedExcelRefError()
+        raise ReversedExcelRefError("""
+            Invalid excel reference format. Please provide your reference in the
+            standard upmost left to downmost right format, i.e A1:C5 not C5:A1
+                """)
 
     start_x = start_cell.x
     start_y = start_cell.y

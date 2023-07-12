@@ -90,7 +90,7 @@ class LiveTable:
         if self._name:
             return self._name
         else:
-            raise UnnamedTableError()
+            raise UnnamedTableError("Cannot access table name/title property as this table does not have one.")
 
     @property
     def cells(self) -> List[Cell]:
@@ -137,7 +137,10 @@ class LiveTable:
         Confirm class is validly constructed.
         """
         if self.pristine._signature != self.filtered._signature:
-            raise InvalidTableSignatures()
+            raise InvalidTableSignatures(
+                "This class:LiveTable is invalid. A LiveTable must be "
+                "instantiated from tables with matching signatures."
+                )
 
     @staticmethod
     def from_table(
@@ -160,7 +163,6 @@ class LiveTable:
         """
         return self.filtered._signature
 
-    # TODO - type hint this
     @dontmutate
     def __sub__(self, other_input: LiveTable):
         """
@@ -172,7 +174,11 @@ class LiveTable:
         """
 
         if self.signature != other_input.signature:
-            raise UnalignedTableOperation()
+            raise UnalignedTableOperation(
+            "Selections can only be combined or previewed in combination "
+            "if they are taken from the exact same table as taken from a single "
+            "instance of a parsed input."
+        )
 
         self.cells = dfc.cells_not_in(self.cells, other_input.cells)
         return self
@@ -188,7 +194,11 @@ class LiveTable:
         are derived from the same initial BaseInput.
         """
         if self.signature != other_input.signature:
-            raise UnalignedTableOperation()
+            raise UnalignedTableOperation(
+            "Selections can only be combined or previewed in combination "
+            "if they are taken from the exact same table as taken from a single "
+            "instance of a parsed input."
+        )
 
         new_cells = dfc.cells_not_in(other_input.cells, self.cells)
         self.cells = self.cells + new_cells

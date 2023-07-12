@@ -18,6 +18,13 @@ class BaseColumn(metaclass=ABCMeta):
         *args,
         **kwargs,
     ):
+        """
+        An object representing a proto column that can resolve a
+        visual relationship to retrieve the appropriate column
+        value relative to a given observation containing cell object.
+
+        :param engine: The "lookup engine" that resolves cell value lookups.
+        """
 
         # See _pre_init() docstring
         self._pre_init(self, engine, *args, **kwargs)
@@ -27,8 +34,7 @@ class BaseColumn(metaclass=ABCMeta):
         ), f"""
                 {engine} is not a valid argument.
                 
-                Argument must be a type or subtype of BaseLookupEngine:
-                Within, Closest, Directly etc
+                Argument must be of type BaseLookupEngine.
         """
 
         self.engine = engine
@@ -46,12 +52,13 @@ class BaseColumn(metaclass=ABCMeta):
         """
         Overridable method for doing something clever just before the bulk
         of the __init__ logic is executed.
+
+        :param engine: The "lookup engine" that resolves cell value lookups.
         """
         ...
 
     def _post_init(
         self,
-        label: str,
         engine: BaseLookupEngine,
         *args,
         **kwargs,
@@ -59,6 +66,8 @@ class BaseColumn(metaclass=ABCMeta):
         """
         Overridable method for doing something clever just after the __init__
         logic is executed.
+
+        :param engine: The "lookup engine" that resolves cell value lookups.
         """
         ...
 
@@ -74,6 +83,9 @@ class BaseColumn(metaclass=ABCMeta):
                 cell.value = "foo-"+cell.value
                 return Cell
         ``
+
+        :param cell: A single datachef Cell object.
+        :return: A single datachef Cell object.
         """
         return cell
 
@@ -86,6 +98,9 @@ class BaseColumn(metaclass=ABCMeta):
         The found cell is ran through _post_lookup() in case
         this particular Column is applying custom handling of
         some sort.
+
+        :param cell: A single datachef Cell object.
+        :return: A single datachef Cell object. 
         """
         cell = self.engine.resolve(observation_cell, *args)
         cell = self._post_lookup(cell)
@@ -101,6 +116,9 @@ class BaseColumn(metaclass=ABCMeta):
 
         This is intended for sanity checking during
         development, not for doing the actual transform.
+
+        :param observation_selection: A list of cells representing
+        a selection of observations from the data source.
         """
         for observation_cell in observation_selection.cells:
             yield observation_cell, self.resolve_column_cell_from_obs_cell(

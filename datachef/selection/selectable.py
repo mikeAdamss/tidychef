@@ -71,7 +71,9 @@ class Selectable(LiveTable):
         the value of that cell
         """
         if len(self.cells) != 1:
-            raise LoneValueOnMultipleCellsError(len(self.cells))
+            raise LoneValueOnMultipleCellsError(f'''
+                Selection contains {len(self.cells)} cell. It must contain 1 to use .lone_value()
+                ''')
         return self.cells[0].value
 
     @dontmutate
@@ -231,9 +233,17 @@ class Selectable(LiveTable):
         :param possibly_y: Either none or the raw y offset of a direction
         """
 
+        msg=(
+            f"The shift method must be called with one of two types of argument{linesep}"
+            f"1.) By passing in an up, down, left, right, above or below direction, "
+            f"for example: .shift(up). {linesep}"
+            "2.) By passing in two integer arguments, on each for x index change and y index change"
+            "example: .shift(1, 2)"
+        ),
+
         if isinstance(direction_or_x, int):
             if not isinstance(possibly_y, int):
-                raise BadShiftParameterError()
+                raise BadShiftParameterError(msg)
             x_offset = direction_or_x
             y_offset = possibly_y
         elif isinstance(direction_or_x, BaseDirection):
@@ -243,7 +253,7 @@ class Selectable(LiveTable):
             x_offset = direction_or_x.x
             y_offset = direction_or_x.y
         else:
-            raise BadShiftParameterError()
+            raise BadShiftParameterError(msg)
 
         wanted_cells: List[BaseCell] = [
             BaseCell(x=c.x + x_offset, y=c.y + y_offset) for c in self.cells

@@ -1,5 +1,3 @@
-from os import linesep
-
 
 class BadExcelReferenceError(Exception):
     """
@@ -7,10 +5,8 @@ class BadExcelReferenceError(Exception):
     the known patterns for excel references.
     """
 
-    def __init__(
-        self, msg=("Could not understand the provided excel reference"), *args, **kwargs
-    ):
-        super().__init__(msg, *args, **kwargs)
+    def __init__(self, msg):
+        self.msg = msg
 
 
 class BadShiftParameterError(Exception):
@@ -19,22 +15,16 @@ class BadShiftParameterError(Exception):
     shift method.
     """
 
-    def __init__(
-        self,
-        msg=(
-            f"The shift method must be called with one of two types of argument{linesep}"
-            f"1.) By passing in an up, down, left, right, above or below direction, "
-            f"for example: .shift(up). {linesep}"
-            "2.) By passing in two integer arguments, on each for x index change and y index change"
-            "example: .shift(1, 2)"
-        ),
-        *args,
-        **kwargs,
-    ):
-        super().__init__(msg, *args, **kwargs)
+    def __init__(self,msg):
+        self.msg = msg
 
 
 class CardinalDeclarationWithOffset(Exception):
+    """
+    User had tried to pass in an argument to a direction
+    in a context where its just being used to declare an
+    absolute cardinal direction.
+    """
     def __init__(self, msg):
         self.msg = msg
 
@@ -60,7 +50,10 @@ class WithinAxisDeclarationError(Exception):
 
 
 class OutputPassedToPreview(Exception):
-    """ """
+    """
+    User it trying to call preview() with a TidyData class
+    in place of Selectables
+    """
 
     def __init__(self, msg):
         self.msg = msg
@@ -74,16 +67,8 @@ class ReversedExcelRefError(Exception):
     C5:A2
     """
 
-    def __init__(
-        self,
-        msg=(
-            "Invalid excel reference format. Please provide your reference in the "
-            "standard upmost left to downmost right format, i.e A1:C5 not C5:A1"
-        ),
-        *args,
-        **kwargs,
-    ):
-        super().__init__(msg, *args, **kwargs)
+    def __init__(self, msg):
+        self.msg = msg
 
 
 class UnknownDirectionError(Exception):
@@ -91,10 +76,5 @@ class UnknownDirectionError(Exception):
     User has passed in a direction that is not a valid direction
     """
 
-    def __init__(
-        self,
-        msg=("Direction is not a valid direction."),
-        *args,
-        **kwargs,
-    ):
-        super().__init__(msg, *args, **kwargs)
+    def __init__(self, msg):
+        self.msg = msg

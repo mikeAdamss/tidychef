@@ -17,6 +17,11 @@ LOWEST = 0
 class CellRange:
     """
     A class representing a range of cells
+
+    :param low: the lowest index in the range
+    :param high: the highest index in the range
+    :param cell: the cell the spanning range resolves to
+    :direction: the direction of traversal for the lookup
     """
 
     low: int
@@ -32,6 +37,8 @@ class CellRange:
         """
         Does this cell contain the range
         in question.
+
+        :param cell: The cell we want to check is in the range
         """
         if self.direction.is_horizontal:
             offset = cell.x
@@ -44,6 +51,9 @@ class CellRange:
         """
         Does this range cover a range of indexes higher that the
         index of a given cell.
+
+        :param cell: The cell this range may or may not span a higher
+        range than.
         """
         if self.direction.is_horizontal:
             return self.low > cell.x
@@ -54,6 +64,9 @@ class CellRange:
         """
         Does this range cover a range of indexes lower that the
         index of a given cell.
+
+        :param cell: The cell this range may or may not span a lower
+        range than.
         """
         if self.direction.is_horizontal:
             return self.high < cell.x
@@ -75,6 +88,10 @@ class CellRanges:
     """
 
     def __init__(self, selection: LiveTable, direction: Direction):
+        """
+        selection: The selection of cells to create the cell ranges from
+        :direction: The direction of traversal considered when constructing ranges
+        """
         self.direction: Direction = direction
         self.highest_possible_offset: Optional[int] = None
         self.lowest_possible_offset: Optional[int] = None
@@ -85,10 +102,19 @@ class CellRanges:
         return "horizontal/x" if self.direction.is_horizontal else "vertical/y"
 
     def get_range_by_index(self, index: int) -> CellRange:
+        """
+        Get a single constructed range by index
+
+        :param index: Index of the range to get
+        """
         return self.ordered_cell_ranges[index]
 
     def _populate(self, selection: LiveTable):
-        """ """
+        """
+        Create the cell ranges from the selection provided
+
+        :param selection: The selection of cells.
+        """
 
         break_points = {}
         for cell in selection.cells:
@@ -175,7 +201,9 @@ class Closest(BaseLookupEngine):
         Creates a lookup engine to column values defined via
         the closest visual relationship.
 
-        :param: Direction: one of up,down,left,right,above,below
+        :param label: The label of the column informed
+        by this lookup engine.
+        :param: direction: one of up,down,left,right,above,below
         :param: Selection: the selection of cells that hold the column values being looked to.
         """
         self.direction = direction
@@ -188,6 +216,11 @@ class Closest(BaseLookupEngine):
         """
         Move the index down as as the cell offset was down/less-than the
         last ranged we looked at then attempt to resolve again.
+
+        :param index: The index of the last range we looked at
+        :param cell: The cell we're trying to find the correct range for
+        :param ceiling: The highest range index to consider
+        :param floor: The lowest range index to consider
         """
 
         if self.bumped == False and index != 0:
@@ -204,6 +237,11 @@ class Closest(BaseLookupEngine):
         """
         Move the index down as as the cell offset was above/greater-than the
         last ranged we looked at then attempt to resolve again.
+
+        :param index: The index of the last range we looked at
+        :param cell: The cell we're trying to find the correct range for
+        :param ceiling: The lowest range index to consider
+        :param floor: The highest range index to consider
         """
 
         if self.bumped == False and index != len(self.ranges.ordered_cell_ranges):
@@ -224,6 +262,9 @@ class Closest(BaseLookupEngine):
         example: we're trying to resolve a closest relations to the left
         of a cell that is further to the left than any of the ranges we're
         considering.
+
+        :param cell: The single Cell object we want to resolve a the relative
+        column cell object for.
         """
 
         err_str = """
@@ -266,6 +307,13 @@ class Closest(BaseLookupEngine):
 
         Note - this method is called recursively, using the kwargs to start
         again at a different point in the indexed list of ranges.
+
+        :param index: The index of the last range we looked at
+        :param cell: The cell we're trying to find the correct range for
+        :param ceiling: The lowest range index to consider
+        :param floor: The highest range index to consider
+        :return: The datachef Cell object representing the
+        column cell.
         """
 
         # If neither the index or ceiling have been passed in, then its the

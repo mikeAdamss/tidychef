@@ -63,7 +63,7 @@ def local(
 class LocalXlsxReader(BaseReader):
     """
     A reader to lead in a source where that source is a locally
-    held xlsx file.
+    held xls file.
     """
 
     def parse(

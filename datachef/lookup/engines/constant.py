@@ -15,6 +15,11 @@ class Constant(BaseLookupEngine):
         A class to resolve a direct lookup between
         an observation cell and a single constant
         value.
+
+        :param label: The label of the column informed
+        by this lookup engine.
+        :param value: The constant value we want this
+        lookup engine to return.
         """
         self.cell = VirtualCell(value=value)
         self.label = label
@@ -23,5 +28,8 @@ class Constant(BaseLookupEngine):
         """
         Regardless of the observation cell,
         return the constant cell.
+
+        :param _: Unused Cell object required to keep api
+        signature in keeping with the other engines
         """
         return self.cell

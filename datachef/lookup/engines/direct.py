@@ -12,8 +12,6 @@ from datachef.selection import datafuncs as dfc
 
 from ..base import BaseLookupEngine
 
-# from datachef.selection.selectable import Selectable
-
 
 class Directly(BaseLookupEngine):
     """
@@ -31,10 +29,15 @@ class Directly(BaseLookupEngine):
 
     def __init__(self, label: str, selection: LiveTable, direction: Direction):
         """
+        A class to resolve a direct lookup between
+        a given observation cell and the appropriate
+        cell from the selection of cells this class
+        is constructed with.
 
-        :param: The value items that define this
-        component, eg: in case of a dimension, these
-        would be the dimensional values.
+        :param label: The label of the column informed
+        by this lookup engine.
+        :param: direction: one of up,down,left,right,above,below
+        :param: Selection: the selection of cells that hold the column values being looked to.
         """
         self.label = label
         self.direction: Direction = direction
@@ -90,6 +93,9 @@ class Directly(BaseLookupEngine):
         By default its the along the principle direction
         of travel, i.e cell.x (column index) for a
         horizontal lookups else y (row index).
+
+        :param cell: The datachef Cell object we're trying
+        to resolve the relative column cell object for.
         """
         if self.direction.is_horizontal:
             return cell.y
@@ -100,6 +106,11 @@ class Directly(BaseLookupEngine):
         Given an observation cell, return the
         appropriate cell as declared via this
         visual relationship.
+
+        :param cell: The datachef Cell object we're trying
+        to resolve the relative column cell object for.
+        :return: The datachef Cell object representing the
+        column cell.
         """
 
         potential_cells: List[Cell] = self._lookups.get(self._index(cell))

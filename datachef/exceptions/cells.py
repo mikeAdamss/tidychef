@@ -5,15 +5,8 @@ class NonExistentCellComparissonError(Exception):
     a virtual cell created by a constant or other external input.
     """
 
-    def __init__(
-        self,
-        msg=(
-            "You cannot make a postitional comparisson between a cell parsed from a source input and a virtual cell."
-        ),
-        *args,
-        **kwargs,
-    ):
-        super().__init__(msg, *args, **kwargs)
+    def __init__(self, msg):
+        self.msg = msg
 
 
 class InvlaidCellPositionError(Exception):
@@ -25,10 +18,5 @@ class InvlaidCellPositionError(Exception):
     x has a value but y does not
     """
 
-    def __init__(
-        self,
-        msg=("A cell with any postional values must exist on both the x and y axis."),
-        *args,
-        **kwargs,
-    ):
-        super().__init__(msg, *args, **kwargs)
+    def __init__(self,msg):
+        self.msg = msg

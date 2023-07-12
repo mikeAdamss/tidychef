@@ -45,7 +45,11 @@ def preview(
     selections = list(selections)
 
     if len(set([s.signature for s in selections])) > 1:
-        raise UnalignedTableOperation()
+        raise UnalignedTableOperation(
+            "Selections can only be combined or previewed in combination "
+            "if they are taken from the exact same table as taken from a single "
+            "instance of a parsed input."
+        )
 
     html_as_str = get_preview_table_as_html(
         selections,

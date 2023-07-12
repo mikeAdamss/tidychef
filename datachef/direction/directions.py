@@ -18,16 +18,14 @@ class Direction(BaseDirection):
     1 = one space, right, -1 = one position left.
     :param y: The vertical offset. For example:
     1 = one space down, -1 = one position left.
+    :param name: The name of the direction
+    :param _locked: Can this directions offset be overwritten.
     """
 
     x: int
     y: int
     name: str
     _locked: bool = False
-
-    # TODO
-    # police passing it over offset overides
-    # where they should not be used
 
     @property
     def is_upwards(self) -> bool:

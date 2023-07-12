@@ -18,6 +18,16 @@ class HorizontalCondition(BaseLookupEngine):
     def __init__(
         self, label: str, resolver: Callable[[Dict[str, str]], str], priority: int = 0
     ):
+        """
+        A lookup engine to populate the contents of a column based
+        on the values resolved for the other columns on the row.
+
+        :param label: The label of the column informed
+        by this lookup engine.
+        :param resolver: The callable that will create the new column value
+        :param priority: The priority used when resolving multiple horizontal
+        conditions, 0 is highest priority and the default.
+        """
         self.label = label
         self.resolver = resolver
         self.priority = priority
@@ -26,6 +36,12 @@ class HorizontalCondition(BaseLookupEngine):
         """
         For a given observation row (as denoted by the unused Cell argument),
         resolve the
+
+        :param _: Unused datachef cell object representing the observation in
+        question. Required to match api signature used by other look engines.
+        :param cells_on_row: Dictionary containing contents of other
+        columns already resolve against the observation cell.
+        :return: The value for the column.
         """
 
         if not isinstance(cells_on_row, dict):

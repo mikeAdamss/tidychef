@@ -15,13 +15,8 @@ class MissingDirectLookupError(Exception):
     not value in the direction specified.
     """
 
-    def __init__(
-        self,
-        msg=("Cannot use a direct lookup, no value found in the direction specified."),
-        *args,
-        **kwargs
-    ):
-        super().__init__(msg, *args, **kwargs)
+    def __init__(self, msg):
+        self.msg = msg
 
 
 class FailedLookupError(Exception):
@@ -29,10 +24,5 @@ class FailedLookupError(Exception):
     Raised where a lookup engine fails to resolve a result cell
     """
 
-    def __init__(
-        self,
-        msg=("Lookup has failed, no relative cell could be resolved."),
-        *args,
-        **kwargs
-    ):
-        super().__init__(msg, *args, **kwargs)
+    def __init__(self, msg):
+        self.msg = msg
