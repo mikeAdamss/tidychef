@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import csv
 from pathlib import Path
-from typing import Dict, List, Union, Optional
+from typing import Dict, List, Union, Optional, Callable
 
 import tabulate
 from IPython.core.display import display
@@ -17,13 +17,14 @@ from datachef.utils.decorators import dontmutate
 
 
 class TidyData(BaseOutput):
-    def __init__(self, observations: Selectable, *columns, drop: Optional[List[str]] = None):
+    def __init__(self, observations: Selectable, *columns, obs_apply: Callable = None, drop: Optional[List[str]] = None):
         """
         A class to generate a basic representation of the
         data as tidy data.
 
         :param observations: The cell selection representing observations.
         :param *columns: 1-n Columns to resolve against the observations.
+        :param obs_apply: Callable to make changes to values in the observation column.
         :param drop: Columns by label to drop after cells have been resolved.
         """
 
@@ -43,6 +44,7 @@ class TidyData(BaseOutput):
         self.observations = observations
         self.columns: List[BaseColumn] = columns
         self.drop = drop if drop else []
+        self.obs_apply = obs_apply
 
         # Don't transform until told to, but once we have
         # only do it once.
@@ -218,7 +220,7 @@ class TidyData(BaseOutput):
                     ''')
 
             for observation in self.observations:
-                line = [observation.value]
+                line = [observation.value if not self.obs_apply else self.obs_apply(observation.value)]
                 column_value_dict: Dict[str, str] = {}
 
                 # Resolve the standard columns first

@@ -141,9 +141,11 @@ class Directly(BaseLookupEngine):
                 break
 
         if not chosen_cell:
-            raise FailedLookupError(
-                f"Couldn't find a relative value for cell {cell}"
-                f" with direction {self.direction.name}"
-            )
+            raise FailedLookupError(f'''
+                Direct lookup for column "{self.label}" could not resolve
+                with direction: {self.direction.name}".
+
+                Cell that failed to resolve was "{str(cell._as_xy_str())}"
+                    ''')
 
         return chosen_cell

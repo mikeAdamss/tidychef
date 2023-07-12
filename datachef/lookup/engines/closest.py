@@ -231,6 +231,9 @@ class Closest(BaseLookupEngine):
             new_index = index - int(potential_range / 2)
             new_index = new_index if new_index != index else new_index - 1
 
+        if new_index < 0:
+            new_index = 0
+
         return self.resolve(cell, index=new_index, ceiling=index, floor=floor)
 
     def _resolve_at_higher_range(self, index, cell, ceiling, floor):
@@ -324,7 +327,7 @@ class Closest(BaseLookupEngine):
 
         # If no maximum cell range (ceiling) is set then its the absolute maximum
         if ceiling is None:
-            ceiling: int = len(self.ranges.ordered_cell_ranges)
+            ceiling: int = len(self.ranges.ordered_cell_ranges) -1
 
         if index is None:
             # When starting range index is not passed in, start at the mid point.

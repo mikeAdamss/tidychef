@@ -222,4 +222,4 @@ class Cell(BaseCell):
         eg:
         <A1, value:"value of a1", x:{x}, y:{y}>
         """
-        return self.__repr__()
+        return f'<{self._excel_ref()}, value:"{self.value}", x:{self.x}, y:{self.y}>'

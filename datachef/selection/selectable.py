@@ -142,27 +142,23 @@ class Selectable(LiveTable):
                 ]
 
                 if direction in [up, above]:
-                    # Note: A vertical index value works in reverse to a visual relationship,
-                    # the higher the index number -> the high the row number -> the LOWER it is
-                    # in visual terms.
+                    lowest_used_xi = dfc.maximum_y_offset(selected_cells_on_xi)
+                    # Add cells from the potential selection to the
+                    # actual selection if they meet the criteria.
+                    selection += [
+                        c
+                        for c in potential_cells_on_xi
+                        if c.is_above(lowest_used_xi)  # above: visually
+                    ]
+
+                if direction in [down, below]:
                     largest_used_yi = dfc.minimum_y_offset(selected_cells_on_xi)
                     # Add cells from the potential selection to the
                     # actual selection if they meet the criteria.
                     selection += [
                         c
                         for c in potential_cells_on_xi
-                        if c.is_above(largest_used_yi)  # above: visually
-                    ]
-
-                if direction in [down, below]:
-                    # Note: A vertical index value works in reverse to a visual relationship,
-                    # the lower the index number -> the lower the row number -> the HIGHER it is
-                    # in visual terms.
-                    lowest_used_xi = dfc.maximum_y_offset(selected_cells_on_xi)
-                    selection += [
-                        c
-                        for c in potential_cells_on_xi
-                        if c.is_below(lowest_used_xi)  # below: visually
+                        if c.is_below(largest_used_yi)  # below: visually
                     ]
 
         if direction in [left, right]:
