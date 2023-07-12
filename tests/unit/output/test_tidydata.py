@@ -8,7 +8,7 @@ import pytest
 
 from datachef.column import Column
 from datachef.direction.directions import above, below, left, right
-from datachef.exceptions import MisalignedHeadersError
+from datachef.exceptions import MisalignedHeadersError, DroppingNonColumnError
 from datachef.lookup.engines.constant import Constant
 from datachef.lookup.engines.direct import Directly
 from datachef.output.tidydata import TidyData
@@ -87,6 +87,48 @@ def test_tidydata_internal_representation_is_as_expected(tidy: TidyData):
     assert tidy._data == expected_data
     assert len(tidy) == 19
 
+def test_tidydata_internal_representation_with_dropped_column_is_as_expected(tidy: TidyData):
+    """
+    Test that the ._data attribute of TidyData contains the expected
+    data once _transform() has been called when we drop a column.
+    """
+
+    tidy.drop = ["Assets"]
+    tidy._transform()
+    expected_data = [
+        ["Value", "Genre", "Member"],
+        ["1", "Rock & Roll", "John"],
+        ["5", "Rock & Roll", "John"],
+        ["9", "Rock & Roll", "John"],
+        ["2", "Rock & Roll", "Keith"],
+        ["6", "Rock & Roll", "Keith"],
+        ["10", "Rock & Roll", "Keith"],
+        ["2", "Rock & Roll", "Paul"],
+        ["6", "Rock & Roll", "Paul"],
+        ["10", "Rock & Roll", "Paul"],
+        ["3", "Rock & Roll", "Mick"],
+        ["7", "Rock & Roll", "Mick"],
+        ["11", "Rock & Roll", "Mick"],
+        ["2", "Rock & Roll", "George"],
+        ["7", "Rock & Roll", "George"],
+        ["11", "Rock & Roll", "George"],
+        ["3", "Rock & Roll", "Charlie"],
+        ["8", "Rock & Roll", "Charlie"],
+        ["12", "Rock & Roll", "Charlie"],
+    ]
+    assert tidy._data == expected_data
+    assert len(tidy) == 19
+
+def test_tidydata_drop_raises_expected_error_for_non_existent_column(tidy: TidyData):
+    """
+    Confirm the expected error is raised where we are trying to drop
+    a column that does not exist in the data.
+    """
+
+    tidy.drop = ["foo"]
+
+    with pytest.raises(DroppingNonColumnError):
+        tidy._transform()
 
 def test_tidydata_from_many(tidy: TidyData):
     """

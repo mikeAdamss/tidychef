@@ -48,7 +48,7 @@ chapters:
       sections:
         - file: examples/basic/bands
         - file: examples/basic/oic-1a-table
-        - file: examples/basic/cornavavirus-lonliness
+        - file: examples/basic/cornavavirus-loneliness
         - file: examples/basic/monthly-gdp-tables
 
 - file: technical

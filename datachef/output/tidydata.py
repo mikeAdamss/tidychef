@@ -2,13 +2,13 @@ from __future__ import annotations
 
 import csv
 from pathlib import Path
-from typing import Dict, List, Tuple, Union
+from typing import Dict, List, Union, Optional
 
 import tabulate
 from IPython.core.display import display
 
 from datachef.column.base import BaseColumn
-from datachef.exceptions import MisalignedHeadersError
+from datachef.exceptions import MisalignedHeadersError, DroppingNonColumnError
 from datachef.lookup.engines.horizontal_condition import HorizontalCondition
 from datachef.notebook.ipython import in_notebook
 from datachef.output.base import BaseOutput
@@ -17,10 +17,14 @@ from datachef.utils.decorators import dontmutate
 
 
 class TidyData(BaseOutput):
-    def __init__(self, observations: Selectable, *columns):
+    def __init__(self, observations: Selectable, *columns, drop: Optional[List[str]] = None):
         """
         A class to generate a basic representation of the
         data as tidy data.
+
+        :param observations: The cell selection representing observations.
+        :param *columns: 1-n Columns to resolve against the observations.
+        :param drop: Columns by label to drop after cells have been resolved.
         """
 
         assert (
@@ -38,6 +42,7 @@ class TidyData(BaseOutput):
 
         self.observations = observations
         self.columns: List[BaseColumn] = columns
+        self.drop = drop if drop else []
 
         # Don't transform until told to, but once we have
         # only do it once.
@@ -190,11 +195,27 @@ class TidyData(BaseOutput):
         """
         if not self._data:
             grid = []
+            drop_count = 0
 
             header_row = [self.observations.label]
             for column in self.columns:
-                header_row.append(column.label)
+                if column.label not in self.drop:
+                    header_row.append(column.label)
+                else:
+                    drop_count += 1
             grid.append(header_row)
+
+            # If user has opted to drop a column that does
+            # not exist, we need to tell them.
+            if drop_count != len(self.drop):
+                raise DroppingNonColumnError(f'''
+                    You're attempting to drop one or more columns that
+                    do not exist in the data.
+
+                    You're dropping: {self.drop}
+
+                    Columns are: {[x.label for x in self.columns]} 
+                    ''')
 
             for observation in self.observations:
                 line = [observation.value]
@@ -205,6 +226,7 @@ class TidyData(BaseOutput):
                     x
                     for x in self.columns
                     if not isinstance(x.engine, HorizontalCondition)
+                    and x.label not in self.drop
                 ]
                 for column in standard_columns:
                     ob_value = column.resolve_column_cell_from_obs_cell(
@@ -225,7 +247,9 @@ class TidyData(BaseOutput):
                             ob_value = column.resolve_column_cell_from_obs_cell(
                                 observation, column_value_dict
                             )
-                            line.append(ob_value)
+
+                            if column.label not in self.drop:
+                                line.append(ob_value)
                             column_value_dict[column.label] = ob_value
                 grid.append(line)
 

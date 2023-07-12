@@ -24,5 +24,6 @@ from .common import (
     PreviewBoundarySpecificationError,
     UnalignedTableOperation,
     UnnamedTableError,
+    DroppingNonColumnError
 )
 from .lookups import AmbiguousLookupError, FailedLookupError, MissingDirectLookupError

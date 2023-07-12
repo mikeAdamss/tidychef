@@ -159,3 +159,13 @@ class CellValidationError(Exception):
 
     def __init__(self, msg):
         self.msg = msg
+
+class DroppingNonColumnError(Exception):
+    """
+    Raised where a user is trying to drop a column
+    during the transformation to tidy data but that
+    column does not exist.
+    """
+
+    def __init__(self, msg):
+        self.msg = msg

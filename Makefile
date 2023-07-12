@@ -18,7 +18,7 @@ format: ## Format the codebase with isort and black
 checkimports: install ## Use pylint to check for unused imports
 	poetry run pylint ./datachef | grep "unused-import"
 
-docs: ## Create the jupyter book in /jupyterbook/_build
+book: ## Create the jupyter book in /jupyterbook/_build
 	rm -rf ./jupyterbook/_build
 	rm -rf ./jupyterbook/venv
 	python -m venv ./jupyterbook/venv
