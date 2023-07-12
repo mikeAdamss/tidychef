@@ -219,6 +219,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="../examples/basic/monthly-gdp-tables.html">Monthly GDP Tables: GVA</a></li>
 
 
+<li class="toctree-l3"><a class="reference internal" href="../examples/basic/house-prices.html">House Prices</a></li>
+
 </ul>
 </li>
 </ul>
@@ -521,7 +523,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;datachef.selection.xlsx.xlsx.XlsxSelectable at 0x1112d3a90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;datachef.selection.xlsx.xlsx.XlsxSelectable at 0x10fdb89a0&gt;
 </pre></div>
 </div>
 </div>
@@ -541,17 +543,17 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_40160</span><span class="o">/</span><span class="mf">1822173736.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="nn">/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_60750/1822173736.py</span> in <span class="ni">&lt;cell line: 6&gt;</span><span class="nt">()</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span> 
 <span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsxSelectable</span><span class="p">]</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">)</span>
 <span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">tables</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;A1:A2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">assert_one</span><span class="p">()</span>
 
-<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/selection/selectable.py</span> in <span class="ni">assert_one</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">     </span><span class="mi">63</span>         <span class="k">assert</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">64</span>             <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cells</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
-<span class="ne">---&gt; </span><span class="mi">65</span>         <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Selection contains </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cells</span><span class="p">)</span><span class="si">}</span><span class="s2"> cells, not 1&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">66</span>         <span class="k">return</span> <span class="bp">self</span>
-<span class="g g-Whitespace">     </span><span class="mi">67</span> 
+<span class="nn">~/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/datachef/selection/selectable.py</span> in <span class="ni">assert_one</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span>         <span class="n">Assert</span> <span class="n">that</span> <span class="n">the</span> <span class="n">current</span> <span class="n">selection</span> <span class="n">contains</span> <span class="n">exactly</span> <span class="n">one</span> <span class="n">cell</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">63</span><span class="s2">         assert (</span>
+<span class="g g-Whitespace">     </span><span class="mi">64</span><span class="s2">             len(self.cells) == 1</span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span><span class="s2">         ), f&quot;Selection contains {len(self.cells)} cells, not 1&quot;</span>
 
 <span class="ne">AssertionError</span>: Selection contains 2 cells, not 1
 </pre></div>

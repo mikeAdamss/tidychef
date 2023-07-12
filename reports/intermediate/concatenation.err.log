@@ -1,19 +1,19 @@
 Traceback (most recent call last):
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 64, in single_nb_execution
-    **kwargs,
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 1204, in execute
+  File "/Users/michaeladams/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/michaeladams/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/util.py", line 84, in wrapped
+  File "/Users/michaeladams/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
     return just_run(coro(*args, **kwargs))
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/util.py", line 62, in just_run
+  File "/Users/michaeladams/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
     return loop.run_until_complete(coro)
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
+  File "/Users/michaeladams/.pyenv/versions/3.10.6/lib/python3.10/asyncio/base_events.py", line 646, in run_until_complete
     return future.result()
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 664, in async_execute
-    cell, index, execution_count=self.code_cells_executed + 1
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 965, in async_execute_cell
+  File "/Users/michaeladams/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/Users/michaeladams/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
     await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+  File "/Users/michaeladams/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
@@ -24,24 +24,24 @@ tidydata1 + tidydata2
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mMisalignedHeadersError[0m                    Traceback (most recent call last)
-[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_40296/2463524614.py[0m in [0;36m<module>[0;34m[0m
-[1;32m      1[0m [0;31m# Now we try and concatenate them - and get an error![0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_60976/2463524614.py[0m in [0;36m<cell line: 3>[0;34m()[0m
+[1;32m      1[0m [0;31m# Now we try and concatenate them - and get an error![0m[0;34m[0m[0;34m[0m[0m
 [1;32m      2[0m [0;34m[0m[0m
 [0;32m----> 3[0;31m [0mtidydata1[0m [0;34m+[0m [0mtidydata2[0m[0;34m[0m[0;34m[0m[0m
 [0m
-[0;32m~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/utils/decorators/dontmutate.py[0m in [0;36mwrapper[0;34m(self, *args, **kwargs)[0m
+[0;32m~/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/datachef/utils/decorators/dontmutate.py[0m in [0;36mwrapper[0;34m(self, *args, **kwargs)[0m
 [1;32m     22[0m     [0;32mdef[0m [0mwrapper[0m[0;34m([0m[0mself[0m[0;34m,[0m [0;34m*[0m[0margs[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 [1;32m     23[0m         [0mself[0m [0;34m=[0m [0mcopy[0m[0;34m.[0m[0mdeepcopy[0m[0;34m([0m[0mself[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0;32m---> 24[0;31m         [0;32mreturn[0m [0mmethod[0m[0;34m([0m[0mself[0m[0;34m,[0m [0;34m*[0m[0margs[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m[1;32m     25[0m [0;34m[0m[0m
 [1;32m     26[0m     [0;32mreturn[0m [0mwrapper[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/output/tidydata.py[0m in [0;36m__add__[0;34m(self, other_tidy_data)[0m
-[1;32m    159[0m                 [0mTidyData2[0m [0mheaders[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    160[0m                 [0;34m{[0m[0mother_tidy_data[0m[0;34m.[0m[0m_data[0m[0;34m[[0m[0;36m0[0m[0;34m][0m[0;34m}[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 161[0;31m             """
-[0m[1;32m    162[0m             )
-[1;32m    163[0m [0;34m[0m[0m
+[0;32m~/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/datachef/output/tidydata.py[0m in [0;36m__add__[0;34m(self, other_tidy_data)[0m
+[1;32m    155[0m         [0;31m# with different headers[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    156[0m         [0;32mif[0m [0mself[0m[0;34m.[0m[0m_data[0m[0;34m[[0m[0;36m0[0m[0;34m][0m [0;34m!=[0m [0mother_tidy_data[0m[0;34m.[0m[0m_data[0m[0;34m[[0m[0;36m0[0m[0;34m][0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 157[0;31m             raise MisalignedHeadersError(
+[0m[1;32m    158[0m                 f"""
+[1;32m    159[0m                 [0mYou[0m [0mare[0m [0mattempting[0m [0mto[0m [0msum[0m [0mtwo[0m [0mtidy[0m [0mdata[0m[0;34m[0m[0;34m[0m[0m
 
 [0;31mMisalignedHeadersError[0m: 
                 You are attempting to sum two tidy data

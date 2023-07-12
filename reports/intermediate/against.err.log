@@ -1,19 +1,19 @@
 Traceback (most recent call last):
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 64, in single_nb_execution
-    **kwargs,
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 1204, in execute
+  File "/Users/michaeladams/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/michaeladams/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/util.py", line 84, in wrapped
+  File "/Users/michaeladams/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
     return just_run(coro(*args, **kwargs))
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/util.py", line 62, in just_run
+  File "/Users/michaeladams/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
     return loop.run_until_complete(coro)
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
+  File "/Users/michaeladams/.pyenv/versions/3.10.6/lib/python3.10/asyncio/base_events.py", line 646, in run_until_complete
     return future.result()
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 664, in async_execute
-    cell, index, execution_count=self.code_cells_executed + 1
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 965, in async_execute_cell
+  File "/Users/michaeladams/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/Users/michaeladams/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
     await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+  File "/Users/michaeladams/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
@@ -36,13 +36,13 @@ selection.validate(numeric_validator)
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mImportError[0m                               Traceback (most recent call last)
-[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_40272/72827583.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_60957/72827583.py[0m in [0;36m<cell line: 1>[0;34m()[0m
 [0;32m----> 1[0;31m [0;32mfrom[0m [0mdatachef[0m [0;32mimport[0m [0macquire[0m[0;34m,[0m [0mpreview[0m[0;34m,[0m [0mCsvSelectable[0m[0;34m[0m[0;34m[0m[0m
 [0m[1;32m      2[0m [0;34m[0m[0m
 [1;32m      3[0m [0mtable[0m[0;34m:[0m [0mCsvSelectable[0m [0;34m=[0m [0macquire[0m[0;34m.[0m[0mcsv[0m[0;34m.[0m[0mhttp[0m[0;34m([0m[0;34m"https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      4[0m [0;34m[0m[0m
-[1;32m      5[0m [0;31m# Select them[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m [0;31m# Select them[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mImportError[0m: cannot import name 'CsvSelectable' from 'datachef' (/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/__init__.py)
-ImportError: cannot import name 'CsvSelectable' from 'datachef' (/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/__init__.py)
+[0;31mImportError[0m: cannot import name 'CsvSelectable' from 'datachef' (/Users/michaeladams/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/datachef/__init__.py)
+ImportError: cannot import name 'CsvSelectable' from 'datachef' (/Users/michaeladams/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/datachef/__init__.py)
 

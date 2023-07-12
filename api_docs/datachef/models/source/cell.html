@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="pdoc 13.1.1"/>
+    <meta name="generator" content="pdoc 14.0.0"/>
     <title>datachef.models.source.cell API documentation</title>
 
     <style>/*! * Bootstrap Reboot v5.0.0 (https://getbootstrap.com/) * Copyright 2011-2021 The Bootstrap Authors * Copyright 2011-2021 Twitter, Inc. * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) * Forked from Normalize.css, licensed MIT (https://github.com/necolas/normalize.css/blob/master/LICENSE.md) */*,::after,::before{box-sizing:border-box}@media (prefers-reduced-motion:no-preference){:root{scroll-behavior:smooth}}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:1rem;font-weight:400;line-height:1.5;color:#212529;background-color:#fff;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}hr{margin:1rem 0;color:inherit;background-color:currentColor;border:0;opacity:.25}hr:not([size]){height:1px}h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:.5rem;font-weight:500;line-height:1.2}h1{font-size:calc(1.375rem + 1.5vw)}@media (min-width:1200px){h1{font-size:2.5rem}}h2{font-size:calc(1.325rem + .9vw)}@media (min-width:1200px){h2{font-size:2rem}}h3{font-size:calc(1.3rem + .6vw)}@media (min-width:1200px){h3{font-size:1.75rem}}h4{font-size:calc(1.275rem + .3vw)}@media (min-width:1200px){h4{font-size:1.5rem}}h5{font-size:1.25rem}h6{font-size:1rem}p{margin-top:0;margin-bottom:1rem}abbr[data-bs-original-title],abbr[title]{-webkit-text-decoration:underline dotted;text-decoration:underline dotted;cursor:help;-webkit-text-decoration-skip-ink:none;text-decoration-skip-ink:none}address{margin-bottom:1rem;font-style:normal;line-height:inherit}ol,ul{padding-left:2rem}dl,ol,ul{margin-top:0;margin-bottom:1rem}ol ol,ol ul,ul ol,ul ul{margin-bottom:0}dt{font-weight:700}dd{margin-bottom:.5rem;margin-left:0}blockquote{margin:0 0 1rem}b,strong{font-weight:bolder}small{font-size:.875em}mark{padding:.2em;background-color:#fcf8e3}sub,sup{position:relative;font-size:.75em;line-height:0;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}a{color:#0d6efd;text-decoration:underline}a:hover{color:#0a58ca}a:not([href]):not([class]),a:not([href]):not([class]):hover{color:inherit;text-decoration:none}code,kbd,pre,samp{font-family:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:1em;direction:ltr;unicode-bidi:bidi-override}pre{display:block;margin-top:0;margin-bottom:1rem;overflow:auto;font-size:.875em}pre code{font-size:inherit;color:inherit;word-break:normal}code{font-size:.875em;color:#d63384;word-wrap:break-word}a>code{color:inherit}kbd{padding:.2rem .4rem;font-size:.875em;color:#fff;background-color:#212529;border-radius:.2rem}kbd kbd{padding:0;font-size:1em;font-weight:700}figure{margin:0 0 1rem}img,svg{vertical-align:middle}table{caption-side:bottom;border-collapse:collapse}caption{padding-top:.5rem;padding-bottom:.5rem;color:#6c757d;text-align:left}th{text-align:inherit;text-align:-webkit-match-parent}tbody,td,tfoot,th,thead,tr{border-color:inherit;border-style:solid;border-width:0}label{display:inline-block}button{border-radius:0}button:focus:not(:focus-visible){outline:0}button,input,optgroup,select,textarea{margin:0;font-family:inherit;font-size:inherit;line-height:inherit}button,select{text-transform:none}[role=button]{cursor:pointer}select{word-wrap:normal}select:disabled{opacity:1}[list]::-webkit-calendar-picker-indicator{display:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled),button:not(:disabled){cursor:pointer}::-moz-focus-inner{padding:0;border-style:none}textarea{resize:vertical}fieldset{min-width:0;padding:0;margin:0;border:0}legend{float:left;width:100%;padding:0;margin-bottom:.5rem;font-size:calc(1.275rem + .3vw);line-height:inherit}@media (min-width:1200px){legend{font-size:1.5rem}}legend+*{clear:left}::-webkit-datetime-edit-day-field,::-webkit-datetime-edit-fields-wrapper,::-webkit-datetime-edit-hour-field,::-webkit-datetime-edit-minute,::-webkit-datetime-edit-month-field,::-webkit-datetime-edit-text,::-webkit-datetime-edit-year-field{padding:0}::-webkit-inner-spin-button{height:auto}[type=search]{outline-offset:-2px;-webkit-appearance:textfield}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-color-swatch-wrapper{padding:0}::file-selector-button{font:inherit}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}output{display:inline-block}iframe{border:0}summary{display:list-item;cursor:pointer}progress{vertical-align:baseline}[hidden]{display:none!important}</style>
@@ -37,6 +37,12 @@
                                 <a class="function" href="#BaseCell.__init__">BaseCell</a>
                         </li>
                         <li>
+                                <a class="variable" href="#BaseCell.x">x</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#BaseCell.y">y</a>
+                        </li>
+                        <li>
                                 <a class="function" href="#BaseCell.matches_xy">matches_xy</a>
                         </li>
                         <li>
@@ -60,6 +66,15 @@
                         <li>
                                 <a class="function" href="#VirtualCell.__init__">VirtualCell</a>
                         </li>
+                        <li>
+                                <a class="variable" href="#VirtualCell.value">value</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#VirtualCell.x">x</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#VirtualCell.y">y</a>
+                        </li>
                 </ul>
 
             </li>
@@ -68,6 +83,18 @@
                             <ul class="memberlist">
                         <li>
                                 <a class="function" href="#Cell.__init__">Cell</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Cell.value">value</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Cell.x">x</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Cell.y">y</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Cell.cellformat">cellformat</a>
                         </li>
                         <li>
                                 <a class="function" href="#Cell.is_blank">is_blank</a>
@@ -325,7 +352,7 @@
 </span><span id="L-222"><a href="#L-222"><span class="linenos">222</span></a><span class="sd">        eg:</span>
 </span><span id="L-223"><a href="#L-223"><span class="linenos">223</span></a><span class="sd">        &lt;A1, value:&quot;value of a1&quot;, x:{x}, y:{y}&gt;</span>
 </span><span id="L-224"><a href="#L-224"><span class="linenos">224</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-225"><a href="#L-225"><span class="linenos">225</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
+</span><span id="L-225"><a href="#L-225"><span class="linenos">225</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_excel_ref</span><span class="p">()</span><span class="si">}</span><span class="s1">, value:&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s1">&quot;, x:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s1">, y:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="si">}</span><span class="s1">&gt;&#39;</span>
 </span></pre></div>
 
 
@@ -333,7 +360,8 @@
                 <section id="BaseCell">
                             <input id="BaseCell-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr class">
-            
+                    <div class="decorator">@dataclass</div>
+
     <span class="def">class</span>
     <span class="name">BaseCell</span>:
 
@@ -341,7 +369,8 @@
 
     </div>
     <a class="headerlink" href="#BaseCell"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="BaseCell-22"><a href="#BaseCell-22"><span class="linenos"> 22</span></a><span class="k">class</span> <span class="nc">BaseCell</span><span class="p">:</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="BaseCell-21"><a href="#BaseCell-21"><span class="linenos"> 21</span></a><span class="nd">@dataclass</span>
+</span><span id="BaseCell-22"><a href="#BaseCell-22"><span class="linenos"> 22</span></a><span class="k">class</span> <span class="nc">BaseCell</span><span class="p">:</span>
 </span><span id="BaseCell-23"><a href="#BaseCell-23"><span class="linenos"> 23</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="BaseCell-24"><a href="#BaseCell-24"><span class="linenos"> 24</span></a><span class="sd">    A primitive non value holding cell construct.</span>
 </span><span id="BaseCell-25"><a href="#BaseCell-25"><span class="linenos"> 25</span></a><span class="sd">    &quot;&quot;&quot;</span>
@@ -466,6 +495,28 @@
         
     </div>
     <a class="headerlink" href="#BaseCell.__init__"></a>
+    
+    
+
+                            </div>
+                            <div id="BaseCell.x" class="classattr">
+                                <div class="attr variable">
+            <span class="name">x</span><span class="annotation">: int</span>
+
+        
+    </div>
+    <a class="headerlink" href="#BaseCell.x"></a>
+    
+    
+
+                            </div>
+                            <div id="BaseCell.y" class="classattr">
+                                <div class="attr variable">
+            <span class="name">y</span><span class="annotation">: int</span>
+
+        
+    </div>
+    <a class="headerlink" href="#BaseCell.y"></a>
     
     
 
@@ -712,7 +763,8 @@ compare to.</li>
                 <section id="VirtualCell">
                             <input id="VirtualCell-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr class">
-            
+                    <div class="decorator">@dataclass</div>
+
     <span class="def">class</span>
     <span class="name">VirtualCell</span><wbr>(<span class="base"><a href="#BaseCell">BaseCell</a></span>):
 
@@ -720,7 +772,8 @@ compare to.</li>
 
     </div>
     <a class="headerlink" href="#VirtualCell"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="VirtualCell-135"><a href="#VirtualCell-135"><span class="linenos">135</span></a><span class="k">class</span> <span class="nc">VirtualCell</span><span class="p">(</span><span class="n">BaseCell</span><span class="p">):</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="VirtualCell-134"><a href="#VirtualCell-134"><span class="linenos">134</span></a><span class="nd">@dataclass</span>
+</span><span id="VirtualCell-135"><a href="#VirtualCell-135"><span class="linenos">135</span></a><span class="k">class</span> <span class="nc">VirtualCell</span><span class="p">(</span><span class="n">BaseCell</span><span class="p">):</span>
 </span><span id="VirtualCell-136"><a href="#VirtualCell-136"><span class="linenos">136</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="VirtualCell-137"><a href="#VirtualCell-137"><span class="linenos">137</span></a><span class="sd">    Where we are establishing relationships between a concrete cell</span>
 </span><span id="VirtualCell-138"><a href="#VirtualCell-138"><span class="linenos">138</span></a><span class="sd">    from the tabulated data source and a constant or external value</span>
@@ -755,11 +808,47 @@ have None positional values for x and y.</p>
                             <div id="VirtualCell.__init__" class="classattr">
                                 <div class="attr function">
             
-        <span class="name">VirtualCell</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span>)</span>
+        <span class="name">VirtualCell</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">x</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">y</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span>)</span>
 
         
     </div>
     <a class="headerlink" href="#VirtualCell.__init__"></a>
+    
+    
+
+                            </div>
+                            <div id="VirtualCell.value" class="classattr">
+                                <div class="attr variable">
+            <span class="name">value</span><span class="annotation">: Optional[str]</span>        =
+<span class="default_value">None</span>
+
+        
+    </div>
+    <a class="headerlink" href="#VirtualCell.value"></a>
+    
+    
+
+                            </div>
+                            <div id="VirtualCell.x" class="classattr">
+                                <div class="attr variable">
+            <span class="name">x</span><span class="annotation">: Optional[int]</span>        =
+<span class="default_value">None</span>
+
+        
+    </div>
+    <a class="headerlink" href="#VirtualCell.x"></a>
+    
+    
+
+                            </div>
+                            <div id="VirtualCell.y" class="classattr">
+                                <div class="attr variable">
+            <span class="name">y</span><span class="annotation">: Optional[int]</span>        =
+<span class="default_value">None</span>
+
+        
+    </div>
+    <a class="headerlink" href="#VirtualCell.y"></a>
     
     
 
@@ -781,7 +870,8 @@ have None positional values for x and y.</p>
                 <section id="Cell">
                             <input id="Cell-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr class">
-            
+                    <div class="decorator">@dataclass</div>
+
     <span class="def">class</span>
     <span class="name">Cell</span><wbr>(<span class="base"><a href="#BaseCell">BaseCell</a></span>):
 
@@ -789,7 +879,8 @@ have None positional values for x and y.</p>
 
     </div>
     <a class="headerlink" href="#Cell"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Cell-158"><a href="#Cell-158"><span class="linenos">158</span></a><span class="k">class</span> <span class="nc">Cell</span><span class="p">(</span><span class="n">BaseCell</span><span class="p">):</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Cell-157"><a href="#Cell-157"><span class="linenos">157</span></a><span class="nd">@dataclass</span>
+</span><span id="Cell-158"><a href="#Cell-158"><span class="linenos">158</span></a><span class="k">class</span> <span class="nc">Cell</span><span class="p">(</span><span class="n">BaseCell</span><span class="p">):</span>
 </span><span id="Cell-159"><a href="#Cell-159"><span class="linenos">159</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="Cell-160"><a href="#Cell-160"><span class="linenos">160</span></a><span class="sd">    Denotes a cell of data from a tabulated data source</span>
 </span><span id="Cell-161"><a href="#Cell-161"><span class="linenos">161</span></a><span class="sd">    &quot;&quot;&quot;</span>
@@ -857,7 +948,7 @@ have None positional values for x and y.</p>
 </span><span id="Cell-223"><a href="#Cell-223"><span class="linenos">223</span></a><span class="sd">        eg:</span>
 </span><span id="Cell-224"><a href="#Cell-224"><span class="linenos">224</span></a><span class="sd">        &lt;A1, value:&quot;value of a1&quot;, x:{x}, y:{y}&gt;</span>
 </span><span id="Cell-225"><a href="#Cell-225"><span class="linenos">225</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Cell-226"><a href="#Cell-226"><span class="linenos">226</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
+</span><span id="Cell-226"><a href="#Cell-226"><span class="linenos">226</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_excel_ref</span><span class="p">()</span><span class="si">}</span><span class="s1">, value:&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s1">&quot;, x:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s1">, y:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="si">}</span><span class="s1">&gt;&#39;</span>
 </span></pre></div>
 
 
@@ -868,11 +959,59 @@ have None positional values for x and y.</p>
                             <div id="Cell.__init__" class="classattr">
                                 <div class="attr function">
             
-        <span class="name">Cell</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">cellformat</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n"><a href="cellformat.html#CellFormatting">datachef.models.source.cellformat.CellFormatting</a></span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span>)</span>
+        <span class="name">Cell</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">x</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">y</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">cellformat</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n"><a href="cellformat.html#CellFormatting">datachef.models.source.cellformat.CellFormatting</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span>)</span>
 
         
     </div>
     <a class="headerlink" href="#Cell.__init__"></a>
+    
+    
+
+                            </div>
+                            <div id="Cell.value" class="classattr">
+                                <div class="attr variable">
+            <span class="name">value</span><span class="annotation">: Optional[str]</span>        =
+<span class="default_value">None</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Cell.value"></a>
+    
+    
+
+                            </div>
+                            <div id="Cell.x" class="classattr">
+                                <div class="attr variable">
+            <span class="name">x</span><span class="annotation">: Optional[str]</span>        =
+<span class="default_value">None</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Cell.x"></a>
+    
+    
+
+                            </div>
+                            <div id="Cell.y" class="classattr">
+                                <div class="attr variable">
+            <span class="name">y</span><span class="annotation">: Optional[str]</span>        =
+<span class="default_value">None</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Cell.y"></a>
+    
+    
+
+                            </div>
+                            <div id="Cell.cellformat" class="classattr">
+                                <div class="attr variable">
+            <span class="name">cellformat</span><span class="annotation">: Optional[<a href="cellformat.html#CellFormatting">datachef.models.source.cellformat.CellFormatting</a>]</span>        =
+<span class="default_value">None</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Cell.cellformat"></a>
     
     
 
