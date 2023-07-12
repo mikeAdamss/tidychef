@@ -86,94 +86,112 @@
 </span><span id="L-18"><a href="#L-18"><span class="linenos"> 18</span></a>        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
 </span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a>        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 </span><span id="L-20"><a href="#L-20"><span class="linenos"> 20</span></a>    <span class="p">):</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos"> 21</span></a>
-</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a>        <span class="c1"># See _pre_init() docstring</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_pre_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a>
-</span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a>        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a>            <span class="n">engine</span><span class="p">,</span> <span class="n">BaseLookupEngine</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a>        <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a><span class="s2">                </span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="s2"> is not a valid argument.</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a><span class="s2">                </span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a><span class="s2">                Argument must be a type or subtype of BaseLookupEngine:</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a><span class="s2">                Within, Closest, Directly etc</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a><span class="s2">        &quot;&quot;&quot;</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a>
-</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">engine</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">label</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a>
-</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a>        <span class="c1"># See _post_init() docstring</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos"> 21</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a><span class="sd">        An object representing a proto column that can resolve a</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a><span class="sd">        visual relationship to retrieve the appropriate column</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a><span class="sd">        value relative to a given observation containing cell object.</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a>
+</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a><span class="sd">        :param engine: The &quot;lookup engine&quot; that resolves cell value lookups.</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a>
+</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a>        <span class="c1"># See _pre_init() docstring</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_pre_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a>
+</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a>        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a>            <span class="n">engine</span><span class="p">,</span> <span class="n">BaseLookupEngine</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a>        <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a><span class="s2">                </span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="s2"> is not a valid argument.</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a><span class="s2">                </span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a><span class="s2">                Argument must be of type BaseLookupEngine.</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a><span class="s2">        &quot;&quot;&quot;</span>
 </span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a>
-</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a>    <span class="k">def</span> <span class="nf">_pre_init</span><span class="p">(</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a>        <span class="bp">self</span><span class="p">,</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>        <span class="n">engine</span><span class="p">:</span> <span class="n">BaseLookupEngine</span><span class="p">,</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a>        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>    <span class="p">):</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a><span class="sd">        Overridable method for doing something clever just before the bulk</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a><span class="sd">        of the __init__ logic is executed.</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a>        <span class="o">...</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a>
-</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a>    <span class="k">def</span> <span class="nf">_post_init</span><span class="p">(</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a>        <span class="bp">self</span><span class="p">,</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a>        <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a>        <span class="n">engine</span><span class="p">:</span> <span class="n">BaseLookupEngine</span><span class="p">,</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a>        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a>        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>    <span class="p">):</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a><span class="sd">        Overridable method for doing something clever just after the __init__</span>
-</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a><span class="sd">        logic is executed.</span>
-</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>        <span class="o">...</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>
-</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a>    <span class="k">def</span> <span class="nf">_post_lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">):</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">engine</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">label</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>
+</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>        <span class="c1"># See _post_init() docstring</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>
+</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a>    <span class="k">def</span> <span class="nf">_pre_init</span><span class="p">(</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a>        <span class="bp">self</span><span class="p">,</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a>        <span class="n">engine</span><span class="p">:</span> <span class="n">BaseLookupEngine</span><span class="p">,</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a>        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a>        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a>    <span class="p">):</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a><span class="sd">        Overridable method for doing something clever just before the bulk</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a><span class="sd">        of the __init__ logic is executed.</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a>
+</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a><span class="sd">        :param engine: The &quot;lookup engine&quot; that resolves cell value lookups.</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>        <span class="o">...</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>
+</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>    <span class="k">def</span> <span class="nf">_post_init</span><span class="p">(</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>        <span class="bp">self</span><span class="p">,</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>        <span class="n">engine</span><span class="p">:</span> <span class="n">BaseLookupEngine</span><span class="p">,</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a>    <span class="p">):</span>
 </span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a><span class="sd">        Overridable method for doing something clever to a Cell that&#39;s just been</span>
-</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a><span class="sd">        resolved as belonging to this column.</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a><span class="sd">        Overridable method for doing something clever just after the __init__</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a><span class="sd">        logic is executed.</span>
 </span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a>
-</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a><span class="sd">        Example: prefix all cell value with &quot;foo-&quot;</span>
-</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>
-</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a><span class="sd">        ```</span>
-</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a><span class="sd">            def _post_lookup(self, cell: Cell):</span>
-</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a><span class="sd">                cell.value = &quot;foo-&quot;+cell.value</span>
-</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a><span class="sd">                return Cell</span>
-</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a><span class="sd">        ``</span>
-</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>        <span class="k">return</span> <span class="n">cell</span>
-</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>
-</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>    <span class="k">def</span> <span class="nf">resolve_column_cell_from_obs_cell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observation_cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cell</span><span class="p">:</span>
-</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a><span class="sd">        Use the provided lookup engine to return the value</span>
-</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a><span class="sd">        of this Column against a given observation, according</span>
-</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a><span class="sd">        to the lookup engine in use.</span>
-</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>
-</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a><span class="sd">        The found cell is ran through _post_lookup() in case</span>
-</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a><span class="sd">        this particular Column is applying custom handling of</span>
-</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a><span class="sd">        some sort.</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a><span class="sd">        :param engine: The &quot;lookup engine&quot; that resolves cell value lookups.</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a>        <span class="o">...</span>
+</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>
+</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>    <span class="k">def</span> <span class="nf">_post_lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">):</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a><span class="sd">        Overridable method for doing something clever to a Cell that&#39;s just been</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a><span class="sd">        resolved as belonging to this column.</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>
+</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a><span class="sd">        Example: prefix all cell value with &quot;foo-&quot;</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>
+</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a><span class="sd">        ```</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a><span class="sd">            def _post_lookup(self, cell: Cell):</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a><span class="sd">                cell.value = &quot;foo-&quot;+cell.value</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a><span class="sd">                return Cell</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a><span class="sd">        ``</span>
+</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>
+</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a><span class="sd">        :param cell: A single datachef Cell object.</span>
+</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a><span class="sd">        :return: A single datachef Cell object.</span>
 </span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>        <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">observation_cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
-</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>        <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_post_lookup</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
-</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>        <span class="k">return</span> <span class="n">cell</span>
-</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>
-</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>    <span class="k">def</span> <span class="nf">lookup_preview</span><span class="p">(</span>
-</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">observation_selection</span><span class="p">:</span> <span class="n">Selectable</span>
-</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Cell</span><span class="p">,</span> <span class="n">Cell</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
-</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a><span class="sd">        Takes a selection of observations and generates</span>
-</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a><span class="sd">        tuples of:</span>
-</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a><span class="sd">        &lt;observation_cell&gt; : &lt;column cell&gt;</span>
+</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>        <span class="k">return</span> <span class="n">cell</span>
+</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>
+</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>    <span class="k">def</span> <span class="nf">resolve_column_cell_from_obs_cell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observation_cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cell</span><span class="p">:</span>
+</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a><span class="sd">        Use the provided lookup engine to return the value</span>
+</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a><span class="sd">        of this Column against a given observation, according</span>
+</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a><span class="sd">        to the lookup engine in use.</span>
+</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>
+</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a><span class="sd">        The found cell is ran through _post_lookup() in case</span>
+</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a><span class="sd">        this particular Column is applying custom handling of</span>
+</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a><span class="sd">        some sort.</span>
 </span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>
-</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a><span class="sd">        This is intended for sanity checking during</span>
-</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a><span class="sd">        development, not for doing the actual transform.</span>
+</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a><span class="sd">        :param cell: A single datachef Cell object.</span>
+</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a><span class="sd">        :return: A single datachef Cell object. </span>
 </span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a>        <span class="k">for</span> <span class="n">observation_cell</span> <span class="ow">in</span> <span class="n">observation_selection</span><span class="o">.</span><span class="n">cells</span><span class="p">:</span>
-</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a>            <span class="k">yield</span> <span class="n">observation_cell</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolve_column_cell_from_obs_cell</span><span class="p">(</span>
-</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>                <span class="n">observation_cell</span>
-</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>            <span class="p">)</span>
+</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a>        <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">observation_cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a>        <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_post_lookup</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>        <span class="k">return</span> <span class="n">cell</span>
+</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>
+</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>    <span class="k">def</span> <span class="nf">lookup_preview</span><span class="p">(</span>
+</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">observation_selection</span><span class="p">:</span> <span class="n">Selectable</span>
+</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Cell</span><span class="p">,</span> <span class="n">Cell</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a><span class="sd">        Takes a selection of observations and generates</span>
+</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a><span class="sd">        tuples of:</span>
+</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a><span class="sd">        &lt;observation_cell&gt; : &lt;column cell&gt;</span>
+</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>
+</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a><span class="sd">        This is intended for sanity checking during</span>
+</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a><span class="sd">        development, not for doing the actual transform.</span>
+</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>
+</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a><span class="sd">        :param observation_selection: A list of cells representing</span>
+</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a><span class="sd">        a selection of observations from the data source.</span>
+</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a>        <span class="k">for</span> <span class="n">observation_cell</span> <span class="ow">in</span> <span class="n">observation_selection</span><span class="o">.</span><span class="n">cells</span><span class="p">:</span>
+</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a>            <span class="k">yield</span> <span class="n">observation_cell</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolve_column_cell_from_obs_cell</span><span class="p">(</span>
+</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a>                <span class="n">observation_cell</span>
+</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a>            <span class="p">)</span>
 </span></pre></div>
 
 
@@ -201,94 +219,112 @@
 </span><span id="BaseColumn-19"><a href="#BaseColumn-19"><span class="linenos"> 19</span></a>        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
 </span><span id="BaseColumn-20"><a href="#BaseColumn-20"><span class="linenos"> 20</span></a>        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 </span><span id="BaseColumn-21"><a href="#BaseColumn-21"><span class="linenos"> 21</span></a>    <span class="p">):</span>
-</span><span id="BaseColumn-22"><a href="#BaseColumn-22"><span class="linenos"> 22</span></a>
-</span><span id="BaseColumn-23"><a href="#BaseColumn-23"><span class="linenos"> 23</span></a>        <span class="c1"># See _pre_init() docstring</span>
-</span><span id="BaseColumn-24"><a href="#BaseColumn-24"><span class="linenos"> 24</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_pre_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="BaseColumn-25"><a href="#BaseColumn-25"><span class="linenos"> 25</span></a>
-</span><span id="BaseColumn-26"><a href="#BaseColumn-26"><span class="linenos"> 26</span></a>        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span>
-</span><span id="BaseColumn-27"><a href="#BaseColumn-27"><span class="linenos"> 27</span></a>            <span class="n">engine</span><span class="p">,</span> <span class="n">BaseLookupEngine</span>
-</span><span id="BaseColumn-28"><a href="#BaseColumn-28"><span class="linenos"> 28</span></a>        <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-</span><span id="BaseColumn-29"><a href="#BaseColumn-29"><span class="linenos"> 29</span></a><span class="s2">                </span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="s2"> is not a valid argument.</span>
-</span><span id="BaseColumn-30"><a href="#BaseColumn-30"><span class="linenos"> 30</span></a><span class="s2">                </span>
-</span><span id="BaseColumn-31"><a href="#BaseColumn-31"><span class="linenos"> 31</span></a><span class="s2">                Argument must be a type or subtype of BaseLookupEngine:</span>
-</span><span id="BaseColumn-32"><a href="#BaseColumn-32"><span class="linenos"> 32</span></a><span class="s2">                Within, Closest, Directly etc</span>
-</span><span id="BaseColumn-33"><a href="#BaseColumn-33"><span class="linenos"> 33</span></a><span class="s2">        &quot;&quot;&quot;</span>
-</span><span id="BaseColumn-34"><a href="#BaseColumn-34"><span class="linenos"> 34</span></a>
-</span><span id="BaseColumn-35"><a href="#BaseColumn-35"><span class="linenos"> 35</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">engine</span>
-</span><span id="BaseColumn-36"><a href="#BaseColumn-36"><span class="linenos"> 36</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">label</span>
-</span><span id="BaseColumn-37"><a href="#BaseColumn-37"><span class="linenos"> 37</span></a>
-</span><span id="BaseColumn-38"><a href="#BaseColumn-38"><span class="linenos"> 38</span></a>        <span class="c1"># See _post_init() docstring</span>
-</span><span id="BaseColumn-39"><a href="#BaseColumn-39"><span class="linenos"> 39</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="BaseColumn-22"><a href="#BaseColumn-22"><span class="linenos"> 22</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="BaseColumn-23"><a href="#BaseColumn-23"><span class="linenos"> 23</span></a><span class="sd">        An object representing a proto column that can resolve a</span>
+</span><span id="BaseColumn-24"><a href="#BaseColumn-24"><span class="linenos"> 24</span></a><span class="sd">        visual relationship to retrieve the appropriate column</span>
+</span><span id="BaseColumn-25"><a href="#BaseColumn-25"><span class="linenos"> 25</span></a><span class="sd">        value relative to a given observation containing cell object.</span>
+</span><span id="BaseColumn-26"><a href="#BaseColumn-26"><span class="linenos"> 26</span></a>
+</span><span id="BaseColumn-27"><a href="#BaseColumn-27"><span class="linenos"> 27</span></a><span class="sd">        :param engine: The &quot;lookup engine&quot; that resolves cell value lookups.</span>
+</span><span id="BaseColumn-28"><a href="#BaseColumn-28"><span class="linenos"> 28</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="BaseColumn-29"><a href="#BaseColumn-29"><span class="linenos"> 29</span></a>
+</span><span id="BaseColumn-30"><a href="#BaseColumn-30"><span class="linenos"> 30</span></a>        <span class="c1"># See _pre_init() docstring</span>
+</span><span id="BaseColumn-31"><a href="#BaseColumn-31"><span class="linenos"> 31</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_pre_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="BaseColumn-32"><a href="#BaseColumn-32"><span class="linenos"> 32</span></a>
+</span><span id="BaseColumn-33"><a href="#BaseColumn-33"><span class="linenos"> 33</span></a>        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span>
+</span><span id="BaseColumn-34"><a href="#BaseColumn-34"><span class="linenos"> 34</span></a>            <span class="n">engine</span><span class="p">,</span> <span class="n">BaseLookupEngine</span>
+</span><span id="BaseColumn-35"><a href="#BaseColumn-35"><span class="linenos"> 35</span></a>        <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+</span><span id="BaseColumn-36"><a href="#BaseColumn-36"><span class="linenos"> 36</span></a><span class="s2">                </span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="s2"> is not a valid argument.</span>
+</span><span id="BaseColumn-37"><a href="#BaseColumn-37"><span class="linenos"> 37</span></a><span class="s2">                </span>
+</span><span id="BaseColumn-38"><a href="#BaseColumn-38"><span class="linenos"> 38</span></a><span class="s2">                Argument must be of type BaseLookupEngine.</span>
+</span><span id="BaseColumn-39"><a href="#BaseColumn-39"><span class="linenos"> 39</span></a><span class="s2">        &quot;&quot;&quot;</span>
 </span><span id="BaseColumn-40"><a href="#BaseColumn-40"><span class="linenos"> 40</span></a>
-</span><span id="BaseColumn-41"><a href="#BaseColumn-41"><span class="linenos"> 41</span></a>    <span class="k">def</span> <span class="nf">_pre_init</span><span class="p">(</span>
-</span><span id="BaseColumn-42"><a href="#BaseColumn-42"><span class="linenos"> 42</span></a>        <span class="bp">self</span><span class="p">,</span>
-</span><span id="BaseColumn-43"><a href="#BaseColumn-43"><span class="linenos"> 43</span></a>        <span class="n">engine</span><span class="p">:</span> <span class="n">BaseLookupEngine</span><span class="p">,</span>
-</span><span id="BaseColumn-44"><a href="#BaseColumn-44"><span class="linenos"> 44</span></a>        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
-</span><span id="BaseColumn-45"><a href="#BaseColumn-45"><span class="linenos"> 45</span></a>        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-</span><span id="BaseColumn-46"><a href="#BaseColumn-46"><span class="linenos"> 46</span></a>    <span class="p">):</span>
-</span><span id="BaseColumn-47"><a href="#BaseColumn-47"><span class="linenos"> 47</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="BaseColumn-48"><a href="#BaseColumn-48"><span class="linenos"> 48</span></a><span class="sd">        Overridable method for doing something clever just before the bulk</span>
-</span><span id="BaseColumn-49"><a href="#BaseColumn-49"><span class="linenos"> 49</span></a><span class="sd">        of the __init__ logic is executed.</span>
-</span><span id="BaseColumn-50"><a href="#BaseColumn-50"><span class="linenos"> 50</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="BaseColumn-51"><a href="#BaseColumn-51"><span class="linenos"> 51</span></a>        <span class="o">...</span>
-</span><span id="BaseColumn-52"><a href="#BaseColumn-52"><span class="linenos"> 52</span></a>
-</span><span id="BaseColumn-53"><a href="#BaseColumn-53"><span class="linenos"> 53</span></a>    <span class="k">def</span> <span class="nf">_post_init</span><span class="p">(</span>
-</span><span id="BaseColumn-54"><a href="#BaseColumn-54"><span class="linenos"> 54</span></a>        <span class="bp">self</span><span class="p">,</span>
-</span><span id="BaseColumn-55"><a href="#BaseColumn-55"><span class="linenos"> 55</span></a>        <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span id="BaseColumn-56"><a href="#BaseColumn-56"><span class="linenos"> 56</span></a>        <span class="n">engine</span><span class="p">:</span> <span class="n">BaseLookupEngine</span><span class="p">,</span>
-</span><span id="BaseColumn-57"><a href="#BaseColumn-57"><span class="linenos"> 57</span></a>        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
-</span><span id="BaseColumn-58"><a href="#BaseColumn-58"><span class="linenos"> 58</span></a>        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-</span><span id="BaseColumn-59"><a href="#BaseColumn-59"><span class="linenos"> 59</span></a>    <span class="p">):</span>
-</span><span id="BaseColumn-60"><a href="#BaseColumn-60"><span class="linenos"> 60</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="BaseColumn-61"><a href="#BaseColumn-61"><span class="linenos"> 61</span></a><span class="sd">        Overridable method for doing something clever just after the __init__</span>
-</span><span id="BaseColumn-62"><a href="#BaseColumn-62"><span class="linenos"> 62</span></a><span class="sd">        logic is executed.</span>
-</span><span id="BaseColumn-63"><a href="#BaseColumn-63"><span class="linenos"> 63</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="BaseColumn-64"><a href="#BaseColumn-64"><span class="linenos"> 64</span></a>        <span class="o">...</span>
-</span><span id="BaseColumn-65"><a href="#BaseColumn-65"><span class="linenos"> 65</span></a>
-</span><span id="BaseColumn-66"><a href="#BaseColumn-66"><span class="linenos"> 66</span></a>    <span class="k">def</span> <span class="nf">_post_lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">):</span>
+</span><span id="BaseColumn-41"><a href="#BaseColumn-41"><span class="linenos"> 41</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">engine</span>
+</span><span id="BaseColumn-42"><a href="#BaseColumn-42"><span class="linenos"> 42</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">label</span>
+</span><span id="BaseColumn-43"><a href="#BaseColumn-43"><span class="linenos"> 43</span></a>
+</span><span id="BaseColumn-44"><a href="#BaseColumn-44"><span class="linenos"> 44</span></a>        <span class="c1"># See _post_init() docstring</span>
+</span><span id="BaseColumn-45"><a href="#BaseColumn-45"><span class="linenos"> 45</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="BaseColumn-46"><a href="#BaseColumn-46"><span class="linenos"> 46</span></a>
+</span><span id="BaseColumn-47"><a href="#BaseColumn-47"><span class="linenos"> 47</span></a>    <span class="k">def</span> <span class="nf">_pre_init</span><span class="p">(</span>
+</span><span id="BaseColumn-48"><a href="#BaseColumn-48"><span class="linenos"> 48</span></a>        <span class="bp">self</span><span class="p">,</span>
+</span><span id="BaseColumn-49"><a href="#BaseColumn-49"><span class="linenos"> 49</span></a>        <span class="n">engine</span><span class="p">:</span> <span class="n">BaseLookupEngine</span><span class="p">,</span>
+</span><span id="BaseColumn-50"><a href="#BaseColumn-50"><span class="linenos"> 50</span></a>        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+</span><span id="BaseColumn-51"><a href="#BaseColumn-51"><span class="linenos"> 51</span></a>        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+</span><span id="BaseColumn-52"><a href="#BaseColumn-52"><span class="linenos"> 52</span></a>    <span class="p">):</span>
+</span><span id="BaseColumn-53"><a href="#BaseColumn-53"><span class="linenos"> 53</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="BaseColumn-54"><a href="#BaseColumn-54"><span class="linenos"> 54</span></a><span class="sd">        Overridable method for doing something clever just before the bulk</span>
+</span><span id="BaseColumn-55"><a href="#BaseColumn-55"><span class="linenos"> 55</span></a><span class="sd">        of the __init__ logic is executed.</span>
+</span><span id="BaseColumn-56"><a href="#BaseColumn-56"><span class="linenos"> 56</span></a>
+</span><span id="BaseColumn-57"><a href="#BaseColumn-57"><span class="linenos"> 57</span></a><span class="sd">        :param engine: The &quot;lookup engine&quot; that resolves cell value lookups.</span>
+</span><span id="BaseColumn-58"><a href="#BaseColumn-58"><span class="linenos"> 58</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="BaseColumn-59"><a href="#BaseColumn-59"><span class="linenos"> 59</span></a>        <span class="o">...</span>
+</span><span id="BaseColumn-60"><a href="#BaseColumn-60"><span class="linenos"> 60</span></a>
+</span><span id="BaseColumn-61"><a href="#BaseColumn-61"><span class="linenos"> 61</span></a>    <span class="k">def</span> <span class="nf">_post_init</span><span class="p">(</span>
+</span><span id="BaseColumn-62"><a href="#BaseColumn-62"><span class="linenos"> 62</span></a>        <span class="bp">self</span><span class="p">,</span>
+</span><span id="BaseColumn-63"><a href="#BaseColumn-63"><span class="linenos"> 63</span></a>        <span class="n">engine</span><span class="p">:</span> <span class="n">BaseLookupEngine</span><span class="p">,</span>
+</span><span id="BaseColumn-64"><a href="#BaseColumn-64"><span class="linenos"> 64</span></a>        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+</span><span id="BaseColumn-65"><a href="#BaseColumn-65"><span class="linenos"> 65</span></a>        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+</span><span id="BaseColumn-66"><a href="#BaseColumn-66"><span class="linenos"> 66</span></a>    <span class="p">):</span>
 </span><span id="BaseColumn-67"><a href="#BaseColumn-67"><span class="linenos"> 67</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="BaseColumn-68"><a href="#BaseColumn-68"><span class="linenos"> 68</span></a><span class="sd">        Overridable method for doing something clever to a Cell that&#39;s just been</span>
-</span><span id="BaseColumn-69"><a href="#BaseColumn-69"><span class="linenos"> 69</span></a><span class="sd">        resolved as belonging to this column.</span>
+</span><span id="BaseColumn-68"><a href="#BaseColumn-68"><span class="linenos"> 68</span></a><span class="sd">        Overridable method for doing something clever just after the __init__</span>
+</span><span id="BaseColumn-69"><a href="#BaseColumn-69"><span class="linenos"> 69</span></a><span class="sd">        logic is executed.</span>
 </span><span id="BaseColumn-70"><a href="#BaseColumn-70"><span class="linenos"> 70</span></a>
-</span><span id="BaseColumn-71"><a href="#BaseColumn-71"><span class="linenos"> 71</span></a><span class="sd">        Example: prefix all cell value with &quot;foo-&quot;</span>
-</span><span id="BaseColumn-72"><a href="#BaseColumn-72"><span class="linenos"> 72</span></a>
-</span><span id="BaseColumn-73"><a href="#BaseColumn-73"><span class="linenos"> 73</span></a><span class="sd">        ```</span>
-</span><span id="BaseColumn-74"><a href="#BaseColumn-74"><span class="linenos"> 74</span></a><span class="sd">            def _post_lookup(self, cell: Cell):</span>
-</span><span id="BaseColumn-75"><a href="#BaseColumn-75"><span class="linenos"> 75</span></a><span class="sd">                cell.value = &quot;foo-&quot;+cell.value</span>
-</span><span id="BaseColumn-76"><a href="#BaseColumn-76"><span class="linenos"> 76</span></a><span class="sd">                return Cell</span>
-</span><span id="BaseColumn-77"><a href="#BaseColumn-77"><span class="linenos"> 77</span></a><span class="sd">        ``</span>
-</span><span id="BaseColumn-78"><a href="#BaseColumn-78"><span class="linenos"> 78</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="BaseColumn-79"><a href="#BaseColumn-79"><span class="linenos"> 79</span></a>        <span class="k">return</span> <span class="n">cell</span>
-</span><span id="BaseColumn-80"><a href="#BaseColumn-80"><span class="linenos"> 80</span></a>
-</span><span id="BaseColumn-81"><a href="#BaseColumn-81"><span class="linenos"> 81</span></a>    <span class="k">def</span> <span class="nf">resolve_column_cell_from_obs_cell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observation_cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cell</span><span class="p">:</span>
-</span><span id="BaseColumn-82"><a href="#BaseColumn-82"><span class="linenos"> 82</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="BaseColumn-83"><a href="#BaseColumn-83"><span class="linenos"> 83</span></a><span class="sd">        Use the provided lookup engine to return the value</span>
-</span><span id="BaseColumn-84"><a href="#BaseColumn-84"><span class="linenos"> 84</span></a><span class="sd">        of this Column against a given observation, according</span>
-</span><span id="BaseColumn-85"><a href="#BaseColumn-85"><span class="linenos"> 85</span></a><span class="sd">        to the lookup engine in use.</span>
-</span><span id="BaseColumn-86"><a href="#BaseColumn-86"><span class="linenos"> 86</span></a>
-</span><span id="BaseColumn-87"><a href="#BaseColumn-87"><span class="linenos"> 87</span></a><span class="sd">        The found cell is ran through _post_lookup() in case</span>
-</span><span id="BaseColumn-88"><a href="#BaseColumn-88"><span class="linenos"> 88</span></a><span class="sd">        this particular Column is applying custom handling of</span>
-</span><span id="BaseColumn-89"><a href="#BaseColumn-89"><span class="linenos"> 89</span></a><span class="sd">        some sort.</span>
+</span><span id="BaseColumn-71"><a href="#BaseColumn-71"><span class="linenos"> 71</span></a><span class="sd">        :param engine: The &quot;lookup engine&quot; that resolves cell value lookups.</span>
+</span><span id="BaseColumn-72"><a href="#BaseColumn-72"><span class="linenos"> 72</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="BaseColumn-73"><a href="#BaseColumn-73"><span class="linenos"> 73</span></a>        <span class="o">...</span>
+</span><span id="BaseColumn-74"><a href="#BaseColumn-74"><span class="linenos"> 74</span></a>
+</span><span id="BaseColumn-75"><a href="#BaseColumn-75"><span class="linenos"> 75</span></a>    <span class="k">def</span> <span class="nf">_post_lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">):</span>
+</span><span id="BaseColumn-76"><a href="#BaseColumn-76"><span class="linenos"> 76</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="BaseColumn-77"><a href="#BaseColumn-77"><span class="linenos"> 77</span></a><span class="sd">        Overridable method for doing something clever to a Cell that&#39;s just been</span>
+</span><span id="BaseColumn-78"><a href="#BaseColumn-78"><span class="linenos"> 78</span></a><span class="sd">        resolved as belonging to this column.</span>
+</span><span id="BaseColumn-79"><a href="#BaseColumn-79"><span class="linenos"> 79</span></a>
+</span><span id="BaseColumn-80"><a href="#BaseColumn-80"><span class="linenos"> 80</span></a><span class="sd">        Example: prefix all cell value with &quot;foo-&quot;</span>
+</span><span id="BaseColumn-81"><a href="#BaseColumn-81"><span class="linenos"> 81</span></a>
+</span><span id="BaseColumn-82"><a href="#BaseColumn-82"><span class="linenos"> 82</span></a><span class="sd">        ```</span>
+</span><span id="BaseColumn-83"><a href="#BaseColumn-83"><span class="linenos"> 83</span></a><span class="sd">            def _post_lookup(self, cell: Cell):</span>
+</span><span id="BaseColumn-84"><a href="#BaseColumn-84"><span class="linenos"> 84</span></a><span class="sd">                cell.value = &quot;foo-&quot;+cell.value</span>
+</span><span id="BaseColumn-85"><a href="#BaseColumn-85"><span class="linenos"> 85</span></a><span class="sd">                return Cell</span>
+</span><span id="BaseColumn-86"><a href="#BaseColumn-86"><span class="linenos"> 86</span></a><span class="sd">        ``</span>
+</span><span id="BaseColumn-87"><a href="#BaseColumn-87"><span class="linenos"> 87</span></a>
+</span><span id="BaseColumn-88"><a href="#BaseColumn-88"><span class="linenos"> 88</span></a><span class="sd">        :param cell: A single datachef Cell object.</span>
+</span><span id="BaseColumn-89"><a href="#BaseColumn-89"><span class="linenos"> 89</span></a><span class="sd">        :return: A single datachef Cell object.</span>
 </span><span id="BaseColumn-90"><a href="#BaseColumn-90"><span class="linenos"> 90</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="BaseColumn-91"><a href="#BaseColumn-91"><span class="linenos"> 91</span></a>        <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">observation_cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
-</span><span id="BaseColumn-92"><a href="#BaseColumn-92"><span class="linenos"> 92</span></a>        <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_post_lookup</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
-</span><span id="BaseColumn-93"><a href="#BaseColumn-93"><span class="linenos"> 93</span></a>        <span class="k">return</span> <span class="n">cell</span>
-</span><span id="BaseColumn-94"><a href="#BaseColumn-94"><span class="linenos"> 94</span></a>
-</span><span id="BaseColumn-95"><a href="#BaseColumn-95"><span class="linenos"> 95</span></a>    <span class="k">def</span> <span class="nf">lookup_preview</span><span class="p">(</span>
-</span><span id="BaseColumn-96"><a href="#BaseColumn-96"><span class="linenos"> 96</span></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">observation_selection</span><span class="p">:</span> <span class="n">Selectable</span>
-</span><span id="BaseColumn-97"><a href="#BaseColumn-97"><span class="linenos"> 97</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Cell</span><span class="p">,</span> <span class="n">Cell</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
-</span><span id="BaseColumn-98"><a href="#BaseColumn-98"><span class="linenos"> 98</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="BaseColumn-99"><a href="#BaseColumn-99"><span class="linenos"> 99</span></a><span class="sd">        Takes a selection of observations and generates</span>
-</span><span id="BaseColumn-100"><a href="#BaseColumn-100"><span class="linenos">100</span></a><span class="sd">        tuples of:</span>
-</span><span id="BaseColumn-101"><a href="#BaseColumn-101"><span class="linenos">101</span></a><span class="sd">        &lt;observation_cell&gt; : &lt;column cell&gt;</span>
+</span><span id="BaseColumn-91"><a href="#BaseColumn-91"><span class="linenos"> 91</span></a>        <span class="k">return</span> <span class="n">cell</span>
+</span><span id="BaseColumn-92"><a href="#BaseColumn-92"><span class="linenos"> 92</span></a>
+</span><span id="BaseColumn-93"><a href="#BaseColumn-93"><span class="linenos"> 93</span></a>    <span class="k">def</span> <span class="nf">resolve_column_cell_from_obs_cell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observation_cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cell</span><span class="p">:</span>
+</span><span id="BaseColumn-94"><a href="#BaseColumn-94"><span class="linenos"> 94</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="BaseColumn-95"><a href="#BaseColumn-95"><span class="linenos"> 95</span></a><span class="sd">        Use the provided lookup engine to return the value</span>
+</span><span id="BaseColumn-96"><a href="#BaseColumn-96"><span class="linenos"> 96</span></a><span class="sd">        of this Column against a given observation, according</span>
+</span><span id="BaseColumn-97"><a href="#BaseColumn-97"><span class="linenos"> 97</span></a><span class="sd">        to the lookup engine in use.</span>
+</span><span id="BaseColumn-98"><a href="#BaseColumn-98"><span class="linenos"> 98</span></a>
+</span><span id="BaseColumn-99"><a href="#BaseColumn-99"><span class="linenos"> 99</span></a><span class="sd">        The found cell is ran through _post_lookup() in case</span>
+</span><span id="BaseColumn-100"><a href="#BaseColumn-100"><span class="linenos">100</span></a><span class="sd">        this particular Column is applying custom handling of</span>
+</span><span id="BaseColumn-101"><a href="#BaseColumn-101"><span class="linenos">101</span></a><span class="sd">        some sort.</span>
 </span><span id="BaseColumn-102"><a href="#BaseColumn-102"><span class="linenos">102</span></a>
-</span><span id="BaseColumn-103"><a href="#BaseColumn-103"><span class="linenos">103</span></a><span class="sd">        This is intended for sanity checking during</span>
-</span><span id="BaseColumn-104"><a href="#BaseColumn-104"><span class="linenos">104</span></a><span class="sd">        development, not for doing the actual transform.</span>
+</span><span id="BaseColumn-103"><a href="#BaseColumn-103"><span class="linenos">103</span></a><span class="sd">        :param cell: A single datachef Cell object.</span>
+</span><span id="BaseColumn-104"><a href="#BaseColumn-104"><span class="linenos">104</span></a><span class="sd">        :return: A single datachef Cell object. </span>
 </span><span id="BaseColumn-105"><a href="#BaseColumn-105"><span class="linenos">105</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="BaseColumn-106"><a href="#BaseColumn-106"><span class="linenos">106</span></a>        <span class="k">for</span> <span class="n">observation_cell</span> <span class="ow">in</span> <span class="n">observation_selection</span><span class="o">.</span><span class="n">cells</span><span class="p">:</span>
-</span><span id="BaseColumn-107"><a href="#BaseColumn-107"><span class="linenos">107</span></a>            <span class="k">yield</span> <span class="n">observation_cell</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolve_column_cell_from_obs_cell</span><span class="p">(</span>
-</span><span id="BaseColumn-108"><a href="#BaseColumn-108"><span class="linenos">108</span></a>                <span class="n">observation_cell</span>
-</span><span id="BaseColumn-109"><a href="#BaseColumn-109"><span class="linenos">109</span></a>            <span class="p">)</span>
+</span><span id="BaseColumn-106"><a href="#BaseColumn-106"><span class="linenos">106</span></a>        <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">observation_cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span id="BaseColumn-107"><a href="#BaseColumn-107"><span class="linenos">107</span></a>        <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_post_lookup</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+</span><span id="BaseColumn-108"><a href="#BaseColumn-108"><span class="linenos">108</span></a>        <span class="k">return</span> <span class="n">cell</span>
+</span><span id="BaseColumn-109"><a href="#BaseColumn-109"><span class="linenos">109</span></a>
+</span><span id="BaseColumn-110"><a href="#BaseColumn-110"><span class="linenos">110</span></a>    <span class="k">def</span> <span class="nf">lookup_preview</span><span class="p">(</span>
+</span><span id="BaseColumn-111"><a href="#BaseColumn-111"><span class="linenos">111</span></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">observation_selection</span><span class="p">:</span> <span class="n">Selectable</span>
+</span><span id="BaseColumn-112"><a href="#BaseColumn-112"><span class="linenos">112</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Cell</span><span class="p">,</span> <span class="n">Cell</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+</span><span id="BaseColumn-113"><a href="#BaseColumn-113"><span class="linenos">113</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="BaseColumn-114"><a href="#BaseColumn-114"><span class="linenos">114</span></a><span class="sd">        Takes a selection of observations and generates</span>
+</span><span id="BaseColumn-115"><a href="#BaseColumn-115"><span class="linenos">115</span></a><span class="sd">        tuples of:</span>
+</span><span id="BaseColumn-116"><a href="#BaseColumn-116"><span class="linenos">116</span></a><span class="sd">        &lt;observation_cell&gt; : &lt;column cell&gt;</span>
+</span><span id="BaseColumn-117"><a href="#BaseColumn-117"><span class="linenos">117</span></a>
+</span><span id="BaseColumn-118"><a href="#BaseColumn-118"><span class="linenos">118</span></a><span class="sd">        This is intended for sanity checking during</span>
+</span><span id="BaseColumn-119"><a href="#BaseColumn-119"><span class="linenos">119</span></a><span class="sd">        development, not for doing the actual transform.</span>
+</span><span id="BaseColumn-120"><a href="#BaseColumn-120"><span class="linenos">120</span></a>
+</span><span id="BaseColumn-121"><a href="#BaseColumn-121"><span class="linenos">121</span></a><span class="sd">        :param observation_selection: A list of cells representing</span>
+</span><span id="BaseColumn-122"><a href="#BaseColumn-122"><span class="linenos">122</span></a><span class="sd">        a selection of observations from the data source.</span>
+</span><span id="BaseColumn-123"><a href="#BaseColumn-123"><span class="linenos">123</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="BaseColumn-124"><a href="#BaseColumn-124"><span class="linenos">124</span></a>        <span class="k">for</span> <span class="n">observation_cell</span> <span class="ow">in</span> <span class="n">observation_selection</span><span class="o">.</span><span class="n">cells</span><span class="p">:</span>
+</span><span id="BaseColumn-125"><a href="#BaseColumn-125"><span class="linenos">125</span></a>            <span class="k">yield</span> <span class="n">observation_cell</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolve_column_cell_from_obs_cell</span><span class="p">(</span>
+</span><span id="BaseColumn-126"><a href="#BaseColumn-126"><span class="linenos">126</span></a>                <span class="n">observation_cell</span>
+</span><span id="BaseColumn-127"><a href="#BaseColumn-127"><span class="linenos">127</span></a>            <span class="p">)</span>
 </span></pre></div>
 
 
@@ -313,28 +349,44 @@ that can be resolve to a column of data.</p>
 </span><span id="BaseColumn.__init__-19"><a href="#BaseColumn.__init__-19"><span class="linenos">19</span></a>        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
 </span><span id="BaseColumn.__init__-20"><a href="#BaseColumn.__init__-20"><span class="linenos">20</span></a>        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 </span><span id="BaseColumn.__init__-21"><a href="#BaseColumn.__init__-21"><span class="linenos">21</span></a>    <span class="p">):</span>
-</span><span id="BaseColumn.__init__-22"><a href="#BaseColumn.__init__-22"><span class="linenos">22</span></a>
-</span><span id="BaseColumn.__init__-23"><a href="#BaseColumn.__init__-23"><span class="linenos">23</span></a>        <span class="c1"># See _pre_init() docstring</span>
-</span><span id="BaseColumn.__init__-24"><a href="#BaseColumn.__init__-24"><span class="linenos">24</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_pre_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="BaseColumn.__init__-25"><a href="#BaseColumn.__init__-25"><span class="linenos">25</span></a>
-</span><span id="BaseColumn.__init__-26"><a href="#BaseColumn.__init__-26"><span class="linenos">26</span></a>        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span>
-</span><span id="BaseColumn.__init__-27"><a href="#BaseColumn.__init__-27"><span class="linenos">27</span></a>            <span class="n">engine</span><span class="p">,</span> <span class="n">BaseLookupEngine</span>
-</span><span id="BaseColumn.__init__-28"><a href="#BaseColumn.__init__-28"><span class="linenos">28</span></a>        <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-</span><span id="BaseColumn.__init__-29"><a href="#BaseColumn.__init__-29"><span class="linenos">29</span></a><span class="s2">                </span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="s2"> is not a valid argument.</span>
-</span><span id="BaseColumn.__init__-30"><a href="#BaseColumn.__init__-30"><span class="linenos">30</span></a><span class="s2">                </span>
-</span><span id="BaseColumn.__init__-31"><a href="#BaseColumn.__init__-31"><span class="linenos">31</span></a><span class="s2">                Argument must be a type or subtype of BaseLookupEngine:</span>
-</span><span id="BaseColumn.__init__-32"><a href="#BaseColumn.__init__-32"><span class="linenos">32</span></a><span class="s2">                Within, Closest, Directly etc</span>
-</span><span id="BaseColumn.__init__-33"><a href="#BaseColumn.__init__-33"><span class="linenos">33</span></a><span class="s2">        &quot;&quot;&quot;</span>
-</span><span id="BaseColumn.__init__-34"><a href="#BaseColumn.__init__-34"><span class="linenos">34</span></a>
-</span><span id="BaseColumn.__init__-35"><a href="#BaseColumn.__init__-35"><span class="linenos">35</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">engine</span>
-</span><span id="BaseColumn.__init__-36"><a href="#BaseColumn.__init__-36"><span class="linenos">36</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">label</span>
-</span><span id="BaseColumn.__init__-37"><a href="#BaseColumn.__init__-37"><span class="linenos">37</span></a>
-</span><span id="BaseColumn.__init__-38"><a href="#BaseColumn.__init__-38"><span class="linenos">38</span></a>        <span class="c1"># See _post_init() docstring</span>
-</span><span id="BaseColumn.__init__-39"><a href="#BaseColumn.__init__-39"><span class="linenos">39</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="BaseColumn.__init__-22"><a href="#BaseColumn.__init__-22"><span class="linenos">22</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="BaseColumn.__init__-23"><a href="#BaseColumn.__init__-23"><span class="linenos">23</span></a><span class="sd">        An object representing a proto column that can resolve a</span>
+</span><span id="BaseColumn.__init__-24"><a href="#BaseColumn.__init__-24"><span class="linenos">24</span></a><span class="sd">        visual relationship to retrieve the appropriate column</span>
+</span><span id="BaseColumn.__init__-25"><a href="#BaseColumn.__init__-25"><span class="linenos">25</span></a><span class="sd">        value relative to a given observation containing cell object.</span>
+</span><span id="BaseColumn.__init__-26"><a href="#BaseColumn.__init__-26"><span class="linenos">26</span></a>
+</span><span id="BaseColumn.__init__-27"><a href="#BaseColumn.__init__-27"><span class="linenos">27</span></a><span class="sd">        :param engine: The &quot;lookup engine&quot; that resolves cell value lookups.</span>
+</span><span id="BaseColumn.__init__-28"><a href="#BaseColumn.__init__-28"><span class="linenos">28</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="BaseColumn.__init__-29"><a href="#BaseColumn.__init__-29"><span class="linenos">29</span></a>
+</span><span id="BaseColumn.__init__-30"><a href="#BaseColumn.__init__-30"><span class="linenos">30</span></a>        <span class="c1"># See _pre_init() docstring</span>
+</span><span id="BaseColumn.__init__-31"><a href="#BaseColumn.__init__-31"><span class="linenos">31</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_pre_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="BaseColumn.__init__-32"><a href="#BaseColumn.__init__-32"><span class="linenos">32</span></a>
+</span><span id="BaseColumn.__init__-33"><a href="#BaseColumn.__init__-33"><span class="linenos">33</span></a>        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span>
+</span><span id="BaseColumn.__init__-34"><a href="#BaseColumn.__init__-34"><span class="linenos">34</span></a>            <span class="n">engine</span><span class="p">,</span> <span class="n">BaseLookupEngine</span>
+</span><span id="BaseColumn.__init__-35"><a href="#BaseColumn.__init__-35"><span class="linenos">35</span></a>        <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+</span><span id="BaseColumn.__init__-36"><a href="#BaseColumn.__init__-36"><span class="linenos">36</span></a><span class="s2">                </span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="s2"> is not a valid argument.</span>
+</span><span id="BaseColumn.__init__-37"><a href="#BaseColumn.__init__-37"><span class="linenos">37</span></a><span class="s2">                </span>
+</span><span id="BaseColumn.__init__-38"><a href="#BaseColumn.__init__-38"><span class="linenos">38</span></a><span class="s2">                Argument must be of type BaseLookupEngine.</span>
+</span><span id="BaseColumn.__init__-39"><a href="#BaseColumn.__init__-39"><span class="linenos">39</span></a><span class="s2">        &quot;&quot;&quot;</span>
+</span><span id="BaseColumn.__init__-40"><a href="#BaseColumn.__init__-40"><span class="linenos">40</span></a>
+</span><span id="BaseColumn.__init__-41"><a href="#BaseColumn.__init__-41"><span class="linenos">41</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">engine</span>
+</span><span id="BaseColumn.__init__-42"><a href="#BaseColumn.__init__-42"><span class="linenos">42</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">label</span>
+</span><span id="BaseColumn.__init__-43"><a href="#BaseColumn.__init__-43"><span class="linenos">43</span></a>
+</span><span id="BaseColumn.__init__-44"><a href="#BaseColumn.__init__-44"><span class="linenos">44</span></a>        <span class="c1"># See _post_init() docstring</span>
+</span><span id="BaseColumn.__init__-45"><a href="#BaseColumn.__init__-45"><span class="linenos">45</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>An object representing a proto column that can resolve a
+visual relationship to retrieve the appropriate column
+value relative to a given observation containing cell object.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>engine</strong>:  The "lookup engine" that resolves cell value lookups.</li>
+</ul>
+</div>
+
 
                             </div>
                             <div id="BaseColumn.resolve_column_cell_from_obs_cell" class="classattr">
@@ -348,19 +400,22 @@ that can be resolve to a column of data.</p>
 
     </div>
     <a class="headerlink" href="#BaseColumn.resolve_column_cell_from_obs_cell"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="BaseColumn.resolve_column_cell_from_obs_cell-81"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-81"><span class="linenos">81</span></a>    <span class="k">def</span> <span class="nf">resolve_column_cell_from_obs_cell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observation_cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cell</span><span class="p">:</span>
-</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-82"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-82"><span class="linenos">82</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-83"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-83"><span class="linenos">83</span></a><span class="sd">        Use the provided lookup engine to return the value</span>
-</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-84"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-84"><span class="linenos">84</span></a><span class="sd">        of this Column against a given observation, according</span>
-</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-85"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-85"><span class="linenos">85</span></a><span class="sd">        to the lookup engine in use.</span>
-</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-86"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-86"><span class="linenos">86</span></a>
-</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-87"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-87"><span class="linenos">87</span></a><span class="sd">        The found cell is ran through _post_lookup() in case</span>
-</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-88"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-88"><span class="linenos">88</span></a><span class="sd">        this particular Column is applying custom handling of</span>
-</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-89"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-89"><span class="linenos">89</span></a><span class="sd">        some sort.</span>
-</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-90"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-90"><span class="linenos">90</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-91"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-91"><span class="linenos">91</span></a>        <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">observation_cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
-</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-92"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-92"><span class="linenos">92</span></a>        <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_post_lookup</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
-</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-93"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-93"><span class="linenos">93</span></a>        <span class="k">return</span> <span class="n">cell</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="BaseColumn.resolve_column_cell_from_obs_cell-93"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-93"><span class="linenos"> 93</span></a>    <span class="k">def</span> <span class="nf">resolve_column_cell_from_obs_cell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observation_cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cell</span><span class="p">:</span>
+</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-94"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-94"><span class="linenos"> 94</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-95"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-95"><span class="linenos"> 95</span></a><span class="sd">        Use the provided lookup engine to return the value</span>
+</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-96"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-96"><span class="linenos"> 96</span></a><span class="sd">        of this Column against a given observation, according</span>
+</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-97"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-97"><span class="linenos"> 97</span></a><span class="sd">        to the lookup engine in use.</span>
+</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-98"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-98"><span class="linenos"> 98</span></a>
+</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-99"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-99"><span class="linenos"> 99</span></a><span class="sd">        The found cell is ran through _post_lookup() in case</span>
+</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-100"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-100"><span class="linenos">100</span></a><span class="sd">        this particular Column is applying custom handling of</span>
+</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-101"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-101"><span class="linenos">101</span></a><span class="sd">        some sort.</span>
+</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-102"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-102"><span class="linenos">102</span></a>
+</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-103"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-103"><span class="linenos">103</span></a><span class="sd">        :param cell: A single datachef Cell object.</span>
+</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-104"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-104"><span class="linenos">104</span></a><span class="sd">        :return: A single datachef Cell object. </span>
+</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-105"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-105"><span class="linenos">105</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-106"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-106"><span class="linenos">106</span></a>        <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">observation_cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-107"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-107"><span class="linenos">107</span></a>        <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_post_lookup</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+</span><span id="BaseColumn.resolve_column_cell_from_obs_cell-108"><a href="#BaseColumn.resolve_column_cell_from_obs_cell-108"><span class="linenos">108</span></a>        <span class="k">return</span> <span class="n">cell</span>
 </span></pre></div>
 
 
@@ -371,6 +426,18 @@ to the lookup engine in use.</p>
 <p>The found cell is ran through _post_lookup() in case
 this particular Column is applying custom handling of
 some sort.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>cell</strong>:  A single datachef Cell object.</li>
+</ul>
+
+<h6 id="returns">Returns</h6>
+
+<blockquote>
+  <p>A single datachef Cell object.</p>
+</blockquote>
 </div>
 
 
@@ -386,21 +453,24 @@ some sort.</p>
 
     </div>
     <a class="headerlink" href="#BaseColumn.lookup_preview"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="BaseColumn.lookup_preview-95"><a href="#BaseColumn.lookup_preview-95"><span class="linenos"> 95</span></a>    <span class="k">def</span> <span class="nf">lookup_preview</span><span class="p">(</span>
-</span><span id="BaseColumn.lookup_preview-96"><a href="#BaseColumn.lookup_preview-96"><span class="linenos"> 96</span></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">observation_selection</span><span class="p">:</span> <span class="n">Selectable</span>
-</span><span id="BaseColumn.lookup_preview-97"><a href="#BaseColumn.lookup_preview-97"><span class="linenos"> 97</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Cell</span><span class="p">,</span> <span class="n">Cell</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
-</span><span id="BaseColumn.lookup_preview-98"><a href="#BaseColumn.lookup_preview-98"><span class="linenos"> 98</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="BaseColumn.lookup_preview-99"><a href="#BaseColumn.lookup_preview-99"><span class="linenos"> 99</span></a><span class="sd">        Takes a selection of observations and generates</span>
-</span><span id="BaseColumn.lookup_preview-100"><a href="#BaseColumn.lookup_preview-100"><span class="linenos">100</span></a><span class="sd">        tuples of:</span>
-</span><span id="BaseColumn.lookup_preview-101"><a href="#BaseColumn.lookup_preview-101"><span class="linenos">101</span></a><span class="sd">        &lt;observation_cell&gt; : &lt;column cell&gt;</span>
-</span><span id="BaseColumn.lookup_preview-102"><a href="#BaseColumn.lookup_preview-102"><span class="linenos">102</span></a>
-</span><span id="BaseColumn.lookup_preview-103"><a href="#BaseColumn.lookup_preview-103"><span class="linenos">103</span></a><span class="sd">        This is intended for sanity checking during</span>
-</span><span id="BaseColumn.lookup_preview-104"><a href="#BaseColumn.lookup_preview-104"><span class="linenos">104</span></a><span class="sd">        development, not for doing the actual transform.</span>
-</span><span id="BaseColumn.lookup_preview-105"><a href="#BaseColumn.lookup_preview-105"><span class="linenos">105</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="BaseColumn.lookup_preview-106"><a href="#BaseColumn.lookup_preview-106"><span class="linenos">106</span></a>        <span class="k">for</span> <span class="n">observation_cell</span> <span class="ow">in</span> <span class="n">observation_selection</span><span class="o">.</span><span class="n">cells</span><span class="p">:</span>
-</span><span id="BaseColumn.lookup_preview-107"><a href="#BaseColumn.lookup_preview-107"><span class="linenos">107</span></a>            <span class="k">yield</span> <span class="n">observation_cell</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolve_column_cell_from_obs_cell</span><span class="p">(</span>
-</span><span id="BaseColumn.lookup_preview-108"><a href="#BaseColumn.lookup_preview-108"><span class="linenos">108</span></a>                <span class="n">observation_cell</span>
-</span><span id="BaseColumn.lookup_preview-109"><a href="#BaseColumn.lookup_preview-109"><span class="linenos">109</span></a>            <span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="BaseColumn.lookup_preview-110"><a href="#BaseColumn.lookup_preview-110"><span class="linenos">110</span></a>    <span class="k">def</span> <span class="nf">lookup_preview</span><span class="p">(</span>
+</span><span id="BaseColumn.lookup_preview-111"><a href="#BaseColumn.lookup_preview-111"><span class="linenos">111</span></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">observation_selection</span><span class="p">:</span> <span class="n">Selectable</span>
+</span><span id="BaseColumn.lookup_preview-112"><a href="#BaseColumn.lookup_preview-112"><span class="linenos">112</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Cell</span><span class="p">,</span> <span class="n">Cell</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+</span><span id="BaseColumn.lookup_preview-113"><a href="#BaseColumn.lookup_preview-113"><span class="linenos">113</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="BaseColumn.lookup_preview-114"><a href="#BaseColumn.lookup_preview-114"><span class="linenos">114</span></a><span class="sd">        Takes a selection of observations and generates</span>
+</span><span id="BaseColumn.lookup_preview-115"><a href="#BaseColumn.lookup_preview-115"><span class="linenos">115</span></a><span class="sd">        tuples of:</span>
+</span><span id="BaseColumn.lookup_preview-116"><a href="#BaseColumn.lookup_preview-116"><span class="linenos">116</span></a><span class="sd">        &lt;observation_cell&gt; : &lt;column cell&gt;</span>
+</span><span id="BaseColumn.lookup_preview-117"><a href="#BaseColumn.lookup_preview-117"><span class="linenos">117</span></a>
+</span><span id="BaseColumn.lookup_preview-118"><a href="#BaseColumn.lookup_preview-118"><span class="linenos">118</span></a><span class="sd">        This is intended for sanity checking during</span>
+</span><span id="BaseColumn.lookup_preview-119"><a href="#BaseColumn.lookup_preview-119"><span class="linenos">119</span></a><span class="sd">        development, not for doing the actual transform.</span>
+</span><span id="BaseColumn.lookup_preview-120"><a href="#BaseColumn.lookup_preview-120"><span class="linenos">120</span></a>
+</span><span id="BaseColumn.lookup_preview-121"><a href="#BaseColumn.lookup_preview-121"><span class="linenos">121</span></a><span class="sd">        :param observation_selection: A list of cells representing</span>
+</span><span id="BaseColumn.lookup_preview-122"><a href="#BaseColumn.lookup_preview-122"><span class="linenos">122</span></a><span class="sd">        a selection of observations from the data source.</span>
+</span><span id="BaseColumn.lookup_preview-123"><a href="#BaseColumn.lookup_preview-123"><span class="linenos">123</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="BaseColumn.lookup_preview-124"><a href="#BaseColumn.lookup_preview-124"><span class="linenos">124</span></a>        <span class="k">for</span> <span class="n">observation_cell</span> <span class="ow">in</span> <span class="n">observation_selection</span><span class="o">.</span><span class="n">cells</span><span class="p">:</span>
+</span><span id="BaseColumn.lookup_preview-125"><a href="#BaseColumn.lookup_preview-125"><span class="linenos">125</span></a>            <span class="k">yield</span> <span class="n">observation_cell</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolve_column_cell_from_obs_cell</span><span class="p">(</span>
+</span><span id="BaseColumn.lookup_preview-126"><a href="#BaseColumn.lookup_preview-126"><span class="linenos">126</span></a>                <span class="n">observation_cell</span>
+</span><span id="BaseColumn.lookup_preview-127"><a href="#BaseColumn.lookup_preview-127"><span class="linenos">127</span></a>            <span class="p">)</span>
 </span></pre></div>
 
 
@@ -410,6 +480,13 @@ tuples of:
 
 <p>This is intended for sanity checking during
 development, not for doing the actual transform.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>observation_selection</strong>:  A list of cells representing
+a selection of observations from the data source.</li>
+</ul>
 </div>
 
 

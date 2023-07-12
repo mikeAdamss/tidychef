@@ -91,56 +91,74 @@
 </span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a><span class="sd">        Creates a column that populates based on the</span>
 </span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a><span class="sd">        values resolved for one or more other columns.</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>        <span class="k">return</span> <span class="n">Column</span><span class="p">(</span><span class="n">HorizontalCondition</span><span class="p">(</span><span class="n">column_label</span><span class="p">,</span> <span class="n">resolver</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="n">priority</span><span class="p">))</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>
-</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>    <span class="k">def</span> <span class="nf">constant</span><span class="p">(</span><span class="n">column_label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">constant</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a><span class="sd">        Create a column that has one specific value for every</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a><span class="sd">        entry.</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>        <span class="k">return</span> <span class="n">Column</span><span class="p">(</span><span class="n">Constant</span><span class="p">(</span><span class="n">column_label</span><span class="p">,</span> <span class="n">constant</span><span class="p">))</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>
-</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>    <span class="k">def</span> <span class="nf">_pre_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="n">BaseLookupEngine</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot; &quot;&quot;&quot;</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>
-</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>        <span class="c1"># -----</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>        <span class="c1"># Apply</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>        <span class="c1"># -----</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>
-</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">apply</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;apply&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">:</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>            <span class="k">assert</span> <span class="nb">callable</span><span class="p">(</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">apply</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>            <span class="p">),</span> <span class="s2">&quot;Value of Kwarg &#39;apply&#39; must be a python callable&quot;</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>
-</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>        <span class="c1"># ----------</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>        <span class="c1"># Validation</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>        <span class="c1"># ----------</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a>
-</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>        <span class="c1"># TODO - list of callables?</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">validation</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;validate&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation</span><span class="p">:</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a>            <span class="k">assert</span> <span class="nb">callable</span><span class="p">(</span>
-</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">validation</span>
-</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a>            <span class="p">),</span> <span class="s2">&quot;Value of Kwarg &#39;validation&#39; must be a python callable&quot;</span>
-</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a>
-</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a>    <span class="k">def</span> <span class="nf">_post_lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">):</span>
-</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a><span class="sd">        Makes use of apply and/or validation callables where the</span>
-</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a><span class="sd">        user has provided them.</span>
-</span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-69"><a href="#L-69"><span class="linenos">69</span></a>
-</span><span id="L-70"><a href="#L-70"><span class="linenos">70</span></a>        <span class="c1"># Apply any modifications</span>
-</span><span id="L-71"><a href="#L-71"><span class="linenos">71</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">:</span>
-</span><span id="L-72"><a href="#L-72"><span class="linenos">72</span></a>            <span class="n">cell</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-</span><span id="L-73"><a href="#L-73"><span class="linenos">73</span></a>
-</span><span id="L-74"><a href="#L-74"><span class="linenos">74</span></a>        <span class="c1"># Validate</span>
-</span><span id="L-75"><a href="#L-75"><span class="linenos">75</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation</span><span class="p">:</span>
-</span><span id="L-76"><a href="#L-76"><span class="linenos">76</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">validation</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
-</span><span id="L-77"><a href="#L-77"><span class="linenos">77</span></a>
-</span><span id="L-78"><a href="#L-78"><span class="linenos">78</span></a>        <span class="k">return</span> <span class="n">cell</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a><span class="sd">        :param column_label: The label we wish to give to the column.</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a><span class="sd">        :param resolver: A callable to resolve the horizontal condition logic.</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a><span class="sd">        :priority: controls order of resolution for all present HorizontalCondition objects, </span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a><span class="sd">        lower values are resolved first.</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a><span class="sd">        :return: A Column object populated with a configured HorizontalCondition</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a><span class="sd">        lookup engine.</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>        <span class="k">return</span> <span class="n">Column</span><span class="p">(</span><span class="n">HorizontalCondition</span><span class="p">(</span><span class="n">column_label</span><span class="p">,</span> <span class="n">resolver</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="n">priority</span><span class="p">))</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>
+</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>    <span class="k">def</span> <span class="nf">constant</span><span class="p">(</span><span class="n">column_label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">constant</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a><span class="sd">        Create a column that has one specific value for every</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a><span class="sd">        entry.</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>
+</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a><span class="sd">        :param column_label: The label we wish to give to the column.</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a><span class="sd">        :param constant: The constant value we wish to populate the column.</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a><span class="sd">        :return: A Column object populated with a configured Constant lookup engine.</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>        <span class="k">return</span> <span class="n">Column</span><span class="p">(</span><span class="n">Constant</span><span class="p">(</span><span class="n">column_label</span><span class="p">,</span> <span class="n">constant</span><span class="p">))</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>
+</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>    <span class="k">def</span> <span class="nf">_pre_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="n">BaseLookupEngine</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a><span class="sd">        Things to be applied before the bulk of the BaeColumn</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a><span class="sd">        init logic.</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>
+</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a><span class="sd">        :engine: The lookup engine in use by this column.</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>        <span class="c1"># -----</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a>        <span class="c1"># Apply</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a>        <span class="c1"># -----</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>
+</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">apply</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;apply&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">:</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a>            <span class="k">assert</span> <span class="nb">callable</span><span class="p">(</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">apply</span>
+</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a>            <span class="p">),</span> <span class="s2">&quot;Value of Kwarg &#39;apply&#39; must be a python callable&quot;</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a>
+</span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a>        <span class="c1"># ----------</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos">69</span></a>        <span class="c1"># Validation</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos">70</span></a>        <span class="c1"># ----------</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos">71</span></a>
+</span><span id="L-72"><a href="#L-72"><span class="linenos">72</span></a>        <span class="c1"># TODO - list of callables?</span>
+</span><span id="L-73"><a href="#L-73"><span class="linenos">73</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">validation</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;validate&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos">74</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation</span><span class="p">:</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos">75</span></a>            <span class="k">assert</span> <span class="nb">callable</span><span class="p">(</span>
+</span><span id="L-76"><a href="#L-76"><span class="linenos">76</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">validation</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos">77</span></a>            <span class="p">),</span> <span class="s2">&quot;Value of Kwarg &#39;validation&#39; must be a python callable&quot;</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos">78</span></a>
+</span><span id="L-79"><a href="#L-79"><span class="linenos">79</span></a>    <span class="k">def</span> <span class="nf">_post_lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cell</span><span class="p">:</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos">80</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-81"><a href="#L-81"><span class="linenos">81</span></a><span class="sd">        Makes use of apply and/or validation callables where the</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos">82</span></a><span class="sd">        user has provided them.</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos">83</span></a>
+</span><span id="L-84"><a href="#L-84"><span class="linenos">84</span></a><span class="sd">        :param cell: A single instance of a datachef Cell object.</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos">85</span></a><span class="sd">        :return: A single instance of a datachef Cell object.</span>
+</span><span id="L-86"><a href="#L-86"><span class="linenos">86</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-87"><a href="#L-87"><span class="linenos">87</span></a>
+</span><span id="L-88"><a href="#L-88"><span class="linenos">88</span></a>        <span class="c1"># Apply any modifications</span>
+</span><span id="L-89"><a href="#L-89"><span class="linenos">89</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">:</span>
+</span><span id="L-90"><a href="#L-90"><span class="linenos">90</span></a>            <span class="n">cell</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</span><span id="L-91"><a href="#L-91"><span class="linenos">91</span></a>
+</span><span id="L-92"><a href="#L-92"><span class="linenos">92</span></a>        <span class="c1"># Validate</span>
+</span><span id="L-93"><a href="#L-93"><span class="linenos">93</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation</span><span class="p">:</span>
+</span><span id="L-94"><a href="#L-94"><span class="linenos">94</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">validation</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+</span><span id="L-95"><a href="#L-95"><span class="linenos">95</span></a>
+</span><span id="L-96"><a href="#L-96"><span class="linenos">96</span></a>        <span class="k">return</span> <span class="n">cell</span>
 </span></pre></div>
 
 
@@ -175,56 +193,74 @@
 </span><span id="Column-27"><a href="#Column-27"><span class="linenos">27</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="Column-28"><a href="#Column-28"><span class="linenos">28</span></a><span class="sd">        Creates a column that populates based on the</span>
 </span><span id="Column-29"><a href="#Column-29"><span class="linenos">29</span></a><span class="sd">        values resolved for one or more other columns.</span>
-</span><span id="Column-30"><a href="#Column-30"><span class="linenos">30</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Column-31"><a href="#Column-31"><span class="linenos">31</span></a>        <span class="k">return</span> <span class="n">Column</span><span class="p">(</span><span class="n">HorizontalCondition</span><span class="p">(</span><span class="n">column_label</span><span class="p">,</span> <span class="n">resolver</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="n">priority</span><span class="p">))</span>
-</span><span id="Column-32"><a href="#Column-32"><span class="linenos">32</span></a>
-</span><span id="Column-33"><a href="#Column-33"><span class="linenos">33</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="Column-34"><a href="#Column-34"><span class="linenos">34</span></a>    <span class="k">def</span> <span class="nf">constant</span><span class="p">(</span><span class="n">column_label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">constant</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="Column-35"><a href="#Column-35"><span class="linenos">35</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Column-36"><a href="#Column-36"><span class="linenos">36</span></a><span class="sd">        Create a column that has one specific value for every</span>
-</span><span id="Column-37"><a href="#Column-37"><span class="linenos">37</span></a><span class="sd">        entry.</span>
-</span><span id="Column-38"><a href="#Column-38"><span class="linenos">38</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Column-39"><a href="#Column-39"><span class="linenos">39</span></a>        <span class="k">return</span> <span class="n">Column</span><span class="p">(</span><span class="n">Constant</span><span class="p">(</span><span class="n">column_label</span><span class="p">,</span> <span class="n">constant</span><span class="p">))</span>
-</span><span id="Column-40"><a href="#Column-40"><span class="linenos">40</span></a>
-</span><span id="Column-41"><a href="#Column-41"><span class="linenos">41</span></a>    <span class="k">def</span> <span class="nf">_pre_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="n">BaseLookupEngine</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-</span><span id="Column-42"><a href="#Column-42"><span class="linenos">42</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot; &quot;&quot;&quot;</span>
-</span><span id="Column-43"><a href="#Column-43"><span class="linenos">43</span></a>
-</span><span id="Column-44"><a href="#Column-44"><span class="linenos">44</span></a>        <span class="c1"># -----</span>
-</span><span id="Column-45"><a href="#Column-45"><span class="linenos">45</span></a>        <span class="c1"># Apply</span>
-</span><span id="Column-46"><a href="#Column-46"><span class="linenos">46</span></a>        <span class="c1"># -----</span>
-</span><span id="Column-47"><a href="#Column-47"><span class="linenos">47</span></a>
-</span><span id="Column-48"><a href="#Column-48"><span class="linenos">48</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">apply</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;apply&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-</span><span id="Column-49"><a href="#Column-49"><span class="linenos">49</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">:</span>
-</span><span id="Column-50"><a href="#Column-50"><span class="linenos">50</span></a>            <span class="k">assert</span> <span class="nb">callable</span><span class="p">(</span>
-</span><span id="Column-51"><a href="#Column-51"><span class="linenos">51</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">apply</span>
-</span><span id="Column-52"><a href="#Column-52"><span class="linenos">52</span></a>            <span class="p">),</span> <span class="s2">&quot;Value of Kwarg &#39;apply&#39; must be a python callable&quot;</span>
-</span><span id="Column-53"><a href="#Column-53"><span class="linenos">53</span></a>
-</span><span id="Column-54"><a href="#Column-54"><span class="linenos">54</span></a>        <span class="c1"># ----------</span>
-</span><span id="Column-55"><a href="#Column-55"><span class="linenos">55</span></a>        <span class="c1"># Validation</span>
-</span><span id="Column-56"><a href="#Column-56"><span class="linenos">56</span></a>        <span class="c1"># ----------</span>
-</span><span id="Column-57"><a href="#Column-57"><span class="linenos">57</span></a>
-</span><span id="Column-58"><a href="#Column-58"><span class="linenos">58</span></a>        <span class="c1"># TODO - list of callables?</span>
-</span><span id="Column-59"><a href="#Column-59"><span class="linenos">59</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">validation</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;validate&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-</span><span id="Column-60"><a href="#Column-60"><span class="linenos">60</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation</span><span class="p">:</span>
-</span><span id="Column-61"><a href="#Column-61"><span class="linenos">61</span></a>            <span class="k">assert</span> <span class="nb">callable</span><span class="p">(</span>
-</span><span id="Column-62"><a href="#Column-62"><span class="linenos">62</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">validation</span>
-</span><span id="Column-63"><a href="#Column-63"><span class="linenos">63</span></a>            <span class="p">),</span> <span class="s2">&quot;Value of Kwarg &#39;validation&#39; must be a python callable&quot;</span>
-</span><span id="Column-64"><a href="#Column-64"><span class="linenos">64</span></a>
-</span><span id="Column-65"><a href="#Column-65"><span class="linenos">65</span></a>    <span class="k">def</span> <span class="nf">_post_lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">):</span>
-</span><span id="Column-66"><a href="#Column-66"><span class="linenos">66</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Column-67"><a href="#Column-67"><span class="linenos">67</span></a><span class="sd">        Makes use of apply and/or validation callables where the</span>
-</span><span id="Column-68"><a href="#Column-68"><span class="linenos">68</span></a><span class="sd">        user has provided them.</span>
-</span><span id="Column-69"><a href="#Column-69"><span class="linenos">69</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Column-70"><a href="#Column-70"><span class="linenos">70</span></a>
-</span><span id="Column-71"><a href="#Column-71"><span class="linenos">71</span></a>        <span class="c1"># Apply any modifications</span>
-</span><span id="Column-72"><a href="#Column-72"><span class="linenos">72</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">:</span>
-</span><span id="Column-73"><a href="#Column-73"><span class="linenos">73</span></a>            <span class="n">cell</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-</span><span id="Column-74"><a href="#Column-74"><span class="linenos">74</span></a>
-</span><span id="Column-75"><a href="#Column-75"><span class="linenos">75</span></a>        <span class="c1"># Validate</span>
-</span><span id="Column-76"><a href="#Column-76"><span class="linenos">76</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation</span><span class="p">:</span>
-</span><span id="Column-77"><a href="#Column-77"><span class="linenos">77</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">validation</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
-</span><span id="Column-78"><a href="#Column-78"><span class="linenos">78</span></a>
-</span><span id="Column-79"><a href="#Column-79"><span class="linenos">79</span></a>        <span class="k">return</span> <span class="n">cell</span>
+</span><span id="Column-30"><a href="#Column-30"><span class="linenos">30</span></a>
+</span><span id="Column-31"><a href="#Column-31"><span class="linenos">31</span></a><span class="sd">        :param column_label: The label we wish to give to the column.</span>
+</span><span id="Column-32"><a href="#Column-32"><span class="linenos">32</span></a><span class="sd">        :param resolver: A callable to resolve the horizontal condition logic.</span>
+</span><span id="Column-33"><a href="#Column-33"><span class="linenos">33</span></a><span class="sd">        :priority: controls order of resolution for all present HorizontalCondition objects, </span>
+</span><span id="Column-34"><a href="#Column-34"><span class="linenos">34</span></a><span class="sd">        lower values are resolved first.</span>
+</span><span id="Column-35"><a href="#Column-35"><span class="linenos">35</span></a><span class="sd">        :return: A Column object populated with a configured HorizontalCondition</span>
+</span><span id="Column-36"><a href="#Column-36"><span class="linenos">36</span></a><span class="sd">        lookup engine.</span>
+</span><span id="Column-37"><a href="#Column-37"><span class="linenos">37</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Column-38"><a href="#Column-38"><span class="linenos">38</span></a>        <span class="k">return</span> <span class="n">Column</span><span class="p">(</span><span class="n">HorizontalCondition</span><span class="p">(</span><span class="n">column_label</span><span class="p">,</span> <span class="n">resolver</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="n">priority</span><span class="p">))</span>
+</span><span id="Column-39"><a href="#Column-39"><span class="linenos">39</span></a>
+</span><span id="Column-40"><a href="#Column-40"><span class="linenos">40</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="Column-41"><a href="#Column-41"><span class="linenos">41</span></a>    <span class="k">def</span> <span class="nf">constant</span><span class="p">(</span><span class="n">column_label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">constant</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="Column-42"><a href="#Column-42"><span class="linenos">42</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Column-43"><a href="#Column-43"><span class="linenos">43</span></a><span class="sd">        Create a column that has one specific value for every</span>
+</span><span id="Column-44"><a href="#Column-44"><span class="linenos">44</span></a><span class="sd">        entry.</span>
+</span><span id="Column-45"><a href="#Column-45"><span class="linenos">45</span></a>
+</span><span id="Column-46"><a href="#Column-46"><span class="linenos">46</span></a><span class="sd">        :param column_label: The label we wish to give to the column.</span>
+</span><span id="Column-47"><a href="#Column-47"><span class="linenos">47</span></a><span class="sd">        :param constant: The constant value we wish to populate the column.</span>
+</span><span id="Column-48"><a href="#Column-48"><span class="linenos">48</span></a><span class="sd">        :return: A Column object populated with a configured Constant lookup engine.</span>
+</span><span id="Column-49"><a href="#Column-49"><span class="linenos">49</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Column-50"><a href="#Column-50"><span class="linenos">50</span></a>        <span class="k">return</span> <span class="n">Column</span><span class="p">(</span><span class="n">Constant</span><span class="p">(</span><span class="n">column_label</span><span class="p">,</span> <span class="n">constant</span><span class="p">))</span>
+</span><span id="Column-51"><a href="#Column-51"><span class="linenos">51</span></a>
+</span><span id="Column-52"><a href="#Column-52"><span class="linenos">52</span></a>    <span class="k">def</span> <span class="nf">_pre_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="n">BaseLookupEngine</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span id="Column-53"><a href="#Column-53"><span class="linenos">53</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Column-54"><a href="#Column-54"><span class="linenos">54</span></a><span class="sd">        Things to be applied before the bulk of the BaeColumn</span>
+</span><span id="Column-55"><a href="#Column-55"><span class="linenos">55</span></a><span class="sd">        init logic.</span>
+</span><span id="Column-56"><a href="#Column-56"><span class="linenos">56</span></a>
+</span><span id="Column-57"><a href="#Column-57"><span class="linenos">57</span></a><span class="sd">        :engine: The lookup engine in use by this column.</span>
+</span><span id="Column-58"><a href="#Column-58"><span class="linenos">58</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Column-59"><a href="#Column-59"><span class="linenos">59</span></a>        <span class="c1"># -----</span>
+</span><span id="Column-60"><a href="#Column-60"><span class="linenos">60</span></a>        <span class="c1"># Apply</span>
+</span><span id="Column-61"><a href="#Column-61"><span class="linenos">61</span></a>        <span class="c1"># -----</span>
+</span><span id="Column-62"><a href="#Column-62"><span class="linenos">62</span></a>
+</span><span id="Column-63"><a href="#Column-63"><span class="linenos">63</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">apply</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;apply&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</span><span id="Column-64"><a href="#Column-64"><span class="linenos">64</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">:</span>
+</span><span id="Column-65"><a href="#Column-65"><span class="linenos">65</span></a>            <span class="k">assert</span> <span class="nb">callable</span><span class="p">(</span>
+</span><span id="Column-66"><a href="#Column-66"><span class="linenos">66</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">apply</span>
+</span><span id="Column-67"><a href="#Column-67"><span class="linenos">67</span></a>            <span class="p">),</span> <span class="s2">&quot;Value of Kwarg &#39;apply&#39; must be a python callable&quot;</span>
+</span><span id="Column-68"><a href="#Column-68"><span class="linenos">68</span></a>
+</span><span id="Column-69"><a href="#Column-69"><span class="linenos">69</span></a>        <span class="c1"># ----------</span>
+</span><span id="Column-70"><a href="#Column-70"><span class="linenos">70</span></a>        <span class="c1"># Validation</span>
+</span><span id="Column-71"><a href="#Column-71"><span class="linenos">71</span></a>        <span class="c1"># ----------</span>
+</span><span id="Column-72"><a href="#Column-72"><span class="linenos">72</span></a>
+</span><span id="Column-73"><a href="#Column-73"><span class="linenos">73</span></a>        <span class="c1"># TODO - list of callables?</span>
+</span><span id="Column-74"><a href="#Column-74"><span class="linenos">74</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">validation</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;validate&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</span><span id="Column-75"><a href="#Column-75"><span class="linenos">75</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation</span><span class="p">:</span>
+</span><span id="Column-76"><a href="#Column-76"><span class="linenos">76</span></a>            <span class="k">assert</span> <span class="nb">callable</span><span class="p">(</span>
+</span><span id="Column-77"><a href="#Column-77"><span class="linenos">77</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">validation</span>
+</span><span id="Column-78"><a href="#Column-78"><span class="linenos">78</span></a>            <span class="p">),</span> <span class="s2">&quot;Value of Kwarg &#39;validation&#39; must be a python callable&quot;</span>
+</span><span id="Column-79"><a href="#Column-79"><span class="linenos">79</span></a>
+</span><span id="Column-80"><a href="#Column-80"><span class="linenos">80</span></a>    <span class="k">def</span> <span class="nf">_post_lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cell</span><span class="p">:</span>
+</span><span id="Column-81"><a href="#Column-81"><span class="linenos">81</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Column-82"><a href="#Column-82"><span class="linenos">82</span></a><span class="sd">        Makes use of apply and/or validation callables where the</span>
+</span><span id="Column-83"><a href="#Column-83"><span class="linenos">83</span></a><span class="sd">        user has provided them.</span>
+</span><span id="Column-84"><a href="#Column-84"><span class="linenos">84</span></a>
+</span><span id="Column-85"><a href="#Column-85"><span class="linenos">85</span></a><span class="sd">        :param cell: A single instance of a datachef Cell object.</span>
+</span><span id="Column-86"><a href="#Column-86"><span class="linenos">86</span></a><span class="sd">        :return: A single instance of a datachef Cell object.</span>
+</span><span id="Column-87"><a href="#Column-87"><span class="linenos">87</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Column-88"><a href="#Column-88"><span class="linenos">88</span></a>
+</span><span id="Column-89"><a href="#Column-89"><span class="linenos">89</span></a>        <span class="c1"># Apply any modifications</span>
+</span><span id="Column-90"><a href="#Column-90"><span class="linenos">90</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">:</span>
+</span><span id="Column-91"><a href="#Column-91"><span class="linenos">91</span></a>            <span class="n">cell</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</span><span id="Column-92"><a href="#Column-92"><span class="linenos">92</span></a>
+</span><span id="Column-93"><a href="#Column-93"><span class="linenos">93</span></a>        <span class="c1"># Validate</span>
+</span><span id="Column-94"><a href="#Column-94"><span class="linenos">94</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation</span><span class="p">:</span>
+</span><span id="Column-95"><a href="#Column-95"><span class="linenos">95</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">validation</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+</span><span id="Column-96"><a href="#Column-96"><span class="linenos">96</span></a>
+</span><span id="Column-97"><a href="#Column-97"><span class="linenos">97</span></a>        <span class="k">return</span> <span class="n">cell</span>
 </span></pre></div>
 
 
@@ -259,13 +295,36 @@ the validation= keyword.</p></li>
 </span><span id="Column.horizontal_condition-27"><a href="#Column.horizontal_condition-27"><span class="linenos">27</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="Column.horizontal_condition-28"><a href="#Column.horizontal_condition-28"><span class="linenos">28</span></a><span class="sd">        Creates a column that populates based on the</span>
 </span><span id="Column.horizontal_condition-29"><a href="#Column.horizontal_condition-29"><span class="linenos">29</span></a><span class="sd">        values resolved for one or more other columns.</span>
-</span><span id="Column.horizontal_condition-30"><a href="#Column.horizontal_condition-30"><span class="linenos">30</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Column.horizontal_condition-31"><a href="#Column.horizontal_condition-31"><span class="linenos">31</span></a>        <span class="k">return</span> <span class="n">Column</span><span class="p">(</span><span class="n">HorizontalCondition</span><span class="p">(</span><span class="n">column_label</span><span class="p">,</span> <span class="n">resolver</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="n">priority</span><span class="p">))</span>
+</span><span id="Column.horizontal_condition-30"><a href="#Column.horizontal_condition-30"><span class="linenos">30</span></a>
+</span><span id="Column.horizontal_condition-31"><a href="#Column.horizontal_condition-31"><span class="linenos">31</span></a><span class="sd">        :param column_label: The label we wish to give to the column.</span>
+</span><span id="Column.horizontal_condition-32"><a href="#Column.horizontal_condition-32"><span class="linenos">32</span></a><span class="sd">        :param resolver: A callable to resolve the horizontal condition logic.</span>
+</span><span id="Column.horizontal_condition-33"><a href="#Column.horizontal_condition-33"><span class="linenos">33</span></a><span class="sd">        :priority: controls order of resolution for all present HorizontalCondition objects, </span>
+</span><span id="Column.horizontal_condition-34"><a href="#Column.horizontal_condition-34"><span class="linenos">34</span></a><span class="sd">        lower values are resolved first.</span>
+</span><span id="Column.horizontal_condition-35"><a href="#Column.horizontal_condition-35"><span class="linenos">35</span></a><span class="sd">        :return: A Column object populated with a configured HorizontalCondition</span>
+</span><span id="Column.horizontal_condition-36"><a href="#Column.horizontal_condition-36"><span class="linenos">36</span></a><span class="sd">        lookup engine.</span>
+</span><span id="Column.horizontal_condition-37"><a href="#Column.horizontal_condition-37"><span class="linenos">37</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Column.horizontal_condition-38"><a href="#Column.horizontal_condition-38"><span class="linenos">38</span></a>        <span class="k">return</span> <span class="n">Column</span><span class="p">(</span><span class="n">HorizontalCondition</span><span class="p">(</span><span class="n">column_label</span><span class="p">,</span> <span class="n">resolver</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="n">priority</span><span class="p">))</span>
 </span></pre></div>
 
 
             <div class="docstring"><p>Creates a column that populates based on the
 values resolved for one or more other columns.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>column_label</strong>:  The label we wish to give to the column.</li>
+<li><strong>resolver</strong>:  A callable to resolve the horizontal condition logic.
+:priority: controls order of resolution for all present HorizontalCondition objects, 
+lower values are resolved first.</li>
+</ul>
+
+<h6 id="returns">Returns</h6>
+
+<blockquote>
+  <p>A Column object populated with a configured HorizontalCondition
+  lookup engine.</p>
+</blockquote>
 </div>
 
 
@@ -282,18 +341,35 @@ values resolved for one or more other columns.</p>
 
     </div>
     <a class="headerlink" href="#Column.constant"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Column.constant-33"><a href="#Column.constant-33"><span class="linenos">33</span></a>    <span class="nd">@staticmethod</span>
-</span><span id="Column.constant-34"><a href="#Column.constant-34"><span class="linenos">34</span></a>    <span class="k">def</span> <span class="nf">constant</span><span class="p">(</span><span class="n">column_label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">constant</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="Column.constant-35"><a href="#Column.constant-35"><span class="linenos">35</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Column.constant-36"><a href="#Column.constant-36"><span class="linenos">36</span></a><span class="sd">        Create a column that has one specific value for every</span>
-</span><span id="Column.constant-37"><a href="#Column.constant-37"><span class="linenos">37</span></a><span class="sd">        entry.</span>
-</span><span id="Column.constant-38"><a href="#Column.constant-38"><span class="linenos">38</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Column.constant-39"><a href="#Column.constant-39"><span class="linenos">39</span></a>        <span class="k">return</span> <span class="n">Column</span><span class="p">(</span><span class="n">Constant</span><span class="p">(</span><span class="n">column_label</span><span class="p">,</span> <span class="n">constant</span><span class="p">))</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Column.constant-40"><a href="#Column.constant-40"><span class="linenos">40</span></a>    <span class="nd">@staticmethod</span>
+</span><span id="Column.constant-41"><a href="#Column.constant-41"><span class="linenos">41</span></a>    <span class="k">def</span> <span class="nf">constant</span><span class="p">(</span><span class="n">column_label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">constant</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="Column.constant-42"><a href="#Column.constant-42"><span class="linenos">42</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Column.constant-43"><a href="#Column.constant-43"><span class="linenos">43</span></a><span class="sd">        Create a column that has one specific value for every</span>
+</span><span id="Column.constant-44"><a href="#Column.constant-44"><span class="linenos">44</span></a><span class="sd">        entry.</span>
+</span><span id="Column.constant-45"><a href="#Column.constant-45"><span class="linenos">45</span></a>
+</span><span id="Column.constant-46"><a href="#Column.constant-46"><span class="linenos">46</span></a><span class="sd">        :param column_label: The label we wish to give to the column.</span>
+</span><span id="Column.constant-47"><a href="#Column.constant-47"><span class="linenos">47</span></a><span class="sd">        :param constant: The constant value we wish to populate the column.</span>
+</span><span id="Column.constant-48"><a href="#Column.constant-48"><span class="linenos">48</span></a><span class="sd">        :return: A Column object populated with a configured Constant lookup engine.</span>
+</span><span id="Column.constant-49"><a href="#Column.constant-49"><span class="linenos">49</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Column.constant-50"><a href="#Column.constant-50"><span class="linenos">50</span></a>        <span class="k">return</span> <span class="n">Column</span><span class="p">(</span><span class="n">Constant</span><span class="p">(</span><span class="n">column_label</span><span class="p">,</span> <span class="n">constant</span><span class="p">))</span>
 </span></pre></div>
 
 
             <div class="docstring"><p>Create a column that has one specific value for every
 entry.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>column_label</strong>:  The label we wish to give to the column.</li>
+<li><strong>constant</strong>:  The constant value we wish to populate the column.</li>
+</ul>
+
+<h6 id="returns">Returns</h6>
+
+<blockquote>
+  <p>A Column object populated with a configured Constant lookup engine.</p>
+</blockquote>
 </div>
 
 

@@ -72,7 +72,7 @@
 </span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a><span class="kn">import</span> <span class="nn">copy</span>
 </span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a><span class="kn">import</span> <span class="nn">io</span>
 </span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 </span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a>
 </span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a><span class="kn">import</span> <span class="nn">requests</span>
 </span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a><span class="kn">import</span> <span class="nn">validators</span>
@@ -102,83 +102,104 @@
 </span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a><span class="sd">    Read data from a Path (or string representing a path)</span>
 </span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a><span class="sd">    present on the same machine where datachef is running.</span>
 </span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a>
-</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a><span class="sd">    This local xlsx reader uses openpyxl:</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a><span class="sd">    https://openpyxl.readthedocs.io/en/stable/index.html</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a><span class="sd">    This xls reader uses xlrd:</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a><span class="sd">    https://xlrd.readthedocs.io/en/latest/</span>
 </span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a>
-</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a><span class="sd">    Any kwargs passed to this function are propogated to</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a><span class="sd">    the openpyxl.load_workbook() method</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a>
-</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>    <span class="k">assert</span> <span class="n">validators</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="n">source</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2">&#39; is not a valid http/https url.&quot;</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a>
-</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a>    <span class="k">return</span> <span class="n">acquirer</span><span class="p">(</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a>        <span class="n">source</span><span class="p">,</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a>        <span class="n">HttpXlsReader</span><span class="p">,</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a>        <span class="n">selectable</span><span class="p">,</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a>        <span class="n">pre_hook</span><span class="o">=</span><span class="n">pre_hook</span><span class="p">,</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a>        <span class="n">post_hook</span><span class="o">=</span><span class="n">post_hook</span><span class="p">,</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a>        <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">,</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a>        <span class="n">cache</span><span class="o">=</span><span class="n">cache</span><span class="p">,</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a>        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a>    <span class="p">)</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a>
-</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>
-</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a><span class="k">class</span> <span class="nc">HttpXlsReader</span><span class="p">(</span><span class="n">BaseReader</span><span class="p">):</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a><span class="sd">    A reader to lead in a source where that source is a locally</span>
-</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a><span class="sd">    held xlsx file.</span>
-</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>
-</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span>
-</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a>        <span class="n">source</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
-</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a>        <span class="n">selectable</span><span class="p">:</span> <span class="n">Selectable</span> <span class="o">=</span> <span class="n">XlsSelectable</span><span class="p">,</span>
-</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a>        <span class="n">session</span><span class="p">:</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a>        <span class="n">cache</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a>        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsSelectable</span><span class="p">]:</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a><span class="sd">    Any kwargs passed to this function are propagated to</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a><span class="sd">    the xlrd.open_workbook() method.</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>
+</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a><span class="sd">    :param source: A url.</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a><span class="sd">    :param selectable: A class that implements datachef.selection.selectable.Selectable of an inheritor of. Default is XlsSelectable</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a><span class="sd">    :param pre_hook: A callable that can take source as an argument</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a><span class="sd">    :param post_hook: A callable that can take the output of HttpXlsReader.parse() as an argument.</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a><span class="sd">    :param session: An optional requests.Session object.</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a><span class="sd">    :param cache: Boolean flag for whether or not to cache get requests.</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a><span class="sd">    :return: A single populated Selectable of type as specified by selectable param.</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a>
+</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a>    <span class="k">assert</span> <span class="n">validators</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="n">source</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2">&#39; is not a valid http/https url.&quot;</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a>
+</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a>    <span class="k">return</span> <span class="n">acquirer</span><span class="p">(</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a>        <span class="n">source</span><span class="p">,</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a>        <span class="n">HttpXlsReader</span><span class="p">,</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>        <span class="n">selectable</span><span class="p">,</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>        <span class="n">pre_hook</span><span class="o">=</span><span class="n">pre_hook</span><span class="p">,</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>        <span class="n">post_hook</span><span class="o">=</span><span class="n">post_hook</span><span class="p">,</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>        <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">,</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>        <span class="n">cache</span><span class="o">=</span><span class="n">cache</span><span class="p">,</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>    <span class="p">)</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a>
+</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a>
+</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a><span class="k">class</span> <span class="nc">HttpXlsReader</span><span class="p">(</span><span class="n">BaseReader</span><span class="p">):</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a><span class="sd">    A reader to lead in a source where that source is a locally</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a><span class="sd">    held xlsx file.</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a>
-</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">session</span><span class="p">:</span>
-</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>            <span class="k">if</span> <span class="n">cache</span><span class="p">:</span>
-</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a>                <span class="n">session</span> <span class="o">=</span> <span class="n">get_cached_session</span><span class="p">()</span>
-</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>                <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">session</span><span class="p">()</span>
-</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>
-</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>        <span class="n">response</span><span class="p">:</span> <span class="n">requests</span><span class="o">.</span><span class="n">Response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
-</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">response</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
-</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>            <span class="k">raise</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">HTTPError</span><span class="p">(</span>
-</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>                <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a><span class="s2">                Unable to get url: </span><span class="si">{</span><span class="n">source</span><span class="si">}</span>
-</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a><span class="s2">                </span><span class="si">{</span><span class="n">response</span><span class="si">}</span>
-</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a><span class="s2">                &quot;&quot;&quot;</span>
-</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>            <span class="p">)</span>
-</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>
-</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>        <span class="n">bio</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span>
-</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>        <span class="n">bio</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>        <span class="n">bio</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>
-</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>        <span class="n">workbook</span><span class="p">:</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">Book</span> <span class="o">=</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">open_workbook</span><span class="p">(</span><span class="n">file_contents</span><span class="o">=</span><span class="n">bio</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">workbook</span><span class="p">,</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">Book</span><span class="p">)</span>
-</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>
-</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>        <span class="n">datachef_selectables</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>        <span class="n">worksheet_names</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">sheet_names</span><span class="p">()</span>
-</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>        <span class="k">for</span> <span class="n">worksheet_name</span> <span class="ow">in</span> <span class="n">worksheet_names</span><span class="p">:</span>
-</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>
-</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>            <span class="n">worksheet</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">sheet_by_name</span><span class="p">(</span><span class="n">worksheet_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>
-</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>            <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">()</span>
-</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>            <span class="n">num_rows</span> <span class="o">=</span> <span class="n">worksheet</span><span class="o">.</span><span class="n">nrows</span>
-</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_rows</span><span class="p">):</span>
-</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a>                <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">cell</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">worksheet</span><span class="o">.</span><span class="n">row</span><span class="p">(</span><span class="n">y</span><span class="p">)):</span>
-</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a>                    <span class="n">table</span><span class="o">.</span><span class="n">add_cell</span><span class="p">(</span>
-</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a>                        <span class="n">Cell</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="n">cell</span><span class="o">.</span><span class="n">value</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>                    <span class="p">)</span>
+</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>        <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a>        <span class="n">selectable</span><span class="p">:</span> <span class="n">Selectable</span> <span class="o">=</span> <span class="n">XlsSelectable</span><span class="p">,</span>
+</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>        <span class="n">session</span><span class="p">:</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>        <span class="n">cache</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsSelectable</span><span class="p">]:</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a><span class="sd">        Parse the provided source into a list of Selectables. Unless overridden the</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a><span class="sd">        selectable is of type XlsSelectable.</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>
+</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a><span class="sd">        Additional **kwargs are propagated to xlrd.open_workbook()</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>
+</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a><span class="sd">        :param source: A url</span>
+</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a><span class="sd">        :param selectable: The selectable type to be returned.</span>
+</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a><span class="sd">        :param session: An optional requests.Session object.</span>
+</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a><span class="sd">        :param session: An optional requests.Session object.</span>
+</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a><span class="sd">        :param cache: Boolean flag for whether or not to cache get requests.</span>
+</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a><span class="sd">        :return: A list of type as specified by param selectable.</span>
+</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>
+</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">session</span><span class="p">:</span>
+</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>            <span class="k">if</span> <span class="n">cache</span><span class="p">:</span>
+</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>                <span class="n">session</span> <span class="o">=</span> <span class="n">get_cached_session</span><span class="p">()</span>
+</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>                <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">session</span><span class="p">()</span>
+</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>
+</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>        <span class="n">response</span><span class="p">:</span> <span class="n">requests</span><span class="o">.</span><span class="n">Response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">response</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
+</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>            <span class="k">raise</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">HTTPError</span><span class="p">(</span>
+</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>                <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a><span class="s2">                Unable to get url: </span><span class="si">{</span><span class="n">source</span><span class="si">}</span>
+</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a><span class="s2">                </span><span class="si">{</span><span class="n">response</span><span class="si">}</span>
+</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a><span class="s2">                &quot;&quot;&quot;</span>
+</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>            <span class="p">)</span>
 </span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>
-</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>            <span class="n">datachef_selectables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>                <span class="n">selectable</span><span class="p">(</span>
-</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>                    <span class="n">table</span><span class="p">,</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">table</span><span class="p">),</span> <span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="n">_name</span><span class="o">=</span><span class="n">worksheet_name</span>
-</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>                <span class="p">)</span>
-</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>            <span class="p">)</span>
-</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>        <span class="k">return</span> <span class="n">datachef_selectables</span>
+</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>        <span class="n">bio</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span>
+</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>        <span class="n">bio</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>        <span class="n">bio</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>
+</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>        <span class="n">workbook</span><span class="p">:</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">Book</span> <span class="o">=</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">open_workbook</span><span class="p">(</span><span class="n">file_contents</span><span class="o">=</span><span class="n">bio</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">workbook</span><span class="p">,</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">Book</span><span class="p">)</span>
+</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a>
+</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>        <span class="n">datachef_selectables</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>        <span class="n">worksheet_names</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">sheet_names</span><span class="p">()</span>
+</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a>        <span class="k">for</span> <span class="n">worksheet_name</span> <span class="ow">in</span> <span class="n">worksheet_names</span><span class="p">:</span>
+</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>
+</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a>            <span class="n">worksheet</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">sheet_by_name</span><span class="p">(</span><span class="n">worksheet_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a>
+</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a>            <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">()</span>
+</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a>            <span class="n">num_rows</span> <span class="o">=</span> <span class="n">worksheet</span><span class="o">.</span><span class="n">nrows</span>
+</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a>            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_rows</span><span class="p">):</span>
+</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a>                <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">cell</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">worksheet</span><span class="o">.</span><span class="n">row</span><span class="p">(</span><span class="n">y</span><span class="p">)):</span>
+</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a>                    <span class="n">table</span><span class="o">.</span><span class="n">add_cell</span><span class="p">(</span>
+</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a>                        <span class="n">Cell</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="n">cell</span><span class="o">.</span><span class="n">value</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a>                    <span class="p">)</span>
+</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a>
+</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a>            <span class="n">datachef_selectables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>                <span class="n">selectable</span><span class="p">(</span>
+</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>                    <span class="n">table</span><span class="p">,</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">table</span><span class="p">),</span> <span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="n">_name</span><span class="o">=</span><span class="n">worksheet_name</span>
+</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>                <span class="p">)</span>
+</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a>            <span class="p">)</span>
+</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a>        <span class="k">return</span> <span class="n">datachef_selectables</span>
 </span></pre></div>
 
 
@@ -207,36 +228,61 @@
 </span><span id="http-36"><a href="#http-36"><span class="linenos">36</span></a><span class="sd">    Read data from a Path (or string representing a path)</span>
 </span><span id="http-37"><a href="#http-37"><span class="linenos">37</span></a><span class="sd">    present on the same machine where datachef is running.</span>
 </span><span id="http-38"><a href="#http-38"><span class="linenos">38</span></a>
-</span><span id="http-39"><a href="#http-39"><span class="linenos">39</span></a><span class="sd">    This local xlsx reader uses openpyxl:</span>
-</span><span id="http-40"><a href="#http-40"><span class="linenos">40</span></a><span class="sd">    https://openpyxl.readthedocs.io/en/stable/index.html</span>
+</span><span id="http-39"><a href="#http-39"><span class="linenos">39</span></a><span class="sd">    This xls reader uses xlrd:</span>
+</span><span id="http-40"><a href="#http-40"><span class="linenos">40</span></a><span class="sd">    https://xlrd.readthedocs.io/en/latest/</span>
 </span><span id="http-41"><a href="#http-41"><span class="linenos">41</span></a>
-</span><span id="http-42"><a href="#http-42"><span class="linenos">42</span></a><span class="sd">    Any kwargs passed to this function are propogated to</span>
-</span><span id="http-43"><a href="#http-43"><span class="linenos">43</span></a><span class="sd">    the openpyxl.load_workbook() method</span>
-</span><span id="http-44"><a href="#http-44"><span class="linenos">44</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="http-45"><a href="#http-45"><span class="linenos">45</span></a>
-</span><span id="http-46"><a href="#http-46"><span class="linenos">46</span></a>    <span class="k">assert</span> <span class="n">validators</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="n">source</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2">&#39; is not a valid http/https url.&quot;</span>
-</span><span id="http-47"><a href="#http-47"><span class="linenos">47</span></a>
-</span><span id="http-48"><a href="#http-48"><span class="linenos">48</span></a>    <span class="k">return</span> <span class="n">acquirer</span><span class="p">(</span>
-</span><span id="http-49"><a href="#http-49"><span class="linenos">49</span></a>        <span class="n">source</span><span class="p">,</span>
-</span><span id="http-50"><a href="#http-50"><span class="linenos">50</span></a>        <span class="n">HttpXlsReader</span><span class="p">,</span>
-</span><span id="http-51"><a href="#http-51"><span class="linenos">51</span></a>        <span class="n">selectable</span><span class="p">,</span>
-</span><span id="http-52"><a href="#http-52"><span class="linenos">52</span></a>        <span class="n">pre_hook</span><span class="o">=</span><span class="n">pre_hook</span><span class="p">,</span>
-</span><span id="http-53"><a href="#http-53"><span class="linenos">53</span></a>        <span class="n">post_hook</span><span class="o">=</span><span class="n">post_hook</span><span class="p">,</span>
-</span><span id="http-54"><a href="#http-54"><span class="linenos">54</span></a>        <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">,</span>
-</span><span id="http-55"><a href="#http-55"><span class="linenos">55</span></a>        <span class="n">cache</span><span class="o">=</span><span class="n">cache</span><span class="p">,</span>
-</span><span id="http-56"><a href="#http-56"><span class="linenos">56</span></a>        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-</span><span id="http-57"><a href="#http-57"><span class="linenos">57</span></a>    <span class="p">)</span>
+</span><span id="http-42"><a href="#http-42"><span class="linenos">42</span></a><span class="sd">    Any kwargs passed to this function are propagated to</span>
+</span><span id="http-43"><a href="#http-43"><span class="linenos">43</span></a><span class="sd">    the xlrd.open_workbook() method.</span>
+</span><span id="http-44"><a href="#http-44"><span class="linenos">44</span></a>
+</span><span id="http-45"><a href="#http-45"><span class="linenos">45</span></a><span class="sd">    :param source: A url.</span>
+</span><span id="http-46"><a href="#http-46"><span class="linenos">46</span></a><span class="sd">    :param selectable: A class that implements datachef.selection.selectable.Selectable of an inheritor of. Default is XlsSelectable</span>
+</span><span id="http-47"><a href="#http-47"><span class="linenos">47</span></a><span class="sd">    :param pre_hook: A callable that can take source as an argument</span>
+</span><span id="http-48"><a href="#http-48"><span class="linenos">48</span></a><span class="sd">    :param post_hook: A callable that can take the output of HttpXlsReader.parse() as an argument.</span>
+</span><span id="http-49"><a href="#http-49"><span class="linenos">49</span></a><span class="sd">    :param session: An optional requests.Session object.</span>
+</span><span id="http-50"><a href="#http-50"><span class="linenos">50</span></a><span class="sd">    :param cache: Boolean flag for whether or not to cache get requests.</span>
+</span><span id="http-51"><a href="#http-51"><span class="linenos">51</span></a><span class="sd">    :return: A single populated Selectable of type as specified by selectable param.</span>
+</span><span id="http-52"><a href="#http-52"><span class="linenos">52</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="http-53"><a href="#http-53"><span class="linenos">53</span></a>
+</span><span id="http-54"><a href="#http-54"><span class="linenos">54</span></a>    <span class="k">assert</span> <span class="n">validators</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="n">source</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2">&#39; is not a valid http/https url.&quot;</span>
+</span><span id="http-55"><a href="#http-55"><span class="linenos">55</span></a>
+</span><span id="http-56"><a href="#http-56"><span class="linenos">56</span></a>    <span class="k">return</span> <span class="n">acquirer</span><span class="p">(</span>
+</span><span id="http-57"><a href="#http-57"><span class="linenos">57</span></a>        <span class="n">source</span><span class="p">,</span>
+</span><span id="http-58"><a href="#http-58"><span class="linenos">58</span></a>        <span class="n">HttpXlsReader</span><span class="p">,</span>
+</span><span id="http-59"><a href="#http-59"><span class="linenos">59</span></a>        <span class="n">selectable</span><span class="p">,</span>
+</span><span id="http-60"><a href="#http-60"><span class="linenos">60</span></a>        <span class="n">pre_hook</span><span class="o">=</span><span class="n">pre_hook</span><span class="p">,</span>
+</span><span id="http-61"><a href="#http-61"><span class="linenos">61</span></a>        <span class="n">post_hook</span><span class="o">=</span><span class="n">post_hook</span><span class="p">,</span>
+</span><span id="http-62"><a href="#http-62"><span class="linenos">62</span></a>        <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">,</span>
+</span><span id="http-63"><a href="#http-63"><span class="linenos">63</span></a>        <span class="n">cache</span><span class="o">=</span><span class="n">cache</span><span class="p">,</span>
+</span><span id="http-64"><a href="#http-64"><span class="linenos">64</span></a>        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+</span><span id="http-65"><a href="#http-65"><span class="linenos">65</span></a>    <span class="p">)</span>
 </span></pre></div>
 
 
             <div class="docstring"><p>Read data from a Path (or string representing a path)
 present on the same machine where datachef is running.</p>
 
-<p>This local xlsx reader uses openpyxl:
-<a href="https://openpyxl.readthedocs.io/en/stable/index.html">https://openpyxl.readthedocs.io/en/stable/index.html</a></p>
+<p>This xls reader uses xlrd:
+<a href="https://xlrd.readthedocs.io/en/latest/">https://xlrd.readthedocs.io/en/latest/</a></p>
 
-<p>Any kwargs passed to this function are propogated to
-the openpyxl.load_workbook() method</p>
+<p>Any kwargs passed to this function are propagated to
+the xlrd.open_workbook() method.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>source</strong>:  A url.</li>
+<li><strong>selectable</strong>:  A class that implements <a href="../../selection/selectable.html#Selectable">datachef.selection.selectable.Selectable</a> of an inheritor of. Default is XlsSelectable</li>
+<li><strong>pre_hook</strong>:  A callable that can take source as an argument</li>
+<li><strong>post_hook</strong>:  A callable that can take the output of <a href="#HttpXlsReader.parse">HttpXlsReader.parse()</a> as an argument.</li>
+<li><strong>session</strong>:  An optional requests.Session object.</li>
+<li><strong>cache</strong>:  Boolean flag for whether or not to cache get requests.</li>
+</ul>
+
+<h6 id="returns">Returns</h6>
+
+<blockquote>
+  <p>A single populated Selectable of type as specified by selectable param.</p>
+</blockquote>
 </div>
 
 
@@ -252,62 +298,75 @@ the openpyxl.load_workbook() method</p>
 
     </div>
     <a class="headerlink" href="#HttpXlsReader"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="HttpXlsReader-60"><a href="#HttpXlsReader-60"><span class="linenos"> 60</span></a><span class="k">class</span> <span class="nc">HttpXlsReader</span><span class="p">(</span><span class="n">BaseReader</span><span class="p">):</span>
-</span><span id="HttpXlsReader-61"><a href="#HttpXlsReader-61"><span class="linenos"> 61</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="HttpXlsReader-62"><a href="#HttpXlsReader-62"><span class="linenos"> 62</span></a><span class="sd">    A reader to lead in a source where that source is a locally</span>
-</span><span id="HttpXlsReader-63"><a href="#HttpXlsReader-63"><span class="linenos"> 63</span></a><span class="sd">    held xlsx file.</span>
-</span><span id="HttpXlsReader-64"><a href="#HttpXlsReader-64"><span class="linenos"> 64</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="HttpXlsReader-65"><a href="#HttpXlsReader-65"><span class="linenos"> 65</span></a>
-</span><span id="HttpXlsReader-66"><a href="#HttpXlsReader-66"><span class="linenos"> 66</span></a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span>
-</span><span id="HttpXlsReader-67"><a href="#HttpXlsReader-67"><span class="linenos"> 67</span></a>        <span class="n">source</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
-</span><span id="HttpXlsReader-68"><a href="#HttpXlsReader-68"><span class="linenos"> 68</span></a>        <span class="n">selectable</span><span class="p">:</span> <span class="n">Selectable</span> <span class="o">=</span> <span class="n">XlsSelectable</span><span class="p">,</span>
-</span><span id="HttpXlsReader-69"><a href="#HttpXlsReader-69"><span class="linenos"> 69</span></a>        <span class="n">session</span><span class="p">:</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="HttpXlsReader-70"><a href="#HttpXlsReader-70"><span class="linenos"> 70</span></a>        <span class="n">cache</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="HttpXlsReader-71"><a href="#HttpXlsReader-71"><span class="linenos"> 71</span></a>        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-</span><span id="HttpXlsReader-72"><a href="#HttpXlsReader-72"><span class="linenos"> 72</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsSelectable</span><span class="p">]:</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="HttpXlsReader-68"><a href="#HttpXlsReader-68"><span class="linenos"> 68</span></a><span class="k">class</span> <span class="nc">HttpXlsReader</span><span class="p">(</span><span class="n">BaseReader</span><span class="p">):</span>
+</span><span id="HttpXlsReader-69"><a href="#HttpXlsReader-69"><span class="linenos"> 69</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="HttpXlsReader-70"><a href="#HttpXlsReader-70"><span class="linenos"> 70</span></a><span class="sd">    A reader to lead in a source where that source is a locally</span>
+</span><span id="HttpXlsReader-71"><a href="#HttpXlsReader-71"><span class="linenos"> 71</span></a><span class="sd">    held xlsx file.</span>
+</span><span id="HttpXlsReader-72"><a href="#HttpXlsReader-72"><span class="linenos"> 72</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="HttpXlsReader-73"><a href="#HttpXlsReader-73"><span class="linenos"> 73</span></a>
-</span><span id="HttpXlsReader-74"><a href="#HttpXlsReader-74"><span class="linenos"> 74</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">session</span><span class="p">:</span>
-</span><span id="HttpXlsReader-75"><a href="#HttpXlsReader-75"><span class="linenos"> 75</span></a>            <span class="k">if</span> <span class="n">cache</span><span class="p">:</span>
-</span><span id="HttpXlsReader-76"><a href="#HttpXlsReader-76"><span class="linenos"> 76</span></a>                <span class="n">session</span> <span class="o">=</span> <span class="n">get_cached_session</span><span class="p">()</span>
-</span><span id="HttpXlsReader-77"><a href="#HttpXlsReader-77"><span class="linenos"> 77</span></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="HttpXlsReader-78"><a href="#HttpXlsReader-78"><span class="linenos"> 78</span></a>                <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">session</span><span class="p">()</span>
-</span><span id="HttpXlsReader-79"><a href="#HttpXlsReader-79"><span class="linenos"> 79</span></a>
-</span><span id="HttpXlsReader-80"><a href="#HttpXlsReader-80"><span class="linenos"> 80</span></a>        <span class="n">response</span><span class="p">:</span> <span class="n">requests</span><span class="o">.</span><span class="n">Response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
-</span><span id="HttpXlsReader-81"><a href="#HttpXlsReader-81"><span class="linenos"> 81</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">response</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
-</span><span id="HttpXlsReader-82"><a href="#HttpXlsReader-82"><span class="linenos"> 82</span></a>            <span class="k">raise</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">HTTPError</span><span class="p">(</span>
-</span><span id="HttpXlsReader-83"><a href="#HttpXlsReader-83"><span class="linenos"> 83</span></a>                <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-</span><span id="HttpXlsReader-84"><a href="#HttpXlsReader-84"><span class="linenos"> 84</span></a><span class="s2">                Unable to get url: </span><span class="si">{</span><span class="n">source</span><span class="si">}</span>
-</span><span id="HttpXlsReader-85"><a href="#HttpXlsReader-85"><span class="linenos"> 85</span></a><span class="s2">                </span><span class="si">{</span><span class="n">response</span><span class="si">}</span>
-</span><span id="HttpXlsReader-86"><a href="#HttpXlsReader-86"><span class="linenos"> 86</span></a><span class="s2">                &quot;&quot;&quot;</span>
-</span><span id="HttpXlsReader-87"><a href="#HttpXlsReader-87"><span class="linenos"> 87</span></a>            <span class="p">)</span>
-</span><span id="HttpXlsReader-88"><a href="#HttpXlsReader-88"><span class="linenos"> 88</span></a>
-</span><span id="HttpXlsReader-89"><a href="#HttpXlsReader-89"><span class="linenos"> 89</span></a>        <span class="n">bio</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span>
-</span><span id="HttpXlsReader-90"><a href="#HttpXlsReader-90"><span class="linenos"> 90</span></a>        <span class="n">bio</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-</span><span id="HttpXlsReader-91"><a href="#HttpXlsReader-91"><span class="linenos"> 91</span></a>        <span class="n">bio</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</span><span id="HttpXlsReader-92"><a href="#HttpXlsReader-92"><span class="linenos"> 92</span></a>
-</span><span id="HttpXlsReader-93"><a href="#HttpXlsReader-93"><span class="linenos"> 93</span></a>        <span class="n">workbook</span><span class="p">:</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">Book</span> <span class="o">=</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">open_workbook</span><span class="p">(</span><span class="n">file_contents</span><span class="o">=</span><span class="n">bio</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-</span><span id="HttpXlsReader-94"><a href="#HttpXlsReader-94"><span class="linenos"> 94</span></a>        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">workbook</span><span class="p">,</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">Book</span><span class="p">)</span>
-</span><span id="HttpXlsReader-95"><a href="#HttpXlsReader-95"><span class="linenos"> 95</span></a>
-</span><span id="HttpXlsReader-96"><a href="#HttpXlsReader-96"><span class="linenos"> 96</span></a>        <span class="n">datachef_selectables</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="HttpXlsReader-97"><a href="#HttpXlsReader-97"><span class="linenos"> 97</span></a>        <span class="n">worksheet_names</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">sheet_names</span><span class="p">()</span>
-</span><span id="HttpXlsReader-98"><a href="#HttpXlsReader-98"><span class="linenos"> 98</span></a>        <span class="k">for</span> <span class="n">worksheet_name</span> <span class="ow">in</span> <span class="n">worksheet_names</span><span class="p">:</span>
-</span><span id="HttpXlsReader-99"><a href="#HttpXlsReader-99"><span class="linenos"> 99</span></a>
-</span><span id="HttpXlsReader-100"><a href="#HttpXlsReader-100"><span class="linenos">100</span></a>            <span class="n">worksheet</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">sheet_by_name</span><span class="p">(</span><span class="n">worksheet_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="HttpXlsReader-101"><a href="#HttpXlsReader-101"><span class="linenos">101</span></a>
-</span><span id="HttpXlsReader-102"><a href="#HttpXlsReader-102"><span class="linenos">102</span></a>            <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">()</span>
-</span><span id="HttpXlsReader-103"><a href="#HttpXlsReader-103"><span class="linenos">103</span></a>            <span class="n">num_rows</span> <span class="o">=</span> <span class="n">worksheet</span><span class="o">.</span><span class="n">nrows</span>
-</span><span id="HttpXlsReader-104"><a href="#HttpXlsReader-104"><span class="linenos">104</span></a>            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_rows</span><span class="p">):</span>
-</span><span id="HttpXlsReader-105"><a href="#HttpXlsReader-105"><span class="linenos">105</span></a>                <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">cell</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">worksheet</span><span class="o">.</span><span class="n">row</span><span class="p">(</span><span class="n">y</span><span class="p">)):</span>
-</span><span id="HttpXlsReader-106"><a href="#HttpXlsReader-106"><span class="linenos">106</span></a>                    <span class="n">table</span><span class="o">.</span><span class="n">add_cell</span><span class="p">(</span>
-</span><span id="HttpXlsReader-107"><a href="#HttpXlsReader-107"><span class="linenos">107</span></a>                        <span class="n">Cell</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="n">cell</span><span class="o">.</span><span class="n">value</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-</span><span id="HttpXlsReader-108"><a href="#HttpXlsReader-108"><span class="linenos">108</span></a>                    <span class="p">)</span>
+</span><span id="HttpXlsReader-74"><a href="#HttpXlsReader-74"><span class="linenos"> 74</span></a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span>
+</span><span id="HttpXlsReader-75"><a href="#HttpXlsReader-75"><span class="linenos"> 75</span></a>        <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="HttpXlsReader-76"><a href="#HttpXlsReader-76"><span class="linenos"> 76</span></a>        <span class="n">selectable</span><span class="p">:</span> <span class="n">Selectable</span> <span class="o">=</span> <span class="n">XlsSelectable</span><span class="p">,</span>
+</span><span id="HttpXlsReader-77"><a href="#HttpXlsReader-77"><span class="linenos"> 77</span></a>        <span class="n">session</span><span class="p">:</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="HttpXlsReader-78"><a href="#HttpXlsReader-78"><span class="linenos"> 78</span></a>        <span class="n">cache</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span id="HttpXlsReader-79"><a href="#HttpXlsReader-79"><span class="linenos"> 79</span></a>        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+</span><span id="HttpXlsReader-80"><a href="#HttpXlsReader-80"><span class="linenos"> 80</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsSelectable</span><span class="p">]:</span>
+</span><span id="HttpXlsReader-81"><a href="#HttpXlsReader-81"><span class="linenos"> 81</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="HttpXlsReader-82"><a href="#HttpXlsReader-82"><span class="linenos"> 82</span></a><span class="sd">        Parse the provided source into a list of Selectables. Unless overridden the</span>
+</span><span id="HttpXlsReader-83"><a href="#HttpXlsReader-83"><span class="linenos"> 83</span></a><span class="sd">        selectable is of type XlsSelectable.</span>
+</span><span id="HttpXlsReader-84"><a href="#HttpXlsReader-84"><span class="linenos"> 84</span></a>
+</span><span id="HttpXlsReader-85"><a href="#HttpXlsReader-85"><span class="linenos"> 85</span></a><span class="sd">        Additional **kwargs are propagated to xlrd.open_workbook()</span>
+</span><span id="HttpXlsReader-86"><a href="#HttpXlsReader-86"><span class="linenos"> 86</span></a>
+</span><span id="HttpXlsReader-87"><a href="#HttpXlsReader-87"><span class="linenos"> 87</span></a><span class="sd">        :param source: A url</span>
+</span><span id="HttpXlsReader-88"><a href="#HttpXlsReader-88"><span class="linenos"> 88</span></a><span class="sd">        :param selectable: The selectable type to be returned.</span>
+</span><span id="HttpXlsReader-89"><a href="#HttpXlsReader-89"><span class="linenos"> 89</span></a><span class="sd">        :param session: An optional requests.Session object.</span>
+</span><span id="HttpXlsReader-90"><a href="#HttpXlsReader-90"><span class="linenos"> 90</span></a><span class="sd">        :param session: An optional requests.Session object.</span>
+</span><span id="HttpXlsReader-91"><a href="#HttpXlsReader-91"><span class="linenos"> 91</span></a><span class="sd">        :param cache: Boolean flag for whether or not to cache get requests.</span>
+</span><span id="HttpXlsReader-92"><a href="#HttpXlsReader-92"><span class="linenos"> 92</span></a><span class="sd">        :return: A list of type as specified by param selectable.</span>
+</span><span id="HttpXlsReader-93"><a href="#HttpXlsReader-93"><span class="linenos"> 93</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="HttpXlsReader-94"><a href="#HttpXlsReader-94"><span class="linenos"> 94</span></a>
+</span><span id="HttpXlsReader-95"><a href="#HttpXlsReader-95"><span class="linenos"> 95</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">session</span><span class="p">:</span>
+</span><span id="HttpXlsReader-96"><a href="#HttpXlsReader-96"><span class="linenos"> 96</span></a>            <span class="k">if</span> <span class="n">cache</span><span class="p">:</span>
+</span><span id="HttpXlsReader-97"><a href="#HttpXlsReader-97"><span class="linenos"> 97</span></a>                <span class="n">session</span> <span class="o">=</span> <span class="n">get_cached_session</span><span class="p">()</span>
+</span><span id="HttpXlsReader-98"><a href="#HttpXlsReader-98"><span class="linenos"> 98</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="HttpXlsReader-99"><a href="#HttpXlsReader-99"><span class="linenos"> 99</span></a>                <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">session</span><span class="p">()</span>
+</span><span id="HttpXlsReader-100"><a href="#HttpXlsReader-100"><span class="linenos">100</span></a>
+</span><span id="HttpXlsReader-101"><a href="#HttpXlsReader-101"><span class="linenos">101</span></a>        <span class="n">response</span><span class="p">:</span> <span class="n">requests</span><span class="o">.</span><span class="n">Response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+</span><span id="HttpXlsReader-102"><a href="#HttpXlsReader-102"><span class="linenos">102</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">response</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
+</span><span id="HttpXlsReader-103"><a href="#HttpXlsReader-103"><span class="linenos">103</span></a>            <span class="k">raise</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">HTTPError</span><span class="p">(</span>
+</span><span id="HttpXlsReader-104"><a href="#HttpXlsReader-104"><span class="linenos">104</span></a>                <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+</span><span id="HttpXlsReader-105"><a href="#HttpXlsReader-105"><span class="linenos">105</span></a><span class="s2">                Unable to get url: </span><span class="si">{</span><span class="n">source</span><span class="si">}</span>
+</span><span id="HttpXlsReader-106"><a href="#HttpXlsReader-106"><span class="linenos">106</span></a><span class="s2">                </span><span class="si">{</span><span class="n">response</span><span class="si">}</span>
+</span><span id="HttpXlsReader-107"><a href="#HttpXlsReader-107"><span class="linenos">107</span></a><span class="s2">                &quot;&quot;&quot;</span>
+</span><span id="HttpXlsReader-108"><a href="#HttpXlsReader-108"><span class="linenos">108</span></a>            <span class="p">)</span>
 </span><span id="HttpXlsReader-109"><a href="#HttpXlsReader-109"><span class="linenos">109</span></a>
-</span><span id="HttpXlsReader-110"><a href="#HttpXlsReader-110"><span class="linenos">110</span></a>            <span class="n">datachef_selectables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-</span><span id="HttpXlsReader-111"><a href="#HttpXlsReader-111"><span class="linenos">111</span></a>                <span class="n">selectable</span><span class="p">(</span>
-</span><span id="HttpXlsReader-112"><a href="#HttpXlsReader-112"><span class="linenos">112</span></a>                    <span class="n">table</span><span class="p">,</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">table</span><span class="p">),</span> <span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="n">_name</span><span class="o">=</span><span class="n">worksheet_name</span>
-</span><span id="HttpXlsReader-113"><a href="#HttpXlsReader-113"><span class="linenos">113</span></a>                <span class="p">)</span>
-</span><span id="HttpXlsReader-114"><a href="#HttpXlsReader-114"><span class="linenos">114</span></a>            <span class="p">)</span>
-</span><span id="HttpXlsReader-115"><a href="#HttpXlsReader-115"><span class="linenos">115</span></a>        <span class="k">return</span> <span class="n">datachef_selectables</span>
+</span><span id="HttpXlsReader-110"><a href="#HttpXlsReader-110"><span class="linenos">110</span></a>        <span class="n">bio</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span>
+</span><span id="HttpXlsReader-111"><a href="#HttpXlsReader-111"><span class="linenos">111</span></a>        <span class="n">bio</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</span><span id="HttpXlsReader-112"><a href="#HttpXlsReader-112"><span class="linenos">112</span></a>        <span class="n">bio</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span id="HttpXlsReader-113"><a href="#HttpXlsReader-113"><span class="linenos">113</span></a>
+</span><span id="HttpXlsReader-114"><a href="#HttpXlsReader-114"><span class="linenos">114</span></a>        <span class="n">workbook</span><span class="p">:</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">Book</span> <span class="o">=</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">open_workbook</span><span class="p">(</span><span class="n">file_contents</span><span class="o">=</span><span class="n">bio</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="HttpXlsReader-115"><a href="#HttpXlsReader-115"><span class="linenos">115</span></a>        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">workbook</span><span class="p">,</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">Book</span><span class="p">)</span>
+</span><span id="HttpXlsReader-116"><a href="#HttpXlsReader-116"><span class="linenos">116</span></a>
+</span><span id="HttpXlsReader-117"><a href="#HttpXlsReader-117"><span class="linenos">117</span></a>        <span class="n">datachef_selectables</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="HttpXlsReader-118"><a href="#HttpXlsReader-118"><span class="linenos">118</span></a>        <span class="n">worksheet_names</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">sheet_names</span><span class="p">()</span>
+</span><span id="HttpXlsReader-119"><a href="#HttpXlsReader-119"><span class="linenos">119</span></a>        <span class="k">for</span> <span class="n">worksheet_name</span> <span class="ow">in</span> <span class="n">worksheet_names</span><span class="p">:</span>
+</span><span id="HttpXlsReader-120"><a href="#HttpXlsReader-120"><span class="linenos">120</span></a>
+</span><span id="HttpXlsReader-121"><a href="#HttpXlsReader-121"><span class="linenos">121</span></a>            <span class="n">worksheet</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">sheet_by_name</span><span class="p">(</span><span class="n">worksheet_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="HttpXlsReader-122"><a href="#HttpXlsReader-122"><span class="linenos">122</span></a>
+</span><span id="HttpXlsReader-123"><a href="#HttpXlsReader-123"><span class="linenos">123</span></a>            <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">()</span>
+</span><span id="HttpXlsReader-124"><a href="#HttpXlsReader-124"><span class="linenos">124</span></a>            <span class="n">num_rows</span> <span class="o">=</span> <span class="n">worksheet</span><span class="o">.</span><span class="n">nrows</span>
+</span><span id="HttpXlsReader-125"><a href="#HttpXlsReader-125"><span class="linenos">125</span></a>            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_rows</span><span class="p">):</span>
+</span><span id="HttpXlsReader-126"><a href="#HttpXlsReader-126"><span class="linenos">126</span></a>                <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">cell</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">worksheet</span><span class="o">.</span><span class="n">row</span><span class="p">(</span><span class="n">y</span><span class="p">)):</span>
+</span><span id="HttpXlsReader-127"><a href="#HttpXlsReader-127"><span class="linenos">127</span></a>                    <span class="n">table</span><span class="o">.</span><span class="n">add_cell</span><span class="p">(</span>
+</span><span id="HttpXlsReader-128"><a href="#HttpXlsReader-128"><span class="linenos">128</span></a>                        <span class="n">Cell</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="n">cell</span><span class="o">.</span><span class="n">value</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+</span><span id="HttpXlsReader-129"><a href="#HttpXlsReader-129"><span class="linenos">129</span></a>                    <span class="p">)</span>
+</span><span id="HttpXlsReader-130"><a href="#HttpXlsReader-130"><span class="linenos">130</span></a>
+</span><span id="HttpXlsReader-131"><a href="#HttpXlsReader-131"><span class="linenos">131</span></a>            <span class="n">datachef_selectables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+</span><span id="HttpXlsReader-132"><a href="#HttpXlsReader-132"><span class="linenos">132</span></a>                <span class="n">selectable</span><span class="p">(</span>
+</span><span id="HttpXlsReader-133"><a href="#HttpXlsReader-133"><span class="linenos">133</span></a>                    <span class="n">table</span><span class="p">,</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">table</span><span class="p">),</span> <span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="n">_name</span><span class="o">=</span><span class="n">worksheet_name</span>
+</span><span id="HttpXlsReader-134"><a href="#HttpXlsReader-134"><span class="linenos">134</span></a>                <span class="p">)</span>
+</span><span id="HttpXlsReader-135"><a href="#HttpXlsReader-135"><span class="linenos">135</span></a>            <span class="p">)</span>
+</span><span id="HttpXlsReader-136"><a href="#HttpXlsReader-136"><span class="linenos">136</span></a>        <span class="k">return</span> <span class="n">datachef_selectables</span>
 </span></pre></div>
 
 
@@ -321,66 +380,98 @@ held xlsx file.</p>
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">parse</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">source</span><span class="p">:</span> <span class="n">Any</span>,</span><span class="param">	selectable: <a href="../../selection/selectable.html#Selectable">datachef.selection.selectable.Selectable</a> = &lt;class &#x27;datachef.selection.xls.xls.XlsSelectable&#x27;&gt;,</span><span class="param">	<span class="n">session</span><span class="p">:</span> <span class="n">requests</span><span class="o">.</span><span class="n">sessions</span><span class="o">.</span><span class="n">Session</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">cache</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>,</span><span class="param">	<span class="o">**</span><span class="n">kwargs</span></span><span class="return-annotation">) -> <span class="n">List</span><span class="p">[</span><span class="n">datachef</span><span class="o">.</span><span class="n">selection</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">XlsSelectable</span><span class="p">]</span>:</span></span>
+        <span class="name">parse</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">source</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">	selectable: <a href="../../selection/selectable.html#Selectable">datachef.selection.selectable.Selectable</a> = &lt;class &#x27;datachef.selection.xls.xls.XlsSelectable&#x27;&gt;,</span><span class="param">	<span class="n">session</span><span class="p">:</span> <span class="n">requests</span><span class="o">.</span><span class="n">sessions</span><span class="o">.</span><span class="n">Session</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">cache</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>,</span><span class="param">	<span class="o">**</span><span class="n">kwargs</span></span><span class="return-annotation">) -> <span class="n">List</span><span class="p">[</span><span class="n">datachef</span><span class="o">.</span><span class="n">selection</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">XlsSelectable</span><span class="p">]</span>:</span></span>
 
                 <label class="view-source-button" for="HttpXlsReader.parse-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#HttpXlsReader.parse"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="HttpXlsReader.parse-66"><a href="#HttpXlsReader.parse-66"><span class="linenos"> 66</span></a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span>
-</span><span id="HttpXlsReader.parse-67"><a href="#HttpXlsReader.parse-67"><span class="linenos"> 67</span></a>        <span class="n">source</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
-</span><span id="HttpXlsReader.parse-68"><a href="#HttpXlsReader.parse-68"><span class="linenos"> 68</span></a>        <span class="n">selectable</span><span class="p">:</span> <span class="n">Selectable</span> <span class="o">=</span> <span class="n">XlsSelectable</span><span class="p">,</span>
-</span><span id="HttpXlsReader.parse-69"><a href="#HttpXlsReader.parse-69"><span class="linenos"> 69</span></a>        <span class="n">session</span><span class="p">:</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="HttpXlsReader.parse-70"><a href="#HttpXlsReader.parse-70"><span class="linenos"> 70</span></a>        <span class="n">cache</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="HttpXlsReader.parse-71"><a href="#HttpXlsReader.parse-71"><span class="linenos"> 71</span></a>        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-</span><span id="HttpXlsReader.parse-72"><a href="#HttpXlsReader.parse-72"><span class="linenos"> 72</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsSelectable</span><span class="p">]:</span>
-</span><span id="HttpXlsReader.parse-73"><a href="#HttpXlsReader.parse-73"><span class="linenos"> 73</span></a>
-</span><span id="HttpXlsReader.parse-74"><a href="#HttpXlsReader.parse-74"><span class="linenos"> 74</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">session</span><span class="p">:</span>
-</span><span id="HttpXlsReader.parse-75"><a href="#HttpXlsReader.parse-75"><span class="linenos"> 75</span></a>            <span class="k">if</span> <span class="n">cache</span><span class="p">:</span>
-</span><span id="HttpXlsReader.parse-76"><a href="#HttpXlsReader.parse-76"><span class="linenos"> 76</span></a>                <span class="n">session</span> <span class="o">=</span> <span class="n">get_cached_session</span><span class="p">()</span>
-</span><span id="HttpXlsReader.parse-77"><a href="#HttpXlsReader.parse-77"><span class="linenos"> 77</span></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="HttpXlsReader.parse-78"><a href="#HttpXlsReader.parse-78"><span class="linenos"> 78</span></a>                <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">session</span><span class="p">()</span>
-</span><span id="HttpXlsReader.parse-79"><a href="#HttpXlsReader.parse-79"><span class="linenos"> 79</span></a>
-</span><span id="HttpXlsReader.parse-80"><a href="#HttpXlsReader.parse-80"><span class="linenos"> 80</span></a>        <span class="n">response</span><span class="p">:</span> <span class="n">requests</span><span class="o">.</span><span class="n">Response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
-</span><span id="HttpXlsReader.parse-81"><a href="#HttpXlsReader.parse-81"><span class="linenos"> 81</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">response</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
-</span><span id="HttpXlsReader.parse-82"><a href="#HttpXlsReader.parse-82"><span class="linenos"> 82</span></a>            <span class="k">raise</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">HTTPError</span><span class="p">(</span>
-</span><span id="HttpXlsReader.parse-83"><a href="#HttpXlsReader.parse-83"><span class="linenos"> 83</span></a>                <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-</span><span id="HttpXlsReader.parse-84"><a href="#HttpXlsReader.parse-84"><span class="linenos"> 84</span></a><span class="s2">                Unable to get url: </span><span class="si">{</span><span class="n">source</span><span class="si">}</span>
-</span><span id="HttpXlsReader.parse-85"><a href="#HttpXlsReader.parse-85"><span class="linenos"> 85</span></a><span class="s2">                </span><span class="si">{</span><span class="n">response</span><span class="si">}</span>
-</span><span id="HttpXlsReader.parse-86"><a href="#HttpXlsReader.parse-86"><span class="linenos"> 86</span></a><span class="s2">                &quot;&quot;&quot;</span>
-</span><span id="HttpXlsReader.parse-87"><a href="#HttpXlsReader.parse-87"><span class="linenos"> 87</span></a>            <span class="p">)</span>
-</span><span id="HttpXlsReader.parse-88"><a href="#HttpXlsReader.parse-88"><span class="linenos"> 88</span></a>
-</span><span id="HttpXlsReader.parse-89"><a href="#HttpXlsReader.parse-89"><span class="linenos"> 89</span></a>        <span class="n">bio</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span>
-</span><span id="HttpXlsReader.parse-90"><a href="#HttpXlsReader.parse-90"><span class="linenos"> 90</span></a>        <span class="n">bio</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-</span><span id="HttpXlsReader.parse-91"><a href="#HttpXlsReader.parse-91"><span class="linenos"> 91</span></a>        <span class="n">bio</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</span><span id="HttpXlsReader.parse-92"><a href="#HttpXlsReader.parse-92"><span class="linenos"> 92</span></a>
-</span><span id="HttpXlsReader.parse-93"><a href="#HttpXlsReader.parse-93"><span class="linenos"> 93</span></a>        <span class="n">workbook</span><span class="p">:</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">Book</span> <span class="o">=</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">open_workbook</span><span class="p">(</span><span class="n">file_contents</span><span class="o">=</span><span class="n">bio</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-</span><span id="HttpXlsReader.parse-94"><a href="#HttpXlsReader.parse-94"><span class="linenos"> 94</span></a>        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">workbook</span><span class="p">,</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">Book</span><span class="p">)</span>
-</span><span id="HttpXlsReader.parse-95"><a href="#HttpXlsReader.parse-95"><span class="linenos"> 95</span></a>
-</span><span id="HttpXlsReader.parse-96"><a href="#HttpXlsReader.parse-96"><span class="linenos"> 96</span></a>        <span class="n">datachef_selectables</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="HttpXlsReader.parse-97"><a href="#HttpXlsReader.parse-97"><span class="linenos"> 97</span></a>        <span class="n">worksheet_names</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">sheet_names</span><span class="p">()</span>
-</span><span id="HttpXlsReader.parse-98"><a href="#HttpXlsReader.parse-98"><span class="linenos"> 98</span></a>        <span class="k">for</span> <span class="n">worksheet_name</span> <span class="ow">in</span> <span class="n">worksheet_names</span><span class="p">:</span>
-</span><span id="HttpXlsReader.parse-99"><a href="#HttpXlsReader.parse-99"><span class="linenos"> 99</span></a>
-</span><span id="HttpXlsReader.parse-100"><a href="#HttpXlsReader.parse-100"><span class="linenos">100</span></a>            <span class="n">worksheet</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">sheet_by_name</span><span class="p">(</span><span class="n">worksheet_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="HttpXlsReader.parse-101"><a href="#HttpXlsReader.parse-101"><span class="linenos">101</span></a>
-</span><span id="HttpXlsReader.parse-102"><a href="#HttpXlsReader.parse-102"><span class="linenos">102</span></a>            <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">()</span>
-</span><span id="HttpXlsReader.parse-103"><a href="#HttpXlsReader.parse-103"><span class="linenos">103</span></a>            <span class="n">num_rows</span> <span class="o">=</span> <span class="n">worksheet</span><span class="o">.</span><span class="n">nrows</span>
-</span><span id="HttpXlsReader.parse-104"><a href="#HttpXlsReader.parse-104"><span class="linenos">104</span></a>            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_rows</span><span class="p">):</span>
-</span><span id="HttpXlsReader.parse-105"><a href="#HttpXlsReader.parse-105"><span class="linenos">105</span></a>                <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">cell</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">worksheet</span><span class="o">.</span><span class="n">row</span><span class="p">(</span><span class="n">y</span><span class="p">)):</span>
-</span><span id="HttpXlsReader.parse-106"><a href="#HttpXlsReader.parse-106"><span class="linenos">106</span></a>                    <span class="n">table</span><span class="o">.</span><span class="n">add_cell</span><span class="p">(</span>
-</span><span id="HttpXlsReader.parse-107"><a href="#HttpXlsReader.parse-107"><span class="linenos">107</span></a>                        <span class="n">Cell</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="n">cell</span><span class="o">.</span><span class="n">value</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-</span><span id="HttpXlsReader.parse-108"><a href="#HttpXlsReader.parse-108"><span class="linenos">108</span></a>                    <span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="HttpXlsReader.parse-74"><a href="#HttpXlsReader.parse-74"><span class="linenos"> 74</span></a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span>
+</span><span id="HttpXlsReader.parse-75"><a href="#HttpXlsReader.parse-75"><span class="linenos"> 75</span></a>        <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="HttpXlsReader.parse-76"><a href="#HttpXlsReader.parse-76"><span class="linenos"> 76</span></a>        <span class="n">selectable</span><span class="p">:</span> <span class="n">Selectable</span> <span class="o">=</span> <span class="n">XlsSelectable</span><span class="p">,</span>
+</span><span id="HttpXlsReader.parse-77"><a href="#HttpXlsReader.parse-77"><span class="linenos"> 77</span></a>        <span class="n">session</span><span class="p">:</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="HttpXlsReader.parse-78"><a href="#HttpXlsReader.parse-78"><span class="linenos"> 78</span></a>        <span class="n">cache</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span id="HttpXlsReader.parse-79"><a href="#HttpXlsReader.parse-79"><span class="linenos"> 79</span></a>        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+</span><span id="HttpXlsReader.parse-80"><a href="#HttpXlsReader.parse-80"><span class="linenos"> 80</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsSelectable</span><span class="p">]:</span>
+</span><span id="HttpXlsReader.parse-81"><a href="#HttpXlsReader.parse-81"><span class="linenos"> 81</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="HttpXlsReader.parse-82"><a href="#HttpXlsReader.parse-82"><span class="linenos"> 82</span></a><span class="sd">        Parse the provided source into a list of Selectables. Unless overridden the</span>
+</span><span id="HttpXlsReader.parse-83"><a href="#HttpXlsReader.parse-83"><span class="linenos"> 83</span></a><span class="sd">        selectable is of type XlsSelectable.</span>
+</span><span id="HttpXlsReader.parse-84"><a href="#HttpXlsReader.parse-84"><span class="linenos"> 84</span></a>
+</span><span id="HttpXlsReader.parse-85"><a href="#HttpXlsReader.parse-85"><span class="linenos"> 85</span></a><span class="sd">        Additional **kwargs are propagated to xlrd.open_workbook()</span>
+</span><span id="HttpXlsReader.parse-86"><a href="#HttpXlsReader.parse-86"><span class="linenos"> 86</span></a>
+</span><span id="HttpXlsReader.parse-87"><a href="#HttpXlsReader.parse-87"><span class="linenos"> 87</span></a><span class="sd">        :param source: A url</span>
+</span><span id="HttpXlsReader.parse-88"><a href="#HttpXlsReader.parse-88"><span class="linenos"> 88</span></a><span class="sd">        :param selectable: The selectable type to be returned.</span>
+</span><span id="HttpXlsReader.parse-89"><a href="#HttpXlsReader.parse-89"><span class="linenos"> 89</span></a><span class="sd">        :param session: An optional requests.Session object.</span>
+</span><span id="HttpXlsReader.parse-90"><a href="#HttpXlsReader.parse-90"><span class="linenos"> 90</span></a><span class="sd">        :param session: An optional requests.Session object.</span>
+</span><span id="HttpXlsReader.parse-91"><a href="#HttpXlsReader.parse-91"><span class="linenos"> 91</span></a><span class="sd">        :param cache: Boolean flag for whether or not to cache get requests.</span>
+</span><span id="HttpXlsReader.parse-92"><a href="#HttpXlsReader.parse-92"><span class="linenos"> 92</span></a><span class="sd">        :return: A list of type as specified by param selectable.</span>
+</span><span id="HttpXlsReader.parse-93"><a href="#HttpXlsReader.parse-93"><span class="linenos"> 93</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="HttpXlsReader.parse-94"><a href="#HttpXlsReader.parse-94"><span class="linenos"> 94</span></a>
+</span><span id="HttpXlsReader.parse-95"><a href="#HttpXlsReader.parse-95"><span class="linenos"> 95</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">session</span><span class="p">:</span>
+</span><span id="HttpXlsReader.parse-96"><a href="#HttpXlsReader.parse-96"><span class="linenos"> 96</span></a>            <span class="k">if</span> <span class="n">cache</span><span class="p">:</span>
+</span><span id="HttpXlsReader.parse-97"><a href="#HttpXlsReader.parse-97"><span class="linenos"> 97</span></a>                <span class="n">session</span> <span class="o">=</span> <span class="n">get_cached_session</span><span class="p">()</span>
+</span><span id="HttpXlsReader.parse-98"><a href="#HttpXlsReader.parse-98"><span class="linenos"> 98</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="HttpXlsReader.parse-99"><a href="#HttpXlsReader.parse-99"><span class="linenos"> 99</span></a>                <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">session</span><span class="p">()</span>
+</span><span id="HttpXlsReader.parse-100"><a href="#HttpXlsReader.parse-100"><span class="linenos">100</span></a>
+</span><span id="HttpXlsReader.parse-101"><a href="#HttpXlsReader.parse-101"><span class="linenos">101</span></a>        <span class="n">response</span><span class="p">:</span> <span class="n">requests</span><span class="o">.</span><span class="n">Response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+</span><span id="HttpXlsReader.parse-102"><a href="#HttpXlsReader.parse-102"><span class="linenos">102</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">response</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
+</span><span id="HttpXlsReader.parse-103"><a href="#HttpXlsReader.parse-103"><span class="linenos">103</span></a>            <span class="k">raise</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">HTTPError</span><span class="p">(</span>
+</span><span id="HttpXlsReader.parse-104"><a href="#HttpXlsReader.parse-104"><span class="linenos">104</span></a>                <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+</span><span id="HttpXlsReader.parse-105"><a href="#HttpXlsReader.parse-105"><span class="linenos">105</span></a><span class="s2">                Unable to get url: </span><span class="si">{</span><span class="n">source</span><span class="si">}</span>
+</span><span id="HttpXlsReader.parse-106"><a href="#HttpXlsReader.parse-106"><span class="linenos">106</span></a><span class="s2">                </span><span class="si">{</span><span class="n">response</span><span class="si">}</span>
+</span><span id="HttpXlsReader.parse-107"><a href="#HttpXlsReader.parse-107"><span class="linenos">107</span></a><span class="s2">                &quot;&quot;&quot;</span>
+</span><span id="HttpXlsReader.parse-108"><a href="#HttpXlsReader.parse-108"><span class="linenos">108</span></a>            <span class="p">)</span>
 </span><span id="HttpXlsReader.parse-109"><a href="#HttpXlsReader.parse-109"><span class="linenos">109</span></a>
-</span><span id="HttpXlsReader.parse-110"><a href="#HttpXlsReader.parse-110"><span class="linenos">110</span></a>            <span class="n">datachef_selectables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-</span><span id="HttpXlsReader.parse-111"><a href="#HttpXlsReader.parse-111"><span class="linenos">111</span></a>                <span class="n">selectable</span><span class="p">(</span>
-</span><span id="HttpXlsReader.parse-112"><a href="#HttpXlsReader.parse-112"><span class="linenos">112</span></a>                    <span class="n">table</span><span class="p">,</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">table</span><span class="p">),</span> <span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="n">_name</span><span class="o">=</span><span class="n">worksheet_name</span>
-</span><span id="HttpXlsReader.parse-113"><a href="#HttpXlsReader.parse-113"><span class="linenos">113</span></a>                <span class="p">)</span>
-</span><span id="HttpXlsReader.parse-114"><a href="#HttpXlsReader.parse-114"><span class="linenos">114</span></a>            <span class="p">)</span>
-</span><span id="HttpXlsReader.parse-115"><a href="#HttpXlsReader.parse-115"><span class="linenos">115</span></a>        <span class="k">return</span> <span class="n">datachef_selectables</span>
+</span><span id="HttpXlsReader.parse-110"><a href="#HttpXlsReader.parse-110"><span class="linenos">110</span></a>        <span class="n">bio</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span>
+</span><span id="HttpXlsReader.parse-111"><a href="#HttpXlsReader.parse-111"><span class="linenos">111</span></a>        <span class="n">bio</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</span><span id="HttpXlsReader.parse-112"><a href="#HttpXlsReader.parse-112"><span class="linenos">112</span></a>        <span class="n">bio</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span id="HttpXlsReader.parse-113"><a href="#HttpXlsReader.parse-113"><span class="linenos">113</span></a>
+</span><span id="HttpXlsReader.parse-114"><a href="#HttpXlsReader.parse-114"><span class="linenos">114</span></a>        <span class="n">workbook</span><span class="p">:</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">Book</span> <span class="o">=</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">open_workbook</span><span class="p">(</span><span class="n">file_contents</span><span class="o">=</span><span class="n">bio</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="HttpXlsReader.parse-115"><a href="#HttpXlsReader.parse-115"><span class="linenos">115</span></a>        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">workbook</span><span class="p">,</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">Book</span><span class="p">)</span>
+</span><span id="HttpXlsReader.parse-116"><a href="#HttpXlsReader.parse-116"><span class="linenos">116</span></a>
+</span><span id="HttpXlsReader.parse-117"><a href="#HttpXlsReader.parse-117"><span class="linenos">117</span></a>        <span class="n">datachef_selectables</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="HttpXlsReader.parse-118"><a href="#HttpXlsReader.parse-118"><span class="linenos">118</span></a>        <span class="n">worksheet_names</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">sheet_names</span><span class="p">()</span>
+</span><span id="HttpXlsReader.parse-119"><a href="#HttpXlsReader.parse-119"><span class="linenos">119</span></a>        <span class="k">for</span> <span class="n">worksheet_name</span> <span class="ow">in</span> <span class="n">worksheet_names</span><span class="p">:</span>
+</span><span id="HttpXlsReader.parse-120"><a href="#HttpXlsReader.parse-120"><span class="linenos">120</span></a>
+</span><span id="HttpXlsReader.parse-121"><a href="#HttpXlsReader.parse-121"><span class="linenos">121</span></a>            <span class="n">worksheet</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">sheet_by_name</span><span class="p">(</span><span class="n">worksheet_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="HttpXlsReader.parse-122"><a href="#HttpXlsReader.parse-122"><span class="linenos">122</span></a>
+</span><span id="HttpXlsReader.parse-123"><a href="#HttpXlsReader.parse-123"><span class="linenos">123</span></a>            <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">()</span>
+</span><span id="HttpXlsReader.parse-124"><a href="#HttpXlsReader.parse-124"><span class="linenos">124</span></a>            <span class="n">num_rows</span> <span class="o">=</span> <span class="n">worksheet</span><span class="o">.</span><span class="n">nrows</span>
+</span><span id="HttpXlsReader.parse-125"><a href="#HttpXlsReader.parse-125"><span class="linenos">125</span></a>            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_rows</span><span class="p">):</span>
+</span><span id="HttpXlsReader.parse-126"><a href="#HttpXlsReader.parse-126"><span class="linenos">126</span></a>                <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">cell</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">worksheet</span><span class="o">.</span><span class="n">row</span><span class="p">(</span><span class="n">y</span><span class="p">)):</span>
+</span><span id="HttpXlsReader.parse-127"><a href="#HttpXlsReader.parse-127"><span class="linenos">127</span></a>                    <span class="n">table</span><span class="o">.</span><span class="n">add_cell</span><span class="p">(</span>
+</span><span id="HttpXlsReader.parse-128"><a href="#HttpXlsReader.parse-128"><span class="linenos">128</span></a>                        <span class="n">Cell</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="n">cell</span><span class="o">.</span><span class="n">value</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+</span><span id="HttpXlsReader.parse-129"><a href="#HttpXlsReader.parse-129"><span class="linenos">129</span></a>                    <span class="p">)</span>
+</span><span id="HttpXlsReader.parse-130"><a href="#HttpXlsReader.parse-130"><span class="linenos">130</span></a>
+</span><span id="HttpXlsReader.parse-131"><a href="#HttpXlsReader.parse-131"><span class="linenos">131</span></a>            <span class="n">datachef_selectables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+</span><span id="HttpXlsReader.parse-132"><a href="#HttpXlsReader.parse-132"><span class="linenos">132</span></a>                <span class="n">selectable</span><span class="p">(</span>
+</span><span id="HttpXlsReader.parse-133"><a href="#HttpXlsReader.parse-133"><span class="linenos">133</span></a>                    <span class="n">table</span><span class="p">,</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">table</span><span class="p">),</span> <span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="n">_name</span><span class="o">=</span><span class="n">worksheet_name</span>
+</span><span id="HttpXlsReader.parse-134"><a href="#HttpXlsReader.parse-134"><span class="linenos">134</span></a>                <span class="p">)</span>
+</span><span id="HttpXlsReader.parse-135"><a href="#HttpXlsReader.parse-135"><span class="linenos">135</span></a>            <span class="p">)</span>
+</span><span id="HttpXlsReader.parse-136"><a href="#HttpXlsReader.parse-136"><span class="linenos">136</span></a>        <span class="k">return</span> <span class="n">datachef_selectables</span>
 </span></pre></div>
 
 
-            <div class="docstring"><p>Parse the datasource into a selectable thing</p>
+            <div class="docstring"><p>Parse the provided source into a list of Selectables. Unless overridden the
+selectable is of type XlsSelectable.</p>
+
+<p>Additional **kwargs are propagated to xlrd.open_workbook()</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>source</strong>:  A url</li>
+<li><strong>selectable</strong>:  The selectable type to be returned.</li>
+<li><strong>session</strong>:  An optional requests.Session object.</li>
+<li><strong>session</strong>:  An optional requests.Session object.</li>
+<li><strong>cache</strong>:  Boolean flag for whether or not to cache get requests.</li>
+</ul>
+
+<h6 id="returns">Returns</h6>
+
+<blockquote>
+  <p>A list of type as specified by param selectable.</p>
+</blockquote>
 </div>
 
 

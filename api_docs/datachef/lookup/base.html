@@ -70,15 +70,13 @@
 </span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a><span class="sd">    The base class all lookup engines are built upon.</span>
 </span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>
-</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a>    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>
-</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>    <span class="nd">@abstractmethod</span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>    <span class="k">def</span> <span class="nf">resolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cell</span><span class="p">:</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a><span class="sd">        Given a single observation cell, resolve</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="sd">        the lookup, returning the relevant cell</span>
-</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a><span class="sd">        value as defined by this visual relationship.</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a>    <span class="nd">@abstractmethod</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>    <span class="k">def</span> <span class="nf">resolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cell</span><span class="p">:</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a><span class="sd">        Given a single observation cell, resolve</span>
+</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a><span class="sd">        the lookup, returning the relevant cell</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a><span class="sd">        value as defined by this visual relationship.</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span></pre></div>
 
 
@@ -99,15 +97,13 @@
 </span><span id="BaseLookupEngine-9"><a href="#BaseLookupEngine-9"><span class="linenos"> 9</span></a><span class="sd">    The base class all lookup engines are built upon.</span>
 </span><span id="BaseLookupEngine-10"><a href="#BaseLookupEngine-10"><span class="linenos">10</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="BaseLookupEngine-11"><a href="#BaseLookupEngine-11"><span class="linenos">11</span></a>
-</span><span id="BaseLookupEngine-12"><a href="#BaseLookupEngine-12"><span class="linenos">12</span></a>    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="BaseLookupEngine-13"><a href="#BaseLookupEngine-13"><span class="linenos">13</span></a>
-</span><span id="BaseLookupEngine-14"><a href="#BaseLookupEngine-14"><span class="linenos">14</span></a>    <span class="nd">@abstractmethod</span>
-</span><span id="BaseLookupEngine-15"><a href="#BaseLookupEngine-15"><span class="linenos">15</span></a>    <span class="k">def</span> <span class="nf">resolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cell</span><span class="p">:</span>
-</span><span id="BaseLookupEngine-16"><a href="#BaseLookupEngine-16"><span class="linenos">16</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="BaseLookupEngine-17"><a href="#BaseLookupEngine-17"><span class="linenos">17</span></a><span class="sd">        Given a single observation cell, resolve</span>
-</span><span id="BaseLookupEngine-18"><a href="#BaseLookupEngine-18"><span class="linenos">18</span></a><span class="sd">        the lookup, returning the relevant cell</span>
-</span><span id="BaseLookupEngine-19"><a href="#BaseLookupEngine-19"><span class="linenos">19</span></a><span class="sd">        value as defined by this visual relationship.</span>
-</span><span id="BaseLookupEngine-20"><a href="#BaseLookupEngine-20"><span class="linenos">20</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="BaseLookupEngine-12"><a href="#BaseLookupEngine-12"><span class="linenos">12</span></a>    <span class="nd">@abstractmethod</span>
+</span><span id="BaseLookupEngine-13"><a href="#BaseLookupEngine-13"><span class="linenos">13</span></a>    <span class="k">def</span> <span class="nf">resolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cell</span><span class="p">:</span>
+</span><span id="BaseLookupEngine-14"><a href="#BaseLookupEngine-14"><span class="linenos">14</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="BaseLookupEngine-15"><a href="#BaseLookupEngine-15"><span class="linenos">15</span></a><span class="sd">        Given a single observation cell, resolve</span>
+</span><span id="BaseLookupEngine-16"><a href="#BaseLookupEngine-16"><span class="linenos">16</span></a><span class="sd">        the lookup, returning the relevant cell</span>
+</span><span id="BaseLookupEngine-17"><a href="#BaseLookupEngine-17"><span class="linenos">17</span></a><span class="sd">        value as defined by this visual relationship.</span>
+</span><span id="BaseLookupEngine-18"><a href="#BaseLookupEngine-18"><span class="linenos">18</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span></pre></div>
 
 
@@ -127,13 +123,13 @@
 
     </div>
     <a class="headerlink" href="#BaseLookupEngine.resolve"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="BaseLookupEngine.resolve-14"><a href="#BaseLookupEngine.resolve-14"><span class="linenos">14</span></a>    <span class="nd">@abstractmethod</span>
-</span><span id="BaseLookupEngine.resolve-15"><a href="#BaseLookupEngine.resolve-15"><span class="linenos">15</span></a>    <span class="k">def</span> <span class="nf">resolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cell</span><span class="p">:</span>
-</span><span id="BaseLookupEngine.resolve-16"><a href="#BaseLookupEngine.resolve-16"><span class="linenos">16</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="BaseLookupEngine.resolve-17"><a href="#BaseLookupEngine.resolve-17"><span class="linenos">17</span></a><span class="sd">        Given a single observation cell, resolve</span>
-</span><span id="BaseLookupEngine.resolve-18"><a href="#BaseLookupEngine.resolve-18"><span class="linenos">18</span></a><span class="sd">        the lookup, returning the relevant cell</span>
-</span><span id="BaseLookupEngine.resolve-19"><a href="#BaseLookupEngine.resolve-19"><span class="linenos">19</span></a><span class="sd">        value as defined by this visual relationship.</span>
-</span><span id="BaseLookupEngine.resolve-20"><a href="#BaseLookupEngine.resolve-20"><span class="linenos">20</span></a><span class="sd">        &quot;&quot;&quot;</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="BaseLookupEngine.resolve-12"><a href="#BaseLookupEngine.resolve-12"><span class="linenos">12</span></a>    <span class="nd">@abstractmethod</span>
+</span><span id="BaseLookupEngine.resolve-13"><a href="#BaseLookupEngine.resolve-13"><span class="linenos">13</span></a>    <span class="k">def</span> <span class="nf">resolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">:</span> <span class="n">Cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cell</span><span class="p">:</span>
+</span><span id="BaseLookupEngine.resolve-14"><a href="#BaseLookupEngine.resolve-14"><span class="linenos">14</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="BaseLookupEngine.resolve-15"><a href="#BaseLookupEngine.resolve-15"><span class="linenos">15</span></a><span class="sd">        Given a single observation cell, resolve</span>
+</span><span id="BaseLookupEngine.resolve-16"><a href="#BaseLookupEngine.resolve-16"><span class="linenos">16</span></a><span class="sd">        the lookup, returning the relevant cell</span>
+</span><span id="BaseLookupEngine.resolve-17"><a href="#BaseLookupEngine.resolve-17"><span class="linenos">17</span></a><span class="sd">        value as defined by this visual relationship.</span>
+</span><span id="BaseLookupEngine.resolve-18"><a href="#BaseLookupEngine.resolve-18"><span class="linenos">18</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span></pre></div>
 
 

@@ -22,7 +22,7 @@ selection.shift(right)
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mOutOfBoundsError[0m                          Traceback (most recent call last)
-[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_96279/2174711224.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_37574/2174711224.py[0m in [0;36m<module>[0;34m[0m
 [0;32m----> 1[0;31m [0mselection[0m[0;34m.[0m[0mshift[0m[0;34m([0m[0mright[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m
 [0;32m~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/utils/decorators/dontmutate.py[0m in [0;36mwrapper[0;34m(self, *args, **kwargs)[0m
@@ -33,11 +33,11 @@ selection.shift(right)
 [1;32m     26[0m     [0;32mreturn[0m [0mwrapper[0m[0;34m[0m[0;34m[0m[0m
 
 [0;32m~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/selection/selectable.py[0m in [0;36mshift[0;34m(self, direction_or_x, possibly_y)[0m
-[1;32m    254[0m         [0;32mif[0m [0mlen[0m[0;34m([0m[0mfound_cells[0m[0;34m)[0m [0;34m==[0m [0;36m0[0m [0;32mand[0m [0mlen[0m[0;34m([0m[0mwanted_cells[0m[0;34m)[0m [0;34m>[0m [0;36m0[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    255[0m             raise OutOfBoundsError(
-[0;32m--> 256[0;31m                 [0;34m"You are attempting to shift your selection "[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    257[0m                 [0;34m"entirely outside of the boundary of the table."[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    258[0m             )
+[1;32m    264[0m         [0;32mif[0m [0mlen[0m[0;34m([0m[0mfound_cells[0m[0;34m)[0m [0;34m==[0m [0;36m0[0m [0;32mand[0m [0mlen[0m[0;34m([0m[0mwanted_cells[0m[0;34m)[0m [0;34m>[0m [0;36m0[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    265[0m             raise OutOfBoundsError(
+[0;32m--> 266[0;31m                 [0;34m"You are attempting to shift your selection "[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    267[0m                 [0;34m"entirely outside of the boundary of the table."[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    268[0m             )
 
 [0;31mOutOfBoundsError[0m: You are attempting to shift your selection entirely outside of the boundary of the table.
 OutOfBoundsError: You are attempting to shift your selection entirely outside of the boundary of the table.

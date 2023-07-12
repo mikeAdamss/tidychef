@@ -95,133 +95,163 @@
 </span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a><span class="sd">    Given a list of cells, assert that the cell denoted by</span>
 </span><span id="L-17"><a href="#L-17"><span class="linenos"> 17</span></a><span class="sd">    the provided excel reference, exists within the list.</span>
 </span><span id="L-18"><a href="#L-18"><span class="linenos"> 18</span></a>
-</span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a><span class="sd">    :param cells: Representing a selection from a tabular data source.</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos"> 20</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos"> 21</span></a>    <span class="n">wanted_cell</span><span class="p">:</span> <span class="n">BaseCell</span> <span class="o">=</span> <span class="n">single_excel_ref_to_basecell</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">)</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a>    <span class="n">match</span> <span class="o">=</span> <span class="p">[</span><span class="n">c1</span> <span class="k">for</span> <span class="n">c1</span> <span class="ow">in</span> <span class="n">cells</span> <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">c1</span><span class="o">.</span><span class="n">matches_xy</span><span class="p">(</span><span class="n">wanted_cell</span><span class="p">)])]</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a>    <span class="k">assert</span> <span class="p">(</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a>        <span class="nb">len</span><span class="p">(</span><span class="n">match</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a>    <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Cell of excel ref </span><span class="si">{</span><span class="n">excel_ref</span><span class="si">}</span><span class="s2"> is not contained in the provided selection&quot;</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a>
-</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a>
-</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a><span class="k">def</span> <span class="nf">any_excel_ref_as_wanted_basecells</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseCell</span><span class="p">]:</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a><span class="sd">    Convert an excel reference of either the single or multiple cell</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a><span class="sd">    format into a list of BaseCell objects.</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a>
-</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a>    <span class="c1"># Single style reference, eg: A6, ZA18 etc</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a>    <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;^[A-Z]+[0-9]+$&quot;</span><span class="p">,</span> <span class="n">excel_ref</span><span class="p">):</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a>        <span class="k">return</span> <span class="p">[</span><span class="n">single_excel_ref_to_basecell</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">)]</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a>
-</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a>    <span class="c1"># Multi style reference, eg: A1:Z78, G15:AV16 etc</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a>    <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;^[A-Z]+[0-9]+:[A-Z]+[0-9]+$&quot;</span><span class="p">,</span> <span class="n">excel_ref</span><span class="p">):</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a>        <span class="k">return</span> <span class="n">multi_excel_ref_to_basecells</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">)</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a>
-</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>    <span class="k">raise</span> <span class="n">BadExcelReferenceError</span><span class="p">(</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>        <span class="sa">f</span><span class="s2">&quot;Could not identify style of excel reference </span><span class="si">{</span><span class="n">excel_ref</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a>    <span class="p">)</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>
-</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a>
-</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a><span class="k">def</span> <span class="nf">single_excel_row_to_y_index</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a><span class="sd">    Given a single row number as an excel reference, return</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a><span class="sd">    the y offset value</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a>    <span class="k">return</span> <span class="n">cellutils</span><span class="o">.</span><span class="n">number_to_y</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">))</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a>
-</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a>
-</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a><span class="k">def</span> <span class="nf">single_excel_column_to_x_index</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a><span class="sd">    Given a single column latter as an excel reference, return</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a><span class="sd">    the x inde.</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>    <span class="k">return</span> <span class="n">cellutils</span><span class="o">.</span><span class="n">letters_to_x</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">)</span>
-</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>
-</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>
-</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a><span class="k">def</span> <span class="nf">single_excel_ref_to_basecell</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseCell</span><span class="p">:</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a><span class="sd">    Given a single excel cell reference, return a single BaseCell.</span>
-</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a>
-</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a>    <span class="n">letters</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a>    <span class="n">number</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">letter_or_num</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">):</span>
-</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>        <span class="k">try</span><span class="p">:</span>
-</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a>            <span class="nb">int</span><span class="p">(</span><span class="n">letter_or_num</span><span class="p">)</span>
-</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>            <span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">[</span><span class="n">i</span><span class="p">:])</span>
-</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>            <span class="k">break</span>
-</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a>        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>            <span class="n">letters</span> <span class="o">+=</span> <span class="n">letter_or_num</span>
-</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>
-</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>    <span class="k">assert</span> <span class="n">number</span>
-</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
-</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>
-</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>    <span class="n">x_index</span> <span class="o">=</span> <span class="n">cellutils</span><span class="o">.</span><span class="n">letters_to_x</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span>
-</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>    <span class="n">y_index</span> <span class="o">=</span> <span class="n">cellutils</span><span class="o">.</span><span class="n">number_to_y</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
-</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>
-</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>    <span class="k">return</span> <span class="n">BaseCell</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_index</span><span class="p">)</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a><span class="sd">    :param cells: A list of BaseCell or inheritors of that represents a selection</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos"> 20</span></a><span class="sd">    of cells.</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos"> 21</span></a><span class="sd">    :param excel_ref: A single excel reference for a single cell.</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a>    <span class="n">wanted_cell</span><span class="p">:</span> <span class="n">BaseCell</span> <span class="o">=</span> <span class="n">single_excel_ref_to_basecell</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">)</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a>    <span class="n">match</span> <span class="o">=</span> <span class="p">[</span><span class="n">c1</span> <span class="k">for</span> <span class="n">c1</span> <span class="ow">in</span> <span class="n">cells</span> <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">c1</span><span class="o">.</span><span class="n">matches_xy</span><span class="p">(</span><span class="n">wanted_cell</span><span class="p">)])]</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a>    <span class="k">assert</span> <span class="p">(</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a>        <span class="nb">len</span><span class="p">(</span><span class="n">match</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a>    <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Cell of excel ref </span><span class="si">{</span><span class="n">excel_ref</span><span class="si">}</span><span class="s2"> is not contained in the provided selection&quot;</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a>
+</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a>
+</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a><span class="k">def</span> <span class="nf">any_excel_ref_as_wanted_basecells</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseCell</span><span class="p">]:</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a><span class="sd">    Convert an excel reference of either the single or multiple cell</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a><span class="sd">    format into a list of BaseCell objects.</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a>
+</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a><span class="sd">    :param excel_ref: A excel style reference to one or more cells.</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a><span class="sd">    :return: A list of BaseCell or inheritors of that represents a selection</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a><span class="sd">    of cells.</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a>
+</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a>    <span class="c1"># Single style reference, eg: A6, ZA18 etc</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a>    <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;^[A-Z]+[0-9]+$&quot;</span><span class="p">,</span> <span class="n">excel_ref</span><span class="p">):</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>        <span class="k">return</span> <span class="p">[</span><span class="n">single_excel_ref_to_basecell</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">)]</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>
+</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a>    <span class="c1"># Multi style reference, eg: A1:Z78, G15:AV16 etc</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>    <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;^[A-Z]+[0-9]+:[A-Z]+[0-9]+$&quot;</span><span class="p">,</span> <span class="n">excel_ref</span><span class="p">):</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a>        <span class="k">return</span> <span class="n">multi_excel_ref_to_basecells</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">)</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a>
+</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a>    <span class="k">raise</span> <span class="n">BadExcelReferenceError</span><span class="p">(</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a>        <span class="sa">f</span><span class="s2">&quot;Could not identify style of excel reference </span><span class="si">{</span><span class="n">excel_ref</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a>    <span class="p">)</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a>
+</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a>
+</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a><span class="k">def</span> <span class="nf">single_excel_row_to_y_index</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a><span class="sd">    Given a single row number as an excel reference, return</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a><span class="sd">    the y offset value</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a>
+</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a><span class="sd">    :param excel_ref: A number representing an excel style</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a><span class="sd">    reference to a single row in a tabulated data source.</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a><span class="sd">    :return: y (vertical offset) value.</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>    <span class="k">return</span> <span class="n">cellutils</span><span class="o">.</span><span class="n">number_to_y</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">))</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>
+</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>
+</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a><span class="k">def</span> <span class="nf">single_excel_column_to_x_index</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a><span class="sd">    Given a single column latter as an excel reference, return</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a><span class="sd">    the x index.</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a>
+</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a><span class="sd">    :param excel_ref: One or more letters representing an excel</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a><span class="sd">    style reference to a single column in a tabulated source.</span>
+</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a><span class="sd">    :return: x (horizontal offset) value.</span>
+</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>    <span class="k">return</span> <span class="n">cellutils</span><span class="o">.</span><span class="n">letters_to_x</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">)</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a>
+</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>
+</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a><span class="k">def</span> <span class="nf">single_excel_ref_to_basecell</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseCell</span><span class="p">:</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a><span class="sd">    Given a single excel cell reference, return a single BaseCell</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a><span class="sd">    or inheritor of.</span>
+</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>
+</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a><span class="sd">    :param excel_ref: A excel style reference to a single cell.</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a><span class="sd">    :return: A BaseCell or inheritor of.</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>
-</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>
-</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a><span class="k">def</span> <span class="nf">multi_excel_ref_to_basecells</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseCell</span><span class="p">]:</span>
-</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a><span class="sd">    Given an excel reference referring to multiple cells, return a list of</span>
-</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a><span class="sd">    wanted BaseCells.</span>
-</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>
-</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>    <span class="k">assert</span> <span class="p">(</span>
-</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>        <span class="s2">&quot;:&quot;</span> <span class="ow">in</span> <span class="n">excel_ref</span>
-</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>    <span class="p">),</span> <span class="s2">&quot;&quot;&quot;</span>
-</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a><span class="s2">        A multi cell excel reference should be in the format:</span>
-</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a><span class="s2">        &lt;letter(s)&gt;&lt;number&gt;:&lt;letter(s)&gt;&lt;number&gt;</span>
+</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>    <span class="n">letters</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>    <span class="n">number</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">letter_or_num</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">):</span>
+</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>            <span class="nb">int</span><span class="p">(</span><span class="n">letter_or_num</span><span class="p">)</span>
+</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>            <span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">[</span><span class="n">i</span><span class="p">:])</span>
+</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>            <span class="k">break</span>
+</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>            <span class="n">letters</span> <span class="o">+=</span> <span class="n">letter_or_num</span>
+</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>
+</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>    <span class="k">assert</span> <span class="n">number</span>
+</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
 </span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>
-</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a><span class="s2">        </span><span class="si">{excel_ref}</span><span class="s2"> is missing a colon, &quot;:&quot;</span>
-</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a><span class="s2">    &quot;&quot;&quot;</span>
-</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>    <span class="n">start_cell</span> <span class="o">=</span> <span class="n">single_excel_ref_to_basecell</span><span class="p">(</span><span class="n">excel_ref</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
-</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>    <span class="n">end_cell</span> <span class="o">=</span> <span class="n">single_excel_ref_to_basecell</span><span class="p">(</span><span class="n">excel_ref</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>    <span class="n">x_index</span> <span class="o">=</span> <span class="n">cellutils</span><span class="o">.</span><span class="n">letters_to_x</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span>
+</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>    <span class="n">y_index</span> <span class="o">=</span> <span class="n">cellutils</span><span class="o">.</span><span class="n">number_to_y</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>
+</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>    <span class="k">return</span> <span class="n">BaseCell</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_index</span><span class="p">)</span>
 </span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>
-</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a>    <span class="k">if</span> <span class="n">start_cell</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">end_cell</span><span class="o">.</span><span class="n">x</span> <span class="ow">or</span> <span class="n">start_cell</span><span class="o">.</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">end_cell</span><span class="o">.</span><span class="n">y</span><span class="p">:</span>
-</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a>        <span class="k">raise</span> <span class="n">ReversedExcelRefError</span><span class="p">()</span>
-</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a>
-</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>    <span class="n">start_x</span> <span class="o">=</span> <span class="n">start_cell</span><span class="o">.</span><span class="n">x</span>
-</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>    <span class="n">start_y</span> <span class="o">=</span> <span class="n">start_cell</span><span class="o">.</span><span class="n">y</span>
-</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>    <span class="n">end_x</span> <span class="o">=</span> <span class="n">end_cell</span><span class="o">.</span><span class="n">x</span>
-</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>    <span class="n">end_y</span> <span class="o">=</span> <span class="n">end_cell</span><span class="o">.</span><span class="n">y</span>
-</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>
-</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>    <span class="n">return_cells</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>    <span class="k">for</span> <span class="n">x_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_x</span><span class="p">,</span> <span class="n">end_x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>        <span class="k">for</span> <span class="n">y_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_y</span><span class="p">,</span> <span class="n">end_y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a>            <span class="n">return_cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">BaseCell</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_index</span><span class="p">))</span>
-</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>
-</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>    <span class="k">return</span> <span class="n">return_cells</span>
-</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a>
-</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>
-</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a><span class="k">def</span> <span class="nf">basecell_to_excel_ref</span><span class="p">(</span><span class="n">cell</span><span class="p">:</span> <span class="n">BaseCell</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a><span class="sd">    Given a single BaseCell object, return the representative excel reference.</span>
-</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">x_to_letters</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="si">}{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">y_to_number</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">y</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a>
+</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a><span class="k">def</span> <span class="nf">multi_excel_ref_to_basecells</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseCell</span><span class="p">]:</span>
+</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a><span class="sd">    Given an excel reference referring to multiple cells, return a list of</span>
+</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a><span class="sd">    wanted BaseCells.</span>
+</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>
+</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a><span class="sd">    :param excel_ref: A excel style reference to a single cell.</span>
+</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a><span class="sd">    :return: A list of BaseCell or inheritors of that represents a selection</span>
+</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a><span class="sd">    of cells.</span>
+</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>
+</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a>    <span class="k">assert</span> <span class="p">(</span>
+</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>        <span class="s2">&quot;:&quot;</span> <span class="ow">in</span> <span class="n">excel_ref</span>
+</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>    <span class="p">),</span> <span class="s2">&quot;&quot;&quot;</span>
+</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a><span class="s2">        A multi cell excel reference should be in the format:</span>
+</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a><span class="s2">        &lt;letter(s)&gt;&lt;number&gt;:&lt;letter(s)&gt;&lt;number&gt;</span>
+</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a>
+</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a><span class="s2">        </span><span class="si">{excel_ref}</span><span class="s2"> is missing a colon, &quot;:&quot;</span>
+</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a><span class="s2">    &quot;&quot;&quot;</span>
+</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a>    <span class="n">start_cell</span> <span class="o">=</span> <span class="n">single_excel_ref_to_basecell</span><span class="p">(</span><span class="n">excel_ref</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a>    <span class="n">end_cell</span> <span class="o">=</span> <span class="n">single_excel_ref_to_basecell</span><span class="p">(</span><span class="n">excel_ref</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
 </span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a>
-</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a>
-</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a><span class="k">def</span> <span class="nf">basecells_to_excel_ref</span><span class="p">(</span><span class="n">cells</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseCell</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a><span class="sd">    Given a list of cells representing a solid selection with</span>
-</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a><span class="sd">    no gaps. Return the representative excel reference.</span>
+</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a>    <span class="k">if</span> <span class="n">start_cell</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">end_cell</span><span class="o">.</span><span class="n">x</span> <span class="ow">or</span> <span class="n">start_cell</span><span class="o">.</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">end_cell</span><span class="o">.</span><span class="n">y</span><span class="p">:</span>
+</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a>        <span class="k">raise</span> <span class="n">ReversedExcelRefError</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a><span class="s2">            Invalid excel reference format. Please provide your reference in the</span>
+</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a><span class="s2">            standard upmost left to downmost right format, i.e A1:C5 not C5:A1</span>
+</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a><span class="s2">                &quot;&quot;&quot;</span><span class="p">)</span>
 </span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>
-</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a><span class="sd">    :param cells: Representing a selection from a tabular data source.</span>
-</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a>
-</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a>    <span class="n">min_x</span><span class="p">,</span> <span class="n">max_x</span><span class="p">,</span> <span class="n">min_y</span><span class="p">,</span> <span class="n">max_y</span> <span class="o">=</span> <span class="n">dfccommon</span><span class="o">.</span><span class="n">assert_quadrilaterals</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span>
+</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>    <span class="n">start_x</span> <span class="o">=</span> <span class="n">start_cell</span><span class="o">.</span><span class="n">x</span>
+</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>    <span class="n">start_y</span> <span class="o">=</span> <span class="n">start_cell</span><span class="o">.</span><span class="n">y</span>
+</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a>    <span class="n">end_x</span> <span class="o">=</span> <span class="n">end_cell</span><span class="o">.</span><span class="n">x</span>
+</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a>    <span class="n">end_y</span> <span class="o">=</span> <span class="n">end_cell</span><span class="o">.</span><span class="n">y</span>
 </span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a>
-</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a>    <span class="n">topleft_cell</span> <span class="o">=</span> <span class="n">dfccommon</span><span class="o">.</span><span class="n">specific_cell_from_xy</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">min_x</span><span class="p">,</span> <span class="n">min_y</span><span class="p">)</span>
-</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a>    <span class="n">bottomright_cell</span> <span class="o">=</span> <span class="n">dfccommon</span><span class="o">.</span><span class="n">specific_cell_from_xy</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">max_x</span><span class="p">,</span> <span class="n">max_y</span><span class="p">)</span>
-</span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a>
-</span><span id="L-140"><a href="#L-140"><span class="linenos">140</span></a>    <span class="n">ref1</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">x_to_letters</span><span class="p">(</span><span class="n">topleft_cell</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="si">}{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">y_to_number</span><span class="p">(</span><span class="n">topleft_cell</span><span class="o">.</span><span class="n">y</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a>    <span class="n">ref2</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="L-142"><a href="#L-142"><span class="linenos">142</span></a>        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">x_to_letters</span><span class="p">(</span><span class="n">bottomright_cell</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="L-143"><a href="#L-143"><span class="linenos">143</span></a>        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">y_to_number</span><span class="p">(</span><span class="n">bottomright_cell</span><span class="o">.</span><span class="n">y</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a>    <span class="p">)</span>
-</span><span id="L-145"><a href="#L-145"><span class="linenos">145</span></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ref1</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">ref2</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a>    <span class="n">return_cells</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a>    <span class="k">for</span> <span class="n">x_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_x</span><span class="p">,</span> <span class="n">end_x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a>        <span class="k">for</span> <span class="n">y_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_y</span><span class="p">,</span> <span class="n">end_y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="L-140"><a href="#L-140"><span class="linenos">140</span></a>            <span class="n">return_cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">BaseCell</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_index</span><span class="p">))</span>
+</span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a>
+</span><span id="L-142"><a href="#L-142"><span class="linenos">142</span></a>    <span class="k">return</span> <span class="n">return_cells</span>
+</span><span id="L-143"><a href="#L-143"><span class="linenos">143</span></a>
+</span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a>
+</span><span id="L-145"><a href="#L-145"><span class="linenos">145</span></a><span class="k">def</span> <span class="nf">basecell_to_excel_ref</span><span class="p">(</span><span class="n">cell</span><span class="p">:</span> <span class="n">BaseCell</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-147"><a href="#L-147"><span class="linenos">147</span></a><span class="sd">    Given a single BaseCell object, return the representative excel reference.</span>
+</span><span id="L-148"><a href="#L-148"><span class="linenos">148</span></a>
+</span><span id="L-149"><a href="#L-149"><span class="linenos">149</span></a><span class="sd">    :param: A single BaseCell or inheritor of</span>
+</span><span id="L-150"><a href="#L-150"><span class="linenos">150</span></a><span class="sd">    :return: A excel style reference to a single cell.</span>
+</span><span id="L-151"><a href="#L-151"><span class="linenos">151</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-152"><a href="#L-152"><span class="linenos">152</span></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">x_to_letters</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="si">}{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">y_to_number</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">y</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="L-153"><a href="#L-153"><span class="linenos">153</span></a>
+</span><span id="L-154"><a href="#L-154"><span class="linenos">154</span></a>
+</span><span id="L-155"><a href="#L-155"><span class="linenos">155</span></a><span class="k">def</span> <span class="nf">basecells_to_excel_ref</span><span class="p">(</span><span class="n">cells</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseCell</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="L-156"><a href="#L-156"><span class="linenos">156</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-157"><a href="#L-157"><span class="linenos">157</span></a><span class="sd">    Given a list of cells representing a solid selection with</span>
+</span><span id="L-158"><a href="#L-158"><span class="linenos">158</span></a><span class="sd">    no gaps. Return the representative excel reference.</span>
+</span><span id="L-159"><a href="#L-159"><span class="linenos">159</span></a>
+</span><span id="L-160"><a href="#L-160"><span class="linenos">160</span></a><span class="sd">    :param: A list of BaseCell or inheritors of that represents a selection</span>
+</span><span id="L-161"><a href="#L-161"><span class="linenos">161</span></a><span class="sd">    of cells.</span>
+</span><span id="L-162"><a href="#L-162"><span class="linenos">162</span></a><span class="sd">    :return: A excel style reference to multiple cells.</span>
+</span><span id="L-163"><a href="#L-163"><span class="linenos">163</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-164"><a href="#L-164"><span class="linenos">164</span></a>
+</span><span id="L-165"><a href="#L-165"><span class="linenos">165</span></a>    <span class="n">min_x</span><span class="p">,</span> <span class="n">max_x</span><span class="p">,</span> <span class="n">min_y</span><span class="p">,</span> <span class="n">max_y</span> <span class="o">=</span> <span class="n">dfccommon</span><span class="o">.</span><span class="n">assert_quadrilaterals</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span>
+</span><span id="L-166"><a href="#L-166"><span class="linenos">166</span></a>
+</span><span id="L-167"><a href="#L-167"><span class="linenos">167</span></a>    <span class="n">topleft_cell</span> <span class="o">=</span> <span class="n">dfccommon</span><span class="o">.</span><span class="n">specific_cell_from_xy</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">min_x</span><span class="p">,</span> <span class="n">min_y</span><span class="p">)</span>
+</span><span id="L-168"><a href="#L-168"><span class="linenos">168</span></a>    <span class="n">bottomright_cell</span> <span class="o">=</span> <span class="n">dfccommon</span><span class="o">.</span><span class="n">specific_cell_from_xy</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">max_x</span><span class="p">,</span> <span class="n">max_y</span><span class="p">)</span>
+</span><span id="L-169"><a href="#L-169"><span class="linenos">169</span></a>
+</span><span id="L-170"><a href="#L-170"><span class="linenos">170</span></a>    <span class="n">ref1</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">x_to_letters</span><span class="p">(</span><span class="n">topleft_cell</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="si">}{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">y_to_number</span><span class="p">(</span><span class="n">topleft_cell</span><span class="o">.</span><span class="n">y</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="L-171"><a href="#L-171"><span class="linenos">171</span></a>    <span class="n">ref2</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="L-172"><a href="#L-172"><span class="linenos">172</span></a>        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">x_to_letters</span><span class="p">(</span><span class="n">bottomright_cell</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="L-173"><a href="#L-173"><span class="linenos">173</span></a>        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">y_to_number</span><span class="p">(</span><span class="n">bottomright_cell</span><span class="o">.</span><span class="n">y</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="L-174"><a href="#L-174"><span class="linenos">174</span></a>    <span class="p">)</span>
+</span><span id="L-175"><a href="#L-175"><span class="linenos">175</span></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ref1</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">ref2</span><span class="si">}</span><span class="s2">&quot;</span>
 </span></pre></div>
 
 
@@ -242,13 +272,15 @@
 </span><span id="assert_excel_ref_within_cells-17"><a href="#assert_excel_ref_within_cells-17"><span class="linenos">17</span></a><span class="sd">    Given a list of cells, assert that the cell denoted by</span>
 </span><span id="assert_excel_ref_within_cells-18"><a href="#assert_excel_ref_within_cells-18"><span class="linenos">18</span></a><span class="sd">    the provided excel reference, exists within the list.</span>
 </span><span id="assert_excel_ref_within_cells-19"><a href="#assert_excel_ref_within_cells-19"><span class="linenos">19</span></a>
-</span><span id="assert_excel_ref_within_cells-20"><a href="#assert_excel_ref_within_cells-20"><span class="linenos">20</span></a><span class="sd">    :param cells: Representing a selection from a tabular data source.</span>
-</span><span id="assert_excel_ref_within_cells-21"><a href="#assert_excel_ref_within_cells-21"><span class="linenos">21</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="assert_excel_ref_within_cells-22"><a href="#assert_excel_ref_within_cells-22"><span class="linenos">22</span></a>    <span class="n">wanted_cell</span><span class="p">:</span> <span class="n">BaseCell</span> <span class="o">=</span> <span class="n">single_excel_ref_to_basecell</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">)</span>
-</span><span id="assert_excel_ref_within_cells-23"><a href="#assert_excel_ref_within_cells-23"><span class="linenos">23</span></a>    <span class="n">match</span> <span class="o">=</span> <span class="p">[</span><span class="n">c1</span> <span class="k">for</span> <span class="n">c1</span> <span class="ow">in</span> <span class="n">cells</span> <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">c1</span><span class="o">.</span><span class="n">matches_xy</span><span class="p">(</span><span class="n">wanted_cell</span><span class="p">)])]</span>
-</span><span id="assert_excel_ref_within_cells-24"><a href="#assert_excel_ref_within_cells-24"><span class="linenos">24</span></a>    <span class="k">assert</span> <span class="p">(</span>
-</span><span id="assert_excel_ref_within_cells-25"><a href="#assert_excel_ref_within_cells-25"><span class="linenos">25</span></a>        <span class="nb">len</span><span class="p">(</span><span class="n">match</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
-</span><span id="assert_excel_ref_within_cells-26"><a href="#assert_excel_ref_within_cells-26"><span class="linenos">26</span></a>    <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Cell of excel ref </span><span class="si">{</span><span class="n">excel_ref</span><span class="si">}</span><span class="s2"> is not contained in the provided selection&quot;</span>
+</span><span id="assert_excel_ref_within_cells-20"><a href="#assert_excel_ref_within_cells-20"><span class="linenos">20</span></a><span class="sd">    :param cells: A list of BaseCell or inheritors of that represents a selection</span>
+</span><span id="assert_excel_ref_within_cells-21"><a href="#assert_excel_ref_within_cells-21"><span class="linenos">21</span></a><span class="sd">    of cells.</span>
+</span><span id="assert_excel_ref_within_cells-22"><a href="#assert_excel_ref_within_cells-22"><span class="linenos">22</span></a><span class="sd">    :param excel_ref: A single excel reference for a single cell.</span>
+</span><span id="assert_excel_ref_within_cells-23"><a href="#assert_excel_ref_within_cells-23"><span class="linenos">23</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="assert_excel_ref_within_cells-24"><a href="#assert_excel_ref_within_cells-24"><span class="linenos">24</span></a>    <span class="n">wanted_cell</span><span class="p">:</span> <span class="n">BaseCell</span> <span class="o">=</span> <span class="n">single_excel_ref_to_basecell</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">)</span>
+</span><span id="assert_excel_ref_within_cells-25"><a href="#assert_excel_ref_within_cells-25"><span class="linenos">25</span></a>    <span class="n">match</span> <span class="o">=</span> <span class="p">[</span><span class="n">c1</span> <span class="k">for</span> <span class="n">c1</span> <span class="ow">in</span> <span class="n">cells</span> <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">c1</span><span class="o">.</span><span class="n">matches_xy</span><span class="p">(</span><span class="n">wanted_cell</span><span class="p">)])]</span>
+</span><span id="assert_excel_ref_within_cells-26"><a href="#assert_excel_ref_within_cells-26"><span class="linenos">26</span></a>    <span class="k">assert</span> <span class="p">(</span>
+</span><span id="assert_excel_ref_within_cells-27"><a href="#assert_excel_ref_within_cells-27"><span class="linenos">27</span></a>        <span class="nb">len</span><span class="p">(</span><span class="n">match</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+</span><span id="assert_excel_ref_within_cells-28"><a href="#assert_excel_ref_within_cells-28"><span class="linenos">28</span></a>    <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Cell of excel ref </span><span class="si">{</span><span class="n">excel_ref</span><span class="si">}</span><span class="s2"> is not contained in the provided selection&quot;</span>
 </span></pre></div>
 
 
@@ -258,7 +290,9 @@ the provided excel reference, exists within the list.</p>
 <h6 id="parameters">Parameters</h6>
 
 <ul>
-<li><strong>cells</strong>:  Representing a selection from a tabular data source.</li>
+<li><strong>cells</strong>:  A list of BaseCell or inheritors of that represents a selection
+of cells.</li>
+<li><strong>excel_ref</strong>:  A single excel reference for a single cell.</li>
 </ul>
 </div>
 
@@ -275,28 +309,45 @@ the provided excel reference, exists within the list.</p>
 
     </div>
     <a class="headerlink" href="#any_excel_ref_as_wanted_basecells"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="any_excel_ref_as_wanted_basecells-29"><a href="#any_excel_ref_as_wanted_basecells-29"><span class="linenos">29</span></a><span class="k">def</span> <span class="nf">any_excel_ref_as_wanted_basecells</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseCell</span><span class="p">]:</span>
-</span><span id="any_excel_ref_as_wanted_basecells-30"><a href="#any_excel_ref_as_wanted_basecells-30"><span class="linenos">30</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="any_excel_ref_as_wanted_basecells-31"><a href="#any_excel_ref_as_wanted_basecells-31"><span class="linenos">31</span></a><span class="sd">    Convert an excel reference of either the single or multiple cell</span>
-</span><span id="any_excel_ref_as_wanted_basecells-32"><a href="#any_excel_ref_as_wanted_basecells-32"><span class="linenos">32</span></a><span class="sd">    format into a list of BaseCell objects.</span>
-</span><span id="any_excel_ref_as_wanted_basecells-33"><a href="#any_excel_ref_as_wanted_basecells-33"><span class="linenos">33</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="any_excel_ref_as_wanted_basecells-34"><a href="#any_excel_ref_as_wanted_basecells-34"><span class="linenos">34</span></a>
-</span><span id="any_excel_ref_as_wanted_basecells-35"><a href="#any_excel_ref_as_wanted_basecells-35"><span class="linenos">35</span></a>    <span class="c1"># Single style reference, eg: A6, ZA18 etc</span>
-</span><span id="any_excel_ref_as_wanted_basecells-36"><a href="#any_excel_ref_as_wanted_basecells-36"><span class="linenos">36</span></a>    <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;^[A-Z]+[0-9]+$&quot;</span><span class="p">,</span> <span class="n">excel_ref</span><span class="p">):</span>
-</span><span id="any_excel_ref_as_wanted_basecells-37"><a href="#any_excel_ref_as_wanted_basecells-37"><span class="linenos">37</span></a>        <span class="k">return</span> <span class="p">[</span><span class="n">single_excel_ref_to_basecell</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">)]</span>
-</span><span id="any_excel_ref_as_wanted_basecells-38"><a href="#any_excel_ref_as_wanted_basecells-38"><span class="linenos">38</span></a>
-</span><span id="any_excel_ref_as_wanted_basecells-39"><a href="#any_excel_ref_as_wanted_basecells-39"><span class="linenos">39</span></a>    <span class="c1"># Multi style reference, eg: A1:Z78, G15:AV16 etc</span>
-</span><span id="any_excel_ref_as_wanted_basecells-40"><a href="#any_excel_ref_as_wanted_basecells-40"><span class="linenos">40</span></a>    <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;^[A-Z]+[0-9]+:[A-Z]+[0-9]+$&quot;</span><span class="p">,</span> <span class="n">excel_ref</span><span class="p">):</span>
-</span><span id="any_excel_ref_as_wanted_basecells-41"><a href="#any_excel_ref_as_wanted_basecells-41"><span class="linenos">41</span></a>        <span class="k">return</span> <span class="n">multi_excel_ref_to_basecells</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">)</span>
-</span><span id="any_excel_ref_as_wanted_basecells-42"><a href="#any_excel_ref_as_wanted_basecells-42"><span class="linenos">42</span></a>
-</span><span id="any_excel_ref_as_wanted_basecells-43"><a href="#any_excel_ref_as_wanted_basecells-43"><span class="linenos">43</span></a>    <span class="k">raise</span> <span class="n">BadExcelReferenceError</span><span class="p">(</span>
-</span><span id="any_excel_ref_as_wanted_basecells-44"><a href="#any_excel_ref_as_wanted_basecells-44"><span class="linenos">44</span></a>        <span class="sa">f</span><span class="s2">&quot;Could not identify style of excel reference </span><span class="si">{</span><span class="n">excel_ref</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="any_excel_ref_as_wanted_basecells-45"><a href="#any_excel_ref_as_wanted_basecells-45"><span class="linenos">45</span></a>    <span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="any_excel_ref_as_wanted_basecells-31"><a href="#any_excel_ref_as_wanted_basecells-31"><span class="linenos">31</span></a><span class="k">def</span> <span class="nf">any_excel_ref_as_wanted_basecells</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseCell</span><span class="p">]:</span>
+</span><span id="any_excel_ref_as_wanted_basecells-32"><a href="#any_excel_ref_as_wanted_basecells-32"><span class="linenos">32</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="any_excel_ref_as_wanted_basecells-33"><a href="#any_excel_ref_as_wanted_basecells-33"><span class="linenos">33</span></a><span class="sd">    Convert an excel reference of either the single or multiple cell</span>
+</span><span id="any_excel_ref_as_wanted_basecells-34"><a href="#any_excel_ref_as_wanted_basecells-34"><span class="linenos">34</span></a><span class="sd">    format into a list of BaseCell objects.</span>
+</span><span id="any_excel_ref_as_wanted_basecells-35"><a href="#any_excel_ref_as_wanted_basecells-35"><span class="linenos">35</span></a>
+</span><span id="any_excel_ref_as_wanted_basecells-36"><a href="#any_excel_ref_as_wanted_basecells-36"><span class="linenos">36</span></a><span class="sd">    :param excel_ref: A excel style reference to one or more cells.</span>
+</span><span id="any_excel_ref_as_wanted_basecells-37"><a href="#any_excel_ref_as_wanted_basecells-37"><span class="linenos">37</span></a><span class="sd">    :return: A list of BaseCell or inheritors of that represents a selection</span>
+</span><span id="any_excel_ref_as_wanted_basecells-38"><a href="#any_excel_ref_as_wanted_basecells-38"><span class="linenos">38</span></a><span class="sd">    of cells.</span>
+</span><span id="any_excel_ref_as_wanted_basecells-39"><a href="#any_excel_ref_as_wanted_basecells-39"><span class="linenos">39</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="any_excel_ref_as_wanted_basecells-40"><a href="#any_excel_ref_as_wanted_basecells-40"><span class="linenos">40</span></a>
+</span><span id="any_excel_ref_as_wanted_basecells-41"><a href="#any_excel_ref_as_wanted_basecells-41"><span class="linenos">41</span></a>    <span class="c1"># Single style reference, eg: A6, ZA18 etc</span>
+</span><span id="any_excel_ref_as_wanted_basecells-42"><a href="#any_excel_ref_as_wanted_basecells-42"><span class="linenos">42</span></a>    <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;^[A-Z]+[0-9]+$&quot;</span><span class="p">,</span> <span class="n">excel_ref</span><span class="p">):</span>
+</span><span id="any_excel_ref_as_wanted_basecells-43"><a href="#any_excel_ref_as_wanted_basecells-43"><span class="linenos">43</span></a>        <span class="k">return</span> <span class="p">[</span><span class="n">single_excel_ref_to_basecell</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">)]</span>
+</span><span id="any_excel_ref_as_wanted_basecells-44"><a href="#any_excel_ref_as_wanted_basecells-44"><span class="linenos">44</span></a>
+</span><span id="any_excel_ref_as_wanted_basecells-45"><a href="#any_excel_ref_as_wanted_basecells-45"><span class="linenos">45</span></a>    <span class="c1"># Multi style reference, eg: A1:Z78, G15:AV16 etc</span>
+</span><span id="any_excel_ref_as_wanted_basecells-46"><a href="#any_excel_ref_as_wanted_basecells-46"><span class="linenos">46</span></a>    <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;^[A-Z]+[0-9]+:[A-Z]+[0-9]+$&quot;</span><span class="p">,</span> <span class="n">excel_ref</span><span class="p">):</span>
+</span><span id="any_excel_ref_as_wanted_basecells-47"><a href="#any_excel_ref_as_wanted_basecells-47"><span class="linenos">47</span></a>        <span class="k">return</span> <span class="n">multi_excel_ref_to_basecells</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">)</span>
+</span><span id="any_excel_ref_as_wanted_basecells-48"><a href="#any_excel_ref_as_wanted_basecells-48"><span class="linenos">48</span></a>
+</span><span id="any_excel_ref_as_wanted_basecells-49"><a href="#any_excel_ref_as_wanted_basecells-49"><span class="linenos">49</span></a>    <span class="k">raise</span> <span class="n">BadExcelReferenceError</span><span class="p">(</span>
+</span><span id="any_excel_ref_as_wanted_basecells-50"><a href="#any_excel_ref_as_wanted_basecells-50"><span class="linenos">50</span></a>        <span class="sa">f</span><span class="s2">&quot;Could not identify style of excel reference </span><span class="si">{</span><span class="n">excel_ref</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="any_excel_ref_as_wanted_basecells-51"><a href="#any_excel_ref_as_wanted_basecells-51"><span class="linenos">51</span></a>    <span class="p">)</span>
 </span></pre></div>
 
 
             <div class="docstring"><p>Convert an excel reference of either the single or multiple cell
 format into a list of BaseCell objects.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>excel_ref</strong>:  A excel style reference to one or more cells.</li>
+</ul>
+
+<h6 id="returns">Returns</h6>
+
+<blockquote>
+  <p>A list of BaseCell or inheritors of that represents a selection
+  of cells.</p>
+</blockquote>
 </div>
 
 
@@ -312,17 +363,34 @@ format into a list of BaseCell objects.</p>
 
     </div>
     <a class="headerlink" href="#single_excel_row_to_y_index"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="single_excel_row_to_y_index-48"><a href="#single_excel_row_to_y_index-48"><span class="linenos">48</span></a><span class="k">def</span> <span class="nf">single_excel_row_to_y_index</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span id="single_excel_row_to_y_index-49"><a href="#single_excel_row_to_y_index-49"><span class="linenos">49</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="single_excel_row_to_y_index-50"><a href="#single_excel_row_to_y_index-50"><span class="linenos">50</span></a><span class="sd">    Given a single row number as an excel reference, return</span>
-</span><span id="single_excel_row_to_y_index-51"><a href="#single_excel_row_to_y_index-51"><span class="linenos">51</span></a><span class="sd">    the y offset value</span>
-</span><span id="single_excel_row_to_y_index-52"><a href="#single_excel_row_to_y_index-52"><span class="linenos">52</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="single_excel_row_to_y_index-53"><a href="#single_excel_row_to_y_index-53"><span class="linenos">53</span></a>    <span class="k">return</span> <span class="n">cellutils</span><span class="o">.</span><span class="n">number_to_y</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">))</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="single_excel_row_to_y_index-54"><a href="#single_excel_row_to_y_index-54"><span class="linenos">54</span></a><span class="k">def</span> <span class="nf">single_excel_row_to_y_index</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="single_excel_row_to_y_index-55"><a href="#single_excel_row_to_y_index-55"><span class="linenos">55</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="single_excel_row_to_y_index-56"><a href="#single_excel_row_to_y_index-56"><span class="linenos">56</span></a><span class="sd">    Given a single row number as an excel reference, return</span>
+</span><span id="single_excel_row_to_y_index-57"><a href="#single_excel_row_to_y_index-57"><span class="linenos">57</span></a><span class="sd">    the y offset value</span>
+</span><span id="single_excel_row_to_y_index-58"><a href="#single_excel_row_to_y_index-58"><span class="linenos">58</span></a>
+</span><span id="single_excel_row_to_y_index-59"><a href="#single_excel_row_to_y_index-59"><span class="linenos">59</span></a><span class="sd">    :param excel_ref: A number representing an excel style</span>
+</span><span id="single_excel_row_to_y_index-60"><a href="#single_excel_row_to_y_index-60"><span class="linenos">60</span></a><span class="sd">    reference to a single row in a tabulated data source.</span>
+</span><span id="single_excel_row_to_y_index-61"><a href="#single_excel_row_to_y_index-61"><span class="linenos">61</span></a><span class="sd">    :return: y (vertical offset) value.</span>
+</span><span id="single_excel_row_to_y_index-62"><a href="#single_excel_row_to_y_index-62"><span class="linenos">62</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="single_excel_row_to_y_index-63"><a href="#single_excel_row_to_y_index-63"><span class="linenos">63</span></a>    <span class="k">return</span> <span class="n">cellutils</span><span class="o">.</span><span class="n">number_to_y</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">))</span>
 </span></pre></div>
 
 
             <div class="docstring"><p>Given a single row number as an excel reference, return
 the y offset value</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>excel_ref</strong>:  A number representing an excel style
+reference to a single row in a tabulated data source.</li>
+</ul>
+
+<h6 id="returns">Returns</h6>
+
+<blockquote>
+  <p>y (vertical offset) value.</p>
+</blockquote>
 </div>
 
 
@@ -338,17 +406,34 @@ the y offset value</p>
 
     </div>
     <a class="headerlink" href="#single_excel_column_to_x_index"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="single_excel_column_to_x_index-56"><a href="#single_excel_column_to_x_index-56"><span class="linenos">56</span></a><span class="k">def</span> <span class="nf">single_excel_column_to_x_index</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="single_excel_column_to_x_index-57"><a href="#single_excel_column_to_x_index-57"><span class="linenos">57</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="single_excel_column_to_x_index-58"><a href="#single_excel_column_to_x_index-58"><span class="linenos">58</span></a><span class="sd">    Given a single column latter as an excel reference, return</span>
-</span><span id="single_excel_column_to_x_index-59"><a href="#single_excel_column_to_x_index-59"><span class="linenos">59</span></a><span class="sd">    the x inde.</span>
-</span><span id="single_excel_column_to_x_index-60"><a href="#single_excel_column_to_x_index-60"><span class="linenos">60</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="single_excel_column_to_x_index-61"><a href="#single_excel_column_to_x_index-61"><span class="linenos">61</span></a>    <span class="k">return</span> <span class="n">cellutils</span><span class="o">.</span><span class="n">letters_to_x</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="single_excel_column_to_x_index-66"><a href="#single_excel_column_to_x_index-66"><span class="linenos">66</span></a><span class="k">def</span> <span class="nf">single_excel_column_to_x_index</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="single_excel_column_to_x_index-67"><a href="#single_excel_column_to_x_index-67"><span class="linenos">67</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="single_excel_column_to_x_index-68"><a href="#single_excel_column_to_x_index-68"><span class="linenos">68</span></a><span class="sd">    Given a single column latter as an excel reference, return</span>
+</span><span id="single_excel_column_to_x_index-69"><a href="#single_excel_column_to_x_index-69"><span class="linenos">69</span></a><span class="sd">    the x index.</span>
+</span><span id="single_excel_column_to_x_index-70"><a href="#single_excel_column_to_x_index-70"><span class="linenos">70</span></a>
+</span><span id="single_excel_column_to_x_index-71"><a href="#single_excel_column_to_x_index-71"><span class="linenos">71</span></a><span class="sd">    :param excel_ref: One or more letters representing an excel</span>
+</span><span id="single_excel_column_to_x_index-72"><a href="#single_excel_column_to_x_index-72"><span class="linenos">72</span></a><span class="sd">    style reference to a single column in a tabulated source.</span>
+</span><span id="single_excel_column_to_x_index-73"><a href="#single_excel_column_to_x_index-73"><span class="linenos">73</span></a><span class="sd">    :return: x (horizontal offset) value.</span>
+</span><span id="single_excel_column_to_x_index-74"><a href="#single_excel_column_to_x_index-74"><span class="linenos">74</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="single_excel_column_to_x_index-75"><a href="#single_excel_column_to_x_index-75"><span class="linenos">75</span></a>    <span class="k">return</span> <span class="n">cellutils</span><span class="o">.</span><span class="n">letters_to_x</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">)</span>
 </span></pre></div>
 
 
             <div class="docstring"><p>Given a single column latter as an excel reference, return
-the x inde.</p>
+the x index.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>excel_ref</strong>:  One or more letters representing an excel
+style reference to a single column in a tabulated source.</li>
+</ul>
+
+<h6 id="returns">Returns</h6>
+
+<blockquote>
+  <p>x (horizontal offset) value.</p>
+</blockquote>
 </div>
 
 
@@ -364,32 +449,49 @@ the x inde.</p>
 
     </div>
     <a class="headerlink" href="#single_excel_ref_to_basecell"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="single_excel_ref_to_basecell-64"><a href="#single_excel_ref_to_basecell-64"><span class="linenos">64</span></a><span class="k">def</span> <span class="nf">single_excel_ref_to_basecell</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseCell</span><span class="p">:</span>
-</span><span id="single_excel_ref_to_basecell-65"><a href="#single_excel_ref_to_basecell-65"><span class="linenos">65</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="single_excel_ref_to_basecell-66"><a href="#single_excel_ref_to_basecell-66"><span class="linenos">66</span></a><span class="sd">    Given a single excel cell reference, return a single BaseCell.</span>
-</span><span id="single_excel_ref_to_basecell-67"><a href="#single_excel_ref_to_basecell-67"><span class="linenos">67</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="single_excel_ref_to_basecell-68"><a href="#single_excel_ref_to_basecell-68"><span class="linenos">68</span></a>
-</span><span id="single_excel_ref_to_basecell-69"><a href="#single_excel_ref_to_basecell-69"><span class="linenos">69</span></a>    <span class="n">letters</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-</span><span id="single_excel_ref_to_basecell-70"><a href="#single_excel_ref_to_basecell-70"><span class="linenos">70</span></a>    <span class="n">number</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="single_excel_ref_to_basecell-71"><a href="#single_excel_ref_to_basecell-71"><span class="linenos">71</span></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">letter_or_num</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">):</span>
-</span><span id="single_excel_ref_to_basecell-72"><a href="#single_excel_ref_to_basecell-72"><span class="linenos">72</span></a>        <span class="k">try</span><span class="p">:</span>
-</span><span id="single_excel_ref_to_basecell-73"><a href="#single_excel_ref_to_basecell-73"><span class="linenos">73</span></a>            <span class="nb">int</span><span class="p">(</span><span class="n">letter_or_num</span><span class="p">)</span>
-</span><span id="single_excel_ref_to_basecell-74"><a href="#single_excel_ref_to_basecell-74"><span class="linenos">74</span></a>            <span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">[</span><span class="n">i</span><span class="p">:])</span>
-</span><span id="single_excel_ref_to_basecell-75"><a href="#single_excel_ref_to_basecell-75"><span class="linenos">75</span></a>            <span class="k">break</span>
-</span><span id="single_excel_ref_to_basecell-76"><a href="#single_excel_ref_to_basecell-76"><span class="linenos">76</span></a>        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-</span><span id="single_excel_ref_to_basecell-77"><a href="#single_excel_ref_to_basecell-77"><span class="linenos">77</span></a>            <span class="n">letters</span> <span class="o">+=</span> <span class="n">letter_or_num</span>
-</span><span id="single_excel_ref_to_basecell-78"><a href="#single_excel_ref_to_basecell-78"><span class="linenos">78</span></a>
-</span><span id="single_excel_ref_to_basecell-79"><a href="#single_excel_ref_to_basecell-79"><span class="linenos">79</span></a>    <span class="k">assert</span> <span class="n">number</span>
-</span><span id="single_excel_ref_to_basecell-80"><a href="#single_excel_ref_to_basecell-80"><span class="linenos">80</span></a>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
-</span><span id="single_excel_ref_to_basecell-81"><a href="#single_excel_ref_to_basecell-81"><span class="linenos">81</span></a>
-</span><span id="single_excel_ref_to_basecell-82"><a href="#single_excel_ref_to_basecell-82"><span class="linenos">82</span></a>    <span class="n">x_index</span> <span class="o">=</span> <span class="n">cellutils</span><span class="o">.</span><span class="n">letters_to_x</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span>
-</span><span id="single_excel_ref_to_basecell-83"><a href="#single_excel_ref_to_basecell-83"><span class="linenos">83</span></a>    <span class="n">y_index</span> <span class="o">=</span> <span class="n">cellutils</span><span class="o">.</span><span class="n">number_to_y</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
-</span><span id="single_excel_ref_to_basecell-84"><a href="#single_excel_ref_to_basecell-84"><span class="linenos">84</span></a>
-</span><span id="single_excel_ref_to_basecell-85"><a href="#single_excel_ref_to_basecell-85"><span class="linenos">85</span></a>    <span class="k">return</span> <span class="n">BaseCell</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_index</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="single_excel_ref_to_basecell-78"><a href="#single_excel_ref_to_basecell-78"><span class="linenos"> 78</span></a><span class="k">def</span> <span class="nf">single_excel_ref_to_basecell</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseCell</span><span class="p">:</span>
+</span><span id="single_excel_ref_to_basecell-79"><a href="#single_excel_ref_to_basecell-79"><span class="linenos"> 79</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="single_excel_ref_to_basecell-80"><a href="#single_excel_ref_to_basecell-80"><span class="linenos"> 80</span></a><span class="sd">    Given a single excel cell reference, return a single BaseCell</span>
+</span><span id="single_excel_ref_to_basecell-81"><a href="#single_excel_ref_to_basecell-81"><span class="linenos"> 81</span></a><span class="sd">    or inheritor of.</span>
+</span><span id="single_excel_ref_to_basecell-82"><a href="#single_excel_ref_to_basecell-82"><span class="linenos"> 82</span></a>
+</span><span id="single_excel_ref_to_basecell-83"><a href="#single_excel_ref_to_basecell-83"><span class="linenos"> 83</span></a><span class="sd">    :param excel_ref: A excel style reference to a single cell.</span>
+</span><span id="single_excel_ref_to_basecell-84"><a href="#single_excel_ref_to_basecell-84"><span class="linenos"> 84</span></a><span class="sd">    :return: A BaseCell or inheritor of.</span>
+</span><span id="single_excel_ref_to_basecell-85"><a href="#single_excel_ref_to_basecell-85"><span class="linenos"> 85</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="single_excel_ref_to_basecell-86"><a href="#single_excel_ref_to_basecell-86"><span class="linenos"> 86</span></a>
+</span><span id="single_excel_ref_to_basecell-87"><a href="#single_excel_ref_to_basecell-87"><span class="linenos"> 87</span></a>    <span class="n">letters</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span id="single_excel_ref_to_basecell-88"><a href="#single_excel_ref_to_basecell-88"><span class="linenos"> 88</span></a>    <span class="n">number</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="single_excel_ref_to_basecell-89"><a href="#single_excel_ref_to_basecell-89"><span class="linenos"> 89</span></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">letter_or_num</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">):</span>
+</span><span id="single_excel_ref_to_basecell-90"><a href="#single_excel_ref_to_basecell-90"><span class="linenos"> 90</span></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="single_excel_ref_to_basecell-91"><a href="#single_excel_ref_to_basecell-91"><span class="linenos"> 91</span></a>            <span class="nb">int</span><span class="p">(</span><span class="n">letter_or_num</span><span class="p">)</span>
+</span><span id="single_excel_ref_to_basecell-92"><a href="#single_excel_ref_to_basecell-92"><span class="linenos"> 92</span></a>            <span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">[</span><span class="n">i</span><span class="p">:])</span>
+</span><span id="single_excel_ref_to_basecell-93"><a href="#single_excel_ref_to_basecell-93"><span class="linenos"> 93</span></a>            <span class="k">break</span>
+</span><span id="single_excel_ref_to_basecell-94"><a href="#single_excel_ref_to_basecell-94"><span class="linenos"> 94</span></a>        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+</span><span id="single_excel_ref_to_basecell-95"><a href="#single_excel_ref_to_basecell-95"><span class="linenos"> 95</span></a>            <span class="n">letters</span> <span class="o">+=</span> <span class="n">letter_or_num</span>
+</span><span id="single_excel_ref_to_basecell-96"><a href="#single_excel_ref_to_basecell-96"><span class="linenos"> 96</span></a>
+</span><span id="single_excel_ref_to_basecell-97"><a href="#single_excel_ref_to_basecell-97"><span class="linenos"> 97</span></a>    <span class="k">assert</span> <span class="n">number</span>
+</span><span id="single_excel_ref_to_basecell-98"><a href="#single_excel_ref_to_basecell-98"><span class="linenos"> 98</span></a>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+</span><span id="single_excel_ref_to_basecell-99"><a href="#single_excel_ref_to_basecell-99"><span class="linenos"> 99</span></a>
+</span><span id="single_excel_ref_to_basecell-100"><a href="#single_excel_ref_to_basecell-100"><span class="linenos">100</span></a>    <span class="n">x_index</span> <span class="o">=</span> <span class="n">cellutils</span><span class="o">.</span><span class="n">letters_to_x</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span>
+</span><span id="single_excel_ref_to_basecell-101"><a href="#single_excel_ref_to_basecell-101"><span class="linenos">101</span></a>    <span class="n">y_index</span> <span class="o">=</span> <span class="n">cellutils</span><span class="o">.</span><span class="n">number_to_y</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+</span><span id="single_excel_ref_to_basecell-102"><a href="#single_excel_ref_to_basecell-102"><span class="linenos">102</span></a>
+</span><span id="single_excel_ref_to_basecell-103"><a href="#single_excel_ref_to_basecell-103"><span class="linenos">103</span></a>    <span class="k">return</span> <span class="n">BaseCell</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_index</span><span class="p">)</span>
 </span></pre></div>
 
 
-            <div class="docstring"><p>Given a single excel cell reference, return a single BaseCell.</p>
+            <div class="docstring"><p>Given a single excel cell reference, return a single BaseCell
+or inheritor of.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>excel_ref</strong>:  A excel style reference to a single cell.</li>
+</ul>
+
+<h6 id="returns">Returns</h6>
+
+<blockquote>
+  <p>A BaseCell or inheritor of.</p>
+</blockquote>
 </div>
 
 
@@ -405,42 +507,62 @@ the x inde.</p>
 
     </div>
     <a class="headerlink" href="#multi_excel_ref_to_basecells"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="multi_excel_ref_to_basecells-88"><a href="#multi_excel_ref_to_basecells-88"><span class="linenos"> 88</span></a><span class="k">def</span> <span class="nf">multi_excel_ref_to_basecells</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseCell</span><span class="p">]:</span>
-</span><span id="multi_excel_ref_to_basecells-89"><a href="#multi_excel_ref_to_basecells-89"><span class="linenos"> 89</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="multi_excel_ref_to_basecells-90"><a href="#multi_excel_ref_to_basecells-90"><span class="linenos"> 90</span></a><span class="sd">    Given an excel reference referring to multiple cells, return a list of</span>
-</span><span id="multi_excel_ref_to_basecells-91"><a href="#multi_excel_ref_to_basecells-91"><span class="linenos"> 91</span></a><span class="sd">    wanted BaseCells.</span>
-</span><span id="multi_excel_ref_to_basecells-92"><a href="#multi_excel_ref_to_basecells-92"><span class="linenos"> 92</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="multi_excel_ref_to_basecells-93"><a href="#multi_excel_ref_to_basecells-93"><span class="linenos"> 93</span></a>
-</span><span id="multi_excel_ref_to_basecells-94"><a href="#multi_excel_ref_to_basecells-94"><span class="linenos"> 94</span></a>    <span class="k">assert</span> <span class="p">(</span>
-</span><span id="multi_excel_ref_to_basecells-95"><a href="#multi_excel_ref_to_basecells-95"><span class="linenos"> 95</span></a>        <span class="s2">&quot;:&quot;</span> <span class="ow">in</span> <span class="n">excel_ref</span>
-</span><span id="multi_excel_ref_to_basecells-96"><a href="#multi_excel_ref_to_basecells-96"><span class="linenos"> 96</span></a>    <span class="p">),</span> <span class="s2">&quot;&quot;&quot;</span>
-</span><span id="multi_excel_ref_to_basecells-97"><a href="#multi_excel_ref_to_basecells-97"><span class="linenos"> 97</span></a><span class="s2">        A multi cell excel reference should be in the format:</span>
-</span><span id="multi_excel_ref_to_basecells-98"><a href="#multi_excel_ref_to_basecells-98"><span class="linenos"> 98</span></a><span class="s2">        &lt;letter(s)&gt;&lt;number&gt;:&lt;letter(s)&gt;&lt;number&gt;</span>
-</span><span id="multi_excel_ref_to_basecells-99"><a href="#multi_excel_ref_to_basecells-99"><span class="linenos"> 99</span></a>
-</span><span id="multi_excel_ref_to_basecells-100"><a href="#multi_excel_ref_to_basecells-100"><span class="linenos">100</span></a><span class="s2">        </span><span class="si">{excel_ref}</span><span class="s2"> is missing a colon, &quot;:&quot;</span>
-</span><span id="multi_excel_ref_to_basecells-101"><a href="#multi_excel_ref_to_basecells-101"><span class="linenos">101</span></a><span class="s2">    &quot;&quot;&quot;</span>
-</span><span id="multi_excel_ref_to_basecells-102"><a href="#multi_excel_ref_to_basecells-102"><span class="linenos">102</span></a>    <span class="n">start_cell</span> <span class="o">=</span> <span class="n">single_excel_ref_to_basecell</span><span class="p">(</span><span class="n">excel_ref</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
-</span><span id="multi_excel_ref_to_basecells-103"><a href="#multi_excel_ref_to_basecells-103"><span class="linenos">103</span></a>    <span class="n">end_cell</span> <span class="o">=</span> <span class="n">single_excel_ref_to_basecell</span><span class="p">(</span><span class="n">excel_ref</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
-</span><span id="multi_excel_ref_to_basecells-104"><a href="#multi_excel_ref_to_basecells-104"><span class="linenos">104</span></a>
-</span><span id="multi_excel_ref_to_basecells-105"><a href="#multi_excel_ref_to_basecells-105"><span class="linenos">105</span></a>    <span class="k">if</span> <span class="n">start_cell</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">end_cell</span><span class="o">.</span><span class="n">x</span> <span class="ow">or</span> <span class="n">start_cell</span><span class="o">.</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">end_cell</span><span class="o">.</span><span class="n">y</span><span class="p">:</span>
-</span><span id="multi_excel_ref_to_basecells-106"><a href="#multi_excel_ref_to_basecells-106"><span class="linenos">106</span></a>        <span class="k">raise</span> <span class="n">ReversedExcelRefError</span><span class="p">()</span>
-</span><span id="multi_excel_ref_to_basecells-107"><a href="#multi_excel_ref_to_basecells-107"><span class="linenos">107</span></a>
-</span><span id="multi_excel_ref_to_basecells-108"><a href="#multi_excel_ref_to_basecells-108"><span class="linenos">108</span></a>    <span class="n">start_x</span> <span class="o">=</span> <span class="n">start_cell</span><span class="o">.</span><span class="n">x</span>
-</span><span id="multi_excel_ref_to_basecells-109"><a href="#multi_excel_ref_to_basecells-109"><span class="linenos">109</span></a>    <span class="n">start_y</span> <span class="o">=</span> <span class="n">start_cell</span><span class="o">.</span><span class="n">y</span>
-</span><span id="multi_excel_ref_to_basecells-110"><a href="#multi_excel_ref_to_basecells-110"><span class="linenos">110</span></a>    <span class="n">end_x</span> <span class="o">=</span> <span class="n">end_cell</span><span class="o">.</span><span class="n">x</span>
-</span><span id="multi_excel_ref_to_basecells-111"><a href="#multi_excel_ref_to_basecells-111"><span class="linenos">111</span></a>    <span class="n">end_y</span> <span class="o">=</span> <span class="n">end_cell</span><span class="o">.</span><span class="n">y</span>
-</span><span id="multi_excel_ref_to_basecells-112"><a href="#multi_excel_ref_to_basecells-112"><span class="linenos">112</span></a>
-</span><span id="multi_excel_ref_to_basecells-113"><a href="#multi_excel_ref_to_basecells-113"><span class="linenos">113</span></a>    <span class="n">return_cells</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="multi_excel_ref_to_basecells-114"><a href="#multi_excel_ref_to_basecells-114"><span class="linenos">114</span></a>    <span class="k">for</span> <span class="n">x_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_x</span><span class="p">,</span> <span class="n">end_x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-</span><span id="multi_excel_ref_to_basecells-115"><a href="#multi_excel_ref_to_basecells-115"><span class="linenos">115</span></a>        <span class="k">for</span> <span class="n">y_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_y</span><span class="p">,</span> <span class="n">end_y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-</span><span id="multi_excel_ref_to_basecells-116"><a href="#multi_excel_ref_to_basecells-116"><span class="linenos">116</span></a>            <span class="n">return_cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">BaseCell</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_index</span><span class="p">))</span>
-</span><span id="multi_excel_ref_to_basecells-117"><a href="#multi_excel_ref_to_basecells-117"><span class="linenos">117</span></a>
-</span><span id="multi_excel_ref_to_basecells-118"><a href="#multi_excel_ref_to_basecells-118"><span class="linenos">118</span></a>    <span class="k">return</span> <span class="n">return_cells</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="multi_excel_ref_to_basecells-106"><a href="#multi_excel_ref_to_basecells-106"><span class="linenos">106</span></a><span class="k">def</span> <span class="nf">multi_excel_ref_to_basecells</span><span class="p">(</span><span class="n">excel_ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseCell</span><span class="p">]:</span>
+</span><span id="multi_excel_ref_to_basecells-107"><a href="#multi_excel_ref_to_basecells-107"><span class="linenos">107</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="multi_excel_ref_to_basecells-108"><a href="#multi_excel_ref_to_basecells-108"><span class="linenos">108</span></a><span class="sd">    Given an excel reference referring to multiple cells, return a list of</span>
+</span><span id="multi_excel_ref_to_basecells-109"><a href="#multi_excel_ref_to_basecells-109"><span class="linenos">109</span></a><span class="sd">    wanted BaseCells.</span>
+</span><span id="multi_excel_ref_to_basecells-110"><a href="#multi_excel_ref_to_basecells-110"><span class="linenos">110</span></a>
+</span><span id="multi_excel_ref_to_basecells-111"><a href="#multi_excel_ref_to_basecells-111"><span class="linenos">111</span></a><span class="sd">    :param excel_ref: A excel style reference to a single cell.</span>
+</span><span id="multi_excel_ref_to_basecells-112"><a href="#multi_excel_ref_to_basecells-112"><span class="linenos">112</span></a><span class="sd">    :return: A list of BaseCell or inheritors of that represents a selection</span>
+</span><span id="multi_excel_ref_to_basecells-113"><a href="#multi_excel_ref_to_basecells-113"><span class="linenos">113</span></a><span class="sd">    of cells.</span>
+</span><span id="multi_excel_ref_to_basecells-114"><a href="#multi_excel_ref_to_basecells-114"><span class="linenos">114</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="multi_excel_ref_to_basecells-115"><a href="#multi_excel_ref_to_basecells-115"><span class="linenos">115</span></a>
+</span><span id="multi_excel_ref_to_basecells-116"><a href="#multi_excel_ref_to_basecells-116"><span class="linenos">116</span></a>    <span class="k">assert</span> <span class="p">(</span>
+</span><span id="multi_excel_ref_to_basecells-117"><a href="#multi_excel_ref_to_basecells-117"><span class="linenos">117</span></a>        <span class="s2">&quot;:&quot;</span> <span class="ow">in</span> <span class="n">excel_ref</span>
+</span><span id="multi_excel_ref_to_basecells-118"><a href="#multi_excel_ref_to_basecells-118"><span class="linenos">118</span></a>    <span class="p">),</span> <span class="s2">&quot;&quot;&quot;</span>
+</span><span id="multi_excel_ref_to_basecells-119"><a href="#multi_excel_ref_to_basecells-119"><span class="linenos">119</span></a><span class="s2">        A multi cell excel reference should be in the format:</span>
+</span><span id="multi_excel_ref_to_basecells-120"><a href="#multi_excel_ref_to_basecells-120"><span class="linenos">120</span></a><span class="s2">        &lt;letter(s)&gt;&lt;number&gt;:&lt;letter(s)&gt;&lt;number&gt;</span>
+</span><span id="multi_excel_ref_to_basecells-121"><a href="#multi_excel_ref_to_basecells-121"><span class="linenos">121</span></a>
+</span><span id="multi_excel_ref_to_basecells-122"><a href="#multi_excel_ref_to_basecells-122"><span class="linenos">122</span></a><span class="s2">        </span><span class="si">{excel_ref}</span><span class="s2"> is missing a colon, &quot;:&quot;</span>
+</span><span id="multi_excel_ref_to_basecells-123"><a href="#multi_excel_ref_to_basecells-123"><span class="linenos">123</span></a><span class="s2">    &quot;&quot;&quot;</span>
+</span><span id="multi_excel_ref_to_basecells-124"><a href="#multi_excel_ref_to_basecells-124"><span class="linenos">124</span></a>    <span class="n">start_cell</span> <span class="o">=</span> <span class="n">single_excel_ref_to_basecell</span><span class="p">(</span><span class="n">excel_ref</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+</span><span id="multi_excel_ref_to_basecells-125"><a href="#multi_excel_ref_to_basecells-125"><span class="linenos">125</span></a>    <span class="n">end_cell</span> <span class="o">=</span> <span class="n">single_excel_ref_to_basecell</span><span class="p">(</span><span class="n">excel_ref</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+</span><span id="multi_excel_ref_to_basecells-126"><a href="#multi_excel_ref_to_basecells-126"><span class="linenos">126</span></a>
+</span><span id="multi_excel_ref_to_basecells-127"><a href="#multi_excel_ref_to_basecells-127"><span class="linenos">127</span></a>    <span class="k">if</span> <span class="n">start_cell</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">end_cell</span><span class="o">.</span><span class="n">x</span> <span class="ow">or</span> <span class="n">start_cell</span><span class="o">.</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">end_cell</span><span class="o">.</span><span class="n">y</span><span class="p">:</span>
+</span><span id="multi_excel_ref_to_basecells-128"><a href="#multi_excel_ref_to_basecells-128"><span class="linenos">128</span></a>        <span class="k">raise</span> <span class="n">ReversedExcelRefError</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+</span><span id="multi_excel_ref_to_basecells-129"><a href="#multi_excel_ref_to_basecells-129"><span class="linenos">129</span></a><span class="s2">            Invalid excel reference format. Please provide your reference in the</span>
+</span><span id="multi_excel_ref_to_basecells-130"><a href="#multi_excel_ref_to_basecells-130"><span class="linenos">130</span></a><span class="s2">            standard upmost left to downmost right format, i.e A1:C5 not C5:A1</span>
+</span><span id="multi_excel_ref_to_basecells-131"><a href="#multi_excel_ref_to_basecells-131"><span class="linenos">131</span></a><span class="s2">                &quot;&quot;&quot;</span><span class="p">)</span>
+</span><span id="multi_excel_ref_to_basecells-132"><a href="#multi_excel_ref_to_basecells-132"><span class="linenos">132</span></a>
+</span><span id="multi_excel_ref_to_basecells-133"><a href="#multi_excel_ref_to_basecells-133"><span class="linenos">133</span></a>    <span class="n">start_x</span> <span class="o">=</span> <span class="n">start_cell</span><span class="o">.</span><span class="n">x</span>
+</span><span id="multi_excel_ref_to_basecells-134"><a href="#multi_excel_ref_to_basecells-134"><span class="linenos">134</span></a>    <span class="n">start_y</span> <span class="o">=</span> <span class="n">start_cell</span><span class="o">.</span><span class="n">y</span>
+</span><span id="multi_excel_ref_to_basecells-135"><a href="#multi_excel_ref_to_basecells-135"><span class="linenos">135</span></a>    <span class="n">end_x</span> <span class="o">=</span> <span class="n">end_cell</span><span class="o">.</span><span class="n">x</span>
+</span><span id="multi_excel_ref_to_basecells-136"><a href="#multi_excel_ref_to_basecells-136"><span class="linenos">136</span></a>    <span class="n">end_y</span> <span class="o">=</span> <span class="n">end_cell</span><span class="o">.</span><span class="n">y</span>
+</span><span id="multi_excel_ref_to_basecells-137"><a href="#multi_excel_ref_to_basecells-137"><span class="linenos">137</span></a>
+</span><span id="multi_excel_ref_to_basecells-138"><a href="#multi_excel_ref_to_basecells-138"><span class="linenos">138</span></a>    <span class="n">return_cells</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="multi_excel_ref_to_basecells-139"><a href="#multi_excel_ref_to_basecells-139"><span class="linenos">139</span></a>    <span class="k">for</span> <span class="n">x_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_x</span><span class="p">,</span> <span class="n">end_x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="multi_excel_ref_to_basecells-140"><a href="#multi_excel_ref_to_basecells-140"><span class="linenos">140</span></a>        <span class="k">for</span> <span class="n">y_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_y</span><span class="p">,</span> <span class="n">end_y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="multi_excel_ref_to_basecells-141"><a href="#multi_excel_ref_to_basecells-141"><span class="linenos">141</span></a>            <span class="n">return_cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">BaseCell</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_index</span><span class="p">))</span>
+</span><span id="multi_excel_ref_to_basecells-142"><a href="#multi_excel_ref_to_basecells-142"><span class="linenos">142</span></a>
+</span><span id="multi_excel_ref_to_basecells-143"><a href="#multi_excel_ref_to_basecells-143"><span class="linenos">143</span></a>    <span class="k">return</span> <span class="n">return_cells</span>
 </span></pre></div>
 
 
             <div class="docstring"><p>Given an excel reference referring to multiple cells, return a list of
 wanted BaseCells.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>excel_ref</strong>:  A excel style reference to a single cell.</li>
+</ul>
+
+<h6 id="returns">Returns</h6>
+
+<blockquote>
+  <p>A list of BaseCell or inheritors of that represents a selection
+  of cells.</p>
+</blockquote>
 </div>
 
 
@@ -456,15 +578,30 @@ wanted BaseCells.</p>
 
     </div>
     <a class="headerlink" href="#basecell_to_excel_ref"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="basecell_to_excel_ref-121"><a href="#basecell_to_excel_ref-121"><span class="linenos">121</span></a><span class="k">def</span> <span class="nf">basecell_to_excel_ref</span><span class="p">(</span><span class="n">cell</span><span class="p">:</span> <span class="n">BaseCell</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="basecell_to_excel_ref-122"><a href="#basecell_to_excel_ref-122"><span class="linenos">122</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="basecell_to_excel_ref-123"><a href="#basecell_to_excel_ref-123"><span class="linenos">123</span></a><span class="sd">    Given a single BaseCell object, return the representative excel reference.</span>
-</span><span id="basecell_to_excel_ref-124"><a href="#basecell_to_excel_ref-124"><span class="linenos">124</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="basecell_to_excel_ref-125"><a href="#basecell_to_excel_ref-125"><span class="linenos">125</span></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">x_to_letters</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="si">}{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">y_to_number</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">y</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="basecell_to_excel_ref-146"><a href="#basecell_to_excel_ref-146"><span class="linenos">146</span></a><span class="k">def</span> <span class="nf">basecell_to_excel_ref</span><span class="p">(</span><span class="n">cell</span><span class="p">:</span> <span class="n">BaseCell</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="basecell_to_excel_ref-147"><a href="#basecell_to_excel_ref-147"><span class="linenos">147</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="basecell_to_excel_ref-148"><a href="#basecell_to_excel_ref-148"><span class="linenos">148</span></a><span class="sd">    Given a single BaseCell object, return the representative excel reference.</span>
+</span><span id="basecell_to_excel_ref-149"><a href="#basecell_to_excel_ref-149"><span class="linenos">149</span></a>
+</span><span id="basecell_to_excel_ref-150"><a href="#basecell_to_excel_ref-150"><span class="linenos">150</span></a><span class="sd">    :param: A single BaseCell or inheritor of</span>
+</span><span id="basecell_to_excel_ref-151"><a href="#basecell_to_excel_ref-151"><span class="linenos">151</span></a><span class="sd">    :return: A excel style reference to a single cell.</span>
+</span><span id="basecell_to_excel_ref-152"><a href="#basecell_to_excel_ref-152"><span class="linenos">152</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="basecell_to_excel_ref-153"><a href="#basecell_to_excel_ref-153"><span class="linenos">153</span></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">x_to_letters</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="si">}{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">y_to_number</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">y</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 </span></pre></div>
 
 
             <div class="docstring"><p>Given a single BaseCell object, return the representative excel reference.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li>A single BaseCell or inheritor of</li>
+</ul>
+
+<h6 id="returns">Returns</h6>
+
+<blockquote>
+  <p>A excel style reference to a single cell.</p>
+</blockquote>
 </div>
 
 
@@ -480,25 +617,27 @@ wanted BaseCells.</p>
 
     </div>
     <a class="headerlink" href="#basecells_to_excel_ref"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="basecells_to_excel_ref-128"><a href="#basecells_to_excel_ref-128"><span class="linenos">128</span></a><span class="k">def</span> <span class="nf">basecells_to_excel_ref</span><span class="p">(</span><span class="n">cells</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseCell</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="basecells_to_excel_ref-129"><a href="#basecells_to_excel_ref-129"><span class="linenos">129</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="basecells_to_excel_ref-130"><a href="#basecells_to_excel_ref-130"><span class="linenos">130</span></a><span class="sd">    Given a list of cells representing a solid selection with</span>
-</span><span id="basecells_to_excel_ref-131"><a href="#basecells_to_excel_ref-131"><span class="linenos">131</span></a><span class="sd">    no gaps. Return the representative excel reference.</span>
-</span><span id="basecells_to_excel_ref-132"><a href="#basecells_to_excel_ref-132"><span class="linenos">132</span></a>
-</span><span id="basecells_to_excel_ref-133"><a href="#basecells_to_excel_ref-133"><span class="linenos">133</span></a><span class="sd">    :param cells: Representing a selection from a tabular data source.</span>
-</span><span id="basecells_to_excel_ref-134"><a href="#basecells_to_excel_ref-134"><span class="linenos">134</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="basecells_to_excel_ref-135"><a href="#basecells_to_excel_ref-135"><span class="linenos">135</span></a>
-</span><span id="basecells_to_excel_ref-136"><a href="#basecells_to_excel_ref-136"><span class="linenos">136</span></a>    <span class="n">min_x</span><span class="p">,</span> <span class="n">max_x</span><span class="p">,</span> <span class="n">min_y</span><span class="p">,</span> <span class="n">max_y</span> <span class="o">=</span> <span class="n">dfccommon</span><span class="o">.</span><span class="n">assert_quadrilaterals</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span>
-</span><span id="basecells_to_excel_ref-137"><a href="#basecells_to_excel_ref-137"><span class="linenos">137</span></a>
-</span><span id="basecells_to_excel_ref-138"><a href="#basecells_to_excel_ref-138"><span class="linenos">138</span></a>    <span class="n">topleft_cell</span> <span class="o">=</span> <span class="n">dfccommon</span><span class="o">.</span><span class="n">specific_cell_from_xy</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">min_x</span><span class="p">,</span> <span class="n">min_y</span><span class="p">)</span>
-</span><span id="basecells_to_excel_ref-139"><a href="#basecells_to_excel_ref-139"><span class="linenos">139</span></a>    <span class="n">bottomright_cell</span> <span class="o">=</span> <span class="n">dfccommon</span><span class="o">.</span><span class="n">specific_cell_from_xy</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">max_x</span><span class="p">,</span> <span class="n">max_y</span><span class="p">)</span>
-</span><span id="basecells_to_excel_ref-140"><a href="#basecells_to_excel_ref-140"><span class="linenos">140</span></a>
-</span><span id="basecells_to_excel_ref-141"><a href="#basecells_to_excel_ref-141"><span class="linenos">141</span></a>    <span class="n">ref1</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">x_to_letters</span><span class="p">(</span><span class="n">topleft_cell</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="si">}{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">y_to_number</span><span class="p">(</span><span class="n">topleft_cell</span><span class="o">.</span><span class="n">y</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="basecells_to_excel_ref-142"><a href="#basecells_to_excel_ref-142"><span class="linenos">142</span></a>    <span class="n">ref2</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="basecells_to_excel_ref-143"><a href="#basecells_to_excel_ref-143"><span class="linenos">143</span></a>        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">x_to_letters</span><span class="p">(</span><span class="n">bottomright_cell</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="basecells_to_excel_ref-144"><a href="#basecells_to_excel_ref-144"><span class="linenos">144</span></a>        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">y_to_number</span><span class="p">(</span><span class="n">bottomright_cell</span><span class="o">.</span><span class="n">y</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="basecells_to_excel_ref-145"><a href="#basecells_to_excel_ref-145"><span class="linenos">145</span></a>    <span class="p">)</span>
-</span><span id="basecells_to_excel_ref-146"><a href="#basecells_to_excel_ref-146"><span class="linenos">146</span></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ref1</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">ref2</span><span class="si">}</span><span class="s2">&quot;</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="basecells_to_excel_ref-156"><a href="#basecells_to_excel_ref-156"><span class="linenos">156</span></a><span class="k">def</span> <span class="nf">basecells_to_excel_ref</span><span class="p">(</span><span class="n">cells</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseCell</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="basecells_to_excel_ref-157"><a href="#basecells_to_excel_ref-157"><span class="linenos">157</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="basecells_to_excel_ref-158"><a href="#basecells_to_excel_ref-158"><span class="linenos">158</span></a><span class="sd">    Given a list of cells representing a solid selection with</span>
+</span><span id="basecells_to_excel_ref-159"><a href="#basecells_to_excel_ref-159"><span class="linenos">159</span></a><span class="sd">    no gaps. Return the representative excel reference.</span>
+</span><span id="basecells_to_excel_ref-160"><a href="#basecells_to_excel_ref-160"><span class="linenos">160</span></a>
+</span><span id="basecells_to_excel_ref-161"><a href="#basecells_to_excel_ref-161"><span class="linenos">161</span></a><span class="sd">    :param: A list of BaseCell or inheritors of that represents a selection</span>
+</span><span id="basecells_to_excel_ref-162"><a href="#basecells_to_excel_ref-162"><span class="linenos">162</span></a><span class="sd">    of cells.</span>
+</span><span id="basecells_to_excel_ref-163"><a href="#basecells_to_excel_ref-163"><span class="linenos">163</span></a><span class="sd">    :return: A excel style reference to multiple cells.</span>
+</span><span id="basecells_to_excel_ref-164"><a href="#basecells_to_excel_ref-164"><span class="linenos">164</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="basecells_to_excel_ref-165"><a href="#basecells_to_excel_ref-165"><span class="linenos">165</span></a>
+</span><span id="basecells_to_excel_ref-166"><a href="#basecells_to_excel_ref-166"><span class="linenos">166</span></a>    <span class="n">min_x</span><span class="p">,</span> <span class="n">max_x</span><span class="p">,</span> <span class="n">min_y</span><span class="p">,</span> <span class="n">max_y</span> <span class="o">=</span> <span class="n">dfccommon</span><span class="o">.</span><span class="n">assert_quadrilaterals</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span>
+</span><span id="basecells_to_excel_ref-167"><a href="#basecells_to_excel_ref-167"><span class="linenos">167</span></a>
+</span><span id="basecells_to_excel_ref-168"><a href="#basecells_to_excel_ref-168"><span class="linenos">168</span></a>    <span class="n">topleft_cell</span> <span class="o">=</span> <span class="n">dfccommon</span><span class="o">.</span><span class="n">specific_cell_from_xy</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">min_x</span><span class="p">,</span> <span class="n">min_y</span><span class="p">)</span>
+</span><span id="basecells_to_excel_ref-169"><a href="#basecells_to_excel_ref-169"><span class="linenos">169</span></a>    <span class="n">bottomright_cell</span> <span class="o">=</span> <span class="n">dfccommon</span><span class="o">.</span><span class="n">specific_cell_from_xy</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">max_x</span><span class="p">,</span> <span class="n">max_y</span><span class="p">)</span>
+</span><span id="basecells_to_excel_ref-170"><a href="#basecells_to_excel_ref-170"><span class="linenos">170</span></a>
+</span><span id="basecells_to_excel_ref-171"><a href="#basecells_to_excel_ref-171"><span class="linenos">171</span></a>    <span class="n">ref1</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">x_to_letters</span><span class="p">(</span><span class="n">topleft_cell</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="si">}{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">y_to_number</span><span class="p">(</span><span class="n">topleft_cell</span><span class="o">.</span><span class="n">y</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="basecells_to_excel_ref-172"><a href="#basecells_to_excel_ref-172"><span class="linenos">172</span></a>    <span class="n">ref2</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="basecells_to_excel_ref-173"><a href="#basecells_to_excel_ref-173"><span class="linenos">173</span></a>        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">x_to_letters</span><span class="p">(</span><span class="n">bottomright_cell</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="basecells_to_excel_ref-174"><a href="#basecells_to_excel_ref-174"><span class="linenos">174</span></a>        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cellutils</span><span class="o">.</span><span class="n">y_to_number</span><span class="p">(</span><span class="n">bottomright_cell</span><span class="o">.</span><span class="n">y</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="basecells_to_excel_ref-175"><a href="#basecells_to_excel_ref-175"><span class="linenos">175</span></a>    <span class="p">)</span>
+</span><span id="basecells_to_excel_ref-176"><a href="#basecells_to_excel_ref-176"><span class="linenos">176</span></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ref1</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">ref2</span><span class="si">}</span><span class="s2">&quot;</span>
 </span></pre></div>
 
 
@@ -508,8 +647,15 @@ no gaps. Return the representative excel reference.</p>
 <h6 id="parameters">Parameters</h6>
 
 <ul>
-<li><strong>cells</strong>:  Representing a selection from a tabular data source.</li>
+<li>A list of BaseCell or inheritors of that represents a selection
+of cells.</li>
 </ul>
+
+<h6 id="returns">Returns</h6>
+
+<blockquote>
+  <p>A excel style reference to multiple cells.</p>
+</blockquote>
 </div>
 
 
