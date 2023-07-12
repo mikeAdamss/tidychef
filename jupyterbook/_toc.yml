@@ -50,5 +50,6 @@ chapters:
         - file: examples/basic/oic-1a-table
         - file: examples/basic/cornavavirus-loneliness
         - file: examples/basic/monthly-gdp-tables
+        - file: examples/basic/house-prices
 
 - file: technical
