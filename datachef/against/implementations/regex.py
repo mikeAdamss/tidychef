@@ -12,7 +12,10 @@ class RegexValidator(BaseValidator):
     def __call__(self, cell: Cell) -> bool:
         """
         Does the value property of the Cell
-        match the provided pattern
+        match the provided pattern.
+
+        :param cell: A single datachef Cell object.
+        :return: bool, is it valid or not
         """
         if re.match(self.pattern, cell.value):
             return True
@@ -24,5 +27,8 @@ class RegexValidator(BaseValidator):
         message to the user where cell
         value does not match the provided
         regular expression.
+
+        :param cell: A single datachef Cell object.
+        :return: A contextual message
         """
         return f'"{cell.value}" does not match pattern: "{self.pattern}"'
