@@ -52,5 +52,3 @@ chapters:
         - file: examples/basic/monthly-gdp-tables
 
 - file: technical
-  sections:
-    - file: technical/datachef

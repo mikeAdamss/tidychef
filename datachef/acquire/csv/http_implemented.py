@@ -52,7 +52,7 @@ def http(
 
 class HttpCsvReader(BaseReader):
     """
-    A reader to lead in a source where that source is a url
+    A reader to read in a source where that source is a url
     representing a csv.
     """
 
