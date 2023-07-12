@@ -9,9 +9,9 @@ from .badparams import (
 )
 from .cells import InvlaidCellPositionError, NonExistentCellComparissonError
 from .common import (
-    CellValidationError,
     BadConditionalResolverError,
     CellsDoNotExistError,
+    CellValidationError,
     FileInputError,
     HorizontalConditionalHeaderError,
     ImpossibleLookupError,

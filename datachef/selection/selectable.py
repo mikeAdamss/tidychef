@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-from os import linesep
 import copy
 import re
+from os import linesep
 from typing import Callable, FrozenSet, List, Optional, Union
 
+from datachef.against.implementations.base import BaseValidator
 from datachef.direction.directions import (
     BaseDirection,
     Direction,
@@ -30,7 +31,6 @@ from datachef.models.source.cell import BaseCell, Cell
 from datachef.models.source.table import LiveTable
 from datachef.selection import datafuncs as dfc
 from datachef.utils.decorators import dontmutate
-from datachef.against.implementations.base import BaseValidator
 
 
 def _reverse_direction(direction: Direction):
@@ -330,11 +330,7 @@ class Selectable(LiveTable):
         self.cells = selected
         return self
 
-    def validate(
-        self,
-        validator: BaseValidator,
-        raise_first_error: bool = False
-    ):
+    def validate(self, validator: BaseValidator, raise_first_error: bool = False):
         """
         Validates current cell selection by passing each currently
         selected cell to the provided validator.
@@ -350,7 +346,7 @@ class Selectable(LiveTable):
                     raise CellValidationError(validator.msg(cell))
                 else:
                     validation_errors.append(validator.msg(cell))
-                
+
         if len(validation_errors) > 0:
             raise CellValidationError(f"{linesep}".join(validation_errors))
 

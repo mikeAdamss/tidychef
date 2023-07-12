@@ -1,20 +1,21 @@
 from dataclasses import dataclass
 from typing import List
 
-from datachef.models.source.cell import Cell
 from datachef.against.implementations.base import BaseValidator
+from datachef.models.source.cell import Cell
+
 
 @dataclass
 class ItemsValidator(BaseValidator):
     items: List[str]
-    
+
     def __call__(self, cell: Cell) -> bool:
         """
         Does the value property of the Cell
         appear in the items list
         """
         return cell.value in self.items
-    
+
     def msg(self, cell: Cell) -> str:
         """
         Provide a contextually meaningful

@@ -5,7 +5,7 @@ Holds the code that defines the local xlsx reader.
 import copy
 import io
 from pathlib import Path
-from typing import Any, Callable, List, Optional, Union
+from typing import Callable, List, Optional, Union
 
 import openpyxl
 import requests
@@ -38,8 +38,16 @@ def http(
     This local xlsx reader uses openpyxl:
     https://openpyxl.readthedocs.io/en/stable/index.html
 
-    Any kwargs passed to this function are propogated to
-    the openpyxl.load_workbook() method
+    Any kwargs passed to this function are propagated to
+    the openpyxl.load_workbook() method.
+
+    :param source: A url.
+    :param selectable: A class that implements datachef.selection.selectable.Selectable of an inheritor of. Default is XlsxSelectable
+    :param pre_hook: A callable that can take source as an argument
+    :param post_hook: A callable that can take the output of XlsxSelectable.parse() as an argument.
+    :param session: An optional requests.Session object.
+    :param cache: Boolean flag for whether or not to cache get requests.
+    :return: A single populated Selectable of type as specified by selectable param.
     """
 
     assert validators.url(source), f"'{source}' is not a valid http/https url."
@@ -63,13 +71,26 @@ class HttpXlsxReader(BaseReader):
     """
 
     def parse(
-        source: Any,
+        source: str,
         selectable: Selectable = XlsxSelectable,
         data_only=True,
         session: requests.Session = None,
         cache: bool = True,
         **kwargs,
     ) -> List[XlsxSelectable]:
+        """
+        Parse the provided source into a list of Selectables. Unless overridden the
+        selectable is of type XlsxSelectable.
+
+        Additional **kwargs are propagated to openpyxl.load_workbook()
+
+        :param source: A url.
+        :param selectable: The selectable type to be returned.
+        :data_only: An openpyxl.load_workbook() option to disable acquisition of non data elements from the tabulated source (macros etc)
+        :param session: An optional requests.Session object.
+        :param cache: Boolean flag for whether or not to cache get requests.
+        :return: A list of type as specified by param selectable.
+        """
 
         if not session:
             if cache:
@@ -90,7 +111,9 @@ class HttpXlsxReader(BaseReader):
         bio.write(response.content)
         bio.seek(0)
 
-        workbook: openpyxl.Workbook = openpyxl.load_workbook(bio, data_only=data_only)
+        workbook: openpyxl.Workbook = openpyxl.load_workbook(
+            bio, data_only=data_only, **kwargs
+        )
 
         datachef_selectables = []
         worksheet_names = workbook.get_sheet_names()

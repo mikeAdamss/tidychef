@@ -70,7 +70,7 @@ class TidyData(BaseOutput):
     def __len__(self):
         self._transform()
         return len(self._data)
-    
+
     def to_dict(self):
         """
         Outputs the TidyData as a pandas style dictionary, i.e

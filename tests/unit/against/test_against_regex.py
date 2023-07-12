@@ -1,9 +1,8 @@
 import pytest
 
 from datachef import against
-from datachef.against.implementations.regex import RegexValidator
 from datachef.against.implementations.items import ItemsValidator
-
+from datachef.against.implementations.regex import RegexValidator
 from datachef.models.source.cell import Cell
 
 
@@ -25,7 +24,7 @@ def test_against_regex():
     # Is Valid
     validator = against.regex("bar")
     assert validator(cell) is True
-    
+
 
 def test_against_items():
     """
@@ -43,12 +42,11 @@ def test_against_items():
     assert '"baz" not in list: [' in validator.msg(cell)
 
     # Test message generator small messge
-    validator = against.items(["1", "2", "3", "4", "5", "6", "7"
-                               "8", "9", "10", "11", "12"])
+    validator = against.items(
+        ["1", "2", "3", "4", "5", "6", "7" "8", "9", "10", "11", "12"]
+    )
     assert validator.msg(cell) == '"baz" not in list.'
 
     # Is Valid
     validator = against.items(["foo", "bar", "baz"])
     assert validator(cell) is True
-    
-

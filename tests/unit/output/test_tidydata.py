@@ -6,8 +6,8 @@ from pathlib import Path
 
 import pytest
 
-from datachef.direction.directions import above, below, left, right
 from datachef.column import Column
+from datachef.direction.directions import above, below, left, right
 from datachef.exceptions import MisalignedHeadersError
 from datachef.lookup.engines.constant import Constant
 from datachef.lookup.engines.direct import Directly

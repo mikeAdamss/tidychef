@@ -11,6 +11,8 @@ test: install ## Run all unit tests and create new coverage report
 	poetry run pytest --cov-report term-missing --cov=datachef --cov-fail-under=100 ./tests/
 
 format: ## Format the codebase with isort and black
+	rm -rf ./jupyterbook/venv
+	rm -rf ./jupyterbook/pdoc_venv
 	poetry run isort ./* && poetry run black ./*
 
 checkimports: install ## Use pylint to check for unused imports

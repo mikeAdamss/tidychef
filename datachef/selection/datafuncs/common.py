@@ -35,7 +35,7 @@ def assert_quadrilaterals(cells: List[BaseCell]) -> Tuple[int, int, int, int]:
 def cell_is_within(cells: List[BaseCell], cell: BaseCell) -> bool:
     """
     Is the cell present within the list of cells
-    
+
     :param cells: A list of BaseCell or inheritors of that represents a selection
     of cells.
     :param cell: A BaseCell or inheritor of that represents a single selected cell.
@@ -48,7 +48,7 @@ def cell_is_within(cells: List[BaseCell], cell: BaseCell) -> bool:
 def cell_is_not_within(cells: List[BaseCell], cell: BaseCell) -> bool:
     """
     Is the cell absent from the list of cells
-    
+
     :param cells: A list of BaseCell or inheritors of that represents a selection
     of cells.
     :param cell: A BaseCell or inheritor of that represents a single selected cell.
@@ -71,7 +71,9 @@ def cells_not_in(
     :return: The cells from initial cells minus any that were in unwanted_cells
     """
     return [
-        c1 for c1 in initial_cells if not any(c1.matches_xy(c2) for c2 in unwanted_cells)
+        c1
+        for c1 in initial_cells
+        if not any(c1.matches_xy(c2) for c2 in unwanted_cells)
     ]
 
 

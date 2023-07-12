@@ -4,8 +4,9 @@ Convenience wrappers for pre defined validators
 
 from typing import List
 
-from .implementations.regex import RegexValidator
 from .implementations.items import ItemsValidator
+from .implementations.regex import RegexValidator
+
 
 def regex(pattern: str) -> RegexValidator:
     """
@@ -14,6 +15,7 @@ def regex(pattern: str) -> RegexValidator:
     matches the provided pattern.
     """
     return RegexValidator(pattern)
+
 
 def items(items: List[str]) -> ItemsValidator:
     """

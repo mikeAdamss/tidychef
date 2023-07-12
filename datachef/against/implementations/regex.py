@@ -1,13 +1,14 @@
 import re
 from dataclasses import dataclass
 
-from datachef.models.source.cell import Cell
 from datachef.against.implementations.base import BaseValidator
+from datachef.models.source.cell import Cell
+
 
 @dataclass
 class RegexValidator(BaseValidator):
     pattern: str
-    
+
     def __call__(self, cell: Cell) -> bool:
         """
         Does the value property of the Cell
@@ -16,7 +17,7 @@ class RegexValidator(BaseValidator):
         if re.match(self.pattern, cell.value):
             return True
         return False
-    
+
     def msg(self, cell: Cell) -> str:
         """
         Provide a contextually meaningful

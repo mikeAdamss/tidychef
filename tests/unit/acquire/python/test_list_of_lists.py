@@ -12,5 +12,5 @@ def test_lists_of_lists():
     )
 
     assert len(selection) == 6
-    assert len(selection.excel_ref('A')) == 2
-    assert len(selection.excel_ref('1')) == 3
+    assert len(selection.excel_ref("A")) == 2
+    assert len(selection.excel_ref("1")) == 3

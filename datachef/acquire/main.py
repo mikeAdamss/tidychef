@@ -19,22 +19,23 @@ from datachef.selection.selectable import Selectable
 
 def acquirer(
     source: Any,
-    reader: Optional[BaseReader] = None,
-    selectable: Optional[Selectable] = None,
+    reader: BaseReader,
+    selectable: Selectable,
     pre_hook: Optional[Callable] = None,
     post_hook: Optional[Callable] = None,
     **kwargs
 ) -> Union[List[Selectable], Selectable]:
     """
-    :param path: The path of the file to wrap
-    :type path: str
-    :param field_storage: The :class:`FileStorage` instance to wrap
-    :type field_storage: FileStorage
-    :param temporary: Whether or not to delete the file when the File
-    instance is destructed
-    :type temporary: bool
-    :returns: A buffered writable file descriptor
-    :rtype: BufferedFileStorage
+    The principle data acquisition function. Wraps the reader
+    to enable pre and post hook.
+
+    :param source: A source appropriate for the provided BaseReader
+    :param reader: A class that implements datachef.acquire.base.BaseReader
+    :param selectable: A class that implements datachef.selection.selectable.Selectable
+    :param pre_hook: A callable that can take source as an argument
+    :param post_hook: A callable that can take the output of reader.parse() as an argument.
+    :return: A single or list of class Selectable or inheritor of as returned by reader after
+    optional modification by post_hook.
     """
 
     # Execute pre load hook

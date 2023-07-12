@@ -4,8 +4,8 @@ from os import linesep
 
 import pytest
 
-from datachef.direction.directions import down, left, right, up
 from datachef.column.column import Column
+from datachef.direction.directions import down, left, right, up
 from datachef.exceptions import (
     FailedLookupError,
     MissingDirectLookupError,

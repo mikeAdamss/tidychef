@@ -5,7 +5,7 @@ Holds the code that defines the local xlsx reader.
 import copy
 import io
 from pathlib import Path
-from typing import Any, Callable, List, Optional, Union
+from typing import Callable, List, Optional, Union
 
 import xlrd
 
@@ -14,7 +14,6 @@ from datachef.models.source.cell import Cell
 from datachef.models.source.table import Table
 from datachef.selection.selectable import Selectable
 from datachef.selection.xls.xls import XlsSelectable
-from datachef.utils.http.caching import get_cached_session
 
 from ..base import BaseReader
 from ..main import acquirer
@@ -31,11 +30,17 @@ def local(
     Read data from a Path (or string representing a path)
     present on the same machine where datachef is running.
 
-    This local xlsx reader uses openpyxl:
-    https://openpyxl.readthedocs.io/en/stable/index.html
+    This xls reader uses xlrd:
+    https://xlrd.readthedocs.io/en/latest/
 
-    Any kwargs passed to this function are propogated to
-    the openpyxl.load_workbook() method
+    Any kwargs passed to this function are propagated to
+    the xlrd.open_workbook() method.
+
+    :param source: A Path object or a string representing a path
+    :param selectable: A class that implements datachef.selection.selectable.Selectable of an inheritor of. Default is XlsSelectable
+    :param pre_hook: A callable that can take source as an argument
+    :param post_hook: A callable that can take the output of XlsSelectable.parse() as an argument.
+    :return: A single populated Selectable of type as specified by selectable param
     """
 
     assert isinstance(
@@ -62,10 +67,20 @@ class LocalXlsReader(BaseReader):
     """
 
     def parse(
-        source: Any,
+        source: Union[str, Path],
         selectable: Selectable = XlsSelectable,
         **kwargs,
     ) -> List[XlsSelectable]:
+        """
+        Parse the provided source into a list of Selectables. Unless overridden the
+        selectable is of type XlsSelectable.
+
+        Additional **kwargs are propagated to xlrd.open_workbook()
+
+        :param source: A Path or str representing a path indicating a local file
+        :param selectable: The selectable type to be returned.
+        :return: A list of type as specified by param selectable.
+        """
 
         workbook: xlrd.Book = xlrd.open_workbook(source)
         assert isinstance(workbook, xlrd.Book)

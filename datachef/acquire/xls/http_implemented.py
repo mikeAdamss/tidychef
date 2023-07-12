@@ -5,7 +5,7 @@ Holds the code that defines the local xlsx reader.
 import copy
 import io
 from pathlib import Path
-from typing import Any, Callable, List, Optional, Union
+from typing import Callable, List, Optional, Union
 
 import requests
 import validators
@@ -35,11 +35,19 @@ def http(
     Read data from a Path (or string representing a path)
     present on the same machine where datachef is running.
 
-    This local xlsx reader uses openpyxl:
-    https://openpyxl.readthedocs.io/en/stable/index.html
+    This xls reader uses xlrd:
+    https://xlrd.readthedocs.io/en/latest/
 
-    Any kwargs passed to this function are propogated to
-    the openpyxl.load_workbook() method
+    Any kwargs passed to this function are propagated to
+    the xlrd.open_workbook() method.
+
+    :param source: A url.
+    :param selectable: A class that implements datachef.selection.selectable.Selectable of an inheritor of. Default is XlsSelectable
+    :param pre_hook: A callable that can take source as an argument
+    :param post_hook: A callable that can take the output of HttpXlsReader.parse() as an argument.
+    :param session: An optional requests.Session object.
+    :param cache: Boolean flag for whether or not to cache get requests.
+    :return: A single populated Selectable of type as specified by selectable param.
     """
 
     assert validators.url(source), f"'{source}' is not a valid http/https url."
@@ -63,12 +71,25 @@ class HttpXlsReader(BaseReader):
     """
 
     def parse(
-        source: Any,
+        source: str,
         selectable: Selectable = XlsSelectable,
         session: requests.Session = None,
         cache: bool = True,
         **kwargs,
     ) -> List[XlsSelectable]:
+        """
+        Parse the provided source into a list of Selectables. Unless overridden the
+        selectable is of type XlsSelectable.
+
+        Additional **kwargs are propagated to xlrd.open_workbook()
+
+        :param source: A url
+        :param selectable: The selectable type to be returned.
+        :param session: An optional requests.Session object.
+        :param session: An optional requests.Session object.
+        :param cache: Boolean flag for whether or not to cache get requests.
+        :return: A list of type as specified by param selectable.
+        """
 
         if not session:
             if cache:
@@ -89,7 +110,7 @@ class HttpXlsReader(BaseReader):
         bio.write(response.content)
         bio.seek(0)
 
-        workbook: xlrd.Book = xlrd.open_workbook(file_contents=bio.read())
+        workbook: xlrd.Book = xlrd.open_workbook(file_contents=bio.read(), **kwargs)
         assert isinstance(workbook, xlrd.Book)
 
         datachef_selectables = []

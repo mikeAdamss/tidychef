@@ -5,8 +5,7 @@ Holds the code that defines the local csv reader.
 import copy
 import csv
 import io
-from pathlib import Path
-from typing import Any, Callable, Optional, Union
+from typing import Any, Callable, Optional
 
 import requests
 import validators
@@ -23,7 +22,7 @@ from ..main import acquirer
 
 
 def http(
-    source: Union[str, Path],
+    source: str,
     selectable: Selectable = CsvSelectable,
     pre_hook: Optional[Callable] = None,
     post_hook: Optional[Callable] = None,
@@ -32,8 +31,16 @@ def http(
     **kwargs,
 ) -> CsvSelectable:
     """
-    Read data from a url with the http or https
-    scheme.
+    Creates a selectable with default child class CsvSelectable from
+    a url with the http or https scheme.
+
+    :param source: A url.
+    :param selectable: A class that implements datachef.selection.selectable.Selectable of an inheritor of. Default is CsvSelectable
+    :param pre_hook: A callable that can take source as an argument
+    :param post_hook: A callable that can take the output of HttpCsvReader.parse() as an argument.
+    :param session: An optional requests.Session object.
+    :param cache: Boolean flag for whether or not to cache get requests.
+    :return: A single populated Selectable of type as specified by selectable param.
     """
 
     assert validators.url(source), f"'{source}' is not a valid http/https url."
@@ -59,11 +66,22 @@ class HttpCsvReader(BaseReader):
     def parse(
         source: Any,
         selectable: Selectable = CsvSelectable,
-        delimiter=",",
         session: requests.Session = None,
         cache: bool = True,
         **kwargs,
     ) -> CsvSelectable:
+        """
+        Parse the provided source into a Selectable. Unless overridden the
+        selectable is of type CsvSelectable.
+
+        Optional **kwargs are propagated to the csv.reader() method.
+
+        :param source: A url
+        :param selectable: The selectable type to be returned.
+        :param session: An optional requests.Session object.
+        :param cache: Boolean flag for whether or not to cache get requests.
+        :return: A list of type as specified by param selectable.
+        """
 
         if not session:
             if cache:
@@ -85,7 +103,7 @@ class HttpCsvReader(BaseReader):
         sio.seek(0)
 
         table = Table()
-        file_content = csv.reader(sio, delimiter=delimiter, **kwargs)
+        file_content = csv.reader(sio, **kwargs)
 
         for y_index, row in enumerate(file_content):
             for x_index, cell_value in enumerate(row):

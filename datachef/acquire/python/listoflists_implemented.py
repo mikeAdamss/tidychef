@@ -2,8 +2,7 @@
 Holds the code that defines the python list_of_lists reader.
 """
 import copy
-from pathlib import Path
-from typing import Callable, Optional, Union
+from typing import Callable, Optional, List
 
 from datachef.acquire.base import BaseReader
 from datachef.models.source.cell import Cell
@@ -15,7 +14,7 @@ from ..main import acquirer
 
 
 def list_of_lists(
-    source: Union[str, Path],
+    source: List[List[str]],
     selectable: Selectable = Selectable,
     pre_hook: Optional[Callable] = None,
     post_hook: Optional[Callable] = None,
@@ -33,6 +32,12 @@ def list_of_lists(
         ["Content of A1", "Contents of B1", "Contents of C1"],
         ["Content of A2", "Contents of B2", "Contents of C2"]
     ]
+
+    :param source: A Path object or a string representing a path
+    :param selectable: A class that implements datachef.selection.selectable.Selectable of an inheritor of. Default is Selectable
+    :param pre_hook: A callable that can take source as an argument
+    :param post_hook: A callable that can take the output of ListOfListsReader.parse() as an argument.
+    :return: A single populated Selectable of type as specified by selectable param
     """
     return acquirer(
         source,
@@ -46,6 +51,16 @@ def list_of_lists(
 
 class ListOfListsReader(BaseReader):
     def parse(source, selectable: Selectable = Selectable) -> Selectable:
+        """
+        Parse the provided source into a list of Selectables. Unless overridden the
+        selectable is of type XlsSelectable.
+
+        Additional **kwargs are propagated to xlrd.open_workbook()
+
+        :param source: A list of lists of strings representing rows of cells
+        :param selectable: The selectable type to be returned.
+        :return: A populated instance of type as specified by param selectable.
+        """
         table = Table()
 
         assert (
