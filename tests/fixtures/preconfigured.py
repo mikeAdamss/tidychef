@@ -1,7 +1,4 @@
 from datachef import acquire
-from datachef.models.source.input import BaseInput
-from datachef.models.source.table import LiveTable
-from datachef.selection.selectable import Selectable
 from tests.fixtures import path_to_fixture
 
 
@@ -85,21 +82,3 @@ def fixture_is_wide():
     datachef/tests/fixtures/csv/wide.csv
     """
     return acquire.csv.local(path_to_fixture("csv", "wide.csv"))
-
-
-# TODO - use excel when we have a real excel reader
-def fixture_simple_two_tabs():
-    """Simple input of two tabs. Cells A1:Z100"""
-
-    test_input_path = path_to_fixture("csv", "simple.csv")
-    selectable1: Selectable = acquire.csv.local(test_input_path)
-    table1 = LiveTable.from_table(
-        selectable1.pristine, name="I am table 1", source=test_input_path
-    )
-
-    selectable2: Selectable = acquire.csv.local(test_input_path)
-    table2 = LiveTable.from_table(
-        selectable2.pristine, name="I am table 2", source=test_input_path
-    )
-
-    return BaseInput(had_initial_path=test_input_path, tables=[table1, table2])

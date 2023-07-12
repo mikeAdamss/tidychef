@@ -22,9 +22,8 @@ class BaseCell:
     """
     A primitive non value holding cell construct.
     """
-
-    x: Optional[int] = None
-    y: Optional[int] = None
+    x: int
+    y: int
 
     def _confirm_not_virtual(self):
         """
@@ -41,11 +40,15 @@ class BaseCell:
                 f'The value of the cell in question is "{self.value}"'
             )
 
-    def matches_xy(self, other_cell: BaseCell):
+    def matches_xy(self, other_cell: BaseCell) -> bool:
         """
         Does this objects x and y attributes, match
         the x and y attributes of the provided BaseCell or Cell
         object.
+
+        :param other_cell: A different datachef BaseCell or
+        inheritor of.
+        :return: True of cells have same table location, else False
         """
         self._confirm_not_virtual()
         return self.x == other_cell.x and self.y == other_cell.y
@@ -58,6 +61,10 @@ class BaseCell:
         We mean "above" in visual terms, i.e
         does it have a lower vertical offset
         from the top of the table.
+
+        :param y: Vertical cell index (row number) to
+        compare to.
+        :return: is this Cell above this y
         """
         self._confirm_not_virtual()
         return self.y < y
@@ -70,6 +77,10 @@ class BaseCell:
         We mean "below" in visual terms, i.e
         does it have a higher vertical offset
         from the top of the table.
+
+        :param y: Vertical cell index (row number) to
+        compare to.
+        :return: is this Cell below this y
         """
         self._confirm_not_virtual()
         return self.y > y
@@ -78,6 +89,10 @@ class BaseCell:
         """
         When compared to an x index, is this
         cell to the right of it?
+
+        :param x: Horizontal cell index (column number) to
+        compare to.
+        :return: is this Cell right of x
         """
         self._confirm_not_virtual()
         return self.x > x
@@ -86,6 +101,10 @@ class BaseCell:
         """
         When compared to an x index, is this
         cell to the left of it?
+
+        :param x: Horizontal cell index (column number) to
+        compare to.
+        :return: is this Cell left of x
         """
         self._confirm_not_virtual()
         return self.x < x
@@ -93,6 +112,8 @@ class BaseCell:
     def _excel_ref(self) -> str:
         """
         Get the excel reference of the cell
+
+        :return: A string representation of this object.
         """
 
         x_ref = cellutils.x_to_letters(self.x) if self.x is not None else self.x
@@ -121,8 +142,8 @@ class VirtualCell(BaseCell):
     """
 
     value: Optional[str] = None
-    x: Optional[str] = None
-    y: Optional[str] = None
+    x: Optional[int] = None
+    y: Optional[int] = None
 
     def __repr__(self):
         """
@@ -149,6 +170,9 @@ class Cell(BaseCell):
     def is_blank(self, disregard_whitespace: bool = True):
         """
         Can the contents of the cell be regarded as blank
+
+        :param disregard_whitespace: Flag so we can choose to treat
+        cells with just whitespace as populated.
         """
         if isinstance(self.value, str):
             v = self.value.strip() if disregard_whitespace else self.value
@@ -167,6 +191,9 @@ class Cell(BaseCell):
     def is_not_blank(self, disregard_whitespace: bool = True):
         """
         Can the contents of the cell be regarded as not blank
+
+        :param disregard_whitespace: Flag so we can choose to treat
+        cells with just whitespace as populated.
         """
         return not self.is_blank(disregard_whitespace=disregard_whitespace)
 
