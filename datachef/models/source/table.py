@@ -125,13 +125,6 @@ class LiveTable:
     def name(self, name: str):
         self._name = name
 
-    @property
-    def title(self) -> str:
-        """
-        Alternate call to name
-        """
-        return self.name
-
     def confirm_valid(self):
         """
         Confirm class is validly constructed.
@@ -144,7 +137,7 @@ class LiveTable:
 
     @staticmethod
     def from_table(
-        table: Table, source: Union[Path, str], name: str = None
+        table: Table, source: Optional[Union[Path, str]] = None, name: Optional[str] = None
     ) -> LiveTable:
         """
         Given a table and optional it's name, create a livetable.
@@ -170,7 +163,7 @@ class LiveTable:
 
         Allows subtraction of one selection from the same distinct
         and currently selected table from another. Provided they
-        are derrived from the same initial BaseInput.
+        are derived from the same initial BaseInput.
         """
 
         if self.signature != other_input.signature:

@@ -54,3 +54,17 @@ def test_tables_have_expected_length(selectable_simple1: Selectable):
     """
 
     assert len(selectable_simple1) == 2600
+
+
+def test_livetable_from_table(selectable_simple1: Selectable):
+    """
+    Test that tables return the expected len
+    """
+
+    table = Table(selectable_simple1.cells)
+    live_table: LiveTable = LiveTable.from_table(
+        table,
+        name="my table"
+    )
+
+    assert live_table.name == "my table"

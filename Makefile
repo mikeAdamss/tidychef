@@ -7,7 +7,7 @@ help:
 install:
 	poetry install
 	
-test: install ## Run all unit tests and create new coverage report
+test: install ## Run all unit tests and view coverage report
 	poetry run pytest --cov-report term-missing --cov=datachef --cov-fail-under=100 ./tests/
 
 format: ## Format the codebase with isort and black
@@ -18,7 +18,7 @@ format: ## Format the codebase with isort and black
 checkimports: install ## Use pylint to check for unused imports
 	poetry run pylint ./datachef | grep "unused-import"
 
-book: ## Create the jupyter book in /jupyterbook/_build
+docs: ## Create the jupyter book in /jupyterbook/_build
 	rm -rf ./jupyterbook/_build
 	rm -rf ./jupyterbook/venv
 	python -m venv ./jupyterbook/venv
@@ -32,7 +32,7 @@ book: ## Create the jupyter book in /jupyterbook/_build
 	pip install pdoc
 	pdoc ./datachef -o ./jupyterbook/_build/html/api_docs
 
-publish: ## Publish the jupyter book to github pages
+push_docs: ## Publish the jupyter book to github pages
 	poetry run pip install ghp-import
 	poetry run ghp-import -n -p -f ./jupyterbook/_build/html
 
