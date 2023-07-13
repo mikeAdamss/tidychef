@@ -7,8 +7,9 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index &#8212; Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Extensibility &#8212; Documentation</title>
   
   
   
@@ -60,9 +61,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
-    <link rel="index" title="Index" href="#" />
+    <script>DOCUMENTATION_OPTIONS.pagename = 'extensibility';</script>
+    <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Quirks" href="quirks.html" />
+    <link rel="prev" title="Extended Dot Notation" href="dot-notation-explained.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -153,10 +156,10 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="how-to-use-this-book.html">How To Use This Book</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dot-notation-explained.html">Extended Dot Notation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="extensibility.html">Extensibility</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Extensibility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quirks.html">Quirks</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="basics.html">Chapter 1: Basics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="basics/acquire.html">Acquire</a></li>
@@ -304,7 +307,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/mikeAdamss/datachef/issues/new?title=Issue%20on%20page%20%2Fgenindex.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/mikeAdamss/datachef/issues/new?title=Issue%20on%20page%20%2Fextensibility.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -316,6 +319,54 @@ const thebe_selector_output = ".output, .cell_output"
   </span>
 <span class="btn__text-container">Open issue</span>
 </a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/extensibility.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
 </li>
       
   </ul>
@@ -366,7 +417,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1></h1>
+    <h1>Extensibility</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -380,13 +431,43 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
+  <section class="tex2jax_ignore mathjax_ignore" id="extensibility">
+<h1>Extensibility<a class="headerlink" href="#extensibility" title="Permalink to this heading">#</a></h1>
+<p>One important thing to understand about datachef is it’s designed first and foremost as an <em>extensible framework</em>.</p>
+<p>Vanilla datachef is a powerful thing and will allow you to create robust, reliable and repeatable data transformation recipes relatively easily and for many users will be all that’s required.</p>
+<p>But the world of data is a wide one, and the sheer scope of the “messy” in messy data wider still. Apply that across all of the domains of data and the constantly evolving plethora of formats, schemas and approaches and you end up with a potential scope beyond that of any single tool.</p>
+<p>Therefore, datachef has been consciously designed as a “very unlocked box” so to speak.</p>
+<ul class="simple">
+<li><p>Want to load a new data format into datachef? It’s not that hard and its documented.</p></li>
+<li><p>Want to acquire a known data format via a different mechanism (ftp rather than http say, or pulled from your own datastore) ? It’s not that hard and its documented.</p></li>
+<li><p>Want to create ad-hoc selection filters to support your specific use case? It’s not that hard and its documented.</p></li>
+<li><p>Want to extend selection classes with methods <em>that <strong>you specifically</strong> would benefit from</em>? It’s not that hard and its documented.</p></li>
+<li><p>Want to create custom validators suitable to your own use case and data domain? It’s not that hard and its documented.</p></li>
+<li><p>Want to output your tidy data to a different format? It’s not that hard and its documented.</p></li>
+</ul>
+<p>The point here is that datachef was build with the idea that regular users would begin amassing (and possibly even sharing) additional functionality and as such said functionality is easily intermingled, injected and used seemlessly alongside the vanilla datachef package.</p>
+<p>The vision for datachef is to be a reliable core for messy data ETL processing, but you can go very far indeed building on that core.</p>
+</section>
 
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
-</div>
-
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -399,6 +480,24 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="dot-notation-explained.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Extended Dot Notation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="quirks.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Quirks</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>
