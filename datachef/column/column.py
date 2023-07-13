@@ -55,10 +55,10 @@ class Column(BaseColumn):
 
         :engine: The lookup engine in use by this column.
         """
+        
         # -----
         # Apply
         # -----
-
         self.apply = kwargs.get("apply", None)
         if self.apply:
             assert callable(
@@ -68,8 +68,6 @@ class Column(BaseColumn):
         # ----------
         # Validation
         # ----------
-
-        # TODO - list of callables?
         self.validation = kwargs.get("validate", None)
         if self.validation:
             assert callable(
