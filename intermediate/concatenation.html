@@ -223,6 +223,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 </ul>
 </li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/intermediate/intermediate.html">Basic Intermediate</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/intermediate/human-development.html">Human Development</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../technical.html">Technical Reference</a></li>
@@ -1000,7 +1004,7 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">MisalignedHeadersError</span><span class="g g-Whitespace">                    </span>Traceback (most recent call last)
-<span class="nn">/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_60976/2463524614.py</span> in <span class="ni">&lt;cell line: 3&gt;</span><span class="nt">()</span>
+<span class="nn">/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_90977/2463524614.py</span> in <span class="ni">&lt;cell line: 3&gt;</span><span class="nt">()</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Now we try and concatenate them - and get an error!</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> 
 <span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">tidydata1</span> <span class="o">+</span> <span class="n">tidydata2</span>
@@ -1013,11 +1017,11 @@ document.write(`
 <span class="g g-Whitespace">     </span><span class="mi">26</span>     <span class="k">return</span> <span class="n">wrapper</span>
 
 <span class="nn">~/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/datachef/output/tidydata.py</span> in <span class="ni">__add__</span><span class="nt">(self, other_tidy_data)</span>
-<span class="g g-Whitespace">    </span><span class="mi">155</span>         <span class="c1"># with different headers</span>
-<span class="g g-Whitespace">    </span><span class="mi">156</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">other_tidy_data</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-<span class="ne">--&gt; </span><span class="mi">157</span>             <span class="k">raise</span> <span class="n">MisalignedHeadersError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">158</span>                 <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">159</span><span class="s2">                 You are attempting to sum two tidy data</span>
+<span class="g g-Whitespace">    </span><span class="mi">161</span>         <span class="c1"># with different headers</span>
+<span class="g g-Whitespace">    </span><span class="mi">162</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">other_tidy_data</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+<span class="ne">--&gt; </span><span class="mi">163</span>             <span class="k">raise</span> <span class="n">MisalignedHeadersError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">164</span>                 <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">165</span><span class="s2">                 You are attempting to sum two tidy data</span>
 
 <span class="ne">MisalignedHeadersError</span>: 
 <span class="s2">                You are attempting to sum two tidy data</span>

@@ -17,7 +17,8 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-from datachef import acquire, preview, CsvSelectable
+from datachef import acquire, preview
+from datachef.selection import CsvSelectable
 
 table: CsvSelectable = acquire.csv.http("https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv")
 
@@ -35,14 +36,21 @@ selection.validate(numeric_validator)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mImportError[0m                               Traceback (most recent call last)
-[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_60957/72827583.py[0m in [0;36m<cell line: 1>[0;34m()[0m
-[0;32m----> 1[0;31m [0;32mfrom[0m [0mdatachef[0m [0;32mimport[0m [0macquire[0m[0;34m,[0m [0mpreview[0m[0;34m,[0m [0mCsvSelectable[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      2[0m [0;34m[0m[0m
-[1;32m      3[0m [0mtable[0m[0;34m:[0m [0mCsvSelectable[0m [0;34m=[0m [0macquire[0m[0;34m.[0m[0mcsv[0m[0;34m.[0m[0mhttp[0m[0;34m([0m[0;34m"https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      4[0m [0;34m[0m[0m
-[1;32m      5[0m [0;31m# Select them[0m[0;34m[0m[0;34m[0m[0m
+[0;31mCellValidationError[0m                       Traceback (most recent call last)
+[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_90958/4217185943.py[0m in [0;36m<cell line: 15>[0;34m()[0m
+[1;32m     13[0m [0;31m# Noe validate it[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     14[0m [0mnumeric_validator[0m [0;34m=[0m [0mNumericValidator[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 15[0;31m [0mselection[0m[0;34m.[0m[0mvalidate[0m[0;34m([0m[0mnumeric_validator[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;32m~/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/datachef/selection/selectable.py[0m in [0;36mvalidate[0;34m(self, validator, raise_first_error)[0m
+[1;32m    359[0m [0;34m[0m[0m
+[1;32m    360[0m         [0;32mif[0m [0mlen[0m[0;34m([0m[0mvalidation_errors[0m[0;34m)[0m [0;34m>[0m [0;36m0[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 361[0;31m             [0;32mraise[0m [0mCellValidationError[0m[0;34m([0m[0;34mf"{linesep}"[0m[0;34m.[0m[0mjoin[0m[0;34m([0m[0mvalidation_errors[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    362[0m [0;34m[0m[0m
+[1;32m    363[0m         [0;32mreturn[0m [0mself[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mImportError[0m: cannot import name 'CsvSelectable' from 'datachef' (/Users/michaeladams/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/datachef/__init__.py)
-ImportError: cannot import name 'CsvSelectable' from 'datachef' (/Users/michaeladams/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/datachef/__init__.py)
+[0;31mCellValidationError[0m: "Houses" is not numeric
+"Cars" is not numeric
+CellValidationError: "Houses" is not numeric
+"Cars" is not numeric
 

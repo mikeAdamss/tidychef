@@ -34,7 +34,7 @@ print(tidy_data)
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mImportError[0m                               Traceback (most recent call last)
-[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_60962/2928341624.py[0m in [0;36m<cell line: 1>[0;34m()[0m
+[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_90963/2928341624.py[0m in [0;36m<cell line: 1>[0;34m()[0m
 [0;32m----> 1[0;31m [0;32mfrom[0m [0mdatachef[0m [0;32mimport[0m [0macquire[0m[0;34m,[0m [0mpreview[0m[0;34m,[0m [0mCsvSelectable[0m[0;34m,[0m [0mfilters[0m[0;34m,[0m [0mTidyData[0m[0;34m,[0m [0mColumn[0m[0;34m,[0m [0mright[0m[0;34m[0m[0;34m[0m[0m
 [0m[1;32m      2[0m [0;34m[0m[0m
 [1;32m      3[0m [0mtable[0m[0;34m:[0m [0mCsvSelectable[0m [0;34m=[0m [0macquire[0m[0;34m.[0m[0mcsv[0m[0;34m.[0m[0mhttp[0m[0;34m([0m[0;34m"https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m

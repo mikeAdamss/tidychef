@@ -223,6 +223,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 </ul>
 </li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/intermediate/intermediate.html">Basic Intermediate</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/intermediate/human-development.html">Human Development</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../technical.html">Technical Reference</a></li>
@@ -854,7 +858,7 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">OutOfBoundsError</span><span class="g g-Whitespace">                          </span>Traceback (most recent call last)
-<span class="nn">/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_60735/2174711224.py</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="nn">/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_90741/2174711224.py</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">selection</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">right</span><span class="p">)</span>
 
 <span class="nn">~/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/datachef/utils/decorators/dontmutate.py</span> in <span class="ni">wrapper</span><span class="nt">(self, *args, **kwargs)</span>
@@ -865,11 +869,11 @@ document.write(`
 <span class="g g-Whitespace">     </span><span class="mi">26</span>     <span class="k">return</span> <span class="n">wrapper</span>
 
 <span class="nn">~/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/datachef/selection/selectable.py</span> in <span class="ni">shift</span><span class="nt">(self, direction_or_x, possibly_y)</span>
-<span class="g g-Whitespace">    </span><span class="mi">259</span> 
-<span class="g g-Whitespace">    </span><span class="mi">260</span>         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">found_cells</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">wanted_cells</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">261</span>             <span class="k">raise</span> <span class="n">OutOfBoundsError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">262</span>                 <span class="s2">&quot;You are attempting to shift your selection &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">263</span>                 <span class="s2">&quot;entirely outside of the boundary of the table.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">263</span> 
+<span class="g g-Whitespace">    </span><span class="mi">264</span>         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">found_cells</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">wanted_cells</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">265</span>             <span class="k">raise</span> <span class="n">OutOfBoundsError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">266</span>                 <span class="s2">&quot;You are attempting to shift your selection &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">267</span>                 <span class="s2">&quot;entirely outside of the boundary of the table.&quot;</span>
 
 <span class="ne">OutOfBoundsError</span>: You are attempting to shift your selection entirely outside of the boundary of the table.
 </pre></div>
