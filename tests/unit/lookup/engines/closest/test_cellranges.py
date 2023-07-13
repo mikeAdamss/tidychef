@@ -103,7 +103,7 @@ def test_cell_ranges(
     """
 
     cells = selectable_simple_band_tab.excel_ref("A3").is_not_blank()
-    cell_ranges = CellRanges(cells, up)
+    cell_ranges = CellRanges(cells, up, "test table")
 
     @dataclass
     class Case:
@@ -179,7 +179,7 @@ def test_cell_ranges(
                 my_cells = my_cells | case.selectable.excel_ref(excel_ref)
 
         # Create the ranges
-        cell_ranges = CellRanges(my_cells, case.direction)
+        cell_ranges = CellRanges(my_cells, case.direction, "test table")
 
         # Open the fixture
         with open(path_to_fixture("json/closest", case.json_fixture)) as f:

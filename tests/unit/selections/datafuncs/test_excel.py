@@ -82,7 +82,6 @@ def test_any_excel_ref_as_wanted_basecells():
         dfc.any_excel_ref_as_wanted_basecells("foo")
 
 
-
 def test_any_excel_ref_as_wanted_basecells():
     """
     Test that we can convert any excel reference into BaseCell(s) and

@@ -4,7 +4,7 @@ import pytest
 
 from datachef import acquire
 from datachef.acquire.base import BaseReader
-from datachef.exceptions import FileInputError, UnnamedTableError
+from datachef.exceptions import FileInputError
 from datachef.selection.selectable import Selectable
 from tests.fixtures import path_to_fixture
 
@@ -47,11 +47,6 @@ def test_post_hook():
     """
 
     csv_path: Path = path_to_fixture("csv", "simple.csv", assert_exists=False)
-
-    # Originally has no table so raises
-    with pytest.raises(UnnamedTableError):
-        table: Selectable = acquire.csv.local(csv_path)
-        assert table.name == "foo"
 
     def table_name_adding_hook(selection: Selectable):
         selection._name = "foo"

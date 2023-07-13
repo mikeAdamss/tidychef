@@ -16,7 +16,11 @@ class HorizontalCondition(BaseLookupEngine):
     """
 
     def __init__(
-        self, label: str, resolver: Callable[[Dict[str, str]], str], priority: int = 0
+        self,
+        label: str,
+        resolver: Callable[[Dict[str, str]], str],
+        priority: int = 0,
+        table: str = "Unnamed Table",
     ):
         """
         A lookup engine to populate the contents of a column based

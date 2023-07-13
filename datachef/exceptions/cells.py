@@ -18,5 +18,5 @@ class InvlaidCellPositionError(Exception):
     x has a value but y does not
     """
 
-    def __init__(self,msg):
+    def __init__(self, msg):
         self.msg = msg

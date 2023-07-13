@@ -17,6 +17,7 @@ class Within(BaseLookupEngine):
         direction: Direction,
         start: Direction,
         end: Direction,
+        table: str = "Unnamed Table",
     ):
         """
         Creates a lookup engine to resolve a Within lookup.
@@ -60,6 +61,7 @@ class Within(BaseLookupEngine):
         cell range to scan.
         """
         self.label = label
+        self.table = table
 
         # Don't allow incorrect construction
         invalid_combinations = [
@@ -70,6 +72,10 @@ class Within(BaseLookupEngine):
         if True in invalid_combinations:
             raise WithinAxisDeclarationError(
                 f"""
+                An error was encountered when processing column
+                "{self.label}" of table "{self.table}" using a 
+                within lookup.
+
                 A Within class can only be constructed using two offset
                 directions along a single axis.
                                              
@@ -136,7 +142,7 @@ class Within(BaseLookupEngine):
         Filters cells known to the engine to create a list of cells that are
         valid within the start= and end= params relative to the cell in question.
 
-        :param cell: The datachef cell we're trying to resolve the column 
+        :param cell: The datachef cell we're trying to resolve the column
         cell for.
         :return: A list of cells that are feasible
         """
@@ -232,6 +238,10 @@ class Within(BaseLookupEngine):
         if len(feasible_cells) == 0:
             raise ImpossibleLookupError(
                 f"""
+                An error was encountered when processing column
+                "{self.label}" of table "{self.table}" using a 
+                within lookup.
+
                 Within lookup cannot be resolved, there is no
                 cell to find within the constraints:
                                         

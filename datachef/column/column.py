@@ -29,7 +29,7 @@ class Column(BaseColumn):
 
         :param column_label: The label we wish to give to the column.
         :param resolver: A callable to resolve the horizontal condition logic.
-        :priority: controls order of resolution for all present HorizontalCondition objects, 
+        :priority: controls order of resolution for all present HorizontalCondition objects,
         lower values are resolved first.
         :return: A Column object populated with a configured HorizontalCondition
         lookup engine.

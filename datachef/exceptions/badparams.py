@@ -1,4 +1,3 @@
-
 class BadExcelReferenceError(Exception):
     """
     Raised where the user has provided an excel reference that does not match
@@ -15,7 +14,7 @@ class BadShiftParameterError(Exception):
     shift method.
     """
 
-    def __init__(self,msg):
+    def __init__(self, msg):
         self.msg = msg
 
 
@@ -25,6 +24,7 @@ class CardinalDeclarationWithOffset(Exception):
     in a context where its just being used to declare an
     absolute cardinal direction.
     """
+
     def __init__(self, msg):
         self.msg = msg
 

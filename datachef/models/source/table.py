@@ -9,11 +9,7 @@ import uuid
 from pathlib import Path
 from typing import List, Optional, Union
 
-from datachef.exceptions import (
-    InvalidTableSignatures,
-    UnalignedTableOperation,
-    UnnamedTableError,
-)
+from datachef.exceptions import InvalidTableSignatures, UnalignedTableOperation
 from datachef.models.source.cell import BaseCell, Cell
 from datachef.selection import datafuncs as dfc
 from datachef.utils.decorators import dontmutate
@@ -90,7 +86,7 @@ class LiveTable:
         if self._name:
             return self._name
         else:
-            raise UnnamedTableError("Cannot access table name/title property as this table does not have one.")
+            return "Unnamed Table"
 
     @property
     def cells(self) -> List[Cell]:
@@ -133,11 +129,13 @@ class LiveTable:
             raise InvalidTableSignatures(
                 "This class:LiveTable is invalid. A LiveTable must be "
                 "instantiated from tables with matching signatures."
-                )
+            )
 
     @staticmethod
     def from_table(
-        table: Table, source: Optional[Union[Path, str]] = None, name: Optional[str] = None
+        table: Table,
+        source: Optional[Union[Path, str]] = None,
+        name: Optional[str] = None,
     ) -> LiveTable:
         """
         Given a table and optional it's name, create a livetable.
@@ -168,10 +166,10 @@ class LiveTable:
 
         if self.signature != other_input.signature:
             raise UnalignedTableOperation(
-            "Selections can only be combined or previewed in combination "
-            "if they are taken from the exact same table as taken from a single "
-            "instance of a parsed input."
-        )
+                "Selections can only be combined or previewed in combination "
+                "if they are taken from the exact same table as taken from a single "
+                "instance of a parsed input."
+            )
 
         self.cells = dfc.cells_not_in(self.cells, other_input.cells)
         return self
@@ -188,10 +186,10 @@ class LiveTable:
         """
         if self.signature != other_input.signature:
             raise UnalignedTableOperation(
-            "Selections can only be combined or previewed in combination "
-            "if they are taken from the exact same table as taken from a single "
-            "instance of a parsed input."
-        )
+                "Selections can only be combined or previewed in combination "
+                "if they are taken from the exact same table as taken from a single "
+                "instance of a parsed input."
+            )
 
         new_cells = dfc.cells_not_in(other_input.cells, self.cells)
         self.cells = self.cells + new_cells

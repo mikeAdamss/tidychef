@@ -87,7 +87,7 @@ class CellRanges:
     A class representing multiple cell ranges
     """
 
-    def __init__(self, selection: LiveTable, direction: Direction):
+    def __init__(self, selection: LiveTable, direction: Direction, table: str):
         """
         selection: The selection of cells to create the cell ranges from
         :direction: The direction of traversal considered when constructing ranges
@@ -95,6 +95,7 @@ class CellRanges:
         self.direction: Direction = direction
         self.highest_possible_offset: Optional[int] = None
         self.lowest_possible_offset: Optional[int] = None
+        self.table = table
         self._populate(selection)
 
     @property
@@ -122,13 +123,15 @@ class CellRanges:
             if axis_offset in break_points.keys():
                 raise AmbiguousLookupError(
                     f"""
-                    Aborting. You have defined two or more equally valid closest:{self.direction.name}" relationships,
+                    Aborted while processing table "{self.table}.
+                    
+                    You have defined two or more equally valid closest:{self.direction.name}" relationships,
                     you cannot do this as it creates an ambiguous lookup.
                     
                     You are trying to add '{cell}' but we already have: '{break_points[axis_offset]}'.
                     
                     Both of these cells have a {self.axis_text} offsets of '{axis_offset}'. 
-                    and so are equally close in this axis from a given observation cell.
+                    and so are equally close along this axis from any given observation cell.
                     """
                 )
             break_points.update({axis_offset: cell})
@@ -196,7 +199,13 @@ class CellRanges:
 
 
 class Closest(BaseLookupEngine):
-    def __init__(self, label: str, selection: LiveTable, direction: Direction):
+    def __init__(
+        self,
+        label: str,
+        selection: LiveTable,
+        direction: Direction,
+        table: str = "Unnamed Table",
+    ):
         """
         Creates a lookup engine to column values defined via
         the closest visual relationship.
@@ -206,8 +215,9 @@ class Closest(BaseLookupEngine):
         :param: direction: one of up,down,left,right,above,below
         :param: Selection: the selection of cells that hold the column values being looked to.
         """
+        self.table = table
         self.direction = direction
-        self.ranges = CellRanges(selection, direction)
+        self.ranges = CellRanges(selection, direction, table)
         self.bumped = True
         self.start_index = None
         self.label = label
@@ -271,8 +281,10 @@ class Closest(BaseLookupEngine):
         """
 
         err_str = """
+                When processing table {table}.
+
                 Lookup for observation cell '{cell}' is impossible. No
-                cells in your selection exist in direction '{direction}'
+                cells in your selection exist in direction '{direction.name}'
                 relative to this cell.
 
                 The boundary (furthest cell index) out of the cells you provided
@@ -294,8 +306,9 @@ class Closest(BaseLookupEngine):
             axis = "x" if self.direction.is_horizontal else "y"
             raise ImpossibleLookupError(
                 err_str.format(
+                    table=self.table,
                     cell=cell,
-                    direction=self.direction.is_downwards,
+                    direction=self.direction,
                     axis=axis,
                     boundary=self.ranges.lowest_possible_offset
                     if any([self.direction.is_upwards, self.direction.is_left])
@@ -327,7 +340,7 @@ class Closest(BaseLookupEngine):
 
         # If no maximum cell range (ceiling) is set then its the absolute maximum
         if ceiling is None:
-            ceiling: int = len(self.ranges.ordered_cell_ranges) -1
+            ceiling: int = len(self.ranges.ordered_cell_ranges) - 1
 
         if index is None:
             # When starting range index is not passed in, start at the mid point.
@@ -345,23 +358,6 @@ class Closest(BaseLookupEngine):
                 index, cell, ceiling=ceiling, floor=floor
             )
         else:
-            assert considered_range.contains(
-                cell
-            ), f"""
-            Cell {cell} is neither higher nor lower than the range being queried
-
-            {json.dumps(self.ranges._as_dict()[str(index)], indent=2)}
-
-            So should be contained within, but is not.
-
-            Lookup is using direction: {self.direction}
-
-            If you are seeing this error, it's a programmer mistake.
-
-            Ranges being considered:
-            {json.dumps(self.ranges._as_dict(), indent=2)}
-            """
-
             # Lookup Caching
             # --------------
             # cells are implicitly selected right->down-a-row->right as you look at a tabulated

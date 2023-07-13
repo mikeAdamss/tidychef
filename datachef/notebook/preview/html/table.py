@@ -147,7 +147,7 @@ def get_preview_table_as_html(
             </table>
 
             <body>
-                <h2>{selections[0]._name if selections[0]._name else "Unnamed Table"}</h2>
+                <h2>{selections[0].name}</h2>
                 <table>
                     {cell_table_row_html}
                 </table>

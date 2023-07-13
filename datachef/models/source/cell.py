@@ -22,6 +22,7 @@ class BaseCell:
     """
     A primitive non value holding cell construct.
     """
+
     x: int
     y: int
 

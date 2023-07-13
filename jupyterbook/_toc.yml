@@ -52,4 +52,8 @@ chapters:
         - file: examples/basic/monthly-gdp-tables
         - file: examples/basic/house-prices
 
+    - file: examples/intermediate/intermediate
+      sections:
+        - file: examples/intermediate/human-development
+
 - file: technical

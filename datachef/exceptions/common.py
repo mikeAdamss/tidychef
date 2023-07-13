@@ -7,16 +7,6 @@ class FileInputError(Exception):
         self.msg = msg
 
 
-class UnnamedTableError(Exception):
-    """
-    User is trying to access the name/title property of a table that does
-    not have a name/title property.
-    """
-
-    def __init__(self, msg):
-        self.msg = msg
-
-
 class CellsDoNotExistError(Exception):
     """
     User is trying to select something from the filtered table that
@@ -159,6 +149,7 @@ class CellValidationError(Exception):
 
     def __init__(self, msg):
         self.msg = msg
+
 
 class DroppingNonColumnError(Exception):
     """

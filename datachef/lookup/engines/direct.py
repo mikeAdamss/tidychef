@@ -27,7 +27,13 @@ class Directly(BaseLookupEngine):
     an exception is raised.
     """
 
-    def __init__(self, label: str, selection: LiveTable, direction: Direction):
+    def __init__(
+        self,
+        label: str,
+        selection: LiveTable,
+        direction: Direction,
+        table: str = "Unnamed Table",
+    ):
         """
         A class to resolve a direct lookup between
         a given observation cell and the appropriate
@@ -39,6 +45,7 @@ class Directly(BaseLookupEngine):
         :param: direction: one of up,down,left,right,above,below
         :param: Selection: the selection of cells that hold the column values being looked to.
         """
+        self.table = table
         self.label = label
         self.direction: Direction = direction
         cells = selection.cells
@@ -117,10 +124,14 @@ class Directly(BaseLookupEngine):
         if not potential_cells:
             raise MissingDirectLookupError(
                 f"""
-                We're using a direct lookup but no cells have 
-                been provided to Directly class with direction: "{self.direction.name}
-                relative to cell: {cell._excel_ref()}, in x position {cell.x},
-                y position {cell.y}
+                When processing table "{self.table}" a direct lookup for column
+                "{self.label}" failed because no column value exists in your
+                column selection with direction: "{self.direction.name}" relative
+                to the observation cell being resolved.
+                
+                The observation cell in question is:
+                {cell._excel_ref()}, x position "{cell.x}", y position "{cell.y}",
+                value: "{cell.value}"
             """
             )
 
@@ -141,11 +152,16 @@ class Directly(BaseLookupEngine):
                 break
 
         if not chosen_cell:
-            raise FailedLookupError(f'''
-                Direct lookup for column "{self.label}" could not resolve
-                with direction: {self.direction.name}".
+            raise FailedLookupError(
+                f"""
+                When processing table "{self.table}" a Direct lookup for
+                column "{self.label}" could not resolve with direction:
+                "{self.direction.name}".
 
-                Cell that failed to resolve was "{str(cell._as_xy_str())}"
-                    ''')
+                The observation cell in question is:
+                {cell._excel_ref()}, x position "{cell.x}", y position "{cell.y}",
+                value: "{cell.value}"
+                    """
+            )
 
         return chosen_cell

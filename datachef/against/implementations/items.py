@@ -12,6 +12,7 @@ class ItemsValidator(BaseValidator):
     called with a single instance of a datachef
     Cell object.
     """
+
     items: List[str]
 
     def __call__(self, cell: Cell) -> bool:

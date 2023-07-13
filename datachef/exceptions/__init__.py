@@ -12,6 +12,7 @@ from .common import (
     BadConditionalResolverError,
     CellsDoNotExistError,
     CellValidationError,
+    DroppingNonColumnError,
     FileInputError,
     HorizontalConditionalHeaderError,
     ImpossibleLookupError,
@@ -23,7 +24,5 @@ from .common import (
     OutOfBoundsError,
     PreviewBoundarySpecificationError,
     UnalignedTableOperation,
-    UnnamedTableError,
-    DroppingNonColumnError
 )
 from .lookups import AmbiguousLookupError, FailedLookupError, MissingDirectLookupError

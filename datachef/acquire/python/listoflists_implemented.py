@@ -2,7 +2,7 @@
 Holds the code that defines the python list_of_lists reader.
 """
 import copy
-from typing import Callable, Optional, List
+from typing import Callable, List, Optional
 
 from datachef.acquire.base import BaseReader
 from datachef.models.source.cell import Cell

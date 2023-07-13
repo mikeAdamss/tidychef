@@ -100,7 +100,7 @@ class BaseColumn(metaclass=ABCMeta):
         some sort.
 
         :param cell: A single datachef Cell object.
-        :return: A single datachef Cell object. 
+        :return: A single datachef Cell object.
         """
         cell = self.engine.resolve(observation_cell, *args)
         cell = self._post_lookup(cell)

@@ -8,7 +8,7 @@ import pytest
 
 from datachef.column import Column
 from datachef.direction.directions import above, below, left, right
-from datachef.exceptions import MisalignedHeadersError, DroppingNonColumnError
+from datachef.exceptions import DroppingNonColumnError, MisalignedHeadersError
 from datachef.lookup.engines.constant import Constant
 from datachef.lookup.engines.direct import Directly
 from datachef.output.tidydata import TidyData
@@ -87,7 +87,10 @@ def test_tidydata_internal_representation_is_as_expected(tidy: TidyData):
     assert tidy._data == expected_data
     assert len(tidy) == 19
 
-def test_tidydata_internal_representation_with_dropped_column_is_as_expected(tidy: TidyData):
+
+def test_tidydata_internal_representation_with_dropped_column_is_as_expected(
+    tidy: TidyData,
+):
     """
     Test that the ._data attribute of TidyData contains the expected
     data once _transform() has been called when we drop a column.
@@ -119,6 +122,7 @@ def test_tidydata_internal_representation_with_dropped_column_is_as_expected(tid
     assert tidy._data == expected_data
     assert len(tidy) == 19
 
+
 def test_tidydata_drop_raises_expected_error_for_non_existent_column(tidy: TidyData):
     """
     Confirm the expected error is raised where we are trying to drop
@@ -129,6 +133,7 @@ def test_tidydata_drop_raises_expected_error_for_non_existent_column(tidy: TidyD
 
     with pytest.raises(DroppingNonColumnError):
         tidy._transform()
+
 
 def test_tidydata_from_many(tidy: TidyData):
     """

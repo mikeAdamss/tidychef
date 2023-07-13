@@ -1,7 +1,8 @@
 import copy
+
 import pytest
 
-from datachef.exceptions import InvalidTableSignatures, UnnamedTableError
+from datachef.exceptions import InvalidTableSignatures
 from datachef.models.source.table import LiveTable, Table
 from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
@@ -22,18 +23,6 @@ def test_livetable_name_setter_and_getter(selectable_simple1: Selectable):
     assert selectable_simple1.name == "foo"
 
 
-def test_livetable_name_getter_unnamed_table_err(
-    selectable_simple1: Selectable,
-):
-    """
-    Test the expected error is raised at the LiveTable class level if
-    we try and access an unset name property.
-    """
-
-    with pytest.raises(UnnamedTableError):
-        selectable_simple1.name
-
-
 def test_livetable_with_unmatched_signatues_raises(
     selectable_simple1: Selectable,
 ):
@@ -44,9 +33,10 @@ def test_livetable_with_unmatched_signatues_raises(
 
     table1 = Table(selectable_simple1.pcells)
     table2 = Table(selectable_simple1.pcells)
-    
+
     with pytest.raises(InvalidTableSignatures):
         LiveTable(table1, table2)
+
 
 def test_tables_have_expected_length(selectable_simple1: Selectable):
     """
@@ -62,9 +52,6 @@ def test_livetable_from_table(selectable_simple1: Selectable):
     """
 
     table = Table(selectable_simple1.cells)
-    live_table: LiveTable = LiveTable.from_table(
-        table,
-        name="my table"
-    )
+    live_table: LiveTable = LiveTable.from_table(table, name="my table")
 
     assert live_table.name == "my table"

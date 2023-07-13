@@ -2,13 +2,13 @@ from __future__ import annotations
 
 import csv
 from pathlib import Path
-from typing import Dict, List, Union, Optional, Callable
+from typing import Callable, Dict, List, Optional, Union
 
 import tabulate
 from IPython.core.display import display
 
 from datachef.column.base import BaseColumn
-from datachef.exceptions import MisalignedHeadersError, DroppingNonColumnError
+from datachef.exceptions import DroppingNonColumnError, MisalignedHeadersError
 from datachef.lookup.engines.horizontal_condition import HorizontalCondition
 from datachef.notebook.ipython import in_notebook
 from datachef.output.base import BaseOutput
@@ -17,7 +17,13 @@ from datachef.utils.decorators import dontmutate
 
 
 class TidyData(BaseOutput):
-    def __init__(self, observations: Selectable, *columns, obs_apply: Callable = None, drop: Optional[List[str]] = None):
+    def __init__(
+        self,
+        observations: Selectable,
+        *columns,
+        obs_apply: Callable = None,
+        drop: Optional[List[str]] = None,
+    ):
         """
         A class to generate a basic representation of the
         data as tidy data.
@@ -210,17 +216,23 @@ class TidyData(BaseOutput):
             # If user has opted to drop a column that does
             # not exist, we need to tell them.
             if drop_count != len(self.drop):
-                raise DroppingNonColumnError(f'''
+                raise DroppingNonColumnError(
+                    f"""
                     You're attempting to drop one or more columns that
                     do not exist in the data.
 
                     You're dropping: {self.drop}
 
                     Columns are: {[x.label for x in self.columns]} 
-                    ''')
+                    """
+                )
 
             for observation in self.observations:
-                line = [observation.value if not self.obs_apply else self.obs_apply(observation.value)]
+                line = [
+                    observation.value
+                    if not self.obs_apply
+                    else self.obs_apply(observation.value)
+                ]
                 column_value_dict: Dict[str, str] = {}
 
                 # Resolve the standard columns first
