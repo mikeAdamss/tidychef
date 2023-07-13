@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Custom Data Sources &#8212; My sample book</title>
+    <title>Custom Data Sources &#8212; Documentation</title>
   
   
   
@@ -288,7 +288,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+      <li><a href="https://github.com/mikeAdamss/datachef" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -305,7 +305,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fadvanced/custom-data-sources.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/mikeAdamss/datachef/issues/new?title=Issue%20on%20page%20%2Fadvanced/custom-data-sources.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -448,7 +448,7 @@ document.write(`
 <p>We’ll start by explaining how the <code class="docutils literal notranslate"><span class="pre">acquire</span></code> module works.</p>
 <section id="how-acquire-actually-works">
 <h2>How acquire actually works<a class="headerlink" href="#how-acquire-actually-works" title="Permalink to this heading">#</a></h2>
-<p>So the first thing to understand is that all the functions accessible via the <code class="docutils literal notranslate"><span class="pre">acquire</span></code> module are really just around a single function, the <code class="docutils literal notranslate"><span class="pre">acquirer</span></code> function located in <code class="docutils literal notranslate"><span class="pre">datachef.acquire.main</span></code>.</p>
+<p>So the first thing to understand is that all the functions accessible via the <code class="docutils literal notranslate"><span class="pre">acquire</span></code> module are really just wrappers around a single function, the <code class="docutils literal notranslate"><span class="pre">acquirer</span></code> function located in <code class="docutils literal notranslate"><span class="pre">datachef.acquire.main</span></code>.</p>
 <p>Lets have a look at the method signature for acquirer.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">acquirer</span><span class="p">(</span>
     <span class="n">source</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
@@ -491,7 +491,7 @@ document.write(`
 <h2>What this means<a class="headerlink" href="#what-this-means" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>The acquire functions just call <code class="docutils literal notranslate"><span class="pre">acquirer</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">acquirer</span></code> just specific any data source, something that implements <code class="docutils literal notranslate"><span class="pre">BaseReader</span></code> and an appropriate <code class="docutils literal notranslate"><span class="pre">Selectable</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">acquirer</span></code> just specifies a data source, something that implements <code class="docutils literal notranslate"><span class="pre">BaseReader</span></code> and an appropriate <code class="docutils literal notranslate"><span class="pre">Selectable</span></code>.</p></li>
 </ul>
 <p>Therefore, to get a new data source into datachef you <strong>just need to create a new implementation of <code class="docutils literal notranslate"><span class="pre">BaseReader</span></code> and call acquirer with it</strong> and an appropriate <code class="docutils literal notranslate"><span class="pre">Selectable</span></code>.</p>
 </section>
@@ -499,10 +499,10 @@ document.write(`
 <h2>Base Reader<a class="headerlink" href="#base-reader" title="Permalink to this heading">#</a></h2>
 <p>To create a reader we need to create a new class that extends <code class="docutils literal notranslate"><span class="pre">BaseReader</span></code> and implements the methods as show below.</p>
 <p><img alt="" src="../_images/base-reader.png" /></p>
-<p>So really all we need to do to imbibe a new dat format is populate a single parse method that:</p>
+<p>So really all we need to do to ingest a new data format is populate a single parse method that:</p>
 <ul class="simple">
-<li><p>Takes something as a source</p></li>
-<li><p>Populates a datachef selectable.</p></li>
+<li><p>Takes something as a source.</p></li>
+<li><p>Populates a datachef selectable or list of.</p></li>
 </ul>
 </section>
 <section id="python-list-reader">
@@ -602,12 +602,12 @@ document.write(`
 <ul class="simple">
 <li><p>All readers must return either (a) a populated selectable or (b) a list of populated selectable (see last line of example).</p></li>
 <li><p>A selectable is created from two tables of class <code class="docutils literal notranslate"><span class="pre">datachef.models.source.table.Table</span></code> (that <strong>must</strong> be identical but <strong>must</strong> also be deep copied) and a string representing the source.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">source</span></code> would more typically be the filename of url the data is acquired from.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">source</span></code> would more typically be the filename or url the data is acquired from.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">Table</span></code> is populated via the <code class="docutils literal notranslate"><span class="pre">add_cell()</span></code> method.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">add_cell()</span></code> method takes a datachef <code class="docutils literal notranslate"><span class="pre">datachef.models.source.cell.Cell</span></code> object.</p></li>
 <li><p>A <code class="docutils literal notranslate"><span class="pre">Cell</span></code> must be created from x (column index) y (row index) and the contents of the tabular cell.</p></li>
 </ul>
-<p>This is a deliberately simple pattern. Any tabulated source than can be read by python can be iterated, anything that can be iterated can be read into datachef.</p>
+<p>This is a consciously simple pattern. Any tabulated source than can be read by python can be iterated, anything that can be iterated can be read into datachef via this mechanism.</p>
 <p>Now lets try our new reader:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -665,7 +665,7 @@ document.write(`
         </html>
     </div></div>
 </div>
-<p>At which point the usual sweet of methods are accessible, eg:</p>
+<p>At which point the usual suite of methods are accessible, eg:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preview</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">))</span>
@@ -810,7 +810,7 @@ document.write(`
   <div class="footer-item">
     
 <p class="component-author">
-By The Jupyter Book Community
+By https://github.com/mikeAdamss
 </p>
 
   </div>
