@@ -7,6 +7,8 @@ chapters:
 
 - file: how-to-use-this-book
 - file: dot-notation-explained
+- file: extensibility
+- file: quirks
 
 - file: basics
   sections:

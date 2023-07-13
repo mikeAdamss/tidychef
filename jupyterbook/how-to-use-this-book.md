@@ -1,4 +1,4 @@
-# How to use this book
+# How To Use This Book
 
 This book is organised in a very deliberate fashion to help onboard people to this technology and get them productive in the minimum amount of time and can largely be tackled in sequence.
 
@@ -6,6 +6,8 @@ That said, there are some nuances depending on your skillset and goals which I'l
 
 
 - If you're anything less than an experienced python developer then **do** read the section on [extended dot notation](https://mikeadamss.github.io/datachef/dot-notation-explained.html), it will make everything else considerably easier to understand.
+
+- The sections on [extensibility](https://mikeadamss.github.io/datachef/extensibility.html) and [quirks](https://mikeadamss.github.io/datachef/quirks.html) are short pages of prose containing supplementary information. There are some useful insights into datachefs goals and approach here but you can come back to these as needed.
 
 - If you want to get a quick idea of what datachef does, look at the first few recipes in [basic examples](https://mikeadamss.github.io/datachef/examples/basic/basic.html) section before coming back here.
 
