@@ -1,0 +1,12 @@
+,,
+Trucks,Cars,Name
+,,
+5,5,John Lennon
+9,6*,Ringo Strr
+7,7,Mick Jagger
+9,6**,Keith Moon
+9,,Pete Townsend
+,,
+Key,,
+*,Not counting foreign imports,
+**,Not including white models,
