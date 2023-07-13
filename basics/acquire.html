@@ -163,11 +163,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../quirks.html">Quirks</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../basics.html">Chapter 1: Basics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Acquire</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="preview.html">Preview</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="selection-operators.html">Selection: Operators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="selection-expand-fill.html">Selection: Expand &amp; Fill</a></li>
 <li class="toctree-l2"><a class="reference internal" href="selection-warnings.html">Selection: Multiple Selection Warnings</a></li>
@@ -429,25 +425,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Acquire</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-data-from-local">CSV Data From Local</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-data-from-http-s">CSV Data from Http(s)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customising-csv-loads">Customising Csv Loads</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-xlsx-data">Loading Xlsx Data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-xlsx-data">Loading Xlsx Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xlsx-data-from-local">Xlsx Data From Local</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xlsx-data-from-http-s">Xlsx Data From Http(s)</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-xls-data">Loading Xls Data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-xls-data">Loading Xls Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xls-data-from-local">Xls Data From Local</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xls-data-from-http-s">Xls Data From Http(s)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-http-s-caching">A Note On Http(s) Caching</a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -658,9 +646,8 @@ document.write(`
     </div></div>
 </div>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="loading-xlsx-data">
-<h1>Loading Xlsx Data<a class="headerlink" href="#loading-xlsx-data" title="Permalink to this heading">#</a></h1>
+<section id="loading-xlsx-data">
+<h2>Loading Xlsx Data<a class="headerlink" href="#loading-xlsx-data" title="Permalink to this heading">#</a></h2>
 <p>Creating a <strong>list</strong> of selectable table-like objects from a local xlsx file.</p>
 <p>You can download the example xlsx data being used <a class="reference external" href="https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx">here</a>.</p>
 <table class="table">
@@ -669,6 +656,7 @@ document.write(`
 </tr>
 </thead>
 </table>
+</section>
 <section id="xlsx-data-from-local">
 <h2>Xlsx Data From Local<a class="headerlink" href="#xlsx-data-from-local" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -787,9 +775,9 @@ document.write(`
     </div></div>
 </div>
 </section>
+<section id="loading-xls-data">
+<h2>Loading Xls Data<a class="headerlink" href="#loading-xls-data" title="Permalink to this heading">#</a></h2>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="loading-xls-data">
-<h1>Loading Xls Data<a class="headerlink" href="#loading-xls-data" title="Permalink to this heading">#</a></h1>
 <section id="xls-data-from-local">
 <h2>Xls Data From Local<a class="headerlink" href="#xls-data-from-local" title="Permalink to this heading">#</a></h2>
 <p>You can download the example data being used <a class="reference external" href="https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xls/sample.xls">here</a>.</p>
@@ -1048,25 +1036,17 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Acquire</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-data-from-local">CSV Data From Local</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-data-from-http-s">CSV Data from Http(s)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customising-csv-loads">Customising Csv Loads</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-xlsx-data">Loading Xlsx Data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-xlsx-data">Loading Xlsx Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xlsx-data-from-local">Xlsx Data From Local</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xlsx-data-from-http-s">Xlsx Data From Http(s)</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-xls-data">Loading Xls Data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-xls-data">Loading Xls Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xls-data-from-local">Xls Data From Local</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xls-data-from-http-s">Xls Data From Http(s)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-http-s-caching">A Note On Http(s) Caching</a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>

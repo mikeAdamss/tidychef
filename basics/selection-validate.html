@@ -163,11 +163,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../quirks.html">Quirks</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../basics.html">Chapter 1: Basics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="acquire.html">Acquire</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="preview.html">Preview</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="selection-operators.html">Selection: Operators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="selection-expand-fill.html">Selection: Expand &amp; Fill</a></li>
 <li class="toctree-l2"><a class="reference internal" href="selection-warnings.html">Selection: Multiple Selection Warnings</a></li>
@@ -538,7 +534,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;datachef.selection.csv.csv.CsvSelectable at 0x110eacc10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;datachef.selection.csv.csv.CsvSelectable at 0x1054de3e0&gt;
 </pre></div>
 </div>
 </div>
@@ -623,7 +619,7 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">CellValidationError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_26213/2813622948.py</span> in <span class="ni">&lt;cell line: 6&gt;</span><span class="nt">()</span>
+<span class="nn">/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_27660/2813622948.py</span> in <span class="ni">&lt;cell line: 6&gt;</span><span class="nt">()</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv&quot;</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">5</span> 
 <span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">against</span><span class="o">.</span><span class="n">regex</span><span class="p">(</span><span class="s2">&quot;John&quot;</span><span class="p">),</span> <span class="n">raise_first_error</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>

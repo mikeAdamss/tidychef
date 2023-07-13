@@ -163,11 +163,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../quirks.html">Quirks</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../basics.html">Chapter 1: Basics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="acquire.html">Acquire</a></li>
-
-
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Preview</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="selection-operators.html">Selection: Operators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="selection-expand-fill.html">Selection: Expand &amp; Fill</a></li>
 <li class="toctree-l2"><a class="reference internal" href="selection-warnings.html">Selection: Multiple Selection Warnings</a></li>
@@ -429,18 +425,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preview</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-preview">Selection &amp; Preview</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#and-beware-the-gotcha">……and…beware the gotcha!</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#labelling-selections">Labelling Selections</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-notations">Excel notations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-bounded-arguments">Alternative Bounded Arguments</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-notations">Excel notations</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-bounded-arguments">Alternative Bounded Arguments</a></li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -780,9 +772,8 @@ document.write(`
     </div></div>
 </div>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="excel-notations">
-<h1>Excel notations<a class="headerlink" href="#excel-notations" title="Permalink to this heading">#</a></h1>
+<section id="excel-notations">
+<h2>Excel notations<a class="headerlink" href="#excel-notations" title="Permalink to this heading">#</a></h2>
 <p>As previously mentioned, the default behaviour for <code class="docutils literal notranslate"><span class="pre">preview()</span></code> is to show excel style column and row notations.</p>
 <p>This is nearly always the practical choice when processing but can lead to some confusion when previewing your work (especially where previewing a non excel format).</p>
 <p>As a nod to these scenarios you can use the <code class="docutils literal notranslate"><span class="pre">with_excel_notations=</span></code> keyword to change this behaviour as per the following example.</p>
@@ -858,8 +849,8 @@ document.write(`
     </div></div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="alternative-bounded-arguments">
-<h1>Alternative Bounded Arguments<a class="headerlink" href="#alternative-bounded-arguments" title="Permalink to this heading">#</a></h1>
+<section id="alternative-bounded-arguments">
+<h2>Alternative Bounded Arguments<a class="headerlink" href="#alternative-bounded-arguments" title="Permalink to this heading">#</a></h2>
 <p>Passing in an excel reference for <code class="docutils literal notranslate"><span class="pre">bounded=</span></code> somewhat defeats the idea of using <code class="docutils literal notranslate"><span class="pre">with_excel_notations=False</span></code> so you can also pass in a dictionary of x/y positional offets should you need to as per the following example.</p>
 <table class="table">
 <thead>
@@ -937,6 +928,7 @@ document.write(`
     </div></div>
 </div>
 </section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1005,18 +997,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preview</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-preview">Selection &amp; Preview</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#and-beware-the-gotcha">……and…beware the gotcha!</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#labelling-selections">Labelling Selections</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-notations">Excel notations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-bounded-arguments">Alternative Bounded Arguments</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-notations">Excel notations</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-bounded-arguments">Alternative Bounded Arguments</a></li>
-</ul>
-
   </nav></div>
 
 </div></div>

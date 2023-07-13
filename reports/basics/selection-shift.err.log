@@ -22,7 +22,7 @@ selection.shift(right)
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mOutOfBoundsError[0m                          Traceback (most recent call last)
-[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_26186/2174711224.py[0m in [0;36m<cell line: 1>[0;34m()[0m
+[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_27633/2174711224.py[0m in [0;36m<cell line: 1>[0;34m()[0m
 [0;32m----> 1[0;31m [0mselection[0m[0;34m.[0m[0mshift[0m[0;34m([0m[0mright[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m
 [0;32m~/.local/share/virtualenvs/trypandas-_I_Hh2lX/lib/python3.10/site-packages/datachef/utils/decorators/dontmutate.py[0m in [0;36mwrapper[0;34m(self, *args, **kwargs)[0m
