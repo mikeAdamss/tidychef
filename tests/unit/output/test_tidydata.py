@@ -158,6 +158,7 @@ def test_tidydata_internal_representation_with_dropped_column_is_as_expected(
     assert tidy._data == expected_data
     assert len(tidy) == 19
 
+
 def test_tidydata_drop_raises_expected_error_for_non_existent_column(tidy: TidyData):
     """
     Confirm the expected error is raised where we are trying to drop
@@ -281,7 +282,7 @@ def test_create_tidydata_with_condition_column():
         Column.horizontal_condition(
             "Condition2", lambda col: col["Condition1"] + "foo", priority=1
         ),
-        drop=["Condition2"]
+        drop=["Condition2"],
     )._transform()
 
 

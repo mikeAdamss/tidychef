@@ -46,6 +46,7 @@ def test_single_horizontal_conditional():
     resolved = horizontal_conditional.resolve("", {"foo": "fooval", "bar": "barval"})
     assert resolved.value == "foovalbarval"
 
+
 def test_horizontal_conditional_header_error_raises():
     """
     Test the exception HorizontalConditionalHeaderError

@@ -41,13 +41,6 @@ def local(
     :return: A single populated Selectable of type as specified by selectable param
     """
 
-    assert isinstance(
-        source, (str, Path)
-    ), """
-        The source you're passing to acquire.csv.local() needs to
-        be either a Path object or a string representing such.
-        """
-
     return acquirer(
         source,
         LocalCsvReader,
@@ -77,6 +70,13 @@ class LocalCsvReader(BaseReader):
         :param selectable: The selectable type to be returned.
         :return: A list of type as specified by param selectable.
         """
+
+        assert isinstance(
+            source, (str, Path)
+        ), """
+                The source you're passing to acquire.csv.local() needs to
+                be either a Path object or a string representing such.
+                """
 
         source: Path = fileutils.ensure_existing_path(source)
 

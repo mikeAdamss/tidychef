@@ -43,6 +43,7 @@ chapters:
   sections:
     - file: advanced/advanced-acquisition
     - file: advanced/custom-selectables
+    - file: advanced/custom-data-sources
 
 - file: examples
   sections:
