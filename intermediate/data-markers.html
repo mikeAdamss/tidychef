@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Best Practice &#8212; My sample book</title>
+    <title>TidyData: Data Markers &#8212; My sample book</title>
   
   
   
@@ -61,11 +61,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'intermediate/best-practice';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'intermediate/data-markers';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Chapter 3: Advanced" href="../advanced.html" />
-    <link rel="prev" title="Against (Creating New Validators)" href="against.html" />
+    <link rel="next" title="Pandas" href="pandas.html" />
+    <link rel="prev" title="TidyData: Horizontal Conditions" href="horizontal-conditions.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -193,14 +193,14 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l2"><a class="reference internal" href="iterating.html">Iterating Tables/Sheets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="horizontal-conditions.html">TidyData: Horizontal Conditions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data-markers.html">TidyData: Data Markers</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">TidyData: Data Markers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pandas.html">Pandas</a></li>
 
 
 <li class="toctree-l2"><a class="reference internal" href="validation.html">TidyData: Column: validate=</a></li>
 <li class="toctree-l2"><a class="reference internal" href="within.html">TidyData: Within</a></li>
 <li class="toctree-l2"><a class="reference internal" href="against.html">Against (Creating New Validators)</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Best Practice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="best-practice.html">Best Practice</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../advanced.html">Chapter 3: Advanced</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -304,7 +304,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fintermediate/best-practice.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fintermediate/data-markers.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -334,7 +334,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/intermediate/best-practice.ipynb" target="_blank"
+      <li><a href="../_sources/intermediate/data-markers.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -416,7 +416,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Best Practice</h1>
+    <h1>TidyData: Data Markers</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -427,13 +427,6 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-data">Source Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-is-better-then-explicit">Conditional Is Better Then Explicit</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-ref">excel_ref()</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expand">expand()</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-validation">When to use Validation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-wide-and-validate-narrow">Select Wide and Validate Narrow</a></li>
 </ul>
             </nav>
         </div>
@@ -445,33 +438,21 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="best-practice">
-<h1>Best Practice<a class="headerlink" href="#best-practice" title="Permalink to this heading">#</a></h1>
-<p>This section covers some best practice approaches and techniques for creating robust transform recipes with datachef.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="tidydata-data-markers">
+<h1>TidyData: Data Markers<a class="headerlink" href="#tidydata-data-markers" title="Permalink to this heading">#</a></h1>
+<p>This section shows you how to deal with extracting data markers.</p>
+<p>The term “data marker” is a catch all term for notations or non numeric indicators that are often attached to a value observation in data tables intended for visual consumption.</p>
 <section id="source-data">
 <h2>Source Data<a class="headerlink" href="#source-data" title="Permalink to this heading">#</a></h2>
 <p>The data source we’re using for these examples is shown below:</p>
-<table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p><span style="color:green">Note - this particular table has some very verbose headers we don’t care about, so we’ll be using <code class="docutils literal notranslate"><span class="pre">bounded=</span></code> to remove them from the previews as well as to show just the subset of data we’re working with.</span></p></th>
-</tr>
-</thead>
-</table>
-<p>The <a class="reference external" href="https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx">full data source can be downloaded here</a>. We’ll be using th 10th tab named “Table 3c”.</p>
-</section>
-<section id="conditional-is-better-then-explicit">
-<h2>Conditional Is Better Then Explicit<a class="headerlink" href="#conditional-is-better-then-explicit" title="Permalink to this heading">#</a></h2>
-<p>If you want to create a robust repeatable recipe then a conditional selection (particularly simple conditions such as <code class="docutils literal notranslate"><span class="pre">.expand()</span></code> and <code class="docutils literal notranslate"><span class="pre">.fill()</span></code>) are typically better than explicit <code class="docutils literal notranslate"><span class="pre">.excel_ref()</span></code> statements.</p>
-<p>This is because <em>many</em> tabulated sources are intended to be extended over time.</p>
-<p>Consider the following:</p>
+<p>The <a class="reference external" href="https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/data-markers.csv">full data source can be viewed here</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
-<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">CsvSelectable</span>
 
-<span class="n">tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsxSelectable</span><span class="p">]</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">)</span>
-<span class="n">preview</span><span class="p">(</span><span class="n">tables</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A155:H161&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/data-markers.csv&quot;</span><span class="p">)</span>
+<span class="n">preview</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -505,16 +486,21 @@ document.write(`
             </table>
 
             <body>
-                <h2>Table 3c</h2>
+                <h2>Unnamed Table</h2>
                 <table>
-                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td><td style="background-color:lightgrey">G</td><td style="background-color:lightgrey">H</td></tr>
-<tr><td style="background-color:lightgrey">155</td><td style="background-color:white">Oct 2022</td><td style="background-color:white">-3.3</td><td style="background-color:white">0.6</td><td style="background-color:white">0.2</td><td style="background-color:white">5.3</td><td style="background-color:white">-2.2</td><td style="background-color:white">0.8</td><td style="background-color:white">1.5</td></tr>
-<tr><td style="background-color:lightgrey">156</td><td style="background-color:white">Nov 2022</td><td style="background-color:white">2</td><td style="background-color:white">-0.4</td><td style="background-color:white">-0.2</td><td style="background-color:white">6.2</td><td style="background-color:white">4</td><td style="background-color:white">-0.5</td><td style="background-color:white">0.5</td></tr>
-<tr><td style="background-color:lightgrey">157</td><td style="background-color:white">Dec 2022</td><td style="background-color:white">7</td><td style="background-color:white">-2.1</td><td style="background-color:white">-1.1</td><td style="background-color:white">7.3</td><td style="background-color:white">10</td><td style="background-color:white">-1.8</td><td style="background-color:white">-1.7</td></tr>
-<tr><td style="background-color:lightgrey">158</td><td style="background-color:white">Jan 2023</td><td style="background-color:white">7.1</td><td style="background-color:white">-5.3</td><td style="background-color:white">-4</td><td style="background-color:white">6.3</td><td style="background-color:white">8.9</td><td style="background-color:white">0.3</td><td style="background-color:white">-1.1</td></tr>
-<tr><td style="background-color:lightgrey">159</td><td style="background-color:white">Feb 2023</td><td style="background-color:white">5</td><td style="background-color:white">-5.1</td><td style="background-color:white">-4</td><td style="background-color:white">2.9</td><td style="background-color:white">4.4</td><td style="background-color:white">0.8</td><td style="background-color:white">0.3</td></tr>
-<tr><td style="background-color:lightgrey">160</td><td style="background-color:white">Mar 2023</td><td style="background-color:white">1.3</td><td style="background-color:white">-5.3</td><td style="background-color:white">-4.5</td><td style="background-color:white">-1.9</td><td style="background-color:white">0.2</td><td style="background-color:white">4.2</td><td style="background-color:white">0.7</td></tr>
-<tr><td style="background-color:lightgrey">161</td><td style="background-color:white">Apr 2023</td><td style="background-color:white">-0.8</td><td style="background-color:white">-3.3</td><td style="background-color:white">-3</td><td style="background-color:white">-1.5</td><td style="background-color:white">2</td><td style="background-color:white">5.4</td><td style="background-color:white">0.9</td></tr>
+                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td></tr>
+<tr><td style="background-color:lightgrey">1</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">2</td><td style="background-color:white">Trucks</td><td style="background-color:white">Cars</td><td style="background-color:white">Name</td></tr>
+<tr><td style="background-color:lightgrey">3</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">4</td><td style="background-color:white">5</td><td style="background-color:white">5</td><td style="background-color:white">John Lennon</td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:white">9</td><td style="background-color:white">6*</td><td style="background-color:white">Ringo Strr</td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:white">7</td><td style="background-color:white">7</td><td style="background-color:white">Mick Jagger</td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:white">9</td><td style="background-color:white">6**</td><td style="background-color:white">Keith Moon</td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:white">9</td><td style="background-color:white"></td><td style="background-color:white">Pete Townsend</td></tr>
+<tr><td style="background-color:lightgrey">9</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">10</td><td style="background-color:white">Key</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">11</td><td style="background-color:white">*</td><td style="background-color:white">Not counting foreign imports</td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">12</td><td style="background-color:white">**</td><td style="background-color:white">Not including white models</td><td style="background-color:white"></td></tr>
 
                 </table>
             </body>
@@ -522,40 +508,145 @@ document.write(`
         </html>
     </div></div>
 </div>
-<p>It’s pretty easy to see that the creator of this dataset will be adding more months of data in the future - and you want your script to capture this additional data on reruns.</p>
-<p>Now consider our two different techniques of selection.</p>
-<section id="excel-ref">
-<h3>excel_ref()<a class="headerlink" href="#excel-ref" title="Permalink to this heading">#</a></h3>
-<p>A statement of something like <code class="docutils literal notranslate"><span class="pre">table.excel_ref(&quot;B155:B161&quot;)</span></code> will work but when the user inevitably republishes the source with additional rows this additional data will <strong>not</strong> be extracted when the recipe is reran.</p>
-</section>
-<section id="expand">
-<h3>expand()<a class="headerlink" href="#expand" title="Permalink to this heading">#</a></h3>
-<p>Whereas a statement of <code class="docutils literal notranslate"><span class="pre">table.excel_ref(&quot;B155&quot;).expand(down).expand(right)</span></code> would automatically extract the additional data upon a re run of the script with <strong>no code update required</strong>.</p>
-</section>
-</section>
-<section id="when-to-use-validation">
-<h2>When to use Validation<a class="headerlink" href="#when-to-use-validation" title="Permalink to this heading">#</a></h2>
-<p>If you’re doing a one off transform you’ve not intention of repeating (you’re quickly pulling some data apart of populate a dataframe, chart etc) then you could (possibly) argue that validation is overkill.</p>
-<p>If you’re intending run your code more than once against a changeable data source you should be implementing some form of validation. Even if its just one of the lightweight default methods provided by datachef that are documented elsewhere in this Jupyterbook.</p>
-<p>If you’re setting up any kind of ETL pipeline, you should almost certainly be investing time in a quality validation approach suitable for your pipeline processes and use case(s).</p>
-</section>
-<section id="select-wide-and-validate-narrow">
-<h2>Select Wide and Validate Narrow<a class="headerlink" href="#select-wide-and-validate-narrow" title="Permalink to this heading">#</a></h2>
-<p>Sharp observers will have noticed you can us regex to select cells and also use regex to also validate selection and <em>also</em> validate extracted column values - isn’t this redundant?</p>
-<p>No, because there are very different goals for selection vs validation, as a general rule:</p>
+<p>For our example we’re going to:</p>
 <ul class="simple">
-<li><p>You want to keep your <strong>selection techniques wide</strong> so that the cells get selected <em>even if they contain invalid values</em> (perhaps <strong>especially</strong> if they contain invalid values) - provided ofc these calls are located structurally where valid values should be.</p></li>
-<li><p>Your validation then needs to be <strong>narrow</strong>, <strong>precise</strong> and <strong>unforgiving</strong>.</p></li>
+<li><p>Take a “Vehicles” column</p></li>
+<li><p>Take all observations as “raw observations”</p></li>
+<li><p>Use a horizontal condition to create the “Value” column for observations <strong>without</strong> data markers.</p></li>
+<li><p>Use a horizontal condition to create a “Data Marker” column for <strong>just</strong> the data markers.</p></li>
 </ul>
-<p>You can sum this up with the following statement:</p>
-<p><strong>You cannot stop human beings making human errors, but you CAN set things up so you know WHEN and precisely WHERE any such error is encountered.</strong></p>
-<p>Consider this - if you use a strict regular expression to select <em>only valid values</em> then this just means you completely skip the invalid values.</p>
-<ul class="simple">
-<li><p>What if its just a typo? “Maale” in place of Male? Do you want “Male” to be missing from your output?</p></li>
-<li><p>What if you use an <code class="docutils literal notranslate"><span class="pre">is_numeric</span></code> filter but a user adds a data marker of <code class="docutils literal notranslate"><span class="pre">*</span></code> in place of an observation?</p></li>
-</ul>
-<p>My point is there are nuances here, you <strong>dont</strong> want to process invalid values, but you <strong>do</strong> (on balance) want to select them (if they’re located where valid values should be).</p>
-<p>The trick here is to use the provided tools to make it <strong>obvious</strong> where and precisely what the problem is so it can be trivially addressed. Judicious and well targeted usage of validation will get you that.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+
+<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">datachef.direction</span> <span class="kn">import</span> <span class="n">right</span><span class="p">,</span> <span class="n">down</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">up</span>
+<span class="kn">from</span> <span class="nn">datachef.output</span> <span class="kn">import</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span>
+<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">CsvSelectable</span>
+
+<span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/data-markers.csv&quot;</span><span class="p">)</span>
+
+<span class="n">anchor</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">re</span><span class="p">(</span><span class="s2">&quot;Name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">assert_one</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Anchor Cell&quot;</span><span class="p">)</span>
+<span class="n">name</span> <span class="o">=</span> <span class="n">anchor</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Name&quot;</span><span class="p">)</span>
+<span class="n">raw_observations</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">left</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;raw&quot;</span><span class="p">)</span>
+<span class="n">vehicles</span> <span class="o">=</span> <span class="n">anchor</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">left</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Vehicles&quot;</span><span class="p">)</span>
+
+<span class="n">preview</span><span class="p">(</span><span class="n">anchor</span><span class="p">,</span> <span class="n">raw_observations</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">vehicles</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">obs_only</span><span class="p">(</span><span class="n">line</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns numeric characters from the &quot;raw&quot; column relative to</span>
+<span class="sd">    the column cell being populated.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">line</span><span class="p">[</span><span class="s2">&quot;raw&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">()])</span>
+    <span class="k">return</span> <span class="n">v</span>
+
+<span class="k">def</span> <span class="nf">data_markers_only</span><span class="p">(</span><span class="n">line</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns non numeric characters from the &quot;raw&quot; column relative to</span>
+<span class="sd">    the column cell being populated.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">line</span><span class="p">[</span><span class="s2">&quot;raw&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">c</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">()])</span>
+    <span class="k">return</span> <span class="n">v</span>
+
+<span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
+    <span class="n">raw_observations</span><span class="p">,</span>
+    <span class="n">Column</span><span class="o">.</span><span class="n">horizontal_condition</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">,</span> <span class="n">obs_only</span><span class="p">),</span>
+    <span class="n">Column</span><span class="o">.</span><span class="n">horizontal_condition</span><span class="p">(</span><span class="s2">&quot;Data Marker&quot;</span><span class="p">,</span> <span class="n">data_markers_only</span><span class="p">),</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">left</span><span class="p">)),</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">vehicles</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">down</span><span class="p">)),</span>
+    <span class="n">drop</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;raw&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <table>
+                
+            <tr>
+                <td style="background-color:cyan">Anchor Cell</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#99ff99">raw</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#eeccff">Name</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#ffe066">Vehicles</td>
+            <tr>
+        
+            </table>
+
+            <body>
+                <h2>Unnamed Table</h2>
+                <table>
+                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td></tr>
+<tr><td style="background-color:lightgrey">1</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">2</td><td style="background-color:#ffe066">Trucks</td><td style="background-color:#ffe066">Cars</td><td style="background-color:cyan">Name</td></tr>
+<tr><td style="background-color:lightgrey">3</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">4</td><td style="background-color:#99ff99">5</td><td style="background-color:#99ff99">5</td><td style="background-color:#eeccff">John Lennon</td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:#99ff99">9</td><td style="background-color:#99ff99">6*</td><td style="background-color:#eeccff">Ringo Strr</td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:#99ff99">7</td><td style="background-color:#99ff99">7</td><td style="background-color:#eeccff">Mick Jagger</td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:#99ff99">9</td><td style="background-color:#99ff99">6**</td><td style="background-color:#eeccff">Keith Moon</td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:#99ff99">9</td><td style="background-color:white"></td><td style="background-color:#eeccff">Pete Townsend</td></tr>
+<tr><td style="background-color:lightgrey">9</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">10</td><td style="background-color:white">Key</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">11</td><td style="background-color:white">*</td><td style="background-color:white">Not counting foreign imports</td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">12</td><td style="background-color:white">**</td><td style="background-color:white">Not including white models</td><td style="background-color:white"></td></tr>
+
+                </table>
+            </body>
+            <br>
+        </html>
+    </div><div class="output text_html"><table>
+<thead>
+<tr><th style="text-align: right;">  Value</th><th>Data Marker  </th><th>Name         </th><th>Vehicles  </th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: right;">      5</td><td>             </td><td>John Lennon  </td><td>Trucks    </td></tr>
+<tr><td style="text-align: right;">      5</td><td>             </td><td>John Lennon  </td><td>Cars      </td></tr>
+<tr><td style="text-align: right;">      9</td><td>             </td><td>Ringo Strr   </td><td>Trucks    </td></tr>
+<tr><td style="text-align: right;">      6</td><td>*            </td><td>Ringo Strr   </td><td>Cars      </td></tr>
+<tr><td style="text-align: right;">      7</td><td>             </td><td>Mick Jagger  </td><td>Trucks    </td></tr>
+<tr><td style="text-align: right;">      7</td><td>             </td><td>Mick Jagger  </td><td>Cars      </td></tr>
+<tr><td style="text-align: right;">      9</td><td>             </td><td>Keith Moon   </td><td>Trucks    </td></tr>
+<tr><td style="text-align: right;">      6</td><td>**           </td><td>Keith Moon   </td><td>Cars      </td></tr>
+<tr><td style="text-align: right;">      9</td><td>             </td><td>Pete Townsend</td><td>Trucks    </td></tr>
+</tbody>
+</table></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -591,20 +682,20 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="against.html"
+       href="horizontal-conditions.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Against (Creating New Validators)</p>
+        <p class="prev-next-title">TidyData: Horizontal Conditions</p>
       </div>
     </a>
     <a class="right-next"
-       href="../advanced.html"
+       href="pandas.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Chapter 3: Advanced</p>
+        <p class="prev-next-title">Pandas</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -627,13 +718,6 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-data">Source Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-is-better-then-explicit">Conditional Is Better Then Explicit</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-ref">excel_ref()</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expand">expand()</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-validation">When to use Validation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-wide-and-validate-narrow">Select Wide and Validate Narrow</a></li>
 </ul>
   </nav></div>
 

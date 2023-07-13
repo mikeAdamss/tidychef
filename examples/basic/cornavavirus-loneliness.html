@@ -177,6 +177,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../../basics/tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../basics/tidydata-closest.html">TidyData: Closest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../basics/tidydata-constants.html">TidyData: Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../basics/tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
 </li>
@@ -192,6 +193,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l2"><a class="reference internal" href="../../intermediate/iterating.html">Iterating Tables/Sheets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../intermediate/horizontal-conditions.html">TidyData: Horizontal Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/data-markers.html">TidyData: Data Markers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../intermediate/pandas.html">Pandas</a></li>
 
 
@@ -223,8 +225,9 @@ const thebe_selector_output = ".output, .cell_output"
 
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../intermediate/intermediate.html">Basic Intermediate</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../intermediate/intermediate.html">Intermediate Examples</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../intermediate/human-development.html">Human Development</a></li>
+
 </ul>
 </li>
 </ul>
@@ -551,7 +554,7 @@ Adults aged 16 and over across Great Britain were asked "In the past seven days,
 
 <span class="c1"># Create a bounded preview inline but also write the full preview to path</span>
 <span class="n">preview</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">sex</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">,</span> <span class="n">lonliness</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A1:F20&quot;</span><span class="p">)</span>
-<span class="n">preview</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">sex</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">,</span> <span class="n">lonliness</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;loneliness.csv&quot;</span><span class="p">)</span>
+<span class="n">preview</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">sex</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">,</span> <span class="n">lonliness</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;loneliness.htmls&quot;</span><span class="p">)</span>
 
 
 <span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
@@ -652,8 +655,8 @@ Adults aged 16 and over across Great Britain were asked "In the past seven days,
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="outputs">
 <h1>Outputs<a class="headerlink" href="#outputs" title="Permalink to this heading">#</a></h1>
-<p>The full preview can be <span class="xref myst">downloaded here</span>.</p>
-<p>The tidy data can be <span class="xref myst">downloaded here</span> and a full inline preview of the tidydata generated is shown below.</p>
+<p>The full preview can be <a class="reference download internal" download="" href="../../_downloads/34708c94ade61d11df8ab2f22500b951/loneliness.html"><span class="xref download myst">downloaded here</span></a>.</p>
+<p>The tidy data can be <a class="reference download internal" download="" href="../../_downloads/34708c94ade61d11df8ab2f22500b951/loneliness.html"><span class="xref download myst">downloaded here</span></a> and a full inline preview of the tidydata generated is shown below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>

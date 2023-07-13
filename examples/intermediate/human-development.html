@@ -65,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Technical Reference" href="../../technical.html" />
-    <link rel="prev" title="Basic Intermediate" href="intermediate.html" />
+    <link rel="prev" title="Intermediate Examples" href="intermediate.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -177,6 +177,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../../basics/tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../basics/tidydata-closest.html">TidyData: Closest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../basics/tidydata-constants.html">TidyData: Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../basics/tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
 </li>
@@ -192,6 +193,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l2"><a class="reference internal" href="../../intermediate/iterating.html">Iterating Tables/Sheets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../intermediate/horizontal-conditions.html">TidyData: Horizontal Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/data-markers.html">TidyData: Data Markers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../intermediate/pandas.html">Pandas</a></li>
 
 
@@ -223,8 +225,9 @@ const thebe_selector_output = ".output, .cell_output"
 
 </ul>
 </li>
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="intermediate.html">Basic Intermediate</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="intermediate.html">Intermediate Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">Human Development</a></li>
+
 </ul>
 </li>
 </ul>
@@ -423,8 +426,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Human Development</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#outputs">Outputs</a></li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -559,7 +567,7 @@ document.write(`
     
 <span class="c1"># Selection that are the same for each iteration</span>
 <span class="n">area</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Area&quot;</span><span class="p">)</span>
-<span class="n">hdi_category</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_blank</span><span class="p">()</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">left</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;HDI Category&quot;</span><span class="p">)</span>
+<span class="n">hdi_category</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">re</span><span class="p">(</span><span class="s2">&quot;.*HUMAN DEVELOPMENT.*&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;HDI Category&quot;</span><span class="p">)</span>
 <span class="n">year_value</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     
 <span class="n">tidy_data_list</span> <span class="o">=</span> <span class="p">[]</span>
@@ -568,10 +576,11 @@ document.write(`
 <span class="c1"># the observable values being extracted.</span>
 <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">category</span><span class="p">,</span> <span class="n">observations</span> <span class="ow">in</span> <span class="n">input_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">observations</span> <span class="o">=</span> <span class="n">observations</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">)</span>
     <span class="n">preview</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">hdi_category</span><span class="p">,</span> <span class="n">area</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A12:M25&quot;</span><span class="p">)</span>
     <span class="n">tidy_data_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
         <span class="n">TidyData</span><span class="p">(</span>
-            <span class="n">observations</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">),</span>
+            <span class="n">observations</span><span class="p">,</span>
             <span class="n">Column</span><span class="p">(</span><span class="n">hdi_category</span><span class="o">.</span><span class="n">finds_observations_closest</span><span class="p">(</span><span class="n">down</span><span class="p">)),</span>
             <span class="n">Column</span><span class="p">(</span><span class="n">area</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">left</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">right</span><span class="p">)),</span>
             <span class="n">Column</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">,</span> <span class="n">year_value</span><span class="p">),</span>
@@ -581,7 +590,7 @@ document.write(`
     <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 
 <span class="n">all_tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="o">.</span><span class="n">from_tidy_list</span><span class="p">(</span><span class="n">tidy_data_list</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">all_tidy_data</span><span class="p">)</span>
+<span class="n">all_tidy_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;human-development.csv&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -613,7 +622,7 @@ document.write(`
             <table>
                 
             <tr>
-                <td style="background-color:cyan">Unnamed Selection: 0</td>
+                <td style="background-color:cyan">Value</td>
             <tr>
         
             <tr>
@@ -630,11 +639,11 @@ document.write(`
                 <h2>Table 3</h2>
                 <table>
                     <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td><td style="background-color:lightgrey">G</td><td style="background-color:lightgrey">H</td><td style="background-color:lightgrey">I</td><td style="background-color:lightgrey">J</td><td style="background-color:lightgrey">K</td><td style="background-color:lightgrey">L</td><td style="background-color:lightgrey">M</td></tr>
-<tr><td style="background-color:lightgrey">12</td><td style="background-color:#99ff99">HDI rank</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
-<tr><td style="background-color:lightgrey">13</td><td style="background-color:#99ff99"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Rank</td><td style="background-color:white"></td><td style="background-color:white">Value 
+<tr><td style="background-color:lightgrey">12</td><td style="background-color:white">HDI rank</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">13</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Rank</td><td style="background-color:white"></td><td style="background-color:white">Value 
  (%)</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
-<tr><td style="background-color:lightgrey">14</td><td style="background-color:#99ff99"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
-<tr><td style="background-color:lightgrey">15</td><td style="background-color:#99ff99"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">14</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">15</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
 <tr><td style="background-color:lightgrey">16</td><td style="background-color:#99ff99">HIGH HUMAN DEVELOPMENT</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
 <tr><td style="background-color:lightgrey">17</td><td style="background-color:cyan">21</td><td style="background-color:#eeccff">Hong Kong, China (SAR)</td><td style="background-color:white"></td><td style="background-color:white">..</td><td style="background-color:white"></td><td style="background-color:white">..</td><td style="background-color:white"></td><td style="background-color:white">1.5</td><td style="background-color:white">e</td><td style="background-color:white">..</td><td style="background-color:white"></td><td style="background-color:white">..</td><td style="background-color:white"></td></tr>
 <tr><td style="background-color:lightgrey">18</td><td style="background-color:cyan">25</td><td style="background-color:#eeccff">Singapore</td><td style="background-color:white"></td><td style="background-color:white">7</td><td style="background-color:white"></td><td style="background-color:white">5.2</td><td style="background-color:white"></td><td style="background-color:white">1.8</td><td style="background-color:white"></td><td style="background-color:white">7.5</td><td style="background-color:white"></td><td style="background-color:white">0</td><td style="background-color:white"></td></tr>
@@ -677,7 +686,7 @@ document.write(`
             <table>
                 
             <tr>
-                <td style="background-color:cyan">Unnamed Selection: 0</td>
+                <td style="background-color:cyan">Value</td>
             <tr>
         
             <tr>
@@ -694,11 +703,11 @@ document.write(`
                 <h2>Table 3</h2>
                 <table>
                     <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td><td style="background-color:lightgrey">G</td><td style="background-color:lightgrey">H</td><td style="background-color:lightgrey">I</td><td style="background-color:lightgrey">J</td><td style="background-color:lightgrey">K</td><td style="background-color:lightgrey">L</td><td style="background-color:lightgrey">M</td></tr>
-<tr><td style="background-color:lightgrey">12</td><td style="background-color:#99ff99">HDI rank</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
-<tr><td style="background-color:lightgrey">13</td><td style="background-color:#99ff99"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Rank</td><td style="background-color:white"></td><td style="background-color:white">Value 
+<tr><td style="background-color:lightgrey">12</td><td style="background-color:white">HDI rank</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">13</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Rank</td><td style="background-color:white"></td><td style="background-color:white">Value 
  (%)</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
-<tr><td style="background-color:lightgrey">14</td><td style="background-color:#99ff99"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
-<tr><td style="background-color:lightgrey">15</td><td style="background-color:#99ff99"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">14</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">15</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
 <tr><td style="background-color:lightgrey">16</td><td style="background-color:#99ff99">HIGH HUMAN DEVELOPMENT</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
 <tr><td style="background-color:lightgrey">17</td><td style="background-color:white">21</td><td style="background-color:#eeccff">Hong Kong, China (SAR)</td><td style="background-color:white"></td><td style="background-color:cyan">..</td><td style="background-color:white"></td><td style="background-color:white">..</td><td style="background-color:white"></td><td style="background-color:white">1.5</td><td style="background-color:white">e</td><td style="background-color:white">..</td><td style="background-color:white"></td><td style="background-color:white">..</td><td style="background-color:white"></td></tr>
 <tr><td style="background-color:lightgrey">18</td><td style="background-color:white">25</td><td style="background-color:#eeccff">Singapore</td><td style="background-color:white"></td><td style="background-color:cyan">7</td><td style="background-color:white"></td><td style="background-color:white">5.2</td><td style="background-color:white"></td><td style="background-color:white">1.8</td><td style="background-color:white"></td><td style="background-color:white">7.5</td><td style="background-color:white"></td><td style="background-color:white">0</td><td style="background-color:white"></td></tr>
@@ -741,7 +750,7 @@ document.write(`
             <table>
                 
             <tr>
-                <td style="background-color:cyan">Unnamed Selection: 0</td>
+                <td style="background-color:cyan">Value</td>
             <tr>
         
             <tr>
@@ -758,11 +767,11 @@ document.write(`
                 <h2>Table 3</h2>
                 <table>
                     <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td><td style="background-color:lightgrey">G</td><td style="background-color:lightgrey">H</td><td style="background-color:lightgrey">I</td><td style="background-color:lightgrey">J</td><td style="background-color:lightgrey">K</td><td style="background-color:lightgrey">L</td><td style="background-color:lightgrey">M</td></tr>
-<tr><td style="background-color:lightgrey">12</td><td style="background-color:#99ff99">HDI rank</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
-<tr><td style="background-color:lightgrey">13</td><td style="background-color:#99ff99"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Rank</td><td style="background-color:white"></td><td style="background-color:white">Value 
+<tr><td style="background-color:lightgrey">12</td><td style="background-color:white">HDI rank</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">13</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Rank</td><td style="background-color:white"></td><td style="background-color:white">Value 
  (%)</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
-<tr><td style="background-color:lightgrey">14</td><td style="background-color:#99ff99"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
-<tr><td style="background-color:lightgrey">15</td><td style="background-color:#99ff99"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">14</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">15</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
 <tr><td style="background-color:lightgrey">16</td><td style="background-color:#99ff99">HIGH HUMAN DEVELOPMENT</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
 <tr><td style="background-color:lightgrey">17</td><td style="background-color:white">21</td><td style="background-color:#eeccff">Hong Kong, China (SAR)</td><td style="background-color:white"></td><td style="background-color:white">..</td><td style="background-color:white"></td><td style="background-color:cyan">..</td><td style="background-color:white"></td><td style="background-color:white">1.5</td><td style="background-color:white">e</td><td style="background-color:white">..</td><td style="background-color:white"></td><td style="background-color:white">..</td><td style="background-color:white"></td></tr>
 <tr><td style="background-color:lightgrey">18</td><td style="background-color:white">25</td><td style="background-color:#eeccff">Singapore</td><td style="background-color:white"></td><td style="background-color:white">7</td><td style="background-color:white"></td><td style="background-color:cyan">5.2</td><td style="background-color:white"></td><td style="background-color:white">1.8</td><td style="background-color:white"></td><td style="background-color:white">7.5</td><td style="background-color:white"></td><td style="background-color:white">0</td><td style="background-color:white"></td></tr>
@@ -778,7 +787,21 @@ document.write(`
             </body>
             <br>
         </html>
-    </div><div class="output text_html"><table>
+    </div></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="outputs">
+<h1>Outputs<a class="headerlink" href="#outputs" title="Permalink to this heading">#</a></h1>
+<p>The tidy data can be <a class="reference download internal" download="" href="../../_downloads/b84c51965c067fa9c55210031883cd30/human-development.csv"><span class="xref download myst">downloaded here</span></a> and a full inline preview of the tidydata generated is shown below for those people who’d prefer to scroll.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">all_tidy_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
 <thead>
 <tr><th>Value  </th><th>HDI Category            </th><th>Area                              </th><th style="text-align: right;">  Year</th><th>Category                      </th></tr>
 </thead>
@@ -1168,7 +1191,6 @@ document.write(`
 </div>
 </div>
 </section>
-</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1207,7 +1229,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Basic Intermediate</p>
+        <p class="prev-next-title">Intermediate Examples</p>
       </div>
     </a>
     <a class="right-next"
@@ -1237,8 +1259,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Human Development</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#outputs">Outputs</a></li>
+</ul>
+
   </nav></div>
 
 </div></div>
