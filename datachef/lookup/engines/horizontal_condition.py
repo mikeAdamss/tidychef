@@ -4,7 +4,7 @@ from datachef.exceptions import (
     BadConditionalResolverError,
     HorizontalConditionalHeaderError,
 )
-from datachef.models.source.cell import Cell
+from datachef.models.source.cell import Cell, VirtualCell
 
 from ..base import BaseLookupEngine
 
@@ -35,8 +35,9 @@ class HorizontalCondition(BaseLookupEngine):
         self.label = label
         self.resolver = resolver
         self.priority = priority
+        self.table = table
 
-    def resolve(self, _: Cell, cells_on_row: Dict[str, str]) -> str:
+    def resolve(self, _: Cell, cells_on_row: Dict[str, str]) -> VirtualCell:
         """
         For a given observation row (as denoted by the unused Cell argument),
         resolve the
@@ -51,6 +52,8 @@ class HorizontalCondition(BaseLookupEngine):
         if not isinstance(cells_on_row, dict):
             raise BadConditionalResolverError(
                 f"""
+                Issue encountered when processing table: "{self.table}".
+
                 A condition resolver should take an argument of type:
                 Dict[str, str] and return type str.
                                               
@@ -67,6 +70,8 @@ class HorizontalCondition(BaseLookupEngine):
         ):
             raise BadConditionalResolverError(
                 f"""
+                Issue encountered when processing table: "{self.table}".
+
                 A condition resolver should take an argument of type:
                 Dict[str, str] and return type str.
                                               
@@ -82,6 +87,8 @@ class HorizontalCondition(BaseLookupEngine):
             if not isinstance(column_value, str):
                 raise BadConditionalResolverError(
                     f"""
+                    Issue encountered when processing table: "{self.table}".
+
                     A condition resolver should take an argument of type:
                     Dict[str, str] and return type str.
                                                     
@@ -91,11 +98,13 @@ class HorizontalCondition(BaseLookupEngine):
                     return value: {column_value} 
                     """
                 )
-            return column_value
+            return VirtualCell(value=column_value)
 
         except KeyError as err:
             raise HorizontalConditionalHeaderError(
                 f"""
+                Issue encountered when processing table: "{self.table}".
+
                 Unable to resolve lookup for "{self.label}".
                                                
                 The column header key "{err.args[0]}" was specified in:

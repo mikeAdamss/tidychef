@@ -44,21 +44,7 @@ def test_single_horizontal_conditional():
     )
 
     resolved = horizontal_conditional.resolve("", {"foo": "fooval", "bar": "barval"})
-    assert resolved == "foovalbarval"
-
-
-def test_single_horizontal_conditional_raises_for_missing_key():
-    """
-    Test a single simple horizontal conditional
-    """
-
-    horizontal_conditional = HorizontalCondition(
-        "", resolver=lambda x: x["foo"] + x["bar"]
-    )
-
-    resolved = horizontal_conditional.resolve("", {"foo": "fooval", "bar": "barval"})
-    assert resolved == "foovalbarval"
-
+    assert resolved.value == "foovalbarval"
 
 def test_horizontal_conditional_header_error_raises():
     """

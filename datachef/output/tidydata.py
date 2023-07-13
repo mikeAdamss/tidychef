@@ -205,12 +205,38 @@ class TidyData(BaseOutput):
             grid = []
             drop_count = 0
 
-            header_row = [self.observations.label]
-            for column in self.columns:
+            # We need to carefully construct our lists of lists
+            # such that the HorizontalCondition columns are created last
+            # Ordering will be restored at the end via this list.
+            ordered_column_headers = [self.observations.label] + [x.label for x in self.columns]
+
+            # Obs label
+            if self.observations.label in self.drop:
+                unordered_header_row = []
+                drop_count += 1
+            else:
+                unordered_header_row = [self.observations.label]
+
+            # Standard Column labels
+            for column in [x for x in self.columns if not isinstance(x.engine, HorizontalCondition)]:
                 if column.label not in self.drop:
-                    header_row.append(column.label)
+                    unordered_header_row.append(column.label)
                 else:
                     drop_count += 1
+                
+            # Horizontal Condition
+            for column in [x for x in self.columns if isinstance(x.engine, HorizontalCondition)]:
+                if column.label not in self.drop:
+                    unordered_header_row.append(column.label)
+                else:
+                    drop_count += 1
+
+            # Conditional column labels
+            header_row = []
+            for col in ordered_column_headers:
+                if col in unordered_header_row:
+                    header_row.append(col)
+                    
             grid.append(header_row)
 
             # If user has opted to drop a column that does
@@ -228,26 +254,33 @@ class TidyData(BaseOutput):
                 )
 
             for observation in self.observations:
-                line = [
-                    observation.value
-                    if not self.obs_apply
-                    else self.obs_apply(observation.value)
-                ]
+                row_as_dict = {}
+
+                # note we ALWAYS want values in the column_value_dict
+                # regardless of whether we're dropping the column
                 column_value_dict: Dict[str, str] = {}
+                column_value_dict[self.observations.label] = observation.value
+
+                if self.observations.label not in self.drop:
+                    row_as_dict[self.observations.label] = (
+                        observation.value
+                        if not self.obs_apply
+                        else self.obs_apply(observation.value)
+                    )
 
                 # Resolve the standard columns first
                 standard_columns = [
                     x
                     for x in self.columns
                     if not isinstance(x.engine, HorizontalCondition)
-                    and x.label not in self.drop
                 ]
                 for column in standard_columns:
-                    ob_value = column.resolve_column_cell_from_obs_cell(
+                    col_value = column.resolve_column_cell_from_obs_cell(
                         observation
                     ).value
-                    line.append(ob_value)
-                    column_value_dict[column.label] = ob_value
+                    column_value_dict[column.label] = col_value
+                    if column.label not in self.drop:
+                        row_as_dict[column.label] = col_value
 
                 # Now we know the standard column values, resolve the
                 # horizontal conditions
@@ -258,13 +291,21 @@ class TidyData(BaseOutput):
                 for i in priorities:
                     for column in condition_columns:
                         if column.engine.priority == i:
-                            ob_value = column.resolve_column_cell_from_obs_cell(
+                            col_value = column.resolve_column_cell_from_obs_cell(
                                 observation, column_value_dict
-                            )
-
+                            ).value
+                            
+                            column_value_dict[column.label] = col_value
                             if column.label not in self.drop:
-                                line.append(ob_value)
-                            column_value_dict[column.label] = ob_value
+                                row_as_dict[column.label] = col_value
+
+                # Order for output
+                line = []
+                for col in ordered_column_headers:
+                    value_to_output = row_as_dict.get(col, None)
+                    if value_to_output is not None:
+                        line.append(value_to_output)
+                    
                 grid.append(line)
 
             self._data = grid

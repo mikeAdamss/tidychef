@@ -23,6 +23,7 @@ chapters:
     - file: basics/tidydata-columns-direct
     - file: basics/tidydata-closest
     - file: basics/tidydata-constants
+    - file: basics/tidydata-obs-formatting
     - file: basics/tidydata-writing
 
 - file: intermediate
@@ -31,6 +32,7 @@ chapters:
     - file: intermediate/concatenation
     - file: intermediate/iterating
     - file: intermediate/horizontal-conditions
+    - file: intermediate/data-markers
     - file: intermediate/pandas
     - file: intermediate/validation
     - file: intermediate/within

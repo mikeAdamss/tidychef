@@ -123,6 +123,41 @@ def test_tidydata_internal_representation_with_dropped_column_is_as_expected(
     assert len(tidy) == 19
 
 
+def test_tidydata_internal_representation_with_dropped_column_is_as_expected(
+    tidy: TidyData,
+):
+    """
+    Test that the ._data attribute of TidyData contains the expected
+    data once _transform() has been called when we drop the original
+    observation column
+    """
+
+    tidy.drop = ["Value", "Assets"]
+    tidy._transform()
+    expected_data = [
+        ["Genre", "Member"],
+        ["Rock & Roll", "John"],
+        ["Rock & Roll", "John"],
+        ["Rock & Roll", "John"],
+        ["Rock & Roll", "Keith"],
+        ["Rock & Roll", "Keith"],
+        ["Rock & Roll", "Keith"],
+        ["Rock & Roll", "Paul"],
+        ["Rock & Roll", "Paul"],
+        ["Rock & Roll", "Paul"],
+        ["Rock & Roll", "Mick"],
+        ["Rock & Roll", "Mick"],
+        ["Rock & Roll", "Mick"],
+        ["Rock & Roll", "George"],
+        ["Rock & Roll", "George"],
+        ["Rock & Roll", "George"],
+        ["Rock & Roll", "Charlie"],
+        ["Rock & Roll", "Charlie"],
+        ["Rock & Roll", "Charlie"],
+    ]
+    assert tidy._data == expected_data
+    assert len(tidy) == 19
+
 def test_tidydata_drop_raises_expected_error_for_non_existent_column(tidy: TidyData):
     """
     Confirm the expected error is raised where we are trying to drop
@@ -246,6 +281,7 @@ def test_create_tidydata_with_condition_column():
         Column.horizontal_condition(
             "Condition2", lambda col: col["Condition1"] + "foo", priority=1
         ),
+        drop=["Condition2"]
     )._transform()
 
 
