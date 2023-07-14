@@ -50,14 +50,18 @@ class LiveTable:
     extend a Table of cells (.filtered) via comparing the two. This enables the
     easy extension of a cell selection as well as the filtering down of one.
 
-    :param pristine:
+    :param data_table: A datachef Table object holding the cells representing
+    a table.
+    :param name: The name of the table where it has a name
+    :param source: The filename, url or identifier of the source that has
+    been ingested.
     """
 
     def __init__(self, data_table: Table, name: str = None, source: str = None):
         self.pristine: Table = data_table
         self.filtered: Table = copy.deepcopy(data_table)
         self._name: Optional[str] = name
-        self.source: Union[Path, str] = source
+        self.source: Optional[Union[Path, str]] = source
 
         # Label for a given selection
         self._label: Optional[str] = None
@@ -73,6 +77,8 @@ class LiveTable:
     def label_as(self, label: str):
         """
         Assign a label to this specific selection
+
+        :param label: The label we want to set.
         """
         assert isinstance(label, str), "A label for a selection must be of type string"
         self._label = label
@@ -103,6 +109,9 @@ class LiveTable:
     def cells(self, cells: List[Cell]):
         """
         Setter for the cells property
+
+        :param cells: A lost of cells representing the
+        currently selected cells from the table.
         """
         self.filtered.cells = cells
 
@@ -139,6 +148,10 @@ class LiveTable:
         Allows subtraction of one selection from the same distinct
         and currently selected table from another. Provided they
         are derived from the same initial BaseInput.
+
+        :param other_input: Another instance of this class
+        whose selected cells we wish to subtract from the
+        selected cells of this instance.
         """
 
         if self.signature != other_input.signature:
@@ -160,6 +173,10 @@ class LiveTable:
         Allows the union of one selection from the same distinct
         and currently selected table with another. Provided they
         are derived from the same initial BaseInput.
+
+        :param other_input: Another instance of this class
+        whose cells we want to Union | with the cells of
+        this class.
         """
         if self.signature != other_input.signature:
             raise UnalignedTableOperation(
