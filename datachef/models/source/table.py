@@ -9,7 +9,7 @@ import uuid
 from pathlib import Path
 from typing import List, Optional, Union
 
-from datachef.exceptions import InvalidTableSignatures, UnalignedTableOperation
+from datachef.exceptions import UnalignedTableOperation
 from datachef.models.source.cell import BaseCell, Cell
 from datachef.selection import datafuncs as dfc
 from datachef.utils.decorators import dontmutate
@@ -21,6 +21,12 @@ class Table:
     """
 
     def __init__(self, cells: Optional[List[Cell]] = None):
+        """
+        Represents a table of data in the form of a list of cell objects.
+
+        :param cells: A list of Cell objects representing the contents
+        of a tabulated data source.
+        """
         self.cells = cells
         self._signature = str(uuid.uuid4())
 
@@ -43,21 +49,21 @@ class LiveTable:
     Keeping track of the pristine cell selection (the initial table) allows us to
     extend a Table of cells (.filtered) via comparing the two. This enables the
     easy extension of a cell selection as well as the filtering down of one.
+
+    :param pristine: 
     """
 
     def __init__(
-        self, pristine: Table, filtered: Table, _name: str = None, source: str = None
+        self, data_table: Table, name: str = None, source: str = None
     ):
-        self.pristine: Table = pristine
-        self.filtered: Table = filtered
-        self._name: Optional[str] = _name
+        self.pristine: Table = data_table
+        self.filtered: Table = copy.deepcopy(data_table)
+        self._name: Optional[str] = name
         self.source: Union[Path, str] = source
 
-        # Optional label for a given selection that's used when
-        # working with previews
+        # Label for a given selection
         self._label: Optional[str] = None
 
-        self.confirm_valid()
 
     @property
     def label(self):
@@ -120,32 +126,6 @@ class LiveTable:
     @name.setter
     def name(self, name: str):
         self._name = name
-
-    def confirm_valid(self):
-        """
-        Confirm class is validly constructed.
-        """
-        if self.pristine._signature != self.filtered._signature:
-            raise InvalidTableSignatures(
-                "This class:LiveTable is invalid. A LiveTable must be "
-                "instantiated from tables with matching signatures."
-            )
-
-    @staticmethod
-    def from_table(
-        table: Table,
-        source: Optional[Union[Path, str]] = None,
-        name: Optional[str] = None,
-    ) -> LiveTable:
-        """
-        Given a table and optional it's name, create a livetable.
-        """
-        return LiveTable(
-            table,
-            copy.deepcopy(table),
-            _name=name,
-            source=source,
-        )
 
     @property
     def signature(self) -> str:

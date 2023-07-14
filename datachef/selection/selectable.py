@@ -55,7 +55,7 @@ class Selectable(LiveTable):
     """
     Inherits from LiveTable to add cell selection methods that are generic to all tabulated inputs.
     """
-
+    
     def assert_one(self):
         """
         Assert that the current selection contains exactly one cell

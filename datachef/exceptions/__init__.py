@@ -17,7 +17,6 @@ from .common import (
     HorizontalConditionalHeaderError,
     ImpossibleLookupError,
     InvalidCellObjectError,
-    InvalidTableSignatures,
     LoneValueOnMultipleCellsError,
     MisalignedHeadersError,
     MissingLabelError,

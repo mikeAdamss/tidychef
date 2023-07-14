@@ -31,6 +31,7 @@ class HorizontalCondition(BaseLookupEngine):
         :param resolver: The callable that will create the new column value
         :param priority: The priority used when resolving multiple horizontal
         conditions, 0 is highest priority and the default.
+        :param table: the name of the table data is being extracted from
         """
         self.label = label
         self.resolver = resolver

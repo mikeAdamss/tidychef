@@ -1,7 +1,7 @@
 """
 Holds the code that defines the python list_of_lists reader.
 """
-import copy
+
 from typing import Callable, List, Optional
 
 from datachef.acquire.base import BaseReader
@@ -71,4 +71,4 @@ class ListOfListsReader(BaseReader):
             for x_index, cell_value in enumerate(row):
                 table.add_cell(Cell(x=x_index, y=y_index, value=str(cell_value)))
 
-        return selectable(table, copy.deepcopy(table))
+        return selectable(table)

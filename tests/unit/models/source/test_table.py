@@ -1,8 +1,5 @@
-import copy
-
 import pytest
 
-from datachef.exceptions import InvalidTableSignatures
 from datachef.models.source.table import LiveTable, Table
 from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
@@ -23,35 +20,9 @@ def test_livetable_name_setter_and_getter(selectable_simple1: Selectable):
     assert selectable_simple1.name == "foo"
 
 
-def test_livetable_with_unmatched_signatues_raises(
-    selectable_simple1: Selectable,
-):
-    """
-    Test that where we create a class:LiveTable from two tables with
-    unmatching signatures the appropriate error is raised.
-    """
-
-    table1 = Table(selectable_simple1.pcells)
-    table2 = Table(selectable_simple1.pcells)
-
-    with pytest.raises(InvalidTableSignatures):
-        LiveTable(table1, table2)
-
-
 def test_tables_have_expected_length(selectable_simple1: Selectable):
     """
     Test that tables return the expected len
     """
 
     assert len(selectable_simple1) == 2600
-
-
-def test_livetable_from_table(selectable_simple1: Selectable):
-    """
-    Test that tables return the expected len
-    """
-
-    table = Table(selectable_simple1.cells)
-    live_table: LiveTable = LiveTable.from_table(table, name="my table")
-
-    assert live_table.name == "my table"

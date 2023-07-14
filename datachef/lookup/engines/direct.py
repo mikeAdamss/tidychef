@@ -44,6 +44,7 @@ class Directly(BaseLookupEngine):
         by this lookup engine.
         :param: direction: one of up,down,left,right,above,below
         :param: Selection: the selection of cells that hold the column values being looked to.
+        :param table: the name of the table data is being extracted from
         """
         self.table = table
         self.label = label

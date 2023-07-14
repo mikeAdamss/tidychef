@@ -2,7 +2,6 @@
 Holds the code that defines the local xlsx reader.
 """
 
-import copy
 import io
 from pathlib import Path
 from typing import Callable, List, Optional, Union
@@ -128,8 +127,7 @@ class HttpXlsReader(BaseReader):
                     )
 
             datachef_selectables.append(
-                selectable(
-                    table, copy.deepcopy(table), source=source, _name=worksheet_name
+                selectable(table, source=source, name=worksheet_name
                 )
             )
         return datachef_selectables

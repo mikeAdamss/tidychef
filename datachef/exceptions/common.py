@@ -50,16 +50,6 @@ class UnalignedTableOperation(Exception):
         self.msg = msg
 
 
-class InvalidTableSignatures(Exception):
-    """
-    Raised where someone is constructing a LiveTable from two
-    non identical tables.
-    """
-
-    def __init__(self, msg):
-        self.msg = msg
-
-
 class OutOfBoundsError(Exception):
     """
     Raised when a users attempts to select or reference a cell

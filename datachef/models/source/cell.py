@@ -21,6 +21,9 @@ from .cellformat import CellFormatting
 class BaseCell:
     """
     A primitive non value holding cell construct.
+
+    :param x: Index on the horizontal axis
+    :param y: Index on the vertical axis
     """
 
     x: int
@@ -158,11 +161,17 @@ class VirtualCell(BaseCell):
 class Cell(BaseCell):
     """
     Denotes a cell of data from a tabulated data source
+
+    :param value: The contents of the cell as a string
+    :param x: Index on the horizontal axis
+    :param y: Index on the vertical axis
+    :param cellformat: Optional attribute to hold format
+    specific cell attributes
     """
 
-    value: Optional[str] = None
-    x: Optional[str] = None
-    y: Optional[str] = None
+    value: str
+    x: int
+    y: int
 
     # Optional as some tabulated formats (eg csv) do not have
     # cell formatting.

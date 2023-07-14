@@ -59,6 +59,7 @@ class Within(BaseLookupEngine):
         cell range to scan.
         :param end: a direction with an altered positional offset to indicate end of
         cell range to scan.
+        :param table: the name of the table data is being extracted from
         """
         self.label = label
         self.table = table

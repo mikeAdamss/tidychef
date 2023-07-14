@@ -2,7 +2,6 @@
 Holds the code that defines the local csv reader.
 """
 
-import copy
 import csv
 from pathlib import Path
 from typing import Callable, Optional, Union
@@ -88,4 +87,4 @@ class LocalCsvReader(BaseReader):
                 for x_index, cell_value in enumerate(row):
                     table.add_cell(Cell(x=x_index, y=y_index, value=cell_value))
 
-        return selectable(table, copy.deepcopy(table), source=source)
+        return selectable(table, source=source)
