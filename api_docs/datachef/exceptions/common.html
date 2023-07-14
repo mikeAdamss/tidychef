@@ -121,15 +121,6 @@
 
             </li>
             <li>
-                    <a class="class" href="#PreviewBoundarySpecificationError">PreviewBoundarySpecificationError</a>
-                            <ul class="memberlist">
-                        <li>
-                                <a class="function" href="#PreviewBoundarySpecificationError.__init__">PreviewBoundarySpecificationError</a>
-                        </li>
-                </ul>
-
-            </li>
-            <li>
                     <a class="class" href="#MisalignedHeadersError">MisalignedHeadersError</a>
                             <ul class="memberlist">
                         <li>
@@ -289,46 +280,36 @@
 </span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>
 </span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>
-</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a><span class="k">class</span> <span class="nc">PreviewBoundarySpecificationError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a><span class="k">class</span> <span class="nc">MisalignedHeadersError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
 </span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a><span class="sd">    Raised where a user is trying to create a preview with a</span>
-</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a><span class="sd">    set boundary but has provided incorrect parameters.</span>
-</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a>
-</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
-</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a>
+</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a><span class="sd">    Raised where a user is attempting to join together two</span>
+</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a><span class="sd">    TidyData outputs but those outputs do not have the</span>
+</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a><span class="sd">    same column headers.</span>
+</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>
+</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a>
-</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a><span class="k">class</span> <span class="nc">MisalignedHeadersError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a><span class="sd">    Raised where a user is attempting to join together two</span>
-</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a><span class="sd">    TidyData outputs but those outputs do not have the</span>
-</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a><span class="sd">    same column headers.</span>
+</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a>
+</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a><span class="k">class</span> <span class="nc">CellValidationError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a><span class="sd">    Raised where we&#39;re validated a call value and</span>
+</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a><span class="sd">    found it to me invalid.</span>
 </span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a>
 </span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
 </span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>
 </span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>
-</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a><span class="k">class</span> <span class="nc">CellValidationError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a><span class="k">class</span> <span class="nc">DroppingNonColumnError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
 </span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a><span class="sd">    Raised where we&#39;re validated a call value and</span>
-</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a><span class="sd">    found it to me invalid.</span>
-</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a>
-</span><span id="L-140"><a href="#L-140"><span class="linenos">140</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
-</span><span id="L-142"><a href="#L-142"><span class="linenos">142</span></a>
-</span><span id="L-143"><a href="#L-143"><span class="linenos">143</span></a>
-</span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a><span class="k">class</span> <span class="nc">DroppingNonColumnError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-</span><span id="L-145"><a href="#L-145"><span class="linenos">145</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a><span class="sd">    Raised where a user is trying to drop a column</span>
-</span><span id="L-147"><a href="#L-147"><span class="linenos">147</span></a><span class="sd">    during the transformation to tidy data but that</span>
-</span><span id="L-148"><a href="#L-148"><span class="linenos">148</span></a><span class="sd">    column does not exist.</span>
-</span><span id="L-149"><a href="#L-149"><span class="linenos">149</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-150"><a href="#L-150"><span class="linenos">150</span></a>
-</span><span id="L-151"><a href="#L-151"><span class="linenos">151</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="L-152"><a href="#L-152"><span class="linenos">152</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a><span class="sd">    Raised where a user is trying to drop a column</span>
+</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a><span class="sd">    during the transformation to tidy data but that</span>
+</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a><span class="sd">    column does not exist.</span>
+</span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-140"><a href="#L-140"><span class="linenos">140</span></a>
+</span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="L-142"><a href="#L-142"><span class="linenos">142</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -907,61 +888,6 @@ column value is missing.</p>
                                 </dl>
                             </div>
                 </section>
-                <section id="PreviewBoundarySpecificationError">
-                            <input id="PreviewBoundarySpecificationError-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr class">
-            
-    <span class="def">class</span>
-    <span class="name">PreviewBoundarySpecificationError</span><wbr>(<span class="base">builtins.Exception</span>):
-
-                <label class="view-source-button" for="PreviewBoundarySpecificationError-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#PreviewBoundarySpecificationError"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="PreviewBoundarySpecificationError-114"><a href="#PreviewBoundarySpecificationError-114"><span class="linenos">114</span></a><span class="k">class</span> <span class="nc">PreviewBoundarySpecificationError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-</span><span id="PreviewBoundarySpecificationError-115"><a href="#PreviewBoundarySpecificationError-115"><span class="linenos">115</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="PreviewBoundarySpecificationError-116"><a href="#PreviewBoundarySpecificationError-116"><span class="linenos">116</span></a><span class="sd">    Raised where a user is trying to create a preview with a</span>
-</span><span id="PreviewBoundarySpecificationError-117"><a href="#PreviewBoundarySpecificationError-117"><span class="linenos">117</span></a><span class="sd">    set boundary but has provided incorrect parameters.</span>
-</span><span id="PreviewBoundarySpecificationError-118"><a href="#PreviewBoundarySpecificationError-118"><span class="linenos">118</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="PreviewBoundarySpecificationError-119"><a href="#PreviewBoundarySpecificationError-119"><span class="linenos">119</span></a>
-</span><span id="PreviewBoundarySpecificationError-120"><a href="#PreviewBoundarySpecificationError-120"><span class="linenos">120</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="PreviewBoundarySpecificationError-121"><a href="#PreviewBoundarySpecificationError-121"><span class="linenos">121</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
-</span></pre></div>
-
-
-            <div class="docstring"><p>Raised where a user is trying to create a preview with a
-set boundary but has provided incorrect parameters.</p>
-</div>
-
-
-                            <div id="PreviewBoundarySpecificationError.__init__" class="classattr">
-                                        <input id="PreviewBoundarySpecificationError.__init__-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr function">
-            
-        <span class="name">PreviewBoundarySpecificationError</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">msg</span></span>)</span>
-
-                <label class="view-source-button" for="PreviewBoundarySpecificationError.__init__-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#PreviewBoundarySpecificationError.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="PreviewBoundarySpecificationError.__init__-120"><a href="#PreviewBoundarySpecificationError.__init__-120"><span class="linenos">120</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="PreviewBoundarySpecificationError.__init__-121"><a href="#PreviewBoundarySpecificationError.__init__-121"><span class="linenos">121</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
-</span></pre></div>
-
-
-    
-
-                            </div>
-                            <div class="inherited">
-                                <h5>Inherited Members</h5>
-                                <dl>
-                                    <div><dt>builtins.BaseException</dt>
-                                <dd id="PreviewBoundarySpecificationError.with_traceback" class="function">with_traceback</dd>
-
-            </div>
-                                </dl>
-                            </div>
-                </section>
                 <section id="MisalignedHeadersError">
                             <input id="MisalignedHeadersError-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr class">
@@ -973,15 +899,15 @@ set boundary but has provided incorrect parameters.</p>
 
     </div>
     <a class="headerlink" href="#MisalignedHeadersError"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="MisalignedHeadersError-124"><a href="#MisalignedHeadersError-124"><span class="linenos">124</span></a><span class="k">class</span> <span class="nc">MisalignedHeadersError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-</span><span id="MisalignedHeadersError-125"><a href="#MisalignedHeadersError-125"><span class="linenos">125</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="MisalignedHeadersError-126"><a href="#MisalignedHeadersError-126"><span class="linenos">126</span></a><span class="sd">    Raised where a user is attempting to join together two</span>
-</span><span id="MisalignedHeadersError-127"><a href="#MisalignedHeadersError-127"><span class="linenos">127</span></a><span class="sd">    TidyData outputs but those outputs do not have the</span>
-</span><span id="MisalignedHeadersError-128"><a href="#MisalignedHeadersError-128"><span class="linenos">128</span></a><span class="sd">    same column headers.</span>
-</span><span id="MisalignedHeadersError-129"><a href="#MisalignedHeadersError-129"><span class="linenos">129</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="MisalignedHeadersError-130"><a href="#MisalignedHeadersError-130"><span class="linenos">130</span></a>
-</span><span id="MisalignedHeadersError-131"><a href="#MisalignedHeadersError-131"><span class="linenos">131</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="MisalignedHeadersError-132"><a href="#MisalignedHeadersError-132"><span class="linenos">132</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="MisalignedHeadersError-114"><a href="#MisalignedHeadersError-114"><span class="linenos">114</span></a><span class="k">class</span> <span class="nc">MisalignedHeadersError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="MisalignedHeadersError-115"><a href="#MisalignedHeadersError-115"><span class="linenos">115</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="MisalignedHeadersError-116"><a href="#MisalignedHeadersError-116"><span class="linenos">116</span></a><span class="sd">    Raised where a user is attempting to join together two</span>
+</span><span id="MisalignedHeadersError-117"><a href="#MisalignedHeadersError-117"><span class="linenos">117</span></a><span class="sd">    TidyData outputs but those outputs do not have the</span>
+</span><span id="MisalignedHeadersError-118"><a href="#MisalignedHeadersError-118"><span class="linenos">118</span></a><span class="sd">    same column headers.</span>
+</span><span id="MisalignedHeadersError-119"><a href="#MisalignedHeadersError-119"><span class="linenos">119</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="MisalignedHeadersError-120"><a href="#MisalignedHeadersError-120"><span class="linenos">120</span></a>
+</span><span id="MisalignedHeadersError-121"><a href="#MisalignedHeadersError-121"><span class="linenos">121</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="MisalignedHeadersError-122"><a href="#MisalignedHeadersError-122"><span class="linenos">122</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -1001,8 +927,8 @@ same column headers.</p>
 
     </div>
     <a class="headerlink" href="#MisalignedHeadersError.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="MisalignedHeadersError.__init__-131"><a href="#MisalignedHeadersError.__init__-131"><span class="linenos">131</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="MisalignedHeadersError.__init__-132"><a href="#MisalignedHeadersError.__init__-132"><span class="linenos">132</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="MisalignedHeadersError.__init__-121"><a href="#MisalignedHeadersError.__init__-121"><span class="linenos">121</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="MisalignedHeadersError.__init__-122"><a href="#MisalignedHeadersError.__init__-122"><span class="linenos">122</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -1030,14 +956,14 @@ same column headers.</p>
 
     </div>
     <a class="headerlink" href="#CellValidationError"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="CellValidationError-135"><a href="#CellValidationError-135"><span class="linenos">135</span></a><span class="k">class</span> <span class="nc">CellValidationError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-</span><span id="CellValidationError-136"><a href="#CellValidationError-136"><span class="linenos">136</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="CellValidationError-137"><a href="#CellValidationError-137"><span class="linenos">137</span></a><span class="sd">    Raised where we&#39;re validated a call value and</span>
-</span><span id="CellValidationError-138"><a href="#CellValidationError-138"><span class="linenos">138</span></a><span class="sd">    found it to me invalid.</span>
-</span><span id="CellValidationError-139"><a href="#CellValidationError-139"><span class="linenos">139</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="CellValidationError-140"><a href="#CellValidationError-140"><span class="linenos">140</span></a>
-</span><span id="CellValidationError-141"><a href="#CellValidationError-141"><span class="linenos">141</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="CellValidationError-142"><a href="#CellValidationError-142"><span class="linenos">142</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="CellValidationError-125"><a href="#CellValidationError-125"><span class="linenos">125</span></a><span class="k">class</span> <span class="nc">CellValidationError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="CellValidationError-126"><a href="#CellValidationError-126"><span class="linenos">126</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="CellValidationError-127"><a href="#CellValidationError-127"><span class="linenos">127</span></a><span class="sd">    Raised where we&#39;re validated a call value and</span>
+</span><span id="CellValidationError-128"><a href="#CellValidationError-128"><span class="linenos">128</span></a><span class="sd">    found it to me invalid.</span>
+</span><span id="CellValidationError-129"><a href="#CellValidationError-129"><span class="linenos">129</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="CellValidationError-130"><a href="#CellValidationError-130"><span class="linenos">130</span></a>
+</span><span id="CellValidationError-131"><a href="#CellValidationError-131"><span class="linenos">131</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="CellValidationError-132"><a href="#CellValidationError-132"><span class="linenos">132</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -1056,8 +982,8 @@ found it to me invalid.</p>
 
     </div>
     <a class="headerlink" href="#CellValidationError.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="CellValidationError.__init__-141"><a href="#CellValidationError.__init__-141"><span class="linenos">141</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="CellValidationError.__init__-142"><a href="#CellValidationError.__init__-142"><span class="linenos">142</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="CellValidationError.__init__-131"><a href="#CellValidationError.__init__-131"><span class="linenos">131</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="CellValidationError.__init__-132"><a href="#CellValidationError.__init__-132"><span class="linenos">132</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -1085,15 +1011,15 @@ found it to me invalid.</p>
 
     </div>
     <a class="headerlink" href="#DroppingNonColumnError"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="DroppingNonColumnError-145"><a href="#DroppingNonColumnError-145"><span class="linenos">145</span></a><span class="k">class</span> <span class="nc">DroppingNonColumnError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-</span><span id="DroppingNonColumnError-146"><a href="#DroppingNonColumnError-146"><span class="linenos">146</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="DroppingNonColumnError-147"><a href="#DroppingNonColumnError-147"><span class="linenos">147</span></a><span class="sd">    Raised where a user is trying to drop a column</span>
-</span><span id="DroppingNonColumnError-148"><a href="#DroppingNonColumnError-148"><span class="linenos">148</span></a><span class="sd">    during the transformation to tidy data but that</span>
-</span><span id="DroppingNonColumnError-149"><a href="#DroppingNonColumnError-149"><span class="linenos">149</span></a><span class="sd">    column does not exist.</span>
-</span><span id="DroppingNonColumnError-150"><a href="#DroppingNonColumnError-150"><span class="linenos">150</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="DroppingNonColumnError-151"><a href="#DroppingNonColumnError-151"><span class="linenos">151</span></a>
-</span><span id="DroppingNonColumnError-152"><a href="#DroppingNonColumnError-152"><span class="linenos">152</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="DroppingNonColumnError-153"><a href="#DroppingNonColumnError-153"><span class="linenos">153</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="DroppingNonColumnError-135"><a href="#DroppingNonColumnError-135"><span class="linenos">135</span></a><span class="k">class</span> <span class="nc">DroppingNonColumnError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="DroppingNonColumnError-136"><a href="#DroppingNonColumnError-136"><span class="linenos">136</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="DroppingNonColumnError-137"><a href="#DroppingNonColumnError-137"><span class="linenos">137</span></a><span class="sd">    Raised where a user is trying to drop a column</span>
+</span><span id="DroppingNonColumnError-138"><a href="#DroppingNonColumnError-138"><span class="linenos">138</span></a><span class="sd">    during the transformation to tidy data but that</span>
+</span><span id="DroppingNonColumnError-139"><a href="#DroppingNonColumnError-139"><span class="linenos">139</span></a><span class="sd">    column does not exist.</span>
+</span><span id="DroppingNonColumnError-140"><a href="#DroppingNonColumnError-140"><span class="linenos">140</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="DroppingNonColumnError-141"><a href="#DroppingNonColumnError-141"><span class="linenos">141</span></a>
+</span><span id="DroppingNonColumnError-142"><a href="#DroppingNonColumnError-142"><span class="linenos">142</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="DroppingNonColumnError-143"><a href="#DroppingNonColumnError-143"><span class="linenos">143</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -1113,8 +1039,8 @@ column does not exist.</p>
 
     </div>
     <a class="headerlink" href="#DroppingNonColumnError.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="DroppingNonColumnError.__init__-152"><a href="#DroppingNonColumnError.__init__-152"><span class="linenos">152</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="DroppingNonColumnError.__init__-153"><a href="#DroppingNonColumnError.__init__-153"><span class="linenos">153</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="DroppingNonColumnError.__init__-142"><a href="#DroppingNonColumnError.__init__-142"><span class="linenos">142</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="DroppingNonColumnError.__init__-143"><a href="#DroppingNonColumnError.__init__-143"><span class="linenos">143</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 

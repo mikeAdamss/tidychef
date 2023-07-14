@@ -605,12 +605,7 @@ document.write(`
 <span class="c1"># Now iterate and extract</span>
 <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
     <span class="n">anchor</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;A5&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Anchor Cell&quot;</span><span class="p">)</span>
-
-    <span class="c1"># Note - it bad practice to rely on excel references too much</span>
-    <span class="c1"># (see &quot;Best Practice&quot; guidance) but in this instance we need</span>
-    <span class="c1"># to curtail the amount of data for practical purposes.</span>
     <span class="n">observations</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B7:H12&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Observations&quot;</span><span class="p">)</span>
-
     <span class="n">housing</span> <span class="o">=</span> <span class="n">anchor</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Housing&quot;</span><span class="p">)</span>
     <span class="n">dataset_identifier_codes</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Data Identifier Codes&quot;</span><span class="p">)</span>
     <span class="n">period</span> <span class="o">=</span> <span class="n">anchor</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">down</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Period&quot;</span><span class="p">)</span>

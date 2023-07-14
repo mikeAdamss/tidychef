@@ -653,7 +653,10 @@ document.write(`
 <p>Here’s the same example but using a lambda function</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span><span class="p">,</span> <span class="n">CsvSelectable</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">right</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">datachef.direction</span> <span class="kn">import</span> <span class="n">right</span>
+<span class="kn">from</span> <span class="nn">datachef.output</span> <span class="kn">import</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span>
+<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">CsvSelectable</span>
 
 <span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv&quot;</span><span class="p">)</span>
 
@@ -670,16 +673,91 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_11786</span><span class="o">/</span><span class="mf">2928341624.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span><span class="p">,</span> <span class="n">CsvSelectable</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">right</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> 
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> 
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">observations</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">is_numeric</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Observations&quot;</span><span class="p">)</span>
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
 
-<span class="ne">ImportError</span>: cannot import name &#39;CsvSelectable&#39; from &#39;datachef&#39; (/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/__init__.py)
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <table>
+                
+            <tr>
+                <td style="background-color:cyan">Observations</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#99ff99">Members</td>
+            <tr>
+        
+            </table>
+
+            <body>
+                <h2>Unnamed Table</h2>
+                <table>
+                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td><td style="background-color:lightgrey">G</td><td style="background-color:lightgrey">H</td><td style="background-color:lightgrey">I</td><td style="background-color:lightgrey">J</td><td style="background-color:lightgrey">K</td></tr>
+<tr><td style="background-color:lightgrey">1</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">2</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Houses</td><td style="background-color:white">Cars</td><td style="background-color:white">Boats</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Houses</td><td style="background-color:white">Cars</td><td style="background-color:white">Boats</td></tr>
+<tr><td style="background-color:lightgrey">3</td><td style="background-color:white">Beatles</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Rolling Stones</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">4</td><td style="background-color:white"></td><td style="background-color:#99ff99">John</td><td style="background-color:cyan">1</td><td style="background-color:cyan">5</td><td style="background-color:cyan">9</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#99ff99">Keith</td><td style="background-color:cyan">2</td><td style="background-color:cyan">6</td><td style="background-color:cyan">10</td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:white"></td><td style="background-color:#99ff99">Paul</td><td style="background-color:cyan">2</td><td style="background-color:cyan">6</td><td style="background-color:cyan">10</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#99ff99">Mick</td><td style="background-color:cyan">3</td><td style="background-color:cyan">7</td><td style="background-color:cyan">11</td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:white"></td><td style="background-color:#99ff99">George</td><td style="background-color:cyan">2</td><td style="background-color:cyan">7</td><td style="background-color:cyan">11</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#99ff99">Charlie</td><td style="background-color:cyan">3</td><td style="background-color:cyan">8</td><td style="background-color:cyan">12</td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:white"></td><td style="background-color:#99ff99">Ringo</td><td style="background-color:cyan">4</td><td style="background-color:cyan">8</td><td style="background-color:cyan">12</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#99ff99">Ronnie</td><td style="background-color:cyan">5</td><td style="background-color:cyan">9</td><td style="background-color:cyan">13</td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+
+                </table>
+            </body>
+            <br>
+        </html>
+    </div><div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <body>
+                <table>
+                    <tr><td style="background-color:lightgrey">Observations</td><td style="background-color:lightgrey">Members</td></tr><tr><td style="background-color:white">1</td><td style="background-color:white">John Lennon</td></tr><tr><td style="background-color:white">5</td><td style="background-color:white">John Lennon</td></tr><tr><td style="background-color:white">9</td><td style="background-color:white">John Lennon</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Keith</td></tr><tr><td style="background-color:white">6</td><td style="background-color:white">Keith</td></tr><tr><td style="background-color:white">10</td><td style="background-color:white">Keith</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Paul</td></tr><tr><td style="background-color:white">6</td><td style="background-color:white">Paul</td></tr><tr><td style="background-color:white">10</td><td style="background-color:white">Paul</td></tr><tr><td style="background-color:white">3</td><td style="background-color:white">Mick</td></tr><tr><td style="background-color:white">7</td><td style="background-color:white">Mick</td></tr><tr><td style="background-color:white">11</td><td style="background-color:white">Mick</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">George</td></tr><tr><td style="background-color:white">7</td><td style="background-color:white">George</td></tr><tr><td style="background-color:white">11</td><td style="background-color:white">George</td></tr><tr><td style="background-color:white">3</td><td style="background-color:white">Charlie</td></tr><tr><td style="background-color:white">8</td><td style="background-color:white">Charlie</td></tr><tr><td style="background-color:white">12</td><td style="background-color:white">Charlie</td></tr><tr><td style="background-color:white">4</td><td style="background-color:white">Ringo</td></tr><tr><td style="background-color:white">8</td><td style="background-color:white">Ringo</td></tr><tr><td style="background-color:white">12</td><td style="background-color:white">Ringo</td></tr><tr><td style="background-color:white">5</td><td style="background-color:white">Ronnie</td></tr><tr><td style="background-color:white">9</td><td style="background-color:white">Ronnie</td></tr><tr><td style="background-color:white">13</td><td style="background-color:white">Ronnie</td></tr>
+                </table>
+            </body>
+            <br>
+        </html>
+    </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -788,25 +866,38 @@ document.write(`
             </body>
             <br>
         </html>
-    </div><div class="output text_html"><table>
-<thead>
-<tr><th style="text-align: right;">  Observations</th><th>Members        </th></tr>
-</thead>
-<tbody>
-<tr><td style="text-align: right;">             1</td><td>John Lennon    </td></tr>
-<tr><td style="text-align: right;">             5</td><td>John Lennon    </td></tr>
-<tr><td style="text-align: right;">             9</td><td>John Lennon    </td></tr>
-<tr><td style="text-align: right;">             2</td><td>Paul McCartney </td></tr>
-<tr><td style="text-align: right;">             6</td><td>Paul McCartney </td></tr>
-<tr><td style="text-align: right;">            10</td><td>Paul McCartney </td></tr>
-<tr><td style="text-align: right;">             2</td><td>George Harrison</td></tr>
-<tr><td style="text-align: right;">             7</td><td>George Harrison</td></tr>
-<tr><td style="text-align: right;">            11</td><td>George Harrison</td></tr>
-<tr><td style="text-align: right;">             4</td><td>Ringo Starr    </td></tr>
-<tr><td style="text-align: right;">             8</td><td>Ringo Starr    </td></tr>
-<tr><td style="text-align: right;">            12</td><td>Ringo Starr    </td></tr>
-</tbody>
-</table></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+    </div><div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <body>
+                <table>
+                    <tr><td style="background-color:lightgrey">Observations</td><td style="background-color:lightgrey">Members</td></tr><tr><td style="background-color:white">1</td><td style="background-color:white">John Lennon</td></tr><tr><td style="background-color:white">5</td><td style="background-color:white">John Lennon</td></tr><tr><td style="background-color:white">9</td><td style="background-color:white">John Lennon</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Paul McCartney</td></tr><tr><td style="background-color:white">6</td><td style="background-color:white">Paul McCartney</td></tr><tr><td style="background-color:white">10</td><td style="background-color:white">Paul McCartney</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">George Harrison</td></tr><tr><td style="background-color:white">7</td><td style="background-color:white">George Harrison</td></tr><tr><td style="background-color:white">11</td><td style="background-color:white">George Harrison</td></tr><tr><td style="background-color:white">4</td><td style="background-color:white">Ringo Starr</td></tr><tr><td style="background-color:white">8</td><td style="background-color:white">Ringo Starr</td></tr><tr><td style="background-color:white">12</td><td style="background-color:white">Ringo Starr</td></tr>
+                </table>
+            </body>
+            <br>
+        </html>
+    </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>

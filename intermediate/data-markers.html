@@ -446,7 +446,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="tidydata-data-markers-dropping-columns">
 <h1>TidyData: Data Markers &amp; Dropping Columns<a class="headerlink" href="#tidydata-data-markers-dropping-columns" title="Permalink to this heading">#</a></h1>
 <p>This section shows you how to deal with extracting data markers.</p>
-<p>The term “data marker” is a catch all term for notations or non numeric indicators that are often attached to a value observation in data tables intended for visual consumption.</p>
+<p>I’m using the term “data marker” as a catch all term for notations or non numeric indicators that can be attached to a cell value in data tables intended for visual consumption to indicate some nuance regarding the value in question.</p>
 <section id="source-data">
 <h2>Source Data<a class="headerlink" href="#source-data" title="Permalink to this heading">#</a></h2>
 <p>The data source we’re using for these examples is shown below:</p>
@@ -519,6 +519,7 @@ document.write(`
 <li><p>Take all observations as “raw observations”</p></li>
 <li><p>Use a horizontal condition to create the “Value” column for observations <strong>without</strong> data markers.</p></li>
 <li><p>Use a horizontal condition to create a “Data Marker” column for <strong>just</strong> the data markers.</p></li>
+<li><p>“drop” the “raw” column from the tidy data once its served its purpose.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
