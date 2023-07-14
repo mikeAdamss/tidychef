@@ -3,6 +3,20 @@ BORDER_CELL_SECONDARY_COLOUR = "#999999"
 NO_COLOUR = "white"
 WARNING_COLOUR = "#ff8080"
 
+COLOURS = [
+    "cyan",
+    "#99ff99",
+    "#eeccff",
+    "#ffe066",
+    "#ff4da6",
+    "#ff9933",
+    "#4d4dff",
+    "#b3d9ff",
+    "#00b3b3",
+    "#99ffcc",
+    "#b380ff",
+]
+
 # Simple CSS to make it pretty-ish
 INLINE_CSS = """
     <style>

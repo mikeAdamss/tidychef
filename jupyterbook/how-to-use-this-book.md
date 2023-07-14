@@ -11,7 +11,7 @@ That said, there are some nuances depending on your skillset and goals which I'l
 
 - If you want to get a quick idea of what datachef does, look at the first few recipes in [basic examples](https://mikeadamss.github.io/datachef/examples/basic/basic.html) section before coming back here.
 
-- To learn datachef, start with t. [Chapter 1: Basics](https://mikeadamss.github.io/datachef/basics.html). Note - this chapter and the [basic examples](https://mikeadamss.github.io/datachef/examples/basic/basic.html) are complementary, with the examples limited to and highlighted those things covered in the documentation. Once you're absorbed this you should be able to understand the examples (hands on learners may attempt it the other way around and it may well work, though that's not the way it was written).
+- To learn datachef, start with [Chapter 1: Basics](https://mikeadamss.github.io/datachef/basics.html). Note - this chapter and the [basic examples](https://mikeadamss.github.io/datachef/examples/basic/basic.html) are complementary, with the examples limited to and highlighted those things covered in the documentation. Once you're absorbed this you should be able to understand the examples (hands on learners may attempt it the other way around and it may well work, though that's not the way it was written).
 
 Once you've done this you'll be able to read and understand a large number of recipes and have a solid grasp of this package and its api. This should be all you need to get up and running with datachef.
 

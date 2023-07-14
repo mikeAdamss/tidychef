@@ -7,14 +7,13 @@ from datachef.exceptions import OutputPassedToPreview, UnalignedTableOperation
 from datachef.output.base import BaseOutput
 from datachef.selection.selectable import Selectable
 
-from ...ipython import in_notebook
 from .table import get_preview_table_as_html
 
 
 def preview(
     *selections,
-    path: Path = None,
-    bounded: Union[str, Dict[str, str]] = None,
+    path: Union[Path, str] = None,
+    bounded: Union[str] = None,
     border_cells: str = "lightgrey",
     blank_cells: str = "white",
     warning_colour: str = "#ff8080",
@@ -24,6 +23,12 @@ def preview(
 ):
     """
     Create a preview from one of more selections of cells.
+
+    :param *selections: 1-n datachef selectables of inheritors of
+    that will inform the preview.
+    :param path: A Path or string representation of for where
+    we want to write a html preview to local.
+    :bounded param: 
     """
     if isinstance(selections[0], BaseOutput):
         raise OutputPassedToPreview(

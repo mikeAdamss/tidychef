@@ -15,7 +15,7 @@ from .constants import NO_COLOUR, BORDER_CELL_COLOUR, INLINE_CSS, WARNING_COLOUR
 
 def get_preview_table_as_html(
     selections: List[Selectable],
-    bounded: Union[str, Dict[str, str]],
+    bounded: str,
     show_excel: bool = True,
     show_xy: bool = False,
     border_cells: str = BORDER_CELL_COLOUR,

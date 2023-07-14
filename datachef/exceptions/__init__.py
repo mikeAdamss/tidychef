@@ -21,7 +21,6 @@ from .common import (
     MisalignedHeadersError,
     MissingLabelError,
     OutOfBoundsError,
-    PreviewBoundarySpecificationError,
     UnalignedTableOperation,
 )
 from .lookups import AmbiguousLookupError, FailedLookupError, MissingDirectLookupError

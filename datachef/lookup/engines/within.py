@@ -25,6 +25,7 @@ class Within(BaseLookupEngine):
         Imagine the following example:
 
         |  A   |  B   |  C   |  D   |  E   |  F   |  G   |
+        |------|------|------|------|------|------|------|
         |      |      |      |      |      |      |      |
         |      | age1 |      |      |      | age2 |      |
         | ob1  | ob2  | ob3  |      | ob4  | ob5  | ob6  |
