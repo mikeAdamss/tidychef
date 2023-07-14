@@ -156,7 +156,7 @@
 </span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a><span class="sd">    Inherits from LiveTable to add cell selection methods that are generic to all tabulated inputs.</span>
 </span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>    
+</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>
 </span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>    <span class="k">def</span> <span class="nf">assert_one</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 </span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a><span class="sd">        Assert that the current selection contains exactly one cell</span>
@@ -570,17 +570,15 @@
 </span><span id="L-469"><a href="#L-469"><span class="linenos">469</span></a>        <span class="c1"># As such we need to reverse the stated direction.</span>
 </span><span id="L-470"><a href="#L-470"><span class="linenos">470</span></a>        <span class="c1"># In the case of Within we also need to reverse the direction of</span>
 </span><span id="L-471"><a href="#L-471"><span class="linenos">471</span></a>        <span class="c1"># parsing and offsetting.</span>
-</span><span id="L-472"><a href="#L-472"><span class="linenos">472</span></a>        <span class="n">new_start</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
-</span><span id="L-473"><a href="#L-473"><span class="linenos">473</span></a>        <span class="n">new_start</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">-</span> <span class="n">end</span><span class="o">.</span><span class="n">x</span>
-</span><span id="L-474"><a href="#L-474"><span class="linenos">474</span></a>        <span class="n">new_start</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">-</span> <span class="n">end</span><span class="o">.</span><span class="n">y</span>
+</span><span id="L-472"><a href="#L-472"><span class="linenos">472</span></a>        <span class="c1"># new_start = copy.deepcopy(start)</span>
+</span><span id="L-473"><a href="#L-473"><span class="linenos">473</span></a>        <span class="c1"># new_start.x = 0 - end.x</span>
+</span><span id="L-474"><a href="#L-474"><span class="linenos">474</span></a>        <span class="c1"># new_start.y = 0 - end.y</span>
 </span><span id="L-475"><a href="#L-475"><span class="linenos">475</span></a>
-</span><span id="L-476"><a href="#L-476"><span class="linenos">476</span></a>        <span class="n">new_end</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
-</span><span id="L-477"><a href="#L-477"><span class="linenos">477</span></a>        <span class="n">new_end</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">-</span> <span class="n">start</span><span class="o">.</span><span class="n">x</span>
-</span><span id="L-478"><a href="#L-478"><span class="linenos">478</span></a>        <span class="n">new_end</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">-</span> <span class="n">start</span><span class="o">.</span><span class="n">y</span>
+</span><span id="L-476"><a href="#L-476"><span class="linenos">476</span></a>        <span class="c1"># new_end = copy.deepcopy(end)</span>
+</span><span id="L-477"><a href="#L-477"><span class="linenos">477</span></a>        <span class="c1"># new_end.x = 0 - start.x</span>
+</span><span id="L-478"><a href="#L-478"><span class="linenos">478</span></a>        <span class="c1"># new_end.y = 0 - start.y</span>
 </span><span id="L-479"><a href="#L-479"><span class="linenos">479</span></a>
-</span><span id="L-480"><a href="#L-480"><span class="linenos">480</span></a>        <span class="k">return</span> <span class="n">Within</span><span class="p">(</span>
-</span><span id="L-481"><a href="#L-481"><span class="linenos">481</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">_reverse_direction</span><span class="p">(</span><span class="n">direction</span><span class="p">),</span> <span class="n">new_start</span><span class="p">,</span> <span class="n">new_end</span>
-</span><span id="L-482"><a href="#L-482"><span class="linenos">482</span></a>        <span class="p">)</span>
+</span><span id="L-480"><a href="#L-480"><span class="linenos">480</span></a>        <span class="k">return</span> <span class="n">Within</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">_reverse_direction</span><span class="p">(</span><span class="n">direction</span><span class="p">),</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -600,7 +598,7 @@
 </span><span id="Selectable-56"><a href="#Selectable-56"><span class="linenos"> 56</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="Selectable-57"><a href="#Selectable-57"><span class="linenos"> 57</span></a><span class="sd">    Inherits from LiveTable to add cell selection methods that are generic to all tabulated inputs.</span>
 </span><span id="Selectable-58"><a href="#Selectable-58"><span class="linenos"> 58</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="Selectable-59"><a href="#Selectable-59"><span class="linenos"> 59</span></a>    
+</span><span id="Selectable-59"><a href="#Selectable-59"><span class="linenos"> 59</span></a>
 </span><span id="Selectable-60"><a href="#Selectable-60"><span class="linenos"> 60</span></a>    <span class="k">def</span> <span class="nf">assert_one</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 </span><span id="Selectable-61"><a href="#Selectable-61"><span class="linenos"> 61</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="Selectable-62"><a href="#Selectable-62"><span class="linenos"> 62</span></a><span class="sd">        Assert that the current selection contains exactly one cell</span>
@@ -1014,17 +1012,15 @@
 </span><span id="Selectable-470"><a href="#Selectable-470"><span class="linenos">470</span></a>        <span class="c1"># As such we need to reverse the stated direction.</span>
 </span><span id="Selectable-471"><a href="#Selectable-471"><span class="linenos">471</span></a>        <span class="c1"># In the case of Within we also need to reverse the direction of</span>
 </span><span id="Selectable-472"><a href="#Selectable-472"><span class="linenos">472</span></a>        <span class="c1"># parsing and offsetting.</span>
-</span><span id="Selectable-473"><a href="#Selectable-473"><span class="linenos">473</span></a>        <span class="n">new_start</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
-</span><span id="Selectable-474"><a href="#Selectable-474"><span class="linenos">474</span></a>        <span class="n">new_start</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">-</span> <span class="n">end</span><span class="o">.</span><span class="n">x</span>
-</span><span id="Selectable-475"><a href="#Selectable-475"><span class="linenos">475</span></a>        <span class="n">new_start</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">-</span> <span class="n">end</span><span class="o">.</span><span class="n">y</span>
+</span><span id="Selectable-473"><a href="#Selectable-473"><span class="linenos">473</span></a>        <span class="c1"># new_start = copy.deepcopy(start)</span>
+</span><span id="Selectable-474"><a href="#Selectable-474"><span class="linenos">474</span></a>        <span class="c1"># new_start.x = 0 - end.x</span>
+</span><span id="Selectable-475"><a href="#Selectable-475"><span class="linenos">475</span></a>        <span class="c1"># new_start.y = 0 - end.y</span>
 </span><span id="Selectable-476"><a href="#Selectable-476"><span class="linenos">476</span></a>
-</span><span id="Selectable-477"><a href="#Selectable-477"><span class="linenos">477</span></a>        <span class="n">new_end</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
-</span><span id="Selectable-478"><a href="#Selectable-478"><span class="linenos">478</span></a>        <span class="n">new_end</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">-</span> <span class="n">start</span><span class="o">.</span><span class="n">x</span>
-</span><span id="Selectable-479"><a href="#Selectable-479"><span class="linenos">479</span></a>        <span class="n">new_end</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">-</span> <span class="n">start</span><span class="o">.</span><span class="n">y</span>
+</span><span id="Selectable-477"><a href="#Selectable-477"><span class="linenos">477</span></a>        <span class="c1"># new_end = copy.deepcopy(end)</span>
+</span><span id="Selectable-478"><a href="#Selectable-478"><span class="linenos">478</span></a>        <span class="c1"># new_end.x = 0 - start.x</span>
+</span><span id="Selectable-479"><a href="#Selectable-479"><span class="linenos">479</span></a>        <span class="c1"># new_end.y = 0 - start.y</span>
 </span><span id="Selectable-480"><a href="#Selectable-480"><span class="linenos">480</span></a>
-</span><span id="Selectable-481"><a href="#Selectable-481"><span class="linenos">481</span></a>        <span class="k">return</span> <span class="n">Within</span><span class="p">(</span>
-</span><span id="Selectable-482"><a href="#Selectable-482"><span class="linenos">482</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">_reverse_direction</span><span class="p">(</span><span class="n">direction</span><span class="p">),</span> <span class="n">new_start</span><span class="p">,</span> <span class="n">new_end</span>
-</span><span id="Selectable-483"><a href="#Selectable-483"><span class="linenos">483</span></a>        <span class="p">)</span>
+</span><span id="Selectable-481"><a href="#Selectable-481"><span class="linenos">481</span></a>        <span class="k">return</span> <span class="n">Within</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">_reverse_direction</span><span class="p">(</span><span class="n">direction</span><span class="p">),</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -1744,17 +1740,15 @@ relative to any given observation.</p>
 </span><span id="Selectable.finds_observations_within-470"><a href="#Selectable.finds_observations_within-470"><span class="linenos">470</span></a>        <span class="c1"># As such we need to reverse the stated direction.</span>
 </span><span id="Selectable.finds_observations_within-471"><a href="#Selectable.finds_observations_within-471"><span class="linenos">471</span></a>        <span class="c1"># In the case of Within we also need to reverse the direction of</span>
 </span><span id="Selectable.finds_observations_within-472"><a href="#Selectable.finds_observations_within-472"><span class="linenos">472</span></a>        <span class="c1"># parsing and offsetting.</span>
-</span><span id="Selectable.finds_observations_within-473"><a href="#Selectable.finds_observations_within-473"><span class="linenos">473</span></a>        <span class="n">new_start</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
-</span><span id="Selectable.finds_observations_within-474"><a href="#Selectable.finds_observations_within-474"><span class="linenos">474</span></a>        <span class="n">new_start</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">-</span> <span class="n">end</span><span class="o">.</span><span class="n">x</span>
-</span><span id="Selectable.finds_observations_within-475"><a href="#Selectable.finds_observations_within-475"><span class="linenos">475</span></a>        <span class="n">new_start</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">-</span> <span class="n">end</span><span class="o">.</span><span class="n">y</span>
+</span><span id="Selectable.finds_observations_within-473"><a href="#Selectable.finds_observations_within-473"><span class="linenos">473</span></a>        <span class="c1"># new_start = copy.deepcopy(start)</span>
+</span><span id="Selectable.finds_observations_within-474"><a href="#Selectable.finds_observations_within-474"><span class="linenos">474</span></a>        <span class="c1"># new_start.x = 0 - end.x</span>
+</span><span id="Selectable.finds_observations_within-475"><a href="#Selectable.finds_observations_within-475"><span class="linenos">475</span></a>        <span class="c1"># new_start.y = 0 - end.y</span>
 </span><span id="Selectable.finds_observations_within-476"><a href="#Selectable.finds_observations_within-476"><span class="linenos">476</span></a>
-</span><span id="Selectable.finds_observations_within-477"><a href="#Selectable.finds_observations_within-477"><span class="linenos">477</span></a>        <span class="n">new_end</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
-</span><span id="Selectable.finds_observations_within-478"><a href="#Selectable.finds_observations_within-478"><span class="linenos">478</span></a>        <span class="n">new_end</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">-</span> <span class="n">start</span><span class="o">.</span><span class="n">x</span>
-</span><span id="Selectable.finds_observations_within-479"><a href="#Selectable.finds_observations_within-479"><span class="linenos">479</span></a>        <span class="n">new_end</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">-</span> <span class="n">start</span><span class="o">.</span><span class="n">y</span>
+</span><span id="Selectable.finds_observations_within-477"><a href="#Selectable.finds_observations_within-477"><span class="linenos">477</span></a>        <span class="c1"># new_end = copy.deepcopy(end)</span>
+</span><span id="Selectable.finds_observations_within-478"><a href="#Selectable.finds_observations_within-478"><span class="linenos">478</span></a>        <span class="c1"># new_end.x = 0 - start.x</span>
+</span><span id="Selectable.finds_observations_within-479"><a href="#Selectable.finds_observations_within-479"><span class="linenos">479</span></a>        <span class="c1"># new_end.y = 0 - start.y</span>
 </span><span id="Selectable.finds_observations_within-480"><a href="#Selectable.finds_observations_within-480"><span class="linenos">480</span></a>
-</span><span id="Selectable.finds_observations_within-481"><a href="#Selectable.finds_observations_within-481"><span class="linenos">481</span></a>        <span class="k">return</span> <span class="n">Within</span><span class="p">(</span>
-</span><span id="Selectable.finds_observations_within-482"><a href="#Selectable.finds_observations_within-482"><span class="linenos">482</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">_reverse_direction</span><span class="p">(</span><span class="n">direction</span><span class="p">),</span> <span class="n">new_start</span><span class="p">,</span> <span class="n">new_end</span>
-</span><span id="Selectable.finds_observations_within-483"><a href="#Selectable.finds_observations_within-483"><span class="linenos">483</span></a>        <span class="p">)</span>
+</span><span id="Selectable.finds_observations_within-481"><a href="#Selectable.finds_observations_within-481"><span class="linenos">481</span></a>        <span class="k">return</span> <span class="n">Within</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">_reverse_direction</span><span class="p">(</span><span class="n">direction</span><span class="p">),</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
 </span></pre></div>
 
 

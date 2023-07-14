@@ -655,37 +655,38 @@ document.write(`
             </body>
             <br>
         </html>
-    </div><div class="output text_html"><table>
-<thead>
-<tr><th style="text-align: right;">  Observation</th><th>Band          </th><th>Asset  </th><th>Member  </th><th>Is a Beatles Singer  </th></tr>
-</thead>
-<tbody>
-<tr><td style="text-align: right;">            1</td><td>Beatles       </td><td>Houses </td><td>John    </td><td>True                 </td></tr>
-<tr><td style="text-align: right;">            5</td><td>Beatles       </td><td>Cars   </td><td>John    </td><td>True                 </td></tr>
-<tr><td style="text-align: right;">            9</td><td>Beatles       </td><td>Boats  </td><td>John    </td><td>True                 </td></tr>
-<tr><td style="text-align: right;">            2</td><td>Rolling Stones</td><td>Houses </td><td>Keith   </td><td>False                </td></tr>
-<tr><td style="text-align: right;">            6</td><td>Rolling Stones</td><td>Cars   </td><td>Keith   </td><td>False                </td></tr>
-<tr><td style="text-align: right;">           10</td><td>Rolling Stones</td><td>Boats  </td><td>Keith   </td><td>False                </td></tr>
-<tr><td style="text-align: right;">            2</td><td>Beatles       </td><td>Houses </td><td>Paul    </td><td>True                 </td></tr>
-<tr><td style="text-align: right;">            6</td><td>Beatles       </td><td>Cars   </td><td>Paul    </td><td>True                 </td></tr>
-<tr><td style="text-align: right;">           10</td><td>Beatles       </td><td>Boats  </td><td>Paul    </td><td>True                 </td></tr>
-<tr><td style="text-align: right;">            3</td><td>Rolling Stones</td><td>Houses </td><td>Mick    </td><td>False                </td></tr>
-<tr><td style="text-align: right;">            7</td><td>Rolling Stones</td><td>Cars   </td><td>Mick    </td><td>False                </td></tr>
-<tr><td style="text-align: right;">           11</td><td>Rolling Stones</td><td>Boats  </td><td>Mick    </td><td>False                </td></tr>
-<tr><td style="text-align: right;">            2</td><td>Beatles       </td><td>Houses </td><td>George  </td><td>False                </td></tr>
-<tr><td style="text-align: right;">            7</td><td>Beatles       </td><td>Cars   </td><td>George  </td><td>False                </td></tr>
-<tr><td style="text-align: right;">           11</td><td>Beatles       </td><td>Boats  </td><td>George  </td><td>False                </td></tr>
-<tr><td style="text-align: right;">            3</td><td>Rolling Stones</td><td>Houses </td><td>Charlie </td><td>False                </td></tr>
-<tr><td style="text-align: right;">            8</td><td>Rolling Stones</td><td>Cars   </td><td>Charlie </td><td>False                </td></tr>
-<tr><td style="text-align: right;">           12</td><td>Rolling Stones</td><td>Boats  </td><td>Charlie </td><td>False                </td></tr>
-<tr><td style="text-align: right;">            4</td><td>Beatles       </td><td>Houses </td><td>Ringo   </td><td>False                </td></tr>
-<tr><td style="text-align: right;">            8</td><td>Beatles       </td><td>Cars   </td><td>Ringo   </td><td>False                </td></tr>
-<tr><td style="text-align: right;">           12</td><td>Beatles       </td><td>Boats  </td><td>Ringo   </td><td>False                </td></tr>
-<tr><td style="text-align: right;">            5</td><td>Rolling Stones</td><td>Houses </td><td>Ronnie  </td><td>False                </td></tr>
-<tr><td style="text-align: right;">            9</td><td>Rolling Stones</td><td>Cars   </td><td>Ronnie  </td><td>False                </td></tr>
-<tr><td style="text-align: right;">           13</td><td>Rolling Stones</td><td>Boats  </td><td>Ronnie  </td><td>False                </td></tr>
-</tbody>
-</table></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+    </div><div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <body>
+                <table>
+                    <tr><td style="background-color:lightgrey">Observation</td><td style="background-color:lightgrey">Band</td><td style="background-color:lightgrey">Asset</td><td style="background-color:lightgrey">Member</td><td style="background-color:lightgrey">Is a Beatles Singer</td></tr><tr><td style="background-color:white">1</td><td style="background-color:white">Beatles</td><td style="background-color:white">Houses</td><td style="background-color:white">John</td><td style="background-color:white">True</td></tr><tr><td style="background-color:white">5</td><td style="background-color:white">Beatles</td><td style="background-color:white">Cars</td><td style="background-color:white">John</td><td style="background-color:white">True</td></tr><tr><td style="background-color:white">9</td><td style="background-color:white">Beatles</td><td style="background-color:white">Boats</td><td style="background-color:white">John</td><td style="background-color:white">True</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Houses</td><td style="background-color:white">Keith</td><td style="background-color:white">False</td></tr><tr><td style="background-color:white">6</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Cars</td><td style="background-color:white">Keith</td><td style="background-color:white">False</td></tr><tr><td style="background-color:white">10</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Boats</td><td style="background-color:white">Keith</td><td style="background-color:white">False</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Beatles</td><td style="background-color:white">Houses</td><td style="background-color:white">Paul</td><td style="background-color:white">True</td></tr><tr><td style="background-color:white">6</td><td style="background-color:white">Beatles</td><td style="background-color:white">Cars</td><td style="background-color:white">Paul</td><td style="background-color:white">True</td></tr><tr><td style="background-color:white">10</td><td style="background-color:white">Beatles</td><td style="background-color:white">Boats</td><td style="background-color:white">Paul</td><td style="background-color:white">True</td></tr><tr><td style="background-color:white">3</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Houses</td><td style="background-color:white">Mick</td><td style="background-color:white">False</td></tr><tr><td style="background-color:white">7</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Cars</td><td style="background-color:white">Mick</td><td style="background-color:white">False</td></tr><tr><td style="background-color:white">11</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Boats</td><td style="background-color:white">Mick</td><td style="background-color:white">False</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Beatles</td><td style="background-color:white">Houses</td><td style="background-color:white">George</td><td style="background-color:white">False</td></tr><tr><td style="background-color:white">7</td><td style="background-color:white">Beatles</td><td style="background-color:white">Cars</td><td style="background-color:white">George</td><td style="background-color:white">False</td></tr><tr><td style="background-color:white">11</td><td style="background-color:white">Beatles</td><td style="background-color:white">Boats</td><td style="background-color:white">George</td><td style="background-color:white">False</td></tr><tr><td style="background-color:white">3</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Houses</td><td style="background-color:white">Charlie</td><td style="background-color:white">False</td></tr><tr><td style="background-color:white">8</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Cars</td><td style="background-color:white">Charlie</td><td style="background-color:white">False</td></tr><tr><td style="background-color:white">12</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Boats</td><td style="background-color:white">Charlie</td><td style="background-color:white">False</td></tr><tr><td style="background-color:white">4</td><td style="background-color:white">Beatles</td><td style="background-color:white">Houses</td><td style="background-color:white">Ringo</td><td style="background-color:white">False</td></tr><tr><td style="background-color:white">8</td><td style="background-color:white">Beatles</td><td style="background-color:white">Cars</td><td style="background-color:white">Ringo</td><td style="background-color:white">False</td></tr><tr><td style="background-color:white">12</td><td style="background-color:white">Beatles</td><td style="background-color:white">Boats</td><td style="background-color:white">Ringo</td><td style="background-color:white">False</td></tr><tr><td style="background-color:white">5</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Houses</td><td style="background-color:white">Ronnie</td><td style="background-color:white">False</td></tr><tr><td style="background-color:white">9</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Cars</td><td style="background-color:white">Ronnie</td><td style="background-color:white">False</td></tr><tr><td style="background-color:white">13</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Boats</td><td style="background-color:white">Ronnie</td><td style="background-color:white">False</td></tr>
+                </table>
+            </body>
+            <br>
+        </html>
+    </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
