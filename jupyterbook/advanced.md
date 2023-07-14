@@ -6,7 +6,7 @@ This chapter explains with simple examples how to leverage the existing datachef
 
 By the end of this chapter you should:
 
-- Know where and how you can integrate custom classes and functions to seamlessly extend the functionality of datachef.
+- Know where and how you can integrate custom classes and functions to extend the functionality of datachef.
 
 ## Contents
 

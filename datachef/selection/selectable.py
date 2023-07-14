@@ -477,4 +477,4 @@ class Selectable(LiveTable):
         # new_end.x = 0 - start.x
         # new_end.y = 0 - start.y
 
-        return Within(self.label, self, _reverse_direction(direction), start, end)
+        return Within(self.label, self, _reverse_direction(direction), end, start)
