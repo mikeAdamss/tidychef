@@ -55,7 +55,7 @@ class Selectable(LiveTable):
     """
     Inherits from LiveTable to add cell selection methods that are generic to all tabulated inputs.
     """
-    
+
     def assert_one(self):
         """
         Assert that the current selection contains exactly one cell
@@ -469,14 +469,12 @@ class Selectable(LiveTable):
         # As such we need to reverse the stated direction.
         # In the case of Within we also need to reverse the direction of
         # parsing and offsetting.
-        new_start = copy.deepcopy(start)
-        new_start.x = 0 - end.x
-        new_start.y = 0 - end.y
+        # new_start = copy.deepcopy(start)
+        # new_start.x = 0 - end.x
+        # new_start.y = 0 - end.y
 
-        new_end = copy.deepcopy(end)
-        new_end.x = 0 - start.x
-        new_end.y = 0 - start.y
+        # new_end = copy.deepcopy(end)
+        # new_end.x = 0 - start.x
+        # new_end.y = 0 - start.y
 
-        return Within(
-            self.label, self, _reverse_direction(direction), new_start, new_end
-        )
+        return Within(self.label, self, _reverse_direction(direction), start, end)

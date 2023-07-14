@@ -98,8 +98,6 @@ class LocalXlsReader(BaseReader):
                     )
 
             datachef_selectables.append(
-                selectable(
-                    table, source=source, name=worksheet_name
-                )
+                selectable(table, source=source, name=worksheet_name)
             )
         return datachef_selectables

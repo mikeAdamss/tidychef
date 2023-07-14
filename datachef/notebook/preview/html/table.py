@@ -10,39 +10,16 @@ from datachef.utils import cellutils
 
 from ..boundary import Boundary
 from .components import HtmlCell, SelectionKeys
-
-# Simple CSS to make it pretty-ish
-INLINE_CSS = """
-    <style>
-    table, th, td {
-        border: 1px solid;
-    }
-
-    table {
-        border-collapse: collapse;
-    }
-
-    td {
-        align: center;
-        border: 1px  black solid !important;
-        color: black !important;
-    }
-
-    th, td {
-        padding: 5px;
-    }
-
-    </style>
-    """
+from .constants import BLANK_COLOUR, BORDER_COLOUR, INLINE_CSS, WARNING_COLOUR
 
 
 def get_preview_table_as_html(
     selections: List[Selectable],
     bounded: Union[str, Dict[str, str]],
     with_excel_notations: bool = True,
-    border_cells: str = "lightgrey",
-    blank_cells: str = "white",
-    warning_colour: str = "#ff8080",
+    border_cells: str = BORDER_COLOUR,
+    blank_cells: str = BLANK_COLOUR,
+    warning_colour: str = WARNING_COLOUR,
     multiple_selection_warning: bool = True,
 ) -> str:
     """ """
@@ -51,8 +28,8 @@ def get_preview_table_as_html(
     for selection in selections:
         selection: Selectable
 
-        # If the selection is pristine, someone is just previewing the data
-        # prior to selections
+        # If the selection is pristine, someone is just
+        # previewing the data prior to selections
         if not selection.selections_made():
             continue
         selection_keys.add_selection_key(selection)

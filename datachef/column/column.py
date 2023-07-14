@@ -55,7 +55,7 @@ class Column(BaseColumn):
 
         :engine: The lookup engine in use by this column.
         """
-        
+
         # -----
         # Apply
         # -----

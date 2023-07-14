@@ -50,12 +50,10 @@ class LiveTable:
     extend a Table of cells (.filtered) via comparing the two. This enables the
     easy extension of a cell selection as well as the filtering down of one.
 
-    :param pristine: 
+    :param pristine:
     """
 
-    def __init__(
-        self, data_table: Table, name: str = None, source: str = None
-    ):
+    def __init__(self, data_table: Table, name: str = None, source: str = None):
         self.pristine: Table = data_table
         self.filtered: Table = copy.deepcopy(data_table)
         self._name: Optional[str] = name
@@ -63,7 +61,6 @@ class LiveTable:
 
         # Label for a given selection
         self._label: Optional[str] = None
-
 
     @property
     def label(self):

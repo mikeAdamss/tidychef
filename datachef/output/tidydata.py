@@ -5,12 +5,13 @@ from pathlib import Path
 from typing import Callable, Dict, List, Optional, Union
 
 import tabulate
-from IPython.core.display import display
+from IPython.core.display import HTML, display
 
 from datachef.column.base import BaseColumn
 from datachef.exceptions import DroppingNonColumnError, MisalignedHeadersError
 from datachef.lookup.engines.horizontal_condition import HorizontalCondition
 from datachef.notebook.ipython import in_notebook
+from datachef.notebook.preview.html.tidy_data import tidy_data_as_html_table_string
 from datachef.output.base import BaseOutput
 from datachef.selection.selectable import Selectable
 from datachef.utils.decorators import dontmutate
@@ -68,7 +69,7 @@ class TidyData(BaseOutput):
 
         # If we're in a notebook, create a nice html display
         if in_notebook():
-            display(tabulate.tabulate(data_rows, headers=header_row, tablefmt="html"))
+            display(HTML(tidy_data_as_html_table_string(self._data)))
             return ""
 
         # Else return something that'll make sense in a terminal
