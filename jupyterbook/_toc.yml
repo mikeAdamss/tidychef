@@ -33,6 +33,7 @@ chapters:
     - file: intermediate/apply
     - file: intermediate/concatenation
     - file: intermediate/iterating
+    - file: intermediate/duplicates
     - file: intermediate/horizontal-conditions
     - file: intermediate/data-markers
     - file: intermediate/pandas
