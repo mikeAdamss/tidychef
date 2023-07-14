@@ -324,6 +324,16 @@ def test_tidydata_converted_to_dict():
 
     assert tidy_as_dict == tidy_as_dict_fixture
 
+    # Check that table name is inherited from observations
+    # during processing
+    const = Column.constant("foo", "bar")
+    tidy_data = TidyData(
+        observations,
+        Column.constant("foo", "bar")
+    )
+    assert const.table == observations.name
+    
+
 
 def test_drop_duplicates(tidy: TidyData):
     """

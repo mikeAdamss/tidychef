@@ -207,6 +207,12 @@ class TidyData(BaseOutput):
             grid = []
             drop_count = 0
 
+            # Observations always has the table name so
+            # spread it around to cover those columns that
+            # are created via static methods.
+            for column in self.columns:
+                column._table == self.observations._name
+
             # We need to carefully construct our lists of lists
             # such that the HorizontalCondition columns are created last
             # Ordering will be restored at the end via this list.

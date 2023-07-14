@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, Optional
 
 from datachef.column.base import BaseColumn
 from datachef.lookup.base import BaseLookupEngine
@@ -20,6 +20,15 @@ class Column(BaseColumn):
     2. It allows the validation of data extracted via
     the validation= keyword.
     """
+    _table: Optional[str] = "Unnamed Table"
+
+    @property
+    def table(self) -> str:
+        """
+        Returns table name where table name is known,
+        else "Unnamed Table"
+        """
+        return self._table
 
     @staticmethod
     def horizontal_condition(column_label: str, resolver: Callable, priority=0):
