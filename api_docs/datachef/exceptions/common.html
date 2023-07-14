@@ -91,18 +91,6 @@
 
             </li>
             <li>
-                    <a class="class" href="#InvalidTableSignatures">InvalidTableSignatures</a>
-                            <ul class="memberlist">
-                        <li>
-                                <a class="function" href="#InvalidTableSignatures.__init__">InvalidTableSignatures</a>
-                        </li>
-                        <li>
-                                <a class="variable" href="#InvalidTableSignatures.msg">msg</a>
-                        </li>
-                </ul>
-
-            </li>
-            <li>
                     <a class="class" href="#OutOfBoundsError">OutOfBoundsError</a>
                             <ul class="memberlist">
                         <li>
@@ -283,116 +271,106 @@
 </span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a>
 </span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a>
-</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a><span class="k">class</span> <span class="nc">InvalidTableSignatures</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a><span class="k">class</span> <span class="nc">OutOfBoundsError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
 </span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a><span class="sd">    Raised where someone is constructing a LiveTable from two</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a><span class="sd">    non identical tables.</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>
-</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
-</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>
+</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a><span class="sd">    Raised when a users attempts to select or reference a cell</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a><span class="sd">    outside of the boundary of the pristine table of input cells.</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a>
+</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a><span class="sd">    Example: Selecting every cell then shifting RIGHT 1 position</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a><span class="sd">    would be trying to select a rightmost column of data that</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a><span class="sd">    does not exist in the table.</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>
-</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a><span class="k">class</span> <span class="nc">OutOfBoundsError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a><span class="sd">    Raised when a users attempts to select or reference a cell</span>
-</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a><span class="sd">    outside of the boundary of the pristine table of input cells.</span>
-</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a>
-</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a><span class="sd">    Example: Selecting every cell then shifting RIGHT 1 position</span>
-</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a><span class="sd">    would be trying to select a rightmost column of data that</span>
-</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a><span class="sd">    does not exist in the table.</span>
-</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a>
-</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a>
+</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a>
+</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a><span class="k">class</span> <span class="nc">ImpossibleLookupError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a><span class="sd">    Raised when a user is attempting a lookup that is impossible</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a><span class="sd">    to resolve.</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>
+</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a><span class="sd">    For example: looming up to a cell that is &quot;above&quot; directionally</span>
+</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a><span class="sd">    when no cells in the direction have been selected.</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a>
-</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>
-</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a><span class="k">class</span> <span class="nc">ImpossibleLookupError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a><span class="sd">    Raised when a user is attempting a lookup that is impossible</span>
-</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a><span class="sd">    to resolve.</span>
-</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>
-</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a><span class="sd">    For example: looming up to a cell that is &quot;above&quot; directionally</span>
-</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a><span class="sd">    when no cells in the direction have been selected.</span>
-</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>
-</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
-</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>
+</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>
+</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>
+</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a><span class="k">class</span> <span class="nc">MissingLabelError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a><span class="sd">    Raised where a user is trying to construct an output with a</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a><span class="sd">    selection of cells but has not yet labelled that selection of</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a><span class="sd">    cells</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>
+</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>
-</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a><span class="k">class</span> <span class="nc">MissingLabelError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a><span class="sd">    Raised where a user is trying to construct an output with a</span>
-</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a><span class="sd">    selection of cells but has not yet labelled that selection of</span>
-</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a><span class="sd">    cells</span>
-</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>
-</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
-</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>
+</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>
+</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a><span class="k">class</span> <span class="nc">BadConditionalResolverError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a><span class="sd">    Raised where a user has specified a HorizontalCondition</span>
+</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a><span class="sd">    lookup engine that has incorrect arguments or returns</span>
+</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a><span class="sd">    as incorrect types.</span>
+</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>
+</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>
-</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a><span class="k">class</span> <span class="nc">BadConditionalResolverError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a><span class="sd">    Raised where a user has specified a HorizontalCondition</span>
-</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a><span class="sd">    lookup engine that has incorrect arguments or returns</span>
-</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a><span class="sd">    as incorrect types.</span>
-</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>
-</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
-</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>
+</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>
+</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a><span class="k">class</span> <span class="nc">HorizontalConditionalHeaderError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a><span class="sd">    Raised where a user has specified a HorizontalCondition</span>
+</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a><span class="sd">    lookup engine but its failing to resolve as an expected</span>
+</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a><span class="sd">    column value is missing.</span>
+</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>
+</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>
-</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a><span class="k">class</span> <span class="nc">HorizontalConditionalHeaderError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a><span class="sd">    Raised where a user has specified a HorizontalCondition</span>
-</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a><span class="sd">    lookup engine but its failing to resolve as an expected</span>
-</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a><span class="sd">    column value is missing.</span>
+</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>
+</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a><span class="k">class</span> <span class="nc">PreviewBoundarySpecificationError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a><span class="sd">    Raised where a user is trying to create a preview with a</span>
+</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a><span class="sd">    set boundary but has provided incorrect parameters.</span>
 </span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a>
 </span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
 </span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a>
 </span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a>
-</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a><span class="k">class</span> <span class="nc">PreviewBoundarySpecificationError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a><span class="k">class</span> <span class="nc">MisalignedHeadersError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
 </span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a><span class="sd">    Raised where a user is trying to create a preview with a</span>
-</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a><span class="sd">    set boundary but has provided incorrect parameters.</span>
-</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a>
-</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
-</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>
+</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a><span class="sd">    Raised where a user is attempting to join together two</span>
+</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a><span class="sd">    TidyData outputs but those outputs do not have the</span>
+</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a><span class="sd">    same column headers.</span>
+</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a>
+</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>
-</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a><span class="k">class</span> <span class="nc">MisalignedHeadersError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a><span class="sd">    Raised where a user is attempting to join together two</span>
-</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a><span class="sd">    TidyData outputs but those outputs do not have the</span>
-</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a><span class="sd">    same column headers.</span>
+</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>
+</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a><span class="k">class</span> <span class="nc">CellValidationError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a><span class="sd">    Raised where we&#39;re validated a call value and</span>
+</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a><span class="sd">    found it to me invalid.</span>
 </span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a>
 </span><span id="L-140"><a href="#L-140"><span class="linenos">140</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
 </span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span><span id="L-142"><a href="#L-142"><span class="linenos">142</span></a>
 </span><span id="L-143"><a href="#L-143"><span class="linenos">143</span></a>
-</span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a><span class="k">class</span> <span class="nc">CellValidationError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a><span class="k">class</span> <span class="nc">DroppingNonColumnError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
 </span><span id="L-145"><a href="#L-145"><span class="linenos">145</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a><span class="sd">    Raised where we&#39;re validated a call value and</span>
-</span><span id="L-147"><a href="#L-147"><span class="linenos">147</span></a><span class="sd">    found it to me invalid.</span>
-</span><span id="L-148"><a href="#L-148"><span class="linenos">148</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-149"><a href="#L-149"><span class="linenos">149</span></a>
-</span><span id="L-150"><a href="#L-150"><span class="linenos">150</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="L-151"><a href="#L-151"><span class="linenos">151</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
-</span><span id="L-152"><a href="#L-152"><span class="linenos">152</span></a>
-</span><span id="L-153"><a href="#L-153"><span class="linenos">153</span></a>
-</span><span id="L-154"><a href="#L-154"><span class="linenos">154</span></a><span class="k">class</span> <span class="nc">DroppingNonColumnError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-</span><span id="L-155"><a href="#L-155"><span class="linenos">155</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-156"><a href="#L-156"><span class="linenos">156</span></a><span class="sd">    Raised where a user is trying to drop a column</span>
-</span><span id="L-157"><a href="#L-157"><span class="linenos">157</span></a><span class="sd">    during the transformation to tidy data but that</span>
-</span><span id="L-158"><a href="#L-158"><span class="linenos">158</span></a><span class="sd">    column does not exist.</span>
-</span><span id="L-159"><a href="#L-159"><span class="linenos">159</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-160"><a href="#L-160"><span class="linenos">160</span></a>
-</span><span id="L-161"><a href="#L-161"><span class="linenos">161</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="L-162"><a href="#L-162"><span class="linenos">162</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+</span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a><span class="sd">    Raised where a user is trying to drop a column</span>
+</span><span id="L-147"><a href="#L-147"><span class="linenos">147</span></a><span class="sd">    during the transformation to tidy data but that</span>
+</span><span id="L-148"><a href="#L-148"><span class="linenos">148</span></a><span class="sd">    column does not exist.</span>
+</span><span id="L-149"><a href="#L-149"><span class="linenos">149</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-150"><a href="#L-150"><span class="linenos">150</span></a>
+</span><span id="L-151"><a href="#L-151"><span class="linenos">151</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="L-152"><a href="#L-152"><span class="linenos">152</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -736,73 +714,6 @@ a single distinct source of tabulated data.</p>
                                 </dl>
                             </div>
                 </section>
-                <section id="InvalidTableSignatures">
-                            <input id="InvalidTableSignatures-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr class">
-            
-    <span class="def">class</span>
-    <span class="name">InvalidTableSignatures</span><wbr>(<span class="base">builtins.Exception</span>):
-
-                <label class="view-source-button" for="InvalidTableSignatures-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#InvalidTableSignatures"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="InvalidTableSignatures-54"><a href="#InvalidTableSignatures-54"><span class="linenos">54</span></a><span class="k">class</span> <span class="nc">InvalidTableSignatures</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-</span><span id="InvalidTableSignatures-55"><a href="#InvalidTableSignatures-55"><span class="linenos">55</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="InvalidTableSignatures-56"><a href="#InvalidTableSignatures-56"><span class="linenos">56</span></a><span class="sd">    Raised where someone is constructing a LiveTable from two</span>
-</span><span id="InvalidTableSignatures-57"><a href="#InvalidTableSignatures-57"><span class="linenos">57</span></a><span class="sd">    non identical tables.</span>
-</span><span id="InvalidTableSignatures-58"><a href="#InvalidTableSignatures-58"><span class="linenos">58</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="InvalidTableSignatures-59"><a href="#InvalidTableSignatures-59"><span class="linenos">59</span></a>
-</span><span id="InvalidTableSignatures-60"><a href="#InvalidTableSignatures-60"><span class="linenos">60</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="InvalidTableSignatures-61"><a href="#InvalidTableSignatures-61"><span class="linenos">61</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
-</span></pre></div>
-
-
-            <div class="docstring"><p>Raised where someone is constructing a LiveTable from two
-non identical tables.</p>
-</div>
-
-
-                            <div id="InvalidTableSignatures.__init__" class="classattr">
-                                        <input id="InvalidTableSignatures.__init__-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr function">
-            
-        <span class="name">InvalidTableSignatures</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">msg</span></span>)</span>
-
-                <label class="view-source-button" for="InvalidTableSignatures.__init__-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#InvalidTableSignatures.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="InvalidTableSignatures.__init__-60"><a href="#InvalidTableSignatures.__init__-60"><span class="linenos">60</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="InvalidTableSignatures.__init__-61"><a href="#InvalidTableSignatures.__init__-61"><span class="linenos">61</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
-</span></pre></div>
-
-
-    
-
-                            </div>
-                            <div id="InvalidTableSignatures.msg" class="classattr">
-                                <div class="attr variable">
-            <span class="name">msg</span>
-
-        
-    </div>
-    <a class="headerlink" href="#InvalidTableSignatures.msg"></a>
-    
-    
-
-                            </div>
-                            <div class="inherited">
-                                <h5>Inherited Members</h5>
-                                <dl>
-                                    <div><dt>builtins.BaseException</dt>
-                                <dd id="InvalidTableSignatures.with_traceback" class="function">with_traceback</dd>
-                <dd id="InvalidTableSignatures.args" class="variable">args</dd>
-
-            </div>
-                                </dl>
-                            </div>
-                </section>
                 <section id="OutOfBoundsError">
                             <input id="OutOfBoundsError-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr class">
@@ -814,18 +725,18 @@ non identical tables.</p>
 
     </div>
     <a class="headerlink" href="#OutOfBoundsError"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="OutOfBoundsError-64"><a href="#OutOfBoundsError-64"><span class="linenos">64</span></a><span class="k">class</span> <span class="nc">OutOfBoundsError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-</span><span id="OutOfBoundsError-65"><a href="#OutOfBoundsError-65"><span class="linenos">65</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="OutOfBoundsError-66"><a href="#OutOfBoundsError-66"><span class="linenos">66</span></a><span class="sd">    Raised when a users attempts to select or reference a cell</span>
-</span><span id="OutOfBoundsError-67"><a href="#OutOfBoundsError-67"><span class="linenos">67</span></a><span class="sd">    outside of the boundary of the pristine table of input cells.</span>
-</span><span id="OutOfBoundsError-68"><a href="#OutOfBoundsError-68"><span class="linenos">68</span></a>
-</span><span id="OutOfBoundsError-69"><a href="#OutOfBoundsError-69"><span class="linenos">69</span></a><span class="sd">    Example: Selecting every cell then shifting RIGHT 1 position</span>
-</span><span id="OutOfBoundsError-70"><a href="#OutOfBoundsError-70"><span class="linenos">70</span></a><span class="sd">    would be trying to select a rightmost column of data that</span>
-</span><span id="OutOfBoundsError-71"><a href="#OutOfBoundsError-71"><span class="linenos">71</span></a><span class="sd">    does not exist in the table.</span>
-</span><span id="OutOfBoundsError-72"><a href="#OutOfBoundsError-72"><span class="linenos">72</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="OutOfBoundsError-73"><a href="#OutOfBoundsError-73"><span class="linenos">73</span></a>
-</span><span id="OutOfBoundsError-74"><a href="#OutOfBoundsError-74"><span class="linenos">74</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="OutOfBoundsError-75"><a href="#OutOfBoundsError-75"><span class="linenos">75</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="OutOfBoundsError-54"><a href="#OutOfBoundsError-54"><span class="linenos">54</span></a><span class="k">class</span> <span class="nc">OutOfBoundsError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="OutOfBoundsError-55"><a href="#OutOfBoundsError-55"><span class="linenos">55</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="OutOfBoundsError-56"><a href="#OutOfBoundsError-56"><span class="linenos">56</span></a><span class="sd">    Raised when a users attempts to select or reference a cell</span>
+</span><span id="OutOfBoundsError-57"><a href="#OutOfBoundsError-57"><span class="linenos">57</span></a><span class="sd">    outside of the boundary of the pristine table of input cells.</span>
+</span><span id="OutOfBoundsError-58"><a href="#OutOfBoundsError-58"><span class="linenos">58</span></a>
+</span><span id="OutOfBoundsError-59"><a href="#OutOfBoundsError-59"><span class="linenos">59</span></a><span class="sd">    Example: Selecting every cell then shifting RIGHT 1 position</span>
+</span><span id="OutOfBoundsError-60"><a href="#OutOfBoundsError-60"><span class="linenos">60</span></a><span class="sd">    would be trying to select a rightmost column of data that</span>
+</span><span id="OutOfBoundsError-61"><a href="#OutOfBoundsError-61"><span class="linenos">61</span></a><span class="sd">    does not exist in the table.</span>
+</span><span id="OutOfBoundsError-62"><a href="#OutOfBoundsError-62"><span class="linenos">62</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="OutOfBoundsError-63"><a href="#OutOfBoundsError-63"><span class="linenos">63</span></a>
+</span><span id="OutOfBoundsError-64"><a href="#OutOfBoundsError-64"><span class="linenos">64</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="OutOfBoundsError-65"><a href="#OutOfBoundsError-65"><span class="linenos">65</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -848,8 +759,8 @@ does not exist in the table.</p>
 
     </div>
     <a class="headerlink" href="#OutOfBoundsError.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="OutOfBoundsError.__init__-74"><a href="#OutOfBoundsError.__init__-74"><span class="linenos">74</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="OutOfBoundsError.__init__-75"><a href="#OutOfBoundsError.__init__-75"><span class="linenos">75</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="OutOfBoundsError.__init__-64"><a href="#OutOfBoundsError.__init__-64"><span class="linenos">64</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="OutOfBoundsError.__init__-65"><a href="#OutOfBoundsError.__init__-65"><span class="linenos">65</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -889,17 +800,17 @@ does not exist in the table.</p>
 
     </div>
     <a class="headerlink" href="#ImpossibleLookupError"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ImpossibleLookupError-78"><a href="#ImpossibleLookupError-78"><span class="linenos">78</span></a><span class="k">class</span> <span class="nc">ImpossibleLookupError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-</span><span id="ImpossibleLookupError-79"><a href="#ImpossibleLookupError-79"><span class="linenos">79</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="ImpossibleLookupError-80"><a href="#ImpossibleLookupError-80"><span class="linenos">80</span></a><span class="sd">    Raised when a user is attempting a lookup that is impossible</span>
-</span><span id="ImpossibleLookupError-81"><a href="#ImpossibleLookupError-81"><span class="linenos">81</span></a><span class="sd">    to resolve.</span>
-</span><span id="ImpossibleLookupError-82"><a href="#ImpossibleLookupError-82"><span class="linenos">82</span></a>
-</span><span id="ImpossibleLookupError-83"><a href="#ImpossibleLookupError-83"><span class="linenos">83</span></a><span class="sd">    For example: looming up to a cell that is &quot;above&quot; directionally</span>
-</span><span id="ImpossibleLookupError-84"><a href="#ImpossibleLookupError-84"><span class="linenos">84</span></a><span class="sd">    when no cells in the direction have been selected.</span>
-</span><span id="ImpossibleLookupError-85"><a href="#ImpossibleLookupError-85"><span class="linenos">85</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="ImpossibleLookupError-86"><a href="#ImpossibleLookupError-86"><span class="linenos">86</span></a>
-</span><span id="ImpossibleLookupError-87"><a href="#ImpossibleLookupError-87"><span class="linenos">87</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="ImpossibleLookupError-88"><a href="#ImpossibleLookupError-88"><span class="linenos">88</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ImpossibleLookupError-68"><a href="#ImpossibleLookupError-68"><span class="linenos">68</span></a><span class="k">class</span> <span class="nc">ImpossibleLookupError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="ImpossibleLookupError-69"><a href="#ImpossibleLookupError-69"><span class="linenos">69</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="ImpossibleLookupError-70"><a href="#ImpossibleLookupError-70"><span class="linenos">70</span></a><span class="sd">    Raised when a user is attempting a lookup that is impossible</span>
+</span><span id="ImpossibleLookupError-71"><a href="#ImpossibleLookupError-71"><span class="linenos">71</span></a><span class="sd">    to resolve.</span>
+</span><span id="ImpossibleLookupError-72"><a href="#ImpossibleLookupError-72"><span class="linenos">72</span></a>
+</span><span id="ImpossibleLookupError-73"><a href="#ImpossibleLookupError-73"><span class="linenos">73</span></a><span class="sd">    For example: looming up to a cell that is &quot;above&quot; directionally</span>
+</span><span id="ImpossibleLookupError-74"><a href="#ImpossibleLookupError-74"><span class="linenos">74</span></a><span class="sd">    when no cells in the direction have been selected.</span>
+</span><span id="ImpossibleLookupError-75"><a href="#ImpossibleLookupError-75"><span class="linenos">75</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="ImpossibleLookupError-76"><a href="#ImpossibleLookupError-76"><span class="linenos">76</span></a>
+</span><span id="ImpossibleLookupError-77"><a href="#ImpossibleLookupError-77"><span class="linenos">77</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="ImpossibleLookupError-78"><a href="#ImpossibleLookupError-78"><span class="linenos">78</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -921,8 +832,8 @@ when no cells in the direction have been selected.</p>
 
     </div>
     <a class="headerlink" href="#ImpossibleLookupError.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ImpossibleLookupError.__init__-87"><a href="#ImpossibleLookupError.__init__-87"><span class="linenos">87</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="ImpossibleLookupError.__init__-88"><a href="#ImpossibleLookupError.__init__-88"><span class="linenos">88</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ImpossibleLookupError.__init__-77"><a href="#ImpossibleLookupError.__init__-77"><span class="linenos">77</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="ImpossibleLookupError.__init__-78"><a href="#ImpossibleLookupError.__init__-78"><span class="linenos">78</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -962,15 +873,15 @@ when no cells in the direction have been selected.</p>
 
     </div>
     <a class="headerlink" href="#MissingLabelError"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="MissingLabelError-91"><a href="#MissingLabelError-91"><span class="linenos">91</span></a><span class="k">class</span> <span class="nc">MissingLabelError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-</span><span id="MissingLabelError-92"><a href="#MissingLabelError-92"><span class="linenos">92</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="MissingLabelError-93"><a href="#MissingLabelError-93"><span class="linenos">93</span></a><span class="sd">    Raised where a user is trying to construct an output with a</span>
-</span><span id="MissingLabelError-94"><a href="#MissingLabelError-94"><span class="linenos">94</span></a><span class="sd">    selection of cells but has not yet labelled that selection of</span>
-</span><span id="MissingLabelError-95"><a href="#MissingLabelError-95"><span class="linenos">95</span></a><span class="sd">    cells</span>
-</span><span id="MissingLabelError-96"><a href="#MissingLabelError-96"><span class="linenos">96</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="MissingLabelError-97"><a href="#MissingLabelError-97"><span class="linenos">97</span></a>
-</span><span id="MissingLabelError-98"><a href="#MissingLabelError-98"><span class="linenos">98</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="MissingLabelError-99"><a href="#MissingLabelError-99"><span class="linenos">99</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="MissingLabelError-81"><a href="#MissingLabelError-81"><span class="linenos">81</span></a><span class="k">class</span> <span class="nc">MissingLabelError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="MissingLabelError-82"><a href="#MissingLabelError-82"><span class="linenos">82</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="MissingLabelError-83"><a href="#MissingLabelError-83"><span class="linenos">83</span></a><span class="sd">    Raised where a user is trying to construct an output with a</span>
+</span><span id="MissingLabelError-84"><a href="#MissingLabelError-84"><span class="linenos">84</span></a><span class="sd">    selection of cells but has not yet labelled that selection of</span>
+</span><span id="MissingLabelError-85"><a href="#MissingLabelError-85"><span class="linenos">85</span></a><span class="sd">    cells</span>
+</span><span id="MissingLabelError-86"><a href="#MissingLabelError-86"><span class="linenos">86</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="MissingLabelError-87"><a href="#MissingLabelError-87"><span class="linenos">87</span></a>
+</span><span id="MissingLabelError-88"><a href="#MissingLabelError-88"><span class="linenos">88</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="MissingLabelError-89"><a href="#MissingLabelError-89"><span class="linenos">89</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -990,8 +901,8 @@ cells</p>
 
     </div>
     <a class="headerlink" href="#MissingLabelError.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="MissingLabelError.__init__-98"><a href="#MissingLabelError.__init__-98"><span class="linenos">98</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="MissingLabelError.__init__-99"><a href="#MissingLabelError.__init__-99"><span class="linenos">99</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="MissingLabelError.__init__-88"><a href="#MissingLabelError.__init__-88"><span class="linenos">88</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="MissingLabelError.__init__-89"><a href="#MissingLabelError.__init__-89"><span class="linenos">89</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -1031,15 +942,15 @@ cells</p>
 
     </div>
     <a class="headerlink" href="#BadConditionalResolverError"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="BadConditionalResolverError-102"><a href="#BadConditionalResolverError-102"><span class="linenos">102</span></a><span class="k">class</span> <span class="nc">BadConditionalResolverError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-</span><span id="BadConditionalResolverError-103"><a href="#BadConditionalResolverError-103"><span class="linenos">103</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="BadConditionalResolverError-104"><a href="#BadConditionalResolverError-104"><span class="linenos">104</span></a><span class="sd">    Raised where a user has specified a HorizontalCondition</span>
-</span><span id="BadConditionalResolverError-105"><a href="#BadConditionalResolverError-105"><span class="linenos">105</span></a><span class="sd">    lookup engine that has incorrect arguments or returns</span>
-</span><span id="BadConditionalResolverError-106"><a href="#BadConditionalResolverError-106"><span class="linenos">106</span></a><span class="sd">    as incorrect types.</span>
-</span><span id="BadConditionalResolverError-107"><a href="#BadConditionalResolverError-107"><span class="linenos">107</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="BadConditionalResolverError-108"><a href="#BadConditionalResolverError-108"><span class="linenos">108</span></a>
-</span><span id="BadConditionalResolverError-109"><a href="#BadConditionalResolverError-109"><span class="linenos">109</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="BadConditionalResolverError-110"><a href="#BadConditionalResolverError-110"><span class="linenos">110</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="BadConditionalResolverError-92"><a href="#BadConditionalResolverError-92"><span class="linenos"> 92</span></a><span class="k">class</span> <span class="nc">BadConditionalResolverError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="BadConditionalResolverError-93"><a href="#BadConditionalResolverError-93"><span class="linenos"> 93</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="BadConditionalResolverError-94"><a href="#BadConditionalResolverError-94"><span class="linenos"> 94</span></a><span class="sd">    Raised where a user has specified a HorizontalCondition</span>
+</span><span id="BadConditionalResolverError-95"><a href="#BadConditionalResolverError-95"><span class="linenos"> 95</span></a><span class="sd">    lookup engine that has incorrect arguments or returns</span>
+</span><span id="BadConditionalResolverError-96"><a href="#BadConditionalResolverError-96"><span class="linenos"> 96</span></a><span class="sd">    as incorrect types.</span>
+</span><span id="BadConditionalResolverError-97"><a href="#BadConditionalResolverError-97"><span class="linenos"> 97</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="BadConditionalResolverError-98"><a href="#BadConditionalResolverError-98"><span class="linenos"> 98</span></a>
+</span><span id="BadConditionalResolverError-99"><a href="#BadConditionalResolverError-99"><span class="linenos"> 99</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="BadConditionalResolverError-100"><a href="#BadConditionalResolverError-100"><span class="linenos">100</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -1059,8 +970,8 @@ as incorrect types.</p>
 
     </div>
     <a class="headerlink" href="#BadConditionalResolverError.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="BadConditionalResolverError.__init__-109"><a href="#BadConditionalResolverError.__init__-109"><span class="linenos">109</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="BadConditionalResolverError.__init__-110"><a href="#BadConditionalResolverError.__init__-110"><span class="linenos">110</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="BadConditionalResolverError.__init__-99"><a href="#BadConditionalResolverError.__init__-99"><span class="linenos"> 99</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="BadConditionalResolverError.__init__-100"><a href="#BadConditionalResolverError.__init__-100"><span class="linenos">100</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -1100,15 +1011,15 @@ as incorrect types.</p>
 
     </div>
     <a class="headerlink" href="#HorizontalConditionalHeaderError"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="HorizontalConditionalHeaderError-113"><a href="#HorizontalConditionalHeaderError-113"><span class="linenos">113</span></a><span class="k">class</span> <span class="nc">HorizontalConditionalHeaderError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-</span><span id="HorizontalConditionalHeaderError-114"><a href="#HorizontalConditionalHeaderError-114"><span class="linenos">114</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="HorizontalConditionalHeaderError-115"><a href="#HorizontalConditionalHeaderError-115"><span class="linenos">115</span></a><span class="sd">    Raised where a user has specified a HorizontalCondition</span>
-</span><span id="HorizontalConditionalHeaderError-116"><a href="#HorizontalConditionalHeaderError-116"><span class="linenos">116</span></a><span class="sd">    lookup engine but its failing to resolve as an expected</span>
-</span><span id="HorizontalConditionalHeaderError-117"><a href="#HorizontalConditionalHeaderError-117"><span class="linenos">117</span></a><span class="sd">    column value is missing.</span>
-</span><span id="HorizontalConditionalHeaderError-118"><a href="#HorizontalConditionalHeaderError-118"><span class="linenos">118</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="HorizontalConditionalHeaderError-119"><a href="#HorizontalConditionalHeaderError-119"><span class="linenos">119</span></a>
-</span><span id="HorizontalConditionalHeaderError-120"><a href="#HorizontalConditionalHeaderError-120"><span class="linenos">120</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="HorizontalConditionalHeaderError-121"><a href="#HorizontalConditionalHeaderError-121"><span class="linenos">121</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="HorizontalConditionalHeaderError-103"><a href="#HorizontalConditionalHeaderError-103"><span class="linenos">103</span></a><span class="k">class</span> <span class="nc">HorizontalConditionalHeaderError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="HorizontalConditionalHeaderError-104"><a href="#HorizontalConditionalHeaderError-104"><span class="linenos">104</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="HorizontalConditionalHeaderError-105"><a href="#HorizontalConditionalHeaderError-105"><span class="linenos">105</span></a><span class="sd">    Raised where a user has specified a HorizontalCondition</span>
+</span><span id="HorizontalConditionalHeaderError-106"><a href="#HorizontalConditionalHeaderError-106"><span class="linenos">106</span></a><span class="sd">    lookup engine but its failing to resolve as an expected</span>
+</span><span id="HorizontalConditionalHeaderError-107"><a href="#HorizontalConditionalHeaderError-107"><span class="linenos">107</span></a><span class="sd">    column value is missing.</span>
+</span><span id="HorizontalConditionalHeaderError-108"><a href="#HorizontalConditionalHeaderError-108"><span class="linenos">108</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="HorizontalConditionalHeaderError-109"><a href="#HorizontalConditionalHeaderError-109"><span class="linenos">109</span></a>
+</span><span id="HorizontalConditionalHeaderError-110"><a href="#HorizontalConditionalHeaderError-110"><span class="linenos">110</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="HorizontalConditionalHeaderError-111"><a href="#HorizontalConditionalHeaderError-111"><span class="linenos">111</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -1128,8 +1039,8 @@ column value is missing.</p>
 
     </div>
     <a class="headerlink" href="#HorizontalConditionalHeaderError.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="HorizontalConditionalHeaderError.__init__-120"><a href="#HorizontalConditionalHeaderError.__init__-120"><span class="linenos">120</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="HorizontalConditionalHeaderError.__init__-121"><a href="#HorizontalConditionalHeaderError.__init__-121"><span class="linenos">121</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="HorizontalConditionalHeaderError.__init__-110"><a href="#HorizontalConditionalHeaderError.__init__-110"><span class="linenos">110</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="HorizontalConditionalHeaderError.__init__-111"><a href="#HorizontalConditionalHeaderError.__init__-111"><span class="linenos">111</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -1169,14 +1080,14 @@ column value is missing.</p>
 
     </div>
     <a class="headerlink" href="#PreviewBoundarySpecificationError"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="PreviewBoundarySpecificationError-124"><a href="#PreviewBoundarySpecificationError-124"><span class="linenos">124</span></a><span class="k">class</span> <span class="nc">PreviewBoundarySpecificationError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-</span><span id="PreviewBoundarySpecificationError-125"><a href="#PreviewBoundarySpecificationError-125"><span class="linenos">125</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="PreviewBoundarySpecificationError-126"><a href="#PreviewBoundarySpecificationError-126"><span class="linenos">126</span></a><span class="sd">    Raised where a user is trying to create a preview with a</span>
-</span><span id="PreviewBoundarySpecificationError-127"><a href="#PreviewBoundarySpecificationError-127"><span class="linenos">127</span></a><span class="sd">    set boundary but has provided incorrect parameters.</span>
-</span><span id="PreviewBoundarySpecificationError-128"><a href="#PreviewBoundarySpecificationError-128"><span class="linenos">128</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="PreviewBoundarySpecificationError-129"><a href="#PreviewBoundarySpecificationError-129"><span class="linenos">129</span></a>
-</span><span id="PreviewBoundarySpecificationError-130"><a href="#PreviewBoundarySpecificationError-130"><span class="linenos">130</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="PreviewBoundarySpecificationError-131"><a href="#PreviewBoundarySpecificationError-131"><span class="linenos">131</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="PreviewBoundarySpecificationError-114"><a href="#PreviewBoundarySpecificationError-114"><span class="linenos">114</span></a><span class="k">class</span> <span class="nc">PreviewBoundarySpecificationError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="PreviewBoundarySpecificationError-115"><a href="#PreviewBoundarySpecificationError-115"><span class="linenos">115</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="PreviewBoundarySpecificationError-116"><a href="#PreviewBoundarySpecificationError-116"><span class="linenos">116</span></a><span class="sd">    Raised where a user is trying to create a preview with a</span>
+</span><span id="PreviewBoundarySpecificationError-117"><a href="#PreviewBoundarySpecificationError-117"><span class="linenos">117</span></a><span class="sd">    set boundary but has provided incorrect parameters.</span>
+</span><span id="PreviewBoundarySpecificationError-118"><a href="#PreviewBoundarySpecificationError-118"><span class="linenos">118</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="PreviewBoundarySpecificationError-119"><a href="#PreviewBoundarySpecificationError-119"><span class="linenos">119</span></a>
+</span><span id="PreviewBoundarySpecificationError-120"><a href="#PreviewBoundarySpecificationError-120"><span class="linenos">120</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="PreviewBoundarySpecificationError-121"><a href="#PreviewBoundarySpecificationError-121"><span class="linenos">121</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -1195,8 +1106,8 @@ set boundary but has provided incorrect parameters.</p>
 
     </div>
     <a class="headerlink" href="#PreviewBoundarySpecificationError.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="PreviewBoundarySpecificationError.__init__-130"><a href="#PreviewBoundarySpecificationError.__init__-130"><span class="linenos">130</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="PreviewBoundarySpecificationError.__init__-131"><a href="#PreviewBoundarySpecificationError.__init__-131"><span class="linenos">131</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="PreviewBoundarySpecificationError.__init__-120"><a href="#PreviewBoundarySpecificationError.__init__-120"><span class="linenos">120</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="PreviewBoundarySpecificationError.__init__-121"><a href="#PreviewBoundarySpecificationError.__init__-121"><span class="linenos">121</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -1236,15 +1147,15 @@ set boundary but has provided incorrect parameters.</p>
 
     </div>
     <a class="headerlink" href="#MisalignedHeadersError"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="MisalignedHeadersError-134"><a href="#MisalignedHeadersError-134"><span class="linenos">134</span></a><span class="k">class</span> <span class="nc">MisalignedHeadersError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-</span><span id="MisalignedHeadersError-135"><a href="#MisalignedHeadersError-135"><span class="linenos">135</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="MisalignedHeadersError-136"><a href="#MisalignedHeadersError-136"><span class="linenos">136</span></a><span class="sd">    Raised where a user is attempting to join together two</span>
-</span><span id="MisalignedHeadersError-137"><a href="#MisalignedHeadersError-137"><span class="linenos">137</span></a><span class="sd">    TidyData outputs but those outputs do not have the</span>
-</span><span id="MisalignedHeadersError-138"><a href="#MisalignedHeadersError-138"><span class="linenos">138</span></a><span class="sd">    same column headers.</span>
-</span><span id="MisalignedHeadersError-139"><a href="#MisalignedHeadersError-139"><span class="linenos">139</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="MisalignedHeadersError-140"><a href="#MisalignedHeadersError-140"><span class="linenos">140</span></a>
-</span><span id="MisalignedHeadersError-141"><a href="#MisalignedHeadersError-141"><span class="linenos">141</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="MisalignedHeadersError-142"><a href="#MisalignedHeadersError-142"><span class="linenos">142</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="MisalignedHeadersError-124"><a href="#MisalignedHeadersError-124"><span class="linenos">124</span></a><span class="k">class</span> <span class="nc">MisalignedHeadersError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="MisalignedHeadersError-125"><a href="#MisalignedHeadersError-125"><span class="linenos">125</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="MisalignedHeadersError-126"><a href="#MisalignedHeadersError-126"><span class="linenos">126</span></a><span class="sd">    Raised where a user is attempting to join together two</span>
+</span><span id="MisalignedHeadersError-127"><a href="#MisalignedHeadersError-127"><span class="linenos">127</span></a><span class="sd">    TidyData outputs but those outputs do not have the</span>
+</span><span id="MisalignedHeadersError-128"><a href="#MisalignedHeadersError-128"><span class="linenos">128</span></a><span class="sd">    same column headers.</span>
+</span><span id="MisalignedHeadersError-129"><a href="#MisalignedHeadersError-129"><span class="linenos">129</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="MisalignedHeadersError-130"><a href="#MisalignedHeadersError-130"><span class="linenos">130</span></a>
+</span><span id="MisalignedHeadersError-131"><a href="#MisalignedHeadersError-131"><span class="linenos">131</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="MisalignedHeadersError-132"><a href="#MisalignedHeadersError-132"><span class="linenos">132</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -1264,8 +1175,8 @@ same column headers.</p>
 
     </div>
     <a class="headerlink" href="#MisalignedHeadersError.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="MisalignedHeadersError.__init__-141"><a href="#MisalignedHeadersError.__init__-141"><span class="linenos">141</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="MisalignedHeadersError.__init__-142"><a href="#MisalignedHeadersError.__init__-142"><span class="linenos">142</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="MisalignedHeadersError.__init__-131"><a href="#MisalignedHeadersError.__init__-131"><span class="linenos">131</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="MisalignedHeadersError.__init__-132"><a href="#MisalignedHeadersError.__init__-132"><span class="linenos">132</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -1305,14 +1216,14 @@ same column headers.</p>
 
     </div>
     <a class="headerlink" href="#CellValidationError"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="CellValidationError-145"><a href="#CellValidationError-145"><span class="linenos">145</span></a><span class="k">class</span> <span class="nc">CellValidationError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-</span><span id="CellValidationError-146"><a href="#CellValidationError-146"><span class="linenos">146</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="CellValidationError-147"><a href="#CellValidationError-147"><span class="linenos">147</span></a><span class="sd">    Raised where we&#39;re validated a call value and</span>
-</span><span id="CellValidationError-148"><a href="#CellValidationError-148"><span class="linenos">148</span></a><span class="sd">    found it to me invalid.</span>
-</span><span id="CellValidationError-149"><a href="#CellValidationError-149"><span class="linenos">149</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="CellValidationError-150"><a href="#CellValidationError-150"><span class="linenos">150</span></a>
-</span><span id="CellValidationError-151"><a href="#CellValidationError-151"><span class="linenos">151</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="CellValidationError-152"><a href="#CellValidationError-152"><span class="linenos">152</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="CellValidationError-135"><a href="#CellValidationError-135"><span class="linenos">135</span></a><span class="k">class</span> <span class="nc">CellValidationError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="CellValidationError-136"><a href="#CellValidationError-136"><span class="linenos">136</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="CellValidationError-137"><a href="#CellValidationError-137"><span class="linenos">137</span></a><span class="sd">    Raised where we&#39;re validated a call value and</span>
+</span><span id="CellValidationError-138"><a href="#CellValidationError-138"><span class="linenos">138</span></a><span class="sd">    found it to me invalid.</span>
+</span><span id="CellValidationError-139"><a href="#CellValidationError-139"><span class="linenos">139</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="CellValidationError-140"><a href="#CellValidationError-140"><span class="linenos">140</span></a>
+</span><span id="CellValidationError-141"><a href="#CellValidationError-141"><span class="linenos">141</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="CellValidationError-142"><a href="#CellValidationError-142"><span class="linenos">142</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -1331,8 +1242,8 @@ found it to me invalid.</p>
 
     </div>
     <a class="headerlink" href="#CellValidationError.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="CellValidationError.__init__-151"><a href="#CellValidationError.__init__-151"><span class="linenos">151</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="CellValidationError.__init__-152"><a href="#CellValidationError.__init__-152"><span class="linenos">152</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="CellValidationError.__init__-141"><a href="#CellValidationError.__init__-141"><span class="linenos">141</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="CellValidationError.__init__-142"><a href="#CellValidationError.__init__-142"><span class="linenos">142</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -1372,15 +1283,15 @@ found it to me invalid.</p>
 
     </div>
     <a class="headerlink" href="#DroppingNonColumnError"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="DroppingNonColumnError-155"><a href="#DroppingNonColumnError-155"><span class="linenos">155</span></a><span class="k">class</span> <span class="nc">DroppingNonColumnError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-</span><span id="DroppingNonColumnError-156"><a href="#DroppingNonColumnError-156"><span class="linenos">156</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="DroppingNonColumnError-157"><a href="#DroppingNonColumnError-157"><span class="linenos">157</span></a><span class="sd">    Raised where a user is trying to drop a column</span>
-</span><span id="DroppingNonColumnError-158"><a href="#DroppingNonColumnError-158"><span class="linenos">158</span></a><span class="sd">    during the transformation to tidy data but that</span>
-</span><span id="DroppingNonColumnError-159"><a href="#DroppingNonColumnError-159"><span class="linenos">159</span></a><span class="sd">    column does not exist.</span>
-</span><span id="DroppingNonColumnError-160"><a href="#DroppingNonColumnError-160"><span class="linenos">160</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="DroppingNonColumnError-161"><a href="#DroppingNonColumnError-161"><span class="linenos">161</span></a>
-</span><span id="DroppingNonColumnError-162"><a href="#DroppingNonColumnError-162"><span class="linenos">162</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="DroppingNonColumnError-163"><a href="#DroppingNonColumnError-163"><span class="linenos">163</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="DroppingNonColumnError-145"><a href="#DroppingNonColumnError-145"><span class="linenos">145</span></a><span class="k">class</span> <span class="nc">DroppingNonColumnError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="DroppingNonColumnError-146"><a href="#DroppingNonColumnError-146"><span class="linenos">146</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="DroppingNonColumnError-147"><a href="#DroppingNonColumnError-147"><span class="linenos">147</span></a><span class="sd">    Raised where a user is trying to drop a column</span>
+</span><span id="DroppingNonColumnError-148"><a href="#DroppingNonColumnError-148"><span class="linenos">148</span></a><span class="sd">    during the transformation to tidy data but that</span>
+</span><span id="DroppingNonColumnError-149"><a href="#DroppingNonColumnError-149"><span class="linenos">149</span></a><span class="sd">    column does not exist.</span>
+</span><span id="DroppingNonColumnError-150"><a href="#DroppingNonColumnError-150"><span class="linenos">150</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="DroppingNonColumnError-151"><a href="#DroppingNonColumnError-151"><span class="linenos">151</span></a>
+</span><span id="DroppingNonColumnError-152"><a href="#DroppingNonColumnError-152"><span class="linenos">152</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="DroppingNonColumnError-153"><a href="#DroppingNonColumnError-153"><span class="linenos">153</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -1400,8 +1311,8 @@ column does not exist.</p>
 
     </div>
     <a class="headerlink" href="#DroppingNonColumnError.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="DroppingNonColumnError.__init__-162"><a href="#DroppingNonColumnError.__init__-162"><span class="linenos">162</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span id="DroppingNonColumnError.__init__-163"><a href="#DroppingNonColumnError.__init__-163"><span class="linenos">163</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="DroppingNonColumnError.__init__-152"><a href="#DroppingNonColumnError.__init__-152"><span class="linenos">152</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="DroppingNonColumnError.__init__-153"><a href="#DroppingNonColumnError.__init__-153"><span class="linenos">153</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 

@@ -3,15 +3,6 @@
 The following page contains some quick notes on quirks of datachef that might throw a first time user.
 
 
-## Not everyone is a programmer
-
-Datachef is aimed at analysts, data engineers and relative newcomers to python as much and probably more than its aimed at experienced python developers and the style of this documentation reflects that.
-
-As such, the experienced programmers amongst you may find some of the explanations teeth grindingly simplified and lacking in more complex technical explanation and discussion.
-
-Rest assured, this is a conscious choice based on our target audience.
-
-
 ## Excel references
 
 Regardless of the format in question datachef makes heavy use of the phrase "excel reference" or more commonly `excel_ref()`.

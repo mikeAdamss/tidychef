@@ -68,7 +68,7 @@
                         <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a><span class="sd">Holds the code that defines the python list_of_lists reader.</span>
 </span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="kn">import</span> <span class="nn">copy</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a>
 </span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
 </span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a>
 </span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a><span class="kn">from</span> <span class="nn">datachef.acquire.base</span> <span class="kn">import</span> <span class="n">BaseReader</span>
@@ -138,7 +138,7 @@
 </span><span id="L-71"><a href="#L-71"><span class="linenos">71</span></a>            <span class="k">for</span> <span class="n">x_index</span><span class="p">,</span> <span class="n">cell_value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
 </span><span id="L-72"><a href="#L-72"><span class="linenos">72</span></a>                <span class="n">table</span><span class="o">.</span><span class="n">add_cell</span><span class="p">(</span><span class="n">Cell</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_index</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">cell_value</span><span class="p">)))</span>
 </span><span id="L-73"><a href="#L-73"><span class="linenos">73</span></a>
-</span><span id="L-74"><a href="#L-74"><span class="linenos">74</span></a>        <span class="k">return</span> <span class="n">selectable</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">table</span><span class="p">))</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos">74</span></a>        <span class="k">return</span> <span class="n">selectable</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -254,7 +254,7 @@ i.e standard human reading order.</p>
 </span><span id="ListOfListsReader-72"><a href="#ListOfListsReader-72"><span class="linenos">72</span></a>            <span class="k">for</span> <span class="n">x_index</span><span class="p">,</span> <span class="n">cell_value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
 </span><span id="ListOfListsReader-73"><a href="#ListOfListsReader-73"><span class="linenos">73</span></a>                <span class="n">table</span><span class="o">.</span><span class="n">add_cell</span><span class="p">(</span><span class="n">Cell</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_index</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">cell_value</span><span class="p">)))</span>
 </span><span id="ListOfListsReader-74"><a href="#ListOfListsReader-74"><span class="linenos">74</span></a>
-</span><span id="ListOfListsReader-75"><a href="#ListOfListsReader-75"><span class="linenos">75</span></a>        <span class="k">return</span> <span class="n">selectable</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">table</span><span class="p">))</span>
+</span><span id="ListOfListsReader-75"><a href="#ListOfListsReader-75"><span class="linenos">75</span></a>        <span class="k">return</span> <span class="n">selectable</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -294,7 +294,7 @@ i.e standard human reading order.</p>
 </span><span id="ListOfListsReader.parse-72"><a href="#ListOfListsReader.parse-72"><span class="linenos">72</span></a>            <span class="k">for</span> <span class="n">x_index</span><span class="p">,</span> <span class="n">cell_value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
 </span><span id="ListOfListsReader.parse-73"><a href="#ListOfListsReader.parse-73"><span class="linenos">73</span></a>                <span class="n">table</span><span class="o">.</span><span class="n">add_cell</span><span class="p">(</span><span class="n">Cell</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_index</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">cell_value</span><span class="p">)))</span>
 </span><span id="ListOfListsReader.parse-74"><a href="#ListOfListsReader.parse-74"><span class="linenos">74</span></a>
-</span><span id="ListOfListsReader.parse-75"><a href="#ListOfListsReader.parse-75"><span class="linenos">75</span></a>        <span class="k">return</span> <span class="n">selectable</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">table</span><span class="p">))</span>
+</span><span id="ListOfListsReader.parse-75"><a href="#ListOfListsReader.parse-75"><span class="linenos">75</span></a>        <span class="k">return</span> <span class="n">selectable</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
 </span></pre></div>
 
 

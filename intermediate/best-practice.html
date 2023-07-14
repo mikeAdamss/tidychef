@@ -425,7 +425,6 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-data">Source Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-is-better-then-explicit">Conditional Is Better Then Explicit</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-ref">excel_ref()</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expand">expand()</a></li>
@@ -447,17 +446,6 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="best-practice">
 <h1>Best Practice<a class="headerlink" href="#best-practice" title="Permalink to this heading">#</a></h1>
 <p>This section covers some best practice approaches and techniques for creating robust transform recipes with datachef.</p>
-<section id="source-data">
-<h2>Source Data<a class="headerlink" href="#source-data" title="Permalink to this heading">#</a></h2>
-<p>The data source we’re using for these examples is shown below:</p>
-<table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p><span style="color:green">Note - this particular table has some very verbose headers we don’t care about, so we’ll be using <code class="docutils literal notranslate"><span class="pre">bounded=</span></code> to remove them from the previews as well as to show just the subset of data we’re working with.</span></p></th>
-</tr>
-</thead>
-</table>
-<p>The <a class="reference external" href="https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx">full data source can be downloaded here</a>. We’ll be using th 10th tab named “Table 3c”.</p>
-</section>
 <section id="conditional-is-better-then-explicit">
 <h2>Conditional Is Better Then Explicit<a class="headerlink" href="#conditional-is-better-then-explicit" title="Permalink to this heading">#</a></h2>
 <p>If you want to create a robust repeatable recipe then a conditional selection (particularly simple conditions such as <code class="docutils literal notranslate"><span class="pre">.expand()</span></code> and <code class="docutils literal notranslate"><span class="pre">.fill()</span></code>) are typically better than explicit <code class="docutils literal notranslate"><span class="pre">.excel_ref()</span></code> statements.</p>
@@ -625,7 +613,6 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-data">Source Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-is-better-then-explicit">Conditional Is Better Then Explicit</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-ref">excel_ref()</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expand">expand()</a></li>
