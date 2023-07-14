@@ -323,3 +323,47 @@ def test_tidydata_converted_to_dict():
         tidy_as_dict_fixture = json.load(f)
 
     assert tidy_as_dict == tidy_as_dict_fixture
+
+
+def test_drop_duplicates(tidy: TidyData):
+    """
+    Test that the tidy_data .drop_duplicates() methods
+    works as expected.
+    """
+
+    tidy._transform()
+    tidy2 = copy.deepcopy(tidy)
+    
+    # Add a sneaky duplicate line
+    tidy2._data.append(["1", "Rock & Roll", "Houses", "John"])
+    assert len(tidy2._data) != len(tidy._data)
+    assert len(tidy2.drop_duplicates()._data) == len(tidy._data)
+
+
+def test_drop_duplicates_to_path(tidy: TidyData):
+    """
+    Test that the tidy_data .drop_duplicates() methods
+    works as expected when outputting information on
+    duplicates to a file.
+    """
+
+    tidy._transform()
+    tidy2 = copy.deepcopy(tidy)
+    
+    # From path
+    # ---------
+    tidy2._data.append(["1", "Rock & Roll", "Houses", "John"])
+    tidy2.drop_duplicates(path=Path("deleteme.txt"))
+
+    with open("deleteme.txt") as f:
+        assert "1,Rock & Roll,Houses,John" in f.read()
+    os.remove("deleteme.txt")
+
+    # From path as str
+    # ----------------
+    tidy2._data.append(["1", "Rock & Roll", "Houses", "John"])
+    tidy2.drop_duplicates(path="deleteme.txt")
+
+    with open("deleteme.txt") as f:
+        assert "1,Rock & Roll,Houses,John" in f.read()
+    os.remove("deleteme.txt")

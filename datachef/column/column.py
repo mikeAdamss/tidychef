@@ -64,6 +64,7 @@ class Column(BaseColumn):
             assert callable(
                 self.apply
             ), "Value of Kwarg 'apply' must be a python callable"
+        self.applied = []
 
         # ----------
         # Validation
@@ -73,6 +74,7 @@ class Column(BaseColumn):
             assert callable(
                 self.validation
             ), "Value of Kwarg 'validation' must be a python callable"
+        self.validated = []
 
     def _post_lookup(self, cell: Cell) -> Cell:
         """
@@ -84,11 +86,13 @@ class Column(BaseColumn):
         """
 
         # Apply any modifications
-        if self.apply:
+        if self.apply and cell not in self.applied:
             cell.value = self.apply(cell.value)
+            self.applied.append(cell)
 
         # Validate
-        if self.validation:
+        if self.validation and cell not in self.validated:
             self.validation(cell)
+            self.validated.append(cell)
 
         return cell

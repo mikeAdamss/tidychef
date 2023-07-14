@@ -60,5 +60,6 @@ chapters:
     - file: examples/intermediate/intermediate
       sections:
         - file: examples/intermediate/human-development
+        - file: examples/intermediate/household-debt
 
 - file: technical

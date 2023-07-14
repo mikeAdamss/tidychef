@@ -63,26 +63,6 @@ class HorizontalCondition(BaseLookupEngine):
                 """
             )
 
-        if any(
-            [
-                any([not isinstance(x, str) for x in cells_on_row.keys()]),
-                any([not isinstance(x, str) for x in cells_on_row.values()]),
-            ]
-        ):
-            raise BadConditionalResolverError(
-                f"""
-                Issue encountered when processing table: "{self.table}".
-
-                A condition resolver should take an argument of type:
-                Dict[str, str] and return type str.
-                                              
-                The resolver for {self.label} is incorrect, it has:
-                
-                keys of type: {set([type(x) for x in cells_on_row.keys()])}
-                values of type: {set([type(x) for x in cells_on_row.values()])}
-            """
-            )
-
         try:
             column_value = self.resolver(cells_on_row)
             if not isinstance(column_value, str):

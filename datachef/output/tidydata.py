@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+from os import linesep
 from pathlib import Path
 from typing import Callable, Dict, List, Optional, Union
 
@@ -331,9 +332,6 @@ class TidyData(BaseOutput):
         the **kwargs provided here are passed
         through to the csv.csvwriter() constructor.
         https://docs.python.org/3/library/csv.html
-
-        Returns a Path object representing the file that
-        has been written to, principally for testing.
         """
         if not self._data:
             self._transform()
@@ -357,3 +355,40 @@ class TidyData(BaseOutput):
                 if i == 0 and not write_headers:
                     continue
                 tidywriter.writerow(row)
+
+    def drop_duplicates(self, print_duplicates: bool = False, path: Union[str, Path] = None):
+        """
+        Drop duplicates from our tidydata.
+
+        If report=True we print of a statement for each
+        line duplicate being dropped.
+        """
+        self._transform()
+        unique = []
+
+        lines = [
+            "Removed duplicate instances of the following row(s):",
+            "-----------------------------------------------------"
+            ]
+
+        for row in self._data:
+            if row not in unique:
+                unique.append(row)
+            else:
+                if print_duplicates or path:
+                    lines.append(",".join(row))
+
+        if print_duplicates: # pragma: no cover
+            for line in lines:
+                print(line)
+
+        if path:
+            if not isinstance(path, Path):
+                path = Path(path)
+
+            with open(path, "w") as f:
+                for line in lines:
+                    f.write(line + linesep)
+
+        self._data = unique
+        return self
