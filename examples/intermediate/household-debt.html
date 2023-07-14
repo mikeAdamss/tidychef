@@ -1,0 +1,1002 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Household Debt Inequalities &#8212; Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/intermediate/household-debt';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Technical Reference" href="../../technical.html" />
+    <link rel="prev" title="Human Development" href="human-development.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Datachef
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../how-to-use-this-book.html">How To Use This Book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dot-notation-explained.html">Extended Dot Notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../extensibility.html">Extensibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quirks.html">Quirks</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../basics.html">Chapter 1: Basics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/acquire.html">Acquire</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/preview.html">Preview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/selection-operators.html">Selection: Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/selection-expand-fill.html">Selection: Expand &amp; Fill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/selection-warnings.html">Selection: Multiple Selection Warnings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/selection-shift.html">Selection: Shift</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/selection-regex.html">Selection: Regex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/selection-filters.html">Selection: Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/selection-simple-useful.html">Selection: Simple &amp; Useful</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/selection-validate.html">Selection: Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/tidydata-closest.html">TidyData: Closest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/tidydata-constants.html">TidyData: Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/tidydata-writing.html">TidyData: Writing To Csv</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intermediate.html">Chapter 2: Intermediate</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/apply.html">Apply</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/concatenation.html">TidyData: Concatenation</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/iterating.html">Iterating Tables/Sheets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/duplicates.html">TidyData: Duplicate Rows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/horizontal-conditions.html">TidyData: Horizontal Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/data-markers.html">TidyData: Data Markers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/pandas.html">Pandas</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/validation.html">TidyData: Column: validate=</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/within.html">TidyData: Within</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/against.html">Against (Creating New Validators)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/best-practice.html">Best Practice</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../advanced.html">Chapter 3: Advanced</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../advanced/advanced-acquisition.html">Advanced Acquisition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../advanced/custom-selectables.html">Custom Selectables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../advanced/custom-data-sources.html">Custom Data Sources</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../examples.html">Chapter 4: Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../basic/basic.html">Basic Examples</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../basic/bands.html">Bands</a></li>
+
+
+<li class="toctree-l3"><a class="reference internal" href="../basic/oic-1a-table.html">Output In Construction: Table 1a</a></li>
+
+
+<li class="toctree-l3"><a class="reference internal" href="../basic/cornavavirus-loneliness.html">Coronavirus: Loneliness</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../basic/monthly-gdp-tables.html">Monthly GDP Tables: GVA</a></li>
+
+
+<li class="toctree-l3"><a class="reference internal" href="../basic/house-prices.html">House Prices</a></li>
+
+</ul>
+</li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="intermediate.html">Intermediate Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="human-development.html">Human Development</a></li>
+
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Household Debt Inequalities</a></li>
+
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../technical.html">Technical Reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mikeAdamss/datachef" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mikeAdamss/datachef/issues/new?title=Issue%20on%20page%20%2Fexamples/intermediate/household-debt.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/examples/intermediate/household-debt.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Household Debt Inequalities</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Household Debt Inequalities</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source">Source</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#outputs">Outputs</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="household-debt-inequalities">
+<h1>Household Debt Inequalities<a class="headerlink" href="#household-debt-inequalities" title="Permalink to this heading">#</a></h1>
+<section id="source">
+<h2>Source<a class="headerlink" href="#source" title="Permalink to this heading">#</a></h2>
+<p>For this example we’re extracting the tables 11 and 12 from an xls dataset dealing with household debt inequalities.</p>
+<p>The example highlights using iteration to join multiple tables into a coherent whole.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsSelectable</span>
+
+<span class="n">tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsSelectable</span><span class="p">]</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/xls/householddebtdataset.xls&quot;</span><span class="p">)</span>
+
+<span class="c1"># Filter down to just the tables we want</span>
+<span class="n">table_names_wanted</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Table 11&quot;</span><span class="p">,</span> <span class="s2">&quot;Table 12&quot;</span><span class="p">]</span>
+<span class="n">tables</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tables</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">table_names_wanted</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
+    <span class="n">preview</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <table>
+                
+            </table>
+
+            <body>
+                <h2>Table 11</h2>
+                <table>
+                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td><td style="background-color:lightgrey">G</td><td style="background-color:lightgrey">H</td></tr>
+<tr><td style="background-color:lightgrey">1</td><td style="background-color:white">Table 11</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Back to contents</td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">2</td><td style="background-color:white">Individuals with financial liabilities by economic activity: Great Britain, July 2010 to June 2014</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">3</td><td style="background-color:white">Great Britain</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">4</td><td style="background-color:white">Economic Activity</td><td style="background-color:white">Percentage with financial liabilities (%)</td><td style="background-color:white">Median value of financial liabilities (£)</td><td style="background-color:white">Median value of individual annual net income (£)</td><td style="background-color:white">Median Individual Debt to Income Ratio</td><td style="background-color:white">Median value of individual gross financial wealth (£)</td><td style="background-color:white">Unweighted Frequency</td><td style="background-color:white">Weighted Frequency</td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:white">In Employment</td><td style="background-color:white">44.0</td><td style="background-color:white">2900.0</td><td style="background-color:white">18000.0</td><td style="background-color:white">0.15</td><td style="background-color:white">1000.0</td><td style="background-color:white">8175.0</td><td style="background-color:white">12748000.0</td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:white">Unemployed </td><td style="background-color:white">41.0</td><td style="background-color:white">1200.0</td><td style="background-color:white">3700.0</td><td style="background-color:white">0.35</td><td style="background-color:white"></td><td style="background-color:white">481.0</td><td style="background-color:white">813000.0</td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:white">Economically Inactive</td><td style="background-color:white">21.0</td><td style="background-color:white">1000.0</td><td style="background-color:white">9400.0</td><td style="background-color:white">0.14</td><td style="background-color:white">300.0</td><td style="background-color:white">2909.0</td><td style="background-color:white">3728000.0</td></tr>
+<tr><td style="background-color:lightgrey">9</td><td style="background-color:white">All Individuals with financial liabilities</td><td style="background-color:white">35.0</td><td style="background-color:white">2200.0</td><td style="background-color:white">15700.0</td><td style="background-color:white">0.15</td><td style="background-color:white">800.0</td><td style="background-color:white">11565.0</td><td style="background-color:white">17290000.0</td></tr>
+<tr><td style="background-color:lightgrey">10</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">11</td><td style="background-color:white">In Employment</td><td style="background-color:white">46.0</td><td style="background-color:white">3100.0</td><td style="background-color:white">17500.0</td><td style="background-color:white">0.17</td><td style="background-color:white">1000.0</td><td style="background-color:white">9375.0</td><td style="background-color:white">12781000.0</td></tr>
+<tr><td style="background-color:lightgrey">12</td><td style="background-color:white">Unemployed </td><td style="background-color:white">44.0</td><td style="background-color:white">1100.0</td><td style="background-color:white">3700.0</td><td style="background-color:white">0.36</td><td style="background-color:white"></td><td style="background-color:white">604.0</td><td style="background-color:white">845000.0</td></tr>
+<tr><td style="background-color:lightgrey">13</td><td style="background-color:white">Economically Inactive</td><td style="background-color:white">23.0</td><td style="background-color:white">1000.0</td><td style="background-color:white">9300.0</td><td style="background-color:white">0.14</td><td style="background-color:white">300.0</td><td style="background-color:white">3328.0</td><td style="background-color:white">3966000.0</td></tr>
+<tr><td style="background-color:lightgrey">14</td><td style="background-color:white">All Individuals with financial liabilities</td><td style="background-color:white">38.0</td><td style="background-color:white">2300.0</td><td style="background-color:white">15200.0</td><td style="background-color:white">0.17</td><td style="background-color:white">800.0</td><td style="background-color:white">13307.0</td><td style="background-color:white">17592000.0</td></tr>
+<tr><td style="background-color:lightgrey">15</td><td style="background-color:white">Source:  Wealth and Assets Survey, Office for National Statistics</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">16</td><td style="background-color:white">Notes:</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">17</td><td style="background-color:white">Median values include only individuals with financial liabilities</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">18</td><td style="background-color:white">' - ' denotes a value less than £50</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+
+                </table>
+            </body>
+            <br>
+        </html>
+    </div><div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <table>
+                
+            </table>
+
+            <body>
+                <h2>Table 12</h2>
+                <table>
+                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td><td style="background-color:lightgrey">G</td><td style="background-color:lightgrey">H</td></tr>
+<tr><td style="background-color:lightgrey">1</td><td style="background-color:white">Table 12</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Back to contents</td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">2</td><td style="background-color:white">Individuals with financial liabilities by education level: Great Britain, July 2010 to June 2014</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">3</td><td style="background-color:white">Great Britain</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">4</td><td style="background-color:white">Education Level</td><td style="background-color:white">Percentage with financial liabilities (%)</td><td style="background-color:white">Median value of financial liabilities (£)</td><td style="background-color:white">Median value of individual annual net income (£)</td><td style="background-color:white">Median Individual Debt to Income Ratio</td><td style="background-color:white">Median value of individual gross financial wealth (£)</td><td style="background-color:white">Unweighted Frequency</td><td style="background-color:white">Weighted Frequency</td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:white">Degree level or above</td><td style="background-color:white">41.0</td><td style="background-color:white">4600.0</td><td style="background-color:white">20500.0</td><td style="background-color:white">0.22</td><td style="background-color:white">2600.0</td><td style="background-color:white">3188.0</td><td style="background-color:white">4844000.0</td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:white">Other qualifications</td><td style="background-color:white">37.0</td><td style="background-color:white">1900.0</td><td style="background-color:white">15100.0</td><td style="background-color:white">0.14</td><td style="background-color:white">600.0</td><td style="background-color:white">6638.0</td><td style="background-color:white">9906000.0</td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:white">No qualifications</td><td style="background-color:white">22.0</td><td style="background-color:white">900.0</td><td style="background-color:white">11700.0</td><td style="background-color:white">0.09</td><td style="background-color:white">100.0</td><td style="background-color:white">1332.0</td><td style="background-color:white">1860000.0</td></tr>
+<tr><td style="background-color:lightgrey">9</td><td style="background-color:white">All Individuals with financial liabilities</td><td style="background-color:white">35.0</td><td style="background-color:white">2200.0</td><td style="background-color:white">15700.0</td><td style="background-color:white">0.15</td><td style="background-color:white">800.0</td><td style="background-color:white">11158.0</td><td style="background-color:white">16610000.0</td></tr>
+<tr><td style="background-color:lightgrey">10</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">11</td><td style="background-color:white">Degree level or above</td><td style="background-color:white">41.0</td><td style="background-color:white">4700.0</td><td style="background-color:white">21000.0</td><td style="background-color:white">0.23</td><td style="background-color:white">2600.0</td><td style="background-color:white">3118.0</td><td style="background-color:white">4087000.0</td></tr>
+<tr><td style="background-color:lightgrey">12</td><td style="background-color:white">Other qualifications</td><td style="background-color:white">41.0</td><td style="background-color:white">2200.0</td><td style="background-color:white">14700.0</td><td style="background-color:white">0.17</td><td style="background-color:white">500.0</td><td style="background-color:white">7497.0</td><td style="background-color:white">9940000.0</td></tr>
+<tr><td style="background-color:lightgrey">13</td><td style="background-color:white">No qualifications</td><td style="background-color:white">26.0</td><td style="background-color:white">1100.0</td><td style="background-color:white">12200.0</td><td style="background-color:white">0.11</td><td style="background-color:white">200.0</td><td style="background-color:white">2104.0</td><td style="background-color:white">2737000.0</td></tr>
+<tr><td style="background-color:lightgrey">14</td><td style="background-color:white">All Individuals with financial liabilities</td><td style="background-color:white">38.0</td><td style="background-color:white">2300.0</td><td style="background-color:white">15200.0</td><td style="background-color:white">0.17</td><td style="background-color:white">800.0</td><td style="background-color:white">13307.0</td><td style="background-color:white">17592000.0</td></tr>
+<tr><td style="background-color:lightgrey">15</td><td style="background-color:white">Source:  Wealth and Assets Survey, Office for National Statistics</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">16</td><td style="background-color:white">Notes:</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">17</td><td style="background-color:white">Median values include only individuals with financial liabilities</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+
+                </table>
+            </body>
+            <br>
+        </html>
+    </div></div>
+</div>
+<p>From an xls source which can be <a class="reference external" href="https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/xls/householddebtdataset.xls">downloaded here</a>.</p>
+</section>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>We’re going to extract “Period” from the obvious dates in column A.</p></li>
+<li><p>We’re just going to call the principle field indicated by column A “Category”.</p></li>
+<li><p>We’re going to take “Great Britain” as a constant for a column named “Area”.</p></li>
+<li><p>We’re going to take the headers on row 4 as “Financial Liability”</p></li>
+<li><p>As an additional exercise we’re going to use a horizontal condition to create a “Unit Of Measure” column to be one of “Pounds Sterling”, “Percent”, “Ratio” or “Number” depending on the category.</p></li>
+<li><p>We’re going to prefix “Category” as extracted from table 12 with “Education: ” to make the data a little easier to understand.</p></li>
+<li><p>We’re going to join both tables into a single tidy data output.</p></li>
+<li><p>We’re going to de-duplicate with a printout of what we’ve removed - it should be the contents of row 14 as its duplicated on both tables.</p></li>
+<li><p>We’ll strip trailing “.0”s from the observations (which we’ll call “Value” this time).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">datachef.direction</span> <span class="kn">import</span> <span class="n">down</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">left</span>
+<span class="kn">from</span> <span class="nn">datachef.output</span> <span class="kn">import</span> <span class="n">Column</span><span class="p">,</span> <span class="n">TidyData</span>
+<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsSelectable</span>
+
+<span class="k">def</span> <span class="nf">unit_of_measure</span><span class="p">(</span><span class="n">line</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to define unit of measure based on Financial Liability</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cat</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="s2">&quot;Category&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="s2">&quot;(%)&quot;</span> <span class="ow">in</span> <span class="n">cat</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Percent&quot;</span>
+    <span class="k">elif</span> <span class="s2">&quot;(£)&quot;</span> <span class="ow">in</span> <span class="n">cat</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Pounds Sterling&quot;</span>
+    <span class="k">elif</span> <span class="s2">&quot;Frequency&quot;</span> <span class="ow">in</span> <span class="n">cat</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Number&quot;</span>
+    <span class="k">elif</span> <span class="s2">&quot;Ratio&quot;</span> <span class="ow">in</span> <span class="n">cat</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Ratio&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot identify unit of measure from: </span><span class="si">{</span><span class="n">cat</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsSelectable</span><span class="p">]</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/xls/householddebtdataset.xls&quot;</span><span class="p">)</span>
+
+<span class="c1"># Filter down to just the tables we want</span>
+<span class="n">table_names_wanted</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Table 11&quot;</span><span class="p">,</span> <span class="s2">&quot;Table 12&quot;</span><span class="p">]</span>
+<span class="n">tables</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tables</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">table_names_wanted</span><span class="p">]</span>
+
+<span class="n">all_tidy_data</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
+    <span class="n">area</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">re</span><span class="p">(</span><span class="s2">&quot;Great Britain&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">assert_one</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Area&quot;</span><span class="p">)</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;A3&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">re</span><span class="p">(</span><span class="s2">&quot;.*[0-9]</span><span class="si">{4}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">assert_len</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Period&quot;</span><span class="p">)</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">area</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Category&quot;</span><span class="p">)</span>
+    <span class="n">observations</span> <span class="o">=</span> <span class="n">category</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">)</span>
+    <span class="n">financial_liability</span> <span class="o">=</span> <span class="p">(</span><span class="n">observations</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">left</span><span class="p">)</span> <span class="o">-</span> <span class="n">observations</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Financial Liability&quot;</span><span class="p">)</span>
+    <span class="n">preview</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">area</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">financial_liability</span><span class="p">)</span>
+
+    <span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
+        <span class="n">observations</span><span class="p">,</span>
+        <span class="n">Column</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;Area&quot;</span><span class="p">,</span> <span class="n">area</span><span class="o">.</span><span class="n">lone_value</span><span class="p">()),</span>
+        <span class="n">Column</span><span class="p">(</span><span class="n">period</span><span class="o">.</span><span class="n">finds_observations_closest</span><span class="p">(</span><span class="n">down</span><span class="p">)),</span>
+        <span class="n">Column</span><span class="p">(</span><span class="n">category</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">down</span><span class="p">),</span> <span class="n">apply</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">&quot;Eduction: &quot;</span><span class="o">+</span><span class="n">x</span> <span class="k">if</span> <span class="n">table</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;Table 12&quot;</span> <span class="k">else</span> <span class="n">x</span><span class="p">),</span>
+        <span class="n">Column</span><span class="p">(</span><span class="n">financial_liability</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">right</span><span class="p">)),</span>
+        <span class="n">Column</span><span class="o">.</span><span class="n">horizontal_condition</span><span class="p">(</span><span class="s2">&quot;Unit Of Measure&quot;</span><span class="p">,</span> <span class="n">unit_of_measure</span><span class="p">),</span>
+        <span class="n">obs_apply</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.0&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">all_tidy_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
+
+<span class="n">final_tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="o">.</span><span class="n">from_tidy_list</span><span class="p">(</span><span class="n">all_tidy_data</span><span class="p">)</span>
+<span class="n">final_tidy_data</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">print_duplicates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">final_tidy_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;household-debt.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <table>
+                
+            <tr>
+                <td style="background-color:cyan">Value</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#99ff99">Area</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#eeccff">Period</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#ffe066">Category</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#ff4da6">Financial Liability</td>
+            <tr>
+        
+            </table>
+
+            <body>
+                <h2>Table 11</h2>
+                <table>
+                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td><td style="background-color:lightgrey">G</td><td style="background-color:lightgrey">H</td></tr>
+<tr><td style="background-color:lightgrey">1</td><td style="background-color:white">Table 11</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Back to contents</td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">2</td><td style="background-color:white">Individuals with financial liabilities by economic activity: Great Britain, July 2010 to June 2014</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">3</td><td style="background-color:#99ff99">Great Britain</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">4</td><td style="background-color:white">Economic Activity</td><td style="background-color:#ffe066">Percentage with financial liabilities (%)</td><td style="background-color:#ffe066">Median value of financial liabilities (£)</td><td style="background-color:#ffe066">Median value of individual annual net income (£)</td><td style="background-color:#ffe066">Median Individual Debt to Income Ratio</td><td style="background-color:#ffe066">Median value of individual gross financial wealth (£)</td><td style="background-color:#ffe066">Unweighted Frequency</td><td style="background-color:#ffe066">Weighted Frequency</td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:#eeccff">July 2012 to June 2014</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:#ff4da6">In Employment</td><td style="background-color:cyan">44.0</td><td style="background-color:cyan">2900.0</td><td style="background-color:cyan">18000.0</td><td style="background-color:cyan">0.15</td><td style="background-color:cyan">1000.0</td><td style="background-color:cyan">8175.0</td><td style="background-color:cyan">12748000.0</td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:#ff4da6">Unemployed </td><td style="background-color:cyan">41.0</td><td style="background-color:cyan">1200.0</td><td style="background-color:cyan">3700.0</td><td style="background-color:cyan">0.35</td><td style="background-color:white"></td><td style="background-color:cyan">481.0</td><td style="background-color:cyan">813000.0</td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:#ff4da6">Economically Inactive</td><td style="background-color:cyan">21.0</td><td style="background-color:cyan">1000.0</td><td style="background-color:cyan">9400.0</td><td style="background-color:cyan">0.14</td><td style="background-color:cyan">300.0</td><td style="background-color:cyan">2909.0</td><td style="background-color:cyan">3728000.0</td></tr>
+<tr><td style="background-color:lightgrey">9</td><td style="background-color:#ff4da6">All Individuals with financial liabilities</td><td style="background-color:cyan">35.0</td><td style="background-color:cyan">2200.0</td><td style="background-color:cyan">15700.0</td><td style="background-color:cyan">0.15</td><td style="background-color:cyan">800.0</td><td style="background-color:cyan">11565.0</td><td style="background-color:cyan">17290000.0</td></tr>
+<tr><td style="background-color:lightgrey">10</td><td style="background-color:#eeccff">July 2010 to June 2012</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">11</td><td style="background-color:#ff4da6">In Employment</td><td style="background-color:cyan">46.0</td><td style="background-color:cyan">3100.0</td><td style="background-color:cyan">17500.0</td><td style="background-color:cyan">0.17</td><td style="background-color:cyan">1000.0</td><td style="background-color:cyan">9375.0</td><td style="background-color:cyan">12781000.0</td></tr>
+<tr><td style="background-color:lightgrey">12</td><td style="background-color:#ff4da6">Unemployed </td><td style="background-color:cyan">44.0</td><td style="background-color:cyan">1100.0</td><td style="background-color:cyan">3700.0</td><td style="background-color:cyan">0.36</td><td style="background-color:white"></td><td style="background-color:cyan">604.0</td><td style="background-color:cyan">845000.0</td></tr>
+<tr><td style="background-color:lightgrey">13</td><td style="background-color:#ff4da6">Economically Inactive</td><td style="background-color:cyan">23.0</td><td style="background-color:cyan">1000.0</td><td style="background-color:cyan">9300.0</td><td style="background-color:cyan">0.14</td><td style="background-color:cyan">300.0</td><td style="background-color:cyan">3328.0</td><td style="background-color:cyan">3966000.0</td></tr>
+<tr><td style="background-color:lightgrey">14</td><td style="background-color:#ff4da6">All Individuals with financial liabilities</td><td style="background-color:cyan">38.0</td><td style="background-color:cyan">2300.0</td><td style="background-color:cyan">15200.0</td><td style="background-color:cyan">0.17</td><td style="background-color:cyan">800.0</td><td style="background-color:cyan">13307.0</td><td style="background-color:cyan">17592000.0</td></tr>
+<tr><td style="background-color:lightgrey">15</td><td style="background-color:white">Source:  Wealth and Assets Survey, Office for National Statistics</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">16</td><td style="background-color:white">Notes:</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">17</td><td style="background-color:white">Median values include only individuals with financial liabilities</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">18</td><td style="background-color:white">' - ' denotes a value less than £50</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+
+                </table>
+            </body>
+            <br>
+        </html>
+    </div><div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <table>
+                
+            <tr>
+                <td style="background-color:cyan">Value</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#99ff99">Area</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#eeccff">Period</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#ffe066">Category</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#ff4da6">Financial Liability</td>
+            <tr>
+        
+            </table>
+
+            <body>
+                <h2>Table 12</h2>
+                <table>
+                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td><td style="background-color:lightgrey">G</td><td style="background-color:lightgrey">H</td></tr>
+<tr><td style="background-color:lightgrey">1</td><td style="background-color:white">Table 12</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Back to contents</td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">2</td><td style="background-color:white">Individuals with financial liabilities by education level: Great Britain, July 2010 to June 2014</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">3</td><td style="background-color:#99ff99">Great Britain</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">4</td><td style="background-color:white">Education Level</td><td style="background-color:#ffe066">Percentage with financial liabilities (%)</td><td style="background-color:#ffe066">Median value of financial liabilities (£)</td><td style="background-color:#ffe066">Median value of individual annual net income (£)</td><td style="background-color:#ffe066">Median Individual Debt to Income Ratio</td><td style="background-color:#ffe066">Median value of individual gross financial wealth (£)</td><td style="background-color:#ffe066">Unweighted Frequency</td><td style="background-color:#ffe066">Weighted Frequency</td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:#eeccff">July 2012 to June 2014</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:#ff4da6">Degree level or above</td><td style="background-color:cyan">41.0</td><td style="background-color:cyan">4600.0</td><td style="background-color:cyan">20500.0</td><td style="background-color:cyan">0.22</td><td style="background-color:cyan">2600.0</td><td style="background-color:cyan">3188.0</td><td style="background-color:cyan">4844000.0</td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:#ff4da6">Other qualifications</td><td style="background-color:cyan">37.0</td><td style="background-color:cyan">1900.0</td><td style="background-color:cyan">15100.0</td><td style="background-color:cyan">0.14</td><td style="background-color:cyan">600.0</td><td style="background-color:cyan">6638.0</td><td style="background-color:cyan">9906000.0</td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:#ff4da6">No qualifications</td><td style="background-color:cyan">22.0</td><td style="background-color:cyan">900.0</td><td style="background-color:cyan">11700.0</td><td style="background-color:cyan">0.09</td><td style="background-color:cyan">100.0</td><td style="background-color:cyan">1332.0</td><td style="background-color:cyan">1860000.0</td></tr>
+<tr><td style="background-color:lightgrey">9</td><td style="background-color:#ff4da6">All Individuals with financial liabilities</td><td style="background-color:cyan">35.0</td><td style="background-color:cyan">2200.0</td><td style="background-color:cyan">15700.0</td><td style="background-color:cyan">0.15</td><td style="background-color:cyan">800.0</td><td style="background-color:cyan">11158.0</td><td style="background-color:cyan">16610000.0</td></tr>
+<tr><td style="background-color:lightgrey">10</td><td style="background-color:#eeccff">July 2010 to June 2012</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">11</td><td style="background-color:#ff4da6">Degree level or above</td><td style="background-color:cyan">41.0</td><td style="background-color:cyan">4700.0</td><td style="background-color:cyan">21000.0</td><td style="background-color:cyan">0.23</td><td style="background-color:cyan">2600.0</td><td style="background-color:cyan">3118.0</td><td style="background-color:cyan">4087000.0</td></tr>
+<tr><td style="background-color:lightgrey">12</td><td style="background-color:#ff4da6">Other qualifications</td><td style="background-color:cyan">41.0</td><td style="background-color:cyan">2200.0</td><td style="background-color:cyan">14700.0</td><td style="background-color:cyan">0.17</td><td style="background-color:cyan">500.0</td><td style="background-color:cyan">7497.0</td><td style="background-color:cyan">9940000.0</td></tr>
+<tr><td style="background-color:lightgrey">13</td><td style="background-color:#ff4da6">No qualifications</td><td style="background-color:cyan">26.0</td><td style="background-color:cyan">1100.0</td><td style="background-color:cyan">12200.0</td><td style="background-color:cyan">0.11</td><td style="background-color:cyan">200.0</td><td style="background-color:cyan">2104.0</td><td style="background-color:cyan">2737000.0</td></tr>
+<tr><td style="background-color:lightgrey">14</td><td style="background-color:#ff4da6">All Individuals with financial liabilities</td><td style="background-color:cyan">38.0</td><td style="background-color:cyan">2300.0</td><td style="background-color:cyan">15200.0</td><td style="background-color:cyan">0.17</td><td style="background-color:cyan">800.0</td><td style="background-color:cyan">13307.0</td><td style="background-color:cyan">17592000.0</td></tr>
+<tr><td style="background-color:lightgrey">15</td><td style="background-color:white">Source:  Wealth and Assets Survey, Office for National Statistics</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">16</td><td style="background-color:white">Notes:</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">17</td><td style="background-color:white">Median values include only individuals with financial liabilities</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+
+                </table>
+            </body>
+            <br>
+        </html>
+    </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Removed duplicate instances of the following row(s):
+-----------------------------------------------------
+35,Great Britain,July 2012 to June 2014,Eduction: Percentage with financial liabilities (%),All Individuals with financial liabilities,Percent
+38,Great Britain,July 2010 to June 2012,Eduction: Percentage with financial liabilities (%),All Individuals with financial liabilities,Percent
+2200,Great Britain,July 2012 to June 2014,Eduction: Median value of financial liabilities (£),All Individuals with financial liabilities,Pounds Sterling
+2300,Great Britain,July 2010 to June 2012,Eduction: Median value of financial liabilities (£),All Individuals with financial liabilities,Pounds Sterling
+15700,Great Britain,July 2012 to June 2014,Eduction: Median value of individual annual net income (£),All Individuals with financial liabilities,Pounds Sterling
+15200,Great Britain,July 2010 to June 2012,Eduction: Median value of individual annual net income (£),All Individuals with financial liabilities,Pounds Sterling
+0.15,Great Britain,July 2012 to June 2014,Eduction: Median Individual Debt to Income Ratio,All Individuals with financial liabilities,Ratio
+0.17,Great Britain,July 2010 to June 2012,Eduction: Median Individual Debt to Income Ratio,All Individuals with financial liabilities,Ratio
+800,Great Britain,July 2012 to June 2014,Eduction: Median value of individual gross financial wealth (£),All Individuals with financial liabilities,Pounds Sterling
+800,Great Britain,July 2010 to June 2012,Eduction: Median value of individual gross financial wealth (£),All Individuals with financial liabilities,Pounds Sterling
+13307,Great Britain,July 2010 to June 2012,Eduction: Unweighted Frequency,All Individuals with financial liabilities,Number
+17592000,Great Britain,July 2010 to June 2012,Eduction: Weighted Frequency,All Individuals with financial liabilities,Number
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="outputs">
+<h1>Outputs<a class="headerlink" href="#outputs" title="Permalink to this heading">#</a></h1>
+<p>The tidy data can be <a class="reference download internal" download="" href="../../_downloads/7a91214c240a05cd45ed49187b477caa/household-debt.csv"><span class="xref download myst">downloaded here</span></a> and a full inline preview of the tidydata generated is shown below for those people who’d prefer to scroll.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">final_tidy_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <body>
+                <table>
+                    <tr><td style="background-color:lightgrey">Value</td><td style="background-color:lightgrey">Area</td><td style="background-color:lightgrey">Period</td><td style="background-color:lightgrey">Category</td><td style="background-color:lightgrey">Financial Liability</td><td style="background-color:lightgrey">Unit Of Measure</td></tr><tr><td style="background-color:white">44</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Percentage with financial liabilities (%)</td><td style="background-color:white">In Employment</td><td style="background-color:white">Percent</td></tr><tr><td style="background-color:white">41</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Percentage with financial liabilities (%)</td><td style="background-color:white">Unemployed </td><td style="background-color:white">Percent</td></tr><tr><td style="background-color:white">21</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Percentage with financial liabilities (%)</td><td style="background-color:white">Economically Inactive</td><td style="background-color:white">Percent</td></tr><tr><td style="background-color:white">35</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Percentage with financial liabilities (%)</td><td style="background-color:white">All Individuals with financial liabilities</td><td style="background-color:white">Percent</td></tr><tr><td style="background-color:white">46</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Percentage with financial liabilities (%)</td><td style="background-color:white">In Employment</td><td style="background-color:white">Percent</td></tr><tr><td style="background-color:white">44</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Percentage with financial liabilities (%)</td><td style="background-color:white">Unemployed </td><td style="background-color:white">Percent</td></tr><tr><td style="background-color:white">23</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Percentage with financial liabilities (%)</td><td style="background-color:white">Economically Inactive</td><td style="background-color:white">Percent</td></tr><tr><td style="background-color:white">38</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Percentage with financial liabilities (%)</td><td style="background-color:white">All Individuals with financial liabilities</td><td style="background-color:white">Percent</td></tr><tr><td style="background-color:white">2900</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median value of financial liabilities (£)</td><td style="background-color:white">In Employment</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">1200</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median value of financial liabilities (£)</td><td style="background-color:white">Unemployed </td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">1000</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median value of financial liabilities (£)</td><td style="background-color:white">Economically Inactive</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">2200</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median value of financial liabilities (£)</td><td style="background-color:white">All Individuals with financial liabilities</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">3100</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median value of financial liabilities (£)</td><td style="background-color:white">In Employment</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">1100</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median value of financial liabilities (£)</td><td style="background-color:white">Unemployed </td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">1000</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median value of financial liabilities (£)</td><td style="background-color:white">Economically Inactive</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">2300</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median value of financial liabilities (£)</td><td style="background-color:white">All Individuals with financial liabilities</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">18000</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median value of individual annual net income (£)</td><td style="background-color:white">In Employment</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">3700</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median value of individual annual net income (£)</td><td style="background-color:white">Unemployed </td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">9400</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median value of individual annual net income (£)</td><td style="background-color:white">Economically Inactive</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">15700</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median value of individual annual net income (£)</td><td style="background-color:white">All Individuals with financial liabilities</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">17500</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median value of individual annual net income (£)</td><td style="background-color:white">In Employment</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">3700</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median value of individual annual net income (£)</td><td style="background-color:white">Unemployed </td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">9300</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median value of individual annual net income (£)</td><td style="background-color:white">Economically Inactive</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">15200</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median value of individual annual net income (£)</td><td style="background-color:white">All Individuals with financial liabilities</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">0.15</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median Individual Debt to Income Ratio</td><td style="background-color:white">In Employment</td><td style="background-color:white">Ratio</td></tr><tr><td style="background-color:white">0.35</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median Individual Debt to Income Ratio</td><td style="background-color:white">Unemployed </td><td style="background-color:white">Ratio</td></tr><tr><td style="background-color:white">0.14</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median Individual Debt to Income Ratio</td><td style="background-color:white">Economically Inactive</td><td style="background-color:white">Ratio</td></tr><tr><td style="background-color:white">0.15</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median Individual Debt to Income Ratio</td><td style="background-color:white">All Individuals with financial liabilities</td><td style="background-color:white">Ratio</td></tr><tr><td style="background-color:white">0.17</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median Individual Debt to Income Ratio</td><td style="background-color:white">In Employment</td><td style="background-color:white">Ratio</td></tr><tr><td style="background-color:white">0.36</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median Individual Debt to Income Ratio</td><td style="background-color:white">Unemployed </td><td style="background-color:white">Ratio</td></tr><tr><td style="background-color:white">0.14</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median Individual Debt to Income Ratio</td><td style="background-color:white">Economically Inactive</td><td style="background-color:white">Ratio</td></tr><tr><td style="background-color:white">0.17</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median Individual Debt to Income Ratio</td><td style="background-color:white">All Individuals with financial liabilities</td><td style="background-color:white">Ratio</td></tr><tr><td style="background-color:white">1000</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median value of individual gross financial wealth (£)</td><td style="background-color:white">In Employment</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">300</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median value of individual gross financial wealth (£)</td><td style="background-color:white">Economically Inactive</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">800</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median value of individual gross financial wealth (£)</td><td style="background-color:white">All Individuals with financial liabilities</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">1000</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median value of individual gross financial wealth (£)</td><td style="background-color:white">In Employment</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">300</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median value of individual gross financial wealth (£)</td><td style="background-color:white">Economically Inactive</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">800</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median value of individual gross financial wealth (£)</td><td style="background-color:white">All Individuals with financial liabilities</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">8175</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Unweighted Frequency</td><td style="background-color:white">In Employment</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">481</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Unweighted Frequency</td><td style="background-color:white">Unemployed </td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">2909</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Unweighted Frequency</td><td style="background-color:white">Economically Inactive</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">11565</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Unweighted Frequency</td><td style="background-color:white">All Individuals with financial liabilities</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">9375</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Unweighted Frequency</td><td style="background-color:white">In Employment</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">604</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Unweighted Frequency</td><td style="background-color:white">Unemployed </td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">3328</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Unweighted Frequency</td><td style="background-color:white">Economically Inactive</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">13307</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Unweighted Frequency</td><td style="background-color:white">All Individuals with financial liabilities</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">12748000</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Weighted Frequency</td><td style="background-color:white">In Employment</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">813000</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Weighted Frequency</td><td style="background-color:white">Unemployed </td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">3728000</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Weighted Frequency</td><td style="background-color:white">Economically Inactive</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">17290000</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Weighted Frequency</td><td style="background-color:white">All Individuals with financial liabilities</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">12781000</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Weighted Frequency</td><td style="background-color:white">In Employment</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">845000</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Weighted Frequency</td><td style="background-color:white">Unemployed </td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">3966000</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Weighted Frequency</td><td style="background-color:white">Economically Inactive</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">17592000</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Weighted Frequency</td><td style="background-color:white">All Individuals with financial liabilities</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">41</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Percentage with financial liabilities (%)</td><td style="background-color:white">Degree level or above</td><td style="background-color:white">Percent</td></tr><tr><td style="background-color:white">37</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Percentage with financial liabilities (%)</td><td style="background-color:white">Other qualifications</td><td style="background-color:white">Percent</td></tr><tr><td style="background-color:white">22</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Percentage with financial liabilities (%)</td><td style="background-color:white">No qualifications</td><td style="background-color:white">Percent</td></tr><tr><td style="background-color:white">41</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Percentage with financial liabilities (%)</td><td style="background-color:white">Degree level or above</td><td style="background-color:white">Percent</td></tr><tr><td style="background-color:white">41</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Percentage with financial liabilities (%)</td><td style="background-color:white">Other qualifications</td><td style="background-color:white">Percent</td></tr><tr><td style="background-color:white">26</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Percentage with financial liabilities (%)</td><td style="background-color:white">No qualifications</td><td style="background-color:white">Percent</td></tr><tr><td style="background-color:white">4600</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median value of financial liabilities (£)</td><td style="background-color:white">Degree level or above</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">1900</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median value of financial liabilities (£)</td><td style="background-color:white">Other qualifications</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">900</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median value of financial liabilities (£)</td><td style="background-color:white">No qualifications</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">4700</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median value of financial liabilities (£)</td><td style="background-color:white">Degree level or above</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">2200</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median value of financial liabilities (£)</td><td style="background-color:white">Other qualifications</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">1100</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median value of financial liabilities (£)</td><td style="background-color:white">No qualifications</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">20500</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median value of individual annual net income (£)</td><td style="background-color:white">Degree level or above</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">15100</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median value of individual annual net income (£)</td><td style="background-color:white">Other qualifications</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">11700</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median value of individual annual net income (£)</td><td style="background-color:white">No qualifications</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">21000</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median value of individual annual net income (£)</td><td style="background-color:white">Degree level or above</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">14700</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median value of individual annual net income (£)</td><td style="background-color:white">Other qualifications</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">12200</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median value of individual annual net income (£)</td><td style="background-color:white">No qualifications</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">0.22</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median Individual Debt to Income Ratio</td><td style="background-color:white">Degree level or above</td><td style="background-color:white">Ratio</td></tr><tr><td style="background-color:white">0.14</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median Individual Debt to Income Ratio</td><td style="background-color:white">Other qualifications</td><td style="background-color:white">Ratio</td></tr><tr><td style="background-color:white">09</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median Individual Debt to Income Ratio</td><td style="background-color:white">No qualifications</td><td style="background-color:white">Ratio</td></tr><tr><td style="background-color:white">0.23</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median Individual Debt to Income Ratio</td><td style="background-color:white">Degree level or above</td><td style="background-color:white">Ratio</td></tr><tr><td style="background-color:white">0.17</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median Individual Debt to Income Ratio</td><td style="background-color:white">Other qualifications</td><td style="background-color:white">Ratio</td></tr><tr><td style="background-color:white">0.11</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median Individual Debt to Income Ratio</td><td style="background-color:white">No qualifications</td><td style="background-color:white">Ratio</td></tr><tr><td style="background-color:white">2600</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median value of individual gross financial wealth (£)</td><td style="background-color:white">Degree level or above</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">600</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median value of individual gross financial wealth (£)</td><td style="background-color:white">Other qualifications</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">100</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Median value of individual gross financial wealth (£)</td><td style="background-color:white">No qualifications</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">2600</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median value of individual gross financial wealth (£)</td><td style="background-color:white">Degree level or above</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">500</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median value of individual gross financial wealth (£)</td><td style="background-color:white">Other qualifications</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">200</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Median value of individual gross financial wealth (£)</td><td style="background-color:white">No qualifications</td><td style="background-color:white">Pounds Sterling</td></tr><tr><td style="background-color:white">3188</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Unweighted Frequency</td><td style="background-color:white">Degree level or above</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">6638</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Unweighted Frequency</td><td style="background-color:white">Other qualifications</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">1332</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Unweighted Frequency</td><td style="background-color:white">No qualifications</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">11158</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Unweighted Frequency</td><td style="background-color:white">All Individuals with financial liabilities</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">3118</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Unweighted Frequency</td><td style="background-color:white">Degree level or above</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">7497</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Unweighted Frequency</td><td style="background-color:white">Other qualifications</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">2104</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Unweighted Frequency</td><td style="background-color:white">No qualifications</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">4844000</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Weighted Frequency</td><td style="background-color:white">Degree level or above</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">9906000</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Weighted Frequency</td><td style="background-color:white">Other qualifications</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">1860000</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Weighted Frequency</td><td style="background-color:white">No qualifications</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">16610000</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2012 to June 2014</td><td style="background-color:white">Eduction: Weighted Frequency</td><td style="background-color:white">All Individuals with financial liabilities</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">4087000</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Weighted Frequency</td><td style="background-color:white">Degree level or above</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">9940000</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Weighted Frequency</td><td style="background-color:white">Other qualifications</td><td style="background-color:white">Number</td></tr><tr><td style="background-color:white">2737000</td><td style="background-color:white">Great Britain</td><td style="background-color:white">July 2010 to June 2012</td><td style="background-color:white">Eduction: Weighted Frequency</td><td style="background-color:white">No qualifications</td><td style="background-color:white">Number</td></tr>
+                </table>
+            </body>
+            <br>
+        </html>
+    </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./examples/intermediate"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="human-development.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Human Development</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../technical.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Technical Reference</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Household Debt Inequalities</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source">Source</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#outputs">Outputs</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By https://github.com/mikeAdamss
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

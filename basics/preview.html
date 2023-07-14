@@ -190,6 +190,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/iterating.html">Iterating Tables/Sheets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intermediate/duplicates.html">TidyData: Duplicate Rows</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/horizontal-conditions.html">TidyData: Horizontal Conditions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/data-markers.html">TidyData: Data Markers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/pandas.html">Pandas</a></li>
@@ -226,6 +227,8 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../examples/intermediate/intermediate.html">Intermediate Examples</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../examples/intermediate/human-development.html">Human Development</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../examples/intermediate/household-debt.html">Household Debt Inequalities</a></li>
 
 </ul>
 </li>
@@ -430,8 +433,8 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#labelling-selections">Labelling Selections</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-notations">Excel notations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-bounded-arguments">Alternative Bounded Arguments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#excel">Excel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xy">XY</a></li>
 </ul>
             </nav>
         </div>
@@ -614,7 +617,7 @@ document.write(`
 <p>As shown below it can hide information you may need to know - to make this clear lets extend the  last preview another two rows and columns.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preview</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">housing</span><span class="p">,</span> <span class="n">data_identifier_code</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A1:I14&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preview</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">housing</span><span class="p">,</span> <span class="n">data_identifier_code</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A1:I13&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -676,7 +679,6 @@ document.write(`
 <tr><td style="background-color:lightgrey">11</td><td style="background-color:cyan">2001</td><td style="background-color:white">27.7</td><td style="background-color:white">42.5</td><td style="background-color:white">40.1</td><td style="background-color:white">58.1</td><td style="background-color:white">65.3</td><td style="background-color:white">145.8</td><td style="background-color:white">102.3</td><td style="background-color:white">67.2</td></tr>
 <tr><td style="background-color:lightgrey">12</td><td style="background-color:white">2002</td><td style="background-color:white">31.4</td><td style="background-color:white">46.3</td><td style="background-color:white">43.9</td><td style="background-color:white">65.7</td><td style="background-color:white">82.6</td><td style="background-color:white">115.7</td><td style="background-color:white">105.7</td><td style="background-color:white">71.4</td></tr>
 <tr><td style="background-color:lightgrey">13</td><td style="background-color:white">2003</td><td style="background-color:white">35.7</td><td style="background-color:white">57.8</td><td style="background-color:white">54.3</td><td style="background-color:white">62</td><td style="background-color:white">103.7</td><td style="background-color:white">122.2</td><td style="background-color:white">101.9</td><td style="background-color:white">75.6</td></tr>
-<tr><td style="background-color:lightgrey">14</td><td style="background-color:white">2004</td><td style="background-color:white">42.9</td><td style="background-color:white">70.2</td><td style="background-color:white">65.8</td><td style="background-color:white">54.1</td><td style="background-color:white">116.4</td><td style="background-color:white">125.8</td><td style="background-color:white">112.3</td><td style="background-color:white">82.8</td></tr>
 
                 </table>
             </body>
@@ -772,14 +774,14 @@ document.write(`
     </div></div>
 </div>
 </section>
-<section id="excel-notations">
-<h2>Excel notations<a class="headerlink" href="#excel-notations" title="Permalink to this heading">#</a></h2>
-<p>As previously mentioned, the default behaviour for <code class="docutils literal notranslate"><span class="pre">preview()</span></code> is to show excel style column and row notations.</p>
+<section id="excel">
+<h2>Excel<a class="headerlink" href="#excel" title="Permalink to this heading">#</a></h2>
+<p>As previously mentioned, the default behaviour for <code class="docutils literal notranslate"><span class="pre">preview()</span></code> is to show excel style column letters and row numbers.</p>
 <p>This is nearly always the practical choice when processing but can lead to some confusion when previewing your work (especially where previewing a non excel format).</p>
-<p>As a nod to these scenarios you can use the <code class="docutils literal notranslate"><span class="pre">with_excel_notations=</span></code> keyword to change this behaviour as per the following example.</p>
+<p>As a nod to these scenarios you can use the <code class="docutils literal notranslate"><span class="pre">show_excel=</span></code> keyword to change this behaviour as per the following example.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preview</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">housing</span><span class="p">,</span> <span class="n">data_identifier_code</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A1:G14&quot;</span><span class="p">,</span> <span class="n">with_excel_notations</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preview</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">housing</span><span class="p">,</span> <span class="n">data_identifier_code</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A1:G11&quot;</span><span class="p">,</span> <span class="n">show_excel</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -838,9 +840,6 @@ document.write(`
 <tr><td style="background-color:cyan">1999</td><td style="background-color:white">21.6</td><td style="background-color:white">40.7</td><td style="background-color:white">37.7</td><td style="background-color:white">57.9</td><td style="background-color:white">68.3</td><td style="background-color:white">159.9</td></tr>
 <tr><td style="background-color:cyan">2000</td><td style="background-color:white">27.1</td><td style="background-color:white">45.5</td><td style="background-color:white">42.6</td><td style="background-color:white">54.3</td><td style="background-color:white">64.7</td><td style="background-color:white">142.7</td></tr>
 <tr><td style="background-color:cyan">2001</td><td style="background-color:white">27.7</td><td style="background-color:white">42.5</td><td style="background-color:white">40.1</td><td style="background-color:white">58.1</td><td style="background-color:white">65.3</td><td style="background-color:white">145.8</td></tr>
-<tr><td style="background-color:white">2002</td><td style="background-color:white">31.4</td><td style="background-color:white">46.3</td><td style="background-color:white">43.9</td><td style="background-color:white">65.7</td><td style="background-color:white">82.6</td><td style="background-color:white">115.7</td></tr>
-<tr><td style="background-color:white">2003</td><td style="background-color:white">35.7</td><td style="background-color:white">57.8</td><td style="background-color:white">54.3</td><td style="background-color:white">62</td><td style="background-color:white">103.7</td><td style="background-color:white">122.2</td></tr>
-<tr><td style="background-color:white">2004</td><td style="background-color:white">42.9</td><td style="background-color:white">70.2</td><td style="background-color:white">65.8</td><td style="background-color:white">54.1</td><td style="background-color:white">116.4</td><td style="background-color:white">125.8</td></tr>
 
                 </table>
             </body>
@@ -849,19 +848,14 @@ document.write(`
     </div></div>
 </div>
 </section>
-<section id="alternative-bounded-arguments">
-<h2>Alternative Bounded Arguments<a class="headerlink" href="#alternative-bounded-arguments" title="Permalink to this heading">#</a></h2>
-<p>Passing in an excel reference for <code class="docutils literal notranslate"><span class="pre">bounded=</span></code> somewhat defeats the idea of using <code class="docutils literal notranslate"><span class="pre">with_excel_notations=False</span></code> so you can also pass in a dictionary of x/y positional offets should you need to as per the following example.</p>
-<table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p><span style="color:green">To reiterate: the expected, encouraged and principally supported behaviour of datachef is to use excel style references for human readability, the following is again just an effort to support presentational edge cases where a reference to excel when working with non excel data could cause audience confusion.</span></p></th>
-</tr>
-</thead>
-</table>
+<section id="xy">
+<h2>XY<a class="headerlink" href="#xy" title="Permalink to this heading">#</a></h2>
+<p>Underneath the hood datachef uses the x (horizontal) and y (vertical) index of the cells to calculate relative positions.</p>
+<p>The can in some cases be useful information to know and is sometimes included in error messages.</p>
+<p>If you want to show x and y values on your preview you can use the <code class="docutils literal notranslate"><span class="pre">show_xy=</span></code> keyword.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preview</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">housing</span><span class="p">,</span> <span class="n">data_identifier_code</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;start_xy&quot;</span><span class="p">:</span> <span class="s2">&quot;0,0&quot;</span><span class="p">,</span> <span class="s2">&quot;end_xy&quot;</span><span class="p">:</span> <span class="s2">&quot;6,10&quot;</span><span class="p">},</span>
-        <span class="n">with_excel_notations</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preview</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">housing</span><span class="p">,</span> <span class="n">data_identifier_code</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A1:G11&quot;</span><span class="p">,</span> <span class="n">show_xy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_excel</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -909,17 +903,89 @@ document.write(`
             <body>
                 <h2>Table 1a</h2>
                 <table>
-                    <tr><td style="background-color:white">Table 1a: Construction output in Great Britain, volume, seasonally adjusted, index numbers, by sector</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
-<tr><td style="background-color:white">This worksheet contains one table. Some shorthand is used in this table [R&M] = repair and maintenance.</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
-<tr><td style="background-color:white">Source: Construction Output and Employment from the Office for National Statistics</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
-<tr><td style="background-color:white">2019=100</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
-<tr><td style="background-color:white">Time period</td><td style="background-color:#99ff99">Public new housing</td><td style="background-color:#99ff99">Private new housing</td><td style="background-color:#99ff99">Total new housing</td><td style="background-color:#99ff99">Infrastructure new work</td><td style="background-color:#99ff99">Public other new work</td><td style="background-color:#99ff99">Private industrial new work</td></tr>
-<tr><td style="background-color:white">Dataset identifier code</td><td style="background-color:#eeccff">MV36</td><td style="background-color:#eeccff">MV37</td><td style="background-color:#eeccff">MVL7</td><td style="background-color:#eeccff">MV38</td><td style="background-color:#eeccff">MV39</td><td style="background-color:#eeccff">MV3A</td></tr>
-<tr><td style="background-color:cyan">1997</td><td style="background-color:white">30.8</td><td style="background-color:white">44.8</td><td style="background-color:white">42.6</td><td style="background-color:white">61.2</td><td style="background-color:white">57.6</td><td style="background-color:white">152.1</td></tr>
-<tr><td style="background-color:cyan">1998</td><td style="background-color:white">24.9</td><td style="background-color:white">45.3</td><td style="background-color:white">42</td><td style="background-color:white">59.5</td><td style="background-color:white">60.7</td><td style="background-color:white">155</td></tr>
-<tr><td style="background-color:cyan">1999</td><td style="background-color:white">21.6</td><td style="background-color:white">40.7</td><td style="background-color:white">37.7</td><td style="background-color:white">57.9</td><td style="background-color:white">68.3</td><td style="background-color:white">159.9</td></tr>
-<tr><td style="background-color:cyan">2000</td><td style="background-color:white">27.1</td><td style="background-color:white">45.5</td><td style="background-color:white">42.6</td><td style="background-color:white">54.3</td><td style="background-color:white">64.7</td><td style="background-color:white">142.7</td></tr>
-<tr><td style="background-color:cyan">2001</td><td style="background-color:white">27.7</td><td style="background-color:white">42.5</td><td style="background-color:white">40.1</td><td style="background-color:white">58.1</td><td style="background-color:white">65.3</td><td style="background-color:white">145.8</td></tr>
+                    <tr><td style="background-color:#999999">x/y</td><td style="background-color:#999999">0</td><td style="background-color:#999999">1</td><td style="background-color:#999999">2</td><td style="background-color:#999999">3</td><td style="background-color:#999999">4</td><td style="background-color:#999999">5</td><td style="background-color:#999999">6</td></tr>
+<tr><td style="background-color:#999999">0</td><td style="background-color:white">Table 1a: Construction output in Great Britain, volume, seasonally adjusted, index numbers, by sector</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:#999999">1</td><td style="background-color:white">This worksheet contains one table. Some shorthand is used in this table [R&M] = repair and maintenance.</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:#999999">2</td><td style="background-color:white">Source: Construction Output and Employment from the Office for National Statistics</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:#999999">3</td><td style="background-color:white">2019=100</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:#999999">4</td><td style="background-color:white">Time period</td><td style="background-color:#99ff99">Public new housing</td><td style="background-color:#99ff99">Private new housing</td><td style="background-color:#99ff99">Total new housing</td><td style="background-color:#99ff99">Infrastructure new work</td><td style="background-color:#99ff99">Public other new work</td><td style="background-color:#99ff99">Private industrial new work</td></tr>
+<tr><td style="background-color:#999999">5</td><td style="background-color:white">Dataset identifier code</td><td style="background-color:#eeccff">MV36</td><td style="background-color:#eeccff">MV37</td><td style="background-color:#eeccff">MVL7</td><td style="background-color:#eeccff">MV38</td><td style="background-color:#eeccff">MV39</td><td style="background-color:#eeccff">MV3A</td></tr>
+<tr><td style="background-color:#999999">6</td><td style="background-color:cyan">1997</td><td style="background-color:white">30.8</td><td style="background-color:white">44.8</td><td style="background-color:white">42.6</td><td style="background-color:white">61.2</td><td style="background-color:white">57.6</td><td style="background-color:white">152.1</td></tr>
+<tr><td style="background-color:#999999">7</td><td style="background-color:cyan">1998</td><td style="background-color:white">24.9</td><td style="background-color:white">45.3</td><td style="background-color:white">42</td><td style="background-color:white">59.5</td><td style="background-color:white">60.7</td><td style="background-color:white">155</td></tr>
+<tr><td style="background-color:#999999">8</td><td style="background-color:cyan">1999</td><td style="background-color:white">21.6</td><td style="background-color:white">40.7</td><td style="background-color:white">37.7</td><td style="background-color:white">57.9</td><td style="background-color:white">68.3</td><td style="background-color:white">159.9</td></tr>
+<tr><td style="background-color:#999999">9</td><td style="background-color:cyan">2000</td><td style="background-color:white">27.1</td><td style="background-color:white">45.5</td><td style="background-color:white">42.6</td><td style="background-color:white">54.3</td><td style="background-color:white">64.7</td><td style="background-color:white">142.7</td></tr>
+<tr><td style="background-color:#999999">10</td><td style="background-color:cyan">2001</td><td style="background-color:white">27.7</td><td style="background-color:white">42.5</td><td style="background-color:white">40.1</td><td style="background-color:white">58.1</td><td style="background-color:white">65.3</td><td style="background-color:white">145.8</td></tr>
+
+                </table>
+            </body>
+            <br>
+        </html>
+    </div></div>
+</div>
+<p>or both together</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preview</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">housing</span><span class="p">,</span> <span class="n">data_identifier_code</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A1:G11&quot;</span><span class="p">,</span> <span class="n">show_xy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <table>
+                
+            <tr>
+                <td style="background-color:cyan">Time</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#99ff99">Housing</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#eeccff">Data Identifier Code</td>
+            <tr>
+        
+            </table>
+
+            <body>
+                <h2>Table 1a</h2>
+                <table>
+                    <tr><td style="background-color:#999999">x/y</td><td style="background-color:#999999"></td><td style="background-color:#999999">0</td><td style="background-color:#999999">1</td><td style="background-color:#999999">2</td><td style="background-color:#999999">3</td><td style="background-color:#999999">4</td><td style="background-color:#999999">5</td><td style="background-color:#999999">6</td></tr>
+<tr><td style="background-color:#999999"></td><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td><td style="background-color:lightgrey">G</td></tr>
+<tr><td style="background-color:#999999">0</td><td style="background-color:lightgrey">1</td><td style="background-color:white">Table 1a: Construction output in Great Britain, volume, seasonally adjusted, index numbers, by sector</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:#999999">1</td><td style="background-color:lightgrey">2</td><td style="background-color:white">This worksheet contains one table. Some shorthand is used in this table [R&M] = repair and maintenance.</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:#999999">2</td><td style="background-color:lightgrey">3</td><td style="background-color:white">Source: Construction Output and Employment from the Office for National Statistics</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:#999999">3</td><td style="background-color:lightgrey">4</td><td style="background-color:white">2019=100</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:#999999">4</td><td style="background-color:lightgrey">5</td><td style="background-color:white">Time period</td><td style="background-color:#99ff99">Public new housing</td><td style="background-color:#99ff99">Private new housing</td><td style="background-color:#99ff99">Total new housing</td><td style="background-color:#99ff99">Infrastructure new work</td><td style="background-color:#99ff99">Public other new work</td><td style="background-color:#99ff99">Private industrial new work</td></tr>
+<tr><td style="background-color:#999999">5</td><td style="background-color:lightgrey">6</td><td style="background-color:white">Dataset identifier code</td><td style="background-color:#eeccff">MV36</td><td style="background-color:#eeccff">MV37</td><td style="background-color:#eeccff">MVL7</td><td style="background-color:#eeccff">MV38</td><td style="background-color:#eeccff">MV39</td><td style="background-color:#eeccff">MV3A</td></tr>
+<tr><td style="background-color:#999999">6</td><td style="background-color:lightgrey">7</td><td style="background-color:cyan">1997</td><td style="background-color:white">30.8</td><td style="background-color:white">44.8</td><td style="background-color:white">42.6</td><td style="background-color:white">61.2</td><td style="background-color:white">57.6</td><td style="background-color:white">152.1</td></tr>
+<tr><td style="background-color:#999999">7</td><td style="background-color:lightgrey">8</td><td style="background-color:cyan">1998</td><td style="background-color:white">24.9</td><td style="background-color:white">45.3</td><td style="background-color:white">42</td><td style="background-color:white">59.5</td><td style="background-color:white">60.7</td><td style="background-color:white">155</td></tr>
+<tr><td style="background-color:#999999">8</td><td style="background-color:lightgrey">9</td><td style="background-color:cyan">1999</td><td style="background-color:white">21.6</td><td style="background-color:white">40.7</td><td style="background-color:white">37.7</td><td style="background-color:white">57.9</td><td style="background-color:white">68.3</td><td style="background-color:white">159.9</td></tr>
+<tr><td style="background-color:#999999">9</td><td style="background-color:lightgrey">10</td><td style="background-color:cyan">2000</td><td style="background-color:white">27.1</td><td style="background-color:white">45.5</td><td style="background-color:white">42.6</td><td style="background-color:white">54.3</td><td style="background-color:white">64.7</td><td style="background-color:white">142.7</td></tr>
+<tr><td style="background-color:#999999">10</td><td style="background-color:lightgrey">11</td><td style="background-color:cyan">2001</td><td style="background-color:white">27.7</td><td style="background-color:white">42.5</td><td style="background-color:white">40.1</td><td style="background-color:white">58.1</td><td style="background-color:white">65.3</td><td style="background-color:white">145.8</td></tr>
 
                 </table>
             </body>
@@ -1002,8 +1068,8 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#labelling-selections">Labelling Selections</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-notations">Excel notations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-bounded-arguments">Alternative Bounded Arguments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#excel">Excel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xy">XY</a></li>
 </ul>
   </nav></div>
 

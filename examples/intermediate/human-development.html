@@ -64,7 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'examples/intermediate/human-development';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Technical Reference" href="../../technical.html" />
+    <link rel="next" title="Household Debt Inequalities" href="household-debt.html" />
     <link rel="prev" title="Intermediate Examples" href="intermediate.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -190,6 +190,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l2"><a class="reference internal" href="../../intermediate/iterating.html">Iterating Tables/Sheets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/duplicates.html">TidyData: Duplicate Rows</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../intermediate/horizontal-conditions.html">TidyData: Horizontal Conditions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../intermediate/data-markers.html">TidyData: Data Markers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../intermediate/pandas.html">Pandas</a></li>
@@ -226,6 +227,8 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="intermediate.html">Intermediate Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">Human Development</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="household-debt.html">Household Debt Inequalities</a></li>
 
 </ul>
 </li>
@@ -444,6 +447,8 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="human-development">
 <h1>Human Development<a class="headerlink" href="#human-development" title="Permalink to this heading">#</a></h1>
+<p>We’re going to extract from an xlx spreadsheet on human development.</p>
+<p>The example principally deals with running multiple small extractions on a single table to build a final output.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
@@ -546,8 +551,8 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">preview</span>
-<span class="kn">from</span> <span class="nn">datachef.direction</span> <span class="kn">import</span> <span class="n">right</span><span class="p">,</span> <span class="n">down</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">up</span>
+<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">datachef.direction</span> <span class="kn">import</span> <span class="n">right</span><span class="p">,</span> <span class="n">down</span><span class="p">,</span> <span class="n">left</span>
 <span class="kn">from</span> <span class="nn">datachef.output</span> <span class="kn">import</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span>
 <span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
 
@@ -879,11 +884,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="../../technical.html"
+       href="household-debt.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Technical Reference</p>
+        <p class="prev-next-title">Household Debt Inequalities</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

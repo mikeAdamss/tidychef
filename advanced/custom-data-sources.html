@@ -190,6 +190,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/iterating.html">Iterating Tables/Sheets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intermediate/duplicates.html">TidyData: Duplicate Rows</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/horizontal-conditions.html">TidyData: Horizontal Conditions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/data-markers.html">TidyData: Data Markers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/pandas.html">Pandas</a></li>
@@ -226,6 +227,8 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../examples/intermediate/intermediate.html">Intermediate Examples</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../examples/intermediate/human-development.html">Human Development</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../examples/intermediate/household-debt.html">Household Debt Inequalities</a></li>
 
 </ul>
 </li>
@@ -442,7 +445,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="custom-data-sources">
 <h1>Custom Data Sources<a class="headerlink" href="#custom-data-sources" title="Permalink to this heading">#</a></h1>
-<p>This document will explain how to extend datachef to imbibe additional tabulated data formats.</p>
+<p>This document will explain how to extend datachef to ingest additional tabulated data formats.</p>
 <p>We’ll start by explaining how the <code class="docutils literal notranslate"><span class="pre">acquire</span></code> module works.</p>
 <section id="how-acquire-actually-works">
 <h2>How acquire actually works<a class="headerlink" href="#how-acquire-actually-works" title="Permalink to this heading">#</a></h2>
@@ -647,7 +650,7 @@ document.write(`
             </table>
 
             <body>
-                <h2><datachef.models.source.table.Table object at 0x10ef53af0></h2>
+                <h2><datachef.models.source.table.Table object at 0x112583e90></h2>
                 <table>
                     <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td></tr>
 <tr><td style="background-color:lightgrey">1</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
@@ -704,7 +707,7 @@ document.write(`
             </table>
 
             <body>
-                <h2><datachef.models.source.table.Table object at 0x11271e020></h2>
+                <h2><datachef.models.source.table.Table object at 0x1124c6090></h2>
                 <table>
                     <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td></tr>
 <tr><td style="background-color:lightgrey">1</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:cyan"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
