@@ -228,7 +228,7 @@ python-versions = ">=3.7.0"
 
 [[package]]
 name = "click"
-version = "8.1.4"
+version = "8.1.5"
 description = "Composable command line interface toolkit"
 category = "dev"
 optional = false
@@ -349,19 +349,6 @@ python-versions = ">=3.7"
 [package.extras]
 docs = ["furo (>=2023.5.20)", "sphinx (>=7.0.1)", "sphinx-autodoc-typehints (>=1.23,!=1.23.4)"]
 testing = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "diff-cover (>=7.5)", "pytest (>=7.3.1)", "pytest-cov (>=4.1)", "pytest-mock (>=3.10)", "pytest-timeout (>=2.1)"]
-
-[[package]]
-name = "graphviz"
-version = "0.20.1"
-description = "Simple Python interface for Graphviz"
-category = "main"
-optional = false
-python-versions = ">=3.7"
-
-[package.extras]
-dev = ["flake8", "pep8-naming", "tox (>=3)", "twine", "wheel"]
-docs = ["sphinx (>=5)", "sphinx-autodoc-typehints", "sphinx-rtd-theme"]
-test = ["coverage", "mock (>=4)", "pytest (>=7)", "pytest-cov", "pytest-mock (>=3)"]
 
 [[package]]
 name = "greenlet"
@@ -2081,7 +2068,7 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "726d12911bc76dd70fbee1f976b1911fb6ac375b0e3fa3731d2d29f207759630"
+content-hash = "a9e84878a178d1422089fabffbfaf3dcf8a141c0cc8acd7d4c9ea92887928d39"
 
 [metadata.files]
 accessible-pygments = [
@@ -2321,8 +2308,8 @@ charset-normalizer = [
     {file = "charset_normalizer-3.2.0-py3-none-any.whl", hash = "sha256:8e098148dd37b4ce3baca71fb394c81dc5d9c7728c95df695d2dca218edf40e6"},
 ]
 click = [
-    {file = "click-8.1.4-py3-none-any.whl", hash = "sha256:2739815aaa5d2c986a88f1e9230c55e17f0caad3d958a5e13ad0797c166db9e3"},
-    {file = "click-8.1.4.tar.gz", hash = "sha256:b97d0c74955da062a7d4ef92fadb583806a585b2ea81958a81bd72726cbb8e37"},
+    {file = "click-8.1.5-py3-none-any.whl", hash = "sha256:e576aa487d679441d7d30abb87e1b43d24fc53bffb8758443b1a9e1cee504548"},
+    {file = "click-8.1.5.tar.gz", hash = "sha256:4be4b1af8d665c6d942909916d31a213a106800c47d0eeba73d34da3cbc11367"},
 ]
 colorama = [
     {file = "colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"},
@@ -2445,10 +2432,6 @@ fastjsonschema = [
 filelock = [
     {file = "filelock-3.12.2-py3-none-any.whl", hash = "sha256:cbb791cdea2a72f23da6ac5b5269ab0a0d161e9ef0100e653b69049a7706d1ec"},
     {file = "filelock-3.12.2.tar.gz", hash = "sha256:002740518d8aa59a26b0c76e10fb8c6e15eae825d34b6fdf670333fd7b938d81"},
-]
-graphviz = [
-    {file = "graphviz-0.20.1-py3-none-any.whl", hash = "sha256:587c58a223b51611c0cf461132da386edd896a029524ca61a1462b880bf97977"},
-    {file = "graphviz-0.20.1.zip", hash = "sha256:8c58f14adaa3b947daf26c19bc1e98c4e0702cdc31cf99153e6f06904d492bf8"},
 ]
 greenlet = [
     {file = "greenlet-2.0.2-cp27-cp27m-macosx_10_14_x86_64.whl", hash = "sha256:bdfea8c661e80d3c1c99ad7c3ff74e6e87184895bbaca6ee8cc61209f8b9b85d"},
