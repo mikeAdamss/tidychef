@@ -10,16 +10,18 @@ from datachef.utils import cellutils
 
 from ..boundary import Boundary
 from .components import HtmlCell, SelectionKeys
-from .constants import BLANK_COLOUR, BORDER_COLOUR, INLINE_CSS, WARNING_COLOUR
+from .constants import NO_COLOUR, BORDER_CELL_COLOUR, INLINE_CSS, WARNING_COLOUR, BORDER_CELL_SECONDARY_COLOUR
 
 
 def get_preview_table_as_html(
     selections: List[Selectable],
     bounded: Union[str, Dict[str, str]],
-    with_excel_notations: bool = True,
-    border_cells: str = BORDER_COLOUR,
-    blank_cells: str = BLANK_COLOUR,
+    show_excel: bool = True,
+    show_xy: bool = False,
+    border_cells: str = BORDER_CELL_COLOUR,
+    blank_cells: str = NO_COLOUR,
     warning_colour: str = WARNING_COLOUR,
+    border_cell_secondary_colour: str = BORDER_CELL_SECONDARY_COLOUR,
     multiple_selection_warning: bool = True,
 ) -> str:
     """ """
@@ -50,23 +52,41 @@ def get_preview_table_as_html(
     row = []
     show_warning = False
 
-    # Add an excel style letter row above the preview
-    # where requested
-    if with_excel_notations:
-        row.append(HtmlCell("", border_cells))
-        for i in range(boundary.leftmost_point, boundary.rightmost_point + 1):
-            letters = cellutils.x_to_letters(i)
-            row.append(HtmlCell(letters, border_cells))
-        html_cell_rows.append(row)
-        row = [HtmlCell(last_y + 1, border_cells)]
+    # Add table headers as needed.
+    if show_xy or show_excel:
+        if show_xy:
+            row.append(HtmlCell("x/y", border_cell_secondary_colour))
+            if show_excel:
+                row.append(HtmlCell("", border_cell_secondary_colour))
+            for i in range(boundary.leftmost_point, boundary.rightmost_point + 1):
+                row.append(HtmlCell(i, border_cell_secondary_colour))
+            html_cell_rows.append(row)
+            row =[]
 
+        if show_excel:
+            if show_xy:
+                row.append(HtmlCell("", border_cell_secondary_colour))
+            row.append(HtmlCell("", border_cells))
+            for i in range(boundary.leftmost_point, boundary.rightmost_point + 1):
+                letters = cellutils.x_to_letters(i)
+                row.append(HtmlCell(letters, border_cells))
+            html_cell_rows.append(row)
+            row = []
+ 
+        if show_xy:
+            row.append(HtmlCell(last_y, border_cell_secondary_colour))
+        if show_excel:
+            row.append(HtmlCell(last_y + 1, border_cells))
+
+    # Add cell rows, including xy and excel if so indicated
     for cell in all_cells:
         if cell.y != last_y:
             html_cell_rows.append(row)
-            if with_excel_notations:
-                row = [HtmlCell(cell.y + 1, border_cells)]
-            else:
-                row = []
+            row = []
+            if show_xy:
+                row.append(HtmlCell(cell.y, border_cell_secondary_colour))
+            if show_excel:
+                row.append(HtmlCell(cell.y + 1, border_cells))
             last_y = cell.y
 
         found = 0

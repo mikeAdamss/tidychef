@@ -2,7 +2,7 @@ from os import linesep
 from typing import List
 
 from .components import HtmlCell
-from .constants import BLANK_COLOUR, BORDER_COLOUR, INLINE_CSS
+from .constants import NO_COLOUR, BORDER_CELL_COLOUR, INLINE_CSS
 
 
 def tidy_data_as_html_table_string(data: List[List[str]]) -> str:
@@ -20,13 +20,13 @@ def tidy_data_as_html_table_string(data: List[List[str]]) -> str:
 
     headers = data[0]
     table_html = (
-        f"<tr>{''.join([HtmlCell(x, BORDER_COLOUR).as_html() for x in headers])}</tr>"
+        f"<tr>{''.join([HtmlCell(x, BORDER_CELL_COLOUR).as_html() for x in headers])}</tr>"
     )
 
     rows = data[1:]
     for row in rows:
         table_html += (
-            f"<tr>{''.join([HtmlCell(x, BLANK_COLOUR).as_html() for x in row])}</tr>"
+            f"<tr>{''.join([HtmlCell(x, NO_COLOUR).as_html() for x in row])}</tr>"
         )
 
     return f"""

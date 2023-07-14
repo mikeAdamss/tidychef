@@ -18,7 +18,8 @@ def preview(
     border_cells: str = "lightgrey",
     blank_cells: str = "white",
     warning_colour: str = "#ff8080",
-    with_excel_notations=True,
+    show_excel: bool =True,
+    show_xy: bool =False,
     multiple_selection_warning: bool = True,
 ):
     """
@@ -55,7 +56,8 @@ def preview(
         selections,
         bounded=bounded,
         multiple_selection_warning=multiple_selection_warning,
-        with_excel_notations=with_excel_notations,
+        show_excel=show_excel,
+        show_xy=show_xy,
         border_cells=border_cells,
         warning_colour=warning_colour,
         blank_cells=blank_cells,

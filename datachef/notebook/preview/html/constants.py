@@ -1,5 +1,6 @@
-BORDER_COLOUR = "lightgrey"
-BLANK_COLOUR = "white"
+BORDER_CELL_COLOUR = "lightgrey"
+BORDER_CELL_SECONDARY_COLOUR = "#999999"
+NO_COLOUR = "white"
 WARNING_COLOUR = "#ff8080"
 
 # Simple CSS to make it pretty-ish

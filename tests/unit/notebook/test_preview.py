@@ -159,12 +159,58 @@ def test_output_preview_to_path_works_with_no_excel_ref(
     here = Path(__file__).parent
     test_output_path = Path(here / "deleteme.html")
 
-    preview(selectable_simple_small1, with_excel_notations=False, path=test_output_path)
+    preview(selectable_simple_small1, show_excel=False, path=test_output_path)
     with open(test_output_path) as f:
         new_content = f.read()
     os.remove(test_output_path)
 
     html_fixture = path_to_fixture("preview", "simple-output-no-excel-notations.html")
+    with open(html_fixture) as f:
+        fixture_content = f.read()
+
+    assert new_content == fixture_content
+
+
+def test_output_preview_to_path_works_with_xy_references(
+    selectable_simple_small1: Selectable,
+):
+    """
+    Test that the ability to output the html preview to
+    a path works.
+    """
+
+    here = Path(__file__).parent
+    test_output_path = Path(here / "deleteme.html")
+
+    preview(selectable_simple_small1, show_excel=False, show_xy=True, path=test_output_path)
+    with open(test_output_path) as f:
+        new_content = f.read()
+    os.remove(test_output_path)
+
+    html_fixture = path_to_fixture("preview", "show-xy.html")
+    with open(html_fixture) as f:
+        fixture_content = f.read()
+
+    assert new_content == fixture_content
+
+
+def test_output_preview_to_path_works_with_both_xy_and_excel_references(
+    selectable_simple_small1: Selectable,
+):
+    """
+    Test that the ability to output the html preview to
+    a path works.
+    """
+
+    here = Path(__file__).parent
+    test_output_path = Path(here / "deleteme.html")
+
+    preview(selectable_simple_small1, show_xy=True, path=test_output_path)
+    with open(test_output_path) as f:
+        new_content = f.read()
+    os.remove(test_output_path)
+
+    html_fixture = path_to_fixture("preview", "show-xy-and-excel.html")
     with open(html_fixture) as f:
         fixture_content = f.read()
 
