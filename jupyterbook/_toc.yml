@@ -62,5 +62,6 @@ chapters:
       sections:
         - file: examples/intermediate/human-development
         - file: examples/intermediate/household-debt
+        - file: examples/intermediate/tourism
 
 - file: technical
