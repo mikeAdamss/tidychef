@@ -10,7 +10,13 @@ from datachef.utils import cellutils
 
 from ..boundary import Boundary
 from .components import HtmlCell, SelectionKeys
-from .constants import NO_COLOUR, BORDER_CELL_COLOUR, INLINE_CSS, WARNING_COLOUR, BORDER_CELL_SECONDARY_COLOUR
+from .constants import (
+    BORDER_CELL_COLOUR,
+    BORDER_CELL_SECONDARY_COLOUR,
+    INLINE_CSS,
+    NO_COLOUR,
+    WARNING_COLOUR,
+)
 
 
 def get_preview_table_as_html(
@@ -61,7 +67,7 @@ def get_preview_table_as_html(
             for i in range(boundary.leftmost_point, boundary.rightmost_point + 1):
                 row.append(HtmlCell(i, border_cell_secondary_colour))
             html_cell_rows.append(row)
-            row =[]
+            row = []
 
         if show_excel:
             if show_xy:
@@ -72,7 +78,7 @@ def get_preview_table_as_html(
                 row.append(HtmlCell(letters, border_cells))
             html_cell_rows.append(row)
             row = []
- 
+
         if show_xy:
             row.append(HtmlCell(last_y, border_cell_secondary_colour))
         if show_excel:

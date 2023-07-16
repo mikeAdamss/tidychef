@@ -182,7 +182,9 @@ def test_output_preview_to_path_works_with_xy_references(
     here = Path(__file__).parent
     test_output_path = Path(here / "deleteme.html")
 
-    preview(selectable_simple_small1, show_excel=False, show_xy=True, path=test_output_path)
+    preview(
+        selectable_simple_small1, show_excel=False, show_xy=True, path=test_output_path
+    )
     with open(test_output_path) as f:
         new_content = f.read()
     os.remove(test_output_path)

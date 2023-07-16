@@ -327,12 +327,8 @@ def test_tidydata_converted_to_dict():
     # Check that table name is inherited from observations
     # during processing
     const = Column.constant("foo", "bar")
-    tidy_data = TidyData(
-        observations,
-        Column.constant("foo", "bar")
-    )
+    tidy_data = TidyData(observations, Column.constant("foo", "bar"))
     assert const.table == observations.name
-    
 
 
 def test_drop_duplicates(tidy: TidyData):
@@ -343,7 +339,7 @@ def test_drop_duplicates(tidy: TidyData):
 
     tidy._transform()
     tidy2 = copy.deepcopy(tidy)
-    
+
     # Add a sneaky duplicate line
     tidy2._data.append(["1", "Rock & Roll", "Houses", "John"])
     assert len(tidy2._data) != len(tidy._data)
@@ -359,11 +355,11 @@ def test_drop_duplicates_to_path(tidy: TidyData):
 
     tidy._transform()
     tidy2 = copy.deepcopy(tidy)
-    
+
     # From path
     # ---------
     tidy2._data.append(["1", "Rock & Roll", "Houses", "John"])
-    tidy2.drop_duplicates(path=Path("deleteme.txt"))
+    tidy2.drop_duplicates(csv_duplicate_path=Path("deleteme.txt"))
 
     with open("deleteme.txt") as f:
         assert "1,Rock & Roll,Houses,John" in f.read()
@@ -372,7 +368,7 @@ def test_drop_duplicates_to_path(tidy: TidyData):
     # From path as str
     # ----------------
     tidy2._data.append(["1", "Rock & Roll", "Houses", "John"])
-    tidy2.drop_duplicates(path="deleteme.txt")
+    tidy2.drop_duplicates(csv_duplicate_path="deleteme.txt")
 
     with open("deleteme.txt") as f:
         assert "1,Rock & Roll,Houses,John" in f.read()

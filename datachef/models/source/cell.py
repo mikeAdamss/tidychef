@@ -132,6 +132,12 @@ class BaseCell:
         if x_ref and y_ref:
             return f"{x_ref}{y_ref}"
         return "VIRTUAL CELL"
+    
+    def provenance():
+        """
+        Returns information on how the value of this cell
+        was formed.
+        """
 
 
 @dataclass

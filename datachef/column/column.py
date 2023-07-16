@@ -1,4 +1,5 @@
-from typing import Callable, Optional
+import copy
+from typing import Callable, Dict, Optional
 
 from datachef.column.base import BaseColumn
 from datachef.lookup.base import BaseLookupEngine
@@ -20,7 +21,10 @@ class Column(BaseColumn):
     2. It allows the validation of data extracted via
     the validation= keyword.
     """
+
     _table: Optional[str] = "Unnamed Table"
+    _apply_cache: Optional[Dict[Cell, Cell]] = None
+    _validated_cells: Optional[Cell] = None
 
     @property
     def table(self) -> str:
@@ -59,7 +63,7 @@ class Column(BaseColumn):
 
     def _pre_init(self, engine: BaseLookupEngine, *args, **kwargs):
         """
-        Things to be applied before the bulk of the BaeColumn
+        Things to be applied before the bulk of the BaseColumn
         init logic.
 
         :engine: The lookup engine in use by this column.
@@ -73,7 +77,7 @@ class Column(BaseColumn):
             assert callable(
                 self.apply
             ), "Value of Kwarg 'apply' must be a python callable"
-        self.applied = []
+            self._apply_cache = {}
 
         # ----------
         # Validation
@@ -83,7 +87,7 @@ class Column(BaseColumn):
             assert callable(
                 self.validation
             ), "Value of Kwarg 'validation' must be a python callable"
-        self.validated = []
+            self._validated_cells = []
 
     def _post_lookup(self, cell: Cell) -> Cell:
         """
@@ -94,14 +98,30 @@ class Column(BaseColumn):
         :return: A single instance of a datachef Cell object.
         """
 
-        # Apply any modifications
-        if self.apply and cell not in self.applied:
-            cell.value = self.apply(cell.value)
-            self.applied.append(cell)
+        # Apply
+        # -----
+        # We need to be careful not to change the Cell itself
+        # as it might be called by other Columns.
+        # Instead we:
+        # (1) copy before modifying
+        # (2) cache, so we only have to apply once per unique
+        # input value (each column cell can resolve for many
+        # observations)
+        if self.apply:
+            already_applied_cell = self._apply_cache.get(cell.value, None)
+            if already_applied_cell is None:
+                applied_cell = copy.deepcopy(cell)
+                applied_cell.value = self.apply(applied_cell.value)
+                self._apply_cache[cell.value] = applied_cell
+                cell = applied_cell
+            else:
+                cell = already_applied_cell
 
         # Validate
-        if self.validation and cell not in self.validated:
-            self.validation(cell)
-            self.validated.append(cell)
+        # --------
+        # Any _unique_ Cell value is either valid in this context or it
+        # isn't, so only check its valid once.
+        if self.validation and cell not in self._validated_cells:
+            self._validated_cells.append(cell)
 
         return cell

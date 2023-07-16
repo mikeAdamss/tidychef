@@ -86,7 +86,7 @@ class TidyData(BaseOutput):
         self._transform()
         return len(self._data)
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         """
         Outputs the TidyData as a pandas style dictionary, i.e
 
@@ -120,6 +120,9 @@ class TidyData(BaseOutput):
         provided in the form:
 
         TidyData.from_tidy(tidydata1, tidydata2, tidydata3)
+
+        :param *tidy_data_objects: 1-n populated tidy data objects that we
+        want to join together.
         """
         return TidyData.from_tidy_list(list(tidy_data_objects))
 
@@ -130,6 +133,9 @@ class TidyData(BaseOutput):
         provided in the form:
 
         TidyData.from_tidy_list([tidydata1, tidydata2, tidydata3])
+
+        :param tidy_data_objects: A list of 1-n populated tidy data objects
+        that we want to join together.
         """
 
         for tidy_data_object in tidy_data_objects:
@@ -144,7 +150,7 @@ class TidyData(BaseOutput):
             len(tidy_data_objects) > 1
         ), """
             You need to pass 2 or more objects of class TidyData
-            into TidyData.from_many()
+            into to join multiple TidyData sources into one.
         """
 
         tidy_data = tidy_data_objects[0]
@@ -338,6 +344,13 @@ class TidyData(BaseOutput):
         the **kwargs provided here are passed
         through to the csv.csvwriter() constructor.
         https://docs.python.org/3/library/csv.html
+
+        :param path: The location we want to output the
+        csv to.
+        :param write_headers: Whether or not to include the
+        headers when writing to csv.
+        :param write_mode: The mode with which to open
+        the python file object. Defaults to "w".
         """
         if not self._data:
             self._transform()
@@ -362,39 +375,49 @@ class TidyData(BaseOutput):
                     continue
                 tidywriter.writerow(row)
 
-    def drop_duplicates(self, print_duplicates: bool = False, path: Union[str, Path] = None):
+    def drop_duplicates(
+        self,
+        print_duplicates: bool = False,
+        csv_duplicate_path: Union[str, Path] = None,
+    ):
         """
         Drop duplicates from our tidydata.
 
-        If report=True we print of a statement for each
-        line duplicate being dropped.
+        :param print_duplicates: Do we want a human friendly report showing
+        each duplicate row that has been dropped.
+        :param csv_duplicate_path: Path to output a csv containing each duplicate
+        row.
         """
         self._transform()
         unique = []
 
+        non_unique = []
         lines = [
             "Removed duplicate instances of the following row(s):",
-            "-----------------------------------------------------"
-            ]
+            "-----------------------------------------------------",
+        ]
 
         for row in self._data:
             if row not in unique:
                 unique.append(row)
             else:
-                if print_duplicates or path:
+                if print_duplicates: # pragma: no cover
                     lines.append(",".join(row))
+                if csv_duplicate_path:
+                    non_unique.append(row)
 
-        if print_duplicates: # pragma: no cover
+        if print_duplicates:  # pragma: no cover
             for line in lines:
                 print(line)
 
-        if path:
-            if not isinstance(path, Path):
-                path = Path(path)
+        if csv_duplicate_path:
+            if not isinstance(csv_duplicate_path, Path):
+                csv_duplicate_path = Path(csv_duplicate_path)
 
-            with open(path, "w") as f:
-                for line in lines:
-                    f.write(line + linesep)
+            with open(csv_duplicate_path, "w") as csvfile:
+                duplicates_writer = csv.writer(csvfile)
+                for row in non_unique:
+                    duplicates_writer.writerow(row)
 
         self._data = unique
         return self

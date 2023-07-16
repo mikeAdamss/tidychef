@@ -17,8 +17,8 @@ def preview(
     border_cells: str = "lightgrey",
     blank_cells: str = "white",
     warning_colour: str = "#ff8080",
-    show_excel: bool =True,
-    show_xy: bool =False,
+    show_excel: bool = True,
+    show_xy: bool = False,
     multiple_selection_warning: bool = True,
 ):
     """
@@ -28,7 +28,7 @@ def preview(
     that will inform the preview.
     :param path: A Path or string representation of for where
     we want to write a html preview to local.
-    :bounded param: 
+    :bounded param:
     """
     if isinstance(selections[0], BaseOutput):
         raise OutputPassedToPreview(

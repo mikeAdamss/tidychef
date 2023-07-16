@@ -1,7 +1,8 @@
 from IPython import get_ipython
 
 
-# basedhttps://stackoverflow.com/questions/15411967/how-can-i-check-if-code-is-executed-in-the-ipython-notebook
+# based on
+# https://stackoverflow.com/questions/15411967/how-can-i-check-if-code-is-executed-in-the-ipython-notebook
 def in_notebook() -> bool:  # pragma: no cover
     """
     Checks whether the python interpreter calling

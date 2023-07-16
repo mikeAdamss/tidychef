@@ -5,6 +5,7 @@ Convenience wrappers for pre defined validators
 from typing import List
 
 from .implementations.items import ItemsValidator
+from .implementations.numeric import IsNotNumericValidator, IsNumericValidator
 from .implementations.regex import RegexValidator
 
 
@@ -30,3 +31,7 @@ def items(items: List[str]) -> ItemsValidator:
     :return: A instantiated ItemsValidator
     """
     return ItemsValidator(items)
+
+# Pre instantiate these since no arguments are required.
+is_numeric = IsNumericValidator()
+is_not_numeric = IsNotNumericValidator()

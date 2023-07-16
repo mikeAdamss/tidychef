@@ -3,6 +3,7 @@ from typing import Dict, List
 
 from datachef.models.source.cell import Cell
 from datachef.selection.selectable import Selectable
+
 from .constants import COLOURS
 
 
@@ -55,6 +56,7 @@ class SelectionKeys:
     A holding class for constructing and iterating through multiple
     SelectionKey classes.
     """
+
     def __init__(self):
         self.colour_choice = 0
         self._keys: List[SelectionKey] = []
@@ -87,7 +89,7 @@ class HtmlCell:
         """
         Class to create a simple html representation of a single cell
         using a single background colour.
-        
+
         :param value: The value contained in the cell in question.
         :param colour: The background colour to use for the cell.
         """

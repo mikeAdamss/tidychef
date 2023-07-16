@@ -1,7 +1,7 @@
 from typing import List
 
 from .components import HtmlCell
-from .constants import NO_COLOUR, BORDER_CELL_COLOUR, INLINE_CSS
+from .constants import BORDER_CELL_COLOUR, INLINE_CSS, NO_COLOUR
 
 
 def tidy_data_as_html_table_string(data: List[List[str]]) -> str:
@@ -18,9 +18,7 @@ def tidy_data_as_html_table_string(data: List[List[str]]) -> str:
     """
 
     headers = data[0]
-    table_html = (
-        f"<tr>{''.join([HtmlCell(x, BORDER_CELL_COLOUR).as_html() for x in headers])}</tr>"
-    )
+    table_html = f"<tr>{''.join([HtmlCell(x, BORDER_CELL_COLOUR).as_html() for x in headers])}</tr>"
 
     rows = data[1:]
     for row in rows:

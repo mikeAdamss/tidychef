@@ -55,7 +55,7 @@ class Selectable(LiveTable):
     """
     Inherits from LiveTable to add cell selection methods that are generic to all tabulated inputs.
     """
-    
+
     def assert_len(self, number_of_cells: int):
         """
         Assert that the current selection contains the number of cells
@@ -71,7 +71,7 @@ class Selectable(LiveTable):
         Assert that the current selection contains exactly one cell
         """
         return self.assert_len(1)
-    
+
     def lone_value(self) -> str:
         """
         Confirms the selection contains exactly one cell, then returns
@@ -484,4 +484,6 @@ class Selectable(LiveTable):
         # new_end.x = 0 - start.x
         # new_end.y = 0 - start.y
 
-        return Within(self.label, self, _reverse_direction(direction), end, start, table=self.name)
+        return Within(
+            self.label, self, _reverse_direction(direction), end, start, table=self.name
+        )
