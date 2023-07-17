@@ -1,7 +1,7 @@
 """
 Common data functions that do not fall into any of the other categories.
 """
-from typing import List, Optional, Tuple
+from typing import List, Tuple
 
 from datachef.exceptions import CellsDoNotExistError
 from datachef.models.source.cell import BaseCell

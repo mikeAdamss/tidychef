@@ -4,7 +4,7 @@ from datachef.direction.directions import Direction
 from datachef.exceptions import ImpossibleLookupError, WithinAxisDeclarationError
 from datachef.models.source.cell import Cell
 from datachef.models.source.table import LiveTable
-from datachef.selection import datafuncs as dfc
+from datachef import datafuncs as dfc
 
 from ..base import BaseLookupEngine
 

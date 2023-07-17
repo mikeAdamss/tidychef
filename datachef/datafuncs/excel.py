@@ -8,7 +8,7 @@ from datachef.exceptions import BadExcelReferenceError, ReversedExcelRefError
 from datachef.models.source.cell import BaseCell
 from datachef.utils import cellutils
 
-from . import common as dfccommon
+import datachef.datafuncs.common as dfccommon
 
 
 def assert_excel_ref_within_cells(cells: List[BaseCell], excel_ref: str):

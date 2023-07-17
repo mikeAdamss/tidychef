@@ -133,11 +133,22 @@ class BaseCell:
             return f"{x_ref}{y_ref}"
         return "VIRTUAL CELL"
     
-    def provenance():
+    @property
+    def excel_row(self) -> int:
         """
-        Returns information on how the value of this cell
-        was formed.
+        What is the row number of the row
+        containing this cell in excel terms
         """
+        return self.y+1
+    
+    @property
+    def excel_column(self) -> str:
+        """
+        What is the excel style column
+        letter(s) for the column containing
+        this cell.
+        """
+        return cellutils.x_to_letters(self.x)
 
 
 @dataclass
@@ -228,7 +239,8 @@ class Cell(BaseCell):
         eg:
         <A1, value:"value of a1", x:{x}, y:{y}>
         """
-        return f'<{self._excel_ref()}, value:"{self.value}", x:{self.x}, y:{self.y}>'
+
+        return f'({self._excel_ref()}, value:"{self.value}", x:{self.x}, y:{self.y})'
 
     def __str__(self):
         """
@@ -238,4 +250,4 @@ class Cell(BaseCell):
         eg:
         <A1, value:"value of a1", x:{x}, y:{y}>
         """
-        return f'<{self._excel_ref()}, value:"{self.value}", x:{self.x}, y:{self.y}>'
+        return f'({self._excel_ref()}, value:"{self.value}", x:{self.x}, y:{self.y})'

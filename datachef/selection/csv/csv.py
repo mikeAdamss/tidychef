@@ -1,4 +1,4 @@
-from ..selectable import Selectable
+from datachef.selection.selectable import Selectable
 
 
 class CsvSelectable(Selectable):

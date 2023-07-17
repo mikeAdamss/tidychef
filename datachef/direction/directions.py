@@ -28,6 +28,24 @@ class Direction(BaseDirection):
     _locked: bool = False
 
     @property
+    def retrieve_constructor(self) -> str:
+        """
+        Return a plain english description where we've
+        altered the offset now need to give the user
+        some kind of plain English feedback.
+        """
+        if self.is_right:
+            offset = self.x - 1 if self.x > 1 else 1
+        if self.is_left:
+            offset = 0 - self.x if self.x -1 else -1
+        if self.is_downwards:
+            offset = self.y - 1 if self.y > 1 else 1
+        if self.is_upwards:
+            offset = 0 - self.y if self.y -1 else -1
+
+        return f"{self.name}({offset})"
+    
+    @property
     def is_upwards(self) -> bool:
         """
         Is direction.name one of ["up", "above"]

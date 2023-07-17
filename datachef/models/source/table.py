@@ -11,7 +11,7 @@ from typing import List, Optional, Union
 
 from datachef.exceptions import UnalignedTableOperation
 from datachef.models.source.cell import BaseCell, Cell
-from datachef.selection import datafuncs as dfc
+import datachef.datafuncs as dfc
 from datachef.utils.decorators import dontmutate
 
 
@@ -65,6 +65,8 @@ class LiveTable:
 
         # Label for a given selection
         self._label: Optional[str] = None
+
+        self._walk: bool = False
 
     @property
     def label(self):

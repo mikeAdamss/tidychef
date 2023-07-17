@@ -5,7 +5,8 @@ suite in place.
 
 from typing import Dict, List, Union
 
-from datachef.selection.selectable import Selectable
+#from datachef.selection.selectable import Selectable
+from datachef.models.source.table import LiveTable
 from datachef.utils import cellutils
 
 from ..boundary import Boundary
@@ -20,7 +21,7 @@ from .constants import (
 
 
 def get_preview_table_as_html(
-    selections: List[Selectable],
+    selections: List[LiveTable],
     bounded: str,
     show_excel: bool = True,
     show_xy: bool = False,
@@ -29,12 +30,13 @@ def get_preview_table_as_html(
     warning_colour: str = WARNING_COLOUR,
     border_cell_secondary_colour: str = BORDER_CELL_SECONDARY_COLOUR,
     multiple_selection_warning: bool = True,
+    selection_boundary: bool = False
 ) -> str:
     """ """
 
     selection_keys = SelectionKeys()
     for selection in selections:
-        selection: Selectable
+        selection: LiveTable
 
         # If the selection is pristine, someone is just
         # previewing the data prior to selections
@@ -42,8 +44,8 @@ def get_preview_table_as_html(
             continue
         selection_keys.add_selection_key(selection)
 
-    boundary = Boundary(selections, bounded=bounded)
-    all_cells: Selectable = selections[0].pcells
+    boundary = Boundary(selections, bounded=bounded, selection_boundary=selection_boundary)
+    all_cells: LiveTable = selections[0].pcells
     all_cells = [
         cell
         for cell in all_cells

@@ -29,9 +29,9 @@ from datachef.lookup.engines.direct import Directly
 from datachef.lookup.engines.within import Within
 from datachef.models.source.cell import BaseCell, Cell
 from datachef.models.source.table import LiveTable
-from datachef.selection import datafuncs as dfc
+from datachef import datafuncs as dfc
 from datachef.utils.decorators import dontmutate
-
+from datachef.notebook.preview.html.main import preview
 
 def _reverse_direction(direction: Direction):
     """
@@ -50,11 +50,23 @@ def _reverse_direction(direction: Direction):
     else:
         raise Exception(f"Unable to identify direction: {direction}")
 
-
 class Selectable(LiveTable):
     """
     Inherits from LiveTable to add cell selection methods that are generic to all tabulated inputs.
     """
+
+    def walk(self):
+        self._walk = True
+        if self.selections_made:
+            _walk(self, "Starting Selection")
+        else:
+            _walk(self, "Starting with nothing selected")
+        return self
+
+    def unwalk(self):
+        assert self._walk, "You are calling .walk_off() but walk is not currently on for this selection."
+        self._walk = False
+        return self
 
     def assert_len(self, number_of_cells: int):
         """
@@ -64,6 +76,7 @@ class Selectable(LiveTable):
         assert (
             len(self.cells) == number_of_cells
         ), f"Selection contains {len(self.cells)} cells, not {number_of_cells}"
+        _walk(self, f"WALK: Assert selection length is {number_of_cells}")
         return self
 
     def assert_one(self):
@@ -98,6 +111,7 @@ class Selectable(LiveTable):
             for x in self.cells
             if x.is_blank(disregard_whitespace=disregard_whitespace)
         ]
+        _walk(self, f"Is blank")
         return self
 
     @dontmutate
@@ -114,6 +128,7 @@ class Selectable(LiveTable):
             for x in self.cells
             if x.is_not_blank(disregard_whitespace=disregard_whitespace)
         ]
+        _walk(self, f"Is not blank")
         return self
 
     @dontmutate
@@ -204,6 +219,7 @@ class Selectable(LiveTable):
                     ]
 
         self.cells += selection
+        _walk(self, f"Expand: {direction.name}")
         return self
 
     @dontmutate
@@ -215,8 +231,12 @@ class Selectable(LiveTable):
         :direction: One of: up, down, left, right
         """
         did_have = copy.deepcopy(self.cells)
+        was_walk = self._walk
+        self._walk = False
         self = self.expand(direction)
+        self._walk = was_walk
         self.cells = [x for x in self.cells if x not in did_have]
+        _walk(self, f"Fill: {direction.name}")
         return self
 
     @dontmutate
@@ -275,6 +295,7 @@ class Selectable(LiveTable):
             )
 
         self.cells = found_cells
+        _walk(self, f"WALK: Shifted cells {direction_or_x}{', '+possibly_y if possibly_y else ''}")
         return self
 
     @dontmutate
@@ -345,6 +366,7 @@ class Selectable(LiveTable):
             raise BadExcelReferenceError(f"Unrecognised excel reference {excel_ref}")
 
         self.cells = selected
+        _walk(self, f"Excel reference: {excel_ref}")
         return self
 
     def validate(self, validator: BaseValidator, raise_first_error: bool = False):
@@ -379,9 +401,14 @@ class Selectable(LiveTable):
         """
 
         self.cells = list(filter(check, self.cells))
+        if hasattr(check, "explain"):
+            comment = check.explain
+        else:
+            comment = "Custom filter"
+        _walk(self, f"Filtered: {comment}")
         return self
 
-    # Decorator unnecessary as we're calling another decorated method
+    @dontmutate
     def re(self, pattern: str):
         """
         Filter the current selection of cells to only include
@@ -389,9 +416,66 @@ class Selectable(LiveTable):
         pattern.
         """
 
-        return self.filter(
-            lambda cell: True if re.match(pattern, cell.value) is not None else False
-        )
+        self.cells = [x for x in self.cells if re.match(pattern, x.value) is not None]
+        _walk(self, f"Regex, pattern {pattern}")
+        return self
+
+    @dontmutate
+    def extrude(self, direction: Direction):
+        """
+        Increase selection in a single direction s by the amount
+        passed as an argument to direction. Where no integer
+        parameter is passed into direction, the size of the
+        extrusion is one.
+
+        Examples:
+        
+        .extrude(right(2)) - increase selection by all cells
+        that are within two cells right of a currently selected
+        cell.
+
+        .extrude(down(3)) - increase selection by all cells
+        that are within three cells down of a currently selected
+        cell.
+
+        .extrude(left) - increase selection by select all
+        cells that are one cell left of a currently selected cell.
+
+        :param direction: A direction of up, down, left, right,
+        above below with optional offset parameter.
+        """
+
+        additional_cells = []
+        for cell in self.cells:
+
+            if direction.is_horizontal:
+                viable_cells = dfc.cells_on_y_index(self.pcells, cell.y)
+                if direction.is_left:
+                    extruded_cells = [
+                        x for x in viable_cells if x.x > cell.x and x.x <= (cell.x + direction.x)
+                        ]
+                    additional_cells + extruded_cells
+                if direction.is_right:
+                    extruded_cells = [
+                        x for x in viable_cells if x.x < cell.x and x.x >= (cell.x + direction.x)
+                        ]
+                    additional_cells += extruded_cells
+                    
+            else:
+                viable_cells = dfc.cells_on_x_index(self.pcells, cell.x)
+                if direction.is_downwards:
+                    extruded_cells = [
+                        x for x in viable_cells if x.y > cell.y and x.y <= (cell.y + direction.y)
+                        ]
+                if direction.is_upwards:
+                    extruded_cells = [
+                        x for x in viable_cells if x.y < cell.y and x.y >= (cell.y + direction.y)
+                        ]         
+                additional_cells += extruded_cells
+
+        self.cells += [x for x in additional_cells if x not in self.cells]
+        _walk(self, f"Extrude: {direction.retrieve_constructor}")
+        return self
 
     def finds_observations_directly(self, direction: Direction) -> Directly:
         """
@@ -487,3 +571,8 @@ class Selectable(LiveTable):
         return Within(
             self.label, self, _reverse_direction(direction), end, start, table=self.name
         )
+
+def _walk(selectable: Selectable, comment: str):
+    if selectable._walk:
+        selectable = selectable.label_as(f"WALK: {comment}")
+        preview(selectable, selection_boundary=True)

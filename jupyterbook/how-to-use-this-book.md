@@ -5,7 +5,7 @@ This book is organised in a very deliberate fashion to help onboard people to th
 That said, there are some nuances depending on your skillset and goals which I'll try to touch on.
 
 
-- If you're anything less than an experienced python developer then **do** read the section on [extended dot notation](https://mikeadamss.github.io/datachef/dot-notation-explained.html), it will make everything else considerably easier to understand.
+- **Everyone** regardless of their training and background should make a point to read and understand [walk](https://mikeadamss.github.io/datachef/walk.html) section, it will make understanding and working with datachef infinitely easier.
 
 - The sections on [extensibility](https://mikeadamss.github.io/datachef/extensibility.html) and [quirks](https://mikeadamss.github.io/datachef/quirks.html) are short pages of prose containing supplementary information. There are some useful insights into datachefs goals and approach here but you can come back to these as needed.
 

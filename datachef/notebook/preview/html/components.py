@@ -2,7 +2,8 @@ from dataclasses import dataclass
 from typing import Dict, List
 
 from datachef.models.source.cell import Cell
-from datachef.selection.selectable import Selectable
+from datachef.models.source.table import LiveTable
+#from datachef.selection.selectable import Selectable
 
 from .constants import COLOURS
 
@@ -12,7 +13,7 @@ class SelectionKey:
     A coloured key denoting a single selection
     """
 
-    def __init__(self, selection: Selectable, colour_choice: int):
+    def __init__(self, selection: LiveTable, colour_choice: int):
         """
         Creates a mapping between a colour choice
         and a named selection of cells.
@@ -61,7 +62,7 @@ class SelectionKeys:
         self.colour_choice = 0
         self._keys: List[SelectionKey] = []
 
-    def add_selection_key(self, selection: Selectable):
+    def add_selection_key(self, selection: LiveTable):
         """
         Add a single SelectionKey to SelectionKeys
 

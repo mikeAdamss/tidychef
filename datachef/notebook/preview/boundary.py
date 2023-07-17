@@ -1,8 +1,9 @@
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 from datachef.models.source.cell import Cell
-from datachef.selection import datafuncs as dfc
-from datachef.selection.selectable import Selectable
+from datachef import datafuncs as dfc
+#from datachef.selection.selectable import Selectable
+from datachef.models.source.table import LiveTable
 
 
 class Boundary:
@@ -13,8 +14,9 @@ class Boundary:
 
     def __init__(
         self,
-        selections: List[Selectable],
+        selections: List[LiveTable],
         bounded: str = None,
+        selection_boundary: bool = False
     ):
         """
         Created a boundary to calculate the size of the
@@ -25,13 +27,19 @@ class Boundary:
         constrain the size of the previewed table.
         """
 
+        assert not all([selection_boundary, bounded])
+        if selection_boundary:
+            assert len(selections) == 1
+            selection = selections[0].cells
+        else:
+            selection = selections[0].pcells
+
         self.bounded = bounded
         if bounded is None:
-            pcells = selections[0].pcells
-            self.max_selected_x: int = dfc.maximum_x_offset(pcells)
-            self.max_selected_y: int = dfc.maximum_y_offset(pcells)
-            self.min_selected_x: int = dfc.minimum_x_offset(pcells)
-            self.min_selected_y: int = dfc.minimum_y_offset(pcells)
+            self.max_selected_x: int = dfc.maximum_x_offset(selection)
+            self.max_selected_y: int = dfc.maximum_y_offset(selection)
+            self.min_selected_x: int = dfc.minimum_x_offset(selection)
+            self.min_selected_y: int = dfc.minimum_y_offset(selection)
 
         else:
             cells_wanted = dfc.multi_excel_ref_to_basecells(bounded)
@@ -41,6 +49,24 @@ class Boundary:
                 self.min_selected_y,
                 self.max_selected_y,
             ) = dfc.get_outlier_indicies(cells_wanted)
+
+        # Where there's space, put a 1 cell blank border around walk
+        # selections
+        if selection_boundary:
+            self.max_selected_x = (
+                self.max_selected_x+1 if dfc.maximum_x_offset(selections[0].pcells)
+                > self.max_selected_x else self.max_selected_x)
+            self.min_selected_x = (
+                self.min_selected_x-1 if dfc.minimum_x_offset(selections[0].pcells)
+                < self.min_selected_x else self.min_selected_x)
+            self.max_selected_y = (
+                self.max_selected_y+1 if dfc.maximum_y_offset(selections[0].pcells)
+                > self.max_selected_y else self.max_selected_y)
+            self.min_selected_y = (
+                self.min_selected_y-1 if dfc.minimum_y_offset(selections[0].pcells)
+                < self.min_selected_y else self.min_selected_y)
+
+
 
     @property
     def highest_point(self):

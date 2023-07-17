@@ -3,7 +3,7 @@ from typing import Generator, Tuple
 
 from datachef.lookup.base import BaseLookupEngine
 from datachef.models.source.cell import Cell
-from datachef.selection.selectable import Selectable
+#from datachef.selection.selectable import Selectable
 
 
 class BaseColumn(metaclass=ABCMeta):
@@ -105,22 +105,3 @@ class BaseColumn(metaclass=ABCMeta):
         cell = self.engine.resolve(observation_cell, *args)
         cell = self._post_lookup(cell)
         return cell
-
-    def lookup_preview(
-        self, observation_selection: Selectable
-    ) -> Generator[Tuple[Cell, Cell], None, None]:
-        """
-        Takes a selection of observations and generates
-        tuples of:
-        <observation_cell> : <column cell>
-
-        This is intended for sanity checking during
-        development, not for doing the actual transform.
-
-        :param observation_selection: A list of cells representing
-        a selection of observations from the data source.
-        """
-        for observation_cell in observation_selection.cells:
-            yield observation_cell, self.resolve_column_cell_from_obs_cell(
-                observation_cell
-            )

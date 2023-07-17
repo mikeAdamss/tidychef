@@ -5,7 +5,7 @@ from IPython.display import HTML, display
 
 from datachef.exceptions import OutputPassedToPreview, UnalignedTableOperation
 from datachef.output.base import BaseOutput
-from datachef.selection.selectable import Selectable
+from datachef.models.source.table import LiveTable
 
 from .table import get_preview_table_as_html
 
@@ -13,13 +13,14 @@ from .table import get_preview_table_as_html
 def preview(
     *selections,
     path: Union[Path, str] = None,
-    bounded: Union[str] = None,
+    bounded: str = None,
     border_cells: str = "lightgrey",
     blank_cells: str = "white",
     warning_colour: str = "#ff8080",
     show_excel: bool = True,
     show_xy: bool = False,
     multiple_selection_warning: bool = True,
+    selection_boundary: bool = False
 ):
     """
     Create a preview from one of more selections of cells.
@@ -46,7 +47,7 @@ def preview(
 
     for s in selections:
         assert isinstance(
-            s, Selectable
+            s, LiveTable
         ), f"Only selections and keyword arguments can be passed to preview, got {type(s)}"
     selections = list(selections)
 
@@ -66,6 +67,7 @@ def preview(
         border_cells=border_cells,
         warning_colour=warning_colour,
         blank_cells=blank_cells,
+        selection_boundary=selection_boundary
     )
 
     if path:

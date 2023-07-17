@@ -5,7 +5,7 @@ could read a tablulated display of data in a cell by cell fashion.
 
 from typing import List
 
-import datachef.selection.datafuncs as dfc
+import datachef.datafuncs as dfc
 from datachef.models.source.cell import BaseCell
 
 
