@@ -6,7 +6,7 @@ controlling Input upon Input operators.
 import pytest
 
 from datachef.exceptions import UnalignedTableOperation
-from datachef.selection import datafuncs as dfc
+from datachef import datafuncs as dfc
 from datachef.selection.selectable import Selectable
 from tests.fixtures.preconfigured import fixture_simple_one_tab
 

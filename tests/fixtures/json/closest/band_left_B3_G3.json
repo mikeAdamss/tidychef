@@ -2,13 +2,13 @@
   "0": {
     "starts_at": "1",
     "ends_at": "5",
-    "cell": "<B3, value:\"\", x:1, y:2>",
+    "cell": "(B3, value:\"\", x:1, y:2)",
     "axis": "horizontal/x"
   },
   "1": {
     "starts_at": "6",
     "ends_at": "9999999999999",
-    "cell": "<G3, value:\"Rolling Stones\", x:6, y:2>",
+    "cell": "(G3, value:\"Rolling Stones\", x:6, y:2)",
     "axis": "horizontal/x"
   }
 }

@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import List
 
 from datachef.models.source.cell import BaseCell
-from datachef.selection import datafuncs as dfc
+from datachef import datafuncs as dfc
 
 
 def qcel(excel_ref) -> BaseCell:

@@ -2,13 +2,13 @@
   "0": {
     "starts_at": "5",
   "ends_at": "21",
-    "cell": "<F6, value:\"F6val\", x:5, y:5>",
+    "cell": "(F6, value:\"F6val\", x:5, y:5)",
     "axis": "horizontal/x"
   },
   "1": {
   "starts_at": "22",
     "ends_at": "9999999999999",
-    "cell": "<W2, value:\"W2val\", x:22, y:1>",
+    "cell": "(W2, value:\"W2val\", x:22, y:1)",
     "axis": "horizontal/x"
   }
 }

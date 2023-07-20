@@ -1,11 +1,10 @@
 import pytest
 
-from datachef import acquire
 from datachef.column.base import BaseColumn
 from datachef.lookup.engines.constant import Constant
 from datachef.models.source.cell import VirtualCell
 from datachef.selection.selectable import Selectable
-from tests.fixtures import fixture_simple_one_tab, path_to_fixture
+from tests.fixtures import fixture_simple_one_tab
 
 
 @pytest.fixture
@@ -40,22 +39,3 @@ def test_base_column_assertions():
 
     # Does not raise for incorrect arguments
     BaseColumn(Constant("I r a label", "foo"))
-
-
-def test_base_column_lookup_preview(all_cells_from_a_tab: Selectable):
-    """
-    Test that a user can create the generator to
-    preview lookups.
-    """
-
-    column = BaseColumn(Constant("I r a label", "foo"))
-
-    observations_selection = all_cells_from_a_tab.excel_ref("C7:E10")
-
-    count = 0
-    for ob_cell, looked_up_cell in column.lookup_preview(observations_selection):
-        assert (
-            ob_cell == observations_selection.cells[count]
-            and looked_up_cell.value == "foo"
-        )
-        count += 1

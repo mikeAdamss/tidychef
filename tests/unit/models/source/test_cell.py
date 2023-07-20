@@ -93,8 +93,8 @@ def test_cell_repr():
     """
     Test the default cell repr returns as expected
     """
-    assert str(Cell(x=0, y=0, value="foo")) == '<A1, value:"foo", x:0, y:0>'
-    assert str(Cell(x=1, y=10, value="bar")) == '<B11, value:"bar", x:1, y:10>'
+    assert str(Cell(x=0, y=0, value="foo")) == '(A1, value:"foo", x:0, y:0)'
+    assert str(Cell(x=1, y=10, value="bar")) == '(B11, value:"bar", x:1, y:10)'
 
 
 def test_virt_cell_positional_err():
@@ -134,4 +134,4 @@ def test_virt_cell_repr():
     neither should it return an excel reference.
     """
     vcell = VirtualCell(value="foo")
-    assert str(vcell) == '<VIRTUAL CELL, value:"foo">'
+    assert str(vcell) == '(VIRTUAL CELL, value:"foo")'

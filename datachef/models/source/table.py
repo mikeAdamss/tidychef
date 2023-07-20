@@ -66,7 +66,7 @@ class LiveTable:
         # Label for a given selection
         self._label: Optional[str] = None
 
-        self._walk: bool = False
+        self._explain: bool = False
 
     @property
     def label(self):

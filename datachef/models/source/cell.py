@@ -171,7 +171,7 @@ class VirtualCell(BaseCell):
         Create a representation of this virtual cell in the form:
         <VIRTUAL CELL: value>
         """
-        return f'<{self._excel_ref()}, value:"{self.value}">'
+        return f'({self._excel_ref()}, value:"{self.value}")'
 
 
 @dataclass

@@ -14,7 +14,7 @@ from datachef.exceptions import (
 )
 from datachef.lookup.engines.direct import Directly
 from datachef.models.source.cell import Cell
-from datachef.selection import datafuncs as dfc
+from datachef import datafuncs as dfc
 from datachef.selection import filters
 from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_vertical_dimensions, fixture_wide_band_tab

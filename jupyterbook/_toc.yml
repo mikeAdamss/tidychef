@@ -21,7 +21,7 @@ chapters:
     - file: basics/selection-regex
     - file: basics/selection-filters
     - file: basics/selection-simple-useful
-    - file: basics/selection-walks
+    - file: basics/selection-explain
     - file: basics/selection-validate
     - file: basics/tidydata-columns-direct
     - file: basics/tidydata-closest

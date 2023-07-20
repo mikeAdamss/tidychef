@@ -3,7 +3,7 @@ from dataclasses import dataclass
 import pytest
 
 from datachef.models.source.cell import Cell
-from datachef.selection import datafuncs as dfc
+from datachef import datafuncs as dfc
 from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
 

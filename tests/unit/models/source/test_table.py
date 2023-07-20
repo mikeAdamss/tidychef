@@ -1,6 +1,5 @@
 import pytest
 
-from datachef.models.source.table import LiveTable, Table
 from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
 

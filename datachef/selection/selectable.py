@@ -55,18 +55,9 @@ class Selectable(LiveTable):
     Inherits from LiveTable to add cell selection methods that are generic to all tabulated inputs.
     """
 
-    def walk(self):
-        self._walk = True
-        if self.selections_made:
-            _walk(self, "Starting Selection")
-        else:
-            _walk(self, "Starting with nothing selected")
-        return self
-
-    def unwalk(self):
-        assert self._walk, "You are calling .walk_off() but walk is not currently on for this selection."
-        self._walk = False
-        return self
+    def config(self, explain=False):
+        self._explain = explain
+        return copy.deepcopy(self)
 
     def assert_len(self, number_of_cells: int):
         """
@@ -76,7 +67,7 @@ class Selectable(LiveTable):
         assert (
             len(self.cells) == number_of_cells
         ), f"Selection contains {len(self.cells)} cells, not {number_of_cells}"
-        _walk(self, f"WALK: Assert selection length is {number_of_cells}")
+        _explain(self, f"WALK: Assert selection length is {number_of_cells}")
         return self
 
     def assert_one(self):
@@ -111,7 +102,7 @@ class Selectable(LiveTable):
             for x in self.cells
             if x.is_blank(disregard_whitespace=disregard_whitespace)
         ]
-        _walk(self, f"Is blank")
+        _explain(self, f"Is blank")
         return self
 
     @dontmutate
@@ -128,8 +119,9 @@ class Selectable(LiveTable):
             for x in self.cells
             if x.is_not_blank(disregard_whitespace=disregard_whitespace)
         ]
-        _walk(self, f"Is not blank")
+        _explain(self, f"Is not blank")
         return self
+
 
     @dontmutate
     def expand(self, direction: Direction):
@@ -219,8 +211,9 @@ class Selectable(LiveTable):
                     ]
 
         self.cells += selection
-        _walk(self, f"Expand: {direction.name}")
+        _explain(self, f"Expand: {direction.name}")
         return self
+
 
     @dontmutate
     def fill(self, direction: Direction):
@@ -230,13 +223,20 @@ class Selectable(LiveTable):
 
         :direction: One of: up, down, left, right
         """
+        
+        # Fill is just a slightly modified wrapper
+        # for expand. So if ._explain is on we need
+        # to toggle if off while doing the expand
+        # to avoid confusing the user
+        explain_setting = self._explain
+        self._explain = False
+
         did_have = copy.deepcopy(self.cells)
-        was_walk = self._walk
-        self._walk = False
         self = self.expand(direction)
-        self._walk = was_walk
+
+        self._explain = explain_setting
         self.cells = [x for x in self.cells if x not in did_have]
-        _walk(self, f"Fill: {direction.name}")
+        _explain(self, f"Fill: {direction.name}")
         return self
 
     @dontmutate
@@ -295,7 +295,7 @@ class Selectable(LiveTable):
             )
 
         self.cells = found_cells
-        _walk(self, f"WALK: Shifted cells {direction_or_x}{', '+possibly_y if possibly_y else ''}")
+        _explain(self, f"WALK: Shifted cells {str(direction_or_x)}{', '+str(possibly_y) if possibly_y else ''}")
         return self
 
     @dontmutate
@@ -366,7 +366,7 @@ class Selectable(LiveTable):
             raise BadExcelReferenceError(f"Unrecognised excel reference {excel_ref}")
 
         self.cells = selected
-        _walk(self, f"Excel reference: {excel_ref}")
+        _explain(self, f"Excel reference: {excel_ref}")
         return self
 
     def validate(self, validator: BaseValidator, raise_first_error: bool = False):
@@ -405,7 +405,7 @@ class Selectable(LiveTable):
             comment = check.explain
         else:
             comment = "Custom filter"
-        _walk(self, f"Filtered: {comment}")
+        _explain(self, f"Filtered: {comment}")
         return self
 
     @dontmutate
@@ -417,9 +417,10 @@ class Selectable(LiveTable):
         """
 
         self.cells = [x for x in self.cells if re.match(pattern, x.value) is not None]
-        _walk(self, f"Regex, pattern {pattern}")
+        _explain(self, f"Regex, pattern {pattern}")
         return self
 
+    ""
     @dontmutate
     def extrude(self, direction: Direction):
         """
@@ -474,7 +475,7 @@ class Selectable(LiveTable):
                 additional_cells += extruded_cells
 
         self.cells += [x for x in additional_cells if x not in self.cells]
-        _walk(self, f"Extrude: {direction.retrieve_constructor}")
+        _explain(self, f"Extrude: {direction.retrieve_constructor}")
         return self
 
     def finds_observations_directly(self, direction: Direction) -> Directly:
@@ -572,7 +573,7 @@ class Selectable(LiveTable):
             self.label, self, _reverse_direction(direction), end, start, table=self.name
         )
 
-def _walk(selectable: Selectable, comment: str):
-    if selectable._walk:
-        selectable = selectable.label_as(f"WALK: {comment}")
+def _explain(selectable: Selectable, comment: str):
+    if selectable._explain:
+        selectable = selectable.label_as(f"EXPLAIN: {comment}")
         preview(selectable, selection_boundary=True)
