@@ -1,8 +1,8 @@
 import pytest
 
+from datachef import datafuncs as dfc
 from datachef.direction.directions import down, left, right, up
 from datachef.exceptions import BadShiftParameterError, OutOfBoundsError
-from datachef import datafuncs as dfc
 from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
 

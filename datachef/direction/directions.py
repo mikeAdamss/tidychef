@@ -44,7 +44,7 @@ class Direction(BaseDirection):
             offset = 0 - self.y
 
         return f"{self.name}({offset})"
-    
+
     @property
     def is_upwards(self) -> bool:
         """

@@ -1,4 +1,5 @@
 from pathlib import Path
+
 import pytest
 
 from datachef.selection.selectable import Selectable
@@ -21,4 +22,4 @@ def test_selectable_config(selectable_simple1: Selectable):
 
     assert selectable_simple1._explain_path is None
     selection = selectable_simple1.config(explain_path="foo")
-    assert selection._explain_path == Path("foo") 
+    assert selection._explain_path == Path("foo")

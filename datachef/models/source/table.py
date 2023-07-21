@@ -9,9 +9,9 @@ import uuid
 from pathlib import Path
 from typing import List, Optional, Union
 
+import datachef.datafuncs as dfc
 from datachef.exceptions import UnalignedTableOperation
 from datachef.models.source.cell import BaseCell, Cell
-import datachef.datafuncs as dfc
 from datachef.utils.decorators import dontmutate
 
 
@@ -75,7 +75,6 @@ class LiveTable:
         # Config options
         self._explain: bool = False
         self._explain_path = None
-
 
     @property
     def maximum_pristine_x(self) -> int:

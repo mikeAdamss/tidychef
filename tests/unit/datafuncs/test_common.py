@@ -3,9 +3,9 @@ from typing import List
 
 import pytest
 
+from datachef import datafuncs as dfc
 from datachef.exceptions import CellsDoNotExistError
 from datachef.models.source.cell import BaseCell, Cell
-from datachef import datafuncs as dfc
 from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
 from tests.unit.helpers import qcel, qcels

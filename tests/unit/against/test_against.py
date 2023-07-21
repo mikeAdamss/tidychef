@@ -2,8 +2,11 @@ import pytest
 
 from datachef import against
 from datachef.against.implementations.items import ItemsValidator
+from datachef.against.implementations.numeric import (
+    IsNotNumericValidator,
+    IsNumericValidator,
+)
 from datachef.against.implementations.regex import RegexValidator
-from datachef.against.implementations.numeric import IsNotNumericValidator, IsNumericValidator
 from datachef.models.source.cell import Cell
 
 
@@ -71,6 +74,7 @@ def test_is_numeric():
     # Is Valid
     cell = Cell(x="0", y="0", value="1")
     assert validator(cell) is True
+
 
 def test_is_not_numeric():
     """

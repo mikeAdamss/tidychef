@@ -2,8 +2,8 @@ import pytest
 
 from datachef.exceptions import (
     BadExcelReferenceError,
-    ReferenceOutsideSelectionError,
     LoneValueOnMultipleCellsError,
+    ReferenceOutsideSelectionError,
 )
 from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
@@ -83,6 +83,7 @@ def test_excel_referece_does_not_error(
     with pytest.raises(ReferenceOutsideSelectionError):
         selectable_simple1.excel_ref("1:3").excel_ref("2:4")
 
+
 def test_excel_reference_bad_reference_error(
     selectable_simple1: Selectable,
 ):
@@ -107,7 +108,15 @@ def test_list_excel_refs(selectable_simple1: Selectable):
     a list of simple excel references if need be.
     """
 
-    selection = selectable_simple1.excel_ref("B6:E7") - selectable_simple1.excel_ref("D7")
+    selection = selectable_simple1.excel_ref("B6:E7") - selectable_simple1.excel_ref(
+        "D7"
+    )
     assert selection._get_excel_references() == [
-        "B6", "C6", "D6", "E6", "B7", "C7", "E7"
+        "B6",
+        "C6",
+        "D6",
+        "E6",
+        "B7",
+        "C7",
+        "E7",
     ]

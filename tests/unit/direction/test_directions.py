@@ -64,6 +64,7 @@ def test_confirm_pristine():
     with pytest.raises(CardinalDeclarationWithOffset):
         up(2)._confirm_pristine()
 
+
 def test_offset_as_str():
     """
     Confirm that we can get a plain english summary

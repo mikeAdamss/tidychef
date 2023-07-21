@@ -1,8 +1,9 @@
 from typing import Dict, List, Optional
 
-from datachef.models.source.cell import Cell
 from datachef import datafuncs as dfc
-#from datachef.selection.selectable import Selectable
+from datachef.models.source.cell import Cell
+
+# from datachef.selection.selectable import Selectable
 from datachef.models.source.table import LiveTable
 
 
@@ -16,7 +17,7 @@ class Boundary:
         self,
         selections: List[LiveTable],
         bounded: str = None,
-        selection_boundary: bool = False
+        selection_boundary: bool = False,
     ):
         """
         Created a boundary to calculate the size of the
@@ -54,17 +55,25 @@ class Boundary:
         # selections
         if selection_boundary:
             self.max_selected_x = (
-                self.max_selected_x+1 if dfc.maximum_x_offset(selections[0].pcells)
-                > self.max_selected_x else self.max_selected_x)
+                self.max_selected_x + 1
+                if dfc.maximum_x_offset(selections[0].pcells) > self.max_selected_x
+                else self.max_selected_x
+            )
             self.min_selected_x = (
-                self.min_selected_x-1 if dfc.minimum_x_offset(selections[0].pcells)
-                < self.min_selected_x else self.min_selected_x)
+                self.min_selected_x - 1
+                if dfc.minimum_x_offset(selections[0].pcells) < self.min_selected_x
+                else self.min_selected_x
+            )
             self.max_selected_y = (
-                self.max_selected_y+1 if dfc.maximum_y_offset(selections[0].pcells)
-                > self.max_selected_y else self.max_selected_y)
+                self.max_selected_y + 1
+                if dfc.maximum_y_offset(selections[0].pcells) > self.max_selected_y
+                else self.max_selected_y
+            )
             self.min_selected_y = (
-                self.min_selected_y-1 if dfc.minimum_y_offset(selections[0].pcells)
-                < self.min_selected_y else self.min_selected_y)
+                self.min_selected_y - 1
+                if dfc.minimum_y_offset(selections[0].pcells) < self.min_selected_y
+                else self.min_selected_y
+            )
 
     @property
     def highest_point(self):

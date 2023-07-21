@@ -1,5 +1,6 @@
 from typing import List
 
+from datachef import datafuncs as dfc
 from datachef.direction.directions import BaseDirection, Direction
 from datachef.exceptions import (
     FailedLookupError,
@@ -8,7 +9,6 @@ from datachef.exceptions import (
 )
 from datachef.models.source.cell import Cell
 from datachef.models.source.table import LiveTable
-from datachef import datafuncs as dfc
 
 from ..base import BaseLookupEngine
 

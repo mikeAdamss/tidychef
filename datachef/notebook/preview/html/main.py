@@ -4,8 +4,8 @@ from typing import Dict, Union
 from IPython.display import HTML, display
 
 from datachef.exceptions import OutputPassedToPreview, UnalignedTableOperation
-from datachef.output.base import BaseOutput
 from datachef.models.source.table import LiveTable
+from datachef.output.base import BaseOutput
 
 from .table import get_preview_table_as_html
 
@@ -67,7 +67,7 @@ def preview(
         border_cells=border_cells,
         warning_colour=warning_colour,
         blank_cells=blank_cells,
-        selection_boundary=selection_boundary
+        selection_boundary=selection_boundary,
     )
 
     if path:

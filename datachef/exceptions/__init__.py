@@ -3,10 +3,10 @@ from .badparams import (
     BadShiftParameterError,
     CardinalDeclarationWithOffset,
     OutputPassedToPreview,
+    ReferenceOutsideSelectionError,
     ReversedExcelRefError,
     UnknownDirectionError,
     WithinAxisDeclarationError,
-    ReferenceOutsideSelectionError
 )
 from .cells import InvlaidCellPositionError, NonExistentCellComparissonError
 from .common import (

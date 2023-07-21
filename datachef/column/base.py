@@ -3,7 +3,8 @@ from typing import Generator, Tuple
 
 from datachef.lookup.base import BaseLookupEngine
 from datachef.models.source.cell import Cell
-#from datachef.selection.selectable import Selectable
+
+# from datachef.selection.selectable import Selectable
 
 
 class BaseColumn(metaclass=ABCMeta):

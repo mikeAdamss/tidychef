@@ -5,7 +5,7 @@ suite in place.
 
 from typing import Dict, List, Union
 
-#from datachef.selection.selectable import Selectable
+# from datachef.selection.selectable import Selectable
 from datachef.models.source.table import LiveTable
 from datachef.utils import cellutils
 
@@ -30,7 +30,7 @@ def get_preview_table_as_html(
     warning_colour: str = WARNING_COLOUR,
     border_cell_secondary_colour: str = BORDER_CELL_SECONDARY_COLOUR,
     multiple_selection_warning: bool = True,
-    selection_boundary: bool = False
+    selection_boundary: bool = False,
 ) -> str:
     """ """
 
@@ -44,7 +44,9 @@ def get_preview_table_as_html(
             continue
         selection_keys.add_selection_key(selection)
 
-    boundary = Boundary(selections, bounded=bounded, selection_boundary=selection_boundary)
+    boundary = Boundary(
+        selections, bounded=bounded, selection_boundary=selection_boundary
+    )
     all_cells: LiveTable = selections[0].pcells
     all_cells = [
         cell

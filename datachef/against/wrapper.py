@@ -32,6 +32,7 @@ def items(items: List[str]) -> ItemsValidator:
     """
     return ItemsValidator(items)
 
+
 # Pre instantiate these since no arguments are required.
 is_numeric = IsNumericValidator()
 is_not_numeric = IsNotNumericValidator()

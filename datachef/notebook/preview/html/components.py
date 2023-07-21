@@ -3,9 +3,10 @@ from typing import Dict, List
 
 from datachef.models.source.cell import Cell
 from datachef.models.source.table import LiveTable
-#from datachef.selection.selectable import Selectable
 
 from .constants import COLOURS
+
+# from datachef.selection.selectable import Selectable
 
 
 class SelectionKey:

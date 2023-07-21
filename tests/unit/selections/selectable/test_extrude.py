@@ -1,7 +1,7 @@
 import pytest
 
-from datachef.direction.directions import down, left, right, up
 from datachef import datafuncs as dfc
+from datachef.direction.directions import down, left, right, up
 from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
 
@@ -27,7 +27,9 @@ def test_extrude(selectable_simple1: Selectable):
     assert dfc.basecells_to_excel_ref(extrude_up) == "B5:G6"
 
     # extrude right
-    extrude_right = (selectable_simple1.excel_ref("B6:B9") | selectable_simple1.excel_ref("F6:F9")).extrude(right(2))
+    extrude_right = (
+        selectable_simple1.excel_ref("B6:B9") | selectable_simple1.excel_ref("F6:F9")
+    ).extrude(right(2))
     extrude_right.assert_len(24)
     # should raise, not quadlitaleral
     with pytest.raises(AssertionError):

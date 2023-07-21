@@ -1,12 +1,13 @@
 from __future__ import annotations
 
-import os
 import copy
-from pathlib import Path
+import os
 import re
 from os import linesep
+from pathlib import Path
 from typing import Callable, FrozenSet, List, Optional, Union
 
+from datachef import datafuncs as dfc
 from datachef.against.implementations.base import BaseValidator
 from datachef.direction.directions import (
     BaseDirection,
@@ -21,21 +22,21 @@ from datachef.direction.directions import (
 from datachef.exceptions import (
     BadExcelReferenceError,
     BadShiftParameterError,
-    CellValidationError,
     CellsDoNotExistError,
+    CellValidationError,
     LoneValueOnMultipleCellsError,
     MissingLabelError,
     OutOfBoundsError,
-    ReferenceOutsideSelectionError
+    ReferenceOutsideSelectionError,
 )
 from datachef.lookup.engines.closest import Closest
 from datachef.lookup.engines.direct import Directly
 from datachef.lookup.engines.within import Within
 from datachef.models.source.cell import BaseCell, Cell
 from datachef.models.source.table import LiveTable
-from datachef import datafuncs as dfc
-from datachef.utils.decorators import dontmutate
 from datachef.notebook.preview.html.main import preview
+from datachef.utils.decorators import dontmutate
+
 
 def _reverse_direction(direction: Direction):
     """
@@ -54,17 +55,20 @@ def _reverse_direction(direction: Direction):
     else:
         raise Exception(f"Unable to identify direction: {direction}")
 
+
 class Selectable(LiveTable):
     """
     Inherits from LiveTable to add cell selection methods that are generic to all tabulated inputs.
     """
 
-    def config(self, explain=False, explain_path:Optional[Union[str,Path]] = None):
-        assert not all([explain, explain_path]), f'''
+    def config(self, explain=False, explain_path: Optional[Union[str, Path]] = None):
+        assert not all(
+            [explain, explain_path]
+        ), f"""
             Where you have specified explain_path= you do not need
             to also include explain=True. The keywords are mutually
             exclusive.
-        '''
+        """
 
         if explain_path is not None:
             if isinstance(explain_path, str):
@@ -76,7 +80,7 @@ class Selectable(LiveTable):
         self._explain = explain
 
         return copy.deepcopy(self)
-    
+
     def _get_excel_references(self) -> List[str]:
         """
         Returns a list of excel references for all selected cells in
@@ -85,7 +89,7 @@ class Selectable(LiveTable):
         cells: List[Cell] = dfc.order_cells_leftright_topbottom(self.cells)
         return [x._excel_ref() for x in cells]
 
-    def print_excel_refs(self): # pragma: no cover
+    def print_excel_refs(self):  # pragma: no cover
         """
         Orders cells in classical human readable order
         (right to left, top row to bottom row) then
@@ -155,7 +159,6 @@ class Selectable(LiveTable):
         ]
         _explain(self, f"Is not blank")
         return self
-
 
     @dontmutate
     def expand(self, direction: Direction):
@@ -248,7 +251,6 @@ class Selectable(LiveTable):
         _explain(self, f"Expand: {direction.name}")
         return self
 
-
     @dontmutate
     def fill(self, direction: Direction):
         """
@@ -257,7 +259,7 @@ class Selectable(LiveTable):
 
         :direction: One of: up, down, left, right
         """
-        
+
         # Fill is just a slightly modified wrapper
         # for expand. So if ._explain is on we need
         # to toggle if off while doing the expand
@@ -343,7 +345,7 @@ class Selectable(LiveTable):
         reference: "A6", "B17:B24", "9", "GH" etc.
         """
 
-        msg = f'''
+        msg = f"""
                 You cannot make a selection of "{excel_ref}" at
                 this time. One or more cells of these cells
                 does not exist in your CURRENT SELECTION.
@@ -357,7 +359,7 @@ class Selectable(LiveTable):
 
                 Where practical, you can debug the selected cells
                 at any given time with <selection>.print_excel_refs()
-                '''
+                """
 
         # Multi excel reference:
         # eg: 'B2:F5'
@@ -419,15 +421,16 @@ class Selectable(LiveTable):
                 assert end_y_index <= self.maximum_pristine_y
                 assert start_y_index >= self.minimum_pristine_y
                 wanted = [
-                    c for c in self.pcells if c.y >= start_y_index and c.y <= end_y_index
-                    ]
+                    c
+                    for c in self.pcells
+                    if c.y >= start_y_index and c.y <= end_y_index
+                ]
                 selected = dfc.exactly_matched_xy_cells(self.cells, wanted)
             except CellsDoNotExistError:
                 raise ReferenceOutsideSelectionError(msg)
             except AssertionError:
                 raise ReferenceOutsideSelectionError(msg)
 
-            
         # An excel reference that is one column letter
         # eg: 'H'
         elif re.match("^[A-Z]+$", excel_ref):
@@ -525,6 +528,7 @@ class Selectable(LiveTable):
         return self
 
     ""
+
     @dontmutate
     def extrude(self, direction: Direction):
         """
@@ -534,7 +538,7 @@ class Selectable(LiveTable):
         extrusion is one.
 
         Examples:
-        
+
         .extrude(right(2)) - increase selection by all cells
         that are within two cells right of a currently selected
         cell.
@@ -557,25 +561,33 @@ class Selectable(LiveTable):
                 viable_cells = dfc.cells_on_y_index(self.pcells, cell.y)
                 if direction.is_right:
                     extruded_cells = [
-                        x for x in viable_cells if x.x > cell.x and x.x <= (cell.x + direction.x)
-                        ]
+                        x
+                        for x in viable_cells
+                        if x.x > cell.x and x.x <= (cell.x + direction.x)
+                    ]
                     additional_cells + extruded_cells
                 if direction.is_left:
                     extruded_cells = [
-                        x for x in viable_cells if x.x < cell.x and x.x >= (cell.x + direction.x)
-                        ]
+                        x
+                        for x in viable_cells
+                        if x.x < cell.x and x.x >= (cell.x + direction.x)
+                    ]
                 additional_cells += extruded_cells
-                    
+
             else:
                 viable_cells = dfc.cells_on_x_index(self.pcells, cell.x)
                 if direction.is_downwards:
                     extruded_cells = [
-                        x for x in viable_cells if x.y > cell.y and x.y <= (cell.y + direction.y)
-                        ]
+                        x
+                        for x in viable_cells
+                        if x.y > cell.y and x.y <= (cell.y + direction.y)
+                    ]
                 if direction.is_upwards:
                     extruded_cells = [
-                        x for x in viable_cells if x.y < cell.y and x.y >= (cell.y + direction.y)
-                        ]         
+                        x
+                        for x in viable_cells
+                        if x.y < cell.y and x.y >= (cell.y + direction.y)
+                    ]
                 additional_cells += extruded_cells
 
         self.cells += [x for x in additional_cells if x not in self.cells]
@@ -676,6 +688,7 @@ class Selectable(LiveTable):
         return Within(
             self.label, self, _reverse_direction(direction), end, start, table=self.name
         )
+
 
 def _explain(selectable: Selectable, comment: str):
     if selectable._explain or selectable._explain_path:

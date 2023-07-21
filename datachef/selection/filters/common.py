@@ -15,7 +15,7 @@ class ContainsString:
     """
 
     substr: str
-    
+
     @property
     def explain(self) -> str:
         return f"Contains string: {self.substr}"
@@ -52,7 +52,10 @@ class IsNumeric:
 
     def __call__(self, cell: Cell):
         return cell.value.strip().isnumeric()
+
+
 is_numeric = IsNumeric()
+
 
 class IsNotNumeric:
     """
@@ -65,4 +68,6 @@ class IsNotNumeric:
 
     def __call__(self, cell: Cell):
         return not cell.value.strip().isnumeric()
+
+
 is_not_numeric = IsNotNumeric()

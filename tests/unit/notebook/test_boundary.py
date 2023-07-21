@@ -58,7 +58,9 @@ def test_boundary_selection_boundary(selectable_simple_small1: Selectable):
     assert boundary.rightmost_point == 2
 
 
-def test_boundary_selection_boundary_and_bounded_are_mutually_exclusive(selectable_simple_small1: Selectable):
+def test_boundary_selection_boundary_and_bounded_are_mutually_exclusive(
+    selectable_simple_small1: Selectable,
+):
     """
     Confirm that where using selection_boundary=True
     and a bounded keyword an assertion error is raised

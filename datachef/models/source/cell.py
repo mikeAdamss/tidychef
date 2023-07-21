@@ -132,7 +132,7 @@ class BaseCell:
         if x_ref and y_ref:
             return f"{x_ref}{y_ref}"
         return "VIRTUAL CELL"
-    
+
     @property
     def excel_row(self) -> int:
         """
@@ -140,7 +140,7 @@ class BaseCell:
         containing this cell in excel terms
         """
         return cellutils.y_to_number(self.y)
-    
+
     @property
     def excel_column(self) -> str:
         """

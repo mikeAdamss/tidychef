@@ -2,8 +2,8 @@ import os
 from pathlib import Path
 from typing import List
 
-from datachef.models.source.cell import BaseCell
 from datachef import datafuncs as dfc
+from datachef.models.source.cell import BaseCell
 
 
 def qcel(excel_ref) -> BaseCell:

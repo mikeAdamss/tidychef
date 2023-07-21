@@ -1,6 +1,6 @@
 import pytest
 
-from datachef.direction import up, down, left, right
+from datachef.direction import down, left, right, up
 from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
 
@@ -16,7 +16,7 @@ def test_explain(selectable_simple1: Selectable):
     to confirm expected behaviour
     """
     a = selectable_simple1.config(explain_path="explain.html")
-    b = a.excel_ref('B')
+    b = a.excel_ref("B")
     c = b.extrude(right(2))
     d = c.shift(left(1))
     e = d.excel_ref("A4:C20")
