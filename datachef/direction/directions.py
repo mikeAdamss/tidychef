@@ -28,20 +28,20 @@ class Direction(BaseDirection):
     _locked: bool = False
 
     @property
-    def retrieve_constructor(self) -> str:
+    def offset_as_str(self) -> str:
         """
-        Return a plain english description where we've
-        altered the offset now need to give the user
-        some kind of plain English feedback.
+        Return a plain english description of a direction
+        offset so we can give the user some kind of plain
+        English feedback.
         """
         if self.is_right:
-            offset = self.x - 1 if self.x > 1 else 1
+            offset = self.x
         if self.is_left:
-            offset = 0 - self.x if self.x -1 else -1
+            offset = 0 - self.x
         if self.is_downwards:
-            offset = self.y - 1 if self.y > 1 else 1
+            offset = self.y
         if self.is_upwards:
-            offset = 0 - self.y if self.y -1 else -1
+            offset = 0 - self.y
 
         return f"{self.name}({offset})"
     

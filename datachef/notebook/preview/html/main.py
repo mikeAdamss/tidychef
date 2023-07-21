@@ -20,7 +20,7 @@ def preview(
     show_excel: bool = True,
     show_xy: bool = False,
     multiple_selection_warning: bool = True,
-    selection_boundary: bool = False
+    selection_boundary: bool = False,
 ):
     """
     Create a preview from one of more selections of cells.
@@ -71,7 +71,9 @@ def preview(
     )
 
     if path:
-        with open(path, "w") as f:
+        # If writing to an explain path, we write append
+        write_mode = "a" if selection_boundary else "w"
+        with open(path, write_mode) as f:
             f.write(html_as_str)
     else:
         display(HTML(html_as_str))

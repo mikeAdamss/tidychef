@@ -41,3 +41,30 @@ def test_boundary_bounded_excel_ref(selectable_simple_small1: Selectable):
     assert boundary.lowest_point == 11
     assert boundary.leftmost_point == 0
     assert boundary.rightmost_point == 2
+
+
+def test_boundary_selection_boundary(selectable_simple_small1: Selectable):
+    """
+    Confirm that where using selection_boundary=True
+    the boundary class adds a one cell buffer around the selection
+    """
+
+    selection = selectable_simple_small1.excel_ref("B2")
+    boundary = Boundary([selection], selection_boundary=True)
+
+    assert boundary.highest_point == 0
+    assert boundary.lowest_point == 2
+    assert boundary.leftmost_point == 0
+    assert boundary.rightmost_point == 2
+
+
+def test_boundary_selection_boundary_and_bounded_are_mutually_exclusive(selectable_simple_small1: Selectable):
+    """
+    Confirm that where using selection_boundary=True
+    and a bounded keyword an assertion error is raised
+    """
+
+    selection = selectable_simple_small1
+
+    with pytest.raises(AssertionError):
+        Boundary([selection], bounded="A1", selection_boundary=True)

@@ -66,7 +66,60 @@ class LiveTable:
         # Label for a given selection
         self._label: Optional[str] = None
 
+        # Cached
+        self._maximum_pristine_x: Optional[int] = None
+        self._minimum_pristine_x: Optional[int] = None
+        self._maximum_pristine_y: Optional[int] = None
+        self._minimum_pristine_y: Optional[int] = None
+
+        # Config options
         self._explain: bool = False
+        self._explain_path = None
+
+
+    @property
+    def maximum_pristine_x(self) -> int:
+        """
+        Get the minimum pristine y offset
+        """
+        if self._maximum_pristine_x is not None:
+            return self._maximum_pristine_x
+        else:
+            self._maximum_pristine_x = dfc.maximum_x_offset(self.pcells)
+            return self._maximum_pristine_x
+
+    @property
+    def minimum_pristine_x(self) -> int:
+        """
+        Get the minimum pristine y offset
+        """
+        if self._minimum_pristine_x is not None:
+            return self._minimum_pristine_x
+        else:
+            self._minimum_pristine_x = dfc.minimum_x_offset(self.pcells)
+            return self._minimum_pristine_x
+
+    @property
+    def maximum_pristine_y(self) -> int:
+        """
+        Get the minimum pristine y offset
+        """
+        if self._maximum_pristine_y is not None:
+            return self._maximum_pristine_y
+        else:
+            self._maximum_pristine_y = dfc.maximum_y_offset(self.pcells)
+            return self._maximum_pristine_y
+
+    @property
+    def minimum_pristine_y(self) -> int:
+        """
+        Get the minimum pristine y offset
+        """
+        if self._minimum_pristine_y is not None:
+            return self._minimum_pristine_y
+        else:
+            self._minimum_pristine_y = dfc.minimum_y_offset(self.pcells)
+            return self._minimum_pristine_y
 
     @property
     def label(self):

@@ -118,6 +118,16 @@ def test_cannot_excel_reference_invalid_cells():
     with pytest.raises(InvlaidCellPositionError):
         cell._excel_ref()
 
+def test_excel_row_and_column():
+    """
+    Make sure that a cell has a working and accurate
+    row and column property.
+    """
+
+    cell = Cell(x=0, y=0, value="foo")
+    assert cell.excel_column == "A"
+    assert cell.excel_row == 1
+
 
 def test_virt_cell_excel_ref():
     """

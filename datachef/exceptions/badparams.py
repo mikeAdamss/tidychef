@@ -78,3 +78,14 @@ class UnknownDirectionError(Exception):
 
     def __init__(self, msg):
         self.msg = msg
+
+
+class ReferenceOutsideSelectionError(Exception):
+    """
+    User is trying to make a narrow selection of cells
+    but has already filtered the cells in question out
+    of the table via a prior action.
+    """
+
+    def __init__(self, msg):
+        self.msg = msg

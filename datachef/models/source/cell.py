@@ -139,7 +139,7 @@ class BaseCell:
         What is the row number of the row
         containing this cell in excel terms
         """
-        return self.y+1
+        return cellutils.y_to_number(self.y)
     
     @property
     def excel_column(self) -> str:

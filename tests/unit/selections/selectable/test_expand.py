@@ -1,7 +1,7 @@
 import pytest
 
 from datachef.direction.directions import down, left, right, up
-from datachef.exceptions import CellsDoNotExistError
+from datachef.exceptions import ReferenceOutsideSelectionError
 from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
 
@@ -40,5 +40,5 @@ def test_out_of_bounds_from_excel_ref(selectable_simple1: Selectable):
     current table raises a suitable error.
     """
 
-    with pytest.raises(CellsDoNotExistError):
+    with pytest.raises(ReferenceOutsideSelectionError):
         selectable_simple1.excel_ref("ADFG120909")

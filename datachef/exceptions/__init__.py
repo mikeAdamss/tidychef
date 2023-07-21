@@ -6,6 +6,7 @@ from .badparams import (
     ReversedExcelRefError,
     UnknownDirectionError,
     WithinAxisDeclarationError,
+    ReferenceOutsideSelectionError
 )
 from .cells import InvlaidCellPositionError, NonExistentCellComparissonError
 from .common import (

@@ -48,7 +48,7 @@ class IsNumeric:
 
     @property
     def explain(self) -> str:
-        return "Call value is numeric"
+        return "Cell value is numeric"
 
     def __call__(self, cell: Cell):
         return cell.value.strip().isnumeric()
@@ -61,7 +61,7 @@ class IsNotNumeric:
 
     @property
     def explain(self) -> str:
-        return "Call value is not numeric"
+        return "Cell value is not numeric"
 
     def __call__(self, cell: Cell):
         return not cell.value.strip().isnumeric()

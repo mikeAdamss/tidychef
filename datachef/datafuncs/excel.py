@@ -107,7 +107,7 @@ def multi_excel_ref_to_basecells(excel_ref: str) -> List[BaseCell]:
     Given an excel reference referring to multiple cells, return a list of
     wanted BaseCells.
 
-    :param excel_ref: A excel style reference to a single cell.
+    :param excel_ref: A excel style reference to a range of cells.
     :return: A list of BaseCell or inheritors of that represents a selection
     of cells.
     """

@@ -63,3 +63,15 @@ def test_confirm_pristine():
     # Should raise
     with pytest.raises(CardinalDeclarationWithOffset):
         up(2)._confirm_pristine()
+
+def test_offset_as_str():
+    """
+    Confirm that we can get a plain english summary
+    of the specified direction and the degree of its
+    principle offset
+    """
+
+    assert up(2).offset_as_str == "up(2)"
+    assert left(18).offset_as_str == "left(18)"
+    assert down.offset_as_str == "down(1)"
+    assert right(4).offset_as_str == "right(4)"

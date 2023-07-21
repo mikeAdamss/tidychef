@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import os
 import copy
+from pathlib import Path
 import re
 from os import linesep
 from typing import Callable, FrozenSet, List, Optional, Union
@@ -20,9 +22,11 @@ from datachef.exceptions import (
     BadExcelReferenceError,
     BadShiftParameterError,
     CellValidationError,
+    CellsDoNotExistError,
     LoneValueOnMultipleCellsError,
     MissingLabelError,
     OutOfBoundsError,
+    ReferenceOutsideSelectionError
 )
 from datachef.lookup.engines.closest import Closest
 from datachef.lookup.engines.direct import Directly
@@ -55,9 +59,39 @@ class Selectable(LiveTable):
     Inherits from LiveTable to add cell selection methods that are generic to all tabulated inputs.
     """
 
-    def config(self, explain=False):
+    def config(self, explain=False, explain_path:Optional[Union[str,Path]] = None):
+        assert not all([explain, explain_path]), f'''
+            Where you have specified explain_path= you do not need
+            to also include explain=True. The keywords are mutually
+            exclusive.
+        '''
+
+        if explain_path is not None:
+            if isinstance(explain_path, str):
+                explain_path = Path(explain_path)
+            if explain_path.exists():
+                os.remove(explain_path.resolve())
+
+        self._explain_path = explain_path
         self._explain = explain
+
         return copy.deepcopy(self)
+    
+    def _get_excel_references(self) -> List[str]:
+        """
+        Returns a list of excel references for all selected cells in
+        classical human readable order (left to right, top row to bottom row)
+        """
+        cells: List[Cell] = dfc.order_cells_leftright_topbottom(self.cells)
+        return [x._excel_ref() for x in cells]
+
+    def print_excel_refs(self): # pragma: no cover
+        """
+        Orders cells in classical human readable order
+        (right to left, top row to bottom row) then
+        prints a list of ll excel references as a list
+        """
+        print(self._get_excel_references())
 
     def assert_len(self, number_of_cells: int):
         """
@@ -295,7 +329,11 @@ class Selectable(LiveTable):
             )
 
         self.cells = found_cells
-        _explain(self, f"WALK: Shifted cells {str(direction_or_x)}{', '+str(possibly_y) if possibly_y else ''}")
+
+        if not possibly_y:
+            _explain(self, f"Shifted cells {direction_or_x.offset_as_str}")
+        else:
+            _explain(self, f"Shifted cells {direction_or_x}, {possibly_y}")
         return self
 
     @dontmutate
@@ -305,25 +343,66 @@ class Selectable(LiveTable):
         reference: "A6", "B17:B24", "9", "GH" etc.
         """
 
+        msg = f'''
+                You cannot make a selection of "{excel_ref}" at
+                this time. One or more cells of these cells
+                does not exist in your CURRENT SELECTION.
+                
+                If you believe they should be, you need to check
+                your sequencing.
+
+                As an example: if you filter a selection to just
+                column A then try excel_ref('B') you'll get
+                this error.
+
+                Where practical, you can debug the selected cells
+                at any given time with <selection>.print_excel_refs()
+                '''
+
         # Multi excel reference:
         # eg: 'B2:F5'
         if re.match("^[A-Z]+[0-9]+:[A-Z]+[0-9]+$", excel_ref):
-            wanted: List[BaseCell] = dfc.multi_excel_ref_to_basecells(excel_ref)
-            selected = dfc.exactly_matched_xy_cells(self.cells, wanted)
-            # TODO - guarantee sensible ordering?
+            cell1 = dfc.single_excel_ref_to_basecell(excel_ref.split(":")[0])
+            cell2 = dfc.single_excel_ref_to_basecell(excel_ref.split(":")[1])
+            try:
+                assert cell1.x >= self.minimum_pristine_x
+                assert cell1.x <= self.maximum_pristine_x
+                assert cell1.y >= self.minimum_pristine_y
+                assert cell1.y <= self.maximum_pristine_y
+                assert cell2.x >= self.minimum_pristine_x
+                assert cell2.x <= self.maximum_pristine_x
+                assert cell2.y >= self.minimum_pristine_y
+                assert cell2.y <= self.maximum_pristine_y
+                wanted: List[BaseCell] = dfc.multi_excel_ref_to_basecells(excel_ref)
+                selected = dfc.exactly_matched_xy_cells(self.cells, wanted)
+            except CellsDoNotExistError:
+                raise ReferenceOutsideSelectionError(msg)
+            except AssertionError:
+                raise ReferenceOutsideSelectionError(msg)
 
         # Single column and row reference
         # eg: 'F19'
         elif re.match("^[A-Z]+[0-9]+$", excel_ref):
             wanted: BaseCell = dfc.single_excel_ref_to_basecell(excel_ref)
             wanted = [wanted]
-            selected = dfc.exactly_matched_xy_cells(self.cells, wanted)
+            try:
+                selected = dfc.exactly_matched_xy_cells(self.cells, wanted)
+            except CellsDoNotExistError:
+                raise ReferenceOutsideSelectionError(msg)
 
         # An excel reference that is a single row number
         # eg: '4'
         elif re.match("^[0-9]+$", excel_ref):
             wanted_y_index: int = dfc.single_excel_row_to_y_index(excel_ref)
-            selected = [c for c in self.cells if c.y == wanted_y_index]
+            wanted = [c for c in self.pcells if c.y == wanted_y_index]
+            try:
+                assert wanted_y_index <= self.maximum_pristine_y
+                assert wanted_y_index >= self.minimum_pristine_y
+                selected = dfc.exactly_matched_xy_cells(self.cells, wanted)
+            except CellsDoNotExistError:
+                raise ReferenceOutsideSelectionError(msg)
+            except AssertionError:
+                raise ReferenceOutsideSelectionError(msg)
 
         # An excel reference that is a multiple row numbers
         # eg: '4:6'
@@ -336,15 +415,32 @@ class Selectable(LiveTable):
                 raise BadExcelReferenceError(
                     f'Excel ref "{excel_ref}" is invalid. {end_y_index} must be higher than {start_y_index}'
                 )
-            selected = [
-                c for c in self.cells if c.y >= start_y_index and c.y <= end_y_index
-            ]
+            try:
+                assert end_y_index <= self.maximum_pristine_y
+                assert start_y_index >= self.minimum_pristine_y
+                wanted = [
+                    c for c in self.pcells if c.y >= start_y_index and c.y <= end_y_index
+                    ]
+                selected = dfc.exactly_matched_xy_cells(self.cells, wanted)
+            except CellsDoNotExistError:
+                raise ReferenceOutsideSelectionError(msg)
+            except AssertionError:
+                raise ReferenceOutsideSelectionError(msg)
 
+            
         # An excel reference that is one column letter
         # eg: 'H'
         elif re.match("^[A-Z]+$", excel_ref):
             wanted_x_index: int = dfc.single_excel_column_to_x_index(excel_ref)
-            selected = [c for c in self.cells if c.x == wanted_x_index]
+            try:
+                assert wanted_x_index <= self.maximum_pristine_x
+                assert wanted_x_index >= self.minimum_pristine_x
+                wanted = [c for c in self.pcells if c.x == wanted_x_index]
+                selected = dfc.exactly_matched_xy_cells(self.cells, wanted)
+            except CellsDoNotExistError:
+                raise ReferenceOutsideSelectionError(msg)
+            except AssertionError:
+                raise ReferenceOutsideSelectionError(msg)
 
         # An excel reference that is a range of column letters
         # eg: 'H:J'
@@ -357,13 +453,21 @@ class Selectable(LiveTable):
                 raise BadExcelReferenceError(
                     f'Excel ref "{excel_ref}" is invalid. {right_letters} much be higher than {left_letters}'
                 )
-            selected = [
-                c for c in self.cells if c.x >= start_x_index and c.x <= end_x_index
+            wanted = [
+                c for c in self.pcells if c.x >= start_x_index and c.x <= end_x_index
             ]
+            try:
+                assert end_x_index <= self.maximum_pristine_x
+                assert start_x_index >= self.minimum_pristine_x
+                selected = dfc.exactly_matched_xy_cells(self.cells, wanted)
+            except CellsDoNotExistError:
+                raise ReferenceOutsideSelectionError(msg)
+            except AssertionError:
+                raise ReferenceOutsideSelectionError(msg)
 
         # Unknown excel reference
         else:
-            raise BadExcelReferenceError(f"Unrecognised excel reference {excel_ref}")
+            raise BadExcelReferenceError(f"Unrecognised excel reference: {excel_ref}")
 
         self.cells = selected
         _explain(self, f"Excel reference: {excel_ref}")
@@ -451,16 +555,16 @@ class Selectable(LiveTable):
 
             if direction.is_horizontal:
                 viable_cells = dfc.cells_on_y_index(self.pcells, cell.y)
-                if direction.is_left:
+                if direction.is_right:
                     extruded_cells = [
                         x for x in viable_cells if x.x > cell.x and x.x <= (cell.x + direction.x)
                         ]
                     additional_cells + extruded_cells
-                if direction.is_right:
+                if direction.is_left:
                     extruded_cells = [
                         x for x in viable_cells if x.x < cell.x and x.x >= (cell.x + direction.x)
                         ]
-                    additional_cells += extruded_cells
+                additional_cells += extruded_cells
                     
             else:
                 viable_cells = dfc.cells_on_x_index(self.pcells, cell.x)
@@ -475,7 +579,7 @@ class Selectable(LiveTable):
                 additional_cells += extruded_cells
 
         self.cells += [x for x in additional_cells if x not in self.cells]
-        _explain(self, f"Extrude: {direction.retrieve_constructor}")
+        _explain(self, f"Extrude: {direction.offset_as_str}")
         return self
 
     def finds_observations_directly(self, direction: Direction) -> Directly:
@@ -574,6 +678,6 @@ class Selectable(LiveTable):
         )
 
 def _explain(selectable: Selectable, comment: str):
-    if selectable._explain:
+    if selectable._explain or selectable._explain_path:
         selectable = selectable.label_as(f"EXPLAIN: {comment}")
-        preview(selectable, selection_boundary=True)
+        preview(selectable, selection_boundary=True, path=selectable._explain_path)

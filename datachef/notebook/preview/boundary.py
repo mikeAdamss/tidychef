@@ -66,8 +66,6 @@ class Boundary:
                 self.min_selected_y-1 if dfc.minimum_y_offset(selections[0].pcells)
                 < self.min_selected_y else self.min_selected_y)
 
-
-
     @property
     def highest_point(self):
         """
