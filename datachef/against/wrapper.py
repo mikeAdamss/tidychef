@@ -2,11 +2,12 @@
 Convenience wrappers for pre defined validators
 """
 
-from typing import List
+from typing import List, Optional
 
 from .implementations.items import ItemsValidator
 from .implementations.numeric import IsNotNumericValidator, IsNumericValidator
 from .implementations.regex import RegexValidator
+from .implementations.length import LengthValidator
 
 
 def regex(pattern: str) -> RegexValidator:
@@ -33,6 +34,18 @@ def items(items: List[str]) -> ItemsValidator:
     return ItemsValidator(items)
 
 
+def length(least: Optional[int] = None, most: Optional[int] = None) -> LengthValidator:
+    """
+    Creates a LengthValidator to check if the
+    datachef Cell.value property of a given Cell
+    is with the stated length constraints.
+
+    :param least: The minimum length the cell value must be if any
+    :param most: The minimum length the cell value must be if any
+    :return: A instantiated ItemsValidator
+    """
+    return LengthValidator(least=least, most=most)
+        
 # Pre instantiate these since no arguments are required.
 is_numeric = IsNumericValidator()
 is_not_numeric = IsNotNumericValidator()

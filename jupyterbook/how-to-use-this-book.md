@@ -4,9 +4,6 @@ This book is organised in a very deliberate fashion to help onboard people to th
 
 That said, there are some nuances depending on your skillset and goals which I'll try to touch on.
 
-
-- **Everyone** regardless of their training and background should make a point to read and understand [walk](https://mikeadamss.github.io/datachef/walk.html) section, it will make understanding and working with datachef infinitely easier.
-
 - The sections on [extensibility](https://mikeadamss.github.io/datachef/extensibility.html) and [quirks](https://mikeadamss.github.io/datachef/quirks.html) are short pages of prose containing supplementary information. There are some useful insights into datachefs goals and approach here but you can come back to these as needed.
 
 - If you want to get a quick idea of what datachef does, look at the first few recipes in [basic examples](https://mikeadamss.github.io/datachef/examples/basic/basic.html) section before coming back here.
@@ -16,6 +13,8 @@ That said, there are some nuances depending on your skillset and goals which I'l
 Once you've done this you'll be able to read and understand a large number of recipes and have a solid grasp of this package and its api. This should be all you need to get up and running with datachef.
 
 - Like Chapter 1, [Chapter 2: Intermediate](https://mikeadamss.github.io/datachef/intermediate.html) and the [intermediate examples](https://mikeadamss.github.io/datachef/examples/intermediate/intermediate.html) are also complementary and completing the former should explain anything new you'll encounter in the examples. Be aware though, while the examples for this section use mostly the tools from basic its **against much more complex and messy data sources**. It's probably wise to take some time and practice what you learnt in [Chapter 1: Basics](https://mikeadamss.github.io/datachef/basics.html) against some data sources of your own before tackling these in earnest.
+
+- **Examples of using with validation** have their own section as while they're imporant to anyone setting up a repeatable EL process, for those working on ad-goc analysis they're of much less significance.
 
 I'd consider the above section the final part of the onboarding to full capability with datachef. After that it's just practice.
 

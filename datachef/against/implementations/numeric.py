@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import List
 
 from datachef.against.implementations.base import BaseValidator
 from datachef.models.source.cell import Cell
