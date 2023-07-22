@@ -30,7 +30,7 @@ def http(
     cache: bool = True,
     tables: str = None,
     **kwargs,
-) -> List[XlsxSelectable]:
+) -> Union[XlsxSelectable, List[XlsxSelectable]]:
     """
     Read data from a Path (or string representing a path)
     present on the same machine where datachef is running.
