@@ -41,7 +41,7 @@ def list_of_lists(
     """
     return acquirer(
         source,
-        ListOfListsReader,
+        ListOfListsReader(),
         selectable,
         pre_hook=pre_hook,
         post_hook=post_hook,
@@ -50,7 +50,7 @@ def list_of_lists(
 
 
 class ListOfListsReader(BaseReader):
-    def parse(source, selectable: Selectable = Selectable) -> Selectable:
+    def parse(self, source, selectable: Selectable = Selectable) -> Selectable:
         """
         Parse the provided source into a list of Selectables. Unless overridden the
         selectable is of type XlsSelectable.

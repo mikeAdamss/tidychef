@@ -23,6 +23,7 @@ def local(
     selectable: Selectable = XlsxSelectable,
     pre_hook: Optional[Callable] = None,
     post_hook: Optional[Callable] = None,
+    tables: str = None,
     **kwargs
 ) -> List[XlsxSelectable]:
     """
@@ -32,7 +33,7 @@ def local(
     This local xlsx reader uses openpyxl:
     https://openpyxl.readthedocs.io/en/stable/index.html
 
-    Any kwargs passed to this function are propagated to
+    Additional kwargs passed to this function are propagated to
     the openpyxl.load_workbook() method.
 
     :param source: A Path object or a string representing a path
@@ -51,7 +52,7 @@ def local(
 
     return acquirer(
         source,
-        LocalXlsxReader,
+        LocalXlsxReader(tables),
         selectable,
         pre_hook=pre_hook,
         post_hook=post_hook,
@@ -66,6 +67,7 @@ class LocalXlsxReader(BaseReader):
     """
 
     def parse(
+        self,
         source: Union[str, Path],
         selectable: Selectable = XlsxSelectable,
         data_only: bool = True,

@@ -28,6 +28,7 @@ def http(
     post_hook: Optional[Callable] = None,
     session: requests.Session = None,
     cache: bool = True,
+    tables: str = None,
     **kwargs,
 ) -> List[XlsxSelectable]:
     """
@@ -53,7 +54,7 @@ def http(
 
     return acquirer(
         source,
-        HttpXlsxReader,
+        HttpXlsxReader(tables),
         selectable,
         pre_hook=pre_hook,
         post_hook=post_hook,
@@ -70,6 +71,7 @@ class HttpXlsxReader(BaseReader):
     """
 
     def parse(
+        self,
         source: str,
         selectable: Selectable = XlsxSelectable,
         data_only=True,

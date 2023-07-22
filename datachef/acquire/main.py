@@ -11,9 +11,11 @@ acquire.csv.local()
 acquire.csv.remote()
 etc...
 """
+import re
 from typing import Any, Callable, List, Optional, Union
 
 from datachef.acquire.base import BaseReader
+from datachef.exceptions import ZeroAcquiredTablesError
 from datachef.selection.selectable import Selectable
 
 
@@ -42,7 +44,25 @@ def acquirer(
     if pre_hook:
         source = pre_hook(source)
 
-    parsed = reader.parse(source, selectable=selectable, **kwargs)
+    parsed = reader.parse(source, selectable, **kwargs)
+
+    if reader.tables:
+        assert isinstance(parsed, list), (
+            'You can only use tables= where acquire is returning a list of selectabes.'
+        )
+        initial_table_names = [x.name for x in parsed]
+        parsed = [x for x in parsed if re.match(reader.tables, x.name)]
+        if len(parsed) == 1:
+            parsed = parsed[0]
+        if isinstance(parsed, list):
+            if len(parsed) == 0:
+                raise ZeroAcquiredTablesError(f'''
+                    The tables regex you provided: {reader.tables}
+                    Has resulted in no tables being acquired.
+
+                    The table names in question were:
+                    {initial_table_names}
+                    ''')
 
     # Execute post load hook
     if post_hook:

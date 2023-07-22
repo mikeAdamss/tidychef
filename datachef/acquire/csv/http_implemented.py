@@ -46,7 +46,7 @@ def http(
 
     return acquirer(
         source,
-        HttpCsvReader,
+        HttpCsvReader(),
         selectable,
         pre_hook=pre_hook,
         post_hook=post_hook,
@@ -63,6 +63,7 @@ class HttpCsvReader(BaseReader):
     """
 
     def parse(
+        self,
         source: Any,
         selectable: Selectable = CsvSelectable,
         session: requests.Session = None,

@@ -42,7 +42,7 @@ def local(
 
     return acquirer(
         source,
-        LocalCsvReader,
+        LocalCsvReader(),
         selectable,
         pre_hook=pre_hook,
         post_hook=post_hook,
@@ -57,7 +57,7 @@ class LocalCsvReader(BaseReader):
     """
 
     def parse(
-        source: Union[str, Path], selectable: Selectable = CsvSelectable, **kwargs
+        self, source: Union[str, Path], selectable: Selectable = CsvSelectable, **kwargs
     ) -> CsvSelectable:
         """
         Parse the provided source into a Selectable. Unless overridden the

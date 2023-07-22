@@ -64,6 +64,15 @@ class OutOfBoundsError(Exception):
         self.msg = msg
 
 
+class ZeroAcquiredTablesError(Exception):
+    """
+    Raised when a user is attempting to filter tables being
+    acquired but it has resulted on no tables being acquired
+    """
+
+    def __init__(self, msg):
+        self.msg = msg
+
 class ImpossibleLookupError(Exception):
     """
     Raised when a user is attempting a lookup that is impossible

@@ -22,6 +22,7 @@ def local(
     selectable: Selectable = XlsSelectable,
     pre_hook: Optional[Callable] = None,
     post_hook: Optional[Callable] = None,
+    tables: str = None,
     **kwargs,
 ) -> List[XlsSelectable]:
     """
@@ -50,7 +51,7 @@ def local(
 
     return acquirer(
         source,
-        LocalXlsReader,
+        LocalXlsReader(tables),
         selectable,
         pre_hook=pre_hook,
         post_hook=post_hook,
@@ -65,6 +66,7 @@ class LocalXlsReader(BaseReader):
     """
 
     def parse(
+        self,
         source: Union[str, Path],
         selectable: Selectable = XlsSelectable,
         **kwargs,
