@@ -170,9 +170,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-regex.html">Selection: Regex</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-filters.html">Selection: Filters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-waffle.html">Selection: Waffle</a></li>
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-simple-useful.html">Selection: Simple &amp; Useful</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-explain.html">Selection: Config(explain=)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-validate.html">Selection: Validation</a></li>
@@ -186,20 +183,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intermediate.html">Chapter 2: Intermediate</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="apply.html">Apply</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">TidyData: Concatenation</a></li>
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="iterating.html">Iterating Tables/Sheets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="duplicates.html">TidyData: Duplicate Rows</a></li>
 <li class="toctree-l2"><a class="reference internal" href="horizontal-conditions.html">TidyData: Horizontal Conditions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data-markers.html">TidyData: Data Markers &amp; Dropping Columns</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pandas.html">Pandas</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="validation.html">TidyData: Column: validate=</a></li>
 <li class="toctree-l2"><a class="reference internal" href="within.html">TidyData: Within</a></li>
 <li class="toctree-l2"><a class="reference internal" href="against.html">Against (Creating New Validators)</a></li>
@@ -438,16 +426,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">TidyData: Concatenation</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#source-data">Source Data</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-sources">The “Two” Sources</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#create-and-preview-tidydata-objects">Create and preview TidyData objects</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenation-via">Concatenation via ‘+’</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenation-via-a-list">Concatenation via a list</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenation-via-arguments">Concatenation via arguments</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#misaligned-headers-error">Misaligned Headers Error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-data">Source Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-sources">The “Two” Sources</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-and-preview-tidydata-objects">Create and preview TidyData objects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenation-via">Concatenation via ‘+’</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenation-via-a-list">Concatenation via a list</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenation-via-arguments">Concatenation via arguments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#misaligned-headers-error">Misaligned Headers Error</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -458,12 +444,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="tidydata-concatenation">
+  <section class="tex2jax_ignore mathjax_ignore" id="tidydata-concatenation">
 <h1>TidyData: Concatenation<a class="headerlink" href="#tidydata-concatenation" title="Permalink to this heading">#</a></h1>
 <p>This section details how you can concatenate multiple tidy data sheets together when you output them.</p>
-</section>
 <section id="source-data">
-<h1>Source Data<a class="headerlink" href="#source-data" title="Permalink to this heading">#</a></h1>
+<h2>Source Data<a class="headerlink" href="#source-data" title="Permalink to this heading">#</a></h2>
 <p>The data source we’re using for these examples is shown below:</p>
 <table class="table">
 <thead>
@@ -532,7 +517,7 @@ document.write(`
 </div>
 </section>
 <section id="the-two-sources">
-<h1>The “Two” Sources<a class="headerlink" href="#the-two-sources" title="Permalink to this heading">#</a></h1>
+<h2>The “Two” Sources<a class="headerlink" href="#the-two-sources" title="Permalink to this heading">#</a></h2>
 <p>To keep these examples reasonably brief we’re going to create two TidyData class from the above as follow:</p>
 <ul class="simple">
 <li><p>one with observations from B7 though H8</p></li>
@@ -702,7 +687,7 @@ document.write(`
 </div>
 </section>
 <section id="create-and-preview-tidydata-objects">
-<h1>Create and preview TidyData objects<a class="headerlink" href="#create-and-preview-tidydata-objects" title="Permalink to this heading">#</a></h1>
+<h2>Create and preview TidyData objects<a class="headerlink" href="#create-and-preview-tidydata-objects" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tidydata1</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
@@ -801,7 +786,7 @@ document.write(`
 </div>
 </section>
 <section id="concatenation-via">
-<h1>Concatenation via ‘+’<a class="headerlink" href="#concatenation-via" title="Permalink to this heading">#</a></h1>
+<h2>Concatenation via ‘+’<a class="headerlink" href="#concatenation-via" title="Permalink to this heading">#</a></h2>
 <p>The simplest way to concatenate two TidyData objects is just to add them together.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -849,7 +834,7 @@ document.write(`
 </div>
 </section>
 <section id="concatenation-via-a-list">
-<h1>Concatenation via a list<a class="headerlink" href="#concatenation-via-a-list" title="Permalink to this heading">#</a></h1>
+<h2>Concatenation via a list<a class="headerlink" href="#concatenation-via-a-list" title="Permalink to this heading">#</a></h2>
 <p>The next method is to use the <code class="docutils literal notranslate"><span class="pre">TidyData.from_tidy_list()</span></code> constructor.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -897,7 +882,7 @@ document.write(`
 </div>
 </section>
 <section id="concatenation-via-arguments">
-<h1>Concatenation via arguments<a class="headerlink" href="#concatenation-via-arguments" title="Permalink to this heading">#</a></h1>
+<h2>Concatenation via arguments<a class="headerlink" href="#concatenation-via-arguments" title="Permalink to this heading">#</a></h2>
 <p>Lastly, you can pass in objects of class TidyData as positional arguments to the <code class="docutils literal notranslate"><span class="pre">TidyData.from_tidy()</span></code> constructor.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -945,7 +930,7 @@ document.write(`
 </div>
 </section>
 <section id="misaligned-headers-error">
-<h1>Misaligned Headers Error<a class="headerlink" href="#misaligned-headers-error" title="Permalink to this heading">#</a></h1>
+<h2>Misaligned Headers Error<a class="headerlink" href="#misaligned-headers-error" title="Permalink to this heading">#</a></h2>
 <p>Where concatenating together TidyData the column headers must match precisely.</p>
 <p>The following is an example of what happens if you try and concatenate two TidyData classes with misaligned headers.</p>
 <div class="cell docutils container">
@@ -1054,7 +1039,7 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">MisalignedHeadersError</span><span class="g g-Whitespace">                    </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_73657</span><span class="o">/</span><span class="mf">2463524614.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_75083</span><span class="o">/</span><span class="mf">2463524614.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Now we try and concatenate them - and get an error!</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> 
 <span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">tidydata1</span> <span class="o">+</span> <span class="n">tidydata2</span>
@@ -1088,6 +1073,7 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1157,16 +1143,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">TidyData: Concatenation</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#source-data">Source Data</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-sources">The “Two” Sources</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#create-and-preview-tidydata-objects">Create and preview TidyData objects</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenation-via">Concatenation via ‘+’</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenation-via-a-list">Concatenation via a list</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenation-via-arguments">Concatenation via arguments</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#misaligned-headers-error">Misaligned Headers Error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-data">Source Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-sources">The “Two” Sources</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-and-preview-tidydata-objects">Create and preview TidyData objects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenation-via">Concatenation via ‘+’</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenation-via-a-list">Concatenation via a list</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenation-via-arguments">Concatenation via arguments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#misaligned-headers-error">Misaligned Headers Error</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>

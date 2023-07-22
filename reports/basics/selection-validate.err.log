@@ -27,7 +27,7 @@ table.excel_ref('B').is_not_blank().validate(against.regex("John"), raise_first_
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mCellValidationError[0m                       Traceback (most recent call last)
-[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_73531/2813622948.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_74955/2813622948.py[0m in [0;36m<module>[0;34m[0m
 [1;32m      4[0m [0mtable[0m[0;34m:[0m [0mCsvSelectable[0m [0;34m=[0m [0macquire[0m[0;34m.[0m[0mcsv[0m[0;34m.[0m[0mhttp[0m[0;34m([0m[0;34m"https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      5[0m [0;34m[0m[0m
 [0;32m----> 6[0;31m [0mtable[0m[0;34m.[0m[0mexcel_ref[0m[0;34m([0m[0;34m'B'[0m[0;34m)[0m[0;34m.[0m[0mis_not_blank[0m[0;34m([0m[0;34m)[0m[0;34m.[0m[0mvalidate[0m[0;34m([0m[0magainst[0m[0;34m.[0m[0mregex[0m[0;34m([0m[0;34m"John"[0m[0;34m)[0m[0;34m,[0m [0mraise_first_error[0m[0;34m=[0m[0;32mTrue[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
