@@ -75,7 +75,7 @@ class Selectable(LiveTable):
             if isinstance(explain_path, str):
                 explain_path = Path(explain_path)
             if explain_path.exists():
-                os.remove(explain_path.resolve())
+                os.remove(explain_path.resolve()) # pragma: no cover
 
         self._explain_path = explain_path
         self._explain = explain
