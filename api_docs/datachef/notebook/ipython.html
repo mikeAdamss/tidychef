@@ -57,18 +57,19 @@
                         <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">get_ipython</span>
 </span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a>
 </span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a>
-</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="c1"># basedhttps://stackoverflow.com/questions/15411967/how-can-i-check-if-code-is-executed-in-the-ipython-notebook</span>
-</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="k">def</span> <span class="nf">in_notebook</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
-</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a><span class="sd">    Checks whether the python interpreter calling</span>
-</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a><span class="sd">    this code is doing so via an IPython or Jupyter</span>
-</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a><span class="sd">    notebook.</span>
-</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">get_ipython</span><span class="p">():</span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>        <span class="k">return</span> <span class="kc">False</span>
-</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>    <span class="k">if</span> <span class="s2">&quot;IPKernelApp&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">config</span><span class="p">:</span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>        <span class="k">return</span> <span class="kc">False</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>    <span class="k">return</span> <span class="kc">True</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="c1"># based on</span>
+</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="c1"># https://stackoverflow.com/questions/15411967/how-can-i-check-if-code-is-executed-in-the-ipython-notebook</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a><span class="k">def</span> <span class="nf">in_notebook</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a><span class="sd">    Checks whether the python interpreter calling</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a><span class="sd">    this code is doing so via an IPython or Jupyter</span>
+</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a><span class="sd">    notebook.</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">get_ipython</span><span class="p">():</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>        <span class="k">return</span> <span class="kc">False</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>    <span class="k">if</span> <span class="s2">&quot;IPKernelApp&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">config</span><span class="p">:</span>
+</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>        <span class="k">return</span> <span class="kc">False</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>    <span class="k">return</span> <span class="kc">True</span>
 </span></pre></div>
 
 
@@ -84,17 +85,17 @@
 
     </div>
     <a class="headerlink" href="#in_notebook"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="in_notebook-6"><a href="#in_notebook-6"><span class="linenos"> 6</span></a><span class="k">def</span> <span class="nf">in_notebook</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
-</span><span id="in_notebook-7"><a href="#in_notebook-7"><span class="linenos"> 7</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="in_notebook-8"><a href="#in_notebook-8"><span class="linenos"> 8</span></a><span class="sd">    Checks whether the python interpreter calling</span>
-</span><span id="in_notebook-9"><a href="#in_notebook-9"><span class="linenos"> 9</span></a><span class="sd">    this code is doing so via an IPython or Jupyter</span>
-</span><span id="in_notebook-10"><a href="#in_notebook-10"><span class="linenos">10</span></a><span class="sd">    notebook.</span>
-</span><span id="in_notebook-11"><a href="#in_notebook-11"><span class="linenos">11</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="in_notebook-12"><a href="#in_notebook-12"><span class="linenos">12</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">get_ipython</span><span class="p">():</span>
-</span><span id="in_notebook-13"><a href="#in_notebook-13"><span class="linenos">13</span></a>        <span class="k">return</span> <span class="kc">False</span>
-</span><span id="in_notebook-14"><a href="#in_notebook-14"><span class="linenos">14</span></a>    <span class="k">if</span> <span class="s2">&quot;IPKernelApp&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">config</span><span class="p">:</span>
-</span><span id="in_notebook-15"><a href="#in_notebook-15"><span class="linenos">15</span></a>        <span class="k">return</span> <span class="kc">False</span>
-</span><span id="in_notebook-16"><a href="#in_notebook-16"><span class="linenos">16</span></a>    <span class="k">return</span> <span class="kc">True</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="in_notebook-7"><a href="#in_notebook-7"><span class="linenos"> 7</span></a><span class="k">def</span> <span class="nf">in_notebook</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+</span><span id="in_notebook-8"><a href="#in_notebook-8"><span class="linenos"> 8</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="in_notebook-9"><a href="#in_notebook-9"><span class="linenos"> 9</span></a><span class="sd">    Checks whether the python interpreter calling</span>
+</span><span id="in_notebook-10"><a href="#in_notebook-10"><span class="linenos">10</span></a><span class="sd">    this code is doing so via an IPython or Jupyter</span>
+</span><span id="in_notebook-11"><a href="#in_notebook-11"><span class="linenos">11</span></a><span class="sd">    notebook.</span>
+</span><span id="in_notebook-12"><a href="#in_notebook-12"><span class="linenos">12</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="in_notebook-13"><a href="#in_notebook-13"><span class="linenos">13</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">get_ipython</span><span class="p">():</span>
+</span><span id="in_notebook-14"><a href="#in_notebook-14"><span class="linenos">14</span></a>        <span class="k">return</span> <span class="kc">False</span>
+</span><span id="in_notebook-15"><a href="#in_notebook-15"><span class="linenos">15</span></a>    <span class="k">if</span> <span class="s2">&quot;IPKernelApp&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">config</span><span class="p">:</span>
+</span><span id="in_notebook-16"><a href="#in_notebook-16"><span class="linenos">16</span></a>        <span class="k">return</span> <span class="kc">False</span>
+</span><span id="in_notebook-17"><a href="#in_notebook-17"><span class="linenos">17</span></a>    <span class="k">return</span> <span class="kc">True</span>
 </span></pre></div>
 
 

@@ -158,7 +158,6 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../how-to-use-this-book.html">How To Use This Book</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../dot-notation-explained.html">Extended Dot Notation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../extensibility.html">Extensibility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quirks.html">Quirks</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../basics.html">Chapter 1: Basics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -170,7 +169,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-shift.html">Selection: Shift</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-regex.html">Selection: Regex</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-filters.html">Selection: Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/selection-waffle.html">Selection: Waffle</a></li>
+
+
+
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-simple-useful.html">Selection: Simple &amp; Useful</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/selection-explain.html">Selection: Config(explain=)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-closest.html">TidyData: Closest</a></li>
@@ -222,6 +226,9 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l3"><a class="reference internal" href="../examples/basic/house-prices.html">House Prices</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../examples/basic/service-industry.html">Service Industry</a></li>
+
 
 </ul>
 </li>
@@ -714,17 +721,17 @@ Should be False: False
         </html>
     </div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">CellValidationError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_15072</span><span class="o">/</span><span class="mf">4217185943.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_73639</span><span class="o">/</span><span class="mf">4217185943.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="c1"># Noe validate it</span>
 <span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="n">numeric_validator</span> <span class="o">=</span> <span class="n">NumericValidator</span><span class="p">()</span>
 <span class="ne">---&gt; </span><span class="mi">15</span> <span class="n">selection</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">numeric_validator</span><span class="p">)</span>
 
-<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/selection/selectable.py</span> in <span class="ni">validate</span><span class="nt">(self, validator, raise_first_error)</span>
-<span class="g g-Whitespace">    </span><span class="mi">366</span> 
-<span class="g g-Whitespace">    </span><span class="mi">367</span>         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">validation_errors</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">368</span>             <span class="k">raise</span> <span class="n">CellValidationError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">linesep</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">validation_errors</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">369</span> 
-<span class="g g-Whitespace">    </span><span class="mi">370</span>         <span class="k">return</span> <span class="bp">self</span>
+<span class="nn">~/Library/Caches/pypoetry/virtualenvs/datachef-hNSMaw3h-py3.7/lib/python3.7/site-packages/datachef/selection/selectable.py</span> in <span class="ni">validate</span><span class="nt">(self, validator, raise_first_error)</span>
+<span class="g g-Whitespace">    </span><span class="mi">520</span> 
+<span class="g g-Whitespace">    </span><span class="mi">521</span>         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">validation_errors</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">522</span>             <span class="k">raise</span> <span class="n">CellValidationError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">linesep</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">validation_errors</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">523</span> 
+<span class="g g-Whitespace">    </span><span class="mi">524</span>         <span class="k">return</span> <span class="bp">self</span>
 
 <span class="ne">CellValidationError</span>: &quot;Houses&quot; is not numeric
 <span class="s2">&quot;Cars&quot;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">numeric</span>

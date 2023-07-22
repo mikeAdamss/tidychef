@@ -158,7 +158,6 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../how-to-use-this-book.html">How To Use This Book</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../dot-notation-explained.html">Extended Dot Notation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../extensibility.html">Extensibility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quirks.html">Quirks</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../basics.html">Chapter 1: Basics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -170,7 +169,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-shift.html">Selection: Shift</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-regex.html">Selection: Regex</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-filters.html">Selection: Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/selection-waffle.html">Selection: Waffle</a></li>
+
+
+
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-simple-useful.html">Selection: Simple &amp; Useful</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/selection-explain.html">Selection: Config(explain=)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-closest.html">TidyData: Closest</a></li>
@@ -222,6 +226,9 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l3"><a class="reference internal" href="../examples/basic/house-prices.html">House Prices</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../examples/basic/service-industry.html">Service Industry</a></li>
+
 
 </ul>
 </li>
@@ -544,11 +551,11 @@ document.write(`
 <p>If called without keyword argument duplicates will be dropped with no user feedback given, alternatively you can use one (or both) of the following.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">print_duplicates</span></code> which prints out the rows you’ve just dropped.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">path</span></code> which writes the same information to a specified text file (for more excessive numbers of duplicate rows).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">csv_duplicate_path</span></code> which writes the same information to the specified csv file.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="o">.</span><span class="n">from_tidy</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">,</span> <span class="n">tidy_data</span><span class="p">)</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">print_duplicates</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;duplicates.txt&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="o">.</span><span class="n">from_tidy</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">,</span> <span class="n">tidy_data</span><span class="p">)</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">print_duplicates</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">csv_duplicate_path</span><span class="o">=</span><span class="s2">&quot;duplicates.csv&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -587,15 +594,13 @@ document.write(`
 <p>Below, we’ll check the contents of <code class="docutils literal notranslate"><span class="pre">duplicates.txt</span></code> as well.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;duplicates.txt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;duplicates.csv&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Removed duplicate instances of the following row(s):
------------------------------------------------------
-1,Beatles,Houses,John
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1,Beatles,Houses,John
 5,Beatles,Cars,John
 9,Beatles,Boats,John
 2,Rolling Stones,Houses,Keith
