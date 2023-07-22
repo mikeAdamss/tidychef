@@ -27,7 +27,7 @@ class Table:
         :param cells: A list of Cell objects representing the contents
         of a tabulated data source.
         """
-        self.cells = cells
+        self.cells = None
         self._signature = str(uuid.uuid4())
 
     def add_cell(self, cell: Cell):
