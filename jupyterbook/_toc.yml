@@ -20,6 +20,7 @@ chapters:
     - file: basics/selection-shift
     - file: basics/selection-regex
     - file: basics/selection-filters
+    - file: basics/selection-waffle
     - file: basics/selection-simple-useful
     - file: basics/selection-explain
     - file: basics/selection-validate
@@ -58,6 +59,7 @@ chapters:
         - file: examples/basic/cornavavirus-loneliness
         - file: examples/basic/monthly-gdp-tables
         - file: examples/basic/house-prices
+        - file: examples/basic/service-industry
 
     - file: examples/intermediate/intermediate
       sections:
