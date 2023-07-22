@@ -436,6 +436,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xls-data-from-local">Xls Data From Local</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xls-data-from-http-s">Xls Data From Http(s)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-http-s-caching">A Note On Http(s) Caching</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-tables">Using tables=</a></li>
 </ul>
             </nav>
         </div>
@@ -716,18 +717,73 @@ document.write(`
         </html>
     </div></div>
 </div>
+<p>Rather than using the rather clunky <code class="docutils literal notranslate"><span class="pre">tables[0]</span></code> syntax, we can also pass a <code class="docutils literal notranslate"><span class="pre">tables=</span></code> keyword as per the below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
+
+<span class="c1"># Note: tables (note plural) as its now a list of tabulated data sources</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">local</span><span class="p">(</span><span class="s2">&quot;../../tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Cover Sheet&quot;</span><span class="p">)</span>
+<span class="n">preview</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A1:B4&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <table>
+                
+            </table>
+
+            <body>
+                <h2>Cover Sheet</h2>
+                <table>
+                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td></tr>
+<tr><td style="background-color:lightgrey">1</td><td style="background-color:white">Output in the construction industry reference tables April 2023</td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">2</td><td style="background-color:white">This spreadsheet contains the data tables published alongside the Office for National Statistics' Construction output in Great Britain bulletin for April 2023 . We have edited these data tables and the accompanying cover sheet, table of contents and notes worksheet to meet legal accessibility regulations</td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">3</td><td style="background-color:white">Coverage:</td><td style="background-color:white">Great Britain</td></tr>
+<tr><td style="background-color:lightgrey">4</td><td style="background-color:white">Released:</td><td style="background-color:white">14 June 2023</td></tr>
+
+                </table>
+            </body>
+            <br>
+        </html>
+    </div></div>
+</div>
 </section>
 <section id="xlsx-data-from-http-s">
 <h2>Xlsx Data From Http(s)<a class="headerlink" href="#xlsx-data-from-http-s" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
 <span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
 
 <span class="c1"># Note: tables (note plural) as its now a list of tabulated data sources</span>
-<span class="n">tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsxSelectable</span><span class="p">]</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">)</span>
-<span class="n">preview</span><span class="p">(</span><span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A1:B4&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Cover Sheet&quot;</span><span class="p">)</span>
+<span class="n">preview</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A1:B4&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -784,12 +840,11 @@ document.write(`
 <p>You can download the example data being used <a class="reference external" href="https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xls/sample.xls">here</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
 <span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsSelectable</span>
 
-<span class="n">tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsSelectable</span><span class="p">]</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">local</span><span class="p">(</span><span class="s2">&quot;../../tests/fixtures/xls/sample.xls&quot;</span><span class="p">)</span>
-<span class="n">preview</span><span class="p">(</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A1:G7&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">XlsSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">local</span><span class="p">(</span><span class="s2">&quot;../../tests/fixtures/xls/sample.xls&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;SalesOrders&quot;</span><span class="p">)</span>
+<span class="n">preview</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A1:G7&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -845,12 +900,11 @@ document.write(`
 <h2>Xls Data From Http(s)<a class="headerlink" href="#xls-data-from-http-s" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
 <span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsSelectable</span>
 
-<span class="n">tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsSelectable</span><span class="p">]</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xls/sample.xls&quot;</span><span class="p">)</span>
-<span class="n">preview</span><span class="p">(</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A1:G7&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">XlsSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xls/sample.xls&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;SalesOrders&quot;</span><span class="p">)</span>
+<span class="n">preview</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A1:G7&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -968,6 +1022,40 @@ document.write(`
     </div></div>
 </div>
 </section>
+<section id="using-tables">
+<h2>Using tables=<a class="headerlink" href="#using-tables" title="Permalink to this heading">#</a></h2>
+<p>Some of you will have wondered why its “tables” (plural) not “table” singular.</p>
+<p>It’s because the string you pass to tables is a <a class="reference external" href="https://regexone.com/">regular expression</a>.</p>
+<p>We’re <em>not</em> going to go into regular expressions as part of this documentation, but for our purposes just be aware its pattern matching syntax and well worth exploring for anyone working in an ETL role.</p>
+<p>As a simple example, you can use regular expressions to create an <strong>or</strong> statement with the pipe (<code class="docutils literal notranslate"><span class="pre">|</span></code>) character.</p>
+<p>The following example shows how you can do just that to select two table from our xlsx source.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span>
+<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
+
+<span class="n">tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsxSelectable</span><span class="p">]</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span>
+                                                 <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 1a|Table 1b&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Table 1a
+Table 1b
+</pre></div>
+</div>
+</div>
+</div>
+<p>For many users this ability to only select the tables you want to process will be all that’s required, but the <em>real</em> power here is the ability (where needed) to deal with inconsistencies in table naming.</p>
+<p>This is crude (you can do some very clever things with regular expressions should you chose to explore them) but continuing on from our <strong>or</strong> example lets imagine the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 1a|table 1a|table1a|table 1A|Table 1A|Table1A&quot;</span>
+</pre></div>
+</div>
+<p>Which gives your acquire statement a fair degree of additional robustness, as minor changes or mistakes in table naming by the data publisher are accounted for.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1047,6 +1135,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xls-data-from-local">Xls Data From Local</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xls-data-from-http-s">Xls Data From Http(s)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-http-s-caching">A Note On Http(s) Caching</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-tables">Using tables=</a></li>
 </ul>
   </nav></div>
 

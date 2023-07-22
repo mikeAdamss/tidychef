@@ -109,7 +109,7 @@
 </span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>
 </span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>    <span class="k">return</span> <span class="n">acquirer</span><span class="p">(</span>
 </span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>        <span class="n">source</span><span class="p">,</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>        <span class="n">LocalCsvReader</span><span class="p">,</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>        <span class="n">LocalCsvReader</span><span class="p">(),</span>
 </span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>        <span class="n">selectable</span><span class="p">,</span>
 </span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>        <span class="n">pre_hook</span><span class="o">=</span><span class="n">pre_hook</span><span class="p">,</span>
 </span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>        <span class="n">post_hook</span><span class="o">=</span><span class="n">post_hook</span><span class="p">,</span>
@@ -124,7 +124,7 @@
 </span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>
 </span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a>        <span class="n">source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span> <span class="n">selectable</span><span class="p">:</span> <span class="n">Selectable</span> <span class="o">=</span> <span class="n">CsvSelectable</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span> <span class="n">selectable</span><span class="p">:</span> <span class="n">Selectable</span> <span class="o">=</span> <span class="n">CsvSelectable</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
 </span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CsvSelectable</span><span class="p">:</span>
 </span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a><span class="sd">        Parse the provided source into a Selectable. Unless overridden the</span>
@@ -195,7 +195,7 @@
 </span><span id="local-43"><a href="#local-43"><span class="linenos">43</span></a>
 </span><span id="local-44"><a href="#local-44"><span class="linenos">44</span></a>    <span class="k">return</span> <span class="n">acquirer</span><span class="p">(</span>
 </span><span id="local-45"><a href="#local-45"><span class="linenos">45</span></a>        <span class="n">source</span><span class="p">,</span>
-</span><span id="local-46"><a href="#local-46"><span class="linenos">46</span></a>        <span class="n">LocalCsvReader</span><span class="p">,</span>
+</span><span id="local-46"><a href="#local-46"><span class="linenos">46</span></a>        <span class="n">LocalCsvReader</span><span class="p">(),</span>
 </span><span id="local-47"><a href="#local-47"><span class="linenos">47</span></a>        <span class="n">selectable</span><span class="p">,</span>
 </span><span id="local-48"><a href="#local-48"><span class="linenos">48</span></a>        <span class="n">pre_hook</span><span class="o">=</span><span class="n">pre_hook</span><span class="p">,</span>
 </span><span id="local-49"><a href="#local-49"><span class="linenos">49</span></a>        <span class="n">post_hook</span><span class="o">=</span><span class="n">post_hook</span><span class="p">,</span>
@@ -248,7 +248,7 @@ are propagated through to csv.reader().
 </span><span id="LocalCsvReader-58"><a href="#LocalCsvReader-58"><span class="linenos">58</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="LocalCsvReader-59"><a href="#LocalCsvReader-59"><span class="linenos">59</span></a>
 </span><span id="LocalCsvReader-60"><a href="#LocalCsvReader-60"><span class="linenos">60</span></a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span>
-</span><span id="LocalCsvReader-61"><a href="#LocalCsvReader-61"><span class="linenos">61</span></a>        <span class="n">source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span> <span class="n">selectable</span><span class="p">:</span> <span class="n">Selectable</span> <span class="o">=</span> <span class="n">CsvSelectable</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+</span><span id="LocalCsvReader-61"><a href="#LocalCsvReader-61"><span class="linenos">61</span></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span> <span class="n">selectable</span><span class="p">:</span> <span class="n">Selectable</span> <span class="o">=</span> <span class="n">CsvSelectable</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
 </span><span id="LocalCsvReader-62"><a href="#LocalCsvReader-62"><span class="linenos">62</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CsvSelectable</span><span class="p">:</span>
 </span><span id="LocalCsvReader-63"><a href="#LocalCsvReader-63"><span class="linenos">63</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="LocalCsvReader-64"><a href="#LocalCsvReader-64"><span class="linenos">64</span></a><span class="sd">        Parse the provided source into a Selectable. Unless overridden the</span>
@@ -292,14 +292,14 @@ held csv file.</p>
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">parse</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]</span>,</span><span class="param">	selectable: <a href="../../selection/selectable.html#Selectable">datachef.selection.selectable.Selectable</a> = &lt;class &#x27;datachef.selection.csv.csv.CsvSelectable&#x27;&gt;,</span><span class="param">	<span class="o">**</span><span class="n">kwargs</span></span><span class="return-annotation">) -> <span class="n">datachef</span><span class="o">.</span><span class="n">selection</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">CsvSelectable</span>:</span></span>
+        <span class="name">parse</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="bp">self</span>,</span><span class="param">	<span class="n">source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]</span>,</span><span class="param">	selectable: <a href="../../selection/selectable.html#Selectable">datachef.selection.selectable.Selectable</a> = &lt;class &#x27;datachef.selection.csv.csv.CsvSelectable&#x27;&gt;,</span><span class="param">	<span class="o">**</span><span class="n">kwargs</span></span><span class="return-annotation">) -> <span class="n">datachef</span><span class="o">.</span><span class="n">selection</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">CsvSelectable</span>:</span></span>
 
                 <label class="view-source-button" for="LocalCsvReader.parse-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#LocalCsvReader.parse"></a>
             <div class="pdoc-code codehilite"><pre><span></span><span id="LocalCsvReader.parse-60"><a href="#LocalCsvReader.parse-60"><span class="linenos">60</span></a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span>
-</span><span id="LocalCsvReader.parse-61"><a href="#LocalCsvReader.parse-61"><span class="linenos">61</span></a>        <span class="n">source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span> <span class="n">selectable</span><span class="p">:</span> <span class="n">Selectable</span> <span class="o">=</span> <span class="n">CsvSelectable</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+</span><span id="LocalCsvReader.parse-61"><a href="#LocalCsvReader.parse-61"><span class="linenos">61</span></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span> <span class="n">selectable</span><span class="p">:</span> <span class="n">Selectable</span> <span class="o">=</span> <span class="n">CsvSelectable</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
 </span><span id="LocalCsvReader.parse-62"><a href="#LocalCsvReader.parse-62"><span class="linenos">62</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CsvSelectable</span><span class="p">:</span>
 </span><span id="LocalCsvReader.parse-63"><a href="#LocalCsvReader.parse-63"><span class="linenos">63</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="LocalCsvReader.parse-64"><a href="#LocalCsvReader.parse-64"><span class="linenos">64</span></a><span class="sd">        Parse the provided source into a Selectable. Unless overridden the</span>
@@ -353,6 +353,15 @@ selectable is of type CsvSelectable.</p>
 </div>
 
 
+                            </div>
+                            <div class="inherited">
+                                <h5>Inherited Members</h5>
+                                <dl>
+                                    <div><dt><a href="../base.html#BaseReader">datachef.acquire.base.BaseReader</a></dt>
+                                <dd id="LocalCsvReader.__init__" class="function"><a href="../base.html#BaseReader.__init__">BaseReader</a></dd>
+
+            </div>
+                                </dl>
                             </div>
                 </section>
     </main>

@@ -37,7 +37,7 @@ selection.validate(numeric_validator)
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mCellValidationError[0m                       Traceback (most recent call last)
-[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_75065/4217185943.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_80781/4217185943.py[0m in [0;36m<module>[0;34m[0m
 [1;32m     13[0m [0;31m# Noe validate it[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
 [1;32m     14[0m [0mnumeric_validator[0m [0;34m=[0m [0mNumericValidator[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0;32m---> 15[0;31m [0mselection[0m[0;34m.[0m[0mvalidate[0m[0;34m([0m[0mnumeric_validator[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
