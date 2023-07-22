@@ -215,7 +215,8 @@ class LiveTable:
                 "instance of a parsed input."
             )
 
-        self.cells = dfc.cells_not_in(self.cells, other_input.cells)
+        cells = self.cells if self.selections_made() else self.pcells
+        self.cells = dfc.cells_not_in(cells, other_input.cells)
         return self
 
     # TODO - type hint this

@@ -1,4 +1,5 @@
 from .badparams import (
+    AmbiguousWaffleError,
     BadExcelReferenceError,
     BadShiftParameterError,
     CardinalDeclarationWithOffset,

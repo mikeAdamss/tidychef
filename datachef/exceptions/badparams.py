@@ -89,3 +89,12 @@ class ReferenceOutsideSelectionError(Exception):
 
     def __init__(self, msg):
         self.msg = msg
+
+class AmbiguousWaffleError(Exception):
+    """
+    User is trying to use the waffle method but has
+    provided invalid combinations of selections. 
+    """
+
+    def __init__(self, msg):
+        self.msg = msg

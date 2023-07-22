@@ -40,7 +40,7 @@ def get_preview_table_as_html(
 
         # If the selection is pristine, someone is just
         # previewing the data prior to selections
-        if not selection.selections_made():
+        if not selection.selections_made() and selection_boundary is False:
             continue
         selection_keys.add_selection_key(selection)
 
