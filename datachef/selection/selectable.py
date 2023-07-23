@@ -20,8 +20,8 @@ from datachef.direction.directions import (
     up,
 )
 from datachef.exceptions import (
-    BadExcelReferenceError,
     AmbiguousWaffleError,
+    BadExcelReferenceError,
     BadShiftParameterError,
     CellsDoNotExistError,
     CellValidationError,
@@ -75,7 +75,7 @@ class Selectable(LiveTable):
             if isinstance(explain_path, str):
                 explain_path = Path(explain_path)
             if explain_path.exists():
-                os.remove(explain_path.resolve()) # pragma: no cover
+                os.remove(explain_path.resolve())  # pragma: no cover
 
         self._explain_path = explain_path
         self._explain = explain
@@ -114,15 +114,15 @@ class Selectable(LiveTable):
         Assert that the current selection contains exactly one cell
         """
         return self.assert_len(1)
-    
+
     def assert_single_column(self):
         """
         Assert that all CURRENTLY selected cells are contained in
         a single column.
         """
-        assert len(dfc.all_used_x_indicies(self.cells)) == 1, (
-            'Selection has cells from more than one column'
-        )
+        assert (
+            len(dfc.all_used_x_indicies(self.cells)) == 1
+        ), "Selection has cells from more than one column"
         return self
 
     def assert_single_row(self):
@@ -130,9 +130,9 @@ class Selectable(LiveTable):
         Assert that all CURRENTLY selected cells are contained on
         a single row.
         """
-        assert len(dfc.all_used_y_indicies(self.cells)) == 1, (
-            'Selection has cells from more than one row'
-        )
+        assert (
+            len(dfc.all_used_y_indicies(self.cells)) == 1
+        ), "Selection has cells from more than one row"
         return self
 
     def lone_value(self) -> str:
@@ -552,7 +552,6 @@ class Selectable(LiveTable):
         _explain(self, f"Regex, pattern {pattern}")
         return self
 
-
     @dontmutate
     def waffle(self, direction: Direction, additional_selection: Selectable):
         """
@@ -561,7 +560,7 @@ class Selectable(LiveTable):
         selection being passed into this method.
 
         Examples:
-        
+
         [B1].waffle("A6") == [B6]
 
         [C4,C5,C6].waffle("F1", "G1") == [F4,F5,F6,G4,G5,G6]
@@ -573,13 +572,15 @@ class Selectable(LiveTable):
                 if any([x for x in additional_selection if x.y <= highest_y]):
                     raise AmbiguousWaffleError(
                         "When using waffle down, your additional selections must all "
-                        "be below your initial selections.")
+                        "be below your initial selections."
+                    )
             if direction.is_upwards:
                 lowest_y = dfc.minimum_y_offset(self.cells)
                 if any([x for x in additional_selection if x.y >= lowest_y]):
                     raise AmbiguousWaffleError(
                         "When using waffle up, your additional selections must all be "
-                        "above your initial selections.")
+                        "above your initial selections."
+                    )
             x_offsets = dfc.all_used_x_indicies(self.cells)
             y_offsets = dfc.all_used_y_indicies(additional_selection.cells)
         else:
@@ -588,20 +589,21 @@ class Selectable(LiveTable):
                 if any([x for x in additional_selection if x.x <= highest_x]):
                     raise AmbiguousWaffleError(
                         "When using waffle right, your additional selections must all "
-                        "be right of your initial selections.")
+                        "be right of your initial selections."
+                    )
             if direction.is_left:
                 lowest_x = dfc.minimum_x_offset(self.cells)
                 if any([x for x in additional_selection if x.x >= lowest_x]):
                     raise AmbiguousWaffleError(
                         "When using waffle left, your additional selections must all be "
-                        "left of your initial selections.")
+                        "left of your initial selections."
+                    )
             x_offsets = dfc.all_used_x_indicies(additional_selection.cells)
             y_offsets = dfc.all_used_y_indicies(self.cells)
 
         self.cells = [x for x in self.pcells if x.x in x_offsets and x.y in y_offsets]
-    
+
         return self
-            
 
     @dontmutate
     def extrude(self, direction: Direction):
@@ -768,6 +770,7 @@ def _explain(selectable: Selectable, comment: str):
     if selectable._explain or selectable._explain_path:
         assert len(selectable.cells) > 0, (
             f'Error: stage "EXPLAIN: {comment}" results in 0 cells selected.'
-            ' You cannot preview nothing.')
+            " You cannot preview nothing."
+        )
         selectable = selectable.label_as(f"EXPLAIN: {comment}")
         preview(selectable, selection_boundary=True, path=selectable._explain_path)

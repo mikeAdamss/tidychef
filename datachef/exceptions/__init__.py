@@ -24,6 +24,6 @@ from .common import (
     MissingLabelError,
     OutOfBoundsError,
     UnalignedTableOperation,
-    ZeroAcquiredTablesError
+    ZeroAcquiredTablesError,
 )
 from .lookups import AmbiguousLookupError, FailedLookupError, MissingDirectLookupError

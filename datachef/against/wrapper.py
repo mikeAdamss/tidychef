@@ -5,9 +5,14 @@ Convenience wrappers for pre defined validators
 from typing import List, Optional
 
 from .implementations.items import ItemsValidator
-from .implementations.numeric import IsNotNumericValidator, IsNumericValidator
-from .implementations.regex import RegexValidator
 from .implementations.length import LengthValidator
+from .implementations.numeric import (
+    IsNotNumericOrFloatValidator,
+    IsNotNumericValidator,
+    IsNumericOrFloatValidator,
+    IsNumericValidator,
+)
+from .implementations.regex import RegexValidator
 
 
 def regex(pattern: str) -> RegexValidator:
@@ -45,7 +50,10 @@ def length(least: Optional[int] = None, most: Optional[int] = None) -> LengthVal
     :return: A instantiated LengthValidator
     """
     return LengthValidator(least=least, most=most)
-        
+
+
 # Pre instantiate these since no arguments are required.
 is_numeric = IsNumericValidator()
 is_not_numeric = IsNotNumericValidator()
+is_not_numeric_or_float = IsNotNumericOrFloatValidator()
+is_numeric_or_float = IsNumericOrFloatValidator()

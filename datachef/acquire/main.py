@@ -4,7 +4,7 @@ Source code for the acquirer class that power the data acquisition methods.
 You would not typically be calling this directly outside of advanced users
 utilising kwargs for unanticipated and/or niche uses cases.
 
-In the vast majority of cirumstances it is both easier and more reliable
+In the vast majority of circumstances it is both easier and more reliable
 to use the provided wrappers.
 
 acquire.csv.local()
@@ -25,7 +25,7 @@ def acquirer(
     selectable: Selectable,
     pre_hook: Optional[Callable] = None,
     post_hook: Optional[Callable] = None,
-    **kwargs
+    **kwargs,
 ) -> Union[List[Selectable], Selectable]:
     """
     The principle data acquisition function. Wraps the reader
@@ -47,22 +47,24 @@ def acquirer(
     parsed = reader.parse(source, selectable, **kwargs)
 
     if reader.tables:
-        assert isinstance(parsed, list), (
-            'You can only use tables= where acquire is returning a list of selectabes.'
-        )
+        assert isinstance(
+            parsed, list
+        ), "You can only use tables= where acquire is returning a list of selectabes."
         initial_table_names = [x.name for x in parsed]
         parsed = [x for x in parsed if re.match(reader.tables, x.name)]
         if len(parsed) == 1:
             parsed = parsed[0]
         if isinstance(parsed, list):
             if len(parsed) == 0:
-                raise ZeroAcquiredTablesError(f'''
+                raise ZeroAcquiredTablesError(
+                    f"""
                     The tables regex you provided: {reader.tables}
                     Has resulted in no tables being acquired.
 
                     The table names in question were:
                     {initial_table_names}
-                    ''')
+                    """
+                )
 
     # Execute post load hook
     if post_hook:

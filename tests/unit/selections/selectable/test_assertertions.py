@@ -21,6 +21,7 @@ def test_assert_one(selectable_simple1: Selectable):
         s = selectable_simple1.excel_ref("F93:G94")
         s.assert_one()
 
+
 def test_assert_len(selectable_simple1: Selectable):
     """
     Test assert len behaves correctly

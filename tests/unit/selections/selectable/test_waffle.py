@@ -1,7 +1,7 @@
 import pytest
 
-from datachef.direction.directions import down, left, right, up
 from datachef import datafuncs as dfc
+from datachef.direction.directions import down, left, right, up
 from datachef.exceptions import AmbiguousWaffleError
 from datachef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
@@ -69,4 +69,3 @@ def test_waffle(selectable_simple1: Selectable):
         selection1 = selectable_simple1.excel_ref("D1:G2")
         selection2 = selectable_simple1.excel_ref("G1:G9")
         selection1.waffle(down, selection2)
-

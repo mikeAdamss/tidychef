@@ -12,27 +12,29 @@ class LengthValidator(BaseValidator):
     called with a single instance of a datachef
     Cell object.
     """
+
     least: Optional[int] = None
     most: Optional[int] = None
-    
+
     def __post_init__(self):
         assert not all([self.least is None, self.most is None]), (
             "To use a length validator you must provide at least one "
             "keyword argument from least= and most="
         )
         if self.least and self.most:
-            assert self.most > self.least, (f"""
+            assert (
+                self.most > self.least
+            ), f"""
                 Your most value needs to be bigger than least,
                 you have provided:
                                             
                 least: {self.least}
                 most: {self.most}
-            """)
+            """
         if self.least:
             assert isinstance(self.least, int), "You least value must be an integer."
         if self.most:
             assert isinstance(self.most, int), "You most value must be an integer."
-
 
     def __call__(self, cell: Cell) -> bool:
         """

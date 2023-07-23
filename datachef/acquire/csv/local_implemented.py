@@ -85,6 +85,6 @@ class LocalCsvReader(BaseReader):
 
             for y_index, row in enumerate(file_content):
                 for x_index, cell_value in enumerate(row):
-                    table.add_cell(Cell(x=x_index, y=y_index, value=cell_value))
+                    table.add_cell(Cell(x=x_index, y=y_index, value=str(cell_value)))
 
         return selectable(table, source=source)

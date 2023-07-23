@@ -56,10 +56,10 @@ chapters:
       sections:
         - file: examples/basic/bands
         - file: examples/basic/oic-1a-table
-        - file: examples/basic/cornavavirus-loneliness
         - file: examples/basic/monthly-gdp-tables
         - file: examples/basic/house-prices
         - file: examples/basic/service-industry
+        - file: examples/basic/cornavavirus-loneliness
 
     - file: examples/intermediate/intermediate
       sections:
@@ -67,9 +67,9 @@ chapters:
         - file: examples/intermediate/household-debt
         - file: examples/intermediate/tourism
 
-    - file: examples/validation
+    - file: examples/validation/validation
       sections:
-        - file: example/validation/bands
+        - file: examples/validation/bands
     
 
 - file: technical

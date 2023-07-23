@@ -73,6 +73,7 @@ class ZeroAcquiredTablesError(Exception):
     def __init__(self, msg):
         self.msg = msg
 
+
 class ImpossibleLookupError(Exception):
     """
     Raised when a user is attempting a lookup that is impossible

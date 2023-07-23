@@ -4,11 +4,13 @@ from typing import Any, List, Optional, Union
 
 from datachef.selection.selectable import Selectable
 
+
 @dataclass
 class BaseReader(metaclass=ABCMeta):
     """
     Baseclass that all readers inherit from.
     """
+
     tables: Optional[str] = None
 
     @abstractmethod

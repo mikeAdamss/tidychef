@@ -5,8 +5,8 @@ from typing import List
 import pytest
 
 from datachef import acquire
-from datachef.acquire.main import acquirer
 from datachef.acquire.base import BaseReader
+from datachef.acquire.main import acquirer
 from datachef.exceptions import FileInputError, ZeroAcquiredTablesError
 from datachef.selection.selectable import Selectable
 from tests.fixtures import path_to_fixture
@@ -72,19 +72,19 @@ def test_tables_regex():
 
     class FakeReader(BaseReader):
         def parse(self, *args, **kwargs):
-            return [
-                FakeTable("foo"),
-                FakeTable("bar"),
-                FakeTable("baz")
-            ]
+            return [FakeTable("foo"), FakeTable("bar"), FakeTable("baz")]
 
-    tables: List[FakeTable] = acquirer(csv_path, reader=FakeReader("^b.*$"), selectable=Selectable)
+    tables: List[FakeTable] = acquirer(
+        csv_path, reader=FakeReader("^b.*$"), selectable=Selectable
+    )
     table_names = [x.name for x in tables]
     assert "bar" in table_names
     assert "baz" in table_names
 
     # Test we de-listified where we've filtered down to 1 table
-    table: FakeTable = acquirer(csv_path, reader=FakeReader("^f.*$"), selectable=Selectable)
+    table: FakeTable = acquirer(
+        csv_path, reader=FakeReader("^f.*$"), selectable=Selectable
+    )
     assert isinstance(table, FakeTable)
 
     with pytest.raises(ZeroAcquiredTablesError):
