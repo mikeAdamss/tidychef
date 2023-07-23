@@ -514,12 +514,20 @@ class Selectable(LiveTable):
         for cell in self.cells:
             if not validator(cell):
                 if raise_first_error:
-                    raise CellValidationError(validator.msg(cell))
+                    raise CellValidationError(f'''
+                    When making selection from table: {self.name} the
+                    following validation error was encountered:
+                    {validator.msg(cell)}
+                ''')
                 else:
                     validation_errors.append(validator.msg(cell))
 
         if len(validation_errors) > 0:
-            raise CellValidationError(f"{linesep}".join(validation_errors))
+            raise CellValidationError(f'''
+                    When making selection from table: {self.name} the
+                    following validation errors were encountered:
+                    {linesep.join(validation_errors)}
+                ''')
 
         return self
 
@@ -745,13 +753,6 @@ class Selectable(LiveTable):
                 attempting this.
             """
             )
-
-        # raise Exception(f'''
-        #                 {_reverse_direction(direction)}
-
-        #                 {start.inverted()}
-        #                 {end.inverted()}
-        #                 ''')
 
         return Within(
             self.label,

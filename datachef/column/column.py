@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 import copy
-from typing import Callable, Dict, Optional
+from typing import Callable, List, Dict, Optional
 
 from datachef.column.base import BaseColumn
+from datachef.exceptions import CellValidationError
 from datachef.lookup.base import BaseLookupEngine
 from datachef.lookup.engines.constant import Constant
 from datachef.lookup.engines.horizontal_condition import HorizontalCondition
@@ -26,7 +27,7 @@ class Column(BaseColumn):
 
     _table: Optional[str] = "Unnamed Table"
     _apply_cache: Optional[Dict[Cell, Cell]] = None
-    _validated_cells: Optional[Cell] = None
+    _validated_cells: Optional[List[Cell]] = None
 
     @property
     def table(self) -> str:
@@ -109,7 +110,7 @@ class Column(BaseColumn):
         # (2) cache, so we only have to apply once per unique
         # input value (each column cell can resolve for many
         # observations)
-        if self.apply:
+        if self.apply is not None:
             already_applied_cell = self._apply_cache.get(cell.value, None)
             if already_applied_cell is None:
                 applied_cell = copy.deepcopy(cell)
@@ -123,7 +124,17 @@ class Column(BaseColumn):
         # --------
         # Any _unique_ Cell value is either valid in this context or it
         # isn't, so only check its valid once.
-        if self.validation and cell not in self._validated_cells:
+        if self.validation is not None and cell not in self._validated_cells:
             self._validated_cells.append(cell)
+            if not self.validation(cell):
+                if hasattr(self.validation, "msg"):
+                    msg = f"Message is: {self.validation.msg(cell)}"
+                else:
+                    msg = ''
+                raise CellValidationError(f'''
+                        Column {self.label} has a cell that is not valid,
+                        Invalid cell {cell}.
+                        {msg}                      
+                        ''')
 
         return cell

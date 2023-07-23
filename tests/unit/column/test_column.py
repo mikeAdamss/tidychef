@@ -1,8 +1,9 @@
 import pytest
 
-from datachef import acquire
+from datachef import acquire, against
 from datachef.column.column import Column
 from datachef.direction import down
+from datachef.exceptions import CellValidationError
 from datachef.lookup.engines.constant import Constant
 from datachef.models.source.cell import Cell
 from datachef.selection import Selectable
@@ -71,12 +72,18 @@ def test_apply_results_are_unique_to_a_given_column_context():
         assert column2.resolve_column_cell_from_obs_cell(ob_cell).value == "Male"
 
 
-def test_validation_can_be_specified():
+def test_column_validation():
     """
-    Test that validation= works as expected
+    Test that validation= assugnment works as expected
     """
 
     ob_cell = Cell(x="1", y="1", value="value unused as we're using a constant lookup")
 
-    col = Column(Constant("This", "foo"), validate=lambda x: x)
-    assert col.resolve_column_cell_from_obs_cell(ob_cell).value == "foo"
+    col = Column(Constant("This", "foo"), validate=lambda x: x == "bar")
+    with pytest.raises(CellValidationError):
+        col.resolve_column_cell_from_obs_cell(ob_cell)
+
+    col = Column(Constant("This", "foo"), validate=against.is_numeric)
+    with pytest.raises(CellValidationError):
+        col.resolve_column_cell_from_obs_cell(ob_cell)
+
