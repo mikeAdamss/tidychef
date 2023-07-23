@@ -2,6 +2,7 @@
 Holds the code that defines the python list_of_lists reader.
 """
 
+from os import linesep
 from typing import Callable, List, Optional
 
 from datachef.acquire.base import BaseReader
@@ -13,7 +14,7 @@ from ..base import BaseReader
 from ..main import acquirer
 
 
-def list_of_lists(
+def pipe_table(
     source: List[List[str]],
     selectable: Selectable = Selectable,
     pre_hook: Optional[Callable] = None,
@@ -21,19 +22,19 @@ def list_of_lists(
     **kwargs
 ) -> Selectable:
     """
-    A reader to create a selectable from a list of python
-    lists, with each cell entry being a simple string.
+    A reader to create a selectable from a string which represents a pipe
+    delimited table. this is principally a convenience for testing.
 
-    Regarding ordering we traverse the x axis then the y axis,
-    i.e standard human reading order.
+    Example pipe table (without the escapes)
 
-    For example:
-    [
-        ["Content of A1", "Contents of B1", "Contents of C1"],
-        ["Content of A2", "Contents of B2", "Contents of C2"]
-    ]
+    = \"""
+             |        |
+        Male | Female | Both
+        4    | 5      | 6
+        7    | 8      | 9
+      \"""
 
-    :param source: A python list of lists
+    :param source: A str representing a pipe table
     :param selectable: A class that implements datachef.selection.selectable.Selectable of an inheritor of. Default is Selectable
     :param pre_hook: A callable that can take source as an argument
     :param post_hook: A callable that can take the output of ListOfListsReader.parse() as an argument.
@@ -41,7 +42,7 @@ def list_of_lists(
     """
     return acquirer(
         source,
-        ListOfListsReader(),
+        PipeTableReader(),
         selectable,
         pre_hook=pre_hook,
         post_hook=post_hook,
@@ -49,8 +50,8 @@ def list_of_lists(
     )
 
 
-class ListOfListsReader(BaseReader):
-    def parse(self, source, selectable: Selectable = Selectable) -> Selectable:
+class PipeTableReader(BaseReader):
+    def parse(self, source: str, selectable: Selectable = Selectable) -> Selectable:
         """
         Parse the provided source into a list of Selectables. Unless overridden the
         selectable is of type XlsSelectable.
@@ -63,12 +64,24 @@ class ListOfListsReader(BaseReader):
         """
         table = Table()
 
-        assert (
-            len(set([len(x) for x in source])) == 1
-        ), "All rows must be the same length"
+        raw_rows = source.split(linesep)
+        rows = []
+        row_cell_count = None
 
-        for y_index, row in enumerate(source):
+        for row in raw_rows:
+            if len(row.strip()) == 0:
+                continue
+            row_cells = [x.strip() for x in row.split("|")]
+            if row_cell_count is None:
+                row_cell_count = len(row_cells)
+            else:
+                assert (
+                    len(row_cells) == row_cell_count
+                ), "All rows in a pipe table must be the same length"
+            rows.append(row_cells)
+
+        for y_index, row in enumerate(rows):
             for x_index, cell_value in enumerate(row):
-                table.add_cell(Cell(x=x_index, y=y_index, value=str(cell_value)))
+                table.add_cell(Cell(x=x_index, y=y_index, value=cell_value))
 
         return selectable(table)

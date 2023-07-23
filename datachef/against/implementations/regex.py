@@ -1,5 +1,7 @@
 import re
 from dataclasses import dataclass
+from re import Pattern
+from typing import Optional
 
 from datachef.against.implementations.base import BaseValidator
 from datachef.models.source.cell import Cell
@@ -8,6 +10,7 @@ from datachef.models.source.cell import Cell
 @dataclass
 class RegexValidator(BaseValidator):
     pattern: str
+    _compiled: Optional[Pattern] = None
 
     def __call__(self, cell: Cell) -> bool:
         """
@@ -17,7 +20,9 @@ class RegexValidator(BaseValidator):
         :param cell: A single datachef Cell object.
         :return: bool, is it valid or not
         """
-        if re.match(self.pattern, cell.value):
+        if self._compiled is None:
+            self._compiled = re.compile(self.pattern)
+        if self._compiled.match(cell.value):
             return True
         return False
 

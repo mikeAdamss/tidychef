@@ -548,7 +548,8 @@ class Selectable(LiveTable):
         pattern.
         """
 
-        self.cells = [x for x in self.cells if re.match(pattern, x.value) is not None]
+        matcher = re.compile(pattern)
+        self.cells = [x for x in self.cells if matcher.match(x.value) is not None]
         _explain(self, f"Regex, pattern {pattern}")
         return self
 
@@ -745,24 +746,20 @@ class Selectable(LiveTable):
             """
             )
 
-        # The constructor we provide to the user advertises that the column
-        # lookup engines "finds the observations" but this is purely a
-        # conceptual trick to make a more user friendly api.
-        # In reality that's exactly backwards, an observation actually finds
-        # a column value (by being passed to the lookup engine constructed below).
-        # As such we need to reverse the stated direction.
-        # In the case of Within we also need to reverse the direction of
-        # parsing and offsetting.
-        # new_start = copy.deepcopy(start)
-        # new_start.x = 0 - end.x
-        # new_start.y = 0 - end.y
+        # raise Exception(f'''
+        #                 {_reverse_direction(direction)}
 
-        # new_end = copy.deepcopy(end)
-        # new_end.x = 0 - start.x
-        # new_end.y = 0 - start.y
+        #                 {start.inverted()}
+        #                 {end.inverted()}
+        #                 ''')
 
         return Within(
-            self.label, self, _reverse_direction(direction), end, start, table=self.name
+            self.label,
+            self,
+            _reverse_direction(direction),
+            start.inverted(),
+            end.inverted(),
+            table=self.name,
         )
 
 

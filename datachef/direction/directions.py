@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
 
 from datachef.exceptions import CardinalDeclarationWithOffset
@@ -86,6 +88,33 @@ class Direction(BaseDirection):
         Is up, down, above or below
         """
         return self.is_upwards or self.is_downwards
+
+    def inverted(self) -> Direction:
+        """
+        Returns a direction that is the direct inversion of
+        this direction.
+
+        for example:
+
+        up(2).inverted() == down(2)
+        left(8).inverted() == right(8)
+        """
+
+        if self.is_upwards:
+            offset = 0 - self.y
+            return down(offset)
+
+        if self.is_downwards:
+            offset = 0 + self.y
+            return up(offset)
+
+        if self.is_right:
+            offset = 0 + self.x
+            return left(offset)
+
+        if self.is_left:
+            offset = 0 - self.x
+            return right(offset)
 
     def _confirm_pristine(self):
         """

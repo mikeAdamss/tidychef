@@ -261,4 +261,27 @@ class Within(BaseLookupEngine):
             )
         ordered_feasible_cells = self._order(feasible_cells)
         assert len(ordered_feasible_cells) == len(feasible_cells)
-        return ordered_feasible_cells[0]
+
+        if self.direction.is_left:
+            max_x = max([x.x for x in ordered_feasible_cells])
+            for cell in ordered_feasible_cells:
+                if cell.x == max_x:
+                    return cell
+
+        if self.direction.is_upwards:
+            max_y = max([x.y for x in ordered_feasible_cells])
+            for cell in ordered_feasible_cells:
+                if cell.y == max_y:
+                    return cell
+
+        if self.direction.is_right:
+            min_x = min([x.x for x in ordered_feasible_cells])
+            for cell in ordered_feasible_cells:
+                if cell.x == min_x:
+                    return cell
+
+        if self.direction.is_downwards:
+            min_y = min([x.y for x in ordered_feasible_cells])
+            for cell in ordered_feasible_cells:
+                if cell.y == min_y:
+                    return cell
