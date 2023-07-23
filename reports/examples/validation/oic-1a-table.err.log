@@ -22,7 +22,7 @@ print(tidy_data)
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mCellValidationError[0m                       Traceback (most recent call last)
-[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_2946/1473135511.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_4421/1473135511.py[0m in [0;36m<module>[0;34m[0m
 [0;32m----> 1[0;31m [0mprint[0m[0;34m([0m[0mtidy_data[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m
 [0;32m~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/output/tidydata.py[0m in [0;36m__str__[0;34m(self)[0m

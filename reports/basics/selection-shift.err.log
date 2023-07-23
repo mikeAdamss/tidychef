@@ -22,7 +22,7 @@ selection.shift(right)
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mOutOfBoundsError[0m                          Traceback (most recent call last)
-[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_2817/2174711224.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_4291/2174711224.py[0m in [0;36m<module>[0;34m[0m
 [0;32m----> 1[0;31m [0mselection[0m[0;34m.[0m[0mshift[0m[0;34m([0m[0mright[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m
 [0;32m~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/utils/decorators/dontmutate.py[0m in [0;36mwrapper[0;34m(self, *args, **kwargs)[0m
