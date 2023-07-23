@@ -64,8 +64,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'examples/basic/cornavavirus-loneliness';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Monthly GDP Tables: GVA" href="monthly-gdp-tables.html" />
-    <link rel="prev" title="Output In Construction: Table 1a" href="oic-1a-table.html" />
+    <link rel="next" title="Intermediate Examples" href="../intermediate/intermediate.html" />
+    <link rel="prev" title="Service Industry" href="service-industry.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -208,8 +208,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="oic-1a-table.html">Output In Construction: Table 1a</a></li>
 
 
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Coronavirus: Loneliness</a></li>
-
 <li class="toctree-l3"><a class="reference internal" href="monthly-gdp-tables.html">Monthly GDP Tables: GVA</a></li>
 
 
@@ -217,6 +215,8 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l3"><a class="reference internal" href="service-industry.html">Service Industry</a></li>
 
+
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Coronavirus: Loneliness</a></li>
 
 </ul>
 </li>
@@ -227,6 +227,11 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l3"><a class="reference internal" href="../intermediate/tourism.html">Tourism</a></li>
 
+
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../validation/validation.html">Validation</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../validation/bands.html">Bands (with validation)</a></li>
 
 </ul>
 </li>
@@ -539,23 +544,24 @@ Adults aged 16 and over across Great Britain were asked "In the past seven days,
 
 <span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/xlsx/coronavirusandlonelinessreferencetable.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;1.4 Loneliness by sex&quot;</span><span class="p">)</span>
 
-<span class="n">sex</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">re</span><span class="p">(</span><span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Sex&quot;</span><span class="p">)</span>
-<span class="n">sample_size</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">contains_string</span><span class="p">(</span><span class="s2">&quot;Sample size&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Sample Size&quot;</span><span class="p">)</span>
 <span class="c1"># We&#39;ll select the source entry at the end just so we can remove it from selections</span>
 <span class="n">unwanted_footer</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">contains_string</span><span class="p">(</span><span class="s2">&quot;Source: &quot;</span><span class="p">))</span><span class="o">.</span><span class="n">assert_one</span><span class="p">()</span>
-<span class="n">lonliness</span> <span class="o">=</span> <span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;A4&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">down</span><span class="p">)</span> <span class="o">-</span> <span class="n">sample_size</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">left</span><span class="p">)</span> <span class="o">-</span> <span class="n">unwanted_footer</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">down</span><span class="p">))</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Loneliness&quot;</span><span class="p">)</span>
-<span class="n">observations</span> <span class="o">=</span> <span class="n">lonliness</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Observations&quot;</span><span class="p">)</span>
+
+<span class="n">sex</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">re</span><span class="p">(</span><span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Sex&quot;</span><span class="p">)</span>
+<span class="n">sample_size</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">contains_string</span><span class="p">(</span><span class="s2">&quot;Sample size&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Sample Size&quot;</span><span class="p">)</span>
+<span class="n">loneliness</span> <span class="o">=</span> <span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;A4&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">down</span><span class="p">)</span> <span class="o">-</span> <span class="n">sample_size</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">left</span><span class="p">)</span> <span class="o">-</span> <span class="n">unwanted_footer</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Loneliness&quot;</span><span class="p">)</span>
+<span class="n">observations</span> <span class="o">=</span> <span class="n">loneliness</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Observations&quot;</span><span class="p">)</span>
 
 <span class="c1"># Create a bounded preview inline but also write the full preview to path</span>
-<span class="n">preview</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">sex</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">,</span> <span class="n">lonliness</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A1:F20&quot;</span><span class="p">)</span>
-<span class="n">preview</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">sex</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">,</span> <span class="n">lonliness</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;loneliness.html&quot;</span><span class="p">)</span>
+<span class="n">preview</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">sex</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">,</span> <span class="n">loneliness</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A1:F20&quot;</span><span class="p">)</span>
+<span class="n">preview</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">sex</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">,</span> <span class="n">loneliness</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;loneliness.html&quot;</span><span class="p">)</span>
 
 
 <span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
     <span class="n">observations</span><span class="p">,</span> 
     <span class="n">Column</span><span class="p">(</span><span class="n">sex</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">down</span><span class="p">)),</span>
     <span class="n">Column</span><span class="p">(</span><span class="n">sample_size</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">up</span><span class="p">)),</span>
-    <span class="n">Column</span><span class="p">(</span><span class="n">lonliness</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">right</span><span class="p">)),</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">loneliness</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">right</span><span class="p">)),</span>
 
 <span class="p">)</span>
 
@@ -728,20 +734,20 @@ Adults aged 16 and over across Great Britain were asked "In the past seven days,
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="oic-1a-table.html"
+       href="service-industry.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Output In Construction: Table 1a</p>
+        <p class="prev-next-title">Service Industry</p>
       </div>
     </a>
     <a class="right-next"
-       href="monthly-gdp-tables.html"
+       href="../intermediate/intermediate.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Monthly GDP Tables: GVA</p>
+        <p class="prev-next-title">Intermediate Examples</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

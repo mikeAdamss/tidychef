@@ -2,7 +2,8 @@
 
 By default datachef supports three types of validation.
 
-- Simple selection assertions (`assert_one()`, `assert_len()`, `assert_single_row()`, `assert_single_clumn()`)- Validation via the `<selection>.valdiation()` method.
+- Simple selection assertions (`assert_one()`, `assert_len()`, `assert_single_row()`, `assert_single_clumn()`
+- Validation via the `<selection>.valdiation()` method.
 - Validation via the `Column(validation=)` keyword.
 
 This section contains some simple examples of using a mixture of these approaches. To do this we're going to add validation _to example provided elsewhere in the documentation_.

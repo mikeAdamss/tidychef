@@ -4,9 +4,10 @@ This chapter covers the intermediate level functionality of working with datache
 
 By the end of this chapter you should:
 
-- know how to create custom validations
+- know how to iterate through and combine data extracted from multiple tables
+- know how to drop duplicates
 - know how to use horizontal conditions
-- know how to create tidy data by joining multiple tabulated sources
+- know how to move data markings or other notations to their own separate column
 - know how to use a `within` lookup
 - know how to pass data from datachef to pandas
 - understand best practices when working wth datachef

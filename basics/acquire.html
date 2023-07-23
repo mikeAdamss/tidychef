@@ -208,8 +208,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="../examples/basic/oic-1a-table.html">Output In Construction: Table 1a</a></li>
 
 
-<li class="toctree-l3"><a class="reference internal" href="../examples/basic/cornavavirus-loneliness.html">Coronavirus: Loneliness</a></li>
-
 <li class="toctree-l3"><a class="reference internal" href="../examples/basic/monthly-gdp-tables.html">Monthly GDP Tables: GVA</a></li>
 
 
@@ -217,6 +215,8 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l3"><a class="reference internal" href="../examples/basic/service-industry.html">Service Industry</a></li>
 
+
+<li class="toctree-l3"><a class="reference internal" href="../examples/basic/cornavavirus-loneliness.html">Coronavirus: Loneliness</a></li>
 
 </ul>
 </li>
@@ -227,6 +227,11 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l3"><a class="reference internal" href="../examples/intermediate/tourism.html">Tourism</a></li>
 
+
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/validation/validation.html">Validation</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/validation/bands.html">Bands (with validation)</a></li>
 
 </ul>
 </li>
@@ -435,8 +440,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-xls-data">Loading Xls Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xls-data-from-local">Xls Data From Local</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xls-data-from-http-s">Xls Data From Http(s)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-http-s-caching">A Note On Http(s) Caching</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-tables">Using tables=</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-http-s-caching">A Note On Http(s) Caching</a></li>
 </ul>
             </nav>
         </div>
@@ -956,11 +961,51 @@ document.write(`
     </div></div>
 </div>
 </section>
+<section id="using-tables">
+<h2>Using tables=<a class="headerlink" href="#using-tables" title="Permalink to this heading">#</a></h2>
+<p>Some of you will have wondered why the keyword for filtering to the table you want is “tables” (plural) not “table” singular.</p>
+<p>It’s because the string you pass to tables is a <a class="reference external" href="https://regexone.com/">regular expression</a>.</p>
+<p>We’re <em>not</em> going to go into regular expressions as part of this documentation, but for our purposes just be aware its pattern matching syntax and well worth exploring for anyone working in an ETL role.</p>
+<p>As a simple example, you can use regular expressions to create an <strong>or</strong> statement with the pipe (<code class="docutils literal notranslate"><span class="pre">|</span></code>) character.</p>
+<p>The following example shows how you can do just that to select two table from our xlsx source.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span>
+<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
+
+<span class="n">tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsxSelectable</span><span class="p">]</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span>
+                                                 <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 1a|Table 1b&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Table 1a
+Table 1b
+</pre></div>
+</div>
+</div>
+</div>
+<p>For many users this ability to only select the tables you want to process will be all that’s required, but the <em>real</em> power here is the ability (where needed) to deal with inconsistencies in table naming.</p>
+<p>This is crude (you can do some very clever things with regular expressions should you chose to explore them) but continuing on from our <strong>or</strong> example lets imagine the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 1a|table 1a|table1a|table 1A|Table 1A|Table1A&quot;</span>
+</pre></div>
+</div>
+<p>Which gives your acquire statement a fair degree of additional robustness, as minor changes or mistakes in table naming by the data publisher are accounted for.</p>
+</section>
 <section id="a-note-on-http-s-caching">
 <h2>A Note On Http(s) Caching<a class="headerlink" href="#a-note-on-http-s-caching" title="Permalink to this heading">#</a></h2>
 <p>All <code class="docutils literal notranslate"><span class="pre">.http()</span></code> methods described in this section use http caching via the python <a class="reference external" href="https://pypi.org/project/CacheControl/">CacheControl</a> package.</p>
 <p>This <em>should</em> cache responses and fetch new data only when the last modified date of the data in question has changed (i.e when the data source has been updated).</p>
-<p>You can toggle this behaviour off as needed by passing <code class="docutils literal notranslate"><span class="pre">cache=False</span></code> into the <code class="docutils literal notranslate"><span class="pre">.http()</span></code> function(s).</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span style="color:green">Note - I say <em>should</em> here not due to any lack of faith in datachs coding, but because these things are dependant on the site in question correctly following web standards, which is a factor outside of our control.</span></p></th>
+</tr>
+</thead>
+</table>
+<p>Where desired, you can toggle this default caching behaviour off as needed by passing <code class="docutils literal notranslate"><span class="pre">cache=False</span></code> into the <code class="docutils literal notranslate"><span class="pre">.http()</span></code> function(s).</p>
 <p>Example follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1021,40 +1066,7 @@ document.write(`
         </html>
     </div></div>
 </div>
-</section>
-<section id="using-tables">
-<h2>Using tables=<a class="headerlink" href="#using-tables" title="Permalink to this heading">#</a></h2>
-<p>Some of you will have wondered why its “tables” (plural) not “table” singular.</p>
-<p>It’s because the string you pass to tables is a <a class="reference external" href="https://regexone.com/">regular expression</a>.</p>
-<p>We’re <em>not</em> going to go into regular expressions as part of this documentation, but for our purposes just be aware its pattern matching syntax and well worth exploring for anyone working in an ETL role.</p>
-<p>As a simple example, you can use regular expressions to create an <strong>or</strong> statement with the pipe (<code class="docutils literal notranslate"><span class="pre">|</span></code>) character.</p>
-<p>The following example shows how you can do just that to select two table from our xlsx source.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span>
-<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
-
-<span class="n">tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsxSelectable</span><span class="p">]</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span>
-                                                 <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 1a|Table 1b&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Table 1a
-Table 1b
-</pre></div>
-</div>
-</div>
-</div>
-<p>For many users this ability to only select the tables you want to process will be all that’s required, but the <em>real</em> power here is the ability (where needed) to deal with inconsistencies in table naming.</p>
-<p>This is crude (you can do some very clever things with regular expressions should you chose to explore them) but continuing on from our <strong>or</strong> example lets imagine the following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 1a|table 1a|table1a|table 1A|Table 1A|Table1A&quot;</span>
-</pre></div>
-</div>
-<p>Which gives your acquire statement a fair degree of additional robustness, as minor changes or mistakes in table naming by the data publisher are accounted for.</p>
+<p>For those familiar with the requests python package you can also pass in a <a class="reference external" href="https://requests.readthedocs.io/en/latest/user/advanced/">requests session object</a> via the <code class="docutils literal notranslate"><span class="pre">session=</span></code> keyword to control this behaviour however you see fit.</p>
 </section>
 </section>
 
@@ -1134,8 +1146,8 @@ Table 1b
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-xls-data">Loading Xls Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xls-data-from-local">Xls Data From Local</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xls-data-from-http-s">Xls Data From Http(s)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-http-s-caching">A Note On Http(s) Caching</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-tables">Using tables=</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-http-s-caching">A Note On Http(s) Caching</a></li>
 </ul>
   </nav></div>
 

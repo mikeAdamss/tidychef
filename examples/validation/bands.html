@@ -64,6 +64,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'examples/validation/bands';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Technical Reference" href="../../technical.html" />
+    <link rel="prev" title="Validation" href="validation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -154,7 +156,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../how-to-use-this-book.html">How To Use This Book</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../extensibility.html">Extensibility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../quirks.html">Quirks</a></li>
@@ -198,15 +200,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../../advanced/custom-data-sources.html">Custom Data Sources</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../examples.html">Chapter 4: Examples</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../examples.html">Chapter 4: Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="../basic/basic.html">Basic Examples</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../basic/bands.html">Bands</a></li>
 
 
 <li class="toctree-l3"><a class="reference internal" href="../basic/oic-1a-table.html">Output In Construction: Table 1a</a></li>
 
-
-<li class="toctree-l3"><a class="reference internal" href="../basic/cornavavirus-loneliness.html">Coronavirus: Loneliness</a></li>
 
 <li class="toctree-l3"><a class="reference internal" href="../basic/monthly-gdp-tables.html">Monthly GDP Tables: GVA</a></li>
 
@@ -215,6 +215,8 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l3"><a class="reference internal" href="../basic/service-industry.html">Service Industry</a></li>
 
+
+<li class="toctree-l3"><a class="reference internal" href="../basic/cornavavirus-loneliness.html">Coronavirus: Loneliness</a></li>
 
 </ul>
 </li>
@@ -225,6 +227,11 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l3"><a class="reference internal" href="../intermediate/tourism.html">Tourism</a></li>
 
+
+</ul>
+</li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="validation.html">Validation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Bands (with validation)</a></li>
 
 </ul>
 </li>
@@ -574,7 +581,7 @@ document.write(`
     <span class="n">observations</span><span class="o">.</span><span class="n">assert_len</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">assets</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">names</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
     <span class="n">Column</span><span class="p">(</span><span class="n">bands</span><span class="o">.</span><span class="n">finds_observations_closest</span><span class="p">(</span><span class="n">right</span><span class="p">),</span> <span class="n">validate</span><span class="o">=</span><span class="n">against</span><span class="o">.</span><span class="n">regex</span><span class="p">(</span><span class="s2">&quot;Beatles|Rolling Stones&quot;</span><span class="p">)),</span>
     <span class="n">Column</span><span class="p">(</span><span class="n">assets</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">below</span><span class="p">),</span> <span class="n">validate</span><span class="o">=</span><span class="n">against</span><span class="o">.</span><span class="n">regex</span><span class="p">(</span><span class="s2">&quot;Houses|Cars|Boats&quot;</span><span class="p">)),</span>
-    <span class="n">Column</span><span class="p">(</span><span class="n">names</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">right</span><span class="p">),</span> <span class="n">validate</span><span class="o">=</span><span class="n">against</span><span class="o">.</span><span class="n">length</span><span class="p">(</span><span class="n">least</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">most</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">names</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">right</span><span class="p">),</span> <span class="n">validate</span><span class="o">=</span><span class="n">against</span><span class="o">.</span><span class="n">length</span><span class="p">(</span><span class="n">least</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">most</span><span class="o">=</span><span class="mi">7</span><span class="p">))</span>
 <span class="p">)</span>
 
 <span class="n">tidy_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;bands_tidy.csv&quot;</span><span class="p">)</span>
@@ -643,41 +650,7 @@ document.write(`
             </body>
             <br>
         </html>
-    </div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_86026</span><span class="o">/</span><span class="mf">4170634080.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="n">Column</span><span class="p">(</span><span class="n">bands</span><span class="o">.</span><span class="n">finds_observations_closest</span><span class="p">(</span><span class="n">right</span><span class="p">),</span> <span class="n">validate</span><span class="o">=</span><span class="n">against</span><span class="o">.</span><span class="n">regex</span><span class="p">(</span><span class="s2">&quot;Beatles|Rolling Stones&quot;</span><span class="p">)),</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">Column</span><span class="p">(</span><span class="n">assets</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">below</span><span class="p">),</span> <span class="n">validate</span><span class="o">=</span><span class="n">against</span><span class="o">.</span><span class="n">regex</span><span class="p">(</span><span class="s2">&quot;Houses|Cars|Boats&quot;</span><span class="p">)),</span>
-<span class="ne">---&gt; </span><span class="mi">18</span>     <span class="n">Column</span><span class="p">(</span><span class="n">names</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">right</span><span class="p">),</span> <span class="n">validate</span><span class="o">=</span><span class="n">against</span><span class="o">.</span><span class="n">length</span><span class="p">(</span><span class="n">least</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">most</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span> 
-
-<span class="nn">~/Library/Caches/pypoetry/virtualenvs/datachef-hNSMaw3h-py3.7/lib/python3.7/site-packages/datachef/against/wrapper.py</span> in <span class="ni">length</span><span class="nt">(least, most)</span>
-<span class="g g-Whitespace">     </span><span class="mi">45</span>     <span class="p">:</span><span class="k">return</span><span class="p">:</span> <span class="n">A</span> <span class="n">instantiated</span> <span class="n">LengthValidator</span>
-<span class="g g-Whitespace">     </span><span class="mi">46</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="ne">---&gt; </span><span class="mi">47</span><span class="sd">     return LengthValidator(least=least, most=most)</span>
-<span class="g g-Whitespace">     </span><span class="mi">48</span><span class="sd"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">49</span><span class="sd"> # Pre instantiate these since no arguments are required.</span>
-
-<span class="nn">~/Library/Caches/pypoetry/virtualenvs/datachef-hNSMaw3h-py3.7/lib/python3.7/site-packages/datachef/against/implementations/length.py</span> in <span class="ni">__init__</span><span class="nt">(self, least, most)</span>
-
-<span class="nn">~/Library/Caches/pypoetry/virtualenvs/datachef-hNSMaw3h-py3.7/lib/python3.7/site-packages/datachef/against/implementations/length.py</span> in <span class="ni">__post_init__</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span><span class="sd">                 least: {self.least}</span>
-<span class="g g-Whitespace">     </span><span class="mi">29</span><span class="sd">                 most: {self.most}</span>
-<span class="ne">---&gt; </span><span class="mi">30</span><span class="sd">             &quot;&quot;&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">least</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span>             <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">least</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="s2">&quot;You least value must be an integer.&quot;</span>
-
-<span class="ne">AssertionError</span>: 
-                <span class="n">Your</span> <span class="n">most</span> <span class="n">value</span> <span class="n">needs</span> <span class="n">to</span> <span class="n">be</span> <span class="n">bigger</span> <span class="n">than</span> <span class="n">least</span><span class="p">,</span>
-                <span class="n">you</span> <span class="n">have</span> <span class="n">provided</span><span class="p">:</span>
-                                            
-                <span class="n">least</span><span class="p">:</span> <span class="mi">5</span>
-                <span class="n">most</span><span class="p">:</span> <span class="mi">5</span>
-            
-</pre></div>
-</div>
-</div>
+    </div></div>
 </div>
 </section>
 </section>
@@ -760,6 +733,24 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="validation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Validation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../technical.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Technical Reference</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>

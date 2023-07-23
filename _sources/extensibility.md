@@ -13,7 +13,6 @@ Therefore, datachef has been consciously designed as a "very unlocked box" so to
 - Want to create ad-hoc selection filters to support your specific use case? It's not that hard and its documented.
 - Want to extend selection classes with methods _that **you specifically** would benefit from_? It's not that hard and its documented.
 - Want to create custom validators suitable to your own use case and data domain? It's not that hard and its documented.
-- Want to output your tidy data to a different format? It's not that hard and its documented.
 
 The point here is that datachef was build with the idea that regular users would begin amassing (and possibly even sharing) additional functionality and as such said functionality is easily intermingled, injected and used seemlessly alongside the vanilla datachef package. 
 

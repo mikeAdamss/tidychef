@@ -207,8 +207,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="examples/basic/oic-1a-table.html">Output In Construction: Table 1a</a></li>
 
 
-<li class="toctree-l3"><a class="reference internal" href="examples/basic/cornavavirus-loneliness.html">Coronavirus: Loneliness</a></li>
-
 <li class="toctree-l3"><a class="reference internal" href="examples/basic/monthly-gdp-tables.html">Monthly GDP Tables: GVA</a></li>
 
 
@@ -216,6 +214,8 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l3"><a class="reference internal" href="examples/basic/service-industry.html">Service Industry</a></li>
 
+
+<li class="toctree-l3"><a class="reference internal" href="examples/basic/cornavavirus-loneliness.html">Coronavirus: Loneliness</a></li>
 
 </ul>
 </li>
@@ -226,6 +226,11 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l3"><a class="reference internal" href="examples/intermediate/tourism.html">Tourism</a></li>
 
+
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="examples/validation/validation.html">Validation</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/validation/bands.html">Bands (with validation)</a></li>
 
 </ul>
 </li>
@@ -429,13 +434,13 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="datachef">
 <h1>Datachef<a class="headerlink" href="#datachef" title="Permalink to this heading">#</a></h1>
-<p>Datachef is a python framework to enable “data extraction for humans” via simple python beginner friendly “recipes”. It aims at allowing users to easily transform tabulated data sources that use visual relationships (human readable only data) into simple machine readable “tidy data” in a way that supports usage in <a class="reference external" href="https://analysisfunction.civilservice.gov.uk/policy-store/reproducible-analytical-pipelines-strategy/#:~:text=Reproducible%20Analytical%20Pipelines%20(RAPs)%20are,auditable%2C%20efficient%20and%20high%20quality.">RAP</a> processing.</p>
+<p>Datachef is a python framework to enable “data extraction for humans” via simple python beginner friendly “recipes”. It aims at allowing users to easily transform tabulated data sources that use visual relationships (human readable only data) into simple machine readable “tidy data” in a way that supports usage in ETL processes.</p>
 <p>i.e: it allows you to reliably turn something that looks like this:</p>
 <p><img alt="" src="_images/bands-before.png" /></p>
 <p>into something that looks like this:</p>
 <p><img alt="" src="_images/bands-after.png" /></p>
 <p><em>Note: the above image was cropped short for practical reasons</em>.</p>
-<p>Datachef provides a simple api suitable for <strong>data analysts or people just beginning their journey with python</strong> but is built to be <em>highly</em> extensible as needed and can be configured to support even the most niche use cases and/or domain specific tabulated data sources.</p>
+<p>Datachef provides a simple api suitable for <strong>data analysts or people just beginning their journey with python</strong> but is built to be <em>highly</em> extensible as needed and can be configured to support niche use cases and/or domain specific tabulated data sources.</p>
 <div class="toctree-wrapper compound">
 </div>
 </section>

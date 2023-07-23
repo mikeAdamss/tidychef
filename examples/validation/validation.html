@@ -64,6 +64,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'examples/validation/validation';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Bands (with validation)" href="bands.html" />
+    <link rel="prev" title="Tourism" href="../intermediate/tourism.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -154,7 +156,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../how-to-use-this-book.html">How To Use This Book</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../extensibility.html">Extensibility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../quirks.html">Quirks</a></li>
@@ -198,15 +200,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../../advanced/custom-data-sources.html">Custom Data Sources</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../examples.html">Chapter 4: Examples</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../examples.html">Chapter 4: Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="../basic/basic.html">Basic Examples</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../basic/bands.html">Bands</a></li>
 
 
 <li class="toctree-l3"><a class="reference internal" href="../basic/oic-1a-table.html">Output In Construction: Table 1a</a></li>
 
-
-<li class="toctree-l3"><a class="reference internal" href="../basic/cornavavirus-loneliness.html">Coronavirus: Loneliness</a></li>
 
 <li class="toctree-l3"><a class="reference internal" href="../basic/monthly-gdp-tables.html">Monthly GDP Tables: GVA</a></li>
 
@@ -215,6 +215,8 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l3"><a class="reference internal" href="../basic/service-industry.html">Service Industry</a></li>
 
+
+<li class="toctree-l3"><a class="reference internal" href="../basic/cornavavirus-loneliness.html">Coronavirus: Loneliness</a></li>
 
 </ul>
 </li>
@@ -225,6 +227,11 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l3"><a class="reference internal" href="../intermediate/tourism.html">Tourism</a></li>
 
+
+</ul>
+</li>
+<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">Validation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="bands.html">Bands (with validation)</a></li>
 
 </ul>
 </li>
@@ -441,7 +448,8 @@ document.write(`
 <h1>Validation<a class="headerlink" href="#validation" title="Permalink to this heading">#</a></h1>
 <p>By default datachef supports three types of validation.</p>
 <ul class="simple">
-<li><p>Simple selection assertions (<code class="docutils literal notranslate"><span class="pre">assert_one()</span></code>, <code class="docutils literal notranslate"><span class="pre">assert_len()</span></code>, <code class="docutils literal notranslate"><span class="pre">assert_single_row()</span></code>, <code class="docutils literal notranslate"><span class="pre">assert_single_clumn()</span></code>)- Validation via the <code class="docutils literal notranslate"><span class="pre">&lt;selection&gt;.valdiation()</span></code> method.</p></li>
+<li><p>Simple selection assertions (<code class="docutils literal notranslate"><span class="pre">assert_one()</span></code>, <code class="docutils literal notranslate"><span class="pre">assert_len()</span></code>, <code class="docutils literal notranslate"><span class="pre">assert_single_row()</span></code>, <code class="docutils literal notranslate"><span class="pre">assert_single_clumn()</span></code></p></li>
+<li><p>Validation via the <code class="docutils literal notranslate"><span class="pre">&lt;selection&gt;.valdiation()</span></code> method.</p></li>
 <li><p>Validation via the <code class="docutils literal notranslate"><span class="pre">Column(validation=)</span></code> keyword.</p></li>
 </ul>
 <p>This section contains some simple examples of using a mixture of these approaches. To do this we’re going to add validation <em>to example provided elsewhere in the documentation</em>.</p>
@@ -455,6 +463,8 @@ document.write(`
 <p>Precisely how to correctly extract, dimension and categorize extracted data is an art all of its own and <em>very dependent on domain expertise</em> and <em>very subject to contrary opinions</em>, as such I’m not even going to try and make no claims whatsoever as to whether or to what extent any of the examples are “correctly” represented after extraction from their original sources.</p>
 <p>To put it another way these are purely examples of <strong>how</strong> to extract data with code, the correct/best/ideal structure and categorization for any and all examples I leave to others to debate as it has no bearing on our goal of teaching people how to use these tools.</p>
 </section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -488,6 +498,24 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../intermediate/tourism.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Tourism</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="bands.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Bands (with validation)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>
