@@ -25,7 +25,7 @@ waffled_selection = years.waffle(right, codes)
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mAmbiguousWaffleError[0m                      Traceback (most recent call last)
-[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_80681/2135533438.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_85892/2135533438.py[0m in [0;36m<module>[0;34m[0m
 [1;32m      2[0m [0myears[0m [0;34m=[0m [0mtable[0m[0;34m.[0m[0mexcel_ref[0m[0;34m([0m[0;34m"C7:C10"[0m[0;34m)[0m[0;34m.[0m[0mlabel_as[0m[0;34m([0m[0;34m"Years"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      3[0m [0mpreview[0m[0;34m([0m[0mcodes[0m[0;34m,[0m [0myears[0m[0;34m,[0m [0mbounded[0m[0;34m=[0m[0;34m"A4:H10"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0;32m----> 4[0;31m [0mwaffled_selection[0m [0;34m=[0m [0myears[0m[0;34m.[0m[0mwaffle[0m[0;34m([0m[0mright[0m[0;34m,[0m [0mcodes[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m

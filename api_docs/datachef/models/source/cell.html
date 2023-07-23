@@ -350,16 +350,6 @@
 </span><span id="L-241"><a href="#L-241"><span class="linenos">241</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="L-242"><a href="#L-242"><span class="linenos">242</span></a>
 </span><span id="L-243"><a href="#L-243"><span class="linenos">243</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_excel_ref</span><span class="p">()</span><span class="si">}</span><span class="s1">, value:&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s1">&quot;, x:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s1">, y:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="si">}</span><span class="s1">)&#39;</span>
-</span><span id="L-244"><a href="#L-244"><span class="linenos">244</span></a>
-</span><span id="L-245"><a href="#L-245"><span class="linenos">245</span></a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="L-246"><a href="#L-246"><span class="linenos">246</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-247"><a href="#L-247"><span class="linenos">247</span></a><span class="sd">        Create a representation of this cell in the form:</span>
-</span><span id="L-248"><a href="#L-248"><span class="linenos">248</span></a><span class="sd">        &lt;excel ref: value&gt;</span>
-</span><span id="L-249"><a href="#L-249"><span class="linenos">249</span></a>
-</span><span id="L-250"><a href="#L-250"><span class="linenos">250</span></a><span class="sd">        eg:</span>
-</span><span id="L-251"><a href="#L-251"><span class="linenos">251</span></a><span class="sd">        &lt;A1, value:&quot;value of a1&quot;, x:{x}, y:{y}&gt;</span>
-</span><span id="L-252"><a href="#L-252"><span class="linenos">252</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-253"><a href="#L-253"><span class="linenos">253</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_excel_ref</span><span class="p">()</span><span class="si">}</span><span class="s1">, value:&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s1">&quot;, x:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s1">, y:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="si">}</span><span class="s1">)&#39;</span>
 </span></pre></div>
 
 
@@ -948,16 +938,6 @@ have None positional values for x and y.</p>
 </span><span id="Cell-242"><a href="#Cell-242"><span class="linenos">242</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="Cell-243"><a href="#Cell-243"><span class="linenos">243</span></a>
 </span><span id="Cell-244"><a href="#Cell-244"><span class="linenos">244</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_excel_ref</span><span class="p">()</span><span class="si">}</span><span class="s1">, value:&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s1">&quot;, x:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s1">, y:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="si">}</span><span class="s1">)&#39;</span>
-</span><span id="Cell-245"><a href="#Cell-245"><span class="linenos">245</span></a>
-</span><span id="Cell-246"><a href="#Cell-246"><span class="linenos">246</span></a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Cell-247"><a href="#Cell-247"><span class="linenos">247</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Cell-248"><a href="#Cell-248"><span class="linenos">248</span></a><span class="sd">        Create a representation of this cell in the form:</span>
-</span><span id="Cell-249"><a href="#Cell-249"><span class="linenos">249</span></a><span class="sd">        &lt;excel ref: value&gt;</span>
-</span><span id="Cell-250"><a href="#Cell-250"><span class="linenos">250</span></a>
-</span><span id="Cell-251"><a href="#Cell-251"><span class="linenos">251</span></a><span class="sd">        eg:</span>
-</span><span id="Cell-252"><a href="#Cell-252"><span class="linenos">252</span></a><span class="sd">        &lt;A1, value:&quot;value of a1&quot;, x:{x}, y:{y}&gt;</span>
-</span><span id="Cell-253"><a href="#Cell-253"><span class="linenos">253</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Cell-254"><a href="#Cell-254"><span class="linenos">254</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_excel_ref</span><span class="p">()</span><span class="si">}</span><span class="s1">, value:&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s1">&quot;, x:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s1">, y:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="si">}</span><span class="s1">)&#39;</span>
 </span></pre></div>
 
 

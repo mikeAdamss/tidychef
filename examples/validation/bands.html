@@ -1,0 +1,843 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Bands (with validation) &#8212; Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/validation/bands';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Datachef
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../how-to-use-this-book.html">How To Use This Book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../extensibility.html">Extensibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quirks.html">Quirks</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../basics.html">Chapter 1: Basics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/acquire.html">Acquire</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/preview.html">Preview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/selection-operators.html">Selection: Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/selection-expand-fill.html">Selection: Expand &amp; Fill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/selection-warnings.html">Selection: Multiple Selection Warnings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/selection-shift.html">Selection: Shift</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/selection-regex.html">Selection: Regex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/selection-filters.html">Selection: Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/selection-waffle.html">Selection: Waffle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/selection-simple-useful.html">Selection: Simple &amp; Useful</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/selection-explain.html">Selection: Config(explain=)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/selection-validate.html">Selection: Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/tidydata-closest.html">TidyData: Closest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/tidydata-constants.html">TidyData: Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/tidydata-writing.html">TidyData: Writing To Csv</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intermediate.html">Chapter 2: Intermediate</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/apply.html">Apply</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/concatenation.html">TidyData: Concatenation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/iterating.html">Iterating Tables/Sheets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/duplicates.html">TidyData: Duplicate Rows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/horizontal-conditions.html">TidyData: Horizontal Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/data-markers.html">TidyData: Data Markers &amp; Dropping Columns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/pandas.html">Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/validation.html">TidyData: Column: validate=</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/within.html">TidyData: Within</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/against.html">Against (Creating New Validators)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intermediate/best-practice.html">Best Practice</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../advanced.html">Chapter 3: Advanced</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../advanced/advanced-acquisition.html">Advanced Acquisition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../advanced/custom-selectables.html">Custom Selectables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../advanced/custom-data-sources.html">Custom Data Sources</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../examples.html">Chapter 4: Examples</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../basic/basic.html">Basic Examples</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../basic/bands.html">Bands</a></li>
+
+
+<li class="toctree-l3"><a class="reference internal" href="../basic/oic-1a-table.html">Output In Construction: Table 1a</a></li>
+
+
+<li class="toctree-l3"><a class="reference internal" href="../basic/cornavavirus-loneliness.html">Coronavirus: Loneliness</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../basic/monthly-gdp-tables.html">Monthly GDP Tables: GVA</a></li>
+
+
+<li class="toctree-l3"><a class="reference internal" href="../basic/house-prices.html">House Prices</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../basic/service-industry.html">Service Industry</a></li>
+
+
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../intermediate/intermediate.html">Intermediate Examples</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../intermediate/human-development.html">Human Development</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../intermediate/household-debt.html">Household Debt Inequalities</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../intermediate/tourism.html">Tourism</a></li>
+
+
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../technical.html">Technical Reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mikeAdamss/datachef" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mikeAdamss/datachef/issues/new?title=Issue%20on%20page%20%2Fexamples/validation/bands.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/examples/validation/bands.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Bands (with validation)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Bands (with validation)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source">Source</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specification">Specification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#previous-recipe">Previous Recipe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validated-recipe">Validated Recipe</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#outputs">Outputs</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="bands-with-validation">
+<h1>Bands (with validation)<a class="headerlink" href="#bands-with-validation" title="Permalink to this heading">#</a></h1>
+<p>The following is an example of adding some simple validation logic to the Bands example extraction.</p>
+<section id="source">
+<h2>Source<a class="headerlink" href="#source" title="Permalink to this heading">#</a></h2>
+<p>For this example we’re extracting the following table:</p>
+<p><img alt="" src="../../_images/bands-before.png" /></p>
+<p>From a csv source which can be viewed <a class="reference external" href="https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv">here</a>.</p>
+</section>
+<section id="specification">
+<h2>Specification<a class="headerlink" href="#specification" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>We want a “Value” column to hold the observations</p></li>
+<li><p>We want other columns of: “Band”, “Name”, “Asset”</p></li>
+<li><p>We want to preview selections inline.</p></li>
+<li><p>We want to output one tidy data csv as “bands_tidy.csv”</p></li>
+</ul>
+</section>
+<section id="previous-recipe">
+<h2>Previous Recipe<a class="headerlink" href="#previous-recipe" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span><span class="p">,</span> <span class="n">filters</span>
+<span class="kn">from</span> <span class="nn">datachef.direction</span> <span class="kn">import</span> <span class="n">right</span><span class="p">,</span> <span class="n">below</span>
+<span class="kn">from</span> <span class="nn">datachef.output</span> <span class="kn">import</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span>
+<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">CsvSelectable</span>
+
+<span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv&quot;</span><span class="p">)</span>
+
+<span class="n">observations</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">is_numeric</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">)</span>
+<span class="n">bands</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Band&quot;</span><span class="p">)</span>
+<span class="n">assets</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Asset&quot;</span><span class="p">)</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Name&quot;</span><span class="p">)</span>
+<span class="n">preview</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">bands</span><span class="p">,</span> <span class="n">assets</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span>
+
+<span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
+    <span class="n">observations</span><span class="p">,</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">bands</span><span class="o">.</span><span class="n">finds_observations_closest</span><span class="p">(</span><span class="n">right</span><span class="p">)),</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">assets</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">below</span><span class="p">)),</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">names</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">right</span><span class="p">))</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <table>
+                
+            <tr>
+                <td style="background-color:cyan">Value</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#99ff99">Band</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#eeccff">Asset</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#ffe066">Name</td>
+            <tr>
+        
+            </table>
+
+            <body>
+                <h2>Unnamed Table</h2>
+                <table>
+                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td><td style="background-color:lightgrey">G</td><td style="background-color:lightgrey">H</td><td style="background-color:lightgrey">I</td><td style="background-color:lightgrey">J</td><td style="background-color:lightgrey">K</td></tr>
+<tr><td style="background-color:lightgrey">1</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">2</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#eeccff">Houses</td><td style="background-color:#eeccff">Cars</td><td style="background-color:#eeccff">Boats</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#eeccff">Houses</td><td style="background-color:#eeccff">Cars</td><td style="background-color:#eeccff">Boats</td></tr>
+<tr><td style="background-color:lightgrey">3</td><td style="background-color:#99ff99">Beatles</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#99ff99">Rolling Stones</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">4</td><td style="background-color:white"></td><td style="background-color:#ffe066">John</td><td style="background-color:cyan">1</td><td style="background-color:cyan">5</td><td style="background-color:cyan">9</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#ffe066">Keith</td><td style="background-color:cyan">2</td><td style="background-color:cyan">6</td><td style="background-color:cyan">10</td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:white"></td><td style="background-color:#ffe066">Paul</td><td style="background-color:cyan">2</td><td style="background-color:cyan">6</td><td style="background-color:cyan">10</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#ffe066">Mick</td><td style="background-color:cyan">3</td><td style="background-color:cyan">7</td><td style="background-color:cyan">11</td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:white"></td><td style="background-color:#ffe066">George</td><td style="background-color:cyan">2</td><td style="background-color:cyan">7</td><td style="background-color:cyan">11</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#ffe066">Charlie</td><td style="background-color:cyan">3</td><td style="background-color:cyan">8</td><td style="background-color:cyan">12</td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:white"></td><td style="background-color:#ffe066">Ringo</td><td style="background-color:cyan">4</td><td style="background-color:cyan">8</td><td style="background-color:cyan">12</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#ffe066">Ronnie</td><td style="background-color:cyan">5</td><td style="background-color:cyan">9</td><td style="background-color:cyan">13</td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+
+                </table>
+            </body>
+            <br>
+        </html>
+    </div></div>
+</div>
+</section>
+<section id="validated-recipe">
+<h2>Validated Recipe<a class="headerlink" href="#validated-recipe" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">against</span><span class="p">,</span> <span class="n">preview</span><span class="p">,</span> <span class="n">filters</span>
+<span class="kn">from</span> <span class="nn">datachef.direction</span> <span class="kn">import</span> <span class="n">right</span><span class="p">,</span> <span class="n">below</span>
+<span class="kn">from</span> <span class="nn">datachef.output</span> <span class="kn">import</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span>
+<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">CsvSelectable</span>
+
+<span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv&quot;</span><span class="p">)</span>
+
+<span class="n">observations</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">is_numeric</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">)</span>
+<span class="n">bands</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">assert_len</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Band&quot;</span><span class="p">)</span>
+<span class="n">assets</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">assert_len</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Asset&quot;</span><span class="p">)</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">assert_len</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Name&quot;</span><span class="p">)</span>
+<span class="n">preview</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">bands</span><span class="p">,</span> <span class="n">assets</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span>
+
+<span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
+    <span class="n">observations</span><span class="o">.</span><span class="n">assert_len</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">assets</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">names</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">bands</span><span class="o">.</span><span class="n">finds_observations_closest</span><span class="p">(</span><span class="n">right</span><span class="p">),</span> <span class="n">validate</span><span class="o">=</span><span class="n">against</span><span class="o">.</span><span class="n">regex</span><span class="p">(</span><span class="s2">&quot;Beatles|Rolling Stones&quot;</span><span class="p">)),</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">assets</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">below</span><span class="p">),</span> <span class="n">validate</span><span class="o">=</span><span class="n">against</span><span class="o">.</span><span class="n">regex</span><span class="p">(</span><span class="s2">&quot;Houses|Cars|Boats&quot;</span><span class="p">)),</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">names</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">right</span><span class="p">),</span> <span class="n">validate</span><span class="o">=</span><span class="n">against</span><span class="o">.</span><span class="n">length</span><span class="p">(</span><span class="n">least</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">most</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
+<span class="p">)</span>
+
+<span class="n">tidy_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;bands_tidy.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <table>
+                
+            <tr>
+                <td style="background-color:cyan">Value</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#99ff99">Band</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#eeccff">Asset</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#ffe066">Name</td>
+            <tr>
+        
+            </table>
+
+            <body>
+                <h2>Unnamed Table</h2>
+                <table>
+                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td><td style="background-color:lightgrey">G</td><td style="background-color:lightgrey">H</td><td style="background-color:lightgrey">I</td><td style="background-color:lightgrey">J</td><td style="background-color:lightgrey">K</td></tr>
+<tr><td style="background-color:lightgrey">1</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">2</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#eeccff">Houses</td><td style="background-color:#eeccff">Cars</td><td style="background-color:#eeccff">Boats</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#eeccff">Houses</td><td style="background-color:#eeccff">Cars</td><td style="background-color:#eeccff">Boats</td></tr>
+<tr><td style="background-color:lightgrey">3</td><td style="background-color:#99ff99">Beatles</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#99ff99">Rolling Stones</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">4</td><td style="background-color:white"></td><td style="background-color:#ffe066">John</td><td style="background-color:cyan">1</td><td style="background-color:cyan">5</td><td style="background-color:cyan">9</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#ffe066">Keith</td><td style="background-color:cyan">2</td><td style="background-color:cyan">6</td><td style="background-color:cyan">10</td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:white"></td><td style="background-color:#ffe066">Paul</td><td style="background-color:cyan">2</td><td style="background-color:cyan">6</td><td style="background-color:cyan">10</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#ffe066">Mick</td><td style="background-color:cyan">3</td><td style="background-color:cyan">7</td><td style="background-color:cyan">11</td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:white"></td><td style="background-color:#ffe066">George</td><td style="background-color:cyan">2</td><td style="background-color:cyan">7</td><td style="background-color:cyan">11</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#ffe066">Charlie</td><td style="background-color:cyan">3</td><td style="background-color:cyan">8</td><td style="background-color:cyan">12</td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:white"></td><td style="background-color:#ffe066">Ringo</td><td style="background-color:cyan">4</td><td style="background-color:cyan">8</td><td style="background-color:cyan">12</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#ffe066">Ronnie</td><td style="background-color:cyan">5</td><td style="background-color:cyan">9</td><td style="background-color:cyan">13</td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+
+                </table>
+            </body>
+            <br>
+        </html>
+    </div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_86026</span><span class="o">/</span><span class="mf">4170634080.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="n">Column</span><span class="p">(</span><span class="n">bands</span><span class="o">.</span><span class="n">finds_observations_closest</span><span class="p">(</span><span class="n">right</span><span class="p">),</span> <span class="n">validate</span><span class="o">=</span><span class="n">against</span><span class="o">.</span><span class="n">regex</span><span class="p">(</span><span class="s2">&quot;Beatles|Rolling Stones&quot;</span><span class="p">)),</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">Column</span><span class="p">(</span><span class="n">assets</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">below</span><span class="p">),</span> <span class="n">validate</span><span class="o">=</span><span class="n">against</span><span class="o">.</span><span class="n">regex</span><span class="p">(</span><span class="s2">&quot;Houses|Cars|Boats&quot;</span><span class="p">)),</span>
+<span class="ne">---&gt; </span><span class="mi">18</span>     <span class="n">Column</span><span class="p">(</span><span class="n">names</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">right</span><span class="p">),</span> <span class="n">validate</span><span class="o">=</span><span class="n">against</span><span class="o">.</span><span class="n">length</span><span class="p">(</span><span class="n">least</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">most</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> 
+
+<span class="nn">~/Library/Caches/pypoetry/virtualenvs/datachef-hNSMaw3h-py3.7/lib/python3.7/site-packages/datachef/against/wrapper.py</span> in <span class="ni">length</span><span class="nt">(least, most)</span>
+<span class="g g-Whitespace">     </span><span class="mi">45</span>     <span class="p">:</span><span class="k">return</span><span class="p">:</span> <span class="n">A</span> <span class="n">instantiated</span> <span class="n">LengthValidator</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">47</span><span class="sd">     return LengthValidator(least=least, most=most)</span>
+<span class="g g-Whitespace">     </span><span class="mi">48</span><span class="sd"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">49</span><span class="sd"> # Pre instantiate these since no arguments are required.</span>
+
+<span class="nn">~/Library/Caches/pypoetry/virtualenvs/datachef-hNSMaw3h-py3.7/lib/python3.7/site-packages/datachef/against/implementations/length.py</span> in <span class="ni">__init__</span><span class="nt">(self, least, most)</span>
+
+<span class="nn">~/Library/Caches/pypoetry/virtualenvs/datachef-hNSMaw3h-py3.7/lib/python3.7/site-packages/datachef/against/implementations/length.py</span> in <span class="ni">__post_init__</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span><span class="sd">                 least: {self.least}</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span><span class="sd">                 most: {self.most}</span>
+<span class="ne">---&gt; </span><span class="mi">30</span><span class="sd">             &quot;&quot;&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">least</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span>             <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">least</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="s2">&quot;You least value must be an integer.&quot;</span>
+
+<span class="ne">AssertionError</span>: 
+                <span class="n">Your</span> <span class="n">most</span> <span class="n">value</span> <span class="n">needs</span> <span class="n">to</span> <span class="n">be</span> <span class="n">bigger</span> <span class="n">than</span> <span class="n">least</span><span class="p">,</span>
+                <span class="n">you</span> <span class="n">have</span> <span class="n">provided</span><span class="p">:</span>
+                                            
+                <span class="n">least</span><span class="p">:</span> <span class="mi">5</span>
+                <span class="n">most</span><span class="p">:</span> <span class="mi">5</span>
+            
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="outputs">
+<h1>Outputs<a class="headerlink" href="#outputs" title="Permalink to this heading">#</a></h1>
+<p>The output generated by the above example can be <a class="reference download internal" download="" href="../../_downloads/6734c890ad1c51288780ce983baa10ea/bands_tidy.csv"><span class="xref download myst">downloaded here</span></a> or viewed below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <body>
+                <table>
+                    <tr><td style="background-color:lightgrey">Value</td><td style="background-color:lightgrey">Band</td><td style="background-color:lightgrey">Asset</td><td style="background-color:lightgrey">Name</td></tr><tr><td style="background-color:white">1</td><td style="background-color:white">Beatles</td><td style="background-color:white">Houses</td><td style="background-color:white">John</td></tr><tr><td style="background-color:white">5</td><td style="background-color:white">Beatles</td><td style="background-color:white">Cars</td><td style="background-color:white">John</td></tr><tr><td style="background-color:white">9</td><td style="background-color:white">Beatles</td><td style="background-color:white">Boats</td><td style="background-color:white">John</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Houses</td><td style="background-color:white">Keith</td></tr><tr><td style="background-color:white">6</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Cars</td><td style="background-color:white">Keith</td></tr><tr><td style="background-color:white">10</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Boats</td><td style="background-color:white">Keith</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Beatles</td><td style="background-color:white">Houses</td><td style="background-color:white">Paul</td></tr><tr><td style="background-color:white">6</td><td style="background-color:white">Beatles</td><td style="background-color:white">Cars</td><td style="background-color:white">Paul</td></tr><tr><td style="background-color:white">10</td><td style="background-color:white">Beatles</td><td style="background-color:white">Boats</td><td style="background-color:white">Paul</td></tr><tr><td style="background-color:white">3</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Houses</td><td style="background-color:white">Mick</td></tr><tr><td style="background-color:white">7</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Cars</td><td style="background-color:white">Mick</td></tr><tr><td style="background-color:white">11</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Boats</td><td style="background-color:white">Mick</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Beatles</td><td style="background-color:white">Houses</td><td style="background-color:white">George</td></tr><tr><td style="background-color:white">7</td><td style="background-color:white">Beatles</td><td style="background-color:white">Cars</td><td style="background-color:white">George</td></tr><tr><td style="background-color:white">11</td><td style="background-color:white">Beatles</td><td style="background-color:white">Boats</td><td style="background-color:white">George</td></tr><tr><td style="background-color:white">3</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Houses</td><td style="background-color:white">Charlie</td></tr><tr><td style="background-color:white">8</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Cars</td><td style="background-color:white">Charlie</td></tr><tr><td style="background-color:white">12</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Boats</td><td style="background-color:white">Charlie</td></tr><tr><td style="background-color:white">4</td><td style="background-color:white">Beatles</td><td style="background-color:white">Houses</td><td style="background-color:white">Ringo</td></tr><tr><td style="background-color:white">8</td><td style="background-color:white">Beatles</td><td style="background-color:white">Cars</td><td style="background-color:white">Ringo</td></tr><tr><td style="background-color:white">12</td><td style="background-color:white">Beatles</td><td style="background-color:white">Boats</td><td style="background-color:white">Ringo</td></tr><tr><td style="background-color:white">5</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Houses</td><td style="background-color:white">Ronnie</td></tr><tr><td style="background-color:white">9</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Cars</td><td style="background-color:white">Ronnie</td></tr><tr><td style="background-color:white">13</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Boats</td><td style="background-color:white">Ronnie</td></tr>
+                </table>
+            </body>
+            <br>
+        </html>
+    </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./examples/validation"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Bands (with validation)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source">Source</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specification">Specification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#previous-recipe">Previous Recipe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validated-recipe">Validated Recipe</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#outputs">Outputs</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By https://github.com/mikeAdamss
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

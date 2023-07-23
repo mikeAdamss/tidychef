@@ -1,0 +1,82 @@
+Traceback (most recent call last):
+  File "/Users/michaeladams/Library/Caches/pypoetry/virtualenvs/datachef-hNSMaw3h-py3.7/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 64, in single_nb_execution
+    **kwargs,
+  File "/Users/michaeladams/Library/Caches/pypoetry/virtualenvs/datachef-hNSMaw3h-py3.7/lib/python3.7/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/michaeladams/Library/Caches/pypoetry/virtualenvs/datachef-hNSMaw3h-py3.7/lib/python3.7/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/Users/michaeladams/Library/Caches/pypoetry/virtualenvs/datachef-hNSMaw3h-py3.7/lib/python3.7/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
+    return future.result()
+  File "/Users/michaeladams/Library/Caches/pypoetry/virtualenvs/datachef-hNSMaw3h-py3.7/lib/python3.7/site-packages/nbclient/client.py", line 664, in async_execute
+    cell, index, execution_count=self.code_cells_executed + 1
+  File "/Users/michaeladams/Library/Caches/pypoetry/virtualenvs/datachef-hNSMaw3h-py3.7/lib/python3.7/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/michaeladams/Library/Caches/pypoetry/virtualenvs/datachef-hNSMaw3h-py3.7/lib/python3.7/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from datachef import acquire, against, preview, filters
+from datachef.direction import right, below
+from datachef.output import TidyData, Column
+from datachef.selection import CsvSelectable
+
+table: CsvSelectable = acquire.csv.http("https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv")
+
+observations = table.filter(filters.is_numeric).label_as("Value")
+bands = table.excel_ref("3").is_not_blank().assert_len(2).label_as("Band")
+assets = table.excel_ref('2').is_not_blank().assert_len(6).label_as("Asset")
+names = (table.excel_ref("B") | table.excel_ref("H")).is_not_blank().assert_len(8).is_not_blank().label_as("Name")
+preview(observations, bands, assets, names)
+
+tidy_data = TidyData(
+    observations.assert_len(len(assets) * len(names) / 2),
+    Column(bands.finds_observations_closest(right), validate=against.regex("Beatles|Rolling Stones")),
+    Column(assets.finds_observations_directly(below), validate=against.regex("Houses|Cars|Boats")),
+    Column(names.finds_observations_directly(right), validate=against.length(least=5, most=5))
+)
+
+tidy_data.to_csv("bands_tidy.csv")
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mAssertionError[0m                            Traceback (most recent call last)
+[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_86026/4170634080.py[0m in [0;36m<module>[0;34m[0m
+[1;32m     16[0m     [0mColumn[0m[0;34m([0m[0mbands[0m[0;34m.[0m[0mfinds_observations_closest[0m[0;34m([0m[0mright[0m[0;34m)[0m[0;34m,[0m [0mvalidate[0m[0;34m=[0m[0magainst[0m[0;34m.[0m[0mregex[0m[0;34m([0m[0;34m"Beatles|Rolling Stones"[0m[0;34m)[0m[0;34m)[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     17[0m     [0mColumn[0m[0;34m([0m[0massets[0m[0;34m.[0m[0mfinds_observations_directly[0m[0;34m([0m[0mbelow[0m[0;34m)[0m[0;34m,[0m [0mvalidate[0m[0;34m=[0m[0magainst[0m[0;34m.[0m[0mregex[0m[0;34m([0m[0;34m"Houses|Cars|Boats"[0m[0;34m)[0m[0;34m)[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 18[0;31m     [0mColumn[0m[0;34m([0m[0mnames[0m[0;34m.[0m[0mfinds_observations_directly[0m[0;34m([0m[0mright[0m[0;34m)[0m[0;34m,[0m [0mvalidate[0m[0;34m=[0m[0magainst[0m[0;34m.[0m[0mlength[0m[0;34m([0m[0mleast[0m[0;34m=[0m[0;36m5[0m[0;34m,[0m [0mmost[0m[0;34m=[0m[0;36m5[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     19[0m )
+[1;32m     20[0m [0;34m[0m[0m
+
+[0;32m~/Library/Caches/pypoetry/virtualenvs/datachef-hNSMaw3h-py3.7/lib/python3.7/site-packages/datachef/against/wrapper.py[0m in [0;36mlength[0;34m(least, most)[0m
+[1;32m     45[0m     [0;34m:[0m[0;32mreturn[0m[0;34m:[0m [0mA[0m [0minstantiated[0m [0mLengthValidator[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     46[0m     """
+[0;32m---> 47[0;31m     [0;32mreturn[0m [0mLengthValidator[0m[0;34m([0m[0mleast[0m[0;34m=[0m[0mleast[0m[0;34m,[0m [0mmost[0m[0;34m=[0m[0mmost[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     48[0m [0;34m[0m[0m
+[1;32m     49[0m [0;31m# Pre instantiate these since no arguments are required.[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/Library/Caches/pypoetry/virtualenvs/datachef-hNSMaw3h-py3.7/lib/python3.7/site-packages/datachef/against/implementations/length.py[0m in [0;36m__init__[0;34m(self, least, most)[0m
+
+[0;32m~/Library/Caches/pypoetry/virtualenvs/datachef-hNSMaw3h-py3.7/lib/python3.7/site-packages/datachef/against/implementations/length.py[0m in [0;36m__post_init__[0;34m(self)[0m
+[1;32m     28[0m                 [0mleast[0m[0;34m:[0m [0;34m{[0m[0mself[0m[0;34m.[0m[0mleast[0m[0;34m}[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     29[0m                 [0mmost[0m[0;34m:[0m [0;34m{[0m[0mself[0m[0;34m.[0m[0mmost[0m[0;34m}[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 30[0;31m             """)
+[0m[1;32m     31[0m         [0;32mif[0m [0mself[0m[0;34m.[0m[0mleast[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     32[0m             [0;32massert[0m [0misinstance[0m[0;34m([0m[0mself[0m[0;34m.[0m[0mleast[0m[0;34m,[0m [0mint[0m[0;34m)[0m[0;34m,[0m [0;34m"You least value must be an integer."[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mAssertionError[0m: 
+                Your most value needs to be bigger than least,
+                you have provided:
+                                            
+                least: 5
+                most: 5
+            
+AssertionError: 
+                Your most value needs to be bigger than least,
+                you have provided:
+                                            
+                least: 5
+                most: 5
+            
+

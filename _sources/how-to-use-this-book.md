@@ -4,9 +4,6 @@ This book is organised in a very deliberate fashion to help onboard people to th
 
 That said, there are some nuances depending on your skillset and goals which I'll try to touch on.
 
-
-- **Everyone** regardless of their training and background should make a point to read and understand [walk](https://mikeadamss.github.io/datachef/walk.html) section, it will make understanding and working with datachef infinitely easier.
-
 - The sections on [extensibility](https://mikeadamss.github.io/datachef/extensibility.html) and [quirks](https://mikeadamss.github.io/datachef/quirks.html) are short pages of prose containing supplementary information. There are some useful insights into datachefs goals and approach here but you can come back to these as needed.
 
 - If you want to get a quick idea of what datachef does, look at the first few recipes in [basic examples](https://mikeadamss.github.io/datachef/examples/basic/basic.html) section before coming back here.
@@ -20,5 +17,7 @@ Once you've done this you'll be able to read and understand a large number of re
 I'd consider the above section the final part of the onboarding to full capability with datachef. After that it's just practice.
 
 - The [Chapter 3: Advanced](https://mikeadamss.github.io/datachef/advanced.html) is a more developer-esque section (thought it should be within reach of an experienced datachef user as well) so should be considered optional. There are some useful things here and you probably _should_ tackle this if you're looking into extending datachef. You can however be firmly up and running for a while and even producing reliable repeatable data pipelines without tackling this content.
+
+- The [Chapter 4: Examples](https://mikeadamss.github.io/datachef/technical.html) section holds all examples recipes and should be tackled alongside the other chapters as detailed above. It does also include some additional **examples of other examples recipes with added validation**. While validation is of importance to anyone setting up a repeatable EL process, for others (such as those doing ad hoc or one of analysis) the significance can vary.
 
 - The [Chapter 5: Technical Reference](https://mikeadamss.github.io/datachef/technical.html) section is purely for the programmers.

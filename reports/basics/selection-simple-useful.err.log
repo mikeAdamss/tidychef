@@ -26,7 +26,7 @@ table.excel_ref('A1:A2').assert_one()
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mAssertionError[0m                            Traceback (most recent call last)
-[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_80668/1649087184.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_85872/1649087184.py[0m in [0;36m<module>[0;34m[0m
 [1;32m      3[0m [0;34m[0m[0m
 [1;32m      4[0m [0mtable[0m[0;34m:[0m [0mXlsxSelectable[0m [0;34m=[0m [0macquire[0m[0;34m.[0m[0mxlsx[0m[0;34m.[0m[0mhttp[0m[0;34m([0m[0;34m"https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx"[0m[0;34m,[0m [0mtables[0m[0;34m=[0m[0;34m"Table 3a"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0;32m----> 5[0;31m [0mtable[0m[0;34m.[0m[0mexcel_ref[0m[0;34m([0m[0;34m'A1:A2'[0m[0;34m)[0m[0;34m.[0m[0massert_one[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
