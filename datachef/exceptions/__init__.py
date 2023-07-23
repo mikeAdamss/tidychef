@@ -9,11 +9,14 @@ from .badparams import (
     UnknownDirectionError,
     WithinAxisDeclarationError,
 )
-from .cells import InvlaidCellPositionError, NonExistentCellComparissonError
+from .cells import (
+    CellValidationError,
+    InvlaidCellPositionError,
+    NonExistentCellComparissonError,
+)
 from .common import (
     BadConditionalResolverError,
     CellsDoNotExistError,
-    CellValidationError,
     DroppingNonColumnError,
     FileInputError,
     HorizontalConditionalHeaderError,

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import copy
 from typing import Callable, Dict, Optional
 
@@ -35,7 +37,7 @@ class Column(BaseColumn):
         return self._table
 
     @staticmethod
-    def horizontal_condition(column_label: str, resolver: Callable, priority=0):
+    def horizontal_condition(column_label: str, resolver: Callable, priority=0) -> Column:
         """
         Creates a column that populates based on the
         values resolved for one or more other columns.
@@ -50,7 +52,7 @@ class Column(BaseColumn):
         return Column(HorizontalCondition(column_label, resolver, priority=priority))
 
     @staticmethod
-    def constant(column_label: str, constant: str):
+    def constant(column_label: str, constant: str) -> Column:
         """
         Create a column that has one specific value for every
         entry.

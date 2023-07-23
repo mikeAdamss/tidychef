@@ -20,3 +20,13 @@ class InvlaidCellPositionError(Exception):
 
     def __init__(self, msg):
         self.msg = msg
+
+
+class CellValidationError(Exception):
+    """
+    Raised where we're validated a call value and
+    found it to me invalid.
+    """
+
+    def __init__(self, msg):
+        self.msg = msg
