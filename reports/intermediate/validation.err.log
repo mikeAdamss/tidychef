@@ -1,0 +1,90 @@
+Traceback (most recent call last):
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 64, in single_nb_execution
+    **kwargs,
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
+    return future.result()
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 664, in async_execute
+    cell, index, execution_count=self.code_cells_executed + 1
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from datachef import acquire, against
+from datachef.direction import right, down
+from datachef.output import TidyData, Column
+from datachef.selection import XlsxSelectable
+
+table: XlsxSelectable = acquire.xlsx.http("https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx", tables="Table 3c")
+
+observations = table.excel_ref("B7:H10").label_as("Observations")
+dataset_identifier_code = table.excel_ref("B6").expand(right).label_as("Dataset Identifier Codes")
+
+# Note: matches a regex of capital M followed by anything
+tidy_data = TidyData(
+    observations,
+    Column(dataset_identifier_code.finds_observations_directly(down), validate=against.regex("L.*"))
+)
+
+print(tidy_data)
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mCellValidationError[0m                       Traceback (most recent call last)
+[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_3007/1874977267.py[0m in [0;36m<module>[0;34m[0m
+[1;32m     15[0m )
+[1;32m     16[0m [0;34m[0m[0m
+[0;32m---> 17[0;31m [0mprint[0m[0;34m([0m[0mtidy_data[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;32m~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/output/tidydata.py[0m in [0;36m__str__[0;34m(self)[0m
+[1;32m     84[0m [0;34m[0m[0m
+[1;32m     85[0m     [0;32mdef[0m [0m__str__[0m[0;34m([0m[0mself[0m[0;34m)[0m[0;34m:[0m  [0;31m# pragma: no cover[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 86[0;31m         [0;32mreturn[0m [0mself[0m[0;34m.[0m[0m__get_representation[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     87[0m [0;34m[0m[0m
+[1;32m     88[0m     [0;32mdef[0m [0m__len__[0m[0;34m([0m[0mself[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/output/tidydata.py[0m in [0;36m__get_representation[0;34m(self)[0m
+[1;32m     67[0m         """
+[1;32m     68[0m         [0;32mif[0m [0;32mnot[0m [0mself[0m[0;34m.[0m[0m_data[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 69[0;31m             [0mself[0m[0;34m.[0m[0m_transform[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     70[0m [0;34m[0m[0m
+[1;32m     71[0m         [0mheader_row[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_data[0m[0;34m[[0m[0;36m0[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/output/tidydata.py[0m in [0;36m_transform[0;34m(self)[0m
+[1;32m    300[0m                 [0;32mfor[0m [0mcolumn[0m [0;32min[0m [0mstandard_columns[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    301[0m                     col_value = column.resolve_column_cell_from_obs_cell(
+[0;32m--> 302[0;31m                         [0mobservation[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    303[0m                     ).value
+[1;32m    304[0m                     [0mcolumn_value_dict[0m[0;34m[[0m[0mcolumn[0m[0;34m.[0m[0mlabel[0m[0;34m][0m [0;34m=[0m [0mcol_value[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/column/base.py[0m in [0;36mresolve_column_cell_from_obs_cell[0;34m(self, observation_cell, *args)[0m
+[1;32m    105[0m         """
+[1;32m    106[0m         [0mcell[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0mengine[0m[0;34m.[0m[0mresolve[0m[0;34m([0m[0mobservation_cell[0m[0;34m,[0m [0;34m*[0m[0margs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 107[0;31m         [0mcell[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_post_lookup[0m[0;34m([0m[0mcell[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    108[0m         [0;32mreturn[0m [0mcell[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/column/column.py[0m in [0;36m_post_lookup[0;34m(self, cell)[0m
+[1;32m    136[0m                         [0mInvalid[0m [0mcell[0m [0;34m{[0m[0mcell[0m[0;34m}[0m[0;34m.[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    137[0m                         [0;34m{[0m[0mmsg[0m[0;34m}[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 138[0;31m                         ''')
+[0m[1;32m    139[0m [0;34m[0m[0m
+[1;32m    140[0m         [0;32mreturn[0m [0mcell[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mCellValidationError[0m: 
+                        Column Dataset Identifier Codes has a cell that is not valid,
+                        Invalid cell (B6, value:"MVO6", x:1, y:5).
+                        Message is: "MVO6" does not match pattern: "L.*"                      
+                        
+CellValidationError: 
+                        Column Dataset Identifier Codes has a cell that is not valid,
+                        Invalid cell (B6, value:"MVO6", x:1, y:5).
+                        Message is: "MVO6" does not match pattern: "L.*"                      
+                        
+

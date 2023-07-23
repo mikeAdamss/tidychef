@@ -233,11 +233,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2 has-children"><a class="reference internal" href="../examples/validation/validation.html">Validation</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../examples/validation/bands.html">Bands (with validation)</a></li>
 
+<li class="toctree-l3"><a class="reference internal" href="../examples/validation/oic-1a-table.html">Output In Construction: Table 1a (with validation)</a></li>
+
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../technical.html">Technical Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../technical.html">Chapter 5: Technical Reference</a></li>
 </ul>
 
     </div>
@@ -1042,24 +1044,24 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">MisalignedHeadersError</span><span class="g g-Whitespace">                    </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_96095</span><span class="o">/</span><span class="mf">2463524614.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_2971</span><span class="o">/</span><span class="mf">2463524614.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Now we try and concatenate them - and get an error!</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> 
 <span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">tidydata1</span> <span class="o">+</span> <span class="n">tidydata2</span>
 
-<span class="nn">~/Library/Caches/pypoetry/virtualenvs/datachef-hNSMaw3h-py3.7/lib/python3.7/site-packages/datachef/utils/decorators/dontmutate.py</span> in <span class="ni">wrapper</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/utils/decorators/dontmutate.py</span> in <span class="ni">wrapper</span><span class="nt">(self, *args, **kwargs)</span>
 <span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="g g-Whitespace">     </span><span class="mi">23</span>         <span class="bp">self</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 <span class="ne">---&gt; </span><span class="mi">24</span>         <span class="k">return</span> <span class="n">method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">25</span> 
 <span class="g g-Whitespace">     </span><span class="mi">26</span>     <span class="k">return</span> <span class="n">wrapper</span>
 
-<span class="nn">~/Library/Caches/pypoetry/virtualenvs/datachef-hNSMaw3h-py3.7/lib/python3.7/site-packages/datachef/output/tidydata.py</span> in <span class="ni">__add__</span><span class="nt">(self, other_tidy_data)</span>
-<span class="g g-Whitespace">    </span><span class="mi">182</span>                 <span class="n">TidyData2</span> <span class="n">headers</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">183</span>                 <span class="p">{</span><span class="n">other_tidy_data</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
-<span class="ne">--&gt; </span><span class="mi">184</span>             <span class="s2">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">185</span><span class="s2">             )</span>
-<span class="g g-Whitespace">    </span><span class="mi">186</span><span class="s2"> </span>
+<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/output/tidydata.py</span> in <span class="ni">__add__</span><span class="nt">(self, other_tidy_data)</span>
+<span class="g g-Whitespace">    </span><span class="mi">183</span>                 <span class="n">TidyData2</span> <span class="n">headers</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">184</span>                 <span class="p">{</span><span class="n">other_tidy_data</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
+<span class="ne">--&gt; </span><span class="mi">185</span>             <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">186</span><span class="s2">             )</span>
+<span class="g g-Whitespace">    </span><span class="mi">187</span><span class="s2"> </span>
 
 <span class="ne">MisalignedHeadersError</span>: 
 <span class="s2">                You are attempting to sum two tidy data</span>

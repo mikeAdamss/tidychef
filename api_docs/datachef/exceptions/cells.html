@@ -48,6 +48,15 @@
                 </ul>
 
             </li>
+            <li>
+                    <a class="class" href="#CellValidationError">CellValidationError</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="function" href="#CellValidationError.__init__">CellValidationError</a>
+                        </li>
+                </ul>
+
+            </li>
     </ul>
 
 
@@ -91,6 +100,16 @@
 </span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>
 </span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
 </span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a><span class="k">class</span> <span class="nc">CellValidationError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a><span class="sd">    Raised where we&#39;re validated a call value and</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a><span class="sd">    found it to me invalid.</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
 </span></pre></div>
 
 
@@ -208,6 +227,61 @@ x has a value but y does not</p>
                                 <dl>
                                     <div><dt>builtins.BaseException</dt>
                                 <dd id="InvlaidCellPositionError.with_traceback" class="function">with_traceback</dd>
+
+            </div>
+                                </dl>
+                            </div>
+                </section>
+                <section id="CellValidationError">
+                            <input id="CellValidationError-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr class">
+            
+    <span class="def">class</span>
+    <span class="name">CellValidationError</span><wbr>(<span class="base">builtins.Exception</span>):
+
+                <label class="view-source-button" for="CellValidationError-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#CellValidationError"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="CellValidationError-26"><a href="#CellValidationError-26"><span class="linenos">26</span></a><span class="k">class</span> <span class="nc">CellValidationError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span><span id="CellValidationError-27"><a href="#CellValidationError-27"><span class="linenos">27</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="CellValidationError-28"><a href="#CellValidationError-28"><span class="linenos">28</span></a><span class="sd">    Raised where we&#39;re validated a call value and</span>
+</span><span id="CellValidationError-29"><a href="#CellValidationError-29"><span class="linenos">29</span></a><span class="sd">    found it to me invalid.</span>
+</span><span id="CellValidationError-30"><a href="#CellValidationError-30"><span class="linenos">30</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="CellValidationError-31"><a href="#CellValidationError-31"><span class="linenos">31</span></a>
+</span><span id="CellValidationError-32"><a href="#CellValidationError-32"><span class="linenos">32</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="CellValidationError-33"><a href="#CellValidationError-33"><span class="linenos">33</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Raised where we're validated a call value and
+found it to me invalid.</p>
+</div>
+
+
+                            <div id="CellValidationError.__init__" class="classattr">
+                                        <input id="CellValidationError.__init__-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="name">CellValidationError</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">msg</span></span>)</span>
+
+                <label class="view-source-button" for="CellValidationError.__init__-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#CellValidationError.__init__"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="CellValidationError.__init__-32"><a href="#CellValidationError.__init__-32"><span class="linenos">32</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+</span><span id="CellValidationError.__init__-33"><a href="#CellValidationError.__init__-33"><span class="linenos">33</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span>
+</span></pre></div>
+
+
+    
+
+                            </div>
+                            <div class="inherited">
+                                <h5>Inherited Members</h5>
+                                <dl>
+                                    <div><dt>builtins.BaseException</dt>
+                                <dd id="CellValidationError.with_traceback" class="function">with_traceback</dd>
 
             </div>
                                 </dl>

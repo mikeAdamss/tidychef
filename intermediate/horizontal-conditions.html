@@ -233,11 +233,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2 has-children"><a class="reference internal" href="../examples/validation/validation.html">Validation</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../examples/validation/bands.html">Bands (with validation)</a></li>
 
+<li class="toctree-l3"><a class="reference internal" href="../examples/validation/oic-1a-table.html">Output In Construction: Table 1a (with validation)</a></li>
+
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../technical.html">Technical Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../technical.html">Chapter 5: Technical Reference</a></li>
 </ul>
 
     </div>
@@ -576,8 +578,8 @@ document.write(`
 
 <span class="k">def</span> <span class="nf">e_ending_stones</span><span class="p">(</span><span class="n">line</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns &quot;True&quot; as string if member is John or Paul and band</span>
-<span class="sd">    is beatles, else &quot;False&quot; as string.</span>
+<span class="sd">    Returns &quot;True&quot; as string if member ends with &quot;e&quot;</span>
+<span class="sd">    and band is &quot;Rolling Stones&quot;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="s2">&quot;Member&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">line</span><span class="p">[</span><span class="s2">&quot;Band&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Rolling Stones&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">&quot;True&quot;</span>

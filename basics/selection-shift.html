@@ -233,11 +233,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2 has-children"><a class="reference internal" href="../examples/validation/validation.html">Validation</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../examples/validation/bands.html">Bands (with validation)</a></li>
 
+<li class="toctree-l3"><a class="reference internal" href="../examples/validation/oic-1a-table.html">Output In Construction: Table 1a (with validation)</a></li>
+
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../technical.html">Technical Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../technical.html">Chapter 5: Technical Reference</a></li>
 </ul>
 
     </div>
@@ -856,17 +858,17 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">OutOfBoundsError</span><span class="g g-Whitespace">                          </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_95945</span><span class="o">/</span><span class="mf">2174711224.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_2817</span><span class="o">/</span><span class="mf">2174711224.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">selection</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">right</span><span class="p">)</span>
 
-<span class="nn">~/Library/Caches/pypoetry/virtualenvs/datachef-hNSMaw3h-py3.7/lib/python3.7/site-packages/datachef/utils/decorators/dontmutate.py</span> in <span class="ni">wrapper</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/utils/decorators/dontmutate.py</span> in <span class="ni">wrapper</span><span class="nt">(self, *args, **kwargs)</span>
 <span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="g g-Whitespace">     </span><span class="mi">23</span>         <span class="bp">self</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 <span class="ne">---&gt; </span><span class="mi">24</span>         <span class="k">return</span> <span class="n">method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">25</span> 
 <span class="g g-Whitespace">     </span><span class="mi">26</span>     <span class="k">return</span> <span class="n">wrapper</span>
 
-<span class="nn">~/Library/Caches/pypoetry/virtualenvs/datachef-hNSMaw3h-py3.7/lib/python3.7/site-packages/datachef/selection/selectable.py</span> in <span class="ni">shift</span><span class="nt">(self, direction_or_x, possibly_y)</span>
+<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/selection/selectable.py</span> in <span class="ni">shift</span><span class="nt">(self, direction_or_x, possibly_y)</span>
 <span class="g g-Whitespace">    </span><span class="mi">352</span>         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">found_cells</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">wanted_cells</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
 <span class="g g-Whitespace">    </span><span class="mi">353</span>             <span class="k">raise</span> <span class="n">OutOfBoundsError</span><span class="p">(</span>
 <span class="ne">--&gt; </span><span class="mi">354</span>                 <span class="s2">&quot;You are attempting to shift your selection &quot;</span>
