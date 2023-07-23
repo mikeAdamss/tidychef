@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 import csv
+from dataclasses import dataclass
 from os import linesep
 from pathlib import Path
-from typing import Callable, Dict, List, Optional, Union
+from typing import Callable, Dict, List, Optional, Union, FrozenSet
 
 import tabulate
 from IPython.core.display import HTML, display
@@ -12,18 +13,18 @@ from datachef.column.base import BaseColumn
 from datachef.exceptions import DroppingNonColumnError, MisalignedHeadersError
 from datachef.lookup.engines.horizontal_condition import HorizontalCondition
 
-# from datachef.selection.selectable import Selectable
-from datachef.models.source.table import Table
+from datachef.models.source.table import LiveTable
 from datachef.notebook.ipython import in_notebook
 from datachef.notebook.preview.html.tidy_data import tidy_data_as_html_table_string
 from datachef.output.base import BaseOutput
 from datachef.utils.decorators import dontmutate
 
 
+
 class TidyData(BaseOutput):
     def __init__(
         self,
-        observations: Table,
+        observations: LiveTable,
         *columns,
         obs_apply: Callable = None,
         drop: Optional[List[str]] = None,
@@ -99,10 +100,10 @@ class TidyData(BaseOutput):
         }
         """
         self._transform()
-        output_dict = {}
+        output_dict: Dict[str, List[str]] = {}
 
         count = 0
-        translater = {}
+        translater: Dict[i, str] = {}
 
         for column_name in self._data[0]:
             output_dict[column_name] = []

@@ -70,6 +70,7 @@ chapters:
     - file: examples/validation/validation
       sections:
         - file: examples/validation/bands
+        - file: examples/validation/oic-1a-table
     
 
 - file: technical
