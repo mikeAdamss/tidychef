@@ -67,4 +67,9 @@ chapters:
         - file: examples/intermediate/household-debt
         - file: examples/intermediate/tourism
 
+    - file: examples/validation
+      sections:
+        - file: example/validation/bands
+    
+
 - file: technical

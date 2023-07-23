@@ -42,7 +42,7 @@ def length(least: Optional[int] = None, most: Optional[int] = None) -> LengthVal
 
     :param least: The minimum length the cell value must be if any
     :param most: The minimum length the cell value must be if any
-    :return: A instantiated ItemsValidator
+    :return: A instantiated LengthValidator
     """
     return LengthValidator(least=least, most=most)
         

@@ -6,6 +6,7 @@ from datachef.against.implementations.numeric import (
     IsNotNumericValidator,
     IsNumericValidator,
 )
+from datachef.against.implementations.length import LengthValidator
 from datachef.against.implementations.regex import RegexValidator
 from datachef.models.source.cell import Cell
 
@@ -56,7 +57,7 @@ def test_against_items():
     assert validator(cell) is True
 
 
-def test_is_numeric():
+def test_against_is_numeric():
     """
     Test that validating against numeric works
     """
@@ -76,7 +77,7 @@ def test_is_numeric():
     assert validator(cell) is True
 
 
-def test_is_not_numeric():
+def test_against_is_not_numeric():
     """
     Test that validating against non numeric works
     """
@@ -94,3 +95,43 @@ def test_is_not_numeric():
     # Is Valid
     cell = Cell(x="0", y="0", value="baz")
     assert validator(cell) is True
+
+
+def test_against_length():
+    """
+    Test we can validate cell values based on length
+    """
+
+    # Both least and most
+    validator = against.length(least=2, most=5)
+    assert isinstance(validator, LengthValidator)
+    cell = Cell(x="0", y="0", value="aaa")
+    assert validator(cell) is True
+    cell = Cell(x="0", y="0", value="aaaaaa")
+    assert validator(cell) is False
+    assert validator.msg(cell) == 'The length of cell value "aaaaaa" is not between 2 and 5 in length.'
+
+    # most
+    validator = against.length(most=5)
+    assert isinstance(validator, LengthValidator)
+    cell = Cell(x="0", y="0", value="a")
+    assert validator(cell) is True
+    cell = Cell(x="0", y="0", value="aaaaaa")
+    assert validator(cell) is False
+    assert validator.msg(cell) == f'The length of cell value "aaaaaa" is not below the maximum length of 5.'
+
+
+    # least
+    validator = against.length(least=2)
+    assert isinstance(validator, LengthValidator)
+    cell = Cell(x="0", y="0", value="aaaaaa")
+    assert validator(cell) is True
+    cell = Cell(x="0", y="0", value="a")
+    assert validator(cell) is False
+    assert validator.msg(cell) == 'The length of cell value "a" is not above the minimum length of 2.'
+
+    with pytest.raises(AssertionError):
+        against.length(least=20, most=10)
+
+    with pytest.raises(AssertionError):
+        against.length()

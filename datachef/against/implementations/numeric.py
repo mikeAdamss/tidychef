@@ -4,7 +4,6 @@ from datachef.against.implementations.base import BaseValidator
 from datachef.models.source.cell import Cell
 
 
-@dataclass
 class IsNumericValidator(BaseValidator):
     """
     A class to return bool (valid or not) when
@@ -35,7 +34,6 @@ class IsNumericValidator(BaseValidator):
         return f'"{cell.value}" is not numeric'
 
 
-@dataclass
 class IsNotNumericValidator(BaseValidator):
     """
     A class to return bool (valid or not) when

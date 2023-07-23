@@ -241,13 +241,3 @@ class Cell(BaseCell):
         """
 
         return f'({self._excel_ref()}, value:"{self.value}", x:{self.x}, y:{self.y})'
-
-    def __str__(self):
-        """
-        Create a representation of this cell in the form:
-        <excel ref: value>
-
-        eg:
-        <A1, value:"value of a1", x:{x}, y:{y}>
-        """
-        return f'({self._excel_ref()}, value:"{self.value}", x:{self.x}, y:{self.y})'
