@@ -4,8 +4,6 @@
 ![The test coverage for datachef is 100%](./jupyterbook/images/coverage-100.svg)
 ![Static Badge](https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9%20%7C%203.10%20%7C%203.11%20-blue)
 
-> :warning: This software is a **work in progress**.
-
 Datachef is a python framework to enable “data extraction for humans” via simple python beginner friendly "recipes". It aims at allowing users to easily transform tabulated data sources that use visual relationships (human readable only data) into simple machine readable "tidy data" in a repeatable way.
 
 i.e: it allows you to reliably turn something that looks like this: 
