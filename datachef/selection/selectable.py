@@ -515,18 +515,18 @@ class Selectable(LiveTable):
             if not validator(cell):
                 if raise_first_error:
                     raise CellValidationError(f'''
-                    When making selection from table: {self.name} the
-                    following validation error was encountered:
-                    {validator.msg(cell)}
+When making selections from table: {self.name} the
+following validation error was encountered:
+{validator.msg(cell)}
                 ''')
                 else:
                     validation_errors.append(validator.msg(cell))
 
         if len(validation_errors) > 0:
             raise CellValidationError(f'''
-                    When making selection from table: {self.name} the
-                    following validation errors were encountered:
-                    {linesep.join(validation_errors)}
+When making selections from table: {self.name} the
+following validation errors were encountered:
+{linesep.join(validation_errors)}
                 ''')
 
         return self
@@ -556,7 +556,7 @@ class Selectable(LiveTable):
         pattern.
         """
 
-        matcher = re.compile(pattern)
+        matcher = re.compile(r'' + pattern)
         self.cells = [x for x in self.cells if matcher.match(x.value) is not None]
         _explain(self, f"Regex, pattern {pattern}")
         return self
