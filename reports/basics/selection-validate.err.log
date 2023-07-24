@@ -27,26 +27,28 @@ table.excel_ref('B').is_not_blank().validate(against.regex("John"), raise_first_
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mCellValidationError[0m                       Traceback (most recent call last)
-[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_4305/2813622948.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_6940/2813622948.py[0m in [0;36m<module>[0;34m[0m
 [1;32m      4[0m [0mtable[0m[0;34m:[0m [0mCsvSelectable[0m [0;34m=[0m [0macquire[0m[0;34m.[0m[0mcsv[0m[0;34m.[0m[0mhttp[0m[0;34m([0m[0;34m"https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      5[0m [0;34m[0m[0m
 [0;32m----> 6[0;31m [0mtable[0m[0;34m.[0m[0mexcel_ref[0m[0;34m([0m[0;34m'B'[0m[0;34m)[0m[0;34m.[0m[0mis_not_blank[0m[0;34m([0m[0;34m)[0m[0;34m.[0m[0mvalidate[0m[0;34m([0m[0magainst[0m[0;34m.[0m[0mregex[0m[0;34m([0m[0;34m"John"[0m[0;34m)[0m[0;34m,[0m [0mraise_first_error[0m[0;34m=[0m[0;32mTrue[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m
 [0;32m~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/selection/selectable.py[0m in [0;36mvalidate[0;34m(self, validator, raise_first_error)[0m
-[1;32m    519[0m                     [0mfollowing[0m [0mvalidation[0m [0merror[0m [0mwas[0m [0mencountered[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    520[0m                     [0;34m{[0m[0mvalidator[0m[0;34m.[0m[0mmsg[0m[0;34m([0m[0mcell[0m[0;34m)[0m[0;34m}[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 521[0;31m                 ''')
-[0m[1;32m    522[0m                 [0;32melse[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    523[0m                     [0mvalidation_errors[0m[0;34m.[0m[0mappend[0m[0;34m([0m[0mvalidator[0m[0;34m.[0m[0mmsg[0m[0;34m([0m[0mcell[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    521[0m [0mencountered[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    522[0m [0;34m{[0m[0mvalidator[0m[0;34m.[0m[0mmsg[0m[0;34m([0m[0mcell[0m[0;34m)[0m[0;34m}[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 523[0;31m                 ''')
+[0m[1;32m    524[0m                 [0;32melse[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    525[0m                     [0mvalidation_errors[0m[0;34m.[0m[0mappend[0m[0;34m([0m[0mvalidator[0m[0;34m.[0m[0mmsg[0m[0;34m([0m[0mcell[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 
 [0;31mCellValidationError[0m: 
-                    When making selection from table: Unnamed Table the
-                    following validation error was encountered:
-                    "Paul" does not match pattern: "John"
+When making selection "No label provided" from table:
+"Unnamed Table" the following validation issues were
+encountered:
+"Paul" does not match pattern: "John"
                 
 CellValidationError: 
-                    When making selection from table: Unnamed Table the
-                    following validation error was encountered:
-                    "Paul" does not match pattern: "John"
+When making selection "No label provided" from table:
+"Unnamed Table" the following validation issues were
+encountered:
+"Paul" does not match pattern: "John"
                 
 

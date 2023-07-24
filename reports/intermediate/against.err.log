@@ -37,28 +37,30 @@ selection.validate(numeric_validator)
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mCellValidationError[0m                       Traceback (most recent call last)
-[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_4427/4217185943.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_7060/4217185943.py[0m in [0;36m<module>[0;34m[0m
 [1;32m     13[0m [0;31m# Noe validate it[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
 [1;32m     14[0m [0mnumeric_validator[0m [0;34m=[0m [0mNumericValidator[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0;32m---> 15[0;31m [0mselection[0m[0;34m.[0m[0mvalidate[0m[0;34m([0m[0mnumeric_validator[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m
 [0;32m~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/selection/selectable.py[0m in [0;36mvalidate[0;34m(self, validator, raise_first_error)[0m
-[1;32m    528[0m                     [0mfollowing[0m [0mvalidation[0m [0merrors[0m [0mwere[0m [0mencountered[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    529[0m                     [0;34m{[0m[0mlinesep[0m[0;34m.[0m[0mjoin[0m[0;34m([0m[0mvalidation_errors[0m[0;34m)[0m[0;34m}[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 530[0;31m                 ''')
-[0m[1;32m    531[0m [0;34m[0m[0m
-[1;32m    532[0m         [0;32mreturn[0m [0mself[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    531[0m [0mencountered[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    532[0m [0;34m{[0m[0mlinesep[0m[0;34m.[0m[0mjoin[0m[0;34m([0m[0mvalidation_errors[0m[0;34m)[0m[0;34m}[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 533[0;31m                 ''')
+[0m[1;32m    534[0m [0;34m[0m[0m
+[1;32m    535[0m         [0;32mreturn[0m [0mself[0m[0;34m[0m[0;34m[0m[0m
 
 [0;31mCellValidationError[0m: 
-                    When making selection from table: Unnamed Table the
-                    following validation errors were encountered:
-                    "Houses" is not numeric
+When making selection "No label provided" from table:
+"Unnamed Table" the following validation issues were
+encountered:
+"Houses" is not numeric
 "Cars" is not numeric
                 
 CellValidationError: 
-                    When making selection from table: Unnamed Table the
-                    following validation errors were encountered:
-                    "Houses" is not numeric
+When making selection "No label provided" from table:
+"Unnamed Table" the following validation issues were
+encountered:
+"Houses" is not numeric
 "Cars" is not numeric
                 
 
