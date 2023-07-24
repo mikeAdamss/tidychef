@@ -1,11 +1,11 @@
 import pytest
 
-from datachef.column.column import Column
-from datachef.exceptions import (
+from tidychef.column.column import Column
+from tidychef.exceptions import (
     BadConditionalResolverError,
     HorizontalConditionalHeaderError,
 )
-from datachef.lookup.engines.horizontal_condition import HorizontalCondition
+from tidychef.lookup.engines.horizontal_condition import HorizontalCondition
 
 
 def test_horizontal_resolver_exceptions():

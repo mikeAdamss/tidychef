@@ -4,11 +4,11 @@ from typing import Dict, List, Optional
 
 import pytest
 
-from datachef.direction.directions import Direction, above, below, down, left, right, up
-from datachef.exceptions import MissingLabelError
-from datachef.lookup.engines.closest import Closest
-from datachef.models.source.cell import Cell
-from datachef.selection.selectable import Selectable
+from tidychef.direction.directions import Direction, above, below, down, left, right, up
+from tidychef.exceptions import MissingLabelError
+from tidychef.lookup.engines.closest import Closest
+from tidychef.models.source.cell import Cell
+from tidychef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
 from tests.unit.helpers import qcel
 

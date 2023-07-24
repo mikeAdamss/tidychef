@@ -1,8 +1,8 @@
 import pytest
 
-from datachef import datafuncs as dfc
-from datachef.selection import filters
-from datachef.selection.selectable import Selectable
+from tidychef import datafuncs as dfc
+from tidychef.selection import filters
+from tidychef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab, fixture_vertical_dimensions
 
 

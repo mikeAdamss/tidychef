@@ -3,7 +3,6 @@
 
 title: Documentation
 author: https://github.com/mikeAdamss
-logo: ./images/logo.png
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
@@ -18,7 +17,7 @@ latex:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/mikeAdamss/datachef  # Online location of your book
+  url: https://github.com/mikeAdamss/tidychef # Online location of your book
 
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository

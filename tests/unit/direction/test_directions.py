@@ -1,7 +1,7 @@
 import pytest
 
-from datachef.direction.directions import above, below, down, left, right, up
-from datachef.exceptions import CardinalDeclarationWithOffset
+from tidychef.direction.directions import above, below, down, left, right, up
+from tidychef.exceptions import CardinalDeclarationWithOffset
 
 
 def test_cardinal_offset_can_be_overwritten():

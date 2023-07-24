@@ -6,8 +6,8 @@ import pytest
 import requests
 from pytest_mock import mocker
 
-from datachef import acquire
-from datachef.selection.xlsx.xlsx import XlsxSelectable
+from tidychef import acquire
+from tidychef.selection.xlsx.xlsx import XlsxSelectable
 
 
 def test_xlsx_via_http():

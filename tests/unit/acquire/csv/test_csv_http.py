@@ -5,8 +5,8 @@ import pytest
 import requests
 from pytest_mock import mocker
 
-from datachef import acquire
-from datachef.selection.selectable import Selectable
+from tidychef import acquire
+from tidychef.selection.selectable import Selectable
 
 
 def test_csv_via_http():

@@ -1,5 +1,5 @@
-from datachef import acquire
-from datachef.selection.selectable import Selectable
+from tidychef import acquire
+from tidychef.selection.selectable import Selectable
 
 
 def test_lists_of_lists():

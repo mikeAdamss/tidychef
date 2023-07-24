@@ -4,11 +4,11 @@ from typing import List
 
 import pytest
 
-from datachef import acquire
-from datachef.acquire.base import BaseReader
-from datachef.acquire.main import acquirer
-from datachef.exceptions import FileInputError, ZeroAcquiredTablesError
-from datachef.selection.selectable import Selectable
+from tidychef import acquire
+from tidychef.acquire.base import BaseReader
+from tidychef.acquire.main import acquirer
+from tidychef.exceptions import FileInputError, ZeroAcquiredTablesError
+from tidychef.selection.selectable import Selectable
 from tests.fixtures import path_to_fixture
 
 

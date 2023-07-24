@@ -1,4 +1,4 @@
-from datachef import acquire
+from tidychef import acquire
 from tests.fixtures import path_to_fixture
 
 

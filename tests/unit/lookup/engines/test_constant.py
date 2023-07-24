@@ -1,5 +1,5 @@
-from datachef.lookup.engines.constant import Constant
-from datachef.models.source.cell import Cell
+from tidychef.lookup.engines.constant import Constant
+from tidychef.models.source.cell import Cell
 
 
 def test_constant_lookup_engine():

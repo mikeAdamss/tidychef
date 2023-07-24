@@ -4,14 +4,14 @@ from typing import Dict, List
 
 import pytest
 
-from datachef.direction.directions import above, below, down, left, right, up
-from datachef.exceptions import (
+from tidychef.direction.directions import above, below, down, left, right, up
+from tidychef.exceptions import (
     ImpossibleLookupError,
     MissingLabelError,
     WithinAxisDeclarationError,
 )
-from datachef.lookup.engines.within import Within
-from datachef.selection.selectable import Selectable
+from tidychef.lookup.engines.within import Within
+from tidychef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
 
 

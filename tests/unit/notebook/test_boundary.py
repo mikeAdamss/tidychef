@@ -1,7 +1,7 @@
 import pytest
 
-from datachef.notebook.preview.boundary import Boundary
-from datachef.selection.selectable import Selectable
+from tidychef.notebook.preview.boundary import Boundary
+from tidychef.selection.selectable import Selectable
 from tests.fixtures.preconfigured import fixture_simple_small_one_tab
 from tests.unit.helpers import qcel
 

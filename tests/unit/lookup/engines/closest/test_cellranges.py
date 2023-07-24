@@ -4,9 +4,9 @@ from typing import List
 
 import pytest
 
-from datachef.direction.directions import Direction, above, below, down, left, right, up
-from datachef.lookup.engines.closest import CellRanges
-from datachef.selection.selectable import Selectable
+from tidychef.direction.directions import Direction, above, below, down, left, right, up
+from tidychef.lookup.engines.closest import CellRanges
+from tidychef.selection.selectable import Selectable
 from tests.fixtures import (
     fixture_simple_band_tab,
     fixture_simple_one_tab,

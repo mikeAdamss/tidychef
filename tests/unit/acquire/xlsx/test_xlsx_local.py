@@ -1,8 +1,8 @@
 from pathlib import Path
 from typing import List
 
-from datachef import acquire
-from datachef.selection.xlsx.xlsx import XlsxSelectable
+from tidychef import acquire
+from tidychef.selection.xlsx.xlsx import XlsxSelectable
 from tests.fixtures import path_to_fixture
 
 

@@ -1,10 +1,10 @@
 import pytest
 
-from datachef import acquire
-from datachef import datafuncs as dfc
-from datachef.direction.directions import down, left, right, up
-from datachef.lookup.engines.within import Within
-from datachef.selection.selectable import Selectable
+from tidychef import acquire
+from tidychef import datafuncs as dfc
+from tidychef.direction.directions import down, left, right, up
+from tidychef.lookup.engines.within import Within
+from tidychef.selection.selectable import Selectable
 
 # Note:
 # The logic of reversing the directionality of a within lookup

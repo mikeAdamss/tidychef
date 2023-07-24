@@ -1,8 +1,8 @@
 import pytest
 
-from datachef.direction.directions import down, left, right, up
-from datachef.exceptions import ReferenceOutsideSelectionError
-from datachef.selection.selectable import Selectable
+from tidychef.direction.directions import down, left, right, up
+from tidychef.exceptions import ReferenceOutsideSelectionError
+from tidychef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
 
 

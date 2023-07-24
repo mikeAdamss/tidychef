@@ -1,7 +1,7 @@
 import pytest
 
-from datachef.direction.directions import down, left, right, up
-from datachef.selection.selectable import Selectable
+from tidychef.direction.directions import down, left, right, up
+from tidychef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
 
 

@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from datachef import acquire
-from datachef.selection.selectable import Selectable
+from tidychef import acquire
+from tidychef.selection.selectable import Selectable
 from tests.fixtures import path_to_fixture
 
 

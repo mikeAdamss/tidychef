@@ -3,10 +3,10 @@ from typing import List
 
 import pytest
 
-from datachef import datafuncs as dfc
-from datachef.exceptions import BadExcelReferenceError, ReversedExcelRefError
-from datachef.models.source.cell import BaseCell
-from datachef.selection.selectable import Selectable
+from tidychef import datafuncs as dfc
+from tidychef.exceptions import BadExcelReferenceError, ReversedExcelRefError
+from tidychef.models.source.cell import BaseCell
+from tidychef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
 
 

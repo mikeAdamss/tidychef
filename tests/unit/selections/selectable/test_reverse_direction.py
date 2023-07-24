@@ -3,8 +3,8 @@ from dataclasses import dataclass
 
 import pytest
 
-from datachef.direction.directions import Direction, above, below, down, left, right, up
-from datachef.selection.selectable import _reverse_direction
+from tidychef.direction.directions import Direction, above, below, down, left, right, up
+from tidychef.selection.selectable import _reverse_direction
 
 
 def test_reverse_direction():

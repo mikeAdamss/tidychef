@@ -6,14 +6,14 @@ from pathlib import Path
 
 import pytest
 
-from datachef.column import Column
-from datachef.direction.directions import above, below, left, right
-from datachef.exceptions import DroppingNonColumnError, MisalignedHeadersError
-from datachef.lookup.engines.constant import Constant
-from datachef.lookup.engines.direct import Directly
-from datachef.output.tidydata import TidyData
-from datachef.selection import filters
-from datachef.selection.selectable import Selectable
+from tidychef.column import Column
+from tidychef.direction.directions import above, below, left, right
+from tidychef.exceptions import DroppingNonColumnError, MisalignedHeadersError
+from tidychef.lookup.engines.constant import Constant
+from tidychef.lookup.engines.direct import Directly
+from tidychef.output.tidydata import TidyData
+from tidychef.selection import filters
+from tidychef.selection.selectable import Selectable
 from tests.fixtures import fixture_wide_band_tab
 from tests.fixtures.helpers import path_to_fixture
 from tests.unit.helpers import assert_csvs_match

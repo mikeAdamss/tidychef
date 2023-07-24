@@ -1,12 +1,12 @@
 import pytest
 
-from datachef import acquire, against
-from datachef.column.column import Column
-from datachef.direction import down
-from datachef.exceptions import CellValidationError
-from datachef.lookup.engines.constant import Constant
-from datachef.models.source.cell import Cell
-from datachef.selection import Selectable
+from tidychef import acquire, against
+from tidychef.column.column import Column
+from tidychef.direction import down
+from tidychef.exceptions import CellValidationError
+from tidychef.lookup.engines.constant import Constant
+from tidychef.models.source.cell import Cell
+from tidychef.selection import Selectable
 
 
 def test_resolving_column_value_from_observation():

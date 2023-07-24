@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from datachef.direction.directions import down, left, right, up
-from datachef.lookup.engines.closest import CellRange
-from datachef.models.source.cell import Cell
+from tidychef.direction.directions import down, left, right, up
+from tidychef.lookup.engines.closest import CellRange
+from tidychef.models.source.cell import Cell
 from tests.unit.helpers import qcel
 
 

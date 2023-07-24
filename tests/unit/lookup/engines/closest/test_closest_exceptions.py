@@ -4,10 +4,10 @@ from typing import Dict, List, Optional
 
 import pytest
 
-from datachef.direction.directions import Direction, above, below, down, left, right, up
-from datachef.exceptions import AmbiguousLookupError, ImpossibleLookupError
-from datachef.lookup.engines.closest import Closest
-from datachef.selection.selectable import Selectable
+from tidychef.direction.directions import Direction, above, below, down, left, right, up
+from tidychef.exceptions import AmbiguousLookupError, ImpossibleLookupError
+from tidychef.lookup.engines.closest import Closest
+from tidychef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
 from tests.unit.helpers import qcel
 

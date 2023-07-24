@@ -1,16 +1,16 @@
 import pytest
 
-from datachef import against
-from datachef.against.implementations.items import ItemsValidator
-from datachef.against.implementations.length import LengthValidator
-from datachef.against.implementations.numeric import (
+from tidychef import against
+from tidychef.against.implementations.items import ItemsValidator
+from tidychef.against.implementations.length import LengthValidator
+from tidychef.against.implementations.numeric import (
     IsNotNumericOrFloatValidator,
     IsNotNumericValidator,
     IsNumericOrFloatValidator,
     IsNumericValidator,
 )
-from datachef.against.implementations.regex import RegexValidator
-from datachef.models.source.cell import Cell
+from tidychef.against.implementations.regex import RegexValidator
+from tidychef.models.source.cell import Cell
 
 
 def test_against_regex():

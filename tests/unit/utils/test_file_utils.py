@@ -2,8 +2,8 @@ from pathlib import Path
 
 import pytest
 
-from datachef.exceptions import FileInputError
-from datachef.utils import fileutils
+from tidychef.exceptions import FileInputError
+from tidychef.utils import fileutils
 from tests.fixtures import path_to_fixture
 
 

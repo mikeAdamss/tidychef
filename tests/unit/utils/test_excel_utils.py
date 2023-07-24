@@ -3,9 +3,9 @@ from typing import List
 
 import pytest
 
-from datachef.models.source.cell import BaseCell
-from datachef.selection.selectable import Selectable
-from datachef.utils import cellutils
+from tidychef.models.source.cell import BaseCell
+from tidychef.selection.selectable import Selectable
+from tidychef.utils import cellutils
 from tests.fixtures import fixture_is_wide, fixture_simple_one_tab
 
 

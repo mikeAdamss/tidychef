@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "datachef"
+name = "tidychef"
 version = "0.1.0"
 description = "Python package for transforming human readable tables into tidy data"
 authors = ["mikeAdamss <mikelovesbooks@gmail.com>"]
 packages = [
-  {include = "datachef"},
+  {include = "tidychef"},
 ]
 license = "Apache 2.0"
 
@@ -54,5 +54,5 @@ python =
 allowlist_externals = pytest, poetry
 commands = 
     poetry install
-    poetry run pytest --cov-report term-missing --cov=datachef --cov-fail-under=100 ./tests/
+    poetry run pytest --cov-report term-missing --cov=tidychef --cov-fail-under=100 ./tests/
 """

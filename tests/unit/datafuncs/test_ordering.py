@@ -1,5 +1,5 @@
-from datachef import datafuncs as dfc
-from datachef.models.source.cell import BaseCell
+from tidychef import datafuncs as dfc
+from tidychef.models.source.cell import BaseCell
 
 
 def test_order_cells_leftright_topbottom():

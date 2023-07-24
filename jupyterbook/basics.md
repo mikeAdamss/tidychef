@@ -1,6 +1,6 @@
 # Chapter 1: Basics
 
-This chapter covers the basic of working with datachef to create tidy data.
+This chapter covers the basic of working with tidychef to create tidy data.
 
 By the end of this chapter you should:
 

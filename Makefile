@@ -8,7 +8,7 @@ install:
 	poetry install
 	
 test: install ## Run all unit tests and view coverage report
-	poetry run pytest --cov-report term-missing --cov=datachef --cov-fail-under=100 ./tests/
+	poetry run pytest --cov-report term-missing --cov=tidychef --cov-fail-under=100 ./tests/
 
 format: ## Format the codebase with isort and black
 	rm -rf ./jupyterbook/venv
@@ -16,7 +16,7 @@ format: ## Format the codebase with isort and black
 	poetry run isort ./* && poetry run black ./*
 
 checkimports: install ## Use pylint to check for unused imports
-	poetry run pylint ./datachef | grep "unused-import"
+	poetry run pylint ./tidychef | grep "unused-import"
 
 book: ## Create the jupyter book in /jupyterbook/_build
 	rm -rf ./jupyterbook/_build
@@ -30,7 +30,7 @@ book: ## Create the jupyter book in /jupyterbook/_build
 	python -m venv ./jupyterbook/pdoc_venv
 	. ./jupyterbook/pdoc_venv/bin/activate
 	pip install pdoc
-	pdoc ./datachef -o ./jupyterbook/_build/html/api_docs
+	pdoc ./tidychef -o ./jupyterbook/_build/html/api_docs
 
 push_docs: ## Publish the jupyter book to github pages
 	poetry run pip install ghp-import

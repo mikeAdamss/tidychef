@@ -4,19 +4,19 @@ from os import linesep
 
 import pytest
 
-from datachef import datafuncs as dfc
-from datachef.column.column import Column
-from datachef.direction.directions import down, left, right, up
-from datachef.exceptions import (
+from tidychef import datafuncs as dfc
+from tidychef.column.column import Column
+from tidychef.direction.directions import down, left, right, up
+from tidychef.exceptions import (
     FailedLookupError,
     MissingDirectLookupError,
     MissingLabelError,
     UnknownDirectionError,
 )
-from datachef.lookup.engines.direct import Directly
-from datachef.models.source.cell import Cell
-from datachef.selection import filters
-from datachef.selection.selectable import Selectable
+from tidychef.lookup.engines.direct import Directly
+from tidychef.models.source.cell import Cell
+from tidychef.selection import filters
+from tidychef.selection.selectable import Selectable
 from tests.fixtures import fixture_vertical_dimensions, fixture_wide_band_tab
 
 
