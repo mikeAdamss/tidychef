@@ -462,12 +462,12 @@ document.write(`
 <p>The key difference to understand is as follow:</p>
 <ul class="simple">
 <li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;selectable&gt;.validate()</span></code> method run against <strong>selections</strong> so police your <em>extraction logic</em>.</p></li>
-<li><p>Validations via the <code class="docutils literal notranslate"><span class="pre">Column(validation=)</span></code> keyword runs against the <strong>output</strong> so police your <em>final product</em>.</p></li>
+<li><p>Validations via the <code class="docutils literal notranslate"><span class="pre">Column(validate=)</span></code> keyword runs against the <strong>output</strong> so police your <em>final product</em>.</p></li>
 </ul>
 <p>Consider the following scenarios:</p>
 <ul class="simple">
-<li><p>1.) You want to select an “anchor cell” or a selection of cells for the sole purpose of subtracting it from another selection. It could be important to confirm these selections are accurate but because they’re not directly extracted values then <code class="docutils literal notranslate"><span class="pre">validation=</span></code> will never see them (just the consequence of them) so the <code class="docutils literal notranslate"><span class="pre">&lt;selectable&gt;.validate()</span></code> is more appropriate.</p></li>
-<li><p>2.) You’re are using <code class="docutils literal notranslate"><span class="pre">apply=</span></code> to cleanse cell value data <em>at the point of extraction</em> and need to make sure the correct things are happening, the <code class="docutils literal notranslate"><span class="pre">&lt;selectable&gt;.validate()</span></code> method will <strong>never see these cleansed values</strong>, but <code class="docutils literal notranslate"><span class="pre">validation=</span></code> will.</p></li>
+<li><p>1.) You want to select an “anchor cell” or a selection of cells for the sole purpose of subtracting it from another selection. It could be important to confirm these selections are accurate but because they’re not directly extracted values then <code class="docutils literal notranslate"><span class="pre">validate=</span></code> will never see them (just the consequence of them) so the <code class="docutils literal notranslate"><span class="pre">&lt;selectable&gt;.validate()</span></code> is more appropriate.</p></li>
+<li><p>2.) You’re are using <code class="docutils literal notranslate"><span class="pre">apply=</span></code> to cleanse cell value data <em>at the point of extraction</em> and need to make sure the correct things are happening, the <code class="docutils literal notranslate"><span class="pre">&lt;selectable&gt;.validate()</span></code> method will <strong>never see these cleansed values</strong>, but <code class="docutils literal notranslate"><span class="pre">validate=</span></code> will.</p></li>
 </ul>
 <p>There are nuances on where its best to use each but the pithy version is “use both strategies, wherever possible and as much as its practical to do so”.</p>
 </section>
@@ -569,7 +569,7 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">CellValidationError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_7114</span><span class="o">/</span><span class="mf">1874977267.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_44343</span><span class="o">/</span><span class="mf">1874977267.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">16</span> 
 <span class="ne">---&gt; </span><span class="mi">17</span> <span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
@@ -589,11 +589,11 @@ document.write(`
 <span class="g g-Whitespace">     </span><span class="mi">71</span><span class="sd">         header_row = self._data[0]</span>
 
 <span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/output/tidydata.py</span> in <span class="ni">_transform</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">301</span><span class="sd">                 for column in standard_columns:</span>
-<span class="g g-Whitespace">    </span><span class="mi">302</span><span class="sd">                     col_value = column.resolve_column_cell_from_obs_cell(</span>
-<span class="ne">--&gt; </span><span class="mi">303</span><span class="sd">                         observation</span>
-<span class="g g-Whitespace">    </span><span class="mi">304</span><span class="sd">                     ).value</span>
-<span class="g g-Whitespace">    </span><span class="mi">305</span><span class="sd">                     column_value_dict[column.label] = col_value</span>
+<span class="g g-Whitespace">    </span><span class="mi">300</span><span class="sd">                 for column in standard_columns:</span>
+<span class="g g-Whitespace">    </span><span class="mi">301</span><span class="sd">                     col_value = column.resolve_column_cell_from_obs_cell(</span>
+<span class="ne">--&gt; </span><span class="mi">302</span><span class="sd">                         observation</span>
+<span class="g g-Whitespace">    </span><span class="mi">303</span><span class="sd">                     ).value</span>
+<span class="g g-Whitespace">    </span><span class="mi">304</span><span class="sd">                     column_value_dict[column.label] = col_value</span>
 
 <span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/column/base.py</span> in <span class="ni">resolve_column_cell_from_obs_cell</span><span class="nt">(self, observation_cell, *args)</span>
 <span class="g g-Whitespace">    </span><span class="mi">105</span><span class="sd">         &quot;&quot;&quot;</span>

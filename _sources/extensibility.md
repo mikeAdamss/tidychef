@@ -8,7 +8,8 @@ But the world of data is a wide one, and the sheer scope of the "messy" in messy
 
 Therefore, datachef has been consciously designed as a "very unlocked box" so to speak.
 
-- Want to load a new data format into datachef or acquire a known data format via a different mechanism (ftp rather than http say, or pulled from your own datastore) ? It's not that hard and its documented.
+- Want to load a new data format into datachef? It's not that hard and its documented.
+- Want to acquire a known data format via a different mechanism (ftp rather than http say, or pulled from your own datastore) ? It's not that hard and its documented.
 - Want to create ad-hoc selection filters to support your specific use case? It's not that hard and its documented.
 - Want to extend selection classes with methods _that **you specifically** would benefit from_? It's not that hard and its documented.
 - Want to create custom validators suitable to your own use case and data domain? It's not that hard and its documented.

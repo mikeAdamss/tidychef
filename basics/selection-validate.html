@@ -542,7 +542,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;datachef.selection.csv.csv.CsvSelectable at 0x112702110&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;datachef.selection.csv.csv.CsvSelectable at 0x112454110&gt;
 </pre></div>
 </div>
 </div>
@@ -569,9 +569,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>When making selection &quot;No label provided&quot; from table:
-&quot;Unnamed Table&quot; the following validation issues were
-encountered:
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>When making selections from table: Unnamed Table the
+following validation errors were encountered:
 &quot;George&quot; not in list: [&#39;John&#39;, &#39;Paul&#39;, &#39;Ringo&#39;]
                 
 </pre></div>
@@ -604,9 +603,8 @@ encountered:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>When making selection &quot;No label provided&quot; from table:
-&quot;Unnamed Table&quot; the following validation issues were
-encountered:
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>When making selections from table: Unnamed Table the
+following validation errors were encountered:
 &quot;Paul&quot; does not match pattern: &quot;John&quot;
 &quot;George&quot; does not match pattern: &quot;John&quot;
 &quot;Ringo&quot; does not match pattern: &quot;John&quot;
@@ -635,22 +633,21 @@ encountered:
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">CellValidationError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_6940</span><span class="o">/</span><span class="mf">2813622948.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_44006</span><span class="o">/</span><span class="mf">2813622948.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv&quot;</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">5</span> 
 <span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">against</span><span class="o">.</span><span class="n">regex</span><span class="p">(</span><span class="s2">&quot;John&quot;</span><span class="p">),</span> <span class="n">raise_first_error</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/selection/selectable.py</span> in <span class="ni">validate</span><span class="nt">(self, validator, raise_first_error)</span>
-<span class="g g-Whitespace">    </span><span class="mi">521</span> <span class="n">encountered</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">522</span> <span class="p">{</span><span class="n">validator</span><span class="o">.</span><span class="n">msg</span><span class="p">(</span><span class="n">cell</span><span class="p">)}</span>
-<span class="ne">--&gt; </span><span class="mi">523</span>                 <span class="s1">&#39;&#39;&#39;)</span>
-<span class="g g-Whitespace">    </span><span class="mi">524</span><span class="s1">                 else:</span>
-<span class="g g-Whitespace">    </span><span class="mi">525</span><span class="s1">                     validation_errors.append(validator.msg(cell))</span>
+<span class="g g-Whitespace">    </span><span class="mi">519</span> <span class="n">following</span> <span class="n">validation</span> <span class="n">error</span> <span class="n">was</span> <span class="n">encountered</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">520</span> <span class="p">{</span><span class="n">validator</span><span class="o">.</span><span class="n">msg</span><span class="p">(</span><span class="n">cell</span><span class="p">)}</span>
+<span class="ne">--&gt; </span><span class="mi">521</span>                 <span class="s1">&#39;&#39;&#39;)</span>
+<span class="g g-Whitespace">    </span><span class="mi">522</span><span class="s1">                 else:</span>
+<span class="g g-Whitespace">    </span><span class="mi">523</span><span class="s1">                     validation_errors.append(validator.msg(cell))</span>
 
 <span class="ne">CellValidationError</span>: 
-<span class="s1">When making selection &quot;No label provided&quot; from table:</span>
-<span class="s1">&quot;Unnamed Table&quot; the following validation issues were</span>
-<span class="ne">encountered</span>:
+<span class="s1">When making selections from table: Unnamed Table the</span>
+<span class="s1">following validation error was encountered:</span>
 <span class="s1">&quot;Paul&quot; does not match pattern: &quot;John&quot;</span>
 <span class="s1">                </span>
 </pre></div>

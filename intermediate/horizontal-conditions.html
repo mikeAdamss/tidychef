@@ -439,7 +439,6 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#condition-singer-in-the-beatles">Condition: Singer In The Beatles</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-design">A Note On Design</a></li>
 </ul>
             </nav>
         </div>
@@ -701,17 +700,6 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="a-note-on-design">
-<h2>A Note On Design<a class="headerlink" href="#a-note-on-design" title="Permalink to this heading">#</a></h2>
-<p>There is not (and never will be) any version of a “vertical condition” in datachef.</p>
-<p>When working with datasets of unknown length we try to always support (or at least leave open the door to) the concept of data streaming, a horizontal condition meets that criteria as it works within the context of a single “tidy row” of “tidy data” so can be iterated, streamed or potentially even distributed for processing relatively easily - none of which works if row 5 is informed by row 4 etc.</p>
-<p>If you find yourself needing to lookup vertically into your extracted columns:</p>
-<ul class="simple">
-<li><p>(a) Stop and think about it, is there another way to skin this cat?</p></li>
-<li><p>(b) Are you really trying to create tidy data or are you trying to create something else?</p></li>
-<li><p>(c) If you need to - then just shunt it into pandas for post processing, you’re working on a data series and that’s not a paradime datachef was built to support.</p></li>
-</ul>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -787,7 +775,6 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#condition-singer-in-the-beatles">Condition: Singer In The Beatles</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-design">A Note On Design</a></li>
 </ul>
   </nav></div>
 
