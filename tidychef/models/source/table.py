@@ -50,7 +50,7 @@ class LiveTable:
     extend a Table of cells (.filtered) via comparing the two. This enables the
     easy extension of a cell selection as well as the filtering down of one.
 
-    :param data_table: A datachef Table object holding the cells representing
+    :param data_table: A tidychef Table object holding the cells representing
     a table.
     :param name: The name of the table where it has a name
     :param source: The filename, url or identifier of the source that has

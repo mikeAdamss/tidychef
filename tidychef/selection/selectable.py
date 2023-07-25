@@ -39,24 +39,6 @@ from tidychef.notebook.preview.html.main import preview
 from tidychef.utils.decorators import dontmutate
 
 
-def _reverse_direction(direction: Direction):
-    """
-    Helper to reverse the provided direction to help make
-    the api conceptually easier for users.
-    """
-
-    if direction.name in ["down", "below"]:
-        return up
-    elif direction.name in ["up", "above"]:
-        return down
-    elif direction.name == "left":
-        return right
-    elif direction.name == "right":
-        return left
-    else:
-        raise Exception(f"Unable to identify direction: {direction}")
-
-
 class Selectable(LiveTable):
     """
     Inherits from LiveTable to add cell selection methods that are generic to all tabulated inputs.
@@ -704,7 +686,7 @@ following validation errors were encountered:
         # In reality that's exactly backwards, an observation actually finds
         # a column value (by being passed to the lookup engine constructed below).
         # As such we need to reverse the stated direction.
-        return Directly(self.label, self, _reverse_direction(direction))
+        return Directly(self.label, self, direction.inverted())
 
     def finds_observations_closest(self, direction: Direction) -> Closest:
         """
@@ -731,7 +713,7 @@ following validation errors were encountered:
         # In reality that's exactly backwards, an observation actually finds
         # a column value (by being passed to the lookup engine constructed below).
         # As such we need to reverse the stated direction.
-        return Closest(self.label, self, _reverse_direction(direction))
+        return Closest(self.label, self, direction.inverted())
 
     def finds_observations_within(
         self, direction: Direction, start: Direction, end: Direction
@@ -757,7 +739,7 @@ following validation errors were encountered:
         return Within(
             self.label,
             self,
-            _reverse_direction(direction),
+            direction.inverted(),
             start.inverted(),
             end.inverted(),
             table=self.name,

@@ -3,9 +3,8 @@ TODO - works but messy, rewrite for clarity once we've a comprehensive test
 suite in place.
 """
 
-from typing import Dict, List, Union
+from typing import List
 
-# from datachef.selection.selectable import Selectable
 from tidychef.models.source.table import LiveTable
 from tidychef.utils import cellutils
 

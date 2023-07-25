@@ -34,7 +34,7 @@ def http(
     a url with the http or https scheme.
 
     :param source: A url.
-    :param selectable: A class that implements datachef.selection.selectable.Selectable of an inheritor of. Default is CsvSelectable
+    :param selectable: A class that implements tidychef.selection.selectable.Selectable of an inheritor of. Default is CsvSelectable
     :param pre_hook: A callable that can take source as an argument
     :param post_hook: A callable that can take the output of HttpCsvReader.parse() as an argument.
     :param session: An optional requests.Session object.

@@ -25,7 +25,7 @@ def preview(
     """
     Create a preview from one of more selections of cells.
 
-    :param *selections: 1-n datachef selectables of inheritors of
+    :param *selections: 1-n tidychef selectables of inheritors of
     that will inform the preview.
     :param path: A Path or string representation of for where
     we want to write a html preview to local.

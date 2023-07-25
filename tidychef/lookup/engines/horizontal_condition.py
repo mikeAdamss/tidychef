@@ -43,7 +43,7 @@ class HorizontalCondition(BaseLookupEngine):
         For a given observation row (as denoted by the unused Cell argument),
         resolve the
 
-        :param _: Unused datachef cell object representing the observation in
+        :param _: Unused tidychef cell object representing the observation in
         question. Required to match api signature used by other look engines.
         :param cells_on_row: Dictionary containing contents of other
         columns already resolve against the observation cell.

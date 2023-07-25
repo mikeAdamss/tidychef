@@ -329,7 +329,7 @@ class Closest(BaseLookupEngine):
         :param cell: The cell we're trying to find the correct range for
         :param ceiling: The lowest range index to consider
         :param floor: The highest range index to consider
-        :return: The datachef Cell object representing the
+        :return: The tidychef Cell object representing the
         column cell.
         """
 

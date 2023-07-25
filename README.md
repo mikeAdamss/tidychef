@@ -15,9 +15,9 @@ into something that looks like this:
 ![](./jupyterbook/images/bands-after.png)
 _Note: image cropped for reasons of practicality._
 
-Tidychef is **designed to allow even novice python users or analysts to quickly become productive** but also has an advanced feature set and is designed to be readily and easily extended (adding new source of tabulated data, new output formats, domain specific validation etc are all possible and documented in detail).
+Tidychef is **designed to allow even novice python users or analysts to quickly become productive** but also has an advanced feature set and is designed to be readily and easily extended (adding new source of tabulated data, your own use case specific methods and filters and domain specific validation etc are all possible and documented in detail).
 
-Examples, in depth training material and technical documentation [can be found here](https://mikeadamss.github.io/tidychef/intro.html#).
+In depth training material, examples and technical documentation [can be found here](https://mikeadamss.github.io/tidychef/intro.html#).
 
 ## Installation
 
@@ -27,6 +27,6 @@ pip install tidychef
 
 ## Acknowlagements
 
-Datachef is directly inspired by the python package [databaker](https://github.com/sensiblecodeio/databaker) created by [The Sensible Code Company](https://sensiblecode.io/) in partnership with the United Kingdoms [Office For National Statistics](https://www.ons.gov.uk/).
+Tidychef is directly inspired by the python package [databaker](https://github.com/sensiblecodeio/databaker) created by [The Sensible Code Company](https://sensiblecode.io/) in partnership with the United Kingdoms [Office For National Statistics](https://www.ons.gov.uk/).
 
 While I liked [databaker](https://github.com/sensiblecodeio/databaker) and successfully worked with it on multiple ETL projects over the course of almost a decade, this software should be considered the culmination of that work and the lessons learned from that time.

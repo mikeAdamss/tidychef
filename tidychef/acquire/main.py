@@ -32,8 +32,8 @@ def acquirer(
     to enable pre and post hook.
 
     :param source: A source appropriate for the provided BaseReader
-    :param reader: A class that implements datachef.acquire.base.BaseReader
-    :param selectable: A class that implements datachef.selection.selectable.Selectable
+    :param reader: A class that implements tidychef.acquire.base.BaseReader
+    :param selectable: A class that implements tidychef.selection.selectable.Selectable
     :param pre_hook: A callable that can take source as an argument
     :param post_hook: A callable that can take the output of reader.parse() as an argument.
     :return: A single or list of class Selectable or inheritor of as returned by reader after

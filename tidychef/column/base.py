@@ -1,10 +1,7 @@
 from abc import ABCMeta
-from typing import Generator, Tuple
 
 from tidychef.lookup.base import BaseLookupEngine
 from tidychef.models.source.cell import Cell
-
-# from datachef.selection.selectable import Selectable
 
 
 class BaseColumn(metaclass=ABCMeta):
@@ -85,8 +82,8 @@ class BaseColumn(metaclass=ABCMeta):
                 return Cell
         ``
 
-        :param cell: A single datachef Cell object.
-        :return: A single datachef Cell object.
+        :param cell: A single tidychef Cell object.
+        :return: A single tidychef Cell object.
         """
         return cell
 
@@ -100,8 +97,8 @@ class BaseColumn(metaclass=ABCMeta):
         this particular Column is applying custom handling of
         some sort.
 
-        :param cell: A single datachef Cell object.
-        :return: A single datachef Cell object.
+        :param cell: A single tidychef Cell object.
+        :return: A single tidychef Cell object.
         """
         cell = self.engine.resolve(observation_cell, *args)
         cell = self._post_lookup(cell)

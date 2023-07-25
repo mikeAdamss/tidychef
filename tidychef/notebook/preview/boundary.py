@@ -2,8 +2,6 @@ from typing import Dict, List, Optional
 
 from tidychef import datafuncs as dfc
 from tidychef.models.source.cell import Cell
-
-# from datachef.selection.selectable import Selectable
 from tidychef.models.source.table import LiveTable
 
 

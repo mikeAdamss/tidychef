@@ -144,7 +144,7 @@ class Within(BaseLookupEngine):
         Filters cells known to the engine to create a list of cells that are
         valid within the start= and end= params relative to the cell in question.
 
-        :param cell: The datachef cell we're trying to resolve the column
+        :param cell: The tidychef cell we're trying to resolve the column
         cell for.
         :return: A list of cells that are feasible
         """
@@ -227,7 +227,7 @@ class Within(BaseLookupEngine):
         appropriate cell as declared via this
         visual relationship.
 
-        :param cell: The datachef Cell we want to resolve a column Cell for.
+        :param cell: The tidychef Cell we want to resolve a column Cell for.
         :return: The column Cell we're resolved.
         """
 

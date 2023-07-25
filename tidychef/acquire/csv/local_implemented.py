@@ -26,7 +26,7 @@ def local(
 ) -> CsvSelectable:
     """
     Read data from a Path (or string representing a path)
-    present on the same machine where datachef is running.
+    present on the same machine where tidychef is running.
 
     This local csv reader uses csv.reader() from the standard
     python library. Keyword arguments passed into this function
@@ -34,7 +34,7 @@ def local(
     https://docs.python.org/3/library/csv.html
 
     :param source: A Path object or a string representing a path
-    :param selectable: A class that implements datachef.selection.selectable.Selectable of an inheritor of. Default is CsvSelectable
+    :param selectable: A class that implements tidychef.selection.selectable.Selectable of an inheritor of. Default is CsvSelectable
     :param pre_hook: A callable that can take source as an argument
     :param post_hook: A callable that can take the output of LocalCsvReader.parse() as an argument.
     :return: A single populated Selectable of type as specified by selectable param

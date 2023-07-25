@@ -50,7 +50,7 @@ class BaseCell:
         the x and y attributes of the provided BaseCell or Cell
         object.
 
-        :param other_cell: A different datachef BaseCell or
+        :param other_cell: A different tidychef BaseCell or
         inheritor of.
         :return: True of cells have same table location, else False
         """

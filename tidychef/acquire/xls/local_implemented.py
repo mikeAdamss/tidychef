@@ -27,7 +27,7 @@ def local(
 ) -> Union[XlsSelectable, List[XlsSelectable]]:
     """
     Read data from a Path (or string representing a path)
-    present on the same machine where datachef is running.
+    present on the same machine where tidychef is running.
 
     This xls reader uses xlrd:
     https://xlrd.readthedocs.io/en/latest/
@@ -36,7 +36,7 @@ def local(
     the xlrd.open_workbook() method.
 
     :param source: A Path object or a string representing a path
-    :param selectable: A class that implements datachef.selection.selectable.Selectable of an inheritor of. Default is XlsSelectable
+    :param selectable: A class that implements tidychef.selection.selectable.Selectable of an inheritor of. Default is XlsSelectable
     :param pre_hook: A callable that can take source as an argument
     :param post_hook: A callable that can take the output of XlsSelectable.parse() as an argument.
     :return: A single populated Selectable of type as specified by selectable param
@@ -85,7 +85,7 @@ class LocalXlsReader(BaseReader):
         workbook: xlrd.Book = xlrd.open_workbook(source)
         assert isinstance(workbook, xlrd.Book)
 
-        datachef_selectables = []
+        tidychef_selectables = []
         worksheet_names = workbook.sheet_names()
         for worksheet_name in worksheet_names:
 
@@ -99,7 +99,7 @@ class LocalXlsReader(BaseReader):
                         Cell(x=x, y=y, value=str(cell.value) if cell.value else "")
                     )
 
-            datachef_selectables.append(
+            tidychef_selectables.append(
                 selectable(table, source=source, name=worksheet_name)
             )
-        return datachef_selectables
+        return tidychef_selectables

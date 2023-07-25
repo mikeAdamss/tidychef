@@ -97,8 +97,8 @@ class Column(BaseColumn):
         Makes use of apply and/or validation callables where the
         user has provided them.
 
-        :param cell: A single instance of a datachef Cell object.
-        :return: A single instance of a datachef Cell object.
+        :param cell: A single instance of a tidychef Cell object.
+        :return: A single instance of a tidychef Cell object.
         """
 
         # Apply

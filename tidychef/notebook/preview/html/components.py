@@ -6,8 +6,6 @@ from tidychef.models.source.table import LiveTable
 
 from .constants import COLOURS
 
-# from datachef.selection.selectable import Selectable
-
 
 class SelectionKey:
     """
@@ -19,7 +17,7 @@ class SelectionKey:
         Creates a mapping between a colour choice
         and a named selection of cells.
 
-        :param selection: A populated datachef seletable
+        :param selection: A populated tidychef seletable
         or inheritor of.
         :param colour_choice: An integer specifying a colour
         from the constant list COLOURS
@@ -34,10 +32,10 @@ class SelectionKey:
 
     def matches_xy_of_cell(self, cell: Cell):
         """
-        Is the provided datachef Cell present in the
+        Is the provided tidychef Cell present in the
         selection of cells represented by this colour.
 
-        :param cell: A single datachef Cell object.
+        :param cell: A single tidychef Cell object.
         """
         cells = [x for x in self.cells if x.x == cell.x and x.y == cell.y]
         return len(cells) == 1
@@ -67,7 +65,7 @@ class SelectionKeys:
         """
         Add a single SelectionKey to SelectionKeys
 
-        :param selection: The single datachef selectable or
+        :param selection: The single tidychef selectable or
         inheritor of that is represented by a single colour.
         """
         self._keys.append(SelectionKey(selection, self.colour_choice))

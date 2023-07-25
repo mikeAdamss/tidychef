@@ -1,10 +1,8 @@
 from __future__ import annotations
 
 import csv
-from dataclasses import dataclass
-from os import linesep
 from pathlib import Path
-from typing import Callable, Dict, List, Optional, Union, FrozenSet
+from typing import Callable, Dict, List, Optional, Union
 
 import tabulate
 from IPython.core.display import HTML, display
@@ -12,7 +10,6 @@ from IPython.core.display import HTML, display
 from tidychef.column.base import BaseColumn
 from tidychef.exceptions import DroppingNonColumnError, MisalignedHeadersError
 from tidychef.lookup.engines.horizontal_condition import HorizontalCondition
-
 from tidychef.models.source.table import LiveTable
 from tidychef.notebook.ipython import in_notebook
 from tidychef.notebook.preview.html.tidy_data import tidy_data_as_html_table_string

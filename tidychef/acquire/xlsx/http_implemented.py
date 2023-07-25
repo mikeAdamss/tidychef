@@ -33,7 +33,7 @@ def http(
 ) -> Union[XlsxSelectable, List[XlsxSelectable]]:
     """
     Read data from a Path (or string representing a path)
-    present on the same machine where datachef is running.
+    present on the same machine where tidychef is running.
 
     This local xlsx reader uses openpyxl:
     https://openpyxl.readthedocs.io/en/stable/index.html
@@ -42,7 +42,7 @@ def http(
     the openpyxl.load_workbook() method.
 
     :param source: A url.
-    :param selectable: A class that implements datachef.selection.selectable.Selectable of an inheritor of. Default is XlsxSelectable
+    :param selectable: A class that implements tidychef.selection.selectable.Selectable of an inheritor of. Default is XlsxSelectable
     :param pre_hook: A callable that can take source as an argument
     :param post_hook: A callable that can take the output of XlsxSelectable.parse() as an argument.
     :param session: An optional requests.Session object.
@@ -116,7 +116,7 @@ class HttpXlsxReader(BaseReader):
             bio, data_only=data_only, **kwargs
         )
 
-        datachef_selectables = []
+        tidychef_selectables = []
         worksheet_names = workbook.get_sheet_names()
         for worksheet_name in worksheet_names:
 
@@ -129,7 +129,7 @@ class HttpXlsxReader(BaseReader):
                         Cell(x=x, y=y, value=str(cell.value) if cell.value else "")
                     )
 
-            datachef_selectables.append(
+            tidychef_selectables.append(
                 selectable(table, source=source, name=worksheet_name)
             )
-        return datachef_selectables
+        return tidychef_selectables

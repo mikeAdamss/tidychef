@@ -18,7 +18,7 @@ from .implementations.regex import RegexValidator
 def regex(pattern: str) -> RegexValidator:
     """
     Creates a RegexValidator to check if the
-    datachef Cell.value property of a given Cell
+    tidychef Cell.value property of a given Cell
     matches the provided pattern.
 
     :param pattern: A regular expression
@@ -30,7 +30,7 @@ def regex(pattern: str) -> RegexValidator:
 def items(items: List[str]) -> ItemsValidator:
     """
     Creates an ItemsValidator to check if the
-    datachef Cell.value property of a given Cell
+    tidychef Cell.value property of a given Cell
     is contained within the provided list.
 
     :param items: A list of strings representing valid values
@@ -42,7 +42,7 @@ def items(items: List[str]) -> ItemsValidator:
 def length(least: Optional[int] = None, most: Optional[int] = None) -> LengthValidator:
     """
     Creates a LengthValidator to check if the
-    datachef Cell.value property of a given Cell
+    tidychef Cell.value property of a given Cell
     is with the stated length constraints.
 
     :param least: The minimum length the cell value must be if any

@@ -34,7 +34,7 @@ def list_of_lists(
     ]
 
     :param source: A python list of lists
-    :param selectable: A class that implements datachef.selection.selectable.Selectable of an inheritor of. Default is Selectable
+    :param selectable: A class that implements tidychef.selection.selectable.Selectable of an inheritor of. Default is Selectable
     :param pre_hook: A callable that can take source as an argument
     :param post_hook: A callable that can take the output of ListOfListsReader.parse() as an argument.
     :return: A single populated Selectable of type as specified by selectable param

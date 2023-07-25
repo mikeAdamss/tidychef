@@ -102,7 +102,7 @@ class Directly(BaseLookupEngine):
         of travel, i.e cell.x (column index) for a
         horizontal lookups else y (row index).
 
-        :param cell: The datachef Cell object we're trying
+        :param cell: The tidychef Cell object we're trying
         to resolve the relative column cell object for.
         """
         if self.direction.is_horizontal:
@@ -115,9 +115,9 @@ class Directly(BaseLookupEngine):
         appropriate cell as declared via this
         visual relationship.
 
-        :param cell: The datachef Cell object we're trying
+        :param cell: The tidychef Cell object we're trying
         to resolve the relative column cell object for.
-        :return: The datachef Cell object representing the
+        :return: The tidychef Cell object representing the
         column cell.
         """
 
