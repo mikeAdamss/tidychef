@@ -1,12 +1,13 @@
 [tool.poetry]
 name = "tidychef"
 version = "0.1.0"
-description = "Python package for transforming human readable tables into tidy data"
+description = "Python framework for transforming human readable tables into tidy data"
 authors = ["mikeAdamss <mikelovesbooks@gmail.com>"]
 packages = [
   {include = "tidychef"},
 ]
 license = "Apache 2.0"
+readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.7"
