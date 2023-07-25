@@ -17,31 +17,48 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-from tidychef.models.source.cell import Cell
+from tidychef import acquire, preview
+from tidychef.selection import CsvSelectable
 
-# Create a simple Cell object for testing
-# Note the value here is numeric!
-valid_cell = Cell(x="0", y="0", value="1")
+table: CsvSelectable = acquire.csv.http("https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/csv/bands-wide.csv")
 
-# Try it out - this will be return True (1 is numeric)
-validator = NumericValidator()
-print(f'Should be True: {validator(valid_cell)}')
+# Select them
+selection = (table.excel_ref('C') | table.excel_ref('D')).is_not_blank()
 
-# Now lets try a Cell with a non numeric value
-invalid_cell = Cell(x="0", y="0", value="foo")
-print(f'Should be False: {validator(invalid_cell)}')
+# Preview the selection - PRIOR to validation
+# note - for the sake of this example, you'd just do it in one typically
+preview(selection)
 
-# Lastly lets call .msg() on our failed validation and print it
-print(validator.msg(fake_cell))
+# Noe validate it
+numeric_validator = NumericValidator()
+selection.validate(numeric_validator)
+
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mNameError[0m                                 Traceback (most recent call last)
-[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_66027/4169935608.py[0m in [0;36m<module>[0;34m[0m
-[1;32m     14[0m [0;34m[0m[0m
-[1;32m     15[0m [0;31m# Lastly lets call .msg() on our failed validation and print it[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
-[0;32m---> 16[0;31m [0mprint[0m[0;34m([0m[0mvalidator[0m[0;34m.[0m[0mmsg[0m[0;34m([0m[0mfake_cell[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;31mCellValidationError[0m                       Traceback (most recent call last)
+[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_69963/2540926539.py[0m in [0;36m<module>[0;34m[0m
+[1;32m     13[0m [0;31m# Noe validate it[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     14[0m [0mnumeric_validator[0m [0;34m=[0m [0mNumericValidator[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 15[0;31m [0mselection[0m[0;34m.[0m[0mvalidate[0m[0;34m([0m[0mnumeric_validator[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m
-[0;31mNameError[0m: name 'fake_cell' is not defined
-NameError: name 'fake_cell' is not defined
+[0;32m~/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/tidychef/selection/selectable.py[0m in [0;36mvalidate[0;34m(self, validator, raise_first_error)[0m
+[1;32m    510[0m [0mfollowing[0m [0mvalidation[0m [0merrors[0m [0mwere[0m [0mencountered[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    511[0m [0;34m{[0m[0mlinesep[0m[0;34m.[0m[0mjoin[0m[0;34m([0m[0mvalidation_errors[0m[0;34m)[0m[0;34m}[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 512[0;31m                 ''')
+[0m[1;32m    513[0m [0;34m[0m[0m
+[1;32m    514[0m         [0;32mreturn[0m [0mself[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mCellValidationError[0m: 
+When making selections from table: Unnamed Table the
+following validation errors were encountered:
+"Houses" is not numeric
+"Cars" is not numeric
+                
+CellValidationError: 
+When making selections from table: Unnamed Table the
+following validation errors were encountered:
+"Houses" is not numeric
+"Cars" is not numeric
+                
 
