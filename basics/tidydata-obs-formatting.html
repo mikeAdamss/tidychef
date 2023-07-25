@@ -65,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="TidyData: Writing To Csv" href="tidydata-writing.html" />
-    <link rel="prev" title="TidyData: Constants" href="tidydata-constants.html" />
+    <link rel="prev" title="tidychef: Constants" href="tidydata-constants.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -136,14 +136,8 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
-    
-    
-      
-    
-    
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
+    <p class="title logo__title">Documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -175,7 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-closest.html">TidyData: Closest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tidydata-constants.html">TidyData: Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tidydata-constants.html">tidychef: Constants</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">TidyData: Observation Formatting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
@@ -294,7 +288,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/mikeAdamss/datachef" target="_blank"
+      <li><a href="https://github.com/mikeAdamss/tidychef" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +305,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/mikeAdamss/datachef/issues/new?title=Issue%20on%20page%20%2Fbasics/tidydata-obs-formatting.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/mikeAdamss/tidychef/issues/new?title=Issue%20on%20page%20%2Fbasics/tidydata-obs-formatting.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -464,13 +458,13 @@ document.write(`
 <section id="source-data">
 <h2>Source Data<a class="headerlink" href="#source-data" title="Permalink to this heading">#</a></h2>
 <p>The data source we’re using for these examples is shown below:</p>
-<p>The <a class="reference external" href="https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv">full data source can be viewed here</a>.</p>
+<p>The <a class="reference external" href="https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/csv/bands-wide.csv">full data source can be viewed here</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
-<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">CsvSelectable</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">CsvSelectable</span>
 
-<span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/csv/bands-wide.csv&quot;</span><span class="p">)</span>
 <span class="n">preview</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -557,12 +551,12 @@ document.write(`
 <p>To show this in practice we’re just going to prefix each observation with “foo “.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span><span class="p">,</span> <span class="n">filters</span>
-<span class="kn">from</span> <span class="nn">datachef.direction</span> <span class="kn">import</span> <span class="n">right</span><span class="p">,</span> <span class="n">below</span>
-<span class="kn">from</span> <span class="nn">datachef.output</span> <span class="kn">import</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span>
-<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">CsvSelectable</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span><span class="p">,</span> <span class="n">filters</span>
+<span class="kn">from</span> <span class="nn">tidychef.direction</span> <span class="kn">import</span> <span class="n">right</span><span class="p">,</span> <span class="n">below</span>
+<span class="kn">from</span> <span class="nn">tidychef.output</span> <span class="kn">import</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span>
+<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">CsvSelectable</span>
 
-<span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/csv/bands-wide.csv&quot;</span><span class="p">)</span>
 
 <span class="n">observations</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">is_numeric</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Observations&quot;</span><span class="p">)</span>
 <span class="n">bands</span> <span class="o">=</span> <span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;A3&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;G3&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Bands&quot;</span><span class="p">)</span>
@@ -719,7 +713,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">TidyData: Constants</p>
+        <p class="prev-next-title">tidychef: Constants</p>
       </div>
     </a>
     <a class="right-next"

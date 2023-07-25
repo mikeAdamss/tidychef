@@ -136,14 +136,8 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
-    
-    
-      
-    
-    
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
+    <p class="title logo__title">Documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -175,7 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-closest.html">TidyData: Closest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-constants.html">TidyData: Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-constants.html">tidychef: Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
@@ -294,7 +288,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/mikeAdamss/datachef" target="_blank"
+      <li><a href="https://github.com/mikeAdamss/tidychef" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +305,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/mikeAdamss/datachef/issues/new?title=Issue%20on%20page%20%2Fintermediate/within.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/mikeAdamss/tidychef/issues/new?title=Issue%20on%20page%20%2Fintermediate/within.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -460,16 +454,14 @@ document.write(`
 </tr>
 </thead>
 </table>
-<p>The <a class="reference external" href="https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xls/within_sample.xls">full data source can be downloaded here</a>.</p>
+<p>The <a class="reference external" href="https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xls/within_sample.xls">full data source can be downloaded here</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
-<span class="kn">from</span> <span class="nn">datachef.direction</span> <span class="kn">import</span> <span class="n">right</span>
-<span class="kn">from</span> <span class="nn">datachef.output</span> <span class="kn">import</span> <span class="n">Column</span>
-<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsSelectable</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">tidychef.direction</span> <span class="kn">import</span> <span class="n">right</span>
+<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">XlsSelectable</span>
 
-<span class="n">table</span><span class="p">:</span> <span class="n">XlsSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/xls/within-sample.xls&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">XlsSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/xls/within-sample.xls&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
 <span class="n">sex</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;D2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Sex&quot;</span><span class="p">)</span>
 <span class="n">preview</span><span class="p">(</span><span class="n">sex</span><span class="p">)</span>
 </pre></div>
@@ -514,12 +506,12 @@ document.write(`
                     <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td><td style="background-color:lightgrey">G</td><td style="background-color:lightgrey">H</td><td style="background-color:lightgrey">I</td></tr>
 <tr><td style="background-color:lightgrey">1</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
 <tr><td style="background-color:lightgrey">2</td><td style="background-color:white">Date</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:cyan">Male</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:cyan">Female</td><td style="background-color:white"></td></tr>
-<tr><td style="background-color:lightgrey">3</td><td style="background-color:white">45108.0</td><td style="background-color:white"></td><td style="background-color:white">2.0</td><td style="background-color:white">3.0</td><td style="background-color:white">23.0</td><td style="background-color:white"></td><td style="background-color:white">4.0</td><td style="background-color:white">12.0</td><td style="background-color:white">7.0</td></tr>
-<tr><td style="background-color:lightgrey">4</td><td style="background-color:white">45109.0</td><td style="background-color:white"></td><td style="background-color:white">1.0</td><td style="background-color:white">4.0</td><td style="background-color:white">12.0</td><td style="background-color:white"></td><td style="background-color:white">23.0</td><td style="background-color:white">24.0</td><td style="background-color:white">2.0</td></tr>
-<tr><td style="background-color:lightgrey">5</td><td style="background-color:white">45110.0</td><td style="background-color:white"></td><td style="background-color:white">3.0</td><td style="background-color:white">3.0</td><td style="background-color:white">9.0</td><td style="background-color:white"></td><td style="background-color:white">5.0</td><td style="background-color:white">4.0</td><td style="background-color:white">16.0</td></tr>
-<tr><td style="background-color:lightgrey">6</td><td style="background-color:white">45111.0</td><td style="background-color:white"></td><td style="background-color:white">4.0</td><td style="background-color:white">1.0</td><td style="background-color:white">1.0</td><td style="background-color:white"></td><td style="background-color:white">6.0</td><td style="background-color:white">24.0</td><td style="background-color:white">31.0</td></tr>
-<tr><td style="background-color:lightgrey">7</td><td style="background-color:white">45112.0</td><td style="background-color:white"></td><td style="background-color:white">5.0</td><td style="background-color:white">21.0</td><td style="background-color:white">1.0</td><td style="background-color:white"></td><td style="background-color:white">56.0</td><td style="background-color:white">512.0</td><td style="background-color:white">12.0</td></tr>
-<tr><td style="background-color:lightgrey">8</td><td style="background-color:white">45113.0</td><td style="background-color:white"></td><td style="background-color:white">5.0</td><td style="background-color:white">21.0</td><td style="background-color:white">12.0</td><td style="background-color:white"></td><td style="background-color:white">3.0</td><td style="background-color:white">5.0</td><td style="background-color:white">7.0</td></tr>
+<tr><td style="background-color:lightgrey">3</td><td style="background-color:white">01 07 2023</td><td style="background-color:white"></td><td style="background-color:white">2.0</td><td style="background-color:white">3.0</td><td style="background-color:white">23.0</td><td style="background-color:white"></td><td style="background-color:white">4.0</td><td style="background-color:white">12.0</td><td style="background-color:white">7.0</td></tr>
+<tr><td style="background-color:lightgrey">4</td><td style="background-color:white">02 07 2023</td><td style="background-color:white"></td><td style="background-color:white">1.0</td><td style="background-color:white">4.0</td><td style="background-color:white">12.0</td><td style="background-color:white"></td><td style="background-color:white">23.0</td><td style="background-color:white">24.0</td><td style="background-color:white">2.0</td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:white">03 07 2023</td><td style="background-color:white"></td><td style="background-color:white">3.0</td><td style="background-color:white">3.0</td><td style="background-color:white">9.0</td><td style="background-color:white"></td><td style="background-color:white">5.0</td><td style="background-color:white">4.0</td><td style="background-color:white">16.0</td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:white">04 07 2023</td><td style="background-color:white"></td><td style="background-color:white">4.0</td><td style="background-color:white">1.0</td><td style="background-color:white">1.0</td><td style="background-color:white"></td><td style="background-color:white">6.0</td><td style="background-color:white">24.0</td><td style="background-color:white">31.0</td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:white">05 07 2023</td><td style="background-color:white"></td><td style="background-color:white">5.0</td><td style="background-color:white">21.0</td><td style="background-color:white">1.0</td><td style="background-color:white"></td><td style="background-color:white">56.0</td><td style="background-color:white">512.0</td><td style="background-color:white">12.0</td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:white">06 07 2023</td><td style="background-color:white"></td><td style="background-color:white">5.0</td><td style="background-color:white">21.0</td><td style="background-color:white">12.0</td><td style="background-color:white"></td><td style="background-color:white">3.0</td><td style="background-color:white">5.0</td><td style="background-color:white">7.0</td></tr>
 
                 </table>
             </body>
@@ -625,12 +617,12 @@ document.write(`
 <p>Now lets apply this to our example</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
-<span class="kn">from</span> <span class="nn">datachef.direction</span> <span class="kn">import</span> <span class="n">right</span><span class="p">,</span> <span class="n">down</span><span class="p">,</span> <span class="n">left</span>
-<span class="kn">from</span> <span class="nn">datachef.output</span> <span class="kn">import</span> <span class="n">Column</span><span class="p">,</span> <span class="n">TidyData</span>
-<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsSelectable</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">tidychef.direction</span> <span class="kn">import</span> <span class="n">right</span><span class="p">,</span> <span class="n">down</span><span class="p">,</span> <span class="n">left</span>
+<span class="kn">from</span> <span class="nn">tidychef.output</span> <span class="kn">import</span> <span class="n">Column</span><span class="p">,</span> <span class="n">TidyData</span>
+<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">XlsSelectable</span>
 
-<span class="n">table</span><span class="p">:</span> <span class="n">XlsSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/xls/within-sample.xls&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">XlsSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/xls/within-sample.xls&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
 
 <span class="n">observations</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;C3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Observations&quot;</span><span class="p">)</span>
 <span class="n">sex</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;D2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Sex&quot;</span><span class="p">)</span>
@@ -687,12 +679,12 @@ document.write(`
                     <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td><td style="background-color:lightgrey">G</td><td style="background-color:lightgrey">H</td><td style="background-color:lightgrey">I</td></tr>
 <tr><td style="background-color:lightgrey">1</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
 <tr><td style="background-color:lightgrey">2</td><td style="background-color:white">Date</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#99ff99">Male</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#99ff99">Female</td><td style="background-color:white"></td></tr>
-<tr><td style="background-color:lightgrey">3</td><td style="background-color:white">45108.0</td><td style="background-color:white"></td><td style="background-color:cyan">2.0</td><td style="background-color:cyan">3.0</td><td style="background-color:cyan">23.0</td><td style="background-color:white"></td><td style="background-color:cyan">4.0</td><td style="background-color:cyan">12.0</td><td style="background-color:cyan">7.0</td></tr>
-<tr><td style="background-color:lightgrey">4</td><td style="background-color:white">45109.0</td><td style="background-color:white"></td><td style="background-color:cyan">1.0</td><td style="background-color:cyan">4.0</td><td style="background-color:cyan">12.0</td><td style="background-color:white"></td><td style="background-color:cyan">23.0</td><td style="background-color:cyan">24.0</td><td style="background-color:cyan">2.0</td></tr>
-<tr><td style="background-color:lightgrey">5</td><td style="background-color:white">45110.0</td><td style="background-color:white"></td><td style="background-color:cyan">3.0</td><td style="background-color:cyan">3.0</td><td style="background-color:cyan">9.0</td><td style="background-color:white"></td><td style="background-color:cyan">5.0</td><td style="background-color:cyan">4.0</td><td style="background-color:cyan">16.0</td></tr>
-<tr><td style="background-color:lightgrey">6</td><td style="background-color:white">45111.0</td><td style="background-color:white"></td><td style="background-color:cyan">4.0</td><td style="background-color:cyan">1.0</td><td style="background-color:cyan">1.0</td><td style="background-color:white"></td><td style="background-color:cyan">6.0</td><td style="background-color:cyan">24.0</td><td style="background-color:cyan">31.0</td></tr>
-<tr><td style="background-color:lightgrey">7</td><td style="background-color:white">45112.0</td><td style="background-color:white"></td><td style="background-color:cyan">5.0</td><td style="background-color:cyan">21.0</td><td style="background-color:cyan">1.0</td><td style="background-color:white"></td><td style="background-color:cyan">56.0</td><td style="background-color:cyan">512.0</td><td style="background-color:cyan">12.0</td></tr>
-<tr><td style="background-color:lightgrey">8</td><td style="background-color:white">45113.0</td><td style="background-color:white"></td><td style="background-color:cyan">5.0</td><td style="background-color:cyan">21.0</td><td style="background-color:cyan">12.0</td><td style="background-color:white"></td><td style="background-color:cyan">3.0</td><td style="background-color:cyan">5.0</td><td style="background-color:cyan">7.0</td></tr>
+<tr><td style="background-color:lightgrey">3</td><td style="background-color:white">01 07 2023</td><td style="background-color:white"></td><td style="background-color:cyan">2.0</td><td style="background-color:cyan">3.0</td><td style="background-color:cyan">23.0</td><td style="background-color:white"></td><td style="background-color:cyan">4.0</td><td style="background-color:cyan">12.0</td><td style="background-color:cyan">7.0</td></tr>
+<tr><td style="background-color:lightgrey">4</td><td style="background-color:white">02 07 2023</td><td style="background-color:white"></td><td style="background-color:cyan">1.0</td><td style="background-color:cyan">4.0</td><td style="background-color:cyan">12.0</td><td style="background-color:white"></td><td style="background-color:cyan">23.0</td><td style="background-color:cyan">24.0</td><td style="background-color:cyan">2.0</td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:white">03 07 2023</td><td style="background-color:white"></td><td style="background-color:cyan">3.0</td><td style="background-color:cyan">3.0</td><td style="background-color:cyan">9.0</td><td style="background-color:white"></td><td style="background-color:cyan">5.0</td><td style="background-color:cyan">4.0</td><td style="background-color:cyan">16.0</td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:white">04 07 2023</td><td style="background-color:white"></td><td style="background-color:cyan">4.0</td><td style="background-color:cyan">1.0</td><td style="background-color:cyan">1.0</td><td style="background-color:white"></td><td style="background-color:cyan">6.0</td><td style="background-color:cyan">24.0</td><td style="background-color:cyan">31.0</td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:white">05 07 2023</td><td style="background-color:white"></td><td style="background-color:cyan">5.0</td><td style="background-color:cyan">21.0</td><td style="background-color:cyan">1.0</td><td style="background-color:white"></td><td style="background-color:cyan">56.0</td><td style="background-color:cyan">512.0</td><td style="background-color:cyan">12.0</td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:white">06 07 2023</td><td style="background-color:white"></td><td style="background-color:cyan">5.0</td><td style="background-color:cyan">21.0</td><td style="background-color:cyan">12.0</td><td style="background-color:white"></td><td style="background-color:cyan">3.0</td><td style="background-color:cyan">5.0</td><td style="background-color:cyan">7.0</td></tr>
 
                 </table>
             </body>
@@ -818,8 +810,8 @@ document.write(`
 <p>Consider the following data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">filters</span>
-<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">Selectable</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">filters</span>
+<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">Selectable</span>
 
 <span class="c1"># Note acquire.python.list_of_lists is a constructor that takes a python object</span>
 <span class="c1"># it&#39;s intended purely for testing and/or quickly mocking up tabulated data</span>

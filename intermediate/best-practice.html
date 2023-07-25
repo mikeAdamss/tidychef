@@ -136,14 +136,8 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
-    
-    
-      
-    
-    
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
+    <p class="title logo__title">Documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -175,7 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-closest.html">TidyData: Closest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-constants.html">TidyData: Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-constants.html">tidychef: Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
@@ -294,7 +288,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/mikeAdamss/datachef" target="_blank"
+      <li><a href="https://github.com/mikeAdamss/tidychef" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +305,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/mikeAdamss/datachef/issues/new?title=Issue%20on%20page%20%2Fintermediate/best-practice.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/mikeAdamss/tidychef/issues/new?title=Issue%20on%20page%20%2Fintermediate/best-practice.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -453,7 +447,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="best-practice">
 <h1>Best Practice<a class="headerlink" href="#best-practice" title="Permalink to this heading">#</a></h1>
-<p>This section covers some best practice approaches and techniques for creating robust transform recipes with datachef.</p>
+<p>This section covers some best practice approaches and techniques for creating robust transform recipes with tidychef.</p>
 <section id="conditional-is-better-then-explicit">
 <h2>Conditional Is Better Then Explicit<a class="headerlink" href="#conditional-is-better-then-explicit" title="Permalink to this heading">#</a></h2>
 <p>If you want to create a robust repeatable recipe then a conditional selection (particularly simple conditions such as <code class="docutils literal notranslate"><span class="pre">.expand()</span></code> and <code class="docutils literal notranslate"><span class="pre">.fill()</span></code>) are typically better than explicit <code class="docutils literal notranslate"><span class="pre">.excel_ref()</span></code> statements.</p>
@@ -461,10 +455,10 @@ document.write(`
 <p>Consider the following:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
-<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
 
-<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3c&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3c&quot;</span><span class="p">)</span>
 <span class="n">preview</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A155:H161&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -530,7 +524,7 @@ document.write(`
 <section id="when-to-use-validation">
 <h2>When to use Validation<a class="headerlink" href="#when-to-use-validation" title="Permalink to this heading">#</a></h2>
 <p>If you’re doing a one off transform you’ve not intention of repeating (you’re quickly pulling some data apart of populate a dataframe, chart etc) then you could (possibly) argue that validation is overkill.</p>
-<p>If you’re intending run your code more than once against a changeable data source you should be implementing some form of validation. Even if its just one of the lightweight default methods provided by datachef that are documented elsewhere in this Jupyterbook.</p>
+<p>If you’re intending run your code more than once against a changeable data source you should be implementing some form of validation. Even if its just one of the lightweight default methods provided by tidychef that are documented elsewhere in this Jupyterbook.</p>
 <p>If you’re setting up any kind of ETL pipeline, you should almost certainly be investing time in a quality validation approach suitable for your pipeline processes and use case(s).</p>
 </section>
 <section id="select-wide-and-validate-narrow">

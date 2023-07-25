@@ -136,14 +136,8 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
-    
-    
-      
-    
-    
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
+    <p class="title logo__title">Documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -175,7 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-closest.html">TidyData: Closest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tidydata-constants.html">TidyData: Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tidydata-constants.html">tidychef: Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
@@ -294,7 +288,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/mikeAdamss/datachef" target="_blank"
+      <li><a href="https://github.com/mikeAdamss/tidychef" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +305,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/mikeAdamss/datachef/issues/new?title=Issue%20on%20page%20%2Fbasics/selection-waffle.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/mikeAdamss/tidychef/issues/new?title=Issue%20on%20page%20%2Fbasics/selection-waffle.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -460,14 +454,14 @@ document.write(`
 </tr>
 </thead>
 </table>
-<p>The <a class="reference external" href="https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx">full data source can be downloaded here</a>. We’ll be using th 6th tab named “Table2a”.</p>
+<p>The <a class="reference external" href="https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx">full data source can be downloaded here</a>. We’ll be using th 6th tab named “Table2a”.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
-<span class="kn">from</span> <span class="nn">datachef.direction</span> <span class="kn">import</span> <span class="n">right</span><span class="p">,</span> <span class="n">up</span>
-<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">tidychef.direction</span> <span class="kn">import</span> <span class="n">right</span><span class="p">,</span> <span class="n">up</span>
+<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
 
-<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 2a&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 2a&quot;</span><span class="p">)</span>
 <span class="n">preview</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A4:H10&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -779,24 +773,24 @@ document.write(`
         </html>
     </div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">AmbiguousWaffleError</span><span class="g g-Whitespace">                      </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_44014</span><span class="o">/</span><span class="mf">2135533438.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_64261</span><span class="o">/</span><span class="mf">2135533438.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">years</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;C7:C10&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Years&quot;</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">preview</span><span class="p">(</span><span class="n">codes</span><span class="p">,</span> <span class="n">years</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A4:H10&quot;</span><span class="p">)</span>
 <span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">waffled_selection</span> <span class="o">=</span> <span class="n">years</span><span class="o">.</span><span class="n">waffle</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">codes</span><span class="p">)</span>
 
-<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/utils/decorators/dontmutate.py</span> in <span class="ni">wrapper</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="nn">~/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/tidychef/utils/decorators/dontmutate.py</span> in <span class="ni">wrapper</span><span class="nt">(self, *args, **kwargs)</span>
 <span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="g g-Whitespace">     </span><span class="mi">23</span>         <span class="bp">self</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 <span class="ne">---&gt; </span><span class="mi">24</span>         <span class="k">return</span> <span class="n">method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">25</span> 
 <span class="g g-Whitespace">     </span><span class="mi">26</span>     <span class="k">return</span> <span class="n">wrapper</span>
 
-<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/selection/selectable.py</span> in <span class="ni">waffle</span><span class="nt">(self, direction, additional_selection)</span>
-<span class="g g-Whitespace">    </span><span class="mi">598</span>                 <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">additional_selection</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="n">highest_x</span><span class="p">]):</span>
-<span class="g g-Whitespace">    </span><span class="mi">599</span>                     <span class="k">raise</span> <span class="n">AmbiguousWaffleError</span><span class="p">(</span>
-<span class="ne">--&gt; </span><span class="mi">600</span>                         <span class="s2">&quot;When using waffle right, your additional selections must all &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">601</span>                         <span class="s2">&quot;be right of your initial selections.&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">602</span>                     <span class="p">)</span>
+<span class="nn">~/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/tidychef/selection/selectable.py</span> in <span class="ni">waffle</span><span class="nt">(self, direction, additional_selection)</span>
+<span class="g g-Whitespace">    </span><span class="mi">580</span>                 <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">additional_selection</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="n">highest_x</span><span class="p">]):</span>
+<span class="g g-Whitespace">    </span><span class="mi">581</span>                     <span class="k">raise</span> <span class="n">AmbiguousWaffleError</span><span class="p">(</span>
+<span class="ne">--&gt; </span><span class="mi">582</span>                         <span class="s2">&quot;When using waffle right, your additional selections must all &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">583</span>                         <span class="s2">&quot;be right of your initial selections.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">584</span>                     <span class="p">)</span>
 
 <span class="ne">AmbiguousWaffleError</span>: When using waffle right, your additional selections must all be right of your initial selections.
 </pre></div>

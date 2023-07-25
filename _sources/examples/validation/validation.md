@@ -1,6 +1,6 @@
 # Validation
 
-By default datachef supports three types of validation.
+By default tidychef supports three types of validation.
 
 - Simple selection assertions (`assert_one()`, `assert_len()`, `assert_single_row()`, `assert_single_clumn()`
 - Validation via the `<selection>.valdiation()` method.
@@ -12,7 +12,7 @@ This section contains some simple examples of using a mixture of these approache
 
 These techniques have a place because they _give you contextual information_ on where the issue is.
 
-Neverthless if you're going to be using datachef in any sort of productionized ETL system further external checks would be typical and probably wise.
+Neverthless if you're going to be using tidychef in any sort of productionized ETL system further external checks would be typical and probably wise.
 
 ## Data Disclaimer
 

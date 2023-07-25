@@ -1,11 +1,11 @@
 # Quirks
 
-The following page contains some quick notes on quirks of datachef that might throw a first time user.
+The following page contains some quick notes on quirks of tidychef that might throw a first time user.
 
 
 ## Excel references
 
-Regardless of the format in question datachef makes heavy use of the phrase "excel reference" or more commonly `excel_ref()`.
+Regardless of the format in question tidychef makes heavy use of the phrase "excel reference" or more commonly `excel_ref()`.
 
 This is **nothing** to do with excel or even spreadsheets, it's simply a matter of practicality.
 

@@ -136,14 +136,8 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
-    
-    
-      
-    
-    
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
+    <p class="title logo__title">Documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -175,7 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-closest.html">TidyData: Closest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tidydata-constants.html">TidyData: Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tidydata-constants.html">tidychef: Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
@@ -294,7 +288,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/mikeAdamss/datachef" target="_blank"
+      <li><a href="https://github.com/mikeAdamss/tidychef" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +305,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/mikeAdamss/datachef/issues/new?title=Issue%20on%20page%20%2Fbasics/selection-explain.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/mikeAdamss/tidychef/issues/new?title=Issue%20on%20page%20%2Fbasics/selection-explain.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -449,13 +443,13 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="selection-config-explain">
 <h1>Selection: Config(explain=)<a class="headerlink" href="#selection-config-explain" title="Permalink to this heading">#</a></h1>
-<p>You may have noticed that datachef makes heavy use of <strong>extended dot notation</strong>.</p>
+<p>You may have noticed that tidychef makes heavy use of <strong>extended dot notation</strong>.</p>
 <p>In simplest terms think of this as “constantly chaining commands together with lots of .’s”.</p>
 <p>i.e</p>
 <hr class="docutils" />
 <p>data_is_tidy = data_is_messy.so_do_something().then_something_else()</p>
 <hr class="docutils" />
-<p>This is a powerful feature but can be be unintuitive to newcomers so datachef includes an <code class="docutils literal notranslate"><span class="pre">explain</span></code> configuration option you can toggle on as part of doing a selection. This will create step by step mini previews to walk you through the chained selection logic (examples follow).</p>
+<p>This is a powerful feature but can be be unintuitive to newcomers so tidychef includes an <code class="docutils literal notranslate"><span class="pre">explain</span></code> configuration option you can toggle on as part of doing a selection. This will create step by step mini previews to walk you through the chained selection logic (examples follow).</p>
 <p>Note - these are html preview tables so this <strong>is only applicable when working in a notebook</strong>. you can however also write this explain preview to a file if working via <code class="docutils literal notranslate"><span class="pre">.py</span></code> files.</p>
 <p>Toggling explain on is very simple, see the bold section below.</p>
 <hr class="docutils" />
@@ -465,11 +459,11 @@ document.write(`
 <p>Lets just quickly get some data in, we’ll use the bands table we’ve used a few times before.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
-<span class="kn">from</span> <span class="nn">datachef.direction</span> <span class="kn">import</span> <span class="n">right</span><span class="p">,</span> <span class="n">down</span>
-<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">CsvSelectable</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">tidychef.direction</span> <span class="kn">import</span> <span class="n">right</span><span class="p">,</span> <span class="n">down</span>
+<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">CsvSelectable</span>
 
-<span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/csv/bands-wide.csv&quot;</span><span class="p">)</span>
 <span class="n">preview</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -767,7 +761,7 @@ document.write(`
 <p>We’ll try something similar but this time we’ll string together a whole sleugh of methods in a roundabout way (as an example) to get the names.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">filters</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">filters</span>
 
 <span class="n">selection</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">explain</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">is_not_numeric</span><span class="p">)</span><span class="o">.</span><span class="n">re</span><span class="p">(</span><span class="s2">&quot;^[a-zA-Z]*$&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">not_contains_string</span><span class="p">(</span><span class="s2">&quot;Beatles&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">cell</span><span class="p">:</span> <span class="n">cell</span><span class="o">.</span><span class="n">excel_row</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>

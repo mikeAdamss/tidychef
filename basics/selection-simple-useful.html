@@ -136,14 +136,8 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
-    
-    
-      
-    
-    
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
+    <p class="title logo__title">Documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -175,7 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-closest.html">TidyData: Closest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tidydata-constants.html">TidyData: Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tidydata-constants.html">tidychef: Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
@@ -294,7 +288,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/mikeAdamss/datachef" target="_blank"
+      <li><a href="https://github.com/mikeAdamss/tidychef" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +305,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/mikeAdamss/datachef/issues/new?title=Issue%20on%20page%20%2Fbasics/selection-simple-useful.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/mikeAdamss/tidychef/issues/new?title=Issue%20on%20page%20%2Fbasics/selection-simple-useful.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -462,13 +456,13 @@ document.write(`
 </tr>
 </thead>
 </table>
-<p>The <a class="reference external" href="https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx">full data source can be downloaded here</a>. We’ll be using th 8th tab named “Table 3a”.</p>
+<p>The <a class="reference external" href="https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx">full data source can be downloaded here</a>. We’ll be using th 8th tab named “Table 3a”.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
-<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
 
-<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3a&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3a&quot;</span><span class="p">)</span>
 <span class="n">preview</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A4:H10&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -527,16 +521,16 @@ document.write(`
 <p>The following will not raise as there is exactly one cell in the selection.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span>
-<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span>
+<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
 
-<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3a&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3a&quot;</span><span class="p">)</span>
 <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;A1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">assert_one</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;datachef.selection.xlsx.xlsx.XlsxSelectable at 0x10ee80290&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tidychef.selection.xlsx.xlsx.XlsxSelectable at 0x113a9b650&gt;
 </pre></div>
 </div>
 </div>
@@ -544,10 +538,10 @@ document.write(`
 <p>the following <strong>will</strong> raise a python <code class="docutils literal notranslate"><span class="pre">AssertionError</span></code> as there’s more than one cell.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span>
-<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span>
+<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
 
-<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3a&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3a&quot;</span><span class="p">)</span>
 <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;A1:A2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">assert_one</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -555,24 +549,24 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_43993</span><span class="o">/</span><span class="mf">1649087184.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_64243</span><span class="o">/</span><span class="mf">1449902015.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> 
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3a&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3a&quot;</span><span class="p">)</span>
 <span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;A1:A2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">assert_one</span><span class="p">()</span>
 
-<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/selection/selectable.py</span> in <span class="ni">assert_one</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">114</span>         <span class="n">Assert</span> <span class="n">that</span> <span class="n">the</span> <span class="n">current</span> <span class="n">selection</span> <span class="n">contains</span> <span class="n">exactly</span> <span class="n">one</span> <span class="n">cell</span>
-<span class="g g-Whitespace">    </span><span class="mi">115</span>         <span class="s2">&quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">116</span><span class="s2">         return self.assert_len(1)</span>
-<span class="g g-Whitespace">    </span><span class="mi">117</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">118</span><span class="s2">     def assert_single_column(self):</span>
+<span class="nn">~/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/tidychef/selection/selectable.py</span> in <span class="ni">assert_one</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">96</span>         <span class="n">Assert</span> <span class="n">that</span> <span class="n">the</span> <span class="n">current</span> <span class="n">selection</span> <span class="n">contains</span> <span class="n">exactly</span> <span class="n">one</span> <span class="n">cell</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">98</span><span class="s2">         return self.assert_len(1)</span>
+<span class="g g-Whitespace">     </span><span class="mi">99</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">100</span><span class="s2">     def assert_single_column(self):</span>
 
-<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/selection/selectable.py</span> in <span class="ni">assert_len</span><span class="nt">(self, number_of_cells)</span>
-<span class="g g-Whitespace">    </span><span class="mi">106</span><span class="s2">         assert (</span>
-<span class="g g-Whitespace">    </span><span class="mi">107</span><span class="s2">             len(self.cells) == number_of_cells</span>
-<span class="ne">--&gt; </span><span class="mi">108</span><span class="s2">         ), f&quot;Selection contains {len(self.cells)} cells, not </span><span class="si">{number_of_cells}</span><span class="s2">&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">109</span><span class="s2">         _explain(self, f&quot;WALK: Assert selection length is </span><span class="si">{number_of_cells}</span><span class="s2">&quot;)</span>
-<span class="g g-Whitespace">    </span><span class="mi">110</span><span class="s2">         return self</span>
+<span class="nn">~/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/tidychef/selection/selectable.py</span> in <span class="ni">assert_len</span><span class="nt">(self, number_of_cells)</span>
+<span class="g g-Whitespace">     </span><span class="mi">88</span><span class="s2">         assert (</span>
+<span class="g g-Whitespace">     </span><span class="mi">89</span><span class="s2">             len(self.cells) == number_of_cells</span>
+<span class="ne">---&gt; </span><span class="mi">90</span><span class="s2">         ), f&quot;Selection contains {len(self.cells)} cells, not </span><span class="si">{number_of_cells}</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">91</span><span class="s2">         _explain(self, f&quot;WALK: Assert selection length is </span><span class="si">{number_of_cells}</span><span class="s2">&quot;)</span>
+<span class="g g-Whitespace">     </span><span class="mi">92</span><span class="s2">         return self</span>
 
 <span class="ne">AssertionError</span>: Selection contains 2 cells, not 1
 </pre></div>
@@ -591,14 +585,14 @@ document.write(`
 </section>
 <section id="is-blank-is-not-blank">
 <h2>Is Blank &amp; Is Not Blank<a class="headerlink" href="#is-blank-is-not-blank" title="Permalink to this heading">#</a></h2>
-<p>Two of the most common methods in datachef are <code class="docutils literal notranslate"><span class="pre">is_blank()</span></code> and <code class="docutils literal notranslate"><span class="pre">is_not_blank()</span></code>.</p>
+<p>Two of the most common methods in tidychef are <code class="docutils literal notranslate"><span class="pre">is_blank()</span></code> and <code class="docutils literal notranslate"><span class="pre">is_not_blank()</span></code>.</p>
 <p>Usage examples follow.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span>
-<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span>
+<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
 
-<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3a&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3a&quot;</span><span class="p">)</span>
 
 <span class="n">non_blank_cells</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Non Blank Cells&quot;</span><span class="p">)</span>
 <span class="n">blank_cells</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">is_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Blank Cells&quot;</span><span class="p">)</span>

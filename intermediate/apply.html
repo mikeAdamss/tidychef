@@ -136,14 +136,8 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
-    
-    
-      
-    
-    
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
+    <p class="title logo__title">Documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -175,7 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-closest.html">TidyData: Closest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-constants.html">TidyData: Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-constants.html">tidychef: Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
@@ -294,7 +288,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/mikeAdamss/datachef" target="_blank"
+      <li><a href="https://github.com/mikeAdamss/tidychef" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +305,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/mikeAdamss/datachef/issues/new?title=Issue%20on%20page%20%2Fintermediate/apply.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/mikeAdamss/tidychef/issues/new?title=Issue%20on%20page%20%2Fintermediate/apply.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -455,13 +449,13 @@ document.write(`
 <section id="source-data">
 <h2>Source Data<a class="headerlink" href="#source-data" title="Permalink to this heading">#</a></h2>
 <p>The data source we’re using for these examples is shown below:</p>
-<p>The <a class="reference external" href="https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv">full data source can be viewed here</a>.</p>
+<p>The <a class="reference external" href="https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/csv/bands-wide.csv">full data source can be viewed here</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
-<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">CsvSelectable</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">CsvSelectable</span>
 
-<span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/csv/bands-wide.csv&quot;</span><span class="p">)</span>
 <span class="n">preview</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -529,10 +523,10 @@ document.write(`
 <p>The following is an example of using <code class="docutils literal notranslate"><span class="pre">apply=</span></code> with a simple user defined function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
-<span class="kn">from</span> <span class="nn">datachef.direction</span> <span class="kn">import</span> <span class="n">right</span>
-<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">CsvSelectable</span><span class="p">,</span> <span class="n">filters</span>
-<span class="kn">from</span> <span class="nn">datachef.output</span> <span class="kn">import</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">tidychef.direction</span> <span class="kn">import</span> <span class="n">right</span>
+<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">CsvSelectable</span><span class="p">,</span> <span class="n">filters</span>
+<span class="kn">from</span> <span class="nn">tidychef.output</span> <span class="kn">import</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span>
 
 <span class="c1"># this is our custom function for apply</span>
 <span class="k">def</span> <span class="nf">lennon_iser</span><span class="p">(</span><span class="n">cell_value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
@@ -545,7 +539,7 @@ document.write(`
     <span class="k">return</span> <span class="n">cell_value</span>
 
 
-<span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/csv/bands-wide.csv&quot;</span><span class="p">)</span>
 
 <span class="n">observations</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">is_numeric</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Observations&quot;</span><span class="p">)</span>
 <span class="n">members</span> <span class="o">=</span> <span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Members&quot;</span><span class="p">)</span>
@@ -655,12 +649,12 @@ document.write(`
 <p>Here’s the same example but using a lambda function</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">preview</span>
-<span class="kn">from</span> <span class="nn">datachef.direction</span> <span class="kn">import</span> <span class="n">right</span>
-<span class="kn">from</span> <span class="nn">datachef.output</span> <span class="kn">import</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span>
-<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">CsvSelectable</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">tidychef.direction</span> <span class="kn">import</span> <span class="n">right</span>
+<span class="kn">from</span> <span class="nn">tidychef.output</span> <span class="kn">import</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span>
+<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">CsvSelectable</span>
 
-<span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/csv/bands-wide.csv&quot;</span><span class="p">)</span>
 
 <span class="n">observations</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">is_numeric</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Observations&quot;</span><span class="p">)</span>
 <span class="n">members</span> <span class="o">=</span> <span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Members&quot;</span><span class="p">)</span>
@@ -774,10 +768,10 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
-<span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
-<span class="kn">from</span> <span class="nn">datachef.direction</span> <span class="kn">import</span> <span class="n">right</span>
-<span class="kn">from</span> <span class="nn">datachef.output</span> <span class="kn">import</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span>
-<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">CsvSelectable</span>
+<span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">tidychef.direction</span> <span class="kn">import</span> <span class="n">right</span>
+<span class="kn">from</span> <span class="nn">tidychef.output</span> <span class="kn">import</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span>
+<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">CsvSelectable</span>
 
 <span class="c1"># this is our custom class</span>
 <span class="k">class</span> <span class="nc">SurnamesFromDict</span><span class="p">:</span>
@@ -801,7 +795,7 @@ document.write(`
 
 
 <span class="c1"># Now we do the extraction</span>
-<span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">CsvSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/csv/bands-wide.csv&quot;</span><span class="p">)</span>
 <span class="n">observations</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;C4:E7&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Observations&quot;</span><span class="p">)</span>
 <span class="n">members</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Members&quot;</span><span class="p">)</span>
 <span class="n">preview</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">members</span><span class="p">)</span>

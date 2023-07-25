@@ -136,14 +136,8 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
-    
-    
-      
-    
-    
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
+    <p class="title logo__title">Documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -175,7 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-closest.html">TidyData: Closest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-constants.html">TidyData: Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-constants.html">tidychef: Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
@@ -294,7 +288,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/mikeAdamss/datachef" target="_blank"
+      <li><a href="https://github.com/mikeAdamss/tidychef" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +305,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/mikeAdamss/datachef/issues/new?title=Issue%20on%20page%20%2Fadvanced/custom-data-sources.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/mikeAdamss/tidychef/issues/new?title=Issue%20on%20page%20%2Fadvanced/custom-data-sources.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -450,11 +444,11 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="custom-data-sources">
 <h1>Custom Data Sources<a class="headerlink" href="#custom-data-sources" title="Permalink to this heading">#</a></h1>
-<p>This document will explain how to extend datachef to ingest additional tabulated data formats.</p>
+<p>This document will explain how to extend tidychef to ingest additional tabulated data formats.</p>
 <p>We’ll start by explaining how the <code class="docutils literal notranslate"><span class="pre">acquire</span></code> module works.</p>
 <section id="how-acquire-actually-works">
 <h2>How acquire actually works<a class="headerlink" href="#how-acquire-actually-works" title="Permalink to this heading">#</a></h2>
-<p>So the first thing to understand is that all the functions accessible via the <code class="docutils literal notranslate"><span class="pre">acquire</span></code> module are really just wrappers around a single function, the <code class="docutils literal notranslate"><span class="pre">acquirer</span></code> function located in <code class="docutils literal notranslate"><span class="pre">datachef.acquire.main</span></code>.</p>
+<p>So the first thing to understand is that all the functions accessible via the <code class="docutils literal notranslate"><span class="pre">acquire</span></code> module are really just wrappers around a single function, the <code class="docutils literal notranslate"><span class="pre">acquirer</span></code> function located in <code class="docutils literal notranslate"><span class="pre">tidychef.acquire.main</span></code>.</p>
 <p>Lets have a look at the method signature for acquirer.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">acquirer</span><span class="p">(</span>
     <span class="n">source</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
@@ -499,7 +493,7 @@ document.write(`
 <li><p>The acquire functions just call <code class="docutils literal notranslate"><span class="pre">acquirer</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">acquirer</span></code> just specifies a data source, something that implements <code class="docutils literal notranslate"><span class="pre">BaseReader</span></code> and an appropriate <code class="docutils literal notranslate"><span class="pre">Selectable</span></code>.</p></li>
 </ul>
-<p>Therefore, to get a new data source into datachef you <strong>just need to create a new implementation of <code class="docutils literal notranslate"><span class="pre">BaseReader</span></code> and call acquirer with it</strong> and an appropriate <code class="docutils literal notranslate"><span class="pre">Selectable</span></code>.</p>
+<p>Therefore, to get a new data source into tidychef you <strong>just need to create a new implementation of <code class="docutils literal notranslate"><span class="pre">BaseReader</span></code> and call acquirer with it</strong> and an appropriate <code class="docutils literal notranslate"><span class="pre">Selectable</span></code>.</p>
 </section>
 <section id="base-reader">
 <h2>Base Reader<a class="headerlink" href="#base-reader" title="Permalink to this heading">#</a></h2>
@@ -508,7 +502,7 @@ document.write(`
 <p>So really all we need to do to ingest a new data format is populate a single parse method that:</p>
 <ul class="simple">
 <li><p>Takes something as a source.</p></li>
-<li><p>Populates a datachef selectable or list of.</p></li>
+<li><p>Populates a tidychef selectable or list of.</p></li>
 </ul>
 </section>
 <section id="python-list-reader">
@@ -583,10 +577,10 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
-<span class="kn">from</span> <span class="nn">datachef.acquire.base</span> <span class="kn">import</span> <span class="n">BaseReader</span>
-<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">Selectable</span>
-<span class="kn">from</span> <span class="nn">datachef.models.source.cell</span> <span class="kn">import</span> <span class="n">Cell</span>
-<span class="kn">from</span> <span class="nn">datachef.models.source.table</span> <span class="kn">import</span> <span class="n">Table</span>
+<span class="kn">from</span> <span class="nn">tidychef.acquire.base</span> <span class="kn">import</span> <span class="n">BaseReader</span>
+<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">Selectable</span>
+<span class="kn">from</span> <span class="nn">tidychef.models.source.cell</span> <span class="kn">import</span> <span class="n">Cell</span>
+<span class="kn">from</span> <span class="nn">tidychef.models.source.table</span> <span class="kn">import</span> <span class="n">Table</span>
 
 <span class="k">class</span> <span class="nc">ExampleReader</span><span class="p">(</span><span class="n">BaseReader</span><span class="p">):</span>
 
@@ -606,18 +600,18 @@ document.write(`
 </div>
 <ul class="simple">
 <li><p>All readers must return either (a) a populated selectable or (b) a list of populated selectable (see last line of example).</p></li>
-<li><p>A selectable is created from a table <code class="docutils literal notranslate"><span class="pre">datachef.models.source.table.Table</span></code>, a source (typically a url or filename) and (where appropriate) the table name.</p></li>
+<li><p>A selectable is created from a table <code class="docutils literal notranslate"><span class="pre">tidychef.models.source.table.Table</span></code>, a source (typically a url or filename) and (where appropriate) the table name.</p></li>
 <li><p>It’s a class, the first argument must be <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">Table</span></code> is populated via the <code class="docutils literal notranslate"><span class="pre">add_cell()</span></code> method here though can also just pass a complete list of <code class="docutils literal notranslate"><span class="pre">Cell</span></code> objects into the <code class="docutils literal notranslate"><span class="pre">Table</span></code> constructor.</p></li>
 <li><p>A <code class="docutils literal notranslate"><span class="pre">Cell</span></code> must be created from x (column index) y (row index) and the contents of the tabular cell.</p></li>
-<li><p>It’s not actully necessary here but datachef deals in cell values as type <code class="docutils literal notranslate"><span class="pre">str</span></code> by default so the cast to str is something you’ll almost certainly want to do.</p></li>
+<li><p>It’s not actually necessary here but tidychef deals in cell values as type <code class="docutils literal notranslate"><span class="pre">str</span></code> by default so the cast to str is something you’ll almost certainly want to do.</p></li>
 </ul>
-<p>There are likely more efficient ways to load data in but this is a <em>consciously simple pattern</em>. Any tabulated source than can be read by python can be iterated, anything that can be iterated can be read into datachef via this mechanism.</p>
+<p>There are likely more efficient ways to load data in but this is a <em>consciously simple pattern</em>. Any tabulated source than can be read by python can be iterated, anything that can be iterated can be read into tidychef via this mechanism.</p>
 <p>Now lets try our new reader:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">preview</span>
-<span class="kn">from</span> <span class="nn">datachef.acquire.main</span> <span class="kn">import</span> <span class="n">acquirer</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">tidychef.acquire.main</span> <span class="kn">import</span> <span class="n">acquirer</span>
 
 <span class="n">table</span><span class="p">:</span> <span class="n">Selectable</span> <span class="o">=</span> <span class="n">acquirer</span><span class="p">(</span><span class="n">list_data</span><span class="p">,</span> <span class="n">ExampleReader</span><span class="p">(),</span> <span class="n">Selectable</span><span class="p">)</span>
 <span class="n">preview</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>

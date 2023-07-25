@@ -136,14 +136,8 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
-    
-    
-      
-    
-    
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
+    <p class="title logo__title">Documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -175,7 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-closest.html">TidyData: Closest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tidydata-constants.html">TidyData: Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tidydata-constants.html">tidychef: Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
@@ -294,7 +288,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/mikeAdamss/datachef" target="_blank"
+      <li><a href="https://github.com/mikeAdamss/tidychef" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +305,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/mikeAdamss/datachef/issues/new?title=Issue%20on%20page%20%2Fbasics/selection-regex.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/mikeAdamss/tidychef/issues/new?title=Issue%20on%20page%20%2Fbasics/selection-regex.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -450,7 +444,7 @@ document.write(`
 <h1>Selection: Regex<a class="headerlink" href="#selection-regex" title="Permalink to this heading">#</a></h1>
 <p>No python data wrangling framework would be complete without a nod to regular expressions.</p>
 <p>The full syntax of regex is beyond the scope of this tutorial (but you can learn more <a class="reference external" href="https://regexone.com/">here</a> or via many online sources).</p>
-<p>This page is just some simple example on how to use regex in relation to datachef cells.</p>
+<p>This page is just some simple example on how to use regex in relation to tidychef cells.</p>
 <section id="source-data">
 <h2>Source Data<a class="headerlink" href="#source-data" title="Permalink to this heading">#</a></h2>
 <p>The data source we’re using for these examples is shown below:</p>
@@ -460,13 +454,13 @@ document.write(`
 </tr>
 </thead>
 </table>
-<p>The <a class="reference external" href="https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx">full data source can be downloaded here</a>. We’ll be using th 10th tab named “Table 3c”.</p>
+<p>The <a class="reference external" href="https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx">full data source can be downloaded here</a>. We’ll be using th 10th tab named “Table 3c”.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
-<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
 
-<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3c&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3c&quot;</span><span class="p">)</span>
 <span class="n">preview</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A4:H10&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -521,14 +515,14 @@ document.write(`
 </section>
 <section id="simple-regex-examples">
 <h2>Simple Regex Examples<a class="headerlink" href="#simple-regex-examples" title="Permalink to this heading">#</a></h2>
-<p>The following are simple examples of how to use regex with datachef selections.</p>
+<p>The following are simple examples of how to use regex with tidychef selections.</p>
 <p>Note, for brevity we use the common shorthand <code class="docutils literal notranslate"><span class="pre">re</span></code> for regex.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
-<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
 
-<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3c&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3c&quot;</span><span class="p">)</span>
 
 <span class="c1"># cells beginning with a capital M</span>
 <span class="n">m_cells</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">re</span><span class="p">(</span><span class="s2">&quot;M.*&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Cells starting with a capital M&quot;</span><span class="p">)</span>

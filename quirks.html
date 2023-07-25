@@ -136,14 +136,8 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
-    
-    
-      
-    
-    
-    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
+    <p class="title logo__title">Documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -175,7 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="basics/selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basics/tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basics/tidydata-closest.html">TidyData: Closest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="basics/tidydata-constants.html">TidyData: Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics/tidydata-constants.html">tidychef: Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basics/tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basics/tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
@@ -294,7 +288,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/mikeAdamss/datachef" target="_blank"
+      <li><a href="https://github.com/mikeAdamss/tidychef" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +305,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/mikeAdamss/datachef/issues/new?title=Issue%20on%20page%20%2Fquirks.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/mikeAdamss/tidychef/issues/new?title=Issue%20on%20page%20%2Fquirks.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -447,10 +441,10 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="quirks">
 <h1>Quirks<a class="headerlink" href="#quirks" title="Permalink to this heading">#</a></h1>
-<p>The following page contains some quick notes on quirks of datachef that might throw a first time user.</p>
+<p>The following page contains some quick notes on quirks of tidychef that might throw a first time user.</p>
 <section id="excel-references">
 <h2>Excel references<a class="headerlink" href="#excel-references" title="Permalink to this heading">#</a></h2>
-<p>Regardless of the format in question datachef makes heavy use of the phrase “excel reference” or more commonly <code class="docutils literal notranslate"><span class="pre">excel_ref()</span></code>.</p>
+<p>Regardless of the format in question tidychef makes heavy use of the phrase “excel reference” or more commonly <code class="docutils literal notranslate"><span class="pre">excel_ref()</span></code>.</p>
 <p>This is <strong>nothing</strong> to do with excel or even spreadsheets, it’s simply a matter of practicality.</p>
 <p>If you say “excel reference C3” the vast majority of people will know what you are talking about. If you say “x offset 2, y offset 4” you’ve just lost half the audience. We prefer to keep things accessible to the majority.</p>
 <p>This will mean an odd moment the first time you <code class="docutils literal notranslate"><span class="pre">excel_ref()</span></code> some csv data, but just remember its an <em>excel <strong>style</strong> reference</em>.</p>

@@ -136,14 +136,8 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
-    
-    
-      
-    
-    
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
+    <p class="title logo__title">Documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -175,7 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-closest.html">TidyData: Closest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-constants.html">TidyData: Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-constants.html">tidychef: Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
@@ -294,7 +288,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/mikeAdamss/datachef" target="_blank"
+      <li><a href="https://github.com/mikeAdamss/tidychef" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +305,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/mikeAdamss/datachef/issues/new?title=Issue%20on%20page%20%2Fintermediate/validation.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/mikeAdamss/tidychef/issues/new?title=Issue%20on%20page%20%2Fintermediate/validation.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -450,7 +444,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="tidydata-column-validate">
 <h1>TidyData: Column: validate=<a class="headerlink" href="#tidydata-column-validate" title="Permalink to this heading">#</a></h1>
-<p>The following is an introduction to basic validation in datachef and usage of the <code class="docutils literal notranslate"><span class="pre">validate=</span></code> keyword provided by the <code class="docutils literal notranslate"><span class="pre">Column</span></code> class when constructing <code class="docutils literal notranslate"><span class="pre">TidyData</span></code>.</p>
+<p>The following is an introduction to basic validation in tidychef and usage of the <code class="docutils literal notranslate"><span class="pre">validate=</span></code> keyword provided by the <code class="docutils literal notranslate"><span class="pre">Column</span></code> class when constructing <code class="docutils literal notranslate"><span class="pre">TidyData</span></code>.</p>
 <table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p><span style="color:green">Note - this keyword uses exactly the same <code class="docutils literal notranslate"><span class="pre">against</span></code> module we used when explaining <code class="docutils literal notranslate"><span class="pre">selection.validate()</span></code> method earlier in this documentation - the difference here is intent (explained below in more detail).</span></p></th>
@@ -480,13 +474,13 @@ document.write(`
 </tr>
 </thead>
 </table>
-<p>The <a class="reference external" href="https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx">full data source can be downloaded here</a>. We’ll be using th 10th tab named “Table 3c”.</p>
+<p>The <a class="reference external" href="https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx">full data source can be downloaded here</a>. We’ll be using th 10th tab named “Table 3c”.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
-<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
 
-<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3c&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3c&quot;</span><span class="p">)</span>
 <span class="n">preview</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A4:H10&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -546,12 +540,12 @@ document.write(`
 <p>So the following example is an example of finding an invalid cell with the regex provided:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datachef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">against</span>
-<span class="kn">from</span> <span class="nn">datachef.direction</span> <span class="kn">import</span> <span class="n">right</span><span class="p">,</span> <span class="n">down</span>
-<span class="kn">from</span> <span class="nn">datachef.output</span> <span class="kn">import</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span>
-<span class="kn">from</span> <span class="nn">datachef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">against</span>
+<span class="kn">from</span> <span class="nn">tidychef.direction</span> <span class="kn">import</span> <span class="n">right</span><span class="p">,</span> <span class="n">down</span>
+<span class="kn">from</span> <span class="nn">tidychef.output</span> <span class="kn">import</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span>
+<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
 
-<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/datachef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3c&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3c&quot;</span><span class="p">)</span>
 
 <span class="n">observations</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B7:H10&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Observations&quot;</span><span class="p">)</span>
 <span class="n">dataset_identifier_code</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B6&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Dataset Identifier Codes&quot;</span><span class="p">)</span>
@@ -569,39 +563,39 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">CellValidationError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_44343</span><span class="o">/</span><span class="mf">1874977267.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_64608</span><span class="o">/</span><span class="mf">3031609681.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">16</span> 
 <span class="ne">---&gt; </span><span class="mi">17</span> <span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
 
-<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/output/tidydata.py</span> in <span class="ni">__str__</span><span class="nt">(self)</span>
+<span class="nn">~/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/tidychef/output/tidydata.py</span> in <span class="ni">__str__</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">81</span> 
+<span class="g g-Whitespace">     </span><span class="mi">82</span>     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
+<span class="ne">---&gt; </span><span class="mi">83</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_representation</span><span class="p">()</span>
 <span class="g g-Whitespace">     </span><span class="mi">84</span> 
-<span class="g g-Whitespace">     </span><span class="mi">85</span>     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
-<span class="ne">---&gt; </span><span class="mi">86</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_representation</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">87</span> 
-<span class="g g-Whitespace">     </span><span class="mi">88</span>     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">85</span>     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
-<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/output/tidydata.py</span> in <span class="ni">__get_representation</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">     </span><span class="mi">67</span><span class="w">         </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">68</span><span class="sd">         if not self._data:</span>
-<span class="ne">---&gt; </span><span class="mi">69</span><span class="sd">             self._transform()</span>
-<span class="g g-Whitespace">     </span><span class="mi">70</span><span class="sd"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">71</span><span class="sd">         header_row = self._data[0]</span>
+<span class="nn">~/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/tidychef/output/tidydata.py</span> in <span class="ni">__get_representation</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">64</span><span class="w">         </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span><span class="sd">         if not self._data:</span>
+<span class="ne">---&gt; </span><span class="mi">66</span><span class="sd">             self._transform()</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span><span class="sd"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span><span class="sd">         header_row = self._data[0]</span>
 
-<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/output/tidydata.py</span> in <span class="ni">_transform</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">300</span><span class="sd">                 for column in standard_columns:</span>
-<span class="g g-Whitespace">    </span><span class="mi">301</span><span class="sd">                     col_value = column.resolve_column_cell_from_obs_cell(</span>
-<span class="ne">--&gt; </span><span class="mi">302</span><span class="sd">                         observation</span>
-<span class="g g-Whitespace">    </span><span class="mi">303</span><span class="sd">                     ).value</span>
-<span class="g g-Whitespace">    </span><span class="mi">304</span><span class="sd">                     column_value_dict[column.label] = col_value</span>
+<span class="nn">~/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/tidychef/output/tidydata.py</span> in <span class="ni">_transform</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">297</span><span class="sd">                 for column in standard_columns:</span>
+<span class="g g-Whitespace">    </span><span class="mi">298</span><span class="sd">                     col_value = column.resolve_column_cell_from_obs_cell(</span>
+<span class="ne">--&gt; </span><span class="mi">299</span><span class="sd">                         observation</span>
+<span class="g g-Whitespace">    </span><span class="mi">300</span><span class="sd">                     ).value</span>
+<span class="g g-Whitespace">    </span><span class="mi">301</span><span class="sd">                     column_value_dict[column.label] = col_value</span>
 
-<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/column/base.py</span> in <span class="ni">resolve_column_cell_from_obs_cell</span><span class="nt">(self, observation_cell, *args)</span>
-<span class="g g-Whitespace">    </span><span class="mi">105</span><span class="sd">         &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">106</span>         <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">observation_cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">107</span>         <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_post_lookup</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">108</span>         <span class="k">return</span> <span class="n">cell</span>
+<span class="nn">~/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/tidychef/column/base.py</span> in <span class="ni">resolve_column_cell_from_obs_cell</span><span class="nt">(self, observation_cell, *args)</span>
+<span class="g g-Whitespace">    </span><span class="mi">102</span><span class="sd">         &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">103</span>         <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">observation_cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">104</span>         <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_post_lookup</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">105</span>         <span class="k">return</span> <span class="n">cell</span>
 
-<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/column/column.py</span> in <span class="ni">_post_lookup</span><span class="nt">(self, cell)</span>
+<span class="nn">~/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/tidychef/column/column.py</span> in <span class="ni">_post_lookup</span><span class="nt">(self, cell)</span>
 <span class="g g-Whitespace">    </span><span class="mi">136</span>                         <span class="n">Invalid</span> <span class="n">cell</span> <span class="p">{</span><span class="n">cell</span><span class="p">}</span><span class="o">.</span>
 <span class="g g-Whitespace">    </span><span class="mi">137</span>                         <span class="p">{</span><span class="n">msg</span><span class="p">}</span>
 <span class="ne">--&gt; </span><span class="mi">138</span>                         <span class="s1">&#39;&#39;&#39;)</span>

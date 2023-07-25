@@ -1,64 +1,47 @@
 Traceback (most recent call last):
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 64, in single_nb_execution
+  File "/Users/michaeladams/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 64, in single_nb_execution
     **kwargs,
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 1204, in execute
+  File "/Users/michaeladams/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/nbclient/client.py", line 1204, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/util.py", line 84, in wrapped
+  File "/Users/michaeladams/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/nbclient/util.py", line 84, in wrapped
     return just_run(coro(*args, **kwargs))
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/util.py", line 62, in just_run
+  File "/Users/michaeladams/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/nbclient/util.py", line 62, in just_run
     return loop.run_until_complete(coro)
   File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
     return future.result()
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 664, in async_execute
+  File "/Users/michaeladams/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/nbclient/client.py", line 664, in async_execute
     cell, index, execution_count=self.code_cells_executed + 1
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 965, in async_execute_cell
+  File "/Users/michaeladams/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/nbclient/client.py", line 965, in async_execute_cell
     await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+  File "/Users/michaeladams/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-from datachef import acquire, preview
-from datachef.selection import CsvSelectable
+from tidychef.models.source.cell import Cell
 
-table: CsvSelectable = acquire.csv.http("https://raw.githubusercontent.com/mikeAdamss/datachef/main/tests/fixtures/csv/bands-wide.csv")
+# Create a simple Cell object for testing
+# Note the value here is numeric!
+valid_cell = Cell(x="0", y="0", value="1")
 
-# Select them
-selection = (table.excel_ref('C') | table.excel_ref('D')).is_not_blank()
+# Try it out - this will be return True (1 is numeric)
+validator = NumericValidator()
+print(f'Should be True: {validator(valid_cell)}')
 
-# Preview the selection - PRIOR to validation
-# note - for the sake of this example, you'd just do it in one typically
-preview(selection)
+# Now lets try a Cell with a non numeric value
+invalid_cell = Cell(x="0", y="0", value="foo")
+print(f'Should be False: {validator(invalid_cell)}')
 
-# Noe validate it
-numeric_validator = NumericValidator()
-selection.validate(numeric_validator)
-
+# Lastly lets call .msg() on our failed validation and print it
+print(validator.msg(fake_cell))
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mCellValidationError[0m                       Traceback (most recent call last)
-[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_44268/4217185943.py[0m in [0;36m<module>[0;34m[0m
-[1;32m     13[0m [0;31m# Noe validate it[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     14[0m [0mnumeric_validator[0m [0;34m=[0m [0mNumericValidator[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;32m---> 15[0;31m [0mselection[0m[0;34m.[0m[0mvalidate[0m[0;34m([0m[0mnumeric_validator[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_64527/4169935608.py[0m in [0;36m<module>[0;34m[0m
+[1;32m     14[0m [0;34m[0m[0m
+[1;32m     15[0m [0;31m# Lastly lets call .msg() on our failed validation and print it[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 16[0;31m [0mprint[0m[0;34m([0m[0mvalidator[0m[0;34m.[0m[0mmsg[0m[0;34m([0m[0mfake_cell[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m
-[0;32m~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/datachef/selection/selectable.py[0m in [0;36mvalidate[0;34m(self, validator, raise_first_error)[0m
-[1;32m    528[0m [0mfollowing[0m [0mvalidation[0m [0merrors[0m [0mwere[0m [0mencountered[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    529[0m [0;34m{[0m[0mlinesep[0m[0;34m.[0m[0mjoin[0m[0;34m([0m[0mvalidation_errors[0m[0;34m)[0m[0;34m}[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 530[0;31m                 ''')
-[0m[1;32m    531[0m [0;34m[0m[0m
-[1;32m    532[0m         [0;32mreturn[0m [0mself[0m[0;34m[0m[0;34m[0m[0m
-
-[0;31mCellValidationError[0m: 
-When making selections from table: Unnamed Table the
-following validation errors were encountered:
-"Houses" is not numeric
-"Cars" is not numeric
-                
-CellValidationError: 
-When making selections from table: Unnamed Table the
-following validation errors were encountered:
-"Houses" is not numeric
-"Cars" is not numeric
-                
+[0;31mNameError[0m: name 'fake_cell' is not defined
+NameError: name 'fake_cell' is not defined
 
