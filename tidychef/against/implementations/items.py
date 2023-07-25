@@ -9,7 +9,7 @@ from tidychef.models.source.cell import Cell
 class ItemsValidator(BaseValidator):
     """
     A class to return bool (valid or not) when
-    called with a single instance of a datachef
+    called with a single instance of a tidychef
     Cell object.
     """
 
@@ -20,7 +20,7 @@ class ItemsValidator(BaseValidator):
         Does the value property of the Cell
         appear in the items list
 
-        :param cell: A single datachef Cell object.
+        :param cell: A single tidychef Cell object.
         :return: bool, is it valid or not
         """
         return cell.value in self.items
@@ -31,7 +31,7 @@ class ItemsValidator(BaseValidator):
         message to the user where cell
         value not on the provided items list
 
-        :param cell: A single datachef Cell object.
+        :param cell: A single tidychef Cell object.
         :return: A contextual message
         """
 

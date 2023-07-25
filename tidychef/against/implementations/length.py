@@ -9,7 +9,7 @@ from tidychef.models.source.cell import Cell
 class LengthValidator(BaseValidator):
     """
     A class to return bool (valid or not) when
-    called with a single instance of a datachef
+    called with a single instance of a tidychef
     Cell object.
     """
 
@@ -41,7 +41,7 @@ class LengthValidator(BaseValidator):
         Is the length of the value property of the Cell
         between the minimum and maximum length
 
-        :param cell: A single datachef Cell object.
+        :param cell: A single tidychef Cell object.
         :return: bool, is it valid or not
         """
         if self.least and self.most:
@@ -57,7 +57,7 @@ class LengthValidator(BaseValidator):
         message to the user where cell
         is not numeric
 
-        :param cell: A single datachef Cell object.
+        :param cell: A single tidychef Cell object.
         :return: A contextual message
         """
         if self.least and self.most:

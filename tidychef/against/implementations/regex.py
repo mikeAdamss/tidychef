@@ -17,7 +17,7 @@ class RegexValidator(BaseValidator):
         Does the value property of the Cell
         match the provided pattern.
 
-        :param cell: A single datachef Cell object.
+        :param cell: A single tidychef Cell object.
         :return: bool, is it valid or not
         """
         if self._compiled is None:
@@ -33,7 +33,7 @@ class RegexValidator(BaseValidator):
         value does not match the provided
         regular expression.
 
-        :param cell: A single datachef Cell object.
+        :param cell: A single tidychef Cell object.
         :return: A contextual message
         """
         return f'"{cell.value}" does not match pattern: "{self.pattern}"'

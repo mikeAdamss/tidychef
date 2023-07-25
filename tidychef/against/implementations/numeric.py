@@ -7,7 +7,7 @@ from tidychef.models.source.cell import Cell
 class IsNumericOrFloatValidator(BaseValidator):
     """
     A class to return bool (valid or not) when
-    called with a single instance of a datachef
+    called with a single instance of a tidychef
     Cell object.
     """
 
@@ -16,7 +16,7 @@ class IsNumericOrFloatValidator(BaseValidator):
         Is the value property of the Cell
         numeric to include floats
 
-        :param cell: A single datachef Cell object.
+        :param cell: A single tidychef Cell object.
         :return: bool, is it valid or not
         """
         if len(cell.value) > 0:
@@ -32,7 +32,7 @@ class IsNumericOrFloatValidator(BaseValidator):
         message to the user where cell
         is not numeric to include floats
 
-        :param cell: A single datachef Cell object.
+        :param cell: A single tidychef Cell object.
         :return: A contextual message
         """
 
@@ -42,7 +42,7 @@ class IsNumericOrFloatValidator(BaseValidator):
 class IsNotNumericOrFloatValidator(BaseValidator):
     """
     A class to return bool (valid or not) when
-    called with a single instance of a datachef
+    called with a single instance of a tidychef
     Cell object.
     """
 
@@ -51,7 +51,7 @@ class IsNotNumericOrFloatValidator(BaseValidator):
         Is the value property of the Cell
         not numeric to include floats
 
-        :param cell: A single datachef Cell object.
+        :param cell: A single tidychef Cell object.
         :return: bool, is it valid or not
         """
         if len(cell.value) > 0:
@@ -67,7 +67,7 @@ class IsNotNumericOrFloatValidator(BaseValidator):
         message to the user where cell
         is not numeric to include floats
 
-        :param cell: A single datachef Cell object.
+        :param cell: A single tidychef Cell object.
         :return: A contextual message
         """
 
@@ -77,7 +77,7 @@ class IsNotNumericOrFloatValidator(BaseValidator):
 class IsNotNumericValidator(BaseValidator):
     """
     A class to return bool (valid or not) when
-    called with a single instance of a datachef
+    called with a single instance of a tidychef
     Cell object.
     """
 
@@ -86,7 +86,7 @@ class IsNotNumericValidator(BaseValidator):
         Is the value property of the Cell
         not numeric
 
-        :param cell: A single datachef Cell object.
+        :param cell: A single tidychef Cell object.
         :return: bool, is it valid or not
         """
         return not cell.value.isnumeric()
@@ -97,7 +97,7 @@ class IsNotNumericValidator(BaseValidator):
         message to the user where cell
         is numeric
 
-        :param cell: A single datachef Cell object.
+        :param cell: A single tidychef Cell object.
         :return: A contextual message
         """
 
@@ -107,7 +107,7 @@ class IsNotNumericValidator(BaseValidator):
 class IsNumericValidator(BaseValidator):
     """
     A class to return bool (valid or not) when
-    called with a single instance of a datachef
+    called with a single instance of a tidychef
     Cell object.
     """
 
@@ -116,7 +116,7 @@ class IsNumericValidator(BaseValidator):
         Is the value property of the Cell
         numeric
 
-        :param cell: A single datachef Cell object.
+        :param cell: A single tidychef Cell object.
         :return: bool, is it valid or not
         """
         return cell.value.isnumeric()
@@ -127,7 +127,7 @@ class IsNumericValidator(BaseValidator):
         message to the user where cell
         is numeric
 
-        :param cell: A single datachef Cell object.
+        :param cell: A single tidychef Cell object.
         :return: A contextual message
         """
 
