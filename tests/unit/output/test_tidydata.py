@@ -46,6 +46,35 @@ def tidy() -> TidyData:
     return tidy
 
 
+@pytest.fixture
+def tidy_with_obs_apply() -> TidyData:
+    """
+    A relatively simple definition of a populated TidyData class
+    with an apply used.
+    """
+    selectable_wide_band_tab: Selectable = fixture_wide_band_tab()
+
+    observations = selectable_wide_band_tab.excel_ref("B4:K6").filter(
+        filters.is_numeric
+    )
+    assets = selectable_wide_band_tab.excel_ref("2").is_not_blank()
+    member = (
+        selectable_wide_band_tab.excel_ref("4:7")
+        .is_not_blank()
+        .filter(filters.is_not_numeric)
+    )
+
+    tidy = TidyData(
+        observations.label_as("Value"),
+        Column(Constant("Genre", "Rock & Roll")),
+        Column(Directly("Assets", assets, above)),
+        Column(Directly("Member", member, left)),
+        obs_apply=lambda x: "foo "+x
+    )
+
+    return tidy
+
+
 def test_tidydata_can_be_transformed(tidy: TidyData):
     """
     Test that calling _transform() result in a populated
@@ -84,8 +113,40 @@ def test_tidydata_internal_representation_is_as_expected(tidy: TidyData):
         ["8", "Rock & Roll", "Cars", "Charlie"],
         ["12", "Rock & Roll", "Boats", "Charlie"],
     ]
-    assert tidy._data == expected_data
+    assert tidy._data_as_table_of_strings() == expected_data
     assert len(tidy) == 19
+
+
+def test_tidydata_internal_representation_is_as_expected_with_apply(tidy_with_obs_apply: TidyData):
+    """
+    Test that the ._data attribute of TidyData contains the expected
+    data once _transform() has been called.
+    """
+
+    tidy_with_obs_apply._transform()
+    expected_data = [
+       ["Value", "Genre", "Assets", "Member"],
+        ["foo 1", "Rock & Roll", "Houses", "John"],
+        ["foo 5", "Rock & Roll", "Cars", "John"],
+        ["foo 9", "Rock & Roll", "Boats", "John"],
+        ["foo 2", "Rock & Roll", "Houses", "Keith"],
+        ["foo 6", "Rock & Roll", "Cars", "Keith"],
+        ["foo 10", "Rock & Roll", "Boats", "Keith"],
+        ["foo 2", "Rock & Roll", "Houses", "Paul"],
+        ["foo 6", "Rock & Roll", "Cars", "Paul"],
+        ["foo 10", "Rock & Roll", "Boats", "Paul"],
+        ["foo 3", "Rock & Roll", "Houses", "Mick"],
+        ["foo 7", "Rock & Roll", "Cars", "Mick"],
+        ["foo 11", "Rock & Roll", "Boats", "Mick"],
+        ["foo 2", "Rock & Roll", "Houses", "George"],
+        ["foo 7", "Rock & Roll", "Cars", "George"],
+        ["foo 11", "Rock & Roll", "Boats", "George"],
+        ["foo 3", "Rock & Roll", "Houses", "Charlie"],
+        ["foo 8", "Rock & Roll", "Cars", "Charlie"],
+        ["foo 12", "Rock & Roll", "Boats", "Charlie"],
+    ]
+    assert tidy_with_obs_apply._data_as_table_of_strings() == expected_data
+    assert len(tidy_with_obs_apply) == 19
 
 
 def test_tidydata_internal_representation_with_dropped_column_is_as_expected(
@@ -119,7 +180,7 @@ def test_tidydata_internal_representation_with_dropped_column_is_as_expected(
         ["8", "Rock & Roll", "Charlie"],
         ["12", "Rock & Roll", "Charlie"],
     ]
-    assert tidy._data == expected_data
+    assert tidy._data_as_table_of_strings() == expected_data
     assert len(tidy) == 19
 
 
@@ -155,7 +216,7 @@ def test_tidydata_internal_representation_with_dropped_column_is_as_expected(
         ["Rock & Roll", "Charlie"],
         ["Rock & Roll", "Charlie"],
     ]
-    assert tidy._data == expected_data
+    assert tidy._data_as_table_of_strings() == expected_data
     assert len(tidy) == 19
 
 
@@ -341,7 +402,7 @@ def test_drop_duplicates(tidy: TidyData):
     tidy2 = copy.deepcopy(tidy)
 
     # Add a sneaky duplicate line
-    tidy2._data.append(["1", "Rock & Roll", "Houses", "John"])
+    tidy2._data.append(tidy._data[1])
     assert len(tidy2._data) != len(tidy._data)
     assert len(tidy2.drop_duplicates()._data) == len(tidy._data)
 
@@ -358,7 +419,7 @@ def test_drop_duplicates_to_path(tidy: TidyData):
 
     # From path
     # ---------
-    tidy2._data.append(["1", "Rock & Roll", "Houses", "John"])
+    tidy2._data.append(tidy._data[1])
     tidy2.drop_duplicates(csv_duplicate_path=Path("deleteme.txt"))
 
     with open("deleteme.txt") as f:
@@ -367,7 +428,7 @@ def test_drop_duplicates_to_path(tidy: TidyData):
 
     # From path as str
     # ----------------
-    tidy2._data.append(["1", "Rock & Roll", "Houses", "John"])
+    tidy2._data.append(tidy._data[1])
     tidy2.drop_duplicates(csv_duplicate_path="deleteme.txt")
 
     with open("deleteme.txt") as f:

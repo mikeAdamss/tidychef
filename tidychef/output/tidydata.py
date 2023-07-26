@@ -10,6 +10,7 @@ from IPython.core.display import HTML, display
 from tidychef.column.base import BaseColumn
 from tidychef.exceptions import DroppingNonColumnError, MisalignedHeadersError
 from tidychef.lookup.engines.horizontal_condition import HorizontalCondition
+from tidychef.models.source.cell import Cell, VirtualCell
 from tidychef.models.source.table import LiveTable
 from tidychef.notebook.ipython import in_notebook
 from tidychef.notebook.preview.html.tidy_data import tidy_data_as_html_table_string
@@ -85,6 +86,31 @@ class TidyData(BaseOutput):
     def __len__(self):
         self._transform()
         return len(self._data)
+    
+    def _data_as_table_of_strings(self) -> List[List[str]]:
+        """
+        Generates a table of strings from a table of Cells.
+
+        So turns something like this:
+
+        [
+         [ Cell(x=1, y=2, value="Ray"), Cell(x=41, y=2, value="Egon") ],
+         [ Cell(x=9, y=5, value="Peter"), Cell(x=0, y=12, value="Winston") ]
+        ]
+
+        Into something like this:
+
+        [
+         [ "Ray", "Egon" ],
+         [ "Peter", "Winston" ]
+        ]
+        """
+        string_table = []
+        self._transform()
+        for row in self._data:
+            string_row = [x.value for x in row]
+            string_table.append(string_row)
+        return string_table
 
     def to_dict(self) -> dict:
         """
@@ -102,14 +128,14 @@ class TidyData(BaseOutput):
         count = 0
         translater: Dict[i, str] = {}
 
-        for column_name in self._data[0]:
-            output_dict[column_name] = []
-            translater[count] = column_name
+        for column_header_cell in self._data[0]:
+            output_dict[column_header_cell.value] = []
+            translater[count] = column_header_cell.value
             count += 1
 
         for row in self._data[1:]:
             for i, item in enumerate(row):
-                output_dict[translater[i]].append(item)
+                output_dict[translater[i]].append(item.value)
 
         return output_dict
 
@@ -209,6 +235,15 @@ class TidyData(BaseOutput):
         will not repopulate this attribute and will be
         ignored.
         """
+
+        # Dev note:
+        # The key point here is we're assembling a table
+        # of Cell and VirtualCell objects, not a table
+        # of the strings that each represent.
+        # This is so we maintain provenance information
+        # regarding how and from where each value was
+        # acquired.
+
         if not self._data:
             grid = []
             drop_count = 0
@@ -222,23 +257,23 @@ class TidyData(BaseOutput):
             # We need to carefully construct our lists of lists
             # such that the HorizontalCondition columns are created last
             # Ordering will be restored at the end via this list.
-            ordered_column_headers = [self.observations.label] + [
-                x.label for x in self.columns
+            ordered_column_header_cells = [VirtualCell(value=self.observations.label)] + [
+                VirtualCell(value=x.label) for x in self.columns
             ]
 
             # Obs label
             if self.observations.label in self.drop:
-                unordered_header_row = []
+                unordered_header_row_cells = []
                 drop_count += 1
             else:
-                unordered_header_row = [self.observations.label]
+                unordered_header_row_cells = [VirtualCell(value=self.observations.label)]
 
             # Standard Column labels
             for column in [
                 x for x in self.columns if not isinstance(x.engine, HorizontalCondition)
             ]:
                 if column.label not in self.drop:
-                    unordered_header_row.append(column.label)
+                    unordered_header_row_cells.append(VirtualCell(value=column.label))
                 else:
                     drop_count += 1
 
@@ -247,15 +282,15 @@ class TidyData(BaseOutput):
                 x for x in self.columns if isinstance(x.engine, HorizontalCondition)
             ]:
                 if column.label not in self.drop:
-                    unordered_header_row.append(column.label)
+                    unordered_header_row_cells.append(VirtualCell(value=column.label))
                 else:
                     drop_count += 1
 
             # Conditional column labels
             header_row = []
-            for col in ordered_column_headers:
-                if col in unordered_header_row:
-                    header_row.append(col)
+            for column_header_cell in ordered_column_header_cells:
+                if column_header_cell in unordered_header_row_cells:
+                    header_row.append(column_header_cell)
 
             grid.append(header_row)
 
@@ -282,11 +317,9 @@ class TidyData(BaseOutput):
                 column_value_dict[self.observations.label] = observation.value
 
                 if self.observations.label not in self.drop:
-                    row_as_dict[self.observations.label] = (
-                        observation.value
-                        if not self.obs_apply
-                        else self.obs_apply(observation.value)
-                    )
+                    if self.obs_apply is not None:
+                        observation.value = self.obs_apply(observation.value)
+                    row_as_dict[self.observations.label] = observation
 
                 # Resolve the standard columns first
                 standard_columns = [
@@ -295,12 +328,10 @@ class TidyData(BaseOutput):
                     if not isinstance(x.engine, HorizontalCondition)
                 ]
                 for column in standard_columns:
-                    col_value = column.resolve_column_cell_from_obs_cell(
-                        observation
-                    ).value
-                    column_value_dict[column.label] = col_value
+                    column_cell = column.resolve_column_cell_from_obs_cell(observation)
+                    column_value_dict[column.label] = column_cell.value
                     if column.label not in self.drop:
-                        row_as_dict[column.label] = col_value
+                        row_as_dict[column.label] = column_cell
 
                 # Now we know the standard column values, resolve the
                 # horizontal conditions
@@ -311,20 +342,19 @@ class TidyData(BaseOutput):
                 for i in priorities:
                     for column in condition_columns:
                         if column.engine.priority == i:
-                            col_value = column.resolve_column_cell_from_obs_cell(
-                                observation, column_value_dict
-                            ).value
+                            column_cell = column.resolve_column_cell_from_obs_cell(
+                                observation, column_value_dict)
 
-                            column_value_dict[column.label] = col_value
+                            column_value_dict[column.label] = column_cell.value
                             if column.label not in self.drop:
-                                row_as_dict[column.label] = col_value
+                                row_as_dict[column.label] = column_cell
 
                 # Order for output
                 line = []
-                for col in ordered_column_headers:
-                    value_to_output = row_as_dict.get(col, None)
-                    if value_to_output is not None:
-                        line.append(value_to_output)
+                for column_cell in ordered_column_header_cells:
+                    cell_wanted = row_as_dict.get(column_cell.value, None)
+                    if cell_wanted is not None:
+                        line.append(cell_wanted)
 
                 grid.append(line)
 
@@ -352,8 +382,7 @@ class TidyData(BaseOutput):
         :param write_mode: The mode with which to open
         the python file object. Defaults to "w".
         """
-        if not self._data:
-            self._transform()
+        self._transform()
 
         if not isinstance(path, (Path, str)):
             raise ValueError(
@@ -370,7 +399,7 @@ class TidyData(BaseOutput):
 
         with open(path, write_mode) as csvfile:
             tidywriter = csv.writer(csvfile, **kwargs)
-            for i, row in enumerate(self._data):
+            for i, row in enumerate(self._data_as_table_of_strings()):
                 if i == 0 and not write_headers:
                     continue
                 tidywriter.writerow(row)
@@ -402,9 +431,9 @@ class TidyData(BaseOutput):
                 unique.append(row)
             else:
                 if print_duplicates:  # pragma: no cover
-                    lines.append(",".join(row))
+                    lines.append(",".join([x.value for x in row]))
                 if csv_duplicate_path:
-                    non_unique.append(row)
+                    non_unique.append([x.value for x in row])
 
         if print_duplicates:  # pragma: no cover
             for line in lines:

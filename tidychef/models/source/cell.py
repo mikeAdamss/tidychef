@@ -194,6 +194,13 @@ class Cell(BaseCell):
     # cell formatting.
     cellformat: Optional[CellFormatting] = None
 
+    def __post_init__(self):
+        """
+        We'll store the original value of the cell
+        for where a cell value has been changed.
+        """
+        self._original_value = self.value
+
     def is_blank(self, disregard_whitespace: bool = True):
         """
         Can the contents of the cell be regarded as blank
