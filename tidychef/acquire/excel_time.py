@@ -264,36 +264,3 @@ EXCEL_TIME_FORMATS = {
     # Month full name-Year (e.g., May-2023)
     "MMMM-YYYY": "%B-%Y",
 }
-
-
-# Error message where an unknown time format is encountered
-def missing_time_format_message(xls_time_format) -> str:
-    """
-    Returns a consistant message where we encounted an excel
-    style formatting we don't yet have handling for.
-    """
-
-    return f"""
-    One or more cells has excel style time formatting of
-    "{xls_time_format}" which is a pattern currently
-    unknown to tidychef.
-
-    To handle this, you can provide a formatting
-    translator via the "custom_time_formats=" 
-    keyword dictionary so tidychef knows how this time
-    type excel cell should be formatted.
-
-    Please see: https://www.programiz.com/python-programming/datetime/strftime
-    for information on how to use strftime().
-
-    Example usage for xls:
-    acquire.xls.local(source, custom_time_formats={{"{xls_time_format}":"<strftime pattern>"}}"
-
-    Example usage for xlsx:
-    acquire.xls.local(source, custom_time_formats={{"{xls_time_format}":"<strftime pattern>"}}"
-
-    The complete mapping of tidychefs currently known time patterns can be viewed at:
-    https://github.com/mikeAdamss/tidychef/tree/main/tidychef/acquire/excel_time.py
-
-    Please do PR any new patterns encountered in that direction or raise an issue.
-    """

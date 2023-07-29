@@ -84,7 +84,7 @@ class LocalXlsxReader(BaseReader):
         :return: A list of type as specified by param selectable.
         """
 
-        source: Path = fileutils.ensure_existing_path(source, **kwargs)
+        source: Path = fileutils.ensure_existing_path(source)
 
         custom_time_formats = kwargs.get("custom_time_formats", {})
         kwargs.pop("custom_time_formats", None)
@@ -92,4 +92,13 @@ class LocalXlsxReader(BaseReader):
         workbook: openpyxl.Workbook = openpyxl.load_workbook(
             source, data_only=data_only, **kwargs
         )
-        return sheets_from_workbook(source, selectable, workbook, custom_time_formats)
+
+        sheets = sheets_from_workbook(source, selectable, workbook, custom_time_formats, self.tables)
+
+        # In this instance we've filtered the tables at the point of reading, so
+        # remove the post load filter.
+        self.tables = None 
+
+        if len(sheets) == 1:
+            return sheets[0]
+        return sheets

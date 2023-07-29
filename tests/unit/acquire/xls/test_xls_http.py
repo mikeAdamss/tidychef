@@ -7,7 +7,6 @@ import requests
 from pytest_mock import mocker
 
 from tidychef import acquire
-from tidychef.exceptions import UnknownExcelTimeError
 from tidychef.selection.xls.xls import XlsSelectable
 
 
@@ -98,22 +97,6 @@ def test_shared_xls_http_time_formatting_works():
     ]
 
 
-def test_unknown_xls_http_time_format_raises(mocker):
-    """
-    Test that were we don't have knowledge of an xls time
-    format string the appropriate error is raised
-    """
-
-    mocker.patch("tidychef.acquire.xls.shared.xls_time_formats", return_value={})
-
-    with pytest.raises(UnknownExcelTimeError):
-        acquire.xls.http(
-            "https://raw.githubusercontent.com/mikeAdamss/"
-            "tidychef/main/tests/fixtures/xls/dates-times.xls",
-            tables="Sheet1",
-        )
-
-
 def test_unknown_xls_http_time_format_can_be_specified(mocker):
     """
     Test that were we don't have knowledge of an xls time
@@ -137,3 +120,20 @@ def test_unknown_xls_http_time_format_can_be_specified(mocker):
         "12/01/22",
         "10/10/00",
     ]
+
+def test_unknown_xls_http_time_format_warning(caplog, mocker):
+    """
+    Test that were we don't have knowledge of an xlsx time
+    format string the user can explicitly pass in a
+    formatting string.
+    """
+
+    mocker.patch("tidychef.acquire.xls.shared.xls_time_formats", return_value={})
+
+    XlsSelectable = acquire.xls.http(
+        "https://raw.githubusercontent.com/mikeAdamss/"
+        "tidychef/main/tests/fixtures/xls/dates-times.xls",
+        tables="Sheet1",
+    )
+
+    assert "an unknown excel time forma" in caplog.text

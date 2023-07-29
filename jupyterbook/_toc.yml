@@ -43,6 +43,7 @@ chapters:
     - file: intermediate/within
     - file: intermediate/against
     - file: intermediate/best-practice
+    - file: intermediate/time
 
 - file: advanced
   sections:

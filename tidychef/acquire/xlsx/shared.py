@@ -1,14 +1,15 @@
+import re
+import logging
 from typing import Any, Dict, List
 
 from openpyxl.cell.cell import Cell as OpenPyxlCell
 from openpyxl.workbook import Workbook
 
-from tidychef.exceptions import UnknownExcelTimeError
 from tidychef.models.source.cell import Cell
 from tidychef.models.source.table import Table
 from tidychef.selection import Selectable, XlsxSelectable
 
-from ..excel_time import EXCEL_TIME_FORMATS, missing_time_format_message
+from ..excel_time import EXCEL_TIME_FORMATS
 
 
 def xlsx_time_formats():
@@ -23,9 +24,17 @@ def sheets_from_workbook(
     selectable: Selectable,
     workbook: Workbook,
     custom_time_formats: Dict[str, str],
+    tables_regex: str
 ) -> List[XlsxSelectable]:
+    
     tidychef_selectables = []
+
     for worksheet_name in workbook.sheetnames:
+        time_format_warnings = {}
+
+        if tables_regex is not None:
+            if not re.match(tables_regex, worksheet_name):
+                continue # pragma: no cover
 
         worksheet = workbook[worksheet_name]
 
@@ -44,19 +53,32 @@ def sheets_from_workbook(
                         opycell.number_format, None
                     )
                     if strformat_pattern is None:
+
                         strformat_pattern = custom_time_formats.get(
                             opycell.number_format, None
                         )
+
                         if strformat_pattern is None:
-                            raise UnknownExcelTimeError(
-                                missing_time_format_message(opycell.number_format)
-                            )
-                    cell_value = opycell.internal_value.strftime(strformat_pattern)
+                            xy = f'x:{x}, y:{y}'
+                            if opycell.number_format not in time_format_warnings:
+                                time_format_warnings[opycell.number_format] = []
+                            time_format_warnings[opycell.number_format].append(xy)
+                            cell_value = opycell.value
+                        else:
+                            cell_value = opycell.internal_value.strftime(strformat_pattern)
+                    else:
+                        cell_value = opycell.internal_value.strftime(strformat_pattern)
+
                 elif opycell.value is not None:
                     cell_value = opycell.value
                 else:
                     cell_value = ""
                 table.add_cell(Cell(x=x, y=y, value=str(cell_value)))
+
+        for bad_fmt, examples in time_format_warnings.items():
+            time_issue_cells = ",".join(examples[:5]) if len(examples) > 5 else ",".join(examples)
+            logging.warning(f'''When processing table "{worksheet_name}" an unknown excel time format "{bad_fmt}" was encountered. Using raw cell value instead. 
+For more details on handling excel time formatting see tidychef documentation. Cell(s) in question (max 5 shown): {time_issue_cells}''')
 
         tidychef_selectables.append(
             selectable(table, source=source, name=worksheet_name)

@@ -28,7 +28,6 @@ def http(
     session: requests.Session = None,
     cache: bool = True,
     tables: str = None,
-    time_format: str = "%Y-%m-%dT%H:%M",
     **kwargs,
 ) -> Union[XlsSelectable, List[XlsSelectable]]:
     """
@@ -47,7 +46,6 @@ def http(
     :param post_hook: A callable that can take the output of HttpXlsReader.parse() as an argument.
     :param session: An optional requests.Session object.
     :param cache: Boolean flag for whether or not to cache get requests.
-    :param time_format: The pattern for expressing time encoded xlx cells. The default is ISO time.
     :return: A single populated Selectable of type as specified by selectable param.
     """
 
@@ -61,7 +59,6 @@ def http(
         post_hook=post_hook,
         session=session,
         cache=cache,
-        time_format=time_format,
         **kwargs,
     )
 
@@ -78,7 +75,6 @@ class HttpXlsReader(BaseReader):
         selectable: Selectable = XlsSelectable,
         session: requests.Session = None,
         cache: bool = True,
-        time_format: str = "%Y-%m-%dT%H:%M",
         **kwargs,
     ) -> List[XlsSelectable]:
         """
@@ -120,6 +116,12 @@ class HttpXlsReader(BaseReader):
         workbook: xlrd.Book = xlrd.open_workbook(
             file_contents=bio.read(), formatting_info=True, **kwargs
         )
-        return sheets_from_workbook(
-            source, selectable, workbook, custom_time_formats, **kwargs
-        )
+
+        sheets = sheets_from_workbook(source, selectable, workbook, custom_time_formats, self.tables, **kwargs)
+        # In this instance we've filtered the tables at the point of reading, so
+        # remove the post load table name regex.
+        self.tables = None 
+
+        if len(sheets) == 1:
+            return sheets[0]
+        return sheets

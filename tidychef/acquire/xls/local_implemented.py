@@ -85,6 +85,13 @@ class LocalXlsReader(BaseReader):
         kwargs.pop("custom_time_formats", None)
 
         workbook: xlrd.Book = xlrd.open_workbook(source, formatting_info=True)
-        return sheets_from_workbook(
-            source, selectable, workbook, custom_time_formats, **kwargs
-        )
+        
+        sheets = sheets_from_workbook(source, selectable, workbook, custom_time_formats, self.tables, **kwargs)
+
+        # In this instance we've filtered the tables at the point of reading, so
+        # remove the post load filter.
+        self.tables = None 
+
+        if len(sheets) == 1:
+            return sheets[0]
+        return sheets

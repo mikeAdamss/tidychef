@@ -6,7 +6,6 @@ from pytest_mock import mocker
 
 from tests.fixtures import path_to_fixture
 from tidychef import acquire
-from tidychef.exceptions import UnknownExcelTimeError
 from tidychef.selection.xls.xls import XlsSelectable
 
 
@@ -60,19 +59,6 @@ def test_shared_xls_local_time_formatting_works():
         "12/01/22",
         "10/10/00",
     ]
-
-
-def test_unknown_xls_local_time_format_raises(mocker):
-    """
-    Test that were we don't have knowledge of an xls time
-    format string the appropriate error is raised
-    """
-
-    mocker.patch("tidychef.acquire.xls.shared.xls_time_formats", return_value={})
-
-    with pytest.raises(UnknownExcelTimeError):
-        xls_path: Path = path_to_fixture("xls", "dates-times.xls")
-        acquire.xls.local(xls_path, tables="Sheet1")
 
 
 def test_unknown_xls_local_time_format_can_be_specified(mocker):

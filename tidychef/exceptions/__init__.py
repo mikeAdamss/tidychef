@@ -27,7 +27,6 @@ from .common import (
     MissingLabelError,
     OutOfBoundsError,
     UnalignedTableOperation,
-    UnknownExcelTimeError,
     ZeroAcquiredTablesError,
 )
 from .lookups import AmbiguousLookupError, FailedLookupError, MissingDirectLookupError

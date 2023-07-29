@@ -117,4 +117,13 @@ class HttpXlsxReader(BaseReader):
         workbook: openpyxl.Workbook = openpyxl.load_workbook(
             bio, data_only=data_only, **kwargs
         )
-        return sheets_from_workbook(source, selectable, workbook, custom_time_formats)
+
+        sheets = sheets_from_workbook(source, selectable, workbook, custom_time_formats, self.tables)
+
+        # In this instance we've filtered the tables at the point of reading, so
+        # remove the post load filter.
+        self.tables = None 
+
+        if len(sheets) == 1:
+            return sheets[0]
+        return sheets
