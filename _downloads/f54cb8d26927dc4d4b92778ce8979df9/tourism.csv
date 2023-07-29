@@ -92,6 +92,38 @@ Value,Year,Month,Seasonal Adjustment,Country
 7050,2020,Jan,SA,All Countries
 7090,2020,Feb,SA,All Countries
 5240,2020,Mar,SA,All Countries
+0,2020,Apr,SA,All Countries
+0,2020,May,SA,All Countries
+0,2020,Jun,SA,All Countries
+0,2020,Jul,SA,All Countries
+0,2020,Aug,SA,All Countries
+0,2020,Sep,SA,All Countries
+0,2020,Oct,SA,All Countries
+0,2020,Nov,SA,All Countries
+0,2020,Dec,SA,All Countries
+0,2021,Jan *,SA,All Countries
+0,2021,Feb *,SA,All Countries
+0,2021,Mar *,SA,All Countries
+0,2021,Apr *,SA,All Countries
+0,2021,May *,SA,All Countries
+0,2021,Jun *,SA,All Countries
+0,2021,Jul,SA,All Countries
+0,2021,Aug,SA,All Countries
+0,2021,Sep,SA,All Countries
+0,2021,Oct,SA,All Countries
+0,2021,Nov,SA,All Countries
+0,2021,Dec,SA,All Countries
+0,2022,Jan,SA,All Countries
+0,2022,Feb,SA,All Countries
+0,2022,Mar,SA,All Countries
+0,2022,Apr,SA,All Countries
+0,2022,May ,SA,All Countries
+0,2022,June,SA,All Countries
+0,2022,July,SA,All Countries
+0,2022,Aug,SA,All Countries
+0,2022,Sep,SA,All Countries
+0,2022,Oct,SA,All Countries
+0,2022,Nov,SA,All Countries
 306.9532931971211,2018,Feb,NSA,North America
 335.7319919123934,2018,Mar,NSA,North America
 515.9388604171628,2018,Apr,NSA,North America
@@ -236,6 +268,15 @@ Value,Year,Month,Seasonal Adjustment,Country
 3696.744588816861,2020,Jan,NSA,Europe - European Union
 3466.032285062617,2020,Feb,NSA,Europe - European Union
 1957.0236897543152,2020,Mar,NSA,Europe - European Union
+0,2020,Apr,NSA,Europe - European Union
+0,2020,May,NSA,Europe - European Union
+0,2020,Jun,NSA,Europe - European Union
+0,2020,Jul,NSA,Europe - European Union
+0,2020,Aug,NSA,Europe - European Union
+0,2020,Sep,NSA,Europe - European Union
+0,2020,Oct,NSA,Europe - European Union
+0,2020,Nov,NSA,Europe - European Union
+0,2020,Dec,NSA,Europe - European Union
 58.74445445736873,2021,Jan *,NSA,Europe - European Union
 118.1885055542001,2021,Feb *,NSA,Europe - European Union
 142.09360898842883,2021,Mar *,NSA,Europe - European Union
@@ -286,6 +327,15 @@ Value,Year,Month,Seasonal Adjustment,Country
 791.641354908287,2020,Jan,NSA,Europe - Other EU
 581.7328027604425,2020,Feb,NSA,Europe - Other EU
 284.1702151354063,2020,Mar,NSA,Europe - Other EU
+0,2020,Apr,NSA,Europe - Other EU
+0,2020,May,NSA,Europe - Other EU
+0,2020,Jun,NSA,Europe - Other EU
+0,2020,Jul,NSA,Europe - Other EU
+0,2020,Aug,NSA,Europe - Other EU
+0,2020,Sep,NSA,Europe - Other EU
+0,2020,Oct,NSA,Europe - Other EU
+0,2020,Nov,NSA,Europe - Other EU
+0,2020,Dec,NSA,Europe - Other EU
 23.475655651509364,2021,Jan *,NSA,Europe - Other EU
 65.22372092981047,2021,Feb *,NSA,Europe - Other EU
 62.45652441868018,2021,Mar *,NSA,Europe - Other EU
@@ -336,6 +386,15 @@ Value,Year,Month,Seasonal Adjustment,Country
 2906.6833432687154,2020,Jan,NSA,Europe - EU15
 2883.663129894775,2020,Feb,NSA,Europe - EU15
 1671.9097176661992,2020,Mar,NSA,Europe - EU15
+0,2020,Apr,NSA,Europe - EU15
+0,2020,May,NSA,Europe - EU15
+0,2020,Jun,NSA,Europe - EU15
+0,2020,Jul,NSA,Europe - EU15
+0,2020,Aug,NSA,Europe - EU15
+0,2020,Sep,NSA,Europe - EU15
+0,2020,Oct,NSA,Europe - EU15
+0,2020,Nov,NSA,Europe - EU15
+0,2020,Dec,NSA,Europe - EU15
 35.06376728982452,2021,Jan *,NSA,Europe - EU15
 53.3988553399312,2021,Feb *,NSA,Europe - EU15
 79.4080453702439,2021,Mar *,NSA,Europe - EU15

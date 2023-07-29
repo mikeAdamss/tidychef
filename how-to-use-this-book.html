@@ -136,14 +136,8 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
-    
-    
-      
-    
-    
-    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
+    <p class="title logo__title">Documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -192,6 +186,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="intermediate/within.html">TidyData: Within</a></li>
 <li class="toctree-l2"><a class="reference internal" href="intermediate/against.html">Against (Creating New Validators)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="intermediate/best-practice.html">Best Practice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intermediate/time.html">Time</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="advanced.html">Chapter 3: Advanced</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -440,7 +435,7 @@ document.write(`
 <p>This book is organised in a very deliberate fashion to help onboard people to this technology and get them productive in the minimum amount of time and can largely be tackled in sequence.</p>
 <p>That said, there are some nuances depending on your skillset and goals which I’ll try to touch on.</p>
 <ul class="simple">
-<li><p>The sections on <a class="reference external" href="https://mikeadamss.github.io/tidychef/extensibility.html">extensibility</a> and <a class="reference external" href="https://mikeadamss.github.io/tidychef/quirks.html">quirks</a> are short pages of prose containing supplementary information. There are some useful insights into datachefs goals and approach here but you can come back to these as needed.</p></li>
+<li><p>The sections on <a class="reference external" href="https://mikeadamss.github.io/tidychef/extensibility.html">extensibility</a> and <a class="reference external" href="https://mikeadamss.github.io/tidychef/quirks.html">quirks</a> are short pages of prose containing supplementary information. There are some useful insights into tidychefs goals and approach here but you can come back to these as needed.</p></li>
 <li><p>If you want to get a quick idea of what tidychef does, look at the first few recipes in <a class="reference external" href="https://mikeadamss.github.io/tidychef/examples/basic/basic.html">basic examples</a> section before coming back here.</p></li>
 <li><p>To learn tidychef, start with <a class="reference external" href="https://mikeadamss.github.io/tidychef/basics.html">Chapter 1: Basics</a>. Note - this chapter and the <a class="reference external" href="https://mikeadamss.github.io/tidychef/examples/basic/basic.html">basic examples</a> are complementary, with the examples limited to and highlighted those things covered in the documentation. Once you’re absorbed this you should be able to understand the examples (hands on learners may attempt it the other way around and it may well work, though that’s not the way it was written).</p></li>
 </ul>
@@ -451,7 +446,7 @@ document.write(`
 <p>I’d consider the above section the final part of the onboarding to full capability with tidychef. After that it’s just practice.</p>
 <ul class="simple">
 <li><p>The <a class="reference external" href="https://mikeadamss.github.io/tidychef/advanced.html">Chapter 3: Advanced</a> is a more developer-esque section (thought it should be within reach of an experienced tidychef user as well) so should be considered optional. There are some useful things here and you probably <em>should</em> tackle this if you’re looking into extending tidychef. You can however be firmly up and running for a while and even producing reliable repeatable data pipelines without tackling this content.</p></li>
-<li><p>The <a class="reference external" href="https://mikeadamss.github.io/tidychef/technical.html">Chapter 4: Examples</a> section holds all examples recipes and should be tackled alongside the other chapters as detailed above. It does also include some <strong>extensions of prior example recipes with added validation</strong>. While validation is of importance to anyone setting up a repeatable ETL process, for others (such as those doing ad hoc or one of analysis) the significance can vary. This chapter is intended to be extended over time and interested users are encouraged to PR their own examples at the tidychef repository.</p></li>
+<li><p>The <a class="reference external" href="https://mikeadamss.github.io/tidychef/technical.html">Chapter 4: Examples</a> section holds all examples recipes and should be tackled alongside the other chapters as detailed above. It does also include some <strong>extensions of prior example recipes with added validation</strong>. While validation is of importance to anyone setting up a repeatable ETL process, for others (such as those doing ad hoc or one off analysis) the significance can vary. This chapter is intended to be extended over time and interested users are encouraged to PR their own examples at the tidychef repository.</p></li>
 <li><p>The <a class="reference external" href="https://mikeadamss.github.io/tidychef/technical.html">Chapter 5: Technical Reference</a> section is purely for the programmers.</p></li>
 </ul>
 </section>

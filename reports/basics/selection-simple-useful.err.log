@@ -1,19 +1,19 @@
 Traceback (most recent call last):
-  File "/Users/michaeladams/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 64, in single_nb_execution
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 64, in single_nb_execution
     **kwargs,
-  File "/Users/michaeladams/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/nbclient/client.py", line 1204, in execute
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 1204, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/Users/michaeladams/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/nbclient/util.py", line 84, in wrapped
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/util.py", line 84, in wrapped
     return just_run(coro(*args, **kwargs))
-  File "/Users/michaeladams/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/nbclient/util.py", line 62, in just_run
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/util.py", line 62, in just_run
     return loop.run_until_complete(coro)
   File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
     return future.result()
-  File "/Users/michaeladams/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/nbclient/client.py", line 664, in async_execute
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 664, in async_execute
     cell, index, execution_count=self.code_cells_executed + 1
-  File "/Users/michaeladams/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/nbclient/client.py", line 965, in async_execute_cell
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 965, in async_execute_cell
     await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "/Users/michaeladams/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
@@ -26,19 +26,19 @@ table.excel_ref('A1:A2').assert_one()
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mAssertionError[0m                            Traceback (most recent call last)
-[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_69677/1449902015.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_60438/1449902015.py[0m in [0;36m<module>[0;34m[0m
 [1;32m      3[0m [0;34m[0m[0m
 [1;32m      4[0m [0mtable[0m[0;34m:[0m [0mXlsxSelectable[0m [0;34m=[0m [0macquire[0m[0;34m.[0m[0mxlsx[0m[0;34m.[0m[0mhttp[0m[0;34m([0m[0;34m"https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx"[0m[0;34m,[0m [0mtables[0m[0;34m=[0m[0;34m"Table 3a"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0;32m----> 5[0;31m [0mtable[0m[0;34m.[0m[0mexcel_ref[0m[0;34m([0m[0;34m'A1:A2'[0m[0;34m)[0m[0;34m.[0m[0massert_one[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m
-[0;32m~/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/tidychef/selection/selectable.py[0m in [0;36massert_one[0;34m(self)[0m
+[0;32m~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/tidychef/selection/selectable.py[0m in [0;36massert_one[0;34m(self)[0m
 [1;32m     96[0m         [0mAssert[0m [0mthat[0m [0mthe[0m [0mcurrent[0m [0mselection[0m [0mcontains[0m [0mexactly[0m [0mone[0m [0mcell[0m[0;34m[0m[0;34m[0m[0m
 [1;32m     97[0m         """
 [0;32m---> 98[0;31m         [0;32mreturn[0m [0mself[0m[0;34m.[0m[0massert_len[0m[0;34m([0m[0;36m1[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m[1;32m     99[0m [0;34m[0m[0m
 [1;32m    100[0m     [0;32mdef[0m [0massert_single_column[0m[0;34m([0m[0mself[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m~/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/tidychef/selection/selectable.py[0m in [0;36massert_len[0;34m(self, number_of_cells)[0m
+[0;32m~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/tidychef/selection/selectable.py[0m in [0;36massert_len[0;34m(self, number_of_cells)[0m
 [1;32m     88[0m         assert (
 [1;32m     89[0m             [0mlen[0m[0;34m([0m[0mself[0m[0;34m.[0m[0mcells[0m[0;34m)[0m [0;34m==[0m [0mnumber_of_cells[0m[0;34m[0m[0;34m[0m[0m
 [0;32m---> 90[0;31m         ), f"Selection contains {len(self.cells)} cells, not {number_of_cells}"

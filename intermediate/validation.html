@@ -136,14 +136,8 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
-    
-    
-      
-    
-    
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
+    <p class="title logo__title">Documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -192,6 +186,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="within.html">TidyData: Within</a></li>
 <li class="toctree-l2"><a class="reference internal" href="against.html">Against (Creating New Validators)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="best-practice.html">Best Practice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="time.html">Time</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../advanced.html">Chapter 3: Advanced</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -569,50 +564,50 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">CellValidationError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_70037</span><span class="o">/</span><span class="mf">3031609681.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_60914</span><span class="o">/</span><span class="mf">3031609681.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">16</span> 
 <span class="ne">---&gt; </span><span class="mi">17</span> <span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
 
-<span class="nn">~/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/tidychef/output/tidydata.py</span> in <span class="ni">__str__</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">     </span><span class="mi">81</span> 
-<span class="g g-Whitespace">     </span><span class="mi">82</span>     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
-<span class="ne">---&gt; </span><span class="mi">83</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_representation</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">84</span> 
-<span class="g g-Whitespace">     </span><span class="mi">85</span>     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/tidychef/output/tidydata.py</span> in <span class="ni">__str__</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">82</span> 
+<span class="g g-Whitespace">     </span><span class="mi">83</span>     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
+<span class="ne">---&gt; </span><span class="mi">84</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_representation</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">85</span> 
+<span class="g g-Whitespace">     </span><span class="mi">86</span>     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
-<span class="nn">~/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/tidychef/output/tidydata.py</span> in <span class="ni">__get_representation</span><span class="nt">(self)</span>
+<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/tidychef/output/tidydata.py</span> in <span class="ni">__get_representation</span><span class="nt">(self)</span>
 <span class="g g-Whitespace">     </span><span class="mi">64</span><span class="w">         </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="g g-Whitespace">     </span><span class="mi">65</span><span class="sd">         if not self._data:</span>
 <span class="ne">---&gt; </span><span class="mi">66</span><span class="sd">             self._transform()</span>
 <span class="g g-Whitespace">     </span><span class="mi">67</span><span class="sd"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">68</span><span class="sd">         header_row = self._data[0]</span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span><span class="sd">         table_as_strings = self._data_as_table_of_strings()</span>
 
-<span class="nn">~/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/tidychef/output/tidydata.py</span> in <span class="ni">_transform</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">297</span><span class="sd">                 for column in standard_columns:</span>
-<span class="g g-Whitespace">    </span><span class="mi">298</span><span class="sd">                     col_value = column.resolve_column_cell_from_obs_cell(</span>
-<span class="ne">--&gt; </span><span class="mi">299</span><span class="sd">                         observation</span>
-<span class="g g-Whitespace">    </span><span class="mi">300</span><span class="sd">                     ).value</span>
-<span class="g g-Whitespace">    </span><span class="mi">301</span><span class="sd">                     column_value_dict[column.label] = col_value</span>
+<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/tidychef/output/tidydata.py</span> in <span class="ni">_transform</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">331</span><span class="sd">                 ]</span>
+<span class="g g-Whitespace">    </span><span class="mi">332</span><span class="sd">                 for column in standard_columns:</span>
+<span class="ne">--&gt; </span><span class="mi">333</span><span class="sd">                     column_cell = column.resolve_column_cell_from_obs_cell(observation)</span>
+<span class="g g-Whitespace">    </span><span class="mi">334</span><span class="sd">                     column_value_dict[column.label] = column_cell.value</span>
+<span class="g g-Whitespace">    </span><span class="mi">335</span><span class="sd">                     if column.label not in self.drop:</span>
 
-<span class="nn">~/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/tidychef/column/base.py</span> in <span class="ni">resolve_column_cell_from_obs_cell</span><span class="nt">(self, observation_cell, *args)</span>
+<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/tidychef/column/base.py</span> in <span class="ni">resolve_column_cell_from_obs_cell</span><span class="nt">(self, observation_cell, *args)</span>
 <span class="g g-Whitespace">    </span><span class="mi">102</span><span class="sd">         &quot;&quot;&quot;</span>
 <span class="g g-Whitespace">    </span><span class="mi">103</span>         <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">observation_cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
 <span class="ne">--&gt; </span><span class="mi">104</span>         <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_post_lookup</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">105</span>         <span class="k">return</span> <span class="n">cell</span>
 
-<span class="nn">~/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/tidychef/column/column.py</span> in <span class="ni">_post_lookup</span><span class="nt">(self, cell)</span>
-<span class="g g-Whitespace">    </span><span class="mi">136</span>                         <span class="n">Invalid</span> <span class="n">cell</span> <span class="p">{</span><span class="n">cell</span><span class="p">}</span><span class="o">.</span>
-<span class="g g-Whitespace">    </span><span class="mi">137</span>                         <span class="p">{</span><span class="n">msg</span><span class="p">}</span>
-<span class="ne">--&gt; </span><span class="mi">138</span>                         <span class="s1">&#39;&#39;&#39;)</span>
-<span class="g g-Whitespace">    </span><span class="mi">139</span><span class="s1"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">140</span><span class="s1">         return cell</span>
+<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/tidychef/column/column.py</span> in <span class="ni">_post_lookup</span><span class="nt">(self, cell)</span>
+<span class="g g-Whitespace">    </span><span class="mi">139</span>                         <span class="n">Invalid</span> <span class="n">cell</span> <span class="p">{</span><span class="n">cell</span><span class="p">}</span><span class="o">.</span>
+<span class="g g-Whitespace">    </span><span class="mi">140</span>                         <span class="p">{</span><span class="n">msg</span><span class="p">}</span>
+<span class="ne">--&gt; </span><span class="mi">141</span>                         <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">142</span><span class="s2">                 )</span>
+<span class="g g-Whitespace">    </span><span class="mi">143</span><span class="s2"> </span>
 
 <span class="ne">CellValidationError</span>: 
-<span class="s1">                        Column Dataset Identifier Codes has a cell that is not valid,</span>
-<span class="s1">                        Invalid cell (B6, value:&quot;MVO6&quot;, x:1, y:5).</span>
-<span class="s1">                        Message is: &quot;MVO6&quot; does not match pattern: &quot;L.*&quot;                      </span>
-<span class="s1">                        </span>
+<span class="s2">                        Column Dataset Identifier Codes has a cell that is not valid,</span>
+<span class="s2">                        Invalid cell (B6, value:&quot;MVO6&quot;, x:1, y:5).</span>
+<span class="s2">                        Message is: &quot;MVO6&quot; does not match pattern: &quot;L.*&quot;                      </span>
+<span class="s2">                        </span>
 </pre></div>
 </div>
 </div>

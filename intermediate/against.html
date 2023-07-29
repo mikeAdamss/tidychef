@@ -136,14 +136,8 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
-    
-    
-      
-    
-    
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
+    <p class="title logo__title">Documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -192,6 +186,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="within.html">TidyData: Within</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Against (Creating New Validators)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="best-practice.html">Best Practice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="time.html">Time</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../advanced.html">Chapter 3: Advanced</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -682,24 +677,24 @@ Should be False: False
         </html>
     </div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">CellValidationError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_69963</span><span class="o">/</span><span class="mf">2540926539.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_60830</span><span class="o">/</span><span class="mf">2540926539.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="c1"># Noe validate it</span>
 <span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="n">numeric_validator</span> <span class="o">=</span> <span class="n">NumericValidator</span><span class="p">()</span>
 <span class="ne">---&gt; </span><span class="mi">15</span> <span class="n">selection</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">numeric_validator</span><span class="p">)</span>
 
-<span class="nn">~/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/tidychef/selection/selectable.py</span> in <span class="ni">validate</span><span class="nt">(self, validator, raise_first_error)</span>
-<span class="g g-Whitespace">    </span><span class="mi">510</span> <span class="n">following</span> <span class="n">validation</span> <span class="n">errors</span> <span class="n">were</span> <span class="n">encountered</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">511</span> <span class="p">{</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">validation_errors</span><span class="p">)}</span>
-<span class="ne">--&gt; </span><span class="mi">512</span>                 <span class="s1">&#39;&#39;&#39;)</span>
-<span class="g g-Whitespace">    </span><span class="mi">513</span><span class="s1"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">514</span><span class="s1">         return self</span>
+<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/tidychef/selection/selectable.py</span> in <span class="ni">validate</span><span class="nt">(self, validator, raise_first_error)</span>
+<span class="g g-Whitespace">    </span><span class="mi">513</span> <span class="n">following</span> <span class="n">validation</span> <span class="n">errors</span> <span class="n">were</span> <span class="n">encountered</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">514</span> <span class="p">{</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">validation_errors</span><span class="p">)}</span>
+<span class="ne">--&gt; </span><span class="mi">515</span>                 <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">516</span><span class="s2">             )</span>
+<span class="g g-Whitespace">    </span><span class="mi">517</span><span class="s2"> </span>
 
 <span class="ne">CellValidationError</span>: 
-<span class="s1">When making selections from table: Unnamed Table the</span>
-<span class="s1">following validation errors were encountered:</span>
-<span class="s1">&quot;Houses&quot; is not numeric</span>
-<span class="s1">&quot;Cars&quot; is not numeric</span>
-<span class="s1">                </span>
+<span class="s2">When making selections from table: Unnamed Table the</span>
+<span class="s2">following validation errors were encountered:</span>
+<span class="s2">&quot;Houses&quot; is not numeric</span>
+<span class="s2">&quot;Cars&quot; is not numeric</span>
+<span class="s2">                </span>
 </pre></div>
 </div>
 </div>

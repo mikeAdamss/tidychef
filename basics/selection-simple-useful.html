@@ -136,14 +136,8 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
-    
-    
-      
-    
-    
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
+    <p class="title logo__title">Documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -192,6 +186,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/within.html">TidyData: Within</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/against.html">Against (Creating New Validators)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/best-practice.html">Best Practice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intermediate/time.html">Time</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../advanced.html">Chapter 3: Advanced</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -536,7 +531,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tidychef.selection.xlsx.xlsx.XlsxSelectable at 0x105976b90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tidychef.selection.xlsx.xlsx.XlsxSelectable at 0x11517e210&gt;
 </pre></div>
 </div>
 </div>
@@ -555,19 +550,19 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_69677</span><span class="o">/</span><span class="mf">1449902015.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_60438</span><span class="o">/</span><span class="mf">1449902015.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> 
 <span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3a&quot;</span><span class="p">)</span>
 <span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;A1:A2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">assert_one</span><span class="p">()</span>
 
-<span class="nn">~/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/tidychef/selection/selectable.py</span> in <span class="ni">assert_one</span><span class="nt">(self)</span>
+<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/tidychef/selection/selectable.py</span> in <span class="ni">assert_one</span><span class="nt">(self)</span>
 <span class="g g-Whitespace">     </span><span class="mi">96</span>         <span class="n">Assert</span> <span class="n">that</span> <span class="n">the</span> <span class="n">current</span> <span class="n">selection</span> <span class="n">contains</span> <span class="n">exactly</span> <span class="n">one</span> <span class="n">cell</span>
 <span class="g g-Whitespace">     </span><span class="mi">97</span>         <span class="s2">&quot;&quot;&quot;</span>
 <span class="ne">---&gt; </span><span class="mi">98</span><span class="s2">         return self.assert_len(1)</span>
 <span class="g g-Whitespace">     </span><span class="mi">99</span><span class="s2"> </span>
 <span class="g g-Whitespace">    </span><span class="mi">100</span><span class="s2">     def assert_single_column(self):</span>
 
-<span class="nn">~/Library/Caches/pypoetry/virtualenvs/tidychef-jGQs3W5N-py3.7/lib/python3.7/site-packages/tidychef/selection/selectable.py</span> in <span class="ni">assert_len</span><span class="nt">(self, number_of_cells)</span>
+<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/tidychef/selection/selectable.py</span> in <span class="ni">assert_len</span><span class="nt">(self, number_of_cells)</span>
 <span class="g g-Whitespace">     </span><span class="mi">88</span><span class="s2">         assert (</span>
 <span class="g g-Whitespace">     </span><span class="mi">89</span><span class="s2">             len(self.cells) == number_of_cells</span>
 <span class="ne">---&gt; </span><span class="mi">90</span><span class="s2">         ), f&quot;Selection contains {len(self.cells)} cells, not </span><span class="si">{number_of_cells}</span><span class="s2">&quot;</span>

@@ -32,9 +32,11 @@ Value,Area,Period,Category,Financial Liability,Unit Of Measure
 0.14,Great Britain,July 2010 to June 2012,Eduction: Median Individual Debt to Income Ratio,Economically Inactive,Ratio
 0.17,Great Britain,July 2010 to June 2012,Eduction: Median Individual Debt to Income Ratio,All Individuals with financial liabilities,Ratio
 1000,Great Britain,July 2012 to June 2014,Eduction: Median value of individual gross financial wealth (£),In Employment,Pounds Sterling
+0,Great Britain,July 2012 to June 2014,Eduction: Median value of individual gross financial wealth (£),Unemployed ,Pounds Sterling
 300,Great Britain,July 2012 to June 2014,Eduction: Median value of individual gross financial wealth (£),Economically Inactive,Pounds Sterling
 800,Great Britain,July 2012 to June 2014,Eduction: Median value of individual gross financial wealth (£),All Individuals with financial liabilities,Pounds Sterling
 1000,Great Britain,July 2010 to June 2012,Eduction: Median value of individual gross financial wealth (£),In Employment,Pounds Sterling
+0,Great Britain,July 2010 to June 2012,Eduction: Median value of individual gross financial wealth (£),Unemployed ,Pounds Sterling
 300,Great Britain,July 2010 to June 2012,Eduction: Median value of individual gross financial wealth (£),Economically Inactive,Pounds Sterling
 800,Great Britain,July 2010 to June 2012,Eduction: Median value of individual gross financial wealth (£),All Individuals with financial liabilities,Pounds Sterling
 8175,Great Britain,July 2012 to June 2014,Eduction: Unweighted Frequency,In Employment,Number

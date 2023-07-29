@@ -136,14 +136,8 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
-    
-    
-      
-    
-    
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
+    <p class="title logo__title">Documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -192,6 +186,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/within.html">TidyData: Within</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/against.html">Against (Creating New Validators)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/best-practice.html">Best Practice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intermediate/time.html">Time</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../advanced.html">Chapter 3: Advanced</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -442,6 +437,9 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-xls-data">Loading Xls Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xls-data-from-local">Xls Data From Local</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xls-data-from-http-s">Xls Data From Http(s)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-ods-data">Loading Ods Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ods-data-from-local">Ods Data From Local</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ods-data-from-http-s">Ods Data From Http(s)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-tables">Using tables=</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-http-s-caching">A Note On Http(s) Caching</a></li>
 </ul>
@@ -889,12 +887,12 @@ document.write(`
                 <table>
                     <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td><td style="background-color:lightgrey">G</td></tr>
 <tr><td style="background-color:lightgrey">1</td><td style="background-color:white">OrderDate</td><td style="background-color:white">Region</td><td style="background-color:white">Rep</td><td style="background-color:white">Item</td><td style="background-color:white">Units</td><td style="background-color:white">Unit Cost</td><td style="background-color:white">Total</td></tr>
-<tr><td style="background-color:lightgrey">2</td><td style="background-color:white">44202.0</td><td style="background-color:white">East</td><td style="background-color:white">Jones</td><td style="background-color:white">Pencil</td><td style="background-color:white">95.0</td><td style="background-color:white">1.99</td><td style="background-color:white">189.05</td></tr>
-<tr><td style="background-color:lightgrey">3</td><td style="background-color:white">44219.0</td><td style="background-color:white">Central</td><td style="background-color:white">Kivell</td><td style="background-color:white">Binder</td><td style="background-color:white">50.0</td><td style="background-color:white">19.99</td><td style="background-color:white">999.4999999999999</td></tr>
-<tr><td style="background-color:lightgrey">4</td><td style="background-color:white">44236.0</td><td style="background-color:white">Central</td><td style="background-color:white">Jardine</td><td style="background-color:white">Pencil</td><td style="background-color:white">36.0</td><td style="background-color:white">4.99</td><td style="background-color:white">179.64</td></tr>
-<tr><td style="background-color:lightgrey">5</td><td style="background-color:white">44253.0</td><td style="background-color:white">Central</td><td style="background-color:white">Gill</td><td style="background-color:white">Pen</td><td style="background-color:white">27.0</td><td style="background-color:white">19.99</td><td style="background-color:white">539.7299999999999</td></tr>
-<tr><td style="background-color:lightgrey">6</td><td style="background-color:white">44270.0</td><td style="background-color:white">West</td><td style="background-color:white">Sorvino</td><td style="background-color:white">Pencil</td><td style="background-color:white">56.0</td><td style="background-color:white">2.99</td><td style="background-color:white">167.44</td></tr>
-<tr><td style="background-color:lightgrey">7</td><td style="background-color:white">44287.0</td><td style="background-color:white">East</td><td style="background-color:white">Jones</td><td style="background-color:white">Binder</td><td style="background-color:white">60.0</td><td style="background-color:white">4.99</td><td style="background-color:white">299.40000000000003</td></tr>
+<tr><td style="background-color:lightgrey">2</td><td style="background-color:white">01/06/21</td><td style="background-color:white">East</td><td style="background-color:white">Jones</td><td style="background-color:white">Pencil</td><td style="background-color:white">95.0</td><td style="background-color:white">1.99</td><td style="background-color:white">189.05</td></tr>
+<tr><td style="background-color:lightgrey">3</td><td style="background-color:white">01/23/21</td><td style="background-color:white">Central</td><td style="background-color:white">Kivell</td><td style="background-color:white">Binder</td><td style="background-color:white">50.0</td><td style="background-color:white">19.99</td><td style="background-color:white">999.4999999999999</td></tr>
+<tr><td style="background-color:lightgrey">4</td><td style="background-color:white">02/09/21</td><td style="background-color:white">Central</td><td style="background-color:white">Jardine</td><td style="background-color:white">Pencil</td><td style="background-color:white">36.0</td><td style="background-color:white">4.99</td><td style="background-color:white">179.64</td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:white">02/26/21</td><td style="background-color:white">Central</td><td style="background-color:white">Gill</td><td style="background-color:white">Pen</td><td style="background-color:white">27.0</td><td style="background-color:white">19.99</td><td style="background-color:white">539.7299999999999</td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:white">03/15/21</td><td style="background-color:white">West</td><td style="background-color:white">Sorvino</td><td style="background-color:white">Pencil</td><td style="background-color:white">56.0</td><td style="background-color:white">2.99</td><td style="background-color:white">167.44</td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:white">04/01/21</td><td style="background-color:white">East</td><td style="background-color:white">Jones</td><td style="background-color:white">Binder</td><td style="background-color:white">60.0</td><td style="background-color:white">4.99</td><td style="background-color:white">299.40000000000003</td></tr>
 
                 </table>
             </body>
@@ -949,12 +947,145 @@ document.write(`
                 <table>
                     <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td><td style="background-color:lightgrey">G</td></tr>
 <tr><td style="background-color:lightgrey">1</td><td style="background-color:white">OrderDate</td><td style="background-color:white">Region</td><td style="background-color:white">Rep</td><td style="background-color:white">Item</td><td style="background-color:white">Units</td><td style="background-color:white">Unit Cost</td><td style="background-color:white">Total</td></tr>
-<tr><td style="background-color:lightgrey">2</td><td style="background-color:white">44202.0</td><td style="background-color:white">East</td><td style="background-color:white">Jones</td><td style="background-color:white">Pencil</td><td style="background-color:white">95.0</td><td style="background-color:white">1.99</td><td style="background-color:white">189.05</td></tr>
-<tr><td style="background-color:lightgrey">3</td><td style="background-color:white">44219.0</td><td style="background-color:white">Central</td><td style="background-color:white">Kivell</td><td style="background-color:white">Binder</td><td style="background-color:white">50.0</td><td style="background-color:white">19.99</td><td style="background-color:white">999.4999999999999</td></tr>
-<tr><td style="background-color:lightgrey">4</td><td style="background-color:white">44236.0</td><td style="background-color:white">Central</td><td style="background-color:white">Jardine</td><td style="background-color:white">Pencil</td><td style="background-color:white">36.0</td><td style="background-color:white">4.99</td><td style="background-color:white">179.64</td></tr>
-<tr><td style="background-color:lightgrey">5</td><td style="background-color:white">44253.0</td><td style="background-color:white">Central</td><td style="background-color:white">Gill</td><td style="background-color:white">Pen</td><td style="background-color:white">27.0</td><td style="background-color:white">19.99</td><td style="background-color:white">539.7299999999999</td></tr>
-<tr><td style="background-color:lightgrey">6</td><td style="background-color:white">44270.0</td><td style="background-color:white">West</td><td style="background-color:white">Sorvino</td><td style="background-color:white">Pencil</td><td style="background-color:white">56.0</td><td style="background-color:white">2.99</td><td style="background-color:white">167.44</td></tr>
-<tr><td style="background-color:lightgrey">7</td><td style="background-color:white">44287.0</td><td style="background-color:white">East</td><td style="background-color:white">Jones</td><td style="background-color:white">Binder</td><td style="background-color:white">60.0</td><td style="background-color:white">4.99</td><td style="background-color:white">299.40000000000003</td></tr>
+<tr><td style="background-color:lightgrey">2</td><td style="background-color:white">01/06/21</td><td style="background-color:white">East</td><td style="background-color:white">Jones</td><td style="background-color:white">Pencil</td><td style="background-color:white">95.0</td><td style="background-color:white">1.99</td><td style="background-color:white">189.05</td></tr>
+<tr><td style="background-color:lightgrey">3</td><td style="background-color:white">01/23/21</td><td style="background-color:white">Central</td><td style="background-color:white">Kivell</td><td style="background-color:white">Binder</td><td style="background-color:white">50.0</td><td style="background-color:white">19.99</td><td style="background-color:white">999.4999999999999</td></tr>
+<tr><td style="background-color:lightgrey">4</td><td style="background-color:white">02/09/21</td><td style="background-color:white">Central</td><td style="background-color:white">Jardine</td><td style="background-color:white">Pencil</td><td style="background-color:white">36.0</td><td style="background-color:white">4.99</td><td style="background-color:white">179.64</td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:white">02/26/21</td><td style="background-color:white">Central</td><td style="background-color:white">Gill</td><td style="background-color:white">Pen</td><td style="background-color:white">27.0</td><td style="background-color:white">19.99</td><td style="background-color:white">539.7299999999999</td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:white">03/15/21</td><td style="background-color:white">West</td><td style="background-color:white">Sorvino</td><td style="background-color:white">Pencil</td><td style="background-color:white">56.0</td><td style="background-color:white">2.99</td><td style="background-color:white">167.44</td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:white">04/01/21</td><td style="background-color:white">East</td><td style="background-color:white">Jones</td><td style="background-color:white">Binder</td><td style="background-color:white">60.0</td><td style="background-color:white">4.99</td><td style="background-color:white">299.40000000000003</td></tr>
+
+                </table>
+            </body>
+            <br>
+        </html>
+    </div></div>
+</div>
+</section>
+<section id="loading-ods-data">
+<h2>Loading Ods Data<a class="headerlink" href="#loading-ods-data" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="ods-data-from-local">
+<h2>Ods Data From Local<a class="headerlink" href="#ods-data-from-local" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">OdsSelectable</span>
+
+<span class="n">table</span><span class="p">:</span> <span class="n">OdsSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">ods</span><span class="o">.</span><span class="n">local</span><span class="p">(</span><span class="s2">&quot;../../tests/fixtures/ods/EB1-_Existing_Domestic_Properties.ods&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table_of_contents&quot;</span><span class="p">)</span>
+<span class="n">preview</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <table>
+                
+            </table>
+
+            <body>
+                <h2>Table_of_contents</h2>
+                <table>
+                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td></tr>
+<tr><td style="background-color:lightgrey">1</td><td style="background-color:white">Table of contents </td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">2</td><td style="background-color:white">Worksheet number</td><td style="background-color:white">Worksheet title</td><td style="background-color:white">Date this data was first published </td><td style="background-color:white">Next publication date</td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">3</td><td style="background-color:white">EB1 in England and Wales</td><td style="background-color:white">EB1- Existing Domestic Properties in England and Wales by Energy Efficiency Rating</td><td style="background-color:white">Thursday 27 July 2023</td><td style="background-color:white">Thursday 26 October 2023</td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">4</td><td style="background-color:white">EB1 in England</td><td style="background-color:white">EB1- Existing Domestic Properties in England by Energy Efficiency Rating</td><td style="background-color:white">Thursday 27 July 2023</td><td style="background-color:white">Thursday 26 October 2023</td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:white">EB1 in Wales</td><td style="background-color:white">EB1- Existing Domestic Properties in Wales by Energy Efficiency Rating</td><td style="background-color:white">Thursday 27 July 2023</td><td style="background-color:white">Thursday 26 October 2023</td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:white">EB1 by Region</td><td style="background-color:white">EB1- Existing Domestic Properties by Region by Energy Efficiency Rating</td><td style="background-color:white">Thursday 27 July 2023</td><td style="background-color:white">Thursday 26 October 2023</td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:white">EB1 by Local Authority</td><td style="background-color:white">EB1- Existing Domestic Properties by Local Authority by Energy Efficiency Rating</td><td style="background-color:white">Thursday 27 July 2023</td><td style="background-color:white">Thursday 26 October 2023</td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">9</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">10</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">11</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">12</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+
+                </table>
+            </body>
+            <br>
+        </html>
+    </div></div>
+</div>
+</section>
+<section id="ods-data-from-http-s">
+<h2>Ods Data From Http(s)<a class="headerlink" href="#ods-data-from-http-s" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">OdsSelectable</span>
+
+<span class="n">table</span><span class="p">:</span> <span class="n">OdsSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">ods</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/ods/EB1-_Existing_Domestic_Properties.ods&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table_of_contents&quot;</span><span class="p">)</span>
+<span class="n">preview</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <table>
+                
+            </table>
+
+            <body>
+                <h2>Table_of_contents</h2>
+                <table>
+                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td></tr>
+<tr><td style="background-color:lightgrey">1</td><td style="background-color:white">Table of contents </td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">2</td><td style="background-color:white">Worksheet number</td><td style="background-color:white">Worksheet title</td><td style="background-color:white">Date this data was first published </td><td style="background-color:white">Next publication date</td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">3</td><td style="background-color:white">EB1 in England and Wales</td><td style="background-color:white">EB1- Existing Domestic Properties in England and Wales by Energy Efficiency Rating</td><td style="background-color:white">Thursday 27 July 2023</td><td style="background-color:white">Thursday 26 October 2023</td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">4</td><td style="background-color:white">EB1 in England</td><td style="background-color:white">EB1- Existing Domestic Properties in England by Energy Efficiency Rating</td><td style="background-color:white">Thursday 27 July 2023</td><td style="background-color:white">Thursday 26 October 2023</td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:white">EB1 in Wales</td><td style="background-color:white">EB1- Existing Domestic Properties in Wales by Energy Efficiency Rating</td><td style="background-color:white">Thursday 27 July 2023</td><td style="background-color:white">Thursday 26 October 2023</td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:white">EB1 by Region</td><td style="background-color:white">EB1- Existing Domestic Properties by Region by Energy Efficiency Rating</td><td style="background-color:white">Thursday 27 July 2023</td><td style="background-color:white">Thursday 26 October 2023</td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:white">EB1 by Local Authority</td><td style="background-color:white">EB1- Existing Domestic Properties by Local Authority by Energy Efficiency Rating</td><td style="background-color:white">Thursday 27 July 2023</td><td style="background-color:white">Thursday 26 October 2023</td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">9</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">10</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">11</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">12</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
 
                 </table>
             </body>
@@ -992,7 +1123,7 @@ Table 1b
 </div>
 <p>For many users this ability to only select the tables you want to process will be all that’s required, but the <em>real</em> power here is the ability (where needed) to deal with inconsistencies in table naming.</p>
 <p>This is crude (you can do some very clever things with regular expressions should you chose to explore them) but continuing on from our <strong>or</strong> example lets imagine the following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 1a|table 1a|table1a|table 1A|Table 1A|Table1A&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 1a|table 1a|table 1A|Table 1A|tTable1a|table1a|table1A|Table1A&quot;</span>
 </pre></div>
 </div>
 <p>Which gives your acquire statement a fair degree of additional robustness, as minor changes or mistakes in table naming by the data publisher are accounted for.</p>
@@ -1148,6 +1279,9 @@ Table 1b
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-xls-data">Loading Xls Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xls-data-from-local">Xls Data From Local</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xls-data-from-http-s">Xls Data From Http(s)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-ods-data">Loading Ods Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ods-data-from-local">Ods Data From Local</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ods-data-from-http-s">Ods Data From Http(s)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-tables">Using tables=</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-http-s-caching">A Note On Http(s) Caching</a></li>
 </ul>
