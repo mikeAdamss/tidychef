@@ -28,5 +28,6 @@ from .common import (
     OutOfBoundsError,
     UnalignedTableOperation,
     ZeroAcquiredTablesError,
+    UnknownExcelTimeError
 )
 from .lookups import AmbiguousLookupError, FailedLookupError, MissingDirectLookupError

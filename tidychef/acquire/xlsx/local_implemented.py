@@ -14,6 +14,7 @@ from tidychef.selection.selectable import Selectable
 from tidychef.selection.xlsx.xlsx import XlsxSelectable
 from tidychef.utils import fileutils
 
+from .shared import sheets_from_workbook
 from ..base import BaseReader
 from ..main import acquirer
 
@@ -87,24 +88,10 @@ class LocalXlsxReader(BaseReader):
 
         source: Path = fileutils.ensure_existing_path(source, **kwargs)
 
+        custom_time_formats = kwargs.get('custom_time_formats', {})
+        kwargs.pop('custom_time_formats', None)
+
         workbook: openpyxl.Workbook = openpyxl.load_workbook(
             source, data_only=data_only, **kwargs
         )
-
-        tidychef_selectables = []
-        worksheet_names = workbook.get_sheet_names()
-        for worksheet_name in worksheet_names:
-
-            worksheet = workbook.get_sheet_by_name(worksheet_name)
-
-            table = Table()
-            for y, row in enumerate(worksheet.iter_rows()):
-                for x, cell in enumerate(row):
-                    table.add_cell(
-                        Cell(x=x, y=y, value=str(cell.value) if cell.value else "")
-                    )
-
-            tidychef_selectables.append(
-                selectable(table, source=source, name=worksheet_name)
-            )
-        return tidychef_selectables
+        return sheets_from_workbook(source, selectable, workbook, custom_time_formats)

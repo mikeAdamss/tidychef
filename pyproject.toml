@@ -20,6 +20,8 @@ cachecontrol = "^0.13.1"
 filelock = "^3.12.2"
 xlrd = "^2.0.1"
 jupyter = "^1.0.0"
+ezodf = "^0.3.2"
+lxml = "^4.9.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"

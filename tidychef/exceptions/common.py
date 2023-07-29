@@ -140,3 +140,12 @@ class DroppingNonColumnError(Exception):
 
     def __init__(self, msg):
         self.msg = msg
+
+class UnknownExcelTimeError(Exception):
+    """
+    Raised where the data contains an xls or xlsx time
+    format string we don't yet know of.
+    """
+
+    def __init__(self, msg):
+        self.msg = msg

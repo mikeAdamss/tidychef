@@ -66,12 +66,13 @@ class TidyData(BaseOutput):
         if not self._data:
             self._transform()
 
-        header_row = self._data[0]
-        data_rows = self._data[1:]
+        table_as_strings = self._data_as_table_of_strings()
+        header_row = table_as_strings[0]
+        data_rows = table_as_strings[1:]
 
         # If we're in a notebook, create a nice html display
         if in_notebook():
-            display(HTML(tidy_data_as_html_table_string(self._data)))
+            display(HTML(tidy_data_as_html_table_string(table_as_strings)))
             return ""
 
         # Else return something that'll make sense in a terminal

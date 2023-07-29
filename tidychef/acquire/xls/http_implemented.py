@@ -11,12 +11,11 @@ import validators
 import xlrd
 
 from tidychef.acquire.base import BaseReader
-from tidychef.models.source.cell import Cell
-from tidychef.models.source.table import Table
 from tidychef.selection.selectable import Selectable
 from tidychef.selection.xls.xls import XlsSelectable
 from tidychef.utils.http.caching import get_cached_session
 
+from .shared import sheets_from_workbook
 from ..base import BaseReader
 from ..main import acquirer
 
@@ -29,6 +28,7 @@ def http(
     session: requests.Session = None,
     cache: bool = True,
     tables: str = None,
+    time_format: str = "%Y-%m-%dT%H:%M",
     **kwargs,
 ) -> Union[XlsSelectable, List[XlsSelectable]]:
     """
@@ -47,6 +47,7 @@ def http(
     :param post_hook: A callable that can take the output of HttpXlsReader.parse() as an argument.
     :param session: An optional requests.Session object.
     :param cache: Boolean flag for whether or not to cache get requests.
+    :param time_format: The pattern for expressing time encoded xlx cells. The default is ISO time. 
     :return: A single populated Selectable of type as specified by selectable param.
     """
 
@@ -60,6 +61,7 @@ def http(
         post_hook=post_hook,
         session=session,
         cache=cache,
+        time_format=time_format,
         **kwargs,
     )
 
@@ -76,6 +78,7 @@ class HttpXlsReader(BaseReader):
         selectable: Selectable = XlsSelectable,
         session: requests.Session = None,
         cache: bool = True,
+        time_format: str = "%Y-%m-%dT%H:%M",
         **kwargs,
     ) -> List[XlsSelectable]:
         """
@@ -111,24 +114,14 @@ class HttpXlsReader(BaseReader):
         bio.write(response.content)
         bio.seek(0)
 
-        workbook: xlrd.Book = xlrd.open_workbook(file_contents=bio.read(), **kwargs)
-        assert isinstance(workbook, xlrd.Book)
+        custom_time_formats = kwargs.get('custom_time_formats', {})
+        kwargs.pop('custom_time_formats', None)
 
-        tidychef_selectables = []
-        worksheet_names = workbook.sheet_names()
-        for worksheet_name in worksheet_names:
-
-            worksheet = workbook.sheet_by_name(worksheet_name, **kwargs)
-
-            table = Table()
-            num_rows = worksheet.nrows
-            for y in range(0, num_rows):
-                for x, cell in enumerate(worksheet.row(y)):
-                    table.add_cell(
-                        Cell(x=x, y=y, value=str(cell.value) if cell.value else "")
-                    )
-
-            tidychef_selectables.append(
-                selectable(table, source=source, name=worksheet_name)
-            )
-        return tidychef_selectables
+        workbook: xlrd.Book = xlrd.open_workbook(file_contents=bio.read(), formatting_info=True, **kwargs)
+        return sheets_from_workbook(
+            source,
+            selectable,
+            workbook,
+            custom_time_formats,
+            **kwargs 
+        )

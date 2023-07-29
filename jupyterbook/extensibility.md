@@ -14,6 +14,6 @@ Therefore, tidychef has been consciously designed as a "very unlocked box" so to
 - Want to extend selection classes with methods _that **you specifically** would benefit from_? It's not that hard and its documented.
 - Want to create custom validators suitable to your own use case and data domain? It's not that hard and its documented.
 
-The point here is that tidychef was build with the idea that regular users would begin amassing (and possibly even sharing) additional functionality and as such said functionality is easily intermingled, injected and used seemlessly alongside the vanilla tidychef package. 
+The point here is that tidychef was built with the idea that regular users would begin amassing (and possibly even sharing) additional functionality and as such said functionality is easily intermingled, injected and used seemlessly alongside the vanilla tidychef package. 
 
 The vision for tidychef is to be a reliable core for messy data ETL processing, but you can go very far indeed building on that core.

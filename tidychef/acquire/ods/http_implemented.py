@@ -2,48 +2,44 @@
 Holds the code that defines the local xlsx reader.
 """
 
-import io
 from pathlib import Path
 from typing import Callable, List, Optional, Union
+from tempfile import NamedTemporaryFile
 
-import openpyxl
 import requests
 import validators
+import ezodf
+from ezodf.document import PackagedDocument
 
 from tidychef.acquire.base import BaseReader
+from tidychef.models.source.cell import Cell
+from tidychef.models.source.table import Table
 from tidychef.selection.selectable import Selectable
-from tidychef.selection.xlsx.xlsx import XlsxSelectable
+from tidychef.selection.ods.ods import OdsSelectable
 from tidychef.utils.http.caching import get_cached_session
 
-from .shared import sheets_from_workbook
 from ..base import BaseReader
 from ..main import acquirer
 
 
 def http(
     source: Union[str, Path],
-    selectable: Selectable = XlsxSelectable,
+    selectable: Selectable = OdsSelectable,
     pre_hook: Optional[Callable] = None,
     post_hook: Optional[Callable] = None,
     session: requests.Session = None,
     cache: bool = True,
     tables: str = None,
     **kwargs,
-) -> Union[XlsxSelectable, List[XlsxSelectable]]:
+) -> Union[OdsSelectable, List[OdsSelectable]]:
     """
     Read data from a Path (or string representing a path)
     present on the same machine where tidychef is running.
 
-    This local xlsx reader uses openpyxl:
-    https://openpyxl.readthedocs.io/en/stable/index.html
-
-    Any kwargs passed to this function are propagated to
-    the openpyxl.load_workbook() method.
-
     :param source: A url.
-    :param selectable: A class that implements tidychef.selection.selectable.Selectable of an inheritor of. Default is XlsxSelectable
+    :param selectable: A class that implements tidychef.selection.selectable.Selectable of an inheritor of. Default is OdsSelectable.
     :param pre_hook: A callable that can take source as an argument
-    :param post_hook: A callable that can take the output of XlsxSelectable.parse() as an argument.
+    :param post_hook: A callable that can take the output of HttpOdsReader.parse() as an argument.
     :param session: An optional requests.Session object.
     :param cache: Boolean flag for whether or not to cache get requests.
     :return: A single populated Selectable of type as specified by selectable param.
@@ -53,7 +49,7 @@ def http(
 
     return acquirer(
         source,
-        HttpXlsxReader(tables),
+        HttpOdsReader(tables),
         selectable,
         pre_hook=pre_hook,
         post_hook=post_hook,
@@ -62,8 +58,7 @@ def http(
         **kwargs,
     )
 
-
-class HttpXlsxReader(BaseReader):
+class HttpOdsReader(BaseReader):
     """
     A reader to lead in a source where that source is a locally
     held xlsx file.
@@ -72,21 +67,20 @@ class HttpXlsxReader(BaseReader):
     def parse(
         self,
         source: str,
-        selectable: Selectable = XlsxSelectable,
-        data_only=True,
+        selectable: Selectable = OdsSelectable,
         session: requests.Session = None,
         cache: bool = True,
         **kwargs,
-    ) -> List[XlsxSelectable]:
+    ) -> List[OdsSelectable]:
         """
         Parse the provided source into a list of Selectables. Unless overridden the
-        selectable is of type XlsxSelectable.
+        selectable is of type XlsSelectable.
 
-        Additional **kwargs are propagated to openpyxl.load_workbook()
+        Additional **kwargs are propagated to xlrd.open_workbook()
 
-        :param source: A url.
+        :param source: A url
         :param selectable: The selectable type to be returned.
-        :data_only: An openpyxl.load_workbook() option to disable acquisition of non data elements from the tabulated source (macros etc)
+        :param session: An optional requests.Session object.
         :param session: An optional requests.Session object.
         :param cache: Boolean flag for whether or not to cache get requests.
         :return: A list of type as specified by param selectable.
@@ -107,15 +101,32 @@ class HttpXlsxReader(BaseReader):
                 """
             )
 
-        bio = io.BytesIO()
-        bio.write(response.content)
-        bio.seek(0)
+        # TODO: faster!
+        # So ezodf doesn't want to take a fileobject but instead needs a
+        # solid file. For now we're writing to a temp (self deleting) file
+        # and passing it in.
+        # This works but there's whole file write and re-read more in here
+        # that their needs to be.
 
-        custom_time_formats = kwargs.get('custom_time_formats', {})
-        kwargs.pop('custom_time_formats', None)
+        temp_file = NamedTemporaryFile()
+        temp_file.write(response.content)
+        temp_file.seek(0)
+        
+        spreadsheet: PackagedDocument = ezodf.opendoc(temp_file.name)
+        tidychef_selectables = []
 
-        workbook: openpyxl.Workbook = openpyxl.load_workbook(
-            bio, data_only=data_only, **kwargs
-        )
-        return sheets_from_workbook(source, selectable, workbook, custom_time_formats)
+        for worksheet in spreadsheet.sheets:
 
+            table = Table()
+            for y, row in enumerate(worksheet.rows()):
+                for x, cell in enumerate(row):
+                    table.add_cell(
+                        Cell(x=int(x), y=int(y), value=str(cell.plaintext()) if cell.value is not None else "")
+                    )
+
+            tidychef_selectables.append(
+                selectable(table, source=source, name=worksheet.name)
+            )
+
+        temp_file.close()
+        return tidychef_selectables
