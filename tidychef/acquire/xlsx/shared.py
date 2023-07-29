@@ -29,6 +29,11 @@ def sheets_from_workbook(
 
         worksheet = workbook[worksheet_name]
 
+        # Unmerge all cells as merged cells do not have the
+        # properties we need, i.e .is_date
+        for items in sorted(worksheet.merged_cells.ranges): # pragma: no cover
+            worksheet.unmerge_cells(str(items))
+
         table = Table()
         for y, row in enumerate(worksheet.iter_rows()):
 
