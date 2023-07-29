@@ -1,9 +1,9 @@
 import pytest
 
+from tests.fixtures import fixture_simple_one_tab, fixture_vertical_dimensions
 from tidychef import datafuncs as dfc
 from tidychef.selection import filters
 from tidychef.selection.selectable import Selectable
-from tests.fixtures import fixture_simple_one_tab, fixture_vertical_dimensions
 
 
 @pytest.fixture

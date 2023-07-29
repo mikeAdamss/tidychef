@@ -1,9 +1,9 @@
 from pathlib import Path
 from typing import List
 
+from tests.fixtures import path_to_fixture
 from tidychef import acquire
 from tidychef.selection.ods.ods import OdsSelectable
-from tests.fixtures import path_to_fixture
 
 
 def test_acquire_local_ods():
@@ -41,6 +41,7 @@ def test_read_local_ods_from_str():
     assert sheet.cells == sheet.pcells
     assert len(sheet.cells) == 77
 
+
 def test_ods_local_time_format():
     """
     Test that the ods time_format keyword works as expected.
@@ -48,7 +49,10 @@ def test_ods_local_time_format():
 
     xls_path: Path = path_to_fixture("ods", "dates-times.ods")
     sheet: OdsSelectable = acquire.ods.local(str(xls_path.absolute()), tables="Sheet1")
-    assert (
-        [x.value for x in sheet.pcells] == 
-        ['dates', '11/01/23', '11/01/23', '12/01/22', '10/10/00']
-            )
+    assert [x.value for x in sheet.pcells] == [
+        "dates",
+        "11/01/23",
+        "11/01/23",
+        "12/01/22",
+        "10/10/00",
+    ]

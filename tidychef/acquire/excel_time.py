@@ -1,4 +1,3 @@
-
 # Dev notes:
 # ----------
 # Excel has some opinions on time and so handles cells
@@ -10,13 +9,13 @@
 # The below table maps these "excel time formats" to pythons
 # stftime() patterns so we can present the cell contents exactly
 # as they would appear should the source file be opened via excel.
-# 
+#
 # Please note: this only applies where an excel source is being
 # used where the cells have been specifically formatted as type time.
 
 EXCEL_TIME_FORMATS = {
     # Day without leading zero (e.g., 1)
-    "D": "%-d", 
+    "D": "%-d",
     # Day of year without leading zero (e.g., 32)
     "DDD": "%j",
     # Month without leading zero (e.g., 1)
@@ -274,7 +273,7 @@ def missing_time_format_message(xls_time_format) -> str:
     style formatting we don't yet have handling for.
     """
 
-    return f'''
+    return f"""
     One or more cells has excel style time formatting of
     "{xls_time_format}" which is a pattern currently
     unknown to tidychef.
@@ -297,7 +296,4 @@ def missing_time_format_message(xls_time_format) -> str:
     https://github.com/mikeAdamss/tidychef/tree/main/tidychef/acquire/excel_time.py
 
     Please do PR any new patterns encountered in that direction or raise an issue.
-    '''
-
-
-
+    """

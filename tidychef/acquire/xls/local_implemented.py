@@ -2,21 +2,19 @@
 Holds the code that defines the local xlsx reader.
 """
 
-import datetime
 from pathlib import Path
 from typing import Callable, List, Optional, Union
 
 import xlrd
 
 from tidychef.acquire.base import BaseReader
-from tidychef.models.source.cell import Cell
-from tidychef.models.source.table import Table
 from tidychef.selection.selectable import Selectable
 from tidychef.selection.xls.xls import XlsSelectable
 
-from .shared import sheets_from_workbook
 from ..base import BaseReader
 from ..main import acquirer
+from .shared import sheets_from_workbook
+
 
 def local(
     source: Union[str, Path],
@@ -83,14 +81,10 @@ class LocalXlsReader(BaseReader):
         :return: A list of type as specified by param selectable.
         """
 
-        custom_time_formats = kwargs.get('custom_time_formats', {})
-        kwargs.pop('custom_time_formats', None)
+        custom_time_formats = kwargs.get("custom_time_formats", {})
+        kwargs.pop("custom_time_formats", None)
 
         workbook: xlrd.Book = xlrd.open_workbook(source, formatting_info=True)
         return sheets_from_workbook(
-            source,
-            selectable,
-            workbook,
-            custom_time_formats,
-            **kwargs 
+            source, selectable, workbook, custom_time_formats, **kwargs
         )

@@ -1,5 +1,3 @@
-from dataclasses import dataclass
-
 from tidychef.against.implementations.base import BaseValidator
 from tidychef.models.source.cell import Cell
 

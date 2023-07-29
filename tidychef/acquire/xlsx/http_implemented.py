@@ -15,9 +15,9 @@ from tidychef.selection.selectable import Selectable
 from tidychef.selection.xlsx.xlsx import XlsxSelectable
 from tidychef.utils.http.caching import get_cached_session
 
-from .shared import sheets_from_workbook
 from ..base import BaseReader
 from ..main import acquirer
+from .shared import sheets_from_workbook
 
 
 def http(
@@ -111,11 +111,10 @@ class HttpXlsxReader(BaseReader):
         bio.write(response.content)
         bio.seek(0)
 
-        custom_time_formats = kwargs.get('custom_time_formats', {})
-        kwargs.pop('custom_time_formats', None)
+        custom_time_formats = kwargs.get("custom_time_formats", {})
+        kwargs.pop("custom_time_formats", None)
 
         workbook: openpyxl.Workbook = openpyxl.load_workbook(
             bio, data_only=data_only, **kwargs
         )
         return sheets_from_workbook(source, selectable, workbook, custom_time_formats)
-

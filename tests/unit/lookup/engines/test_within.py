@@ -4,6 +4,7 @@ from typing import Dict, List
 
 import pytest
 
+from tests.fixtures import fixture_simple_one_tab
 from tidychef.direction.directions import above, below, down, left, right, up
 from tidychef.exceptions import (
     ImpossibleLookupError,
@@ -12,7 +13,6 @@ from tidychef.exceptions import (
 )
 from tidychef.lookup.engines.within import Within
 from tidychef.selection.selectable import Selectable
-from tests.fixtures import fixture_simple_one_tab
 
 
 @pytest.fixture

@@ -5,16 +5,14 @@ Holds the code that defines the local xlsx reader.
 from pathlib import Path
 from typing import Callable, List, Optional, Union
 
-import dateutil
-
 import ezodf
 from ezodf.document import PackagedDocument
 
 from tidychef.acquire.base import BaseReader
 from tidychef.models.source.cell import Cell
 from tidychef.models.source.table import Table
-from tidychef.selection.selectable import Selectable
 from tidychef.selection.ods.ods import OdsSelectable
+from tidychef.selection.selectable import Selectable
 
 from ..base import BaseReader
 from ..main import acquirer
@@ -86,10 +84,16 @@ class LocalOdsReader(BaseReader):
             for y, row in enumerate(worksheet.rows()):
                 for x, cell in enumerate(row):
                     table.add_cell(
-                         Cell(x=int(x), y=int(y), value=str(cell.plaintext()) if cell.value is not None else "")
-                     )
+                        Cell(
+                            x=int(x),
+                            y=int(y),
+                            value=str(cell.plaintext())
+                            if cell.value is not None
+                            else "",
+                        )
+                    )
 
             tidychef_selectables.append(
-                 selectable(table, source=source, name=worksheet.name)
+                selectable(table, source=source, name=worksheet.name)
             )
         return tidychef_selectables

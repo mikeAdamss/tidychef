@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import copy
-from typing import Callable, List, Dict, Optional
+from typing import Callable, Dict, List, Optional
 
 from tidychef.column.base import BaseColumn
 from tidychef.exceptions import CellValidationError
@@ -38,7 +38,9 @@ class Column(BaseColumn):
         return self._table
 
     @staticmethod
-    def horizontal_condition(column_label: str, resolver: Callable, priority=0) -> Column:
+    def horizontal_condition(
+        column_label: str, resolver: Callable, priority=0
+    ) -> Column:
         """
         Creates a column that populates based on the
         values resolved for one or more other columns.
@@ -130,11 +132,13 @@ class Column(BaseColumn):
                 if hasattr(self.validation, "msg"):
                     msg = f"Message is: {self.validation.msg(cell)}"
                 else:
-                    msg = ''
-                raise CellValidationError(f'''
+                    msg = ""
+                raise CellValidationError(
+                    f"""
                         Column {self.label} has a cell that is not valid,
                         Invalid cell {cell}.
                         {msg}                      
-                        ''')
+                        """
+                )
 
         return cell

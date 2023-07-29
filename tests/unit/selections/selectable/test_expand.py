@@ -1,9 +1,9 @@
 import pytest
 
+from tests.fixtures import fixture_simple_one_tab
 from tidychef.direction.directions import down, left, right, up
 from tidychef.exceptions import ReferenceOutsideSelectionError
 from tidychef.selection.selectable import Selectable
-from tests.fixtures import fixture_simple_one_tab
 
 
 @pytest.fixture

@@ -2,9 +2,9 @@ from pathlib import Path
 
 import pytest
 
+from tests.fixtures import path_to_fixture
 from tidychef.exceptions import FileInputError
 from tidychef.utils import fileutils
-from tests.fixtures import path_to_fixture
 
 
 def test_ensure_existing_path_from_str_where_exists():

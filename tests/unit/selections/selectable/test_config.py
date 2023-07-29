@@ -2,8 +2,8 @@ from pathlib import Path
 
 import pytest
 
-from tidychef.selection.selectable import Selectable
 from tests.fixtures import fixture_simple_one_tab
+from tidychef.selection.selectable import Selectable
 
 
 @pytest.fixture

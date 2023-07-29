@@ -1,10 +1,10 @@
 import pytest
 
+from tests.fixtures import fixture_simple_one_tab
 from tidychef.column.base import BaseColumn
 from tidychef.lookup.engines.constant import Constant
 from tidychef.models.source.cell import VirtualCell
 from tidychef.selection.selectable import Selectable
-from tests.fixtures import fixture_simple_one_tab
 
 
 @pytest.fixture

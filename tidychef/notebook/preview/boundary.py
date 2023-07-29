@@ -1,4 +1,4 @@
-from typing import Dict, List, Optional
+from typing import List
 
 from tidychef import datafuncs as dfc
 from tidychef.models.source.cell import Cell

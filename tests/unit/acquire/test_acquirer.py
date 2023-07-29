@@ -4,12 +4,12 @@ from typing import List
 
 import pytest
 
+from tests.fixtures import path_to_fixture
 from tidychef import acquire
 from tidychef.acquire.base import BaseReader
 from tidychef.acquire.main import acquirer
 from tidychef.exceptions import FileInputError, ZeroAcquiredTablesError
 from tidychef.selection.selectable import Selectable
-from tests.fixtures import path_to_fixture
 
 
 def test_reader_can_be_overwritten():

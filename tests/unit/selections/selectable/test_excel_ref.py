@@ -1,12 +1,12 @@
 import pytest
 
+from tests.fixtures import fixture_simple_one_tab
 from tidychef.exceptions import (
     BadExcelReferenceError,
     LoneValueOnMultipleCellsError,
     ReferenceOutsideSelectionError,
 )
 from tidychef.selection.selectable import Selectable
-from tests.fixtures import fixture_simple_one_tab
 
 
 @pytest.fixture

@@ -1,9 +1,9 @@
 import pytest
 
-from tidychef.notebook.preview.boundary import Boundary
-from tidychef.selection.selectable import Selectable
 from tests.fixtures.preconfigured import fixture_simple_small_one_tab
 from tests.unit.helpers import qcel
+from tidychef.notebook.preview.boundary import Boundary
+from tidychef.selection.selectable import Selectable
 
 
 @pytest.fixture

@@ -86,4 +86,3 @@ def test_column_validation():
     col = Column(Constant("This", "foo"), validate=against.is_numeric)
     with pytest.raises(CellValidationError):
         col.resolve_column_cell_from_obs_cell(ob_cell)
-

@@ -15,9 +15,9 @@ from tidychef.selection.selectable import Selectable
 from tidychef.selection.xls.xls import XlsSelectable
 from tidychef.utils.http.caching import get_cached_session
 
-from .shared import sheets_from_workbook
 from ..base import BaseReader
 from ..main import acquirer
+from .shared import sheets_from_workbook
 
 
 def http(
@@ -47,7 +47,7 @@ def http(
     :param post_hook: A callable that can take the output of HttpXlsReader.parse() as an argument.
     :param session: An optional requests.Session object.
     :param cache: Boolean flag for whether or not to cache get requests.
-    :param time_format: The pattern for expressing time encoded xlx cells. The default is ISO time. 
+    :param time_format: The pattern for expressing time encoded xlx cells. The default is ISO time.
     :return: A single populated Selectable of type as specified by selectable param.
     """
 
@@ -114,14 +114,12 @@ class HttpXlsReader(BaseReader):
         bio.write(response.content)
         bio.seek(0)
 
-        custom_time_formats = kwargs.get('custom_time_formats', {})
-        kwargs.pop('custom_time_formats', None)
+        custom_time_formats = kwargs.get("custom_time_formats", {})
+        kwargs.pop("custom_time_formats", None)
 
-        workbook: xlrd.Book = xlrd.open_workbook(file_contents=bio.read(), formatting_info=True, **kwargs)
+        workbook: xlrd.Book = xlrd.open_workbook(
+            file_contents=bio.read(), formatting_info=True, **kwargs
+        )
         return sheets_from_workbook(
-            source,
-            selectable,
-            workbook,
-            custom_time_formats,
-            **kwargs 
+            source, selectable, workbook, custom_time_formats, **kwargs
         )

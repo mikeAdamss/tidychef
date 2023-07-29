@@ -1,5 +1,6 @@
 import pytest
 
+from tests.fixtures import fixture_with_blanks
 from tidychef.exceptions import (
     InvalidCellObjectError,
     InvlaidCellPositionError,
@@ -7,7 +8,6 @@ from tidychef.exceptions import (
 )
 from tidychef.models.source.cell import Cell, VirtualCell
 from tidychef.selection.csv.csv import CsvSelectable
-from tests.fixtures import fixture_with_blanks
 
 blank_values_not_disregarding_whitespace = [""]
 default_blank_values = blank_values_not_disregarding_whitespace + ["    ", " "]

@@ -6,6 +6,9 @@ from pathlib import Path
 
 import pytest
 
+from tests.fixtures import fixture_wide_band_tab
+from tests.fixtures.helpers import path_to_fixture
+from tests.unit.helpers import assert_csvs_match
 from tidychef.column import Column
 from tidychef.direction.directions import above, below, left, right
 from tidychef.exceptions import DroppingNonColumnError, MisalignedHeadersError
@@ -14,9 +17,6 @@ from tidychef.lookup.engines.direct import Directly
 from tidychef.output.tidydata import TidyData
 from tidychef.selection import filters
 from tidychef.selection.selectable import Selectable
-from tests.fixtures import fixture_wide_band_tab
-from tests.fixtures.helpers import path_to_fixture
-from tests.unit.helpers import assert_csvs_match
 
 
 @pytest.fixture
@@ -69,7 +69,7 @@ def tidy_with_obs_apply() -> TidyData:
         Column(Constant("Genre", "Rock & Roll")),
         Column(Directly("Assets", assets, above)),
         Column(Directly("Member", member, left)),
-        obs_apply=lambda x: "foo "+x
+        obs_apply=lambda x: "foo " + x,
     )
 
     return tidy
@@ -117,7 +117,9 @@ def test_tidydata_internal_representation_is_as_expected(tidy: TidyData):
     assert len(tidy) == 19
 
 
-def test_tidydata_internal_representation_is_as_expected_with_apply(tidy_with_obs_apply: TidyData):
+def test_tidydata_internal_representation_is_as_expected_with_apply(
+    tidy_with_obs_apply: TidyData,
+):
     """
     Test that the ._data attribute of TidyData contains the expected
     data once _transform() has been called.
@@ -125,7 +127,7 @@ def test_tidydata_internal_representation_is_as_expected_with_apply(tidy_with_ob
 
     tidy_with_obs_apply._transform()
     expected_data = [
-       ["Value", "Genre", "Assets", "Member"],
+        ["Value", "Genre", "Assets", "Member"],
         ["foo 1", "Rock & Roll", "Houses", "John"],
         ["foo 5", "Rock & Roll", "Cars", "John"],
         ["foo 9", "Rock & Roll", "Boats", "John"],

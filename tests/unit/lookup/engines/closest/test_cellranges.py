@@ -4,15 +4,15 @@ from typing import List
 
 import pytest
 
-from tidychef.direction.directions import Direction, above, below, down, left, right, up
-from tidychef.lookup.engines.closest import CellRanges
-from tidychef.selection.selectable import Selectable
 from tests.fixtures import (
     fixture_simple_band_tab,
     fixture_simple_one_tab,
     fixture_wide_band_tab,
     path_to_fixture,
 )
+from tidychef.direction.directions import Direction, above, below, down, left, right, up
+from tidychef.lookup.engines.closest import CellRanges
+from tidychef.selection.selectable import Selectable
 
 
 @pytest.fixture

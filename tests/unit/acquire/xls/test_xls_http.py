@@ -78,17 +78,24 @@ def test_xls_caching():
     cache_dir = Path(".cache")
     assert not cache_dir.exists()
 
+
 def test_shared_xls_http_time_formatting_works():
     """
     Test that the xls time_format keyword works as expected.
     """
 
-    sheet: XlsSelectable = acquire.xls.http("https://raw.githubusercontent.com/mikeAdamss/"
-        "tidychef/main/tests/fixtures/xls/dates-times.xls", tables="Sheet1")
-    assert (
-        [x.value for x in sheet.pcells] == 
-        ['dates', '11/01/23', '11/01/23', '12/01/22', '10/10/00']
+    sheet: XlsSelectable = acquire.xls.http(
+        "https://raw.githubusercontent.com/mikeAdamss/"
+        "tidychef/main/tests/fixtures/xls/dates-times.xls",
+        tables="Sheet1",
     )
+    assert [x.value for x in sheet.pcells] == [
+        "dates",
+        "11/01/23",
+        "11/01/23",
+        "12/01/22",
+        "10/10/00",
+    ]
 
 
 def test_unknown_xls_http_time_format_raises(mocker):
@@ -97,11 +104,14 @@ def test_unknown_xls_http_time_format_raises(mocker):
     format string the appropriate error is raised
     """
 
-    mocker.patch('tidychef.acquire.xls.shared.xls_time_formats', return_value={}) 
+    mocker.patch("tidychef.acquire.xls.shared.xls_time_formats", return_value={})
 
     with pytest.raises(UnknownExcelTimeError):
-        acquire.xls.http("https://raw.githubusercontent.com/mikeAdamss/"
-        "tidychef/main/tests/fixtures/xls/dates-times.xls", tables="Sheet1")
+        acquire.xls.http(
+            "https://raw.githubusercontent.com/mikeAdamss/"
+            "tidychef/main/tests/fixtures/xls/dates-times.xls",
+            tables="Sheet1",
+        )
 
 
 def test_unknown_xls_http_time_format_can_be_specified(mocker):
@@ -111,13 +121,19 @@ def test_unknown_xls_http_time_format_can_be_specified(mocker):
     formatting string.
     """
 
-    mocker.patch('tidychef.acquire.xls.shared.xls_time_formats', return_value={}) 
-    
-    sheet: XlsSelectable = acquire.xls.http("https://raw.githubusercontent.com/mikeAdamss/"
-    "tidychef/main/tests/fixtures/xls/dates-times.xls", tables="Sheet1",
-    custom_time_formats={"DD/MM/YY":"%d/%m/%y"})
+    mocker.patch("tidychef.acquire.xls.shared.xls_time_formats", return_value={})
 
-    assert (
-        [x.value for x in sheet.pcells] == 
-        ['dates', '11/01/23', '11/01/23', '12/01/22', '10/10/00']
+    sheet: XlsSelectable = acquire.xls.http(
+        "https://raw.githubusercontent.com/mikeAdamss/"
+        "tidychef/main/tests/fixtures/xls/dates-times.xls",
+        tables="Sheet1",
+        custom_time_formats={"DD/MM/YY": "%d/%m/%y"},
     )
+
+    assert [x.value for x in sheet.pcells] == [
+        "dates",
+        "11/01/23",
+        "11/01/23",
+        "12/01/22",
+        "10/10/00",
+    ]

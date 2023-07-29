@@ -3,12 +3,12 @@ from pathlib import Path
 
 import pytest
 
+from tests.fixtures.helpers import path_to_fixture
+from tests.fixtures.preconfigured import fixture_simple_small_one_tab
 from tidychef.exceptions import OutputPassedToPreview, UnalignedTableOperation
 from tidychef.notebook.preview.html.main import preview
 from tidychef.output.tidydata import TidyData
 from tidychef.selection.selectable import Selectable
-from tests.fixtures.helpers import path_to_fixture
-from tests.fixtures.preconfigured import fixture_simple_small_one_tab
 
 
 @pytest.fixture

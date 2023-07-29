@@ -1,8 +1,8 @@
 from pathlib import Path
 
+from tests.fixtures import path_to_fixture
 from tidychef import acquire
 from tidychef.selection.selectable import Selectable
-from tests.fixtures import path_to_fixture
 
 
 def test_acquire_local_csv():

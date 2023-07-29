@@ -3,19 +3,19 @@ Holds the code that defines the local xlsx reader.
 """
 
 from pathlib import Path
-from typing import Callable, List, Optional, Union
 from tempfile import NamedTemporaryFile
+from typing import Callable, List, Optional, Union
 
+import ezodf
 import requests
 import validators
-import ezodf
 from ezodf.document import PackagedDocument
 
 from tidychef.acquire.base import BaseReader
 from tidychef.models.source.cell import Cell
 from tidychef.models.source.table import Table
-from tidychef.selection.selectable import Selectable
 from tidychef.selection.ods.ods import OdsSelectable
+from tidychef.selection.selectable import Selectable
 from tidychef.utils.http.caching import get_cached_session
 
 from ..base import BaseReader
@@ -57,6 +57,7 @@ def http(
         cache=cache,
         **kwargs,
     )
+
 
 class HttpOdsReader(BaseReader):
     """
@@ -111,7 +112,7 @@ class HttpOdsReader(BaseReader):
         temp_file = NamedTemporaryFile()
         temp_file.write(response.content)
         temp_file.seek(0)
-        
+
         spreadsheet: PackagedDocument = ezodf.opendoc(temp_file.name)
         tidychef_selectables = []
 
@@ -121,7 +122,13 @@ class HttpOdsReader(BaseReader):
             for y, row in enumerate(worksheet.rows()):
                 for x, cell in enumerate(row):
                     table.add_cell(
-                        Cell(x=int(x), y=int(y), value=str(cell.plaintext()) if cell.value is not None else "")
+                        Cell(
+                            x=int(x),
+                            y=int(y),
+                            value=str(cell.plaintext())
+                            if cell.value is not None
+                            else "",
+                        )
                     )
 
             tidychef_selectables.append(

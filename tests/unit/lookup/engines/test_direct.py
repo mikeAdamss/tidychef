@@ -4,6 +4,7 @@ from os import linesep
 
 import pytest
 
+from tests.fixtures import fixture_vertical_dimensions, fixture_wide_band_tab
 from tidychef import datafuncs as dfc
 from tidychef.column.column import Column
 from tidychef.direction.directions import down, left, right, up
@@ -17,7 +18,6 @@ from tidychef.lookup.engines.direct import Directly
 from tidychef.models.source.cell import Cell
 from tidychef.selection import filters
 from tidychef.selection.selectable import Selectable
-from tests.fixtures import fixture_vertical_dimensions, fixture_wide_band_tab
 
 
 @pytest.fixture

@@ -1,5 +1,5 @@
-from tidychef import acquire
 from tests.fixtures import path_to_fixture
+from tidychef import acquire
 
 
 def fixture_simple_band_tab():

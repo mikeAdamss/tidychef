@@ -5,10 +5,10 @@ controlling Input upon Input operators.
 
 import pytest
 
+from tests.fixtures.preconfigured import fixture_simple_one_tab
 from tidychef import datafuncs as dfc
 from tidychef.exceptions import UnalignedTableOperation
 from tidychef.selection.selectable import Selectable
-from tests.fixtures.preconfigured import fixture_simple_one_tab
 
 
 @pytest.fixture

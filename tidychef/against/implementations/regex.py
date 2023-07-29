@@ -21,7 +21,7 @@ class RegexValidator(BaseValidator):
         :return: bool, is it valid or not
         """
         if self._compiled is None:
-            self._compiled = re.compile(r'' + self.pattern)
+            self._compiled = re.compile(r"" + self.pattern)
         if self._compiled.match(cell.value):
             return True
         return False

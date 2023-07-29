@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 
+from tests.unit.helpers import qcel
 from tidychef.direction.directions import down, left, right, up
 from tidychef.lookup.engines.closest import CellRange
 from tidychef.models.source.cell import Cell
-from tests.unit.helpers import qcel
 
 
 def test_cell_range_contains_direction_right():

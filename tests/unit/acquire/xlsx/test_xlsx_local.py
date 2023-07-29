@@ -1,9 +1,9 @@
 from pathlib import Path
 from typing import List
 
+from tests.fixtures import path_to_fixture
 from tidychef import acquire
 from tidychef.selection.xlsx.xlsx import XlsxSelectable
-from tests.fixtures import path_to_fixture
 
 
 def test_acquire_local_xls():

@@ -1,11 +1,11 @@
 import shutil
 from pathlib import Path
+from tempfile import NamedTemporaryFile
 from typing import List
 
 import pytest
 import requests
 from pytest_mock import mocker
-from tempfile import NamedTemporaryFile
 
 from tidychef import acquire
 from tidychef.selection.ods.ods import OdsSelectable
@@ -49,8 +49,8 @@ def test_ods_http_exception(mocker):
 
     with pytest.raises(requests.exceptions.HTTPError):
         acquire.ods.http(
-        "https://github.com/mikeAdamss/tidychef/raw/main/tests/"
-        "fixtures/ods/EB1-_Existing_Domestic_Properties.ods",
+            "https://github.com/mikeAdamss/tidychef/raw/main/tests/"
+            "fixtures/ods/EB1-_Existing_Domestic_Properties.ods",
             session=mock_session,
             cache=False,
         )

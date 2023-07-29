@@ -1,5 +1,5 @@
-from tidychef.notebook.preview.html.tidy_data import tidy_data_as_html_table_string
 from tests.fixtures.helpers import path_to_fixture
+from tidychef.notebook.preview.html.tidy_data import tidy_data_as_html_table_string
 
 
 def test_tidy_data_as_html_table_string():

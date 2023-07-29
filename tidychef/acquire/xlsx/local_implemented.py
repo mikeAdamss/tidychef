@@ -8,15 +8,13 @@ from typing import Callable, List, Optional, Union
 import openpyxl
 
 from tidychef.acquire.base import BaseReader
-from tidychef.models.source.cell import Cell
-from tidychef.models.source.table import Table
 from tidychef.selection.selectable import Selectable
 from tidychef.selection.xlsx.xlsx import XlsxSelectable
 from tidychef.utils import fileutils
 
-from .shared import sheets_from_workbook
 from ..base import BaseReader
 from ..main import acquirer
+from .shared import sheets_from_workbook
 
 
 def local(
@@ -88,8 +86,8 @@ class LocalXlsxReader(BaseReader):
 
         source: Path = fileutils.ensure_existing_path(source, **kwargs)
 
-        custom_time_formats = kwargs.get('custom_time_formats', {})
-        kwargs.pop('custom_time_formats', None)
+        custom_time_formats = kwargs.get("custom_time_formats", {})
+        kwargs.pop("custom_time_formats", None)
 
         workbook: openpyxl.Workbook = openpyxl.load_workbook(
             source, data_only=data_only, **kwargs

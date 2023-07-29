@@ -2,10 +2,10 @@ from dataclasses import dataclass
 
 import pytest
 
+from tests.fixtures import fixture_simple_one_tab
 from tidychef import datafuncs as dfc
 from tidychef.models.source.cell import Cell
 from tidychef.selection.selectable import Selectable
-from tests.fixtures import fixture_simple_one_tab
 
 
 @pytest.fixture

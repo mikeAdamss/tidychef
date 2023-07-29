@@ -1,9 +1,9 @@
 import pytest
 
+from tests.fixtures import fixture_simple_one_tab
 from tidychef import datafuncs as dfc
 from tidychef.direction.directions import down, left, right, up
 from tidychef.selection.selectable import Selectable
-from tests.fixtures import fixture_simple_one_tab
 
 
 @pytest.fixture

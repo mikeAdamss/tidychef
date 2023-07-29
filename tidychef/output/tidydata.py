@@ -10,13 +10,12 @@ from IPython.core.display import HTML, display
 from tidychef.column.base import BaseColumn
 from tidychef.exceptions import DroppingNonColumnError, MisalignedHeadersError
 from tidychef.lookup.engines.horizontal_condition import HorizontalCondition
-from tidychef.models.source.cell import Cell, VirtualCell
+from tidychef.models.source.cell import VirtualCell
 from tidychef.models.source.table import LiveTable
 from tidychef.notebook.ipython import in_notebook
 from tidychef.notebook.preview.html.tidy_data import tidy_data_as_html_table_string
 from tidychef.output.base import BaseOutput
 from tidychef.utils.decorators import dontmutate
-
 
 
 class TidyData(BaseOutput):
@@ -87,7 +86,7 @@ class TidyData(BaseOutput):
     def __len__(self):
         self._transform()
         return len(self._data)
-    
+
     def _data_as_table_of_strings(self) -> List[List[str]]:
         """
         Generates a table of strings from a table of Cells.
@@ -258,16 +257,18 @@ class TidyData(BaseOutput):
             # We need to carefully construct our lists of lists
             # such that the HorizontalCondition columns are created last
             # Ordering will be restored at the end via this list.
-            ordered_column_header_cells = [VirtualCell(value=self.observations.label)] + [
-                VirtualCell(value=x.label) for x in self.columns
-            ]
+            ordered_column_header_cells = [
+                VirtualCell(value=self.observations.label)
+            ] + [VirtualCell(value=x.label) for x in self.columns]
 
             # Obs label
             if self.observations.label in self.drop:
                 unordered_header_row_cells = []
                 drop_count += 1
             else:
-                unordered_header_row_cells = [VirtualCell(value=self.observations.label)]
+                unordered_header_row_cells = [
+                    VirtualCell(value=self.observations.label)
+                ]
 
             # Standard Column labels
             for column in [
@@ -344,7 +345,8 @@ class TidyData(BaseOutput):
                     for column in condition_columns:
                         if column.engine.priority == i:
                             column_cell = column.resolve_column_cell_from_obs_cell(
-                                observation, column_value_dict)
+                                observation, column_value_dict
+                            )
 
                             column_value_dict[column.label] = column_cell.value
                             if column.label not in self.drop:

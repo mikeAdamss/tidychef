@@ -1,4 +1,3 @@
-
 import datetime
 from typing import Any, Dict, List, Union
 
@@ -19,6 +18,7 @@ def xls_time_formats():
     """
     return EXCEL_TIME_FORMATS
 
+
 def strip_non_time_formatting(pattern: str) -> str:
     """
     Do what we can to remove the random excel formatting information
@@ -32,7 +32,13 @@ def strip_non_time_formatting(pattern: str) -> str:
     return pattern
 
 
-def sheets_from_workbook(source: Any, selectable: Selectable, workbook: xlrd.book, custom_time_formats: Dict[str, str], **kwargs) -> Union[XlsSelectable, List[XlsSelectable]]:
+def sheets_from_workbook(
+    source: Any,
+    selectable: Selectable,
+    workbook: xlrd.book,
+    custom_time_formats: Dict[str, str],
+    **kwargs
+) -> Union[XlsSelectable, List[XlsSelectable]]:
     assert isinstance(workbook, xlrd.Book)
 
     tidychef_selectables = []
@@ -47,27 +53,32 @@ def sheets_from_workbook(source: Any, selectable: Selectable, workbook: xlrd.boo
         for y in range(0, num_rows):
             for x, cell in enumerate(worksheet.row(y)):
 
-                if cell.ctype == 3: # Date Cell
+                if cell.ctype == 3:  # Date Cell
                     xf = workbook.xf_list[cell.xf_index]
-                    xls_time_format = strip_non_time_formatting(workbook.format_map[xf.format_key].format_str)
+                    xls_time_format = strip_non_time_formatting(
+                        workbook.format_map[xf.format_key].format_str
+                    )
                     strformat_pattern = xls_time_formats().get(xls_time_format, None)
                     if strformat_pattern is None:
 
-                        strformat_pattern = custom_time_formats.get(xls_time_format, None)
+                        strformat_pattern = custom_time_formats.get(
+                            xls_time_format, None
+                        )
 
                         if strformat_pattern is None:
-                            raise UnknownExcelTimeError(missing_time_format_message(xls_time_format))
-                    
-                    cell_as_datetime = datetime.datetime(*xlrd.xldate_as_tuple(cell.value, xlrd.book.Book.datemode))
+                            raise UnknownExcelTimeError(
+                                missing_time_format_message(xls_time_format)
+                            )
+
+                    cell_as_datetime = datetime.datetime(
+                        *xlrd.xldate_as_tuple(cell.value, xlrd.book.Book.datemode)
+                    )
                     cell_value = cell_as_datetime.strftime(strformat_pattern)
                 else:
                     cell_value = str(cell.value)
-                table.add_cell(
-                    Cell(x=x, y=y, value=cell_value if cell_value else "")
-                )
+                table.add_cell(Cell(x=x, y=y, value=cell_value if cell_value else ""))
 
         tidychef_selectables.append(
             selectable(table, source=source, name=worksheet_name)
         )
     return tidychef_selectables
-
