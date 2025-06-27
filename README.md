@@ -56,7 +56,11 @@ tidy_data.to_csv("bands_tidy.csv")
 
 ```
 
-to turn into something that looks like this:
+which make will get you an inline preview (because we used `preview()` in the snippet)
+
+![preview](./preview.png)
+
+and will putput a csv (`band_tidy.csv` as per the snippt) that looks like this:
 
 ![](https://mikeadamss.github.io/tidychef/_images/bands-after.png)
 _Note: image cropped for reasons of practicality._
