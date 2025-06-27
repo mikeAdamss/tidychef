@@ -41,6 +41,7 @@ observations = table.filter(filters.is_numeric).label_as("Value")
 bands = table.excel_ref("3").is_not_blank().label_as("Band")
 assets = table.excel_ref("2").is_not_blank().label_as("Asset")
 names = (table.excel_ref("B") | table.excel_ref("H")).is_not_blank().label_as("Name")
+preview(observations, bands, assets, names)
 
 # Build tidy data by associating observations with their corresponding headers
 tidy_data = TidyData(
