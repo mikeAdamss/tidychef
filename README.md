@@ -2,15 +2,61 @@
 
 ![Tests](https://github.com/mikeAdamss/tidychef/actions/workflows/tests.yml/badge.svg)
 ![100% Test Coverage](./jupyterbook/images/coverage-100.svg)
-![Static Badge](https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9%20%7C%203.10%20%7C%203.11%20-blue)
+![Static Badge](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12-blue)
 
 Tidychef is a python framework to enable “data extraction for humans” via simple python beginner friendly "recipes". It aims at allowing users to easily transform tabulated data sources that use visual relationships (human readable only data) into simple machine readable "tidy data" in a repeatable way.
 
-i.e: it allows you to reliably turn something that looks like this: 
+## Why use tidychef?
+
+- Specialized for visually complex and irregular tabular data — tidychef excels at extracting and reshaping data from spreadsheets and CSVs with non-standard layouts, footers, merged headers, and spatial cues that traditional tools like pandas or tidyverse can struggle to parse directly.
+
+- Focus on the visual and spatial structure of data — unlike pandas or tidyverse, which operate on rectangular, “tidy” input, tidychef lets you declaratively select cells based on their relative position and visual grouping, preserving domain context.
+
+- Complements pandas and tidyverse workflows — use tidychef to transform messy reports into tidy data, then leverage pandas or tidyverse for downstream analysis, visualization, and modeling.
+
+- Designed for reproducibility and automation — its programmatic API reduces manual intervention common in spreadsheet wrangling, enabling reliable data pipelines.
+
+- Ideal for domain experts and data engineers dealing with legacy or inconsistent Excel/CSV exports that don’t follow tidy data principles.
+
+
+## Simple Example
+
+Imagine a sheet of data relationship like the following that are only expressed spacially.
 
 ![](https://mikeadamss.github.io/tidychef/_images/bands-before.png)
 
-into something that looks like this:
+You write a fairly concise scipt
+
+```python
+from tidychef import acquire, filters
+from tidychef.direction import right, below
+from tidychef.output import TidyData, Column
+
+# Load a CSV table from a URL
+table = acquire.csv.http("https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/csv/bands-wide.csv")
+
+# Select numeric observations and label them
+observations = table.filter(filters.is_numeric).label_as("Value")
+
+# Label headers based on their positions
+bands = table.excel_ref("3").is_not_blank().label_as("Band")
+assets = table.excel_ref("2").is_not_blank().label_as("Asset")
+names = (table.excel_ref("B") | table.excel_ref("H")).is_not_blank().label_as("Name")
+
+# Build tidy data by associating observations with their corresponding headers
+tidy_data = TidyData(
+    observations,
+    Column(bands.finds_observations_closest(right)),
+    Column(assets.finds_observations_directly(below)),
+    Column(names.finds_observations_directly(right))
+)
+
+# Export the tidy data to CSV
+tidy_data.to_csv("bands_tidy.csv")
+
+```
+
+to turn into something that looks like this:
 
 ![](https://mikeadamss.github.io/tidychef/_images/bands-after.png)
 _Note: image cropped for reasons of practicality._

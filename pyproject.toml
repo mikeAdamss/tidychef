@@ -11,7 +11,7 @@ readme = "README.md"
 repository = "https://github.com/mikeAdamss/tidychef"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.9"
 tabulate = "^0.9.0"
 requests = "^2.31.0"
 validators = "^0.20.0"
@@ -23,7 +23,7 @@ jupyter = "^1.0.0"
 ezodf = "^0.3.2"
 lxml = "^4.9.3"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 pytest = "^7.1.2"
 black = "^22.3.0"
 isort = "^5.10.1"
