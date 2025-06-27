@@ -6,11 +6,26 @@
 
 Tidychef is a python framework to enable “data extraction for humans” via simple python beginner friendly "recipes". It aims at allowing users to easily transform tabulated data sources that use visual relationships (human readable only data) into simple machine readable "tidy data" in a repeatable way.
 
-i.e: it allows you to take something that looks like this: 
+## Why use tidychef?
+
+- Specialized for visually complex and irregular tabular data — tidychef excels at extracting and reshaping data from spreadsheets and CSVs with non-standard layouts, footers, merged headers, and spatial cues that traditional tools like pandas or tidyverse can struggle to parse directly.
+
+- Focus on the visual and spatial structure of data — unlike pandas or tidyverse, which operate on rectangular, “tidy” input, tidychef lets you declaratively select cells based on their relative position and visual grouping, preserving domain context.
+
+- Complements pandas and tidyverse workflows — use tidychef to transform messy reports into tidy data, then leverage pandas or tidyverse for downstream analysis, visualization, and modeling.
+
+- Designed for reproducibility and automation — its programmatic API reduces manual intervention common in spreadsheet wrangling, enabling reliable data pipelines.
+
+- Ideal for domain experts and data engineers dealing with legacy or inconsistent Excel/CSV exports that don’t follow tidy data principles.
+
+
+## Simple Example
+
+Imagine a sheet of data relationship like the following that are only expressed spacially.
 
 ![](https://mikeadamss.github.io/tidychef/_images/bands-before.png)
 
-and write a fairly concise scipt
+You write a fairly concise scipt
 
 ```python
 from tidychef import acquire, filters
