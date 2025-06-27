@@ -10,7 +10,7 @@ i.e: it allows you to take something that looks like this:
 
 ![](https://mikeadamss.github.io/tidychef/_images/bands-before.png)
 
-andand write a fairly concise scipt
+and write a fairly concise scipt
 
 ```python
 from tidychef import acquire, filters
