@@ -18,7 +18,6 @@ Tidychef is a python framework to enable “data extraction for humans” via si
 
 - Ideal for domain experts and data engineers dealing with legacy or inconsistent Excel/CSV exports that don’t follow tidy data principles.
 
-
 ## Simple Example
 
 Imagine a sheet of data relationship like the following that are only expressed spacially.
@@ -60,7 +59,7 @@ which make will get you an inline preview (because we used `preview()` in the sn
 
 ![preview](./preview.png)
 
-and will putput a csv (`band_tidy.csv` as per the snippt) that looks like this:
+and will putput a csv (`band_tidy.csv` as per the snippet) that looks like this:
 
 ![](https://mikeadamss.github.io/tidychef/_images/bands-after.png)
 _Note: image cropped for reasons of practicality._
@@ -69,7 +68,7 @@ Currently supported input formats are `xls`, `xlsx`, `ods` and `csv`. Though use
 
 Tidychef is **designed to allow even novice python users or analysts to quickly become productive** but also has an advanced feature set and is designed to be readily and easily extended (adding new source of tabulated data, your own use case specific methods and filters and domain specific validation etc are all possible and documented in detail).
 
-In depth training material, examples and technical documentation [can be found here](https://mikeadamss.github.io/tidychef/intro.html#).
+Extensive [training materials, examples and technical documentation can be found here](https://mikeadamss.github.io/tidychef/intro.html#).
 
 ## Installation
 
