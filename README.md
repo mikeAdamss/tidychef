@@ -27,7 +27,7 @@ Imagine a sheet of data relationship like the following that are only expressed 
 You write a fairly concise scipt
 
 ```python
-from tidychef import acquire, filters
+from tidychef import acquire, filters, preview
 from tidychef.direction import right, below
 from tidychef.output import TidyData, Column
 
