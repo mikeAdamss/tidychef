@@ -70,13 +70,13 @@ preview(observations, bands, assets, names)
 tidy_data = TidyData(
     observations,
 
-    # "Band" labels are closest to the right of each value
+    # For each "Bands" cell the value cells are closest to the right
     Column(bands.finds_observations_closest(right)),
 
-    # "Assets" labels are directly below each value
+    # For each "Assets" cell the value cells are directly
     Column(assets.finds_observations_directly(below)),
     
-    # "Names" labels are direcrly to the right of each value
+    # For each "Names" cell the values cells are directly right.
     Column(names.finds_observations_directly(right))
 )
 
