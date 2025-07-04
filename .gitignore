@@ -8,7 +8,6 @@ jupyterbook/_build/
 jupyterbook/venv/
 jupyterbook/pdoc_venv/
 htmlcov
-docs
 _docs/splashpage.md
 scenarios
 *.cache

@@ -19,6 +19,7 @@ It's designed for real-world use: publication tables, official statistics, inter
 | A finance/data consultant | Repetitive report formatting with shifting structures        | Writing reusable “recipes” that adapt to visual changes      |
 | A data engineer           | Need to automate legacy spreadsheets                         | Building robust, declarative extractors in Python            |
 
+Here's a short [AI generated analysis](https://mikeadamss.github.io/tidychef/ai-overview) of tidychef of how it relates to other tools in this space, it's probably worth a look if you're browsing and want to know if you ought to browse more.
 
 ## Why use tidychef?
 
@@ -87,7 +88,7 @@ tidy_data.to_csv("bands_tidy.csv")
 
 which make will get you an inline preview (because we used `preview()` in the snippet)
 
-![preview](./preview1.png)
+![preview](./docs/preview1.png)
 
 and will putput a csv (`band_tidy.csv` as per the snippet) that looks like this:
 
@@ -97,11 +98,11 @@ _Note: image cropped for reasons of practicality._
 
 💡 💡 **KEY INSIGHT** 💡💡
 
-This is the bit you need to understand above all -here’s a preview I've made from running **the exact same script** against a _radically altered data source_. This is what we mean by _robust_ and _repeatable_ transformations and why the focus of tidychef is modeling spatial relationships — how cells relate visually, not where they are.
+This is the bit you need to understand above all - here’s a preview I've made from running **the exact same script** against a _radically altered data source_. This is what we mean by _robust_ and _repeatable_ transformations and why the focus of tidychef is modeling spatial relationships — how cells relate visually, not where they are.
 
 💡 Same script, radically different input—same output.
 
-![preview](./preview2.png)
+![preview](./docs/preview2.png)
 
 Even when data changes (as it will if you're working with any kind of regular publication) the _spatial relationships_ rarely change and typically only in ways that can be accounted for with a little care.
 
@@ -123,4 +124,10 @@ pip install tidychef
 
 Tidychef is directly inspired by the python package [databaker](https://github.com/sensiblecodeio/databaker) created by [The Sensible Code Company](https://sensiblecode.io/) in partnership with the United Kingdoms [Office For National Statistics](https://www.ons.gov.uk/).
 
-While I liked [databaker](https://github.com/sensiblecodeio/databaker) and successfully worked with it on multiple ETL projects over the course of almost a decade, this software should be considered the culmination of that work and the lessons learned from that time.
+While I liked [databaker](https://github.com/sensiblecodeio/databaker) and successfully worked with it on multiple ETL projects over the course of almost a decade. I do consider this software the culmination of that work and the lessons learned from that time.
+
+## Get Involved
+
+Please raise issues (or ideas as issues) freely on this repo.
+
+If you'd like to get involved more directly then please see [contbributing](./docs/CONTRIBUTING.md) guidance.

@@ -32,6 +32,9 @@ book: ## Create the jupyter book in /jupyterbook/_build
 	pip install pdoc
 	pdoc ./tidychef -o ./jupyterbook/_build/html/api_docs
 
+	cp ./docs/ai-overview.html ./jupyterbook/_build/html/ai-overview.html
+
+
 push_docs: ## Publish the jupyter book to github pages
 	poetry run pip install ghp-import
 	poetry run ghp-import -n -p -f ./jupyterbook/_build/html
