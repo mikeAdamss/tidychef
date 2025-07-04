@@ -128,4 +128,4 @@ While I liked [databaker](https://github.com/sensiblecodeio/databaker) and succe
 
 Please raise issues (or ideas as issues) freely on this repo.
 
-If you'd like to get involved more directly then please see [contbributing](./docs/CONTRIBUTING.md) guidance.
+If you'd like to get involved more directly then please see [contributing](./docs/CONTRIBUTING.md) guidance.
