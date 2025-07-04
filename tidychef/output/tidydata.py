@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Callable, Dict, List, Optional, Union
 
 import tabulate
-from IPython.core.display import HTML, display
+from IPython.display import HTML, display
 
 from tidychef.column.base import BaseColumn
 from tidychef.exceptions import DroppingNonColumnError, MisalignedHeadersError
