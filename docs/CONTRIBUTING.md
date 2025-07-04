@@ -15,7 +15,6 @@ Thank you for your interest in contributing to tidychef. Contributions from the 
 
     ```bash
     pip install poetry
-    cd tidychef
     poetry install
     ```
 
