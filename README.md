@@ -97,7 +97,7 @@ _Note: image cropped for reasons of practicality._
 
 💡 💡 **KEY INSIGHT** 💡💡
 
-This is the bit you need to understand above all -here’s a preview I've made from running **the exact same script** against a _radically altered data source_. This is what we mean by _robust_ and _repeatable_ transforamations and why the focus of tidychef is modeling spatial relationships — how cells relate visually, not where they are.
+This is the bit you need to understand above all -here’s a preview I've made from running **the exact same script** against a _radically altered data source_. This is what we mean by _robust_ and _repeatable_ transformations and why the focus of tidychef is modeling spatial relationships — how cells relate visually, not where they are.
 
 💡 Same script, radically different input—same output.
 

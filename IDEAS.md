@@ -70,3 +70,8 @@ BaseSelectable -> BaseFormattableSelectable -> XlsSelectable
 ```
 
 so if we put `_is_bold()` in the inherited abstract it'll insist the method always exists for things that have a concept of bold, that should help keep us honest.
+
+
+## Consider removing explain=
+
+It doesn't feel like something someone would use all that much once they've got a grip on the api. Wait and see but (unless we need other config options) it might not be worth having.
