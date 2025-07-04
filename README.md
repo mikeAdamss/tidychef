@@ -47,7 +47,7 @@ Imagine a sheet where relationships between cell values are primarily expressed 
 
 ![](https://mikeadamss.github.io/tidychef/_images/bands-before.png)
 
-You write a fairly concise scipt
+You write a fairly concise script
 
 ```python
 from tidychef import acquire, filters, preview
@@ -97,11 +97,13 @@ _Note: image cropped for reasons of practicality._
 
 💡 💡 **KEY INSIGHT** 💡💡
 
-This is the bit you need to understand above all -here’s a preview I've made from tunn **the exact same script** against a _radically altered data source_. This is what we mean by _robust_ and _repeatable_ transforamtions and why the focus of tidychef is on communicating spatial relationships.
+This is the bit you need to understand above all -here’s a preview I've made from tunn **the exact same script** against a _radically altered data source_. This is what we mean by _robust_ and _repeatable_ transforamations and why the focus of tidychef is modeling spatial relationships — how cells relate visually, not where they are.
+
+💡 Same script, radically different input—same output.
 
 ![preview](./preview2.png)
 
-Even when data changes (as it will if you're working with any kind of regular publicaiton) the _spatial relationships_ rarely change and typically only in ways that can be accounted for with a little care.
+Even when data changes (as it will if you're working with any kind of regular publication) the _spatial relationships_ rarely change and typically only in ways that can be accounted for with a little care.
 
 ## More Info
 
