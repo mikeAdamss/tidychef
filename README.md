@@ -21,30 +21,12 @@ It's designed for real-world use: publication tables, official statistics, inter
 
 Here's a short [AI generated analysis](https://mikeadamss.github.io/tidychef/ai-overview) of tidychef of how it relates to other tools in this space, it's probably worth a look if you're browsing and want to know if you ought to browse more.
 
-## Why use tidychef?
 
-🧠 Visual logic — Extract data based on how it's laid out (above, beside, under), not just raw coordinates or tidy input.
+## 📊 Simple Example: Extracting Spatially Structured Data
 
-🔁 Repeatable & reliable — Define logic once and reuse it across similar—but not identical—files.
+Consider this table where the data relationship are predominantly for human consumption (i.e they're defined by relative visual/spacial postitioning).
 
-💬 Beginner-friendly — Designed for analysts and non-programmers to write recipes in simple Python.
-
-📦 Interoperable — Outputs tidy pandas DataFrames or CSVs, ready for analysis in Python or R.
-
-🧱 Built for real-world data — Handles spreadsheets with multi-level headers, merged cells, footnotes, and visual groupings that traditional tools struggle with.
-
-🧑‍💼 Built for—and with—real data practitioners
-
-📈 Robust to evolving layouts: Rather than relying on fixed coordinates, tidychef locates data by interpreting spatial relationships, allowing your extraction scripts to flexibly handle new or shifted data.
-
-## Basic Example
-
-💡 Note: This example is intentionally simple — a clear demonstration of tidychef’s core concept.
-tidychef excels at extracting data from highly irregular, human-readable, and widely inconsistent spreadsheets (or other tabulated sources) — the kinds of things that break conventional tools.
-
-This example shows how to extract asset ownership data from a spreadsheet with multi-level column headers and repeating row groups — a layout that often challenges traditional tools or adds burdensome complexity.
-
-Imagine a sheet where relationships between cell values are primarily expressed spatially, not just by position.
+This is too messy for clean extraction with Pandas but just right for tidychef.
 
 ![](https://mikeadamss.github.io/tidychef/_images/bands-before.png)
 
@@ -100,25 +82,41 @@ _Note: image cropped for reasons of practicality._
 
 This is the bit you need to understand above all - here’s a preview I've made from running **the exact same script** against a _radically altered data source_. This is what we mean by _robust_ and _repeatable_ transformations and why the focus of tidychef is modeling spatial relationships — how cells relate visually, not where they are.
 
-💡 Same script, radically different input—same output.
+💡 Same script, radically different input—same output structure.
 
 ![preview](./docs/preview2.png)
 
 Even when data changes (as it will if you're working with any kind of regular publication) the _spatial relationships_ rarely change and typically only in ways that can be accounted for with a little care.
 
-## More Info
-
-Currently supported input formats are `xls`, `xlsx`, `ods` and `csv`. Though users can add additional formats relatively easily and without a codebase change being necessary.
-
-Tidychef is **designed to allow even novice python users or analysts to quickly become productive** but also has an advanced feature set and is designed to be readily and easily extended (adding new source of tabulated data, your own use case specific methods and filters and domain specific validation etc are all possible and documented in detail).
-
-Extensive [training materials, examples and technical documentation can be found here](https://mikeadamss.github.io/tidychef/intro.html#).
 
 ## Installation
 
 ```
 pip install tidychef
 ```
+
+
+## Why use tidychef?
+
+🧠 Visual logic — Extract data based on how it's laid out (above, beside, under), not just raw coordinates or tidy input.
+
+🔁 Repeatable & reliable — Define logic once and reuse it across similar—but not identical—files.
+
+💬 Beginner-friendly — Designed for analysts and non-programmers to write recipes in simple Python.
+
+📦 Interoperable — Outputs tidy pandas DataFrames or CSVs, ready for analysis in Python or R.
+
+🧱 Built for real-world data — Handles spreadsheets with multi-level headers, merged cells, footnotes, and visual groupings that traditional tools struggle with.
+
+🧑‍💼 Built for—and with—real data practitioners
+
+📈 Robust to evolving layouts: Rather than relying on fixed coordinates, tidychef locates data by interpreting spatial relationships, allowing your extraction scripts to flexibly handle new or shifted data.
+
+Currently supported input formats are `xls`, `xlsx`, `ods` and `csv`. Though users can add additional formats relatively easily and without a codebase change being necessary.
+
+Tidychef is **designed to allow even novice python users or analysts to quickly become productive** but also has an advanced feature set and is designed to be readily and easily extended (adding new source of tabulated data, your own use case specific methods and filters and domain specific validation etc are all possible and documented in detail).
+
+Extensive [training materials, examples and technical documentation can be found here](https://mikeadamss.github.io/tidychef/intro.html#).
 
 ## Acknowledgements
 
