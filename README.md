@@ -19,7 +19,7 @@ It's designed for real-world use: publication tables, official statistics, inter
 | A finance/data consultant | Repetitive report formatting with shifting structures        | Writing reusable “recipes” that adapt to visual changes      |
 | A data engineer           | Need to automate legacy spreadsheets                         | Building robust, declarative extractors in Python            |
 
-Here's a short [AI generated analysis](https://mikeadamss.github.io/tidychef/ai-overview) of tidychef of how it relates to other tools in this space, it's probably worth a look if you're browsing and want to know if you ought to browse more.
+Here's a short [AI generated analysis](https://mikeadamss.github.io/tidychef/ai-overview) of tidychef and how it relates to other tools in this space, it's probably worth a look if you're browsing and want to know if you ought to browse more.
 
 
 ## 📊 Simple Example: Extracting Spatially Structured Data
