@@ -1,44 +1,54 @@
 Traceback (most recent call last):
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 64, in single_nb_execution
-    **kwargs,
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 1204, in execute
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/nbclient/client.py", line 1319, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/util.py", line 84, in wrapped
-    return just_run(coro(*args, **kwargs))
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/util.py", line 62, in just_run
-    return loop.run_until_complete(coro)
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 158, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
     return future.result()
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 664, in async_execute
-    cell, index, execution_count=self.code_cells_executed + 1
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 965, in async_execute_cell
+           ^^^^^^^^^^^^^^^
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
     await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
 selection.shift(right)
 ------------------
 
-[0;31m---------------------------------------------------------------------------[0m
-[0;31mOutOfBoundsError[0m                          Traceback (most recent call last)
-[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_60428/2174711224.py[0m in [0;36m<module>[0;34m[0m
-[0;32m----> 1[0;31m [0mselection[0m[0;34m.[0m[0mshift[0m[0;34m([0m[0mright[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m
-[0;32m~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/tidychef/utils/decorators/dontmutate.py[0m in [0;36mwrapper[0;34m(self, *args, **kwargs)[0m
-[1;32m     22[0m     [0;32mdef[0m [0mwrapper[0m[0;34m([0m[0mself[0m[0;34m,[0m [0;34m*[0m[0margs[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     23[0m         [0mself[0m [0;34m=[0m [0mcopy[0m[0;34m.[0m[0mdeepcopy[0m[0;34m([0m[0mself[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;32m---> 24[0;31m         [0;32mreturn[0m [0mmethod[0m[0;34m([0m[0mself[0m[0;34m,[0m [0;34m*[0m[0margs[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     25[0m [0;34m[0m[0m
-[1;32m     26[0m     [0;32mreturn[0m [0mwrapper[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/tidychef/selection/selectable.py[0m in [0;36mshift[0;34m(self, direction_or_x, possibly_y)[0m
-[1;32m    334[0m         [0;32mif[0m [0mlen[0m[0;34m([0m[0mfound_cells[0m[0;34m)[0m [0;34m==[0m [0;36m0[0m [0;32mand[0m [0mlen[0m[0;34m([0m[0mwanted_cells[0m[0;34m)[0m [0;34m>[0m [0;36m0[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    335[0m             raise OutOfBoundsError(
-[0;32m--> 336[0;31m                 [0;34m"You are attempting to shift your selection "[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    337[0m                 [0;34m"entirely outside of the boundary of the table."[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    338[0m             )
+[31m---------------------------------------------------------------------------[39m
+[31mOutOfBoundsError[39m                          Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[6][39m[32m, line 1[39m
+[32m----> [39m[32m1[39m [43mselection[49m[43m.[49m[43mshift[49m[43m([49m[43mright[49m[43m)[49m
 
-[0;31mOutOfBoundsError[0m: You are attempting to shift your selection entirely outside of the boundary of the table.
-OutOfBoundsError: You are attempting to shift your selection entirely outside of the boundary of the table.
+[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/utils/decorators/dontmutate.py:24[39m, in [36mdontmutate.<locals>.wrapper[39m[34m(self, *args, **kwargs)[39m
+[32m     21[39m [38;5;129m@wraps[39m(method)
+[32m     22[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mwrapper[39m([38;5;28mself[39m, *args, **kwargs):
+[32m     23[39m     [38;5;28mself[39m = copy.deepcopy([38;5;28mself[39m)
+[32m---> [39m[32m24[39m     [38;5;28;01mreturn[39;00m [43mmethod[49m[43m([49m[38;5;28;43mself[39;49m[43m,[49m[43m [49m[43m*[49m[43margs[49m[43m,[49m[43m [49m[43m*[49m[43m*[49m[43mkwargs[49m[43m)[49m
+
+[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/selection/selectable.py:335[39m, in [36mSelectable.shift[39m[34m(self, direction_or_x, possibly_y)[39m
+[32m    332[39m found_cells = dfc.matching_xy_cells([38;5;28mself[39m.pcells, wanted_cells)
+[32m    334[39m [38;5;28;01mif[39;00m [38;5;28mlen[39m(found_cells) == [32m0[39m [38;5;129;01mand[39;00m [38;5;28mlen[39m(wanted_cells) > [32m0[39m:
+[32m--> [39m[32m335[39m     [38;5;28;01mraise[39;00m OutOfBoundsError(
+[32m    336[39m         [33m"[39m[33mYou are attempting to shift your selection [39m[33m"[39m
+[32m    337[39m         [33m"[39m[33mentirely outside of the boundary of the table.[39m[33m"[39m
+[32m    338[39m     )
+[32m    340[39m [38;5;28mself[39m.cells = found_cells
+[32m    342[39m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m possibly_y:
+
+[31mOutOfBoundsError[39m: You are attempting to shift your selection entirely outside of the boundary of the table.
 

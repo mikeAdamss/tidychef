@@ -1,19 +1,27 @@
 Traceback (most recent call last):
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 64, in single_nb_execution
-    **kwargs,
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 1204, in execute
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/nbclient/client.py", line 1319, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/util.py", line 84, in wrapped
-    return just_run(coro(*args, **kwargs))
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/util.py", line 62, in just_run
-    return loop.run_until_complete(coro)
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 158, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
     return future.result()
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 664, in async_execute
-    cell, index, execution_count=self.code_cells_executed + 1
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 965, in async_execute_cell
+           ^^^^^^^^^^^^^^^
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
     await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "/Users/michaeladams/.pyenv/versions/3.7.13/lib/python3.7/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
@@ -23,27 +31,29 @@ preview(codes, years, bounded="A4:H10")
 waffled_selection = years.waffle(right, codes)
 ------------------
 
-[0;31m---------------------------------------------------------------------------[0m
-[0;31mAmbiguousWaffleError[0m                      Traceback (most recent call last)
-[0;32m/var/folders/3q/wpcx20553xv0hpsjgtq_zl_m0000gp/T/ipykernel_60458/2135533438.py[0m in [0;36m<module>[0;34m[0m
-[1;32m      2[0m [0myears[0m [0;34m=[0m [0mtable[0m[0;34m.[0m[0mexcel_ref[0m[0;34m([0m[0;34m"C7:C10"[0m[0;34m)[0m[0;34m.[0m[0mlabel_as[0m[0;34m([0m[0;34m"Years"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      3[0m [0mpreview[0m[0;34m([0m[0mcodes[0m[0;34m,[0m [0myears[0m[0;34m,[0m [0mbounded[0m[0;34m=[0m[0;34m"A4:H10"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 4[0;31m [0mwaffled_selection[0m [0;34m=[0m [0myears[0m[0;34m.[0m[0mwaffle[0m[0;34m([0m[0mright[0m[0;34m,[0m [0mcodes[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m
-[0;32m~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/tidychef/utils/decorators/dontmutate.py[0m in [0;36mwrapper[0;34m(self, *args, **kwargs)[0m
-[1;32m     22[0m     [0;32mdef[0m [0mwrapper[0m[0;34m([0m[0mself[0m[0;34m,[0m [0;34m*[0m[0margs[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     23[0m         [0mself[0m [0;34m=[0m [0mcopy[0m[0;34m.[0m[0mdeepcopy[0m[0;34m([0m[0mself[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;32m---> 24[0;31m         [0;32mreturn[0m [0mmethod[0m[0;34m([0m[0mself[0m[0;34m,[0m [0;34m*[0m[0margs[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     25[0m [0;34m[0m[0m
-[1;32m     26[0m     [0;32mreturn[0m [0mwrapper[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/tidychef/selection/selectable.py[0m in [0;36mwaffle[0;34m(self, direction, additional_selection)[0m
-[1;32m    584[0m                 [0;32mif[0m [0many[0m[0;34m([0m[0;34m[[0m[0mx[0m [0;32mfor[0m [0mx[0m [0;32min[0m [0madditional_selection[0m [0;32mif[0m [0mx[0m[0;34m.[0m[0mx[0m [0;34m<=[0m [0mhighest_x[0m[0;34m][0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    585[0m                     raise AmbiguousWaffleError(
-[0;32m--> 586[0;31m                         [0;34m"When using waffle right, your additional selections must all "[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    587[0m                         [0;34m"be right of your initial selections."[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    588[0m                     )
+[31m---------------------------------------------------------------------------[39m
+[31mAmbiguousWaffleError[39m                      Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[5][39m[32m, line 4[39m
+[32m      2[39m years = table.excel_ref([33m"[39m[33mC7:C10[39m[33m"[39m).label_as([33m"[39m[33mYears[39m[33m"[39m)
+[32m      3[39m preview(codes, years, bounded=[33m"[39m[33mA4:H10[39m[33m"[39m)
+[32m----> [39m[32m4[39m waffled_selection = [43myears[49m[43m.[49m[43mwaffle[49m[43m([49m[43mright[49m[43m,[49m[43m [49m[43mcodes[49m[43m)[49m
 
-[0;31mAmbiguousWaffleError[0m: When using waffle right, your additional selections must all be right of your initial selections.
-AmbiguousWaffleError: When using waffle right, your additional selections must all be right of your initial selections.
+[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/utils/decorators/dontmutate.py:24[39m, in [36mdontmutate.<locals>.wrapper[39m[34m(self, *args, **kwargs)[39m
+[32m     21[39m [38;5;129m@wraps[39m(method)
+[32m     22[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mwrapper[39m([38;5;28mself[39m, *args, **kwargs):
+[32m     23[39m     [38;5;28mself[39m = copy.deepcopy([38;5;28mself[39m)
+[32m---> [39m[32m24[39m     [38;5;28;01mreturn[39;00m [43mmethod[49m[43m([49m[38;5;28;43mself[39;49m[43m,[49m[43m [49m[43m*[49m[43margs[49m[43m,[49m[43m [49m[43m*[49m[43m*[49m[43mkwargs[49m[43m)[49m
+
+[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/selection/selectable.py:585[39m, in [36mSelectable.waffle[39m[34m(self, direction, additional_selection)[39m
+[32m    583[39m     highest_x = dfc.maximum_x_offset([38;5;28mself[39m.cells)
+[32m    584[39m     [38;5;28;01mif[39;00m [38;5;28many[39m([x [38;5;28;01mfor[39;00m x [38;5;129;01min[39;00m additional_selection [38;5;28;01mif[39;00m x.x <= highest_x]):
+[32m--> [39m[32m585[39m         [38;5;28;01mraise[39;00m AmbiguousWaffleError(
+[32m    586[39m             [33m"[39m[33mWhen using waffle right, your additional selections must all [39m[33m"[39m
+[32m    587[39m             [33m"[39m[33mbe right of your initial selections.[39m[33m"[39m
+[32m    588[39m         )
+[32m    589[39m [38;5;28;01mif[39;00m direction.is_left:
+[32m    590[39m     lowest_x = dfc.minimum_x_offset([38;5;28mself[39m.cells)
+
+[31mAmbiguousWaffleError[39m: When using waffle right, your additional selections must all be right of your initial selections.
 

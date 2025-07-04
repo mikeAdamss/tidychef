@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>TidyData: Concatenation &#8212; Documentation</title>
   
@@ -15,52 +14,49 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'intermediate/concatenation';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -75,19 +71,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -109,12 +109,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -129,6 +137,9 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="../intro.html">
@@ -137,10 +148,22 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     <p class="title logo__title">Documentation</p>
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -154,7 +177,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../how-to-use-this-book.html">How To Use This Book</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../extensibility.html">Extensibility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quirks.html">Quirks</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../basics.html">Chapter 1: Basics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics.html">Chapter 1: Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../basics/acquire.html">Acquire</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/preview.html">Preview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-operators.html">Selection: Operators</a></li>
@@ -173,8 +196,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
-</li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intermediate.html">Chapter 2: Intermediate</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intermediate.html">Chapter 2: Intermediate</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="apply.html">Apply</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">TidyData: Concatenation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="iterating.html">Iterating Tables/Sheets</a></li>
@@ -188,15 +211,15 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="best-practice.html">Best Practice</a></li>
 <li class="toctree-l2"><a class="reference internal" href="time.html">Time</a></li>
 </ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../advanced.html">Chapter 3: Advanced</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../advanced.html">Chapter 3: Advanced</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../advanced/advanced-acquisition.html">Advanced Acquisition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../advanced/custom-selectables.html">Custom Selectables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../advanced/custom-data-sources.html">Custom Data Sources</a></li>
 </ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Chapter 4: Examples</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/basic/basic.html">Basic Examples</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Chapter 4: Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/basic/basic.html">Basic Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../examples/basic/bands.html">Bands</a></li>
 
 
@@ -214,8 +237,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="../examples/basic/cornavavirus-loneliness.html">Coronavirus: Loneliness</a></li>
 
 </ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/intermediate/intermediate.html">Intermediate Examples</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/intermediate/intermediate.html">Intermediate Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../examples/intermediate/human-development.html">Human Development</a></li>
 
 <li class="toctree-l3"><a class="reference internal" href="../examples/intermediate/household-debt.html">Household Debt Inequalities</a></li>
@@ -224,16 +247,16 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 </ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/validation/validation.html">Validation</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/validation/validation.html">Validation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../examples/validation/bands.html">Bands (with validation)</a></li>
 
 <li class="toctree-l3"><a class="reference internal" href="../examples/validation/oic-1a-table.html">Output In Construction: Table 1a (with validation)</a></li>
 
 </ul>
-</li>
+</details></li>
 </ul>
-</li>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../technical.html">Chapter 5: Technical Reference</a></li>
 </ul>
 
@@ -250,7 +273,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -259,14 +282,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -388,26 +411,28 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -444,25 +469,26 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="tidydata-concatenation">
-<h1>TidyData: Concatenation<a class="headerlink" href="#tidydata-concatenation" title="Permalink to this heading">#</a></h1>
+<h1>TidyData: Concatenation<a class="headerlink" href="#tidydata-concatenation" title="Link to this heading">#</a></h1>
 <p>This section details how you can concatenate multiple tidy data sheets together when you output them.</p>
 <section id="source-data">
-<h2>Source Data<a class="headerlink" href="#source-data" title="Permalink to this heading">#</a></h2>
+<h2>Source Data<a class="headerlink" href="#source-data" title="Link to this heading">#</a></h2>
 <p>The data source we’re using for these examples is shown below:</p>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p><span style="color:green">Note - this particular table has some very verbose headers we don’t care about, so we’ll be using <code class="docutils literal notranslate"><span class="pre">bounded=</span></code> to remove them from the previews as well as to show just the subset of data we’re working with.</span></p></th>
 </tr>
 </thead>
 </table>
+</div>
 <p>The <a class="reference external" href="https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx">full data source can be downloaded here</a>. We’ll be using th 10th tab named “Table 3c”.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
-<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tidychef</span><span class="w"> </span><span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tidychef.selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">XlsxSelectable</span>
 
 <span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3c&quot;</span><span class="p">)</span>
 <span class="n">preview</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A4:H10&quot;</span><span class="p">)</span>
@@ -518,7 +544,7 @@ document.write(`
 </div>
 </section>
 <section id="the-two-sources">
-<h2>The “Two” Sources<a class="headerlink" href="#the-two-sources" title="Permalink to this heading">#</a></h2>
+<h2>The “Two” Sources<a class="headerlink" href="#the-two-sources" title="Link to this heading">#</a></h2>
 <p>To keep these examples reasonably brief we’re going to create two TidyData class from the above as follow:</p>
 <ul class="simple">
 <li><p>one with observations from B7 though H8</p></li>
@@ -526,10 +552,10 @@ document.write(`
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tidychef</span> <span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
-<span class="kn">from</span> <span class="nn">tidychef.direction</span> <span class="kn">import</span> <span class="n">right</span><span class="p">,</span> <span class="n">down</span>
-<span class="kn">from</span> <span class="nn">tidychef.output</span> <span class="kn">import</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span>
-<span class="kn">from</span> <span class="nn">tidychef.selection</span> <span class="kn">import</span> <span class="n">XlsxSelectable</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tidychef</span><span class="w"> </span><span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tidychef.direction</span><span class="w"> </span><span class="kn">import</span> <span class="n">right</span><span class="p">,</span> <span class="n">down</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tidychef.output</span><span class="w"> </span><span class="kn">import</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tidychef.selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">XlsxSelectable</span>
 
 <span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3c&quot;</span><span class="p">)</span>
 
@@ -687,7 +713,7 @@ document.write(`
 </div>
 </section>
 <section id="create-and-preview-tidydata-objects">
-<h2>Create and preview TidyData objects<a class="headerlink" href="#create-and-preview-tidydata-objects" title="Permalink to this heading">#</a></h2>
+<h2>Create and preview TidyData objects<a class="headerlink" href="#create-and-preview-tidydata-objects" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tidydata1</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
@@ -786,7 +812,7 @@ document.write(`
 </div>
 </section>
 <section id="concatenation-via">
-<h2>Concatenation via ‘+’<a class="headerlink" href="#concatenation-via" title="Permalink to this heading">#</a></h2>
+<h2>Concatenation via ‘+’<a class="headerlink" href="#concatenation-via" title="Link to this heading">#</a></h2>
 <p>The simplest way to concatenate two TidyData objects is just to add them together.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -834,7 +860,7 @@ document.write(`
 </div>
 </section>
 <section id="concatenation-via-a-list">
-<h2>Concatenation via a list<a class="headerlink" href="#concatenation-via-a-list" title="Permalink to this heading">#</a></h2>
+<h2>Concatenation via a list<a class="headerlink" href="#concatenation-via-a-list" title="Link to this heading">#</a></h2>
 <p>The next method is to use the <code class="docutils literal notranslate"><span class="pre">TidyData.from_tidy_list()</span></code> constructor.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -882,7 +908,7 @@ document.write(`
 </div>
 </section>
 <section id="concatenation-via-arguments">
-<h2>Concatenation via arguments<a class="headerlink" href="#concatenation-via-arguments" title="Permalink to this heading">#</a></h2>
+<h2>Concatenation via arguments<a class="headerlink" href="#concatenation-via-arguments" title="Link to this heading">#</a></h2>
 <p>Lastly, you can pass in objects of class TidyData as positional arguments to the <code class="docutils literal notranslate"><span class="pre">TidyData.from_tidy()</span></code> constructor.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -930,7 +956,7 @@ document.write(`
 </div>
 </section>
 <section id="misaligned-headers-error">
-<h2>Misaligned Headers Error<a class="headerlink" href="#misaligned-headers-error" title="Permalink to this heading">#</a></h2>
+<h2>Misaligned Headers Error<a class="headerlink" href="#misaligned-headers-error" title="Link to this heading">#</a></h2>
 <p>Where concatenating together TidyData the column headers must match precisely.</p>
 <p>The following is an example of what happens if you try and concatenate two TidyData classes with misaligned headers.</p>
 <div class="cell docutils container">
@@ -1039,36 +1065,48 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">MisalignedHeadersError</span><span class="g g-Whitespace">                    </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">3</span><span class="n">q</span><span class="o">/</span><span class="n">wpcx20553xv0hpsjgtq_zl_m0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_60852</span><span class="o">/</span><span class="mf">2463524614.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Now we try and concatenate them - and get an error!</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> 
 <span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">tidydata1</span> <span class="o">+</span> <span class="n">tidydata2</span>
 
-<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/tidychef/utils/decorators/dontmutate.py</span> in <span class="ni">wrapper</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span>         <span class="bp">self</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">24</span>         <span class="k">return</span> <span class="n">method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span> 
-<span class="g g-Whitespace">     </span><span class="mi">26</span>     <span class="k">return</span> <span class="n">wrapper</span>
+<span class="nn">File ~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/utils/decorators/dontmutate.py:24,</span> in <span class="ni">dontmutate.&lt;locals&gt;.wrapper</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="nd">@wraps</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span>     <span class="bp">self</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">24</span>     <span class="k">return</span> <span class="n">method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="nn">~/.pyenv/versions/3.7.13/lib/python3.7/site-packages/tidychef/output/tidydata.py</span> in <span class="ni">__add__</span><span class="nt">(self, other_tidy_data)</span>
-<span class="g g-Whitespace">    </span><span class="mi">206</span>                 <span class="n">TidyData2</span> <span class="n">headers</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">207</span>                 <span class="p">{</span><span class="n">other_tidy_data</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
-<span class="ne">--&gt; </span><span class="mi">208</span>             <span class="s2">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">209</span><span class="s2">             )</span>
-<span class="g g-Whitespace">    </span><span class="mi">210</span><span class="s2"> </span>
+<span class="nn">File ~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/output/tidydata.py:197,</span> in <span class="ni">TidyData.__add__</span><span class="nt">(self, other_tidy_data)</span>
+<span class="g g-Whitespace">    </span><span class="mi">194</span> <span class="c1"># Error if we&#39;re joining two TidyData objects</span>
+<span class="g g-Whitespace">    </span><span class="mi">195</span> <span class="c1"># with different headers</span>
+<span class="g g-Whitespace">    </span><span class="mi">196</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">other_tidy_data</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+<span class="ne">--&gt; </span><span class="mi">197</span>     <span class="k">raise</span> <span class="n">MisalignedHeadersError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">198</span>         <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">199</span><span class="s2">         You are attempting to sum two tidy data</span>
+<span class="g g-Whitespace">    </span><span class="mi">200</span><span class="s2">         outputs but they do not have the same</span>
+<span class="g g-Whitespace">    </span><span class="mi">201</span><span class="s2">         column headers.</span>
+<span class="g g-Whitespace">    </span><span class="mi">202</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">203</span><span class="s2">         TidyData1 headers:</span>
+<span class="g g-Whitespace">    </span><span class="mi">204</span><span class="s2">         </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span>
+<span class="g g-Whitespace">    </span><span class="mi">205</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">206</span><span class="s2">         TidyData2 headers:</span>
+<span class="g g-Whitespace">    </span><span class="mi">207</span><span class="s2">         </span><span class="si">{</span><span class="n">other_tidy_data</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span>
+<span class="g g-Whitespace">    </span><span class="mi">208</span><span class="s2">     &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">209</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">211</span> <span class="c1"># Since the headers match, join all but the header</span>
+<span class="g g-Whitespace">    </span><span class="mi">212</span> <span class="c1"># row from the new source</span>
+<span class="g g-Whitespace">    </span><span class="mi">213</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">+=</span> <span class="n">other_tidy_data</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
 
 <span class="ne">MisalignedHeadersError</span>: 
-<span class="s2">                You are attempting to sum two tidy data</span>
-<span class="s2">                outputs but they do not have the same</span>
-<span class="s2">                column headers.</span>
+                <span class="n">You</span> <span class="n">are</span> <span class="n">attempting</span> <span class="n">to</span> <span class="nb">sum</span> <span class="n">two</span> <span class="n">tidy</span> <span class="n">data</span>
+                <span class="n">outputs</span> <span class="n">but</span> <span class="n">they</span> <span class="n">do</span> <span class="ow">not</span> <span class="n">have</span> <span class="n">the</span> <span class="n">same</span>
+                <span class="n">column</span> <span class="n">headers</span><span class="o">.</span>
 
-<span class="s2">                TidyData1 headers:</span>
-<span class="s2">                [(VIRTUAL CELL, value:&quot;Observations&quot;), (VIRTUAL CELL, value:&quot;Period&quot;), (VIRTUAL CELL, value:&quot;Dataset Identifier Code&quot;), (VIRTUAL CELL, value:&quot;Houses&quot;)]</span>
+                <span class="n">TidyData1</span> <span class="n">headers</span><span class="p">:</span>
+                <span class="p">[(</span><span class="n">VIRTUAL</span> <span class="n">CELL</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span><span class="s2">&quot;Observations&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">VIRTUAL</span> <span class="n">CELL</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span><span class="s2">&quot;Period&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">VIRTUAL</span> <span class="n">CELL</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span><span class="s2">&quot;Dataset Identifier Code&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">VIRTUAL</span> <span class="n">CELL</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span><span class="s2">&quot;Houses&quot;</span><span class="p">)]</span>
 
-<span class="s2">                TidyData2 headers:</span>
-<span class="s2">                [(VIRTUAL CELL, value:&quot;Value&quot;), (VIRTUAL CELL, value:&quot;Period&quot;), (VIRTUAL CELL, value:&quot;Dataset Identifier Code&quot;), (VIRTUAL CELL, value:&quot;Houses&quot;)]</span>
-<span class="s2">            </span>
+                <span class="n">TidyData2</span> <span class="n">headers</span><span class="p">:</span>
+                <span class="p">[(</span><span class="n">VIRTUAL</span> <span class="n">CELL</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span><span class="s2">&quot;Value&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">VIRTUAL</span> <span class="n">CELL</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span><span class="s2">&quot;Period&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">VIRTUAL</span> <span class="n">CELL</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span><span class="s2">&quot;Dataset Identifier Code&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">VIRTUAL</span> <span class="n">CELL</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span><span class="s2">&quot;Houses&quot;</span><span class="p">)]</span>
+            
 </pre></div>
 </div>
 </div>
@@ -1101,11 +1139,10 @@ document.write(`
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer d-print-none">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="apply.html"
@@ -1125,10 +1162,7 @@ document.write(`
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1136,6 +1170,7 @@ document.write(`
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1171,9 +1206,10 @@ By https://github.com/mikeAdamss
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -1197,8 +1233,8 @@ By https://github.com/mikeAdamss
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
