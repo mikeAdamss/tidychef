@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Analysis: The Tidychef Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutral (Slate & Zinc) -->
+    <!-- Application Structure Plan: A thematic, single-page scrolling application that tells a story. It starts with a high-level summary (Hero), explains the core problem it solves, details its capabilities, provides an interactive comparison to alternatives, identifies the target audience, and ends with a call to action. This narrative flow is more engaging and intuitive for understanding the project's unique position than a simple report layout. Key interactions include toggling competitor details and a summary radar chart to provide both at-a-glance and in-depth comparisons. -->
+    <!-- Visualization & Content Choices: 
+        - Hero Diagram (Messy -> Tidy): Goal: Inform. Method: HTML/CSS to visually anchor the core concept immediately.
+        - Problem/Solution Tables: Goal: Compare. Method: Side-by-side HTML tables to clearly show the "before and after" state, reinforcing the project's purpose.
+        - Capabilities Cards: Goal: Organize. Method: A flexbox grid of cards to break down features into digestible chunks.
+        - Comparison Radar Chart: Goal: Compare. Method: Chart.js Canvas to offer a quick, multi-dimensional visual summary of how Tidychef fits into the tool ecosystem.
+        - Competitor Toggles: Goal: Compare. Method: JS-powered toggles for detailed pros/cons. Interaction allows users to self-select the information they want, reducing clutter.
+        - User Persona Icons: Goal: Inform. Method: HTML/CSS with Unicode icons to quickly communicate the target audience.
+        - Justification: This mix of static visuals, diagrams, and interactive elements (charts, toggles) serves different learning styles. It provides a high-level overview while allowing users to drill down into specifics, creating a comprehensive and user-driven exploration experience. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+            color: #18181b; /* zinc-900 */
+        }
+        .nav-link {
+            transition: color 0.3s ease, border-color 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom-color: #0ea5e9; /* sky-500 */
+        }
+        .comparison-btn {
+            transition: all 0.3s ease;
+        }
+        .comparison-btn.active {
+            background-color: #0ea5e9; /* sky-500 */
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 40vh;
+            width: 100%;
+            max-width: 500px;
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="text-xl font-bold text-slate-800">Tidychef Analysis</div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#problem" class="nav-link pb-1">The Problem</a>
+                <a href="#capabilities" class="nav-link pb-1">Capabilities</a>
+                <a href="#comparison" class="nav-link pb-1">Comparison</a>
+                <a href="#value" class="nav-link pb-1">Value</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-slate-900 leading-tight">From Messy Spreadsheets<br>to Tidy Data.</h1>
+                <p class="mt-6 text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
+                    Tidychef is an open-source Python library designed to solve a common, frustrating problem: extracting clean, usable data from spreadsheets that were made for humans, not machines. It bridges the critical gap between visually complex tables and analysis-ready dataframes.
+                </p>
+                <div class="mt-12 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-slate-700">
+                    <div class="bg-rose-100/50 border border-rose-200 p-4 rounded-lg shadow-sm w-full md:w-auto">
+                        <h3 class="font-semibold mb-2 text-rose-800">Messy Spreadsheet</h3>
+                        <div class="font-mono text-xs text-left p-2 bg-white rounded">
+                            <p>Region: North</p>
+                            <p>Product | Q1 Sales | Q2 Sales</p>
+                            <p>Apples  | 100        | 120</p>
+                            <p>Merged Header for Oranges | 150</p>
+                        </div>
+                    </div>
+                    <div class="text-4xl text-sky-500 font-light transform md:rotate-0 rotate-90">→</div>
+                     <div class="bg-emerald-100/50 border border-emerald-200 p-4 rounded-lg shadow-sm w-full md:w-auto">
+                        <h3 class="font-semibold mb-2 text-emerald-800">Tidy Dataframe</h3>
+                        <div class="font-mono text-xs text-left p-2 bg-white rounded">
+                            <p>Region | Product | Quarter | Sales</p>
+                            <p>North  | Apples  | Q1      | 100</p>
+                            <p>North  | Apples  | Q2      | 120</p>
+                            <p>North  | Oranges | Q2      | 150</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+<section id="problem" class="py-16 md:py-24">
+  <div class="container mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-8 items-start">
+      <!-- Problem Data -->
+      <div class="bg-white p-6 rounded-lg shadow-lg border border-slate-200">
+        <h3 class="font-bold text-xl mb-4 text-rose-600">Example Problem Data</h3>
+        <p class="text-slate-600 mb-4">
+          Two separate blocks (NHS Trust A & City Coundil), each with sub-columns (Budget, Staff Projections) and with non standard indication of metrics — human readable, but parsing is painful.
+        </p>
+
+<table class="w-full border-collapse border border-slate-300 text-sm text-center mb-8">
+  <tbody>
+    <tr>
+      <td colspan="10" class="border border-slate-300 p-2 bg-white"></td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2 bg-white"></td>
+      <td class="border border-slate-300 p-2 bg-white"></td>
+      <td class="border border-slate-300 p-2 bg-slate-100 font-semibold">Budget</td>
+      <td class="border border-slate-300 p-2 bg-slate-100 font-semibold">Staff</td>
+      <td class="border border-slate-300 p-2 bg-slate-100 font-semibold">Projects</td>
+      <td class="border border-slate-300 p-2 bg-white"></td>
+      <td class="border border-slate-300 p-2 bg-white"></td>
+      <td class="border border-slate-300 p-2 bg-slate-100 font-semibold">Budget</td>
+      <td class="border border-slate-300 p-2 bg-slate-100 font-semibold">Staff</td>
+      <td class="border border-slate-300 p-2 bg-slate-100 font-semibold">Projects</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2 bg-white"></td>
+      <td class="border border-slate-300 p-2 bg-slate-200 font-semibold">NHS Trust A</td>
+      <td colspan="3" class="border border-slate-300 p-2 bg-white"></td>
+      <td class="border border-slate-300 p-2 bg-white"></td>
+      <td class="border border-slate-300 p-2 bg-slate-200 font-semibold">City Council</td>
+      <td colspan="3" class="border border-slate-300 p-2 bg-white"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td class="border border-slate-300 p-2">Finance</td>
+      <td class="border border-slate-300 p-2">12M</td>
+      <td class="border border-slate-300 p-2">120</td>
+      <td class="border border-slate-300 p-2">15</td>
+      <td></td>
+      <td class="border border-slate-300 p-2">Planning</td>
+      <td class="border border-slate-300 p-2">8M</td>
+      <td class="border border-slate-300 p-2">80</td>
+      <td class="border border-slate-300 p-2">12</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td class="border border-slate-300 p-2">HR</td>
+      <td class="border border-slate-300 p-2">6M</td>
+      <td class="border border-slate-300 p-2">60</td>
+      <td class="border border-slate-300 p-2">8</td>
+      <td></td>
+      <td class="border border-slate-300 p-2">Housing</td>
+      <td class="border border-slate-300 p-2">5M</td>
+      <td class="border border-slate-300 p-2">45</td>
+      <td class="border border-slate-300 p-2">10</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td class="border border-slate-300 p-2">IT</td>
+      <td class="border border-slate-300 p-2">4M</td>
+      <td class="border border-slate-300 p-2">40</td>
+      <td class="border border-slate-300 p-2">6</td>
+      <td></td>
+      <td class="border border-slate-300 p-2">Transport</td>
+      <td class="border border-slate-300 p-2">3M</td>
+      <td class="border border-slate-300 p-2">30</td>
+      <td class="border border-slate-300 p-2">7</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td class="border border-slate-300 p-2">Operations</td>
+      <td class="border border-slate-300 p-2">10M</td>
+      <td class="border border-slate-300 p-2">100</td>
+      <td class="border border-slate-300 p-2">20</td>
+      <td></td>
+      <td class="border border-slate-300 p-2">Environmental</td>
+      <td class="border border-slate-300 p-2">2M</td>
+      <td class="border border-slate-300 p-2">20</td>
+      <td class="border border-slate-300 p-2">5</td>
+    </tr>
+  </tbody>
+</table>
+
+
+      </div>
+      <!-- Tidychef Solution -->
+      <div class="bg-white p-6 rounded-lg shadow-lg border border-slate-200">
+        <h3 class="font-bold text-xl mb-4 text-emerald-600">The Tidychef Solution</h3>
+        <p class="text-slate-600 mb-4">
+            A long-form tidy output with columns: Band, Name, Asset, Value. The spatial structure is programmatically expressed through tidychef’s declarative API, making this complex layout easy to reshape.
+        </p>
+<table class="w-full border-collapse border border-slate-300 text-sm text-center">
+  <thead>
+    <tr class="bg-slate-100">
+      <th class="border border-slate-300 p-2">Organisation</th>
+      <th class="border border-slate-300 p-2">Department</th>
+      <th class="border border-slate-300 p-2">Metric</th>
+      <th class="border border-slate-300 p-2">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="border border-slate-300 p-2">NHS Trust A</td><td class="border border-slate-300 p-2">Finance</td><td class="border border-slate-300 p-2">Budget</td><td class="border border-slate-300 p-2">12M</td></tr>
+    <tr><td class="border border-slate-300 p-2">NHS Trust A</td><td class="border border-slate-300 p-2">Finance</td><td class="border border-slate-300 p-2">Staff</td><td class="border border-slate-300 p-2">120</td></tr>
+    <tr><td class="border border-slate-300 p-2">NHS Trust A</td><td class="border border-slate-300 p-2">Finance</td><td class="border border-slate-300 p-2">Projects</td><td class="border border-slate-300 p-2">15</td></tr>
+
+    <tr><td class="border border-slate-300 p-2">NHS Trust A</td><td class="border border-slate-300 p-2">HR</td><td class="border border-slate-300 p-2">Budget</td><td class="border border-slate-300 p-2">6M</td></tr>
+    <tr><td class="border border-slate-300 p-2">NHS Trust A</td><td class="border border-slate-300 p-2">HR</td><td class="border border-slate-300 p-2">Staff</td><td class="border border-slate-300 p-2">60</td></tr>
+    <tr><td class="border border-slate-300 p-2">NHS Trust A</td><td class="border border-slate-300 p-2">HR</td><td class="border border-slate-300 p-2">Projects</td><td class="border border-slate-300 p-2">8</td></tr>
+
+    <tr><td class="border border-slate-300 p-2">NHS Trust A</td><td class="border border-slate-300 p-2">IT</td><td class="border border-slate-300 p-2">Budget</td><td class="border border-slate-300 p-2">4M</td></tr>
+    <tr><td class="border border-slate-300 p-2">NHS Trust A</td><td class="border border-slate-300 p-2">IT</td><td class="border border-slate-300 p-2">Staff</td><td class="border border-slate-300 p-2">40</td></tr>
+    <tr><td class="border border-slate-300 p-2">NHS Trust A</td><td class="border border-slate-300 p-2">IT</td><td class="border border-slate-300 p-2">Projects</td><td class="border border-slate-300 p-2">6</td></tr>
+
+    <tr><td class="border border-slate-300 p-2">NHS Trust A</td><td class="border border-slate-300 p-2">Operations</td><td class="border border-slate-300 p-2">Budget</td><td class="border border-slate-300 p-2">10M</td></tr>
+    <tr><td class="border border-slate-300 p-2">NHS Trust A</td><td class="border border-slate-300 p-2">Operations</td><td class="border border-slate-300 p-2">Staff</td><td class="border border-slate-300 p-2">100</td></tr>
+    <tr><td class="border border-slate-300 p-2">NHS Trust A</td><td class="border border-slate-300 p-2">Operations</td><td class="border border-slate-300 p-2">Projects</td><td class="border border-slate-300 p-2">20</td></tr>
+
+    <tr><td class="border border-slate-300 p-2">City Council</td><td class="border border-slate-300 p-2">Planning</td><td class="border border-slate-300 p-2">Budget</td><td class="border border-slate-300 p-2">8M</td></tr>
+    <tr><td class="border border-slate-300 p-2">City Council</td><td class="border border-slate-300 p-2">Planning</td><td class="border border-slate-300 p-2">Staff</td><td class="border border-slate-300 p-2">80</td></tr>
+    <tr><td class="border border-slate-300 p-2">City Council</td><td class="border border-slate-300 p-2">Planning</td><td class="border border-slate-300 p-2">Projects</td><td class="border border-slate-300 p-2">12</td></tr>
+
+    <tr><td class="border border-slate-300 p-2">City Council</td><td class="border border-slate-300 p-2">Housing</td><td class="border border-slate-300 p-2">Budget</td><td class="border border-slate-300 p-2">5M</td></tr>
+    <tr><td class="border border-slate-300 p-2">City Council</td><td class="border border-slate-300 p-2">Housing</td><td class="border border-slate-300 p-2">Staff</td><td class="border border-slate-300 p-2">45</td></tr>
+    <tr><td class="border border-slate-300 p-2">City Council</td><td class="border border-slate-300 p-2">Housing</td><td class="border border-slate-300 p-2">Projects</td><td class="border border-slate-300 p-2">10</td></tr>
+
+    <tr><td class="border border-slate-300 p-2">City Council</td><td class="border border-slate-300 p-2">Transport</td><td class="border border-slate-300 p-2">Budget</td><td class="border border-slate-300 p-2">3M</td></tr>
+    <tr><td class="border border-slate-300 p-2">City Council</td><td class="border border-slate-300 p-2">Transport</td><td class="border border-slate-300 p-2">Staff</td><td class="border border-slate-300 p-2">30</td></tr>
+    <tr><td class="border border-slate-300 p-2">City Council</td><td class="border border-slate-300 p-2">Transport</td><td class="border border-slate-300 p-2">Projects</td><td class="border border-slate-300 p-2">7</td></tr>
+
+    <tr><td class="border border-slate-300 p-2">City Council</td><td class="border border-slate-300 p-2">Environmental</td><td class="border border-slate-300 p-2">Budget</td><td class="border border-slate-300 p-2">2M</td></tr>
+    <tr><td class="border border-slate-300 p-2">City Council</td><td class="border border-slate-300 p-2">Environmental</td><td class="border border-slate-300 p-2">Staff</td><td class="border border-slate-300 p-2">20</td></tr>
+    <tr><td class="border border-slate-300 p-2">City Council</td><td class="border border-slate-300 p-2">Environmental</td><td class="border border-slate-300 p-2">Projects</td><td class="border border-slate-300 p-2">5</td></tr>
+  </tbody>
+</table>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+        <section id="capabilities" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Core Capabilities</h2>
+                    <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
+                        Tidychef provides a declarative API to handle the most common pitfalls of messy spreadsheets.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200 text-center">
+                        <div class="text-4xl mb-4">🗺️</div>
+                        <h3 class="font-semibold text-lg mb-2">Visual Selection</h3>
+                        <p class="text-slate-600 text-sm">Select data cells based on their spatial relationship to headers (e.g., "all cells to the right of 'Year' and below 'Sales'").</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200 text-center">
+                        <div class="text-4xl mb-4">🔄</div>
+                        <h3 class="font-semibold text-lg mb-2">Reproducible Pipelines</h3>
+                        <p class="text-slate-600 text-sm">Define a repeatable recipe for cleaning a specific report format, making data pipelines robust and easy to update.</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200 text-center">
+                        <div class="text-4xl mb-4">📦</div>
+                        <h3 class="font-semibold text-lg mb-2">Multi-Format Support</h3>
+                        <p class="text-slate-600 text-sm">Works out-of-the-box with various spreadsheet formats including `.xls`, `.xlsx`, `.ods`, and `.csv`.</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200 text-center">
+                        <div class="text-4xl mb-4">🤝</div>
+                        <h3 class="font-semibold text-lg mb-2">Pandas Integration</h3>
+                        <p class="text-slate-600 text-sm">Seamlessly integrates with the data science ecosystem by outputting clean data directly into a Pandas DataFrame.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="comparison" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Competitive Landscape</h2>
+                    <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
+                        Tidychef fills a specific niche that other popular tools don't fully address. See how it compares.
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-5 gap-8">
+                    <div class="lg:col-span-2">
+                        <p class="text-slate-700 font-medium mb-4">The radar chart below visualizes the strengths of each tool across key areas. Tidychef excels at programmatic, visual-based wrangling, a unique combination.</p>
+                        <div class="bg-white p-4 rounded-lg shadow-lg border border-slate-200">
+                             <div class="chart-container">
+                                <canvas id="comparisonChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-3">
+                         <p class="text-slate-700 font-medium mb-4">Select a tool to compare its specific pros and cons against Tidychef.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <button class="comparison-btn active px-4 py-2 bg-white border border-slate-300 rounded-full text-sm font-medium text-slate-700" data-tool="openrefine">OpenRefine</button>
+                            <button class="comparison-btn px-4 py-2 bg-white border border-slate-300 rounded-full text-sm font-medium text-slate-700" data-tool="pandas">Pandas</button>
+                            <button class="comparison-btn px-4 py-2 bg-white border border-slate-300 rounded-full text-sm font-medium text-slate-700" data-tool="tabula">Tabula</button>
+                        </div>
+
+                        <div id="comparison-details" class="bg-white p-6 rounded-lg shadow-lg border border-slate-200 min-h-[300px]">
+                            <div class="comparison-content" id="content-openrefine">
+                                <h3 class="font-bold text-xl mb-3">vs. OpenRefine</h3>
+                                <div class="grid md:grid-cols-2 gap-6 text-sm">
+                                    <div>
+                                        <h4 class="font-semibold text-emerald-700 mb-1">Pros of Tidychef</h4>
+                                        <ul class="list-disc list-inside space-y-1 text-slate-600">
+                                            <li>Fully programmatic and scriptable</li>
+                                            <li>Ideal for automated, reproducible pipelines</li>
+                                            <li>Version-controllable (part of a codebase)</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-rose-700 mb-1">Cons of Tidychef</h4>
+                                        <ul class="list-disc list-inside space-y-1 text-slate-600">
+                                            <li>Requires Python knowledge</li>
+                                            <li>Less interactive/visual for exploration</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comparison-content hidden" id="content-pandas">
+                                <h3 class="font-bold text-xl mb-3">vs. Pandas</h3>
+                                <div class="grid md:grid-cols-2 gap-6 text-sm">
+                                    <div>
+                                        <h4 class="font-semibold text-emerald-700 mb-1">Pros of Tidychef</h4>
+                                        <ul class="list-disc list-inside space-y-1 text-slate-600">
+                                            <li>Handles visually complex layouts Pandas can't</li>
+                                            <li>Acts as a vital preprocessing step *for* Pandas</li>
+                                            <li>Declarative API for visual structure</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-rose-700 mb-1">Cons of Tidychef</h4>
+                                        <ul class="list-disc list-inside space-y-1 text-slate-600">
+                                            <li>Not a general-purpose data manipulation tool</li>
+                                            <li>Focused solely on extraction and reshaping</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comparison-content hidden" id="content-tabula">
+                               <h3 class="font-bold text-xl mb-3">vs. Tabula</h3>
+                                <div class="grid md:grid-cols-2 gap-6 text-sm">
+                                    <div>
+                                        <h4 class="font-semibold text-emerald-700 mb-1">Pros of Tidychef</h4>
+                                        <ul class="list-disc list-inside space-y-1 text-slate-600">
+                                            <li>Supports Excel, ODS, and CSV files</li>
+                                            <li>More powerful programmatic control</li>
+                                            <li>Integrates into larger Python workflows</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-rose-700 mb-1">Cons of Tidychef</h4>
+                                        <ul class="list-disc list-inside space-y-1 text-slate-600">
+                                            <li>Does not handle PDF files</li>
+                                            <li>Has a steeper learning curve than Tabula's GUI</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="value" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Value Proposition & Adoption Potential</h2>
+                     <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
+                        By focusing on a well-defined, common problem, Tidychef offers significant value to a range of data professionals, giving it strong potential for adoption.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="font-semibold text-xl mb-4">Target User Base</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="bg-sky-100 text-sky-600 p-3 rounded-full text-2xl">📊</div>
+                                <div>
+                                    <h4 class="font-medium">Data Analysts & Scientists</h4>
+                                    <p class="text-slate-600">Who need to quickly turn messy source files into analyzable data.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="bg-sky-100 text-sky-600 p-3 rounded-full text-2xl">⚙️</div>
+                                <div>
+                                    <h4 class="font-medium">Data Engineers</h4>
+                                    <p class="text-slate-600">Building robust and automated ETL/ELT pipelines from unreliable sources.</p>
+                                </div>
+                            </div>
+                             <div class="flex items-center gap-4">
+                                <div class="bg-sky-100 text-sky-600 p-3 rounded-full text-2xl">🏛️</div>
+                                <div>
+                                    <h4 class="font-medium">Government & Research</h4>
+                                    <p class="text-slate-600">Working with public data often released in complex spreadsheet formats.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <div>
+                        <h3 class="font-semibold text-xl mb-4">Key to Adoption</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="bg-sky-100 text-sky-600 p-3 rounded-full text-2xl">🎯</div>
+                                <div>
+                                    <h4 class="font-medium">Niche Focus</h4>
+                                    <p class="text-slate-600">It solves one problem exceptionally well, making it a clear choice for the task.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="bg-sky-100 text-sky-600 p-3 rounded-full text-2xl">🧩</div>
+                                <div>
+                                    <h4 class="font-medium">Ecosystem Fit</h4>
+                                    <p class="text-slate-600">It doesn't seek to replace Pandas, but to complement it, easing adoption.</p>
+                                </div>
+                            </div>
+                             <div class="flex items-center gap-4">
+                                <div class="bg-sky-100 text-sky-600 p-3 rounded-full text-2xl">📚</div>
+                                <div>
+                                    <h4 class="font-medium">Documentation</h4>
+                                    <p class="text-slate-600">Clear examples and training materials will be crucial for user onboarding.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-800 text-white">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p class="text-slate-300">Ready to start cleaning data?</p>
+            <a href="https://github.com/mikeAdamss/tidychef" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                View Tidychef on GitHub
+            </a>
+            <p class="text-sm text-slate-400 mt-6">This interactive analysis was generated to assess the project's potential.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Comparison Chart
+            const ctx = document.getElementById('comparisonChart').getContext('2d');
+            const comparisonChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        'Visual Wrangling', 
+                        'Programmatic', 
+                        'General Purpose', 
+                        'Interactive GUI', 
+                        'Format Support'
+                    ],
+                    datasets: [{
+                        label: 'Tidychef',
+                        data: [5, 5, 1, 1, 4],
+                        backgroundColor: 'rgba(14, 165, 233, 0.2)',
+                        borderColor: 'rgb(14, 165, 233)',
+                        pointBackgroundColor: 'rgb(14, 165, 233)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(14, 165, 233)'
+                    }, {
+                        label: 'OpenRefine',
+                        data: [3, 2, 3, 5, 4],
+                        backgroundColor: 'rgba(236, 72, 153, 0.2)',
+                        borderColor: 'rgb(236, 72, 153)',
+                        pointBackgroundColor: 'rgb(236, 72, 153)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(236, 72, 153)'
+                    },
+                    {
+                        label: 'Pandas',
+                        data: [1, 5, 5, 1, 5],
+                        backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                        borderColor: 'rgb(245, 158, 11)',
+                        pointBackgroundColor: 'rgb(245, 158, 11)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(245, 158, 11)'
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            pointLabels: {
+                                font: {
+                                    size: 12
+                                },
+                                color: '#334155'
+                            },
+                            ticks: {
+                                backdropColor: 'rgba(255, 255, 255, 0.75)',
+                                stepSize: 1,
+                                max: 5,
+                                min: 0
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                }
+            });
+
+            // Comparison Toggles
+            const buttons = document.querySelectorAll('.comparison-btn');
+            const contents = document.querySelectorAll('.comparison-content');
+
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tool = button.dataset.tool;
+                    
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    contents.forEach(content => {
+                        if (content.id === `content-${tool}`) {
+                            content.classList.remove('hidden');
+                        } else {
+                            content.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            // Nav link active state on scroll
+            const sections = document.querySelectorAll('main section');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.toggle('active', link.getAttribute('href').substring(1) === entry.target.id);
+                        });
+                    }
+                });
+            }, { rootMargin: "-50% 0px -50% 0px" });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+
+</body>
+</html>
