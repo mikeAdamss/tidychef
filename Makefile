@@ -38,3 +38,6 @@ push_docs: ## Publish the jupyter book to github pages
 
 tox: install ## Use tox to run tests against all python versions
 	poetry run tox
+
+profile: ## Run a very basic performance profiling script
+	poetry run python3 performance/profiler.py
