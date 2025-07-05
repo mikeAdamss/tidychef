@@ -11,13 +11,11 @@ import requests
 import validators
 
 from tidychef.acquire.base import BaseReader
+from tidychef.acquire.main import acquirer
+from tidychef.acquire.xlsx.shared import sheets_from_workbook
 from tidychef.selection.selectable import Selectable
 from tidychef.selection.xlsx.xlsx import XlsxSelectable
 from tidychef.utils.http.caching import get_cached_session
-
-from ..base import BaseReader
-from ..main import acquirer
-from .shared import sheets_from_workbook
 
 
 def http(
@@ -118,11 +116,13 @@ class HttpXlsxReader(BaseReader):
             bio, data_only=data_only, **kwargs
         )
 
-        sheets = sheets_from_workbook(source, selectable, workbook, custom_time_formats, self.tables)
+        sheets = sheets_from_workbook(
+            source, selectable, workbook, custom_time_formats, self.tables
+        )
 
         # In this instance we've filtered the tables at the point of reading, so
         # remove the post load filter.
-        self.tables = None 
+        self.tables = None
 
         if len(sheets) == 1:
             return sheets[0]

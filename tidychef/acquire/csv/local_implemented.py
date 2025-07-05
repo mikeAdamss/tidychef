@@ -7,14 +7,12 @@ from pathlib import Path
 from typing import Callable, Optional, Union
 
 from tidychef.acquire.base import BaseReader
+from tidychef.acquire.main import acquirer
 from tidychef.models.source.cell import Cell
 from tidychef.models.source.table import Table
 from tidychef.selection.csv.csv import CsvSelectable
 from tidychef.selection.selectable import Selectable
 from tidychef.utils import fileutils
-
-from ..base import BaseReader
-from ..main import acquirer
 
 
 def local(

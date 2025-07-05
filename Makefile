@@ -10,13 +10,10 @@ install:
 test: install ## Run all unit tests and view coverage report
 	poetry run pytest --cov-report term-missing --cov=tidychef --cov-fail-under=100 ./tests/
 
-format: ## Format the codebase with isort and black
+fmt: ## Format the codebase with isort and black
 	rm -rf ./jupyterbook/venv
 	rm -rf ./jupyterbook/pdoc_venv
-	poetry run isort ./* && poetry run black ./*
-
-checkimports: install ## Use pylint to check for unused imports
-	poetry run pylint ./tidychef | grep "unused-import"
+	poetry run isort ./* && poetry run black ./**/*.py
 
 book: ## Create the jupyter book in /jupyterbook/_build
 	rm -rf ./jupyterbook/_build

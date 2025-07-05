@@ -47,7 +47,7 @@ class Selectable(LiveTable):
     def config(self, explain=False, explain_path: Optional[Union[str, Path]] = None):
         assert not all(
             [explain, explain_path]
-        ), f"""
+        ), """
             Where you have specified explain_path= you do not need
             to also include explain=True. The keywords are mutually
             exclusive.
@@ -143,7 +143,7 @@ class Selectable(LiveTable):
             for x in self.cells
             if x.is_blank(disregard_whitespace=disregard_whitespace)
         ]
-        _explain(self, f"Is blank")
+        _explain(self, "Is blank")
         return self
 
     @dontmutate
@@ -160,7 +160,7 @@ class Selectable(LiveTable):
             for x in self.cells
             if x.is_not_blank(disregard_whitespace=disregard_whitespace)
         ]
-        _explain(self, f"Is not blank")
+        _explain(self, "Is not blank")
         return self
 
     @dontmutate

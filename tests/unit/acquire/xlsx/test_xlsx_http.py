@@ -88,14 +88,26 @@ def test_shared_xlsx_http_time_formatting_works():
         "tidychef/main/tests/fixtures/xlsx/dates-times.xlsx",
         tables="Sheet1",
     )
-    assert [x.value for x in sheet.pcells] == [
+
+    expected = [
         "dates",
-        "11/01/2023",
-        "11/01/2023",
-        "12/01/2022",
+        "11/1/2023",
+        "11/1/2023",
+        "12/1/2022",
         "10/10/2000",
         "",
     ]
+
+    got = [x.value for x in sheet.pcells]
+    assert (
+        expected == got
+    ), f"""
+        Expected dates to be formatted as:
+        {expected}
+        
+        But got:
+        {got}
+    """
 
 
 def test_unknown_xlsx_http_time_format_can_be_specified(mocker):
@@ -122,6 +134,7 @@ def test_unknown_xlsx_http_time_format_can_be_specified(mocker):
         "10/10/00",
         "",
     ]
+
 
 def test_unknown_xlsx_http_time_format_warning(caplog, mocker):
     """

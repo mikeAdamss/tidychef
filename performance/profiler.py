@@ -1,13 +1,21 @@
 """
 Quick and dirty profiler for tidychef recipes.
+
+This is a bare minimum profiler that runs each recipe in the scripts directory,
+collects performance statistics, and prints a summary of the results.
+
+This will need to be run in an environment where the tidychef package is installed,
+as a bare minimum starting point - just enough to get a feel for the performance
+of each recipe after any performance related changes.
 """
 
 import cProfile
-import pstats
 import importlib.util
+import pstats
 from pathlib import Path
 
 SCRIPTS_DIR = Path(__file__).parent / "scripts"
+
 
 def run_recipe_module(path):
     spec = importlib.util.spec_from_file_location(path.stem, path)
@@ -17,6 +25,7 @@ def run_recipe_module(path):
         module.main()
     else:
         raise RuntimeError(f"Script {path} has no main() function.")
+
 
 def profile_recipe(recipe_path):
     profiler = cProfile.Profile()
@@ -40,6 +49,7 @@ def profile_recipe(recipe_path):
         "avg_time_per_call": avg_time_per_call,
     }
 
+
 def main():
     recipe_files = sorted(SCRIPTS_DIR.glob("*.py"))
     results = []
@@ -49,13 +59,19 @@ def main():
         results.append(result)
 
     print("\nPerformance summary:")
-    print(f"{'Script':30s} | {'CPU Time (s)':>12s} | {'Calls':>8s} | {'Prim Calls':>10s} | {'Avg Time/Call (ms)':>18s}")
+    print(
+        f"{'Script':30s} | {'CPU Time (s)':>12s} | {'Calls':>8s} | {'Prim Calls':>10s} | {'Avg Time/Call (ms)':>18s}"
+    )
     print("-" * 90)
     for r in results:
-        print(f"{r['name']:30s} | {r['total_time']:12.4f} | {r['total_calls']:8d} | {r['primitive_calls']:10d} | {r['avg_time_per_call']*1000:18.4f}")
+        print(
+            f"{r['name']:30s} | {r['total_time']:12.4f} | {r['total_calls']:8d} | {r['primitive_calls']:10d} | {r['avg_time_per_call']*1000:18.4f}"
+        )
 
     import shutil
-    shutil.rmtree('data.csv', ignore_errors=True)  # Clean up any generated data files
+
+    shutil.rmtree("data.csv", ignore_errors=True)  # Clean up any generated data files
+
+
 if __name__ == "__main__":
     main()
-
