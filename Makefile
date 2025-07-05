@@ -15,9 +15,6 @@ fmt: ## Format the codebase with isort and black
 	rm -rf ./jupyterbook/pdoc_venv
 	poetry run isort ./* && poetry run black ./**/*.py
 
-checkimports: install ## Use pylint to check for unused imports
-	poetry run pylint ./tidychef | grep "unused-import"
-
 book: ## Create the jupyter book in /jupyterbook/_build
 	rm -rf ./jupyterbook/_build
 	rm -rf ./jupyterbook/venv
