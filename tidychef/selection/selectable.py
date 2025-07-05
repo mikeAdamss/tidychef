@@ -33,7 +33,6 @@ from tidychef.lookup.engines.direct import Directly
 from tidychef.lookup.engines.within import Within
 from tidychef.models.source.cell import BaseCell, Cell
 from tidychef.models.source.table import LiveTable
-from tidychef.notebook.preview.html.main import preview
 from tidychef.selection.filters import is_not_numeric, is_numeric
 from tidychef.utils.decorators import dontmutate
 
