@@ -14,6 +14,7 @@ chapters:
   sections:
     - file: basics/acquire
     - file: basics/preview
+    - file: basics/selection-simple
     - file: basics/selection-operators
     - file: basics/selection-expand-fill
     - file: basics/selection-warnings
@@ -21,8 +22,7 @@ chapters:
     - file: basics/selection-regex
     - file: basics/selection-filters
     - file: basics/selection-waffle
-    - file: basics/selection-simple-useful
-    - file: basics/selection-explain
+    - file: basics/selection-useful
     - file: basics/selection-validate
     - file: basics/tidydata-columns-direct
     - file: basics/tidydata-closest

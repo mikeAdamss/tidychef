@@ -12,8 +12,8 @@ def main():
     observations = table.filter(filters.is_numeric).label_as("Value")
 
     # Label headers based on their positions
-    bands = table.excel_ref("3").is_not_blank().label_as("Band")
-    assets = table.excel_ref("2").is_not_blank().label_as("Asset")
+    bands = table.row("3").is_not_blank().label_as("Band")
+    assets = table.row("2").is_not_blank().label_as("Asset")
     names = (
         table.excel_ref("A4")
         .expand(right)
