@@ -34,38 +34,36 @@ You write a fairly concise script
 
 ```python
 from tidychef import acquire, filters, preview
-from tidychef.direction import right, below
-from tidychef.output import TidyData, Column
+from tidychef.direction import below, down, right
+from tidychef.output import Column, TidyData
 
 # Load a CSV table from a URL
-table = acquire.csv.http("https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/csv/bands-wide.csv")
+table = acquire.csv.http(
+    "https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/csv/bands-wide.csv"
+)
 
 # Select numeric observations and label them
-observations = table.filter(filters.is_numeric).label_as("Value")
+observations = table.is_numeric().label_as("Value")
 
-# Label headers based on their positions
-bands = table.excel_ref("3").is_not_blank().label_as("Band")
-assets = table.excel_ref("2").is_not_blank().label_as("Asset")
-names = table.excel_ref("A4").expand(right).expand(down).filter(filters.is_not_numeric).is_not_blank().label_as("Name")
+# Label headers
+bands = table.row_containing_strings(["Beatles"]).is_not_blank().label_as("Band")
+assets = table.row_containing_strings(["Cars"]).is_not_blank().label_as("Asset")
+names = table.cell_containing_string("Beatles").shift(down).box_select().is_not_numeric().label_as("Name")
 preview(observations, bands, assets, names)
 
 # Build tidy data by associating observations with their corresponding headers
 tidy_data = TidyData(
     observations,
-
-    # For each "Bands" cell the value cells are closest to the right
+    # "Band" labels are closest to the right of each value
     Column(bands.finds_observations_closest(right)),
-
-    # For each "Assets" cell the value cells are directly
+    # "Assets" labels are directly below each value
     Column(assets.finds_observations_directly(below)),
-    
-    # For each "Names" cell the values cells are directly right.
-    Column(names.finds_observations_directly(right))
+    # "Names" labels are direcrly to the right of each value
+    Column(names.finds_observations_directly(right)),
 )
 
 # Export the tidy data to CSV
 tidy_data.to_csv("bands_tidy.csv")
-
 ```
 
 which make will get you an inline preview (because we used `preview()` in the snippet)

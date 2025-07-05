@@ -37,32 +37,12 @@ from tidychef.models.source.cell import BaseCell, Cell
 from tidychef.models.source.table import LiveTable
 from tidychef.notebook.preview.html.main import preview
 from tidychef.utils.decorators import dontmutate
-
+from tidychef.selection.filters import is_numeric, is_not_numeric
 
 class Selectable(LiveTable):
     """
     Inherits from LiveTable to add cell selection methods that are generic to all tabulated inputs.
     """
-
-    def config(self, explain=False, explain_path: Optional[Union[str, Path]] = None):
-        assert not all(
-            [explain, explain_path]
-        ), """
-            Where you have specified explain_path= you do not need
-            to also include explain=True. The keywords are mutually
-            exclusive.
-        """
-
-        if explain_path is not None:
-            if isinstance(explain_path, str):
-                explain_path = Path(explain_path)
-            if explain_path.exists():
-                os.remove(explain_path.resolve())  # pragma: no cover
-
-        self._explain_path = explain_path
-        self._explain = explain
-
-        return copy.deepcopy(self)
 
     def _get_excel_references(self) -> List[str]:
         """
@@ -88,7 +68,6 @@ class Selectable(LiveTable):
         assert (
             len(self.cells) == number_of_cells
         ), f"Selection contains {len(self.cells)} cells, not {number_of_cells}"
-        _explain(self, f"WALK: Assert selection length is {number_of_cells}")
         return self
 
     def assert_one(self):
@@ -112,9 +91,10 @@ class Selectable(LiveTable):
         Assert that all CURRENTLY selected cells are contained on
         a single row.
         """
+        distinct_rows_count: int = len(dfc.all_used_y_indicies(self.cells))
         assert (
-            len(dfc.all_used_y_indicies(self.cells)) == 1
-        ), "Selection has cells from more than one row"
+            distinct_rows_count == 1
+        ), f"Selection is not from just one row. Got rows: {distinct_rows_count}"
         return self
 
     def lone_value(self) -> str:
@@ -143,7 +123,6 @@ class Selectable(LiveTable):
             for x in self.cells
             if x.is_blank(disregard_whitespace=disregard_whitespace)
         ]
-        _explain(self, "Is blank")
         return self
 
     @dontmutate
@@ -160,7 +139,6 @@ class Selectable(LiveTable):
             for x in self.cells
             if x.is_not_blank(disregard_whitespace=disregard_whitespace)
         ]
-        _explain(self, "Is not blank")
         return self
 
     @dontmutate
@@ -251,7 +229,6 @@ class Selectable(LiveTable):
                     ]
 
         self.cells += selection
-        _explain(self, f"Expand: {direction.name}")
         return self
 
     @dontmutate
@@ -264,22 +241,12 @@ class Selectable(LiveTable):
         """
 
         # Fill is just a slightly modified wrapper
-        # for expand. So if ._explain is on we need
-        # to toggle if off while doing the expand
-        # to avoid confusing the user
-        explain_setting = self._explain
-        explain_path_setting = self._explain_path
-        self._explain = False
-        self._explain_path = None
+        # for expand. 
 
         did_have = copy.deepcopy(self.cells)
         self = self.expand(direction)
 
-        self._explain = explain_setting
-        self._explain_path = explain_path_setting
-
         self.cells = [x for x in self.cells if x not in did_have]
-        _explain(self, f"Fill: {direction.name}")
         return self
 
     @dontmutate
@@ -338,11 +305,6 @@ class Selectable(LiveTable):
             )
 
         self.cells = found_cells
-
-        if not possibly_y:
-            _explain(self, f"Shifted cells {direction_or_x.offset_as_str}")
-        else:
-            _explain(self, f"Shifted cells {direction_or_x}, {possibly_y}")
         return self
 
     @dontmutate
@@ -480,9 +442,8 @@ class Selectable(LiveTable):
             raise BadExcelReferenceError(f"Unrecognised excel reference: {excel_ref}")
 
         self.cells = selected
-        _explain(self, f"Excel reference: {excel_ref}")
         return self
-
+    
     def validate(self, validator: BaseValidator, raise_first_error: bool = False):
         """
         Validates current cell selection by passing each currently
@@ -527,11 +488,6 @@ following validation errors were encountered:
         """
 
         self.cells = list(filter(check, self.cells))
-        if hasattr(check, "explain"):
-            comment = check.explain
-        else:
-            comment = "Custom filter"
-        _explain(self, f"Filtered: {comment}")
         return self
 
     @dontmutate
@@ -544,7 +500,6 @@ following validation errors were encountered:
 
         matcher = re.compile(r"" + pattern)
         self.cells = [x for x in self.cells if matcher.match(x.value) is not None]
-        _explain(self, f"Regex, pattern {pattern}")
         return self
 
     @dontmutate
@@ -603,7 +558,7 @@ following validation errors were encountered:
     @dontmutate
     def extrude(self, direction: Direction):
         """
-        Increase selection in a single direction s by the amount
+        Increase selection in a single direction by the amount
         passed as an argument to direction. Where no integer
         parameter is passed into direction, the size of the
         extrusion is one.
@@ -662,7 +617,6 @@ following validation errors were encountered:
                 additional_cells += extruded_cells
 
         self.cells += [x for x in additional_cells if x not in self.cells]
-        _explain(self, f"Extrude: {direction.offset_as_str}")
         return self
 
     def finds_observations_directly(self, direction: Direction) -> Directly:
@@ -749,12 +703,118 @@ following validation errors were encountered:
             table=self.name,
         )
 
-
-def _explain(selectable: Selectable, comment: str):
-    if selectable._explain or selectable._explain_path:
-        assert len(selectable.cells) > 0, (
-            f'Error: stage "EXPLAIN: {comment}" results in 0 cells selected.'
-            " You cannot preview nothing."
+    @dontmutate
+    def row(self, row_number: int):
+        """
+        Specifies a selection of cells from the current selection that are
+        all on the specfied row.
+        """
+        return self.excel_ref(row_number)
+    
+    @dontmutate
+    def row_containing_strings(self, row_strings: List[str]):
+        """
+        Specifies a selection of cells from the current selection that are
+        all on the same row - but - only where there's at least one cell
+        on that row contains each of the strings in the provided list.
+        """
+        assert isinstance(row_strings, list), (
+            "You must provide a list of strings to row_containing_strings"
         )
-        selectable = selectable.label_as(f"EXPLAIN: {comment}")
-        preview(selectable, selection_boundary=True, path=selectable._explain_path)
+        
+        found_cells = []
+        for y_index in dfc.all_used_y_indicies(self.cells):
+            row_cells = dfc.cells_on_y_index(self.cells, y_index)
+            found_count = 0
+            for wanted in row_strings:
+                if wanted in [cell.value for cell in row_cells]:
+                    found_count += 1
+            if found_count == len(row_strings):
+                # If we found all the strings in this row, add it to the selection
+                found_cells += row_cells
+
+        self.cells = found_cells
+        self.assert_single_row()
+
+        return self
+    
+    @dontmutate
+    def column(self, column_letter: str):
+        """
+        Returns a new selection of cells that are all in the same
+        column as the first cell in the current selection.
+        """
+        return self.excel_ref(column_letter)
+    
+    @dontmutate
+    def column_containing_strings(self, column_strings: List[str]):
+        """
+        Specifies a selection of cells from the current selection that are
+        all in the same column - but - only where there's at least one cell
+        in that column containing each of the strings in the provided list.
+        """
+        found_cells = []
+        for x_index in dfc.all_used_x_indicies(self.cells):
+            column_cells = dfc.cells_on_x_index(self.cells, x_index)
+            found_count = 0
+            for wanted in column_strings:
+                if wanted in [cell.value for cell in column_cells]:
+                    found_count += 1
+            if found_count == len(column_strings):
+                # If we found all the strings in this column, add it to the selection
+                found_cells += column_cells
+
+        self.cells = found_cells
+        self.assert_single_column()
+
+        return self
+    
+    @dontmutate
+    def box_select(self, remove_blank: bool = True):
+        """
+        Returns a new selection of cells that are all in the same
+        region as the first cell in the current selection.
+
+        A region method must always start with a single cell
+        and expands as per human reading style, so is effectively an
+        alias for.
+
+        single_cell.expand(right).expand(down).is_not_blank()
+        """
+        self.assert_one()
+        if remove_blank:
+            cells = self.expand(right).expand(down).is_not_blank().cells
+        else:
+            cells = self.expand(right).expand(down).cells
+        self.cells = cells
+        return self
+
+
+    @dontmutate
+    def is_numeric(self):
+        """
+        Filters the selection to those cells that are numeric.
+        """
+        self.cells = self.filter(is_numeric)
+        return self
+    
+    @dontmutate
+    def is_not_numeric(self):
+        """
+        Filters the selection to those cells that are not numeric.
+        """
+        self.cells = self.filter(is_not_numeric)
+        return self
+    
+    @dontmutate
+    def cell_containing_string(self, string: str, strict: bool = True):
+        """
+        Filters the selection to those cells that contain the provided string.
+        """
+        if strict:
+            found_cells = [x for x in self.cells if string == x.value]
+        else:
+            found_cells = [x for x in self.cells if string in x.value]
+        self.cells = found_cells
+        self.assert_one()
+        return self

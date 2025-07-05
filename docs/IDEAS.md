@@ -140,3 +140,7 @@ and possibly
 ```
 
 it _feels_ like could potentially simplify a lot of recipes but (a) "sweep" doesn't quite capture the behavioud and (b) it could bequite unintuitive to "sweep" from multiple points, wemight to enforce the single cell starting point which would need careful conventions and handling to be obvious.
+
+## Raise None Selectors
+
+I cant see any reason why any Selectable method that reults in 0 selectec cells would be desirable. Should we just raise when this happens? That feels like it'd make debugging easier. 
