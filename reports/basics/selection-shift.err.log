@@ -40,15 +40,15 @@ selection.shift(right)
 [32m     23[39m     [38;5;28mself[39m = copy.deepcopy([38;5;28mself[39m)
 [32m---> [39m[32m24[39m     [38;5;28;01mreturn[39;00m [43mmethod[49m[43m([49m[38;5;28;43mself[39;49m[43m,[49m[43m [49m[43m*[49m[43margs[49m[43m,[49m[43m [49m[43m*[49m[43m*[49m[43mkwargs[49m[43m)[49m
 
-[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/selection/selectable.py:335[39m, in [36mSelectable.shift[39m[34m(self, direction_or_x, possibly_y)[39m
-[32m    332[39m found_cells = dfc.matching_xy_cells([38;5;28mself[39m.pcells, wanted_cells)
-[32m    334[39m [38;5;28;01mif[39;00m [38;5;28mlen[39m(found_cells) == [32m0[39m [38;5;129;01mand[39;00m [38;5;28mlen[39m(wanted_cells) > [32m0[39m:
-[32m--> [39m[32m335[39m     [38;5;28;01mraise[39;00m OutOfBoundsError(
-[32m    336[39m         [33m"[39m[33mYou are attempting to shift your selection [39m[33m"[39m
-[32m    337[39m         [33m"[39m[33mentirely outside of the boundary of the table.[39m[33m"[39m
-[32m    338[39m     )
-[32m    340[39m [38;5;28mself[39m.cells = found_cells
-[32m    342[39m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m possibly_y:
+[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/selection/selectable.py:300[39m, in [36mSelectable.shift[39m[34m(self, direction_or_x, possibly_y)[39m
+[32m    297[39m found_cells = dfc.matching_xy_cells([38;5;28mself[39m.pcells, wanted_cells)
+[32m    299[39m [38;5;28;01mif[39;00m [38;5;28mlen[39m(found_cells) == [32m0[39m [38;5;129;01mand[39;00m [38;5;28mlen[39m(wanted_cells) > [32m0[39m:
+[32m--> [39m[32m300[39m     [38;5;28;01mraise[39;00m OutOfBoundsError(
+[32m    301[39m         [33m"[39m[33mYou are attempting to shift your selection [39m[33m"[39m
+[32m    302[39m         [33m"[39m[33mentirely outside of the boundary of the table.[39m[33m"[39m
+[32m    303[39m     )
+[32m    305[39m [38;5;28mself[39m.cells = found_cells
+[32m    306[39m [38;5;28;01mreturn[39;00m [38;5;28mself[39m
 
 [31mOutOfBoundsError[39m: You are attempting to shift your selection entirely outside of the boundary of the table.
 

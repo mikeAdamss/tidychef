@@ -45,15 +45,15 @@ waffled_selection = years.waffle(right, codes)
 [32m     23[39m     [38;5;28mself[39m = copy.deepcopy([38;5;28mself[39m)
 [32m---> [39m[32m24[39m     [38;5;28;01mreturn[39;00m [43mmethod[49m[43m([49m[38;5;28;43mself[39;49m[43m,[49m[43m [49m[43m*[49m[43margs[49m[43m,[49m[43m [49m[43m*[49m[43m*[49m[43mkwargs[49m[43m)[49m
 
-[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/selection/selectable.py:585[39m, in [36mSelectable.waffle[39m[34m(self, direction, additional_selection)[39m
-[32m    583[39m     highest_x = dfc.maximum_x_offset([38;5;28mself[39m.cells)
-[32m    584[39m     [38;5;28;01mif[39;00m [38;5;28many[39m([x [38;5;28;01mfor[39;00m x [38;5;129;01min[39;00m additional_selection [38;5;28;01mif[39;00m x.x <= highest_x]):
-[32m--> [39m[32m585[39m         [38;5;28;01mraise[39;00m AmbiguousWaffleError(
-[32m    586[39m             [33m"[39m[33mWhen using waffle right, your additional selections must all [39m[33m"[39m
-[32m    587[39m             [33m"[39m[33mbe right of your initial selections.[39m[33m"[39m
-[32m    588[39m         )
-[32m    589[39m [38;5;28;01mif[39;00m direction.is_left:
-[32m    590[39m     lowest_x = dfc.minimum_x_offset([38;5;28mself[39m.cells)
+[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/selection/selectable.py:538[39m, in [36mSelectable.waffle[39m[34m(self, direction, additional_selection)[39m
+[32m    536[39m     highest_x = dfc.maximum_x_offset([38;5;28mself[39m.cells)
+[32m    537[39m     [38;5;28;01mif[39;00m [38;5;28many[39m([x [38;5;28;01mfor[39;00m x [38;5;129;01min[39;00m additional_selection [38;5;28;01mif[39;00m x.x <= highest_x]):
+[32m--> [39m[32m538[39m         [38;5;28;01mraise[39;00m AmbiguousWaffleError(
+[32m    539[39m             [33m"[39m[33mWhen using waffle right, your additional selections must all [39m[33m"[39m
+[32m    540[39m             [33m"[39m[33mbe right of your initial selections.[39m[33m"[39m
+[32m    541[39m         )
+[32m    542[39m [38;5;28;01mif[39;00m direction.is_left:
+[32m    543[39m     lowest_x = dfc.minimum_x_offset([38;5;28mself[39m.cells)
 
 [31mAmbiguousWaffleError[39m: When using waffle right, your additional selections must all be right of your initial selections.
 

@@ -40,24 +40,23 @@ table.excel_ref('A1:A2').assert_one()
 [32m      4[39m table: XlsxSelectable = acquire.xlsx.http([33m"[39m[33mhttps://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx[39m[33m"[39m, tables=[33m"[39m[33mTable 3a[39m[33m"[39m)
 [32m----> [39m[32m5[39m [43mtable[49m[43m.[49m[43mexcel_ref[49m[43m([49m[33;43m'[39;49m[33;43mA1:A2[39;49m[33;43m'[39;49m[43m)[49m[43m.[49m[43massert_one[49m[43m([49m[43m)[49m
 
-[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/selection/selectable.py:98[39m, in [36mSelectable.assert_one[39m[34m(self)[39m
-[32m     94[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34massert_one[39m([38;5;28mself[39m):
-[32m     95[39m [38;5;250m    [39m[33;03m"""[39;00m
-[32m     96[39m [33;03m    Assert that the current selection contains exactly one cell[39;00m
-[32m     97[39m [33;03m    """[39;00m
-[32m---> [39m[32m98[39m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[43m.[49m[43massert_len[49m[43m([49m[32;43m1[39;49m[43m)[49m
+[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/selection/selectable.py:75[39m, in [36mSelectable.assert_one[39m[34m(self)[39m
+[32m     71[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34massert_one[39m([38;5;28mself[39m):
+[32m     72[39m [38;5;250m    [39m[33;03m"""[39;00m
+[32m     73[39m [33;03m    Assert that the current selection contains exactly one cell[39;00m
+[32m     74[39m [33;03m    """[39;00m
+[32m---> [39m[32m75[39m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[43m.[49m[43massert_len[49m[43m([49m[32;43m1[39;49m[43m)[49m
 
-[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/selection/selectable.py:89[39m, in [36mSelectable.assert_len[39m[34m(self, number_of_cells)[39m
-[32m     83[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34massert_len[39m([38;5;28mself[39m, number_of_cells: [38;5;28mint[39m):
-[32m     84[39m [38;5;250m    [39m[33;03m"""[39;00m
-[32m     85[39m [33;03m    Assert that the current selection contains the number of cells[39;00m
-[32m     86[39m [33;03m    specified[39;00m
-[32m     87[39m [33;03m    """[39;00m
-[32m     88[39m     [38;5;28;01massert[39;00m (
-[32m---> [39m[32m89[39m         [38;5;28mlen[39m([38;5;28mself[39m.cells) == number_of_cells
-[32m     90[39m     ), [33mf[39m[33m"[39m[33mSelection contains [39m[38;5;132;01m{[39;00m[38;5;28mlen[39m([38;5;28mself[39m.cells)[38;5;132;01m}[39;00m[33m cells, not [39m[38;5;132;01m{[39;00mnumber_of_cells[38;5;132;01m}[39;00m[33m"[39m
-[32m     91[39m     _explain([38;5;28mself[39m, [33mf[39m[33m"[39m[33mWALK: Assert selection length is [39m[38;5;132;01m{[39;00mnumber_of_cells[38;5;132;01m}[39;00m[33m"[39m)
-[32m     92[39m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m
+[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/selection/selectable.py:67[39m, in [36mSelectable.assert_len[39m[34m(self, number_of_cells)[39m
+[32m     61[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34massert_len[39m([38;5;28mself[39m, number_of_cells: [38;5;28mint[39m):
+[32m     62[39m [38;5;250m    [39m[33;03m"""[39;00m
+[32m     63[39m [33;03m    Assert that the current selection contains the number of cells[39;00m
+[32m     64[39m [33;03m    specified[39;00m
+[32m     65[39m [33;03m    """[39;00m
+[32m     66[39m     [38;5;28;01massert[39;00m (
+[32m---> [39m[32m67[39m         [38;5;28mlen[39m([38;5;28mself[39m.cells) == number_of_cells
+[32m     68[39m     ), [33mf[39m[33m"[39m[33mSelection contains [39m[38;5;132;01m{[39;00m[38;5;28mlen[39m([38;5;28mself[39m.cells)[38;5;132;01m}[39;00m[33m cells, not [39m[38;5;132;01m{[39;00mnumber_of_cells[38;5;132;01m}[39;00m[33m"[39m
+[32m     69[39m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m
 
 [31mAssertionError[39m: Selection contains 2 cells, not 1
 

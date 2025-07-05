@@ -27,10 +27,22 @@
                    pattern=".+" required>
 
 
-            <h2>Submodules</h2>
-            <ul>
-                    <li><a href="cellutils/excel.html">excel</a></li>
-            </ul>
+
+            <h2>API Documentation</h2>
+                <ul class="memberlist">
+            <li>
+                    <a class="function" href="#letters_to_x">letters_to_x</a>
+            </li>
+            <li>
+                    <a class="function" href="#number_to_y">number_to_y</a>
+            </li>
+            <li>
+                    <a class="function" href="#x_to_letters">x_to_letters</a>
+            </li>
+            <li>
+                    <a class="function" href="#y_to_number">y_to_number</a>
+            </li>
+    </ul>
 
 
 
@@ -52,10 +64,143 @@
                         <label class="view-source-button" for="mod-cellutils-view-source"><span>View Source</span></label>
 
                         <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos">1</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">.excel</span><span class="w"> </span><span class="kn">import</span> <span class="n">letters_to_x</span><span class="p">,</span> <span class="n">number_to_y</span><span class="p">,</span> <span class="n">x_to_letters</span><span class="p">,</span> <span class="n">y_to_number</span>
+</span><span id="L-2"><a href="#L-2"><span class="linenos">2</span></a>
+</span><span id="L-3"><a href="#L-3"><span class="linenos">3</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos">4</span></a>    <span class="s2">&quot;letters_to_x&quot;</span><span class="p">,</span>
+</span><span id="L-5"><a href="#L-5"><span class="linenos">5</span></a>    <span class="s2">&quot;number_to_y&quot;</span><span class="p">,</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos">6</span></a>    <span class="s2">&quot;x_to_letters&quot;</span><span class="p">,</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos">7</span></a>    <span class="s2">&quot;y_to_number&quot;</span><span class="p">,</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos">8</span></a><span class="p">]</span>
 </span></pre></div>
 
 
             </section>
+                <section id="letters_to_x">
+                            <input id="letters_to_x-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">letters_to_x</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">excel_letters_ref</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="nb">int</span>:</span></span>
+
+                <label class="view-source-button" for="letters_to_x-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#letters_to_x"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="letters_to_x-5"><a href="#letters_to_x-5"><span class="linenos"> 5</span></a><span class="k">def</span><span class="w"> </span><span class="nf">letters_to_x</span><span class="p">(</span><span class="n">excel_letters_ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="letters_to_x-6"><a href="#letters_to_x-6"><span class="linenos"> 6</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="letters_to_x-7"><a href="#letters_to_x-7"><span class="linenos"> 7</span></a><span class="sd">    Given letters (as per excel column references), return the equivilent</span>
+</span><span id="letters_to_x-8"><a href="#letters_to_x-8"><span class="linenos"> 8</span></a><span class="sd">    x co-ordinate</span>
+</span><span id="letters_to_x-9"><a href="#letters_to_x-9"><span class="linenos"> 9</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="letters_to_x-10"><a href="#letters_to_x-10"><span class="linenos">10</span></a>
+</span><span id="letters_to_x-11"><a href="#letters_to_x-11"><span class="linenos">11</span></a>    <span class="c1"># Account for bad conventions</span>
+</span><span id="letters_to_x-12"><a href="#letters_to_x-12"><span class="linenos">12</span></a>    <span class="n">excel_letters_ref</span> <span class="o">=</span> <span class="n">excel_letters_ref</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+</span><span id="letters_to_x-13"><a href="#letters_to_x-13"><span class="linenos">13</span></a>
+</span><span id="letters_to_x-14"><a href="#letters_to_x-14"><span class="linenos">14</span></a>    <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="letters_to_x-15"><a href="#letters_to_x-15"><span class="linenos">15</span></a>
+</span><span id="letters_to_x-16"><a href="#letters_to_x-16"><span class="linenos">16</span></a>    <span class="c1"># Account for full iterations of the alphabet,</span>
+</span><span id="letters_to_x-17"><a href="#letters_to_x-17"><span class="linenos">17</span></a>    <span class="c1"># i.e AB, AAB, AH etc</span>
+</span><span id="letters_to_x-18"><a href="#letters_to_x-18"><span class="linenos">18</span></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">excel_letters_ref</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+</span><span id="letters_to_x-19"><a href="#letters_to_x-19"><span class="linenos">19</span></a>        <span class="n">x</span> <span class="o">=</span> <span class="mi">26</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">excel_letters_ref</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="letters_to_x-20"><a href="#letters_to_x-20"><span class="linenos">20</span></a>        <span class="n">excel_letters_ref</span> <span class="o">=</span> <span class="n">excel_letters_ref</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span><span id="letters_to_x-21"><a href="#letters_to_x-21"><span class="linenos">21</span></a>
+</span><span id="letters_to_x-22"><a href="#letters_to_x-22"><span class="linenos">22</span></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">letter</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span><span class="p">):</span>
+</span><span id="letters_to_x-23"><a href="#letters_to_x-23"><span class="linenos">23</span></a>        <span class="k">if</span> <span class="n">letter</span> <span class="o">==</span> <span class="n">excel_letters_ref</span><span class="p">:</span>
+</span><span id="letters_to_x-24"><a href="#letters_to_x-24"><span class="linenos">24</span></a>            <span class="n">x</span> <span class="o">+=</span> <span class="n">i</span>
+</span><span id="letters_to_x-25"><a href="#letters_to_x-25"><span class="linenos">25</span></a>            <span class="k">break</span>
+</span><span id="letters_to_x-26"><a href="#letters_to_x-26"><span class="linenos">26</span></a>
+</span><span id="letters_to_x-27"><a href="#letters_to_x-27"><span class="linenos">27</span></a>    <span class="k">return</span> <span class="n">x</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Given letters (as per excel column references), return the equivilent
+x co-ordinate</p>
+</div>
+
+
+                </section>
+                <section id="number_to_y">
+                            <input id="number_to_y-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">number_to_y</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">excel_number_ref</span><span class="p">:</span> <span class="nb">int</span></span><span class="return-annotation">):</span></span>
+
+                <label class="view-source-button" for="number_to_y-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#number_to_y"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="number_to_y-46"><a href="#number_to_y-46"><span class="linenos">46</span></a><span class="k">def</span><span class="w"> </span><span class="nf">number_to_y</span><span class="p">(</span><span class="n">excel_number_ref</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+</span><span id="number_to_y-47"><a href="#number_to_y-47"><span class="linenos">47</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="number_to_y-48"><a href="#number_to_y-48"><span class="linenos">48</span></a><span class="sd">    Given an excel row number, return the y offset</span>
+</span><span id="number_to_y-49"><a href="#number_to_y-49"><span class="linenos">49</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="number_to_y-50"><a href="#number_to_y-50"><span class="linenos">50</span></a>    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">excel_number_ref</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+</span><span id="number_to_y-51"><a href="#number_to_y-51"><span class="linenos">51</span></a>    <span class="k">return</span> <span class="n">excel_number_ref</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># We are 0 indexed, unlike excel</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Given an excel row number, return the y offset</p>
+</div>
+
+
+                </section>
+                <section id="x_to_letters">
+                            <input id="x_to_letters-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">x_to_letters</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">x</span><span class="p">:</span> <span class="nb">int</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+                <label class="view-source-button" for="x_to_letters-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#x_to_letters"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="x_to_letters-30"><a href="#x_to_letters-30"><span class="linenos">30</span></a><span class="k">def</span><span class="w"> </span><span class="nf">x_to_letters</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="x_to_letters-31"><a href="#x_to_letters-31"><span class="linenos">31</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="x_to_letters-32"><a href="#x_to_letters-32"><span class="linenos">32</span></a><span class="sd">    Convert an x co-ordinate to excel style letter references</span>
+</span><span id="x_to_letters-33"><a href="#x_to_letters-33"><span class="linenos">33</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="x_to_letters-34"><a href="#x_to_letters-34"><span class="linenos">34</span></a>
+</span><span id="x_to_letters-35"><a href="#x_to_letters-35"><span class="linenos">35</span></a>    <span class="c1"># https://stackoverflow.com/questions/23861680/convert-spreadsheet-number-to-column-letter</span>
+</span><span id="x_to_letters-36"><a href="#x_to_letters-36"><span class="linenos">36</span></a>    <span class="n">start_index</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1">#  it can start either at 0 or at 1</span>
+</span><span id="x_to_letters-37"><a href="#x_to_letters-37"><span class="linenos">37</span></a>    <span class="n">letter</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span id="x_to_letters-38"><a href="#x_to_letters-38"><span class="linenos">38</span></a>    <span class="k">while</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">25</span> <span class="o">+</span> <span class="n">start_index</span><span class="p">:</span>
+</span><span id="x_to_letters-39"><a href="#x_to_letters-39"><span class="linenos">39</span></a>        <span class="n">letter</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">(</span><span class="mi">65</span> <span class="o">+</span> <span class="nb">int</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">start_index</span><span class="p">)</span> <span class="o">/</span> <span class="mi">26</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="x_to_letters-40"><a href="#x_to_letters-40"><span class="linenos">40</span></a>        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="nb">int</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">start_index</span><span class="p">)</span> <span class="o">/</span> <span class="mi">26</span><span class="p">))</span> <span class="o">*</span> <span class="mi">26</span>
+</span><span id="x_to_letters-41"><a href="#x_to_letters-41"><span class="linenos">41</span></a>    <span class="n">letter</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">(</span><span class="mi">65</span> <span class="o">-</span> <span class="n">start_index</span> <span class="o">+</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+</span><span id="x_to_letters-42"><a href="#x_to_letters-42"><span class="linenos">42</span></a>
+</span><span id="x_to_letters-43"><a href="#x_to_letters-43"><span class="linenos">43</span></a>    <span class="k">return</span> <span class="n">letter</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Convert an x co-ordinate to excel style letter references</p>
+</div>
+
+
+                </section>
+                <section id="y_to_number">
+                            <input id="y_to_number-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">y_to_number</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">excel_number_ref</span><span class="p">:</span> <span class="nb">int</span></span><span class="return-annotation">):</span></span>
+
+                <label class="view-source-button" for="y_to_number-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#y_to_number"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="y_to_number-54"><a href="#y_to_number-54"><span class="linenos">54</span></a><span class="k">def</span><span class="w"> </span><span class="nf">y_to_number</span><span class="p">(</span><span class="n">excel_number_ref</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+</span><span id="y_to_number-55"><a href="#y_to_number-55"><span class="linenos">55</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="y_to_number-56"><a href="#y_to_number-56"><span class="linenos">56</span></a><span class="sd">    Given a y offset, return the excel row number</span>
+</span><span id="y_to_number-57"><a href="#y_to_number-57"><span class="linenos">57</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="y_to_number-58"><a href="#y_to_number-58"><span class="linenos">58</span></a>    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">excel_number_ref</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+</span><span id="y_to_number-59"><a href="#y_to_number-59"><span class="linenos">59</span></a>    <span class="k">return</span> <span class="n">excel_number_ref</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># We are 0 indexed, unlike excel</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Given a y offset, return the excel row number</p>
+</div>
+
+
+                </section>
     </main>
 <script>
     function escapeHTML(html) {

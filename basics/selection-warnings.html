@@ -180,6 +180,7 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../basics.html">Chapter 1: Basics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="acquire.html">Acquire</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preview.html">Preview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="selection-simple.html">Selection: Simple</a></li>
 <li class="toctree-l2"><a class="reference internal" href="selection-operators.html">Selection: Operators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="selection-expand-fill.html">Selection: Expand &amp; Fill</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Selection: Multiple Selection Warnings</a></li>
@@ -187,8 +188,7 @@
 <li class="toctree-l2"><a class="reference internal" href="selection-regex.html">Selection: Regex</a></li>
 <li class="toctree-l2"><a class="reference internal" href="selection-filters.html">Selection: Filters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="selection-waffle.html">Selection: Waffle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="selection-simple-useful.html">Selection: Simple &amp; Useful</a></li>
-<li class="toctree-l2"><a class="reference internal" href="selection-explain.html">Selection: Config(explain=)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="selection-useful.html">Selection: Simple &amp; Useful</a></li>
 <li class="toctree-l2"><a class="reference internal" href="selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-closest.html">TidyData: Closest</a></li>
@@ -647,6 +647,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:root:When processing table &quot;Table 11&quot; an unknown excel time format &quot;mmm\ yyyy&quot; was encountered. Using raw cell value instead. 
+For more details on handling excel time formatting see tidychef documentation. Cell(s) in question (max 5 shown): x:0, y:6,x:0, y:7,x:0, y:8,x:0, y:9,x:0, y:10
+</pre></div>
+</div>
 <div class="output text_html">
     <html>
         

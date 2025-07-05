@@ -27,12 +27,16 @@
                    pattern=".+" required>
 
 
-            <h2>Submodules</h2>
-            <ul>
-                    <li><a href="xls/http_implemented.html">http_implemented</a></li>
-                    <li><a href="xls/local_implemented.html">local_implemented</a></li>
-                    <li><a href="xls/shared.html">shared</a></li>
-            </ul>
+
+            <h2>API Documentation</h2>
+                <ul class="memberlist">
+            <li>
+                    <a class="function" href="#http">http</a>
+            </li>
+            <li>
+                    <a class="function" href="#local">local</a>
+            </li>
+    </ul>
 
 
 
@@ -60,10 +64,177 @@
 </span><span id="L-3"><a href="#L-3"><span class="linenos">3</span></a><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-4"><a href="#L-4"><span class="linenos">4</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">.http_implemented</span><span class="w"> </span><span class="kn">import</span> <span class="n">http</span>
 </span><span id="L-5"><a href="#L-5"><span class="linenos">5</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">.local_implemented</span><span class="w"> </span><span class="kn">import</span> <span class="n">local</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos">6</span></a>
+</span><span id="L-7"><a href="#L-7"><span class="linenos">7</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;http&quot;</span><span class="p">,</span> <span class="s2">&quot;local&quot;</span><span class="p">]</span>
 </span></pre></div>
 
 
             </section>
+                <section id="http">
+                            <input id="http-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">http</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]</span>,</span><span class="param">	selectable: tidychef.selection.selectable.Selectable = &lt;class &#x27;tidychef.selection.xls.xls.XlsSelectable&#x27;&gt;,</span><span class="param">	<span class="n">pre_hook</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">post_hook</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">session</span><span class="p">:</span> <span class="n">requests</span><span class="o">.</span><span class="n">sessions</span><span class="o">.</span><span class="n">Session</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">cache</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>,</span><span class="param">	<span class="n">tables</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="o">**</span><span class="n">kwargs</span></span><span class="return-annotation">) -> <span class="n">Union</span><span class="p">[</span><span class="n">tidychef</span><span class="o">.</span><span class="n">selection</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">XlsSelectable</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">tidychef</span><span class="o">.</span><span class="n">selection</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">XlsSelectable</span><span class="p">]]</span>:</span></span>
+
+                <label class="view-source-button" for="http-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#http"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="http-22"><a href="#http-22"><span class="linenos">22</span></a><span class="k">def</span><span class="w"> </span><span class="nf">http</span><span class="p">(</span>
+</span><span id="http-23"><a href="#http-23"><span class="linenos">23</span></a>    <span class="n">source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
+</span><span id="http-24"><a href="#http-24"><span class="linenos">24</span></a>    <span class="n">selectable</span><span class="p">:</span> <span class="n">Selectable</span> <span class="o">=</span> <span class="n">XlsSelectable</span><span class="p">,</span>
+</span><span id="http-25"><a href="#http-25"><span class="linenos">25</span></a>    <span class="n">pre_hook</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="http-26"><a href="#http-26"><span class="linenos">26</span></a>    <span class="n">post_hook</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="http-27"><a href="#http-27"><span class="linenos">27</span></a>    <span class="n">session</span><span class="p">:</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="http-28"><a href="#http-28"><span class="linenos">28</span></a>    <span class="n">cache</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span id="http-29"><a href="#http-29"><span class="linenos">29</span></a>    <span class="n">tables</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="http-30"><a href="#http-30"><span class="linenos">30</span></a>    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+</span><span id="http-31"><a href="#http-31"><span class="linenos">31</span></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">XlsSelectable</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsSelectable</span><span class="p">]]:</span>
+</span><span id="http-32"><a href="#http-32"><span class="linenos">32</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="http-33"><a href="#http-33"><span class="linenos">33</span></a><span class="sd">    Read data from a Path (or string representing a path)</span>
+</span><span id="http-34"><a href="#http-34"><span class="linenos">34</span></a><span class="sd">    present on the same machine where tidychef is running.</span>
+</span><span id="http-35"><a href="#http-35"><span class="linenos">35</span></a>
+</span><span id="http-36"><a href="#http-36"><span class="linenos">36</span></a><span class="sd">    This xls reader uses xlrd:</span>
+</span><span id="http-37"><a href="#http-37"><span class="linenos">37</span></a><span class="sd">    https://xlrd.readthedocs.io/en/latest/</span>
+</span><span id="http-38"><a href="#http-38"><span class="linenos">38</span></a>
+</span><span id="http-39"><a href="#http-39"><span class="linenos">39</span></a><span class="sd">    Any kwargs passed to this function are propagated to</span>
+</span><span id="http-40"><a href="#http-40"><span class="linenos">40</span></a><span class="sd">    the xlrd.open_workbook() method.</span>
+</span><span id="http-41"><a href="#http-41"><span class="linenos">41</span></a>
+</span><span id="http-42"><a href="#http-42"><span class="linenos">42</span></a><span class="sd">    :param source: A url.</span>
+</span><span id="http-43"><a href="#http-43"><span class="linenos">43</span></a><span class="sd">    :param selectable: A class that implements tidychef.selection.selectable.Selectable of an inheritor of. Default is XlsSelectable</span>
+</span><span id="http-44"><a href="#http-44"><span class="linenos">44</span></a><span class="sd">    :param pre_hook: A callable that can take source as an argument</span>
+</span><span id="http-45"><a href="#http-45"><span class="linenos">45</span></a><span class="sd">    :param post_hook: A callable that can take the output of HttpXlsReader.parse() as an argument.</span>
+</span><span id="http-46"><a href="#http-46"><span class="linenos">46</span></a><span class="sd">    :param session: An optional requests.Session object.</span>
+</span><span id="http-47"><a href="#http-47"><span class="linenos">47</span></a><span class="sd">    :param cache: Boolean flag for whether or not to cache get requests.</span>
+</span><span id="http-48"><a href="#http-48"><span class="linenos">48</span></a><span class="sd">    :return: A single populated Selectable of type as specified by selectable param.</span>
+</span><span id="http-49"><a href="#http-49"><span class="linenos">49</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="http-50"><a href="#http-50"><span class="linenos">50</span></a>
+</span><span id="http-51"><a href="#http-51"><span class="linenos">51</span></a>    <span class="k">assert</span> <span class="n">validators</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="n">source</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2">&#39; is not a valid http/https url.&quot;</span>
+</span><span id="http-52"><a href="#http-52"><span class="linenos">52</span></a>
+</span><span id="http-53"><a href="#http-53"><span class="linenos">53</span></a>    <span class="k">return</span> <span class="n">acquirer</span><span class="p">(</span>
+</span><span id="http-54"><a href="#http-54"><span class="linenos">54</span></a>        <span class="n">source</span><span class="p">,</span>
+</span><span id="http-55"><a href="#http-55"><span class="linenos">55</span></a>        <span class="n">HttpXlsReader</span><span class="p">(</span><span class="n">tables</span><span class="p">),</span>
+</span><span id="http-56"><a href="#http-56"><span class="linenos">56</span></a>        <span class="n">selectable</span><span class="p">,</span>
+</span><span id="http-57"><a href="#http-57"><span class="linenos">57</span></a>        <span class="n">pre_hook</span><span class="o">=</span><span class="n">pre_hook</span><span class="p">,</span>
+</span><span id="http-58"><a href="#http-58"><span class="linenos">58</span></a>        <span class="n">post_hook</span><span class="o">=</span><span class="n">post_hook</span><span class="p">,</span>
+</span><span id="http-59"><a href="#http-59"><span class="linenos">59</span></a>        <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">,</span>
+</span><span id="http-60"><a href="#http-60"><span class="linenos">60</span></a>        <span class="n">cache</span><span class="o">=</span><span class="n">cache</span><span class="p">,</span>
+</span><span id="http-61"><a href="#http-61"><span class="linenos">61</span></a>        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+</span><span id="http-62"><a href="#http-62"><span class="linenos">62</span></a>    <span class="p">)</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Read data from a Path (or string representing a path)
+present on the same machine where tidychef is running.</p>
+
+<p>This xls reader uses xlrd:
+<a href="https://xlrd.readthedocs.io/en/latest/">https://xlrd.readthedocs.io/en/latest/</a></p>
+
+<p>Any kwargs passed to this function are propagated to
+the xlrd.open_workbook() method.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>source</strong>:  A url.</li>
+<li><strong>selectable</strong>:  A class that implements tidychef.selection.selectable.Selectable of an inheritor of. Default is XlsSelectable</li>
+<li><strong>pre_hook</strong>:  A callable that can take source as an argument</li>
+<li><strong>post_hook</strong>:  A callable that can take the output of HttpXlsReader.parse() as an argument.</li>
+<li><strong>session</strong>:  An optional requests.Session object.</li>
+<li><strong>cache</strong>:  Boolean flag for whether or not to cache get requests.</li>
+</ul>
+
+<h6 id="returns">Returns</h6>
+
+<blockquote>
+  <p>A single populated Selectable of type as specified by selectable param.</p>
+</blockquote>
+</div>
+
+
+                </section>
+                <section id="local">
+                            <input id="local-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">local</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]</span>,</span><span class="param">	selectable: tidychef.selection.selectable.Selectable = &lt;class &#x27;tidychef.selection.xls.xls.XlsSelectable&#x27;&gt;,</span><span class="param">	<span class="n">pre_hook</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">post_hook</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">tables</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="o">**</span><span class="n">kwargs</span></span><span class="return-annotation">) -> <span class="n">Union</span><span class="p">[</span><span class="n">tidychef</span><span class="o">.</span><span class="n">selection</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">XlsSelectable</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">tidychef</span><span class="o">.</span><span class="n">selection</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">xls</span><span class="o">.</span><span class="n">XlsSelectable</span><span class="p">]]</span>:</span></span>
+
+                <label class="view-source-button" for="local-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#local"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="local-18"><a href="#local-18"><span class="linenos">18</span></a><span class="k">def</span><span class="w"> </span><span class="nf">local</span><span class="p">(</span>
+</span><span id="local-19"><a href="#local-19"><span class="linenos">19</span></a>    <span class="n">source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
+</span><span id="local-20"><a href="#local-20"><span class="linenos">20</span></a>    <span class="n">selectable</span><span class="p">:</span> <span class="n">Selectable</span> <span class="o">=</span> <span class="n">XlsSelectable</span><span class="p">,</span>
+</span><span id="local-21"><a href="#local-21"><span class="linenos">21</span></a>    <span class="n">pre_hook</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="local-22"><a href="#local-22"><span class="linenos">22</span></a>    <span class="n">post_hook</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="local-23"><a href="#local-23"><span class="linenos">23</span></a>    <span class="n">tables</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="local-24"><a href="#local-24"><span class="linenos">24</span></a>    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+</span><span id="local-25"><a href="#local-25"><span class="linenos">25</span></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">XlsSelectable</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">XlsSelectable</span><span class="p">]]:</span>
+</span><span id="local-26"><a href="#local-26"><span class="linenos">26</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="local-27"><a href="#local-27"><span class="linenos">27</span></a><span class="sd">    Read data from a Path (or string representing a path)</span>
+</span><span id="local-28"><a href="#local-28"><span class="linenos">28</span></a><span class="sd">    present on the same machine where tidychef is running.</span>
+</span><span id="local-29"><a href="#local-29"><span class="linenos">29</span></a>
+</span><span id="local-30"><a href="#local-30"><span class="linenos">30</span></a><span class="sd">    This xls reader uses xlrd:</span>
+</span><span id="local-31"><a href="#local-31"><span class="linenos">31</span></a><span class="sd">    https://xlrd.readthedocs.io/en/latest/</span>
+</span><span id="local-32"><a href="#local-32"><span class="linenos">32</span></a>
+</span><span id="local-33"><a href="#local-33"><span class="linenos">33</span></a><span class="sd">    Any kwargs passed to this function are propagated to</span>
+</span><span id="local-34"><a href="#local-34"><span class="linenos">34</span></a><span class="sd">    the xlrd.open_workbook() method.</span>
+</span><span id="local-35"><a href="#local-35"><span class="linenos">35</span></a>
+</span><span id="local-36"><a href="#local-36"><span class="linenos">36</span></a><span class="sd">    :param source: A Path object or a string representing a path</span>
+</span><span id="local-37"><a href="#local-37"><span class="linenos">37</span></a><span class="sd">    :param selectable: A class that implements tidychef.selection.selectable.Selectable of an inheritor of. Default is XlsSelectable</span>
+</span><span id="local-38"><a href="#local-38"><span class="linenos">38</span></a><span class="sd">    :param pre_hook: A callable that can take source as an argument</span>
+</span><span id="local-39"><a href="#local-39"><span class="linenos">39</span></a><span class="sd">    :param post_hook: A callable that can take the output of XlsSelectable.parse() as an argument.</span>
+</span><span id="local-40"><a href="#local-40"><span class="linenos">40</span></a><span class="sd">    :return: A single populated Selectable of type as specified by selectable param</span>
+</span><span id="local-41"><a href="#local-41"><span class="linenos">41</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="local-42"><a href="#local-42"><span class="linenos">42</span></a>
+</span><span id="local-43"><a href="#local-43"><span class="linenos">43</span></a>    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span>
+</span><span id="local-44"><a href="#local-44"><span class="linenos">44</span></a>        <span class="n">source</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">)</span>
+</span><span id="local-45"><a href="#local-45"><span class="linenos">45</span></a>    <span class="p">),</span> <span class="s2">&quot;&quot;&quot;</span>
+</span><span id="local-46"><a href="#local-46"><span class="linenos">46</span></a><span class="s2">        The source you&#39;re passing to acquire.csv.local() needs to</span>
+</span><span id="local-47"><a href="#local-47"><span class="linenos">47</span></a><span class="s2">        be either a Path object or a string representing such.</span>
+</span><span id="local-48"><a href="#local-48"><span class="linenos">48</span></a><span class="s2">        &quot;&quot;&quot;</span>
+</span><span id="local-49"><a href="#local-49"><span class="linenos">49</span></a>
+</span><span id="local-50"><a href="#local-50"><span class="linenos">50</span></a>    <span class="k">return</span> <span class="n">acquirer</span><span class="p">(</span>
+</span><span id="local-51"><a href="#local-51"><span class="linenos">51</span></a>        <span class="n">source</span><span class="p">,</span>
+</span><span id="local-52"><a href="#local-52"><span class="linenos">52</span></a>        <span class="n">LocalXlsReader</span><span class="p">(</span><span class="n">tables</span><span class="p">),</span>
+</span><span id="local-53"><a href="#local-53"><span class="linenos">53</span></a>        <span class="n">selectable</span><span class="p">,</span>
+</span><span id="local-54"><a href="#local-54"><span class="linenos">54</span></a>        <span class="n">pre_hook</span><span class="o">=</span><span class="n">pre_hook</span><span class="p">,</span>
+</span><span id="local-55"><a href="#local-55"><span class="linenos">55</span></a>        <span class="n">post_hook</span><span class="o">=</span><span class="n">post_hook</span><span class="p">,</span>
+</span><span id="local-56"><a href="#local-56"><span class="linenos">56</span></a>        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+</span><span id="local-57"><a href="#local-57"><span class="linenos">57</span></a>    <span class="p">)</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Read data from a Path (or string representing a path)
+present on the same machine where tidychef is running.</p>
+
+<p>This xls reader uses xlrd:
+<a href="https://xlrd.readthedocs.io/en/latest/">https://xlrd.readthedocs.io/en/latest/</a></p>
+
+<p>Any kwargs passed to this function are propagated to
+the xlrd.open_workbook() method.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>source</strong>:  A Path object or a string representing a path</li>
+<li><strong>selectable</strong>:  A class that implements tidychef.selection.selectable.Selectable of an inheritor of. Default is XlsSelectable</li>
+<li><strong>pre_hook</strong>:  A callable that can take source as an argument</li>
+<li><strong>post_hook</strong>:  A callable that can take the output of XlsSelectable.parse() as an argument.</li>
+</ul>
+
+<h6 id="returns">Returns</h6>
+
+<blockquote>
+  <p>A single populated Selectable of type as specified by selectable param</p>
+</blockquote>
+</div>
+
+
+                </section>
     </main>
 <script>
     function escapeHTML(html) {
