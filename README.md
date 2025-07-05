@@ -34,7 +34,7 @@ You write a fairly concise script
 
 ```python
 from tidychef import acquire, filters, preview
-from tidychef.direction import below, down, right
+from tidychef.direction import down, right
 from tidychef.output import Column, TidyData
 
 # Load a CSV table from a URL
@@ -54,11 +54,11 @@ preview(observations, bands, assets, names)
 # Build tidy data by associating observations with their corresponding headers
 tidy_data = TidyData(
     observations,
-    # "Band" labels are closest to the right of each value
+    # the observations are closest to the right of bands
     Column(bands.finds_observations_closest(right)),
-    # "Assets" labels are directly below each value
+    # the observations are directly below assets
     Column(assets.finds_observations_directly(below)),
-    # "Names" labels are direcrly to the right of each value
+    # the observations are directyl right of names
     Column(names.finds_observations_directly(right)),
 )
 
