@@ -4,6 +4,26 @@ This document is just an informal holding ground for some thoughts that are baki
 
 **i.e everyting here is speculative!!**
 
+
+## Row and columns
+
+So we rely on `excel.ref()` quite a lot and its great, but we could have simpler and **really** intuitive alias, which feels particularly useful for onboarding people.
+
+example, an ecel_ref that is just a row could be `row()` and a column could be `column()`. AS follow:
+
+```
+selection.excel_ref(2) == selection.row(2)
+
+# and
+
+selection.excel_ref('A') == selection.column('A')
+```
+
+note - do we want ".row**s**" and ".column**s**", to allow say `selection.rows(1:3)` or similar. This also feels like a handy alias.
+
+under the hood its just a wrapper, but would result in much more intuitive day one examples.
+
+
 ## Contiguous Cell Propositions
 
 Note, we need a _waaay_ snappier way of describing this before it gets anywhere near the api.

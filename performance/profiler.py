@@ -1,5 +1,12 @@
 """
 Quick and dirty profiler for tidychef recipes.
+
+This is a bare minimum profiler that runs each recipe in the scripts directory,
+collects performance statistics, and prints a summary of the results.
+
+This will need to be run in an environment where the tidychef package is installed,
+as a bare minimum starting point - just enough to get a feel for the performance
+of each recipe after any performance related changes.
 """
 
 import cProfile
