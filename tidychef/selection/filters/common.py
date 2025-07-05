@@ -51,7 +51,11 @@ class IsNumeric:
         return "Cell value is numeric"
 
     def __call__(self, cell: Cell):
-        return cell.value.strip().isnumeric()
+        try:
+            float(cell.value.strip())
+        except ValueError:
+            return False
+        return True
 
 
 is_numeric = IsNumeric()
@@ -67,7 +71,10 @@ class IsNotNumeric:
         return "Cell value is not numeric"
 
     def __call__(self, cell: Cell):
-        return not cell.value.strip().isnumeric()
-
+        try:
+            float(cell.value.strip())
+        except ValueError:
+            return True
+        return False
 
 is_not_numeric = IsNotNumeric()

@@ -1,6 +1,6 @@
 # Tidychef
 
-![Tests](https://github.com/mikeAdamss/tidychef/actions/workflows/tests.yml/badge.svg)
+![Tests](https://github.com/mikeAdamss/tidychef/actions/workflows/ci.yml/badge.svg)
 ![100% Test Coverage](./jupyterbook/images/coverage-100.svg)
 ![Static Badge](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12-blue)
 
@@ -34,7 +34,7 @@ You write a fairly concise script
 
 ```python
 from tidychef import acquire, filters, preview
-from tidychef.direction import down, right
+from tidychef.direction import down, right, below
 from tidychef.output import Column, TidyData
 
 # Load a CSV table from a URL

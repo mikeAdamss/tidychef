@@ -735,7 +735,7 @@ following validation errors were encountered:
         self.assert_single_row()
 
         return self
-    
+
     @dontmutate
     def column(self, column_letter: str):
         """

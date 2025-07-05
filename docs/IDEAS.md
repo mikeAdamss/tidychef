@@ -4,24 +4,9 @@ This document is just an informal holding ground for some thoughts that are baki
 
 **i.e everyting here is speculative!!**
 
+## Do better examples!!!!
 
-## Row and columns
-
-So we rely on `excel.ref()` quite a lot and its great, but we could have simpler and **really** intuitive alias, which feels particularly useful for onboarding people.
-
-example, an ecel_ref that is just a row could be `row()` and a column could be `column()`. AS follow:
-
-```
-selection.excel_ref(2) == selection.row(2)
-
-# and
-
-selection.excel_ref('A') == selection.column('A')
-```
-
-note - do we want ".row**s**" and ".column**s**", to allow say `selection.rows(1:3)` or similar. This also feels like a handy alias.
-
-under the hood its just a wrapper, but would result in much more intuitive day one examples.
+The examples are all fine but with could probably all be cleaner. We're adding an cognitive load to onboarding here that we probably don't need to.
 
 
 ## Contiguous Cell Propositions
@@ -97,26 +82,6 @@ in fact .....maybe.... we put an `is_bold()` on `Selectable` and raise a "format
 
 It doesn't feel like something someone would use all that much once they've got a grip on the api. Wait and see but (unless we need other config options) it might not be worth having.
 
-
-## Table block
-
-We seem to do a lot of:
-
-- go to a cell
-- expand(right)
-- expand(down)
-- is_not_blank()
-
-which makes sense, most sheets have a solid rectangular block of values or two we need to sweep up, so we can make this a lot easier?
-
-i.e
-
-```
-observations = selection.from_corner_cell(<one selected cell>)  # note, name needs thought
-```
-
-Humans read left to right and up to down so we naturally always start at the top left of a rectangular-ish block of values, so can it literally just be this clean?
-
 ## Sweep
 
 Similar to table block, there's potentially a repeating sceanrio where there are lots of occasions where we want to largely grab everyting relative to a cardinal direction from a single point, so effectively
@@ -141,6 +106,8 @@ and possibly
 
 it _feels_ like could potentially simplify a lot of recipes but (a) "sweep" doesn't quite capture the behavioud and (b) it could bequite unintuitive to "sweep" from multiple points, wemight to enforce the single cell starting point which would need careful conventions and handling to be obvious.
 
-## Raise None Selectors
+## Raise of emply Selector returns
 
 I cant see any reason why any Selectable method that reults in 0 selectec cells would be desirable. Should we just raise when this happens? That feels like it'd make debugging easier. 
+
+Maybe a decorator, i.e _something_ like `@ensure_has_cells`.
