@@ -24,9 +24,10 @@ jobs:
           python -m pip install poetry
           poetry install
       - name: Check import sorting with isort
-        run: poetry run isort --check-only .
+        run: poetry run isort --check-only ./**/*.py
       - name: Check code formatting with black
-        run: poetry run black --check .
+        run: poetry run black --check ./**/*.py
+      - name: Check for unused imports with pylint
       - name: Check code quality with ruff
         run: poetry run ruff check ./tidychef
 
