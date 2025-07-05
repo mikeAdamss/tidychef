@@ -233,7 +233,7 @@ class Closest(BaseLookupEngine):
         :param floor: The lowest range index to consider
         """
 
-        if self.bumped == False and index != 0:
+        if self.bumped is False and index != 0:
             new_index = index - 1
             self.bumped = True
         else:
@@ -257,7 +257,7 @@ class Closest(BaseLookupEngine):
         :param floor: The highest range index to consider
         """
 
-        if self.bumped == False and index != len(self.ranges.ordered_cell_ranges):
+        if self.bumped is False and index != len(self.ranges.ordered_cell_ranges):
             new_index = index + 1
             self.bumped = True
         else:

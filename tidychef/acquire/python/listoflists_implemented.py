@@ -5,12 +5,10 @@ Holds the code that defines the python list_of_lists reader.
 from typing import Callable, List, Optional
 
 from tidychef.acquire.base import BaseReader
+from tidychef.acquire.main import acquirer
 from tidychef.models.source.cell import Cell
 from tidychef.models.source.table import Table
 from tidychef.selection.selectable import Selectable
-
-from ..base import BaseReader
-from ..main import acquirer
 
 
 def list_of_lists(

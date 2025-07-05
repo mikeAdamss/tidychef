@@ -31,6 +31,7 @@ pytest-cov = "^3.0.0"
 jupyter-book = "^0.15.1"
 pytest-mock = "^3.11.1"
 tox = "^4.6.4"
+ruff = "^0.12.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

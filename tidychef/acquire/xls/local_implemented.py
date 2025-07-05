@@ -8,12 +8,10 @@ from typing import Callable, List, Optional, Union
 import xlrd
 
 from tidychef.acquire.base import BaseReader
+from tidychef.acquire.main import acquirer
+from tidychef.acquire.xls.shared import sheets_from_workbook
 from tidychef.selection.selectable import Selectable
 from tidychef.selection.xls.xls import XlsSelectable
-
-from ..base import BaseReader
-from ..main import acquirer
-from .shared import sheets_from_workbook
 
 
 def local(
@@ -85,12 +83,14 @@ class LocalXlsReader(BaseReader):
         kwargs.pop("custom_time_formats", None)
 
         workbook: xlrd.Book = xlrd.open_workbook(source, formatting_info=True)
-        
-        sheets = sheets_from_workbook(source, selectable, workbook, custom_time_formats, self.tables, **kwargs)
+
+        sheets = sheets_from_workbook(
+            source, selectable, workbook, custom_time_formats, self.tables, **kwargs
+        )
 
         # In this instance we've filtered the tables at the point of reading, so
         # remove the post load filter.
-        self.tables = None 
+        self.tables = None
 
         if len(sheets) == 1:
             return sheets[0]

@@ -121,6 +121,7 @@ def test_unknown_xls_http_time_format_can_be_specified(mocker):
         "10/10/00",
     ]
 
+
 def test_unknown_xls_http_time_format_warning(caplog, mocker):
     """
     Test that were we don't have knowledge of an xlsx time

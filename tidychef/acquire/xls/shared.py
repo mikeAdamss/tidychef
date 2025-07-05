@@ -1,6 +1,6 @@
-import re
 import datetime
 import logging
+import re
 from typing import Any, Dict, List, Union
 
 import xlrd
@@ -39,7 +39,7 @@ def sheets_from_workbook(
     workbook: xlrd.book,
     custom_time_formats: Dict[str, str],
     tables_regex: str,
-    **kwargs
+    **kwargs,
 ) -> Union[XlsSelectable, List[XlsSelectable]]:
     assert isinstance(workbook, xlrd.Book)
 
@@ -73,29 +73,35 @@ def sheets_from_workbook(
                         )
 
                         if strformat_pattern is None:
-                            xy = f'x:{x}, y:{y}'
+                            xy = f"x:{x}, y:{y}"
                             if xls_time_format not in time_format_warnings:
                                 time_format_warnings[xls_time_format] = []
                             time_format_warnings[xls_time_format].append(xy)
                             cell_value = cell.value
                         else:
                             cell_as_datetime = datetime.datetime(
-                            *xlrd.xldate_as_tuple(cell.value, xlrd.book.Book.datemode)
+                                *xlrd.xldate_as_tuple(
+                                    cell.value, xlrd.book.Book.datemode
+                                )
                             )
                             cell_value = cell_as_datetime.strftime(strformat_pattern)
                     else:
                         cell_as_datetime = datetime.datetime(
                             *xlrd.xldate_as_tuple(cell.value, xlrd.book.Book.datemode)
-                            )
+                        )
                         cell_value = cell_as_datetime.strftime(strformat_pattern)
                 else:
                     cell_value = str(cell.value)
                 table.add_cell(Cell(x=x, y=y, value=cell_value if cell_value else ""))
 
         for bad_fmt, examples in time_format_warnings.items():
-            time_issue_cells = ",".join(examples[:5]) if len(examples) > 5 else ",".join(examples)
-            logging.warning(f'''When processing table "{worksheet_name}" an unknown excel time format "{bad_fmt}" was encountered. Using raw cell value instead. 
-For more details on handling excel time formatting see tidychef documentation. Cell(s) in question (max 5 shown): {time_issue_cells}''')
+            time_issue_cells = (
+                ",".join(examples[:5]) if len(examples) > 5 else ",".join(examples)
+            )
+            logging.warning(
+                f"""When processing table "{worksheet_name}" an unknown excel time format "{bad_fmt}" was encountered. Using raw cell value instead. 
+For more details on handling excel time formatting see tidychef documentation. Cell(s) in question (max 5 shown): {time_issue_cells}"""
+            )
 
         tidychef_selectables.append(
             selectable(table, source=source, name=worksheet_name)

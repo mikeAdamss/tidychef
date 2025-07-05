@@ -41,6 +41,7 @@ def test_read_local_xlsx_from_str():
     assert sheet.cells == sheet.pcells
     assert len(sheet.cells) == 4455
 
+
 def test_unknown_xlsx_local_time_format_can_be_specified(mocker):
     """
     Test that were we don't have knowledge of an xlsx time
@@ -51,7 +52,9 @@ def test_unknown_xlsx_local_time_format_can_be_specified(mocker):
     mocker.patch("tidychef.acquire.xlsx.shared.xlsx_time_formats", return_value={})
 
     xlsx_path: Path = path_to_fixture("xlsx", "dates-times.xlsx")
-    sheet: XlsxSelectable = acquire.xlsx.local(xlsx_path, tables="Sheet1",
+    sheet: XlsxSelectable = acquire.xlsx.local(
+        xlsx_path,
+        tables="Sheet1",
         custom_time_formats={"d/m/yyyy": "%d/%m/%y"},
     )
 
