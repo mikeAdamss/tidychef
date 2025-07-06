@@ -56,7 +56,7 @@ chapters:
     - file: examples/basic/basic
       sections:
         - file: examples/basic/bands
-        - file: examples/basic/oic-1a-table
+        - file: examples/basic/oic-tables
         - file: examples/basic/monthly-gdp-tables
         - file: examples/basic/house-prices
         - file: examples/basic/service-industry
