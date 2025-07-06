@@ -42,7 +42,7 @@ def test_apply_results_are_cached_so_same_modification_is_not_resolved_multiple_
     ).label_as("unused but required")
 
     column = Column(
-        data.excel_ref("1").finds_observations_directly(down), apply=lambda x: x
+        data.excel_ref("1").attach_directly(down), apply=lambda x: x
     )
     for ob_cell in data - data.excel_ref("1"):
         column.resolve_column_cell_from_obs_cell(ob_cell)
@@ -63,10 +63,10 @@ def test_apply_results_are_unique_to_a_given_column_context():
     )
 
     column1 = Column(
-        data.excel_ref("1").finds_observations_directly(down),
+        data.excel_ref("1").attach_directly(down),
         apply=lambda x: "foo " + x,
     )
-    column2 = Column(data.excel_ref("1").finds_observations_directly(down))
+    column2 = Column(data.excel_ref("1").attach_directly(down))
     for ob_cell in data - data.excel_ref("1"):
         assert column1.resolve_column_cell_from_obs_cell(ob_cell).value == "foo Male"
         assert column2.resolve_column_cell_from_obs_cell(ob_cell).value == "Male"

@@ -617,7 +617,7 @@ following validation errors were encountered:
         self.cells += [x for x in additional_cells if x not in self.cells]
         return self
 
-    def finds_observations_directly(self, direction: Direction) -> Directly:
+    def attach_directly(self, direction: Direction) -> Directly:
         """
         Creates and returns a class:Directly lookup engine
         that can resolve the correct cell from this selection
@@ -644,7 +644,7 @@ following validation errors were encountered:
         # As such we need to reverse the stated direction.
         return Directly(self.label, self, direction.inverted())
 
-    def finds_observations_closest(self, direction: Direction) -> Closest:
+    def attach_closest(self, direction: Direction) -> Closest:
         """
         Creates and returns a class:Closest lookup engine
         that can resolve the correct cell from this selection
@@ -671,7 +671,7 @@ following validation errors were encountered:
         # As such we need to reverse the stated direction.
         return Closest(self.label, self, direction.inverted())
 
-    def finds_observations_within(
+    def attach_within(
         self, direction: Direction, start: Direction, end: Direction
     ) -> Within:
         """
@@ -768,7 +768,7 @@ following validation errors were encountered:
         return self
     
     @dontmutate
-    def box_select(self, remove_blank: bool = True):
+    def expand_to_box(self, remove_blank: bool = True):
         """
         Returns a new selection of cells that are all in the same
         region as the first cell in the current selection.

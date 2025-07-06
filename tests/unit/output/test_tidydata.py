@@ -375,9 +375,9 @@ def test_tidydata_converted_to_dict():
 
     tidy_data = TidyData(
         observations,
-        Column(bands.finds_observations_closest(right)),
-        Column(assets.finds_observations_directly(below)),
-        Column(members.finds_observations_directly(right)),
+        Column(bands.attach_closest(right)),
+        Column(assets.attach_directly(below)),
+        Column(members.attach_directly(right)),
     )
 
     tidy_as_dict = tidy_data.to_dict()

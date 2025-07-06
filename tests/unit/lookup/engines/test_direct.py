@@ -261,7 +261,7 @@ def test_directly_wrapper_via_selectable_down(
     column_selection = selectable_vertical_dimensions.excel_ref("A1").label_as("foo")
     ob: Cell = selectable_vertical_dimensions.excel_ref("A10").cells[0]
     resolved_cell: Cell = Column(
-        column_selection.finds_observations_directly(down)
+        column_selection.attach_directly(down)
     ).resolve_column_cell_from_obs_cell(ob)
     assert resolved_cell._excel_ref() == "A1"
 
@@ -275,4 +275,4 @@ def test_directly_raises(selectable_vertical_dimensions: Selectable):
     column_selection = selectable_vertical_dimensions.excel_ref("A1")
 
     with pytest.raises(MissingLabelError):
-        Column(column_selection.finds_observations_directly(up))
+        Column(column_selection.attach_directly(up))
