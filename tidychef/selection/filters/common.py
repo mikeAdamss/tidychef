@@ -16,10 +16,6 @@ class ContainsString:
 
     substr: str
 
-    @property
-    def explain(self) -> str:
-        return f"Contains string: {self.substr}"
-
     def __call__(self, cell: Cell):
         return self.substr in cell.value
 
@@ -33,10 +29,6 @@ class NotContainsString:
 
     substr: str
 
-    @property
-    def explain(self) -> str:
-        return f"Does not contain string: {self.substr}"
-
     def __call__(self, cell: Cell):
         return self.substr not in cell.value
 
@@ -45,17 +37,8 @@ class IsNumeric:
     """
     The value of the cell is numerical
     """
-
-    @property
-    def explain(self) -> str:
-        return "Cell value is numeric"
-
     def __call__(self, cell: Cell):
-        try:
-            float(cell.value.strip())
-        except ValueError:
-            return False
-        return True
+        return cell.numeric
 
 
 is_numeric = IsNumeric()
@@ -66,15 +49,7 @@ class IsNotNumeric:
     The value of the cell is numerical
     """
 
-    @property
-    def explain(self) -> str:
-        return "Cell value is not numeric"
-
     def __call__(self, cell: Cell):
-        try:
-            float(cell.value.strip())
-        except ValueError:
-            return True
-        return False
+        return not cell.numeric
 
 is_not_numeric = IsNotNumeric()
