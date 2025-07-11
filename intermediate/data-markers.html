@@ -174,9 +174,7 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../how-to-use-this-book.html">How To Use This Book</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../extensibility.html">Extensibility</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../quirks.html">Quirks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-to-use-this-book.html">How to Use This Book</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../basics.html">Chapter 1: Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../basics/acquire.html">Acquire</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/preview.html">Preview</a></li>
@@ -219,42 +217,28 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Chapter 4: Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/basic/basic.html">Basic Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../examples/basic/bands.html">Bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/bands.html">Bands</a></li>
 
 
-<li class="toctree-l3"><a class="reference internal" href="../examples/basic/oic-1a-table.html">Output In Construction: Table 1a</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/oic-table.html">Output In Construction: Tables 1a + 1b</a></li>
 
 
-<li class="toctree-l3"><a class="reference internal" href="../examples/basic/monthly-gdp-tables.html">Monthly GDP Tables: GVA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/service-industry.html">Service Industry</a></li>
 
 
-<li class="toctree-l3"><a class="reference internal" href="../examples/basic/house-prices.html">House Prices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/cornavavirus-loneliness.html">Coronavirus: Loneliness</a></li>
 
-<li class="toctree-l3"><a class="reference internal" href="../examples/basic/service-industry.html">Service Industry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/house-prices.html">House Prices</a></li>
 
+<li class="toctree-l2"><a class="reference internal" href="../examples/tourism.html">Tourism</a></li>
 
-<li class="toctree-l3"><a class="reference internal" href="../examples/basic/cornavavirus-loneliness.html">Coronavirus: Loneliness</a></li>
-
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/intermediate/intermediate.html">Intermediate Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../examples/intermediate/human-development.html">Human Development</a></li>
-
-<li class="toctree-l3"><a class="reference internal" href="../examples/intermediate/household-debt.html">Household Debt Inequalities</a></li>
-
-<li class="toctree-l3"><a class="reference internal" href="../examples/intermediate/tourism.html">Tourism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/monthly-gdp-tables.html">Monthly GDP Tables: GVA</a></li>
 
 
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/validation/validation.html">Validation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../examples/validation/bands.html">Bands (with validation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/household-debt.html">Household Debt Inequalities</a></li>
 
-<li class="toctree-l3"><a class="reference internal" href="../examples/validation/oic-1a-table.html">Output In Construction: Table 1a (with validation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/human-development.html">Human Development</a></li>
 
-</ul>
-</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../technical.html">Chapter 5: Technical Reference</a></li>
@@ -655,38 +639,22 @@ document.write(`
             </body>
             <br>
         </html>
-    </div><div class="output text_html">
-    <html>
-        
-    <style>
-    table, th, td {
-        border: 1px solid;
-    }
+    </div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">37</span>
+<span class="nn">     30     v = &quot;&quot;.join([c for c</span> in <span class="ni">line[&quot;raw&quot;] if not c.isnumeric</span><span class="nt">()])</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span>     <span class="k">return</span> <span class="n">v</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span>     <span class="n">raw_observations</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span>     <span class="n">Column</span><span class="o">.</span><span class="n">horizontal_condition</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">,</span> <span class="n">obs_only</span><span class="p">),</span>
+<span class="g g-Whitespace">     </span><span class="mi">36</span>     <span class="n">Column</span><span class="o">.</span><span class="n">horizontal_condition</span><span class="p">(</span><span class="s2">&quot;Data Marker&quot;</span><span class="p">,</span> <span class="n">data_markers_only</span><span class="p">),</span>
+<span class="ne">---&gt; </span><span class="mi">37</span>     <span class="n">Column</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">left</span><span class="p">)),</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span>     <span class="n">Column</span><span class="p">(</span><span class="n">vehicles</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">down</span><span class="p">)),</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span>     <span class="n">drop</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;raw&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span> <span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
 
-    table {
-        border-collapse: collapse;
-    }
-
-    td {
-        align: center;
-        border: 1px  black solid !important;
-        color: black !important;
-    }
-
-    th, td {
-        padding: 5px;
-    }
-
-    </style>
-    
-            <body>
-                <table>
-                    <tr><td style="background-color:lightgrey">Value</td><td style="background-color:lightgrey">Data Marker</td><td style="background-color:lightgrey">Name</td><td style="background-color:lightgrey">Vehicles</td></tr><tr><td style="background-color:white">5</td><td style="background-color:white"></td><td style="background-color:white">John Lennon</td><td style="background-color:white">Trucks</td></tr><tr><td style="background-color:white">5</td><td style="background-color:white"></td><td style="background-color:white">John Lennon</td><td style="background-color:white">Cars</td></tr><tr><td style="background-color:white">9</td><td style="background-color:white"></td><td style="background-color:white">Ringo Starr</td><td style="background-color:white">Trucks</td></tr><tr><td style="background-color:white">6</td><td style="background-color:white">*</td><td style="background-color:white">Ringo Starr</td><td style="background-color:white">Cars</td></tr><tr><td style="background-color:white">7</td><td style="background-color:white"></td><td style="background-color:white">Mick Jagger</td><td style="background-color:white">Trucks</td></tr><tr><td style="background-color:white">7</td><td style="background-color:white"></td><td style="background-color:white">Mick Jagger</td><td style="background-color:white">Cars</td></tr><tr><td style="background-color:white">9</td><td style="background-color:white"></td><td style="background-color:white">Keith Moon</td><td style="background-color:white">Trucks</td></tr><tr><td style="background-color:white">6</td><td style="background-color:white">**</td><td style="background-color:white">Keith Moon</td><td style="background-color:white">Cars</td></tr><tr><td style="background-color:white">9</td><td style="background-color:white"></td><td style="background-color:white">Pete Townsend</td><td style="background-color:white">Trucks</td></tr>
-                </table>
-            </body>
-            <br>
-        </html>
-    </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class="ne">AttributeError</span>: &#39;CsvSelectable&#39; object has no attribute &#39;finds_observations_directly&#39;
 </pre></div>
 </div>
 </div>

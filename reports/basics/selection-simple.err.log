@@ -1,0 +1,42 @@
+Traceback (most recent call last):
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 158, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+start_cell = table.excel_ref("B9")
+box_of_cells = start_cell.box_select().label_as("Box like selection of value cells")
+preview(box_of_cells, bounded="A5:E12")
+------------------
+
+
+[31m---------------------------------------------------------------------------[39m
+[31mAttributeError[39m                            Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[8][39m[32m, line 2[39m
+[32m      1[39m start_cell = table.excel_ref([33m"[39m[33mB9[39m[33m"[39m)
+[32m----> [39m[32m2[39m box_of_cells = [43mstart_cell[49m[43m.[49m[43mbox_select[49m().label_as([33m"[39m[33mBox like selection of value cells[39m[33m"[39m)
+[32m      3[39m preview(box_of_cells, bounded=[33m"[39m[33mA5:E12[39m[33m"[39m)
+
+[31mAttributeError[39m: 'XlsxSelectable' object has no attribute 'box_select'
+

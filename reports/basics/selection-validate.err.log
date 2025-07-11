@@ -41,18 +41,18 @@ table.excel_ref('B').is_not_blank().validate(against.regex("John"), raise_first_
 [32m      4[39m table: CsvSelectable = acquire.csv.http([33m"[39m[33mhttps://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/csv/bands-wide.csv[39m[33m"[39m)
 [32m----> [39m[32m6[39m [43mtable[49m[43m.[49m[43mexcel_ref[49m[43m([49m[33;43m'[39;49m[33;43mB[39;49m[33;43m'[39;49m[43m)[49m[43m.[49m[43mis_not_blank[49m[43m([49m[43m)[49m[43m.[49m[43mvalidate[49m[43m([49m[43magainst[49m[43m.[49m[43mregex[49m[43m([49m[33;43m"[39;49m[33;43mJohn[39;49m[33;43m"[39;49m[43m)[49m[43m,[49m[43m [49m[43mraise_first_error[49m[43m=[49m[38;5;28;43;01mTrue[39;49;00m[43m)[49m
 
-[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/selection/selectable.py:458[39m, in [36mSelectable.validate[39m[34m(self, validator, raise_first_error)[39m
-[32m    456[39m             [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m validator(cell):
-[32m    457[39m                 [38;5;28;01mif[39;00m raise_first_error:
-[32m--> [39m[32m458[39m                     [38;5;28;01mraise[39;00m CellValidationError(
-[32m    459[39m                         [33mf[39m[33m"""[39m
-[32m    460[39m [33mWhen making selections from table: [39m[38;5;132;01m{[39;00m[38;5;28mself[39m.name[38;5;132;01m}[39;00m[33m the[39m
-[32m    461[39m [33mfollowing validation error was encountered:[39m
-[32m    462[39m [38;5;132;01m{[39;00mvalidator.msg(cell)[38;5;132;01m}[39;00m
-[32m    463[39m [33m                [39m[33m"""[39m
-[32m    464[39m                     )
-[32m    465[39m                 [38;5;28;01melse[39;00m:
-[32m    466[39m                     validation_errors.append(validator.msg(cell))
+[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/selection/selectable.py:457[39m, in [36mSelectable.validate[39m[34m(self, validator, raise_first_error)[39m
+[32m    455[39m             [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m validator(cell):
+[32m    456[39m                 [38;5;28;01mif[39;00m raise_first_error:
+[32m--> [39m[32m457[39m                     [38;5;28;01mraise[39;00m CellValidationError(
+[32m    458[39m                         [33mf[39m[33m"""[39m
+[32m    459[39m [33mWhen making selections from table: [39m[38;5;132;01m{[39;00m[38;5;28mself[39m.name[38;5;132;01m}[39;00m[33m the[39m
+[32m    460[39m [33mfollowing validation error was encountered:[39m
+[32m    461[39m [38;5;132;01m{[39;00mvalidator.msg(cell)[38;5;132;01m}[39;00m
+[32m    462[39m [33m                [39m[33m"""[39m
+[32m    463[39m                     )
+[32m    464[39m                 [38;5;28;01melse[39;00m:
+[32m    465[39m                     validation_errors.append(validator.msg(cell))
 
 [31mCellValidationError[39m: 
 When making selections from table: Unnamed Table the

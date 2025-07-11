@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'examples';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Basic Examples" href="examples/basic/basic.html" />
+    <link rel="next" title="Bands" href="examples/bands.html" />
     <link rel="prev" title="Custom Data Sources" href="advanced/custom-data-sources.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -174,9 +174,7 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="how-to-use-this-book.html">How To Use This Book</a></li>
-<li class="toctree-l1"><a class="reference internal" href="extensibility.html">Extensibility</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quirks.html">Quirks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how-to-use-this-book.html">How to Use This Book</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="basics.html">Chapter 1: Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="basics/acquire.html">Acquire</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basics/preview.html">Preview</a></li>
@@ -219,42 +217,28 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Chapter 4: Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="examples/basic/basic.html">Basic Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="examples/basic/bands.html">Bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/bands.html">Bands</a></li>
 
 
-<li class="toctree-l3"><a class="reference internal" href="examples/basic/oic-1a-table.html">Output In Construction: Table 1a</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/oic-table.html">Output In Construction: Tables 1a + 1b</a></li>
 
 
-<li class="toctree-l3"><a class="reference internal" href="examples/basic/monthly-gdp-tables.html">Monthly GDP Tables: GVA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/service-industry.html">Service Industry</a></li>
 
 
-<li class="toctree-l3"><a class="reference internal" href="examples/basic/house-prices.html">House Prices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/cornavavirus-loneliness.html">Coronavirus: Loneliness</a></li>
 
-<li class="toctree-l3"><a class="reference internal" href="examples/basic/service-industry.html">Service Industry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/house-prices.html">House Prices</a></li>
 
+<li class="toctree-l2"><a class="reference internal" href="examples/tourism.html">Tourism</a></li>
 
-<li class="toctree-l3"><a class="reference internal" href="examples/basic/cornavavirus-loneliness.html">Coronavirus: Loneliness</a></li>
-
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="examples/intermediate/intermediate.html">Intermediate Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="examples/intermediate/human-development.html">Human Development</a></li>
-
-<li class="toctree-l3"><a class="reference internal" href="examples/intermediate/household-debt.html">Household Debt Inequalities</a></li>
-
-<li class="toctree-l3"><a class="reference internal" href="examples/intermediate/tourism.html">Tourism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/monthly-gdp-tables.html">Monthly GDP Tables: GVA</a></li>
 
 
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="examples/validation/validation.html">Validation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="examples/validation/bands.html">Bands (with validation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/household-debt.html">Household Debt Inequalities</a></li>
 
-<li class="toctree-l3"><a class="reference internal" href="examples/validation/oic-1a-table.html">Output In Construction: Table 1a (with validation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/human-development.html">Human Development</a></li>
 
-</ul>
-</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="technical.html">Chapter 5: Technical Reference</a></li>
@@ -468,18 +452,24 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="chapter-4-examples">
 <h1>Chapter 4: Examples<a class="headerlink" href="#chapter-4-examples" title="Link to this heading">#</a></h1>
 <p>This section holds our working examples.</p>
-<p>The sub sections are matched to the chapters of this documentation.</p>
-<p>i.e basic examples only use tools and techniques from the basics chapters, etc.</p>
+<p>The examples are listed in a <em>rough</em> order of complexity.</p>
+<p>Please note - extractions in the real world <em>trend</em> towards the simpler end of the spectrum, but we need to get fairly messy to cover practical uses of tidychef functionality._</p>
 <section id="contents">
 <h2>Contents<a class="headerlink" href="#contents" title="Link to this heading">#</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="examples/basic/basic.html">Basic Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples/intermediate/intermediate.html">Intermediate Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples/validation/validation.html">Validation</a></li>
+<ul class="simple">
+<li><p><a class="reference internal" href="examples/bands.html"><span class="std std-doc">Bands</span></a></p></li>
+<li><p><a class="reference internal" href="examples/oic-table.html"><span class="std std-doc">Output In Construction: Tables 1a + 1b</span></a></p></li>
+<li><p><a class="reference internal" href="examples/service-industry.html"><span class="std std-doc">Service Industry</span></a></p></li>
+<li><p><a class="reference internal" href="examples/cornavavirus-loneliness.html"><span class="std std-doc">Coronavirus Loneliness</span></a></p></li>
+<li><p><a class="reference internal" href="examples/house-prices.html"><span class="std std-doc">House Prices</span></a></p></li>
+<li><p><a class="reference internal" href="examples/tourism.html"><span class="std std-doc">Tourism</span></a></p></li>
+<li><p><a class="reference internal" href="examples/monthly-gdp-tables.html"><span class="std std-doc">Monthly GDP Tables: GVA</span></a></p></li>
+<li><p><a class="reference internal" href="examples/household-debt.html"><span class="std std-doc">Household Debt Inequalities</span></a></p></li>
+<li><p><a class="reference internal" href="examples/human-development.html"><span class="std std-doc">Human Development</span></a></p></li>
 </ul>
-</div>
 </section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -522,11 +512,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="examples/basic/basic.html"
+       href="examples/bands.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Basic Examples</p>
+        <p class="prev-next-title">Bands</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

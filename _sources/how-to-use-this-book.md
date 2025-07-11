@@ -1,23 +1,25 @@
-# How To Use This Book
+# How to Use This Book
 
-This book is organised in a very deliberate fashion to help onboard people to this technology and get them productive in the minimum amount of time and can largely be tackled in sequence.
+This guide is designed to help you become productive with TidyChef as quickly as possible. You don’t need to read everything before getting started—begin experimenting early.
 
-That said, there are some nuances depending on your skillset and goals which I'll try to touch on.
+## Quick Start
 
-- The sections on [extensibility](https://mikeadamss.github.io/tidychef/extensibility.html) and [quirks](https://mikeadamss.github.io/tidychef/quirks.html) are short pages of prose containing supplementary information. There are some useful insights into tidychefs goals and approach here but you can come back to these as needed.
+- Start with **[Chapter 1: Basics](https://mikeadamss.github.io/tidychef/basics.html)**. This introduces TidyChef’s core concepts and how to apply them.
 
-- If you want to get a quick idea of what tidychef does, look at the first few recipes in [basic examples](https://mikeadamss.github.io/tidychef/examples/basic/basic.html) section before coming back here.
+- Then move on to the **[Examples](https://mikeadamss.github.io/tidychef/examples.html)**. These are presented in _roughly_ increasing order of complexity.
 
-- To learn tidychef, start with [Chapter 1: Basics](https://mikeadamss.github.io/tidychef/basics.html). Note - this chapter and the [basic examples](https://mikeadamss.github.io/tidychef/examples/basic/basic.html) are complementary, with the examples limited to and highlighted those things covered in the documentation. Once you're absorbed this you should be able to understand the examples (hands on learners may attempt it the other way around and it may well work, though that's not the way it was written).
+  You don’t need to complete all the documentation before working through examples. Most users find it helpful to alternate between reading and hands-on experimentation. The examples and documentation are designed to reinforce each other.
 
-Once you've done this you'll be able to read and understand a large number of recipes and have a solid grasp of this package and its api. This should be all you need to get up and running with tidychef.
+## Next Steps
 
-- Like Chapter 1, [Chapter 2: Intermediate](https://mikeadamss.github.io/tidychef/intermediate.html) and the [intermediate examples](https://mikeadamss.github.io/tidychef/examples/intermediate/intermediate.html) are also complementary and completing the former should explain anything new you'll encounter in the examples. Be aware though, while the examples for this section use mostly the tools from basic its **against much more complex and messy data sources**. It's probably wise to take some time and practice what you learnt in [Chapter 1: Basics](https://mikeadamss.github.io/tidychef/basics.html) against some data sources of your own before tackling these in earnest.
+- Once you’re comfortable with the basics, proceed to **[Chapter 2: Intermediate](https://mikeadamss.github.io/tidychef/intermediate.html)**. It introduces more advanced techniques for handling messy, real-world data. The example list remains relevant—later entries often reflect intermediate concepts.
 
-I'd consider the above section the final part of the onboarding to full capability with tidychef. After that it's just practice.
+- **[Chapter 3: Advanced](https://mikeadamss.github.io/tidychef/advanced.html)** is for those looking to extend TidyChef or integrate it into broader tooling. This chapter is optional but valuable for power users and developers.
 
-- The [Chapter 3: Advanced](https://mikeadamss.github.io/tidychef/advanced.html) is a more developer-esque section (thought it should be within reach of an experienced tidychef user as well) so should be considered optional. There are some useful things here and you probably _should_ tackle this if you're looking into extending tidychef. You can however be firmly up and running for a while and even producing reliable repeatable data pipelines without tackling this content.
+- The **[Technical Reference](https://mikeadamss.github.io/tidychef/technical.html)** is a detailed API guide, primarily intended for developers.
 
-- The [Chapter 4: Examples](https://mikeadamss.github.io/tidychef/technical.html) section holds all examples recipes and should be tackled alongside the other chapters as detailed above. It does also include some **extensions of prior example recipes with added validation**. While validation is of importance to anyone setting up a repeatable ETL process, for others (such as those doing ad hoc or one off analysis) the significance can vary. This chapter is intended to be extended over time and interested users are encouraged to PR their own examples at the tidychef repository.
+## Notes
 
-- The [Chapter 5: Technical Reference](https://mikeadamss.github.io/tidychef/technical.html) section is purely for the programmers.
+- TidyChef often uses the phrase "Excel reference" or the function `excel_ref()`. This has **nothing** to do with Microsoft Excel or spreadsheets. It's simply a practical convention—saying “Excel reference C3” is immediately understandable, whereas “x offset 2, y offset 4” is not.
+
+- TidyChef is built as an extensible framework. While its core features handle most common needs, it’s designed to be easily extended—supporting new data formats, acquisition methods, selection logic, or domain-specific validation. Extensions integrate cleanly and are fully documented, allowing you to adapt TidyChef to your workflow.

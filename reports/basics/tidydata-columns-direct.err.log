@@ -1,0 +1,68 @@
+Traceback (most recent call last):
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 158, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from tidychef import acquire, preview
+from tidychef.direction import right
+from tidychef.selection import XlsxSelectable
+from tidychef.output import Column, TidyData
+
+table: XlsxSelectable = acquire.xlsx.http("https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx", tables="Table 3a")
+
+# Create our selections
+# Note, we're not taking all observations as we want to keep the 
+# output suitably small for this example.
+observations = table.excel_ref("B9:C18").label_as("Value")
+period = table.excel_ref("A9:A18").label_as("Period")
+
+# First preview the selections
+preview(observations, period, bounded="A4:H18")
+
+# Then create some simple TidyData
+tidy_data = TidyData(
+    observations,
+    Column(period.finds_observations_directly(right))
+)
+
+# And view it
+print(tidy_data)
+------------------
+
+
+[31m---------------------------------------------------------------------------[39m
+[31mAttributeError[39m                            Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[2][39m[32m, line 20[39m
+[32m     15[39m preview(observations, period, bounded=[33m"[39m[33mA4:H18[39m[33m"[39m)
+[32m     17[39m [38;5;66;03m# Then create some simple TidyData[39;00m
+[32m     18[39m tidy_data = TidyData(
+[32m     19[39m     observations,
+[32m---> [39m[32m20[39m     Column([43mperiod[49m[43m.[49m[43mfinds_observations_directly[49m(right))
+[32m     21[39m )
+[32m     23[39m [38;5;66;03m# And view it[39;00m
+[32m     24[39m [38;5;28mprint[39m(tidy_data)
+
+[31mAttributeError[39m: 'XlsxSelectable' object has no attribute 'finds_observations_directly'
+

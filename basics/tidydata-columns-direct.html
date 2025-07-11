@@ -174,9 +174,7 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../how-to-use-this-book.html">How To Use This Book</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../extensibility.html">Extensibility</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../quirks.html">Quirks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-to-use-this-book.html">How to Use This Book</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../basics.html">Chapter 1: Basics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="acquire.html">Acquire</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preview.html">Preview</a></li>
@@ -219,42 +217,28 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Chapter 4: Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/basic/basic.html">Basic Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../examples/basic/bands.html">Bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/bands.html">Bands</a></li>
 
 
-<li class="toctree-l3"><a class="reference internal" href="../examples/basic/oic-1a-table.html">Output In Construction: Table 1a</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/oic-table.html">Output In Construction: Tables 1a + 1b</a></li>
 
 
-<li class="toctree-l3"><a class="reference internal" href="../examples/basic/monthly-gdp-tables.html">Monthly GDP Tables: GVA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/service-industry.html">Service Industry</a></li>
 
 
-<li class="toctree-l3"><a class="reference internal" href="../examples/basic/house-prices.html">House Prices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/cornavavirus-loneliness.html">Coronavirus: Loneliness</a></li>
 
-<li class="toctree-l3"><a class="reference internal" href="../examples/basic/service-industry.html">Service Industry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/house-prices.html">House Prices</a></li>
 
+<li class="toctree-l2"><a class="reference internal" href="../examples/tourism.html">Tourism</a></li>
 
-<li class="toctree-l3"><a class="reference internal" href="../examples/basic/cornavavirus-loneliness.html">Coronavirus: Loneliness</a></li>
-
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/intermediate/intermediate.html">Intermediate Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../examples/intermediate/human-development.html">Human Development</a></li>
-
-<li class="toctree-l3"><a class="reference internal" href="../examples/intermediate/household-debt.html">Household Debt Inequalities</a></li>
-
-<li class="toctree-l3"><a class="reference internal" href="../examples/intermediate/tourism.html">Tourism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/monthly-gdp-tables.html">Monthly GDP Tables: GVA</a></li>
 
 
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/validation/validation.html">Validation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../examples/validation/bands.html">Bands (with validation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/household-debt.html">Household Debt Inequalities</a></li>
 
-<li class="toctree-l3"><a class="reference internal" href="../examples/validation/oic-1a-table.html">Output In Construction: Table 1a (with validation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/human-development.html">Human Development</a></li>
 
-</ul>
-</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../technical.html">Chapter 5: Technical Reference</a></li>
@@ -657,38 +641,19 @@ document.write(`
             </body>
             <br>
         </html>
-    </div><div class="output text_html">
-    <html>
-        
-    <style>
-    table, th, td {
-        border: 1px solid;
-    }
+    </div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">20</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">preview</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A4:H18&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="c1"># Then create some simple TidyData</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span>     <span class="n">observations</span><span class="p">,</span>
+<span class="ne">---&gt; </span><span class="mi">20</span>     <span class="n">Column</span><span class="p">(</span><span class="n">period</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">right</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="c1"># And view it</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
 
-    table {
-        border-collapse: collapse;
-    }
-
-    td {
-        align: center;
-        border: 1px  black solid !important;
-        color: black !important;
-    }
-
-    th, td {
-        padding: 5px;
-    }
-
-    </style>
-    
-            <body>
-                <table>
-                    <tr><td style="background-color:lightgrey">Value</td><td style="background-color:lightgrey">Period</td></tr><tr><td style="background-color:white">-19</td><td style="background-color:white">1998</td></tr><tr><td style="background-color:white">1</td><td style="background-color:white">1998</td></tr><tr><td style="background-color:white">-13.3</td><td style="background-color:white">1999</td></tr><tr><td style="background-color:white">-10</td><td style="background-color:white">1999</td></tr><tr><td style="background-color:white">25.5</td><td style="background-color:white">2000</td></tr><tr><td style="background-color:white">11.7</td><td style="background-color:white">2000</td></tr><tr><td style="background-color:white">2.3</td><td style="background-color:white">2001</td></tr><tr><td style="background-color:white">-6.7</td><td style="background-color:white">2001</td></tr><tr><td style="background-color:white">13.2</td><td style="background-color:white">2002</td></tr><tr><td style="background-color:white">9</td><td style="background-color:white">2002</td></tr><tr><td style="background-color:white">13.8</td><td style="background-color:white">2003</td></tr><tr><td style="background-color:white">24.8</td><td style="background-color:white">2003</td></tr><tr><td style="background-color:white">20.1</td><td style="background-color:white">2004</td></tr><tr><td style="background-color:white">21.5</td><td style="background-color:white">2004</td></tr><tr><td style="background-color:white">-5.9</td><td style="background-color:white">2005</td></tr><tr><td style="background-color:white">2.9</td><td style="background-color:white">2005</td></tr><tr><td style="background-color:white">17.9</td><td style="background-color:white">2006</td></tr><tr><td style="background-color:white">0.3</td><td style="background-color:white">2006</td></tr><tr><td style="background-color:white">15.5</td><td style="background-color:white">2007</td></tr><tr><td style="background-color:white">-1.6</td><td style="background-color:white">2007</td></tr>
-                </table>
-            </body>
-            <br>
-        </html>
-    </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class="ne">AttributeError</span>: &#39;XlsxSelectable&#39; object has no attribute &#39;finds_observations_directly&#39;
 </pre></div>
 </div>
 </div>
@@ -731,118 +696,6 @@ document.write(`
 
 <span class="c1"># And view it</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-    <html>
-        
-    <style>
-    table, th, td {
-        border: 1px solid;
-    }
-
-    table {
-        border-collapse: collapse;
-    }
-
-    td {
-        align: center;
-        border: 1px  black solid !important;
-        color: black !important;
-    }
-
-    th, td {
-        padding: 5px;
-    }
-
-    </style>
-    
-            <table>
-                
-            <tr>
-                <td style="background-color:cyan">Value</td>
-            <tr>
-        
-            <tr>
-                <td style="background-color:#99ff99">Housing</td>
-            <tr>
-        
-            <tr>
-                <td style="background-color:#eeccff">Annual Dataset Identifier</td>
-            <tr>
-        
-            <tr>
-                <td style="background-color:#ffe066">Quarterly Dataset Identifier</td>
-            <tr>
-        
-            <tr>
-                <td style="background-color:#ff4da6">Monthly Dataset Identifier</td>
-            <tr>
-        
-            <tr>
-                <td style="background-color:#ff9933">Period</td>
-            <tr>
-        
-            </table>
-
-            <body>
-                <h2>Table 3a</h2>
-                <table>
-                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td><td style="background-color:lightgrey">G</td><td style="background-color:lightgrey">H</td></tr>
-<tr><td style="background-color:lightgrey">4</td><td style="background-color:white">Percentage change period on period</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
-<tr><td style="background-color:lightgrey">5</td><td style="background-color:white">Time period</td><td style="background-color:#99ff99">Public new housing</td><td style="background-color:#99ff99">Private new housing</td><td style="background-color:#99ff99">Total new housing</td><td style="background-color:#99ff99">Infrastructure new work</td><td style="background-color:#99ff99">Public other new work</td><td style="background-color:#99ff99">Private industrial new work</td><td style="background-color:#99ff99">Private commercial new work</td></tr>
-<tr><td style="background-color:lightgrey">6</td><td style="background-color:white">Annual dataset identifier code</td><td style="background-color:#eeccff">MV5H</td><td style="background-color:#eeccff">MV5I</td><td style="background-color:#eeccff">MVM3</td><td style="background-color:#eeccff">MV5J</td><td style="background-color:#eeccff">MV5K</td><td style="background-color:#eeccff">MV5L</td><td style="background-color:#eeccff">MV5M</td></tr>
-<tr><td style="background-color:lightgrey">7</td><td style="background-color:white">Quarterly dataset identifier code</td><td style="background-color:#ffe066">MV54</td><td style="background-color:#ffe066">MV55</td><td style="background-color:#ffe066">MVM7</td><td style="background-color:#ffe066">MV56</td><td style="background-color:#ffe066">MV57</td><td style="background-color:#ffe066">MV58</td><td style="background-color:#ffe066">MV59</td></tr>
-<tr><td style="background-color:lightgrey">8</td><td style="background-color:white">Monthly dataset identifier code</td><td style="background-color:#ff4da6">MV4O</td><td style="background-color:#ff4da6">MV4P</td><td style="background-color:#ff4da6">MVM2</td><td style="background-color:#ff4da6">MV4Q</td><td style="background-color:#ff4da6">MV4R</td><td style="background-color:#ff4da6">MV4S</td><td style="background-color:#ff4da6">MV4T</td></tr>
-<tr><td style="background-color:lightgrey">9</td><td style="background-color:#ff9933">1998</td><td style="background-color:cyan">-19</td><td style="background-color:cyan">1</td><td style="background-color:white">-1.2</td><td style="background-color:white">-2.8</td><td style="background-color:white">5.4</td><td style="background-color:white">1.9</td><td style="background-color:white">8.4</td></tr>
-<tr><td style="background-color:lightgrey">10</td><td style="background-color:#ff9933">1999</td><td style="background-color:cyan">-13.3</td><td style="background-color:cyan">-10</td><td style="background-color:white">-10.3</td><td style="background-color:white">-2.8</td><td style="background-color:white">12.6</td><td style="background-color:white">3.2</td><td style="background-color:white">12</td></tr>
-<tr><td style="background-color:lightgrey">11</td><td style="background-color:#ff9933">2000</td><td style="background-color:cyan">25.5</td><td style="background-color:cyan">11.7</td><td style="background-color:white">12.9</td><td style="background-color:white">-6.2</td><td style="background-color:white">-5.3</td><td style="background-color:white">-10.7</td><td style="background-color:white">0.8</td></tr>
-<tr><td style="background-color:lightgrey">12</td><td style="background-color:#ff9933">2001</td><td style="background-color:cyan">2.3</td><td style="background-color:cyan">-6.7</td><td style="background-color:white">-5.8</td><td style="background-color:white">7.1</td><td style="background-color:white">0.9</td><td style="background-color:white">2.2</td><td style="background-color:white">-0.7</td></tr>
-<tr><td style="background-color:lightgrey">13</td><td style="background-color:#ff9933">2002</td><td style="background-color:cyan">13.2</td><td style="background-color:cyan">9</td><td style="background-color:white">9.4</td><td style="background-color:white">13.1</td><td style="background-color:white">26.5</td><td style="background-color:white">-20.7</td><td style="background-color:white">3.3</td></tr>
-<tr><td style="background-color:lightgrey">14</td><td style="background-color:#ff9933">2003</td><td style="background-color:cyan">13.8</td><td style="background-color:cyan">24.8</td><td style="background-color:white">23.6</td><td style="background-color:white">-5.7</td><td style="background-color:white">25.5</td><td style="background-color:white">5.6</td><td style="background-color:white">-3.6</td></tr>
-<tr><td style="background-color:lightgrey">15</td><td style="background-color:#ff9933">2004</td><td style="background-color:cyan">20.1</td><td style="background-color:cyan">21.5</td><td style="background-color:white">21.4</td><td style="background-color:white">-12.7</td><td style="background-color:white">12.3</td><td style="background-color:white">3</td><td style="background-color:white">10.3</td></tr>
-<tr><td style="background-color:lightgrey">16</td><td style="background-color:#ff9933">2005</td><td style="background-color:cyan">-5.9</td><td style="background-color:cyan">2.9</td><td style="background-color:white">2</td><td style="background-color:white">-4.1</td><td style="background-color:white">-10</td><td style="background-color:white">-2</td><td style="background-color:white">-4.3</td></tr>
-<tr><td style="background-color:lightgrey">17</td><td style="background-color:#ff9933">2006</td><td style="background-color:cyan">17.9</td><td style="background-color:cyan">0.3</td><td style="background-color:white">1.9</td><td style="background-color:white">-7.8</td><td style="background-color:white">-8.1</td><td style="background-color:white">8.4</td><td style="background-color:white">8.5</td></tr>
-<tr><td style="background-color:lightgrey">18</td><td style="background-color:#ff9933">2007</td><td style="background-color:cyan">15.5</td><td style="background-color:cyan">-1.6</td><td style="background-color:white">0.2</td><td style="background-color:white">-1.4</td><td style="background-color:white">-1.7</td><td style="background-color:white">-2.4</td><td style="background-color:white">10.1</td></tr>
-
-                </table>
-            </body>
-            <br>
-        </html>
-    </div><div class="output text_html">
-    <html>
-        
-    <style>
-    table, th, td {
-        border: 1px solid;
-    }
-
-    table {
-        border-collapse: collapse;
-    }
-
-    td {
-        align: center;
-        border: 1px  black solid !important;
-        color: black !important;
-    }
-
-    th, td {
-        padding: 5px;
-    }
-
-    </style>
-    
-            <body>
-                <table>
-                    <tr><td style="background-color:lightgrey">Value</td><td style="background-color:lightgrey">Period</td><td style="background-color:lightgrey">Housing</td><td style="background-color:lightgrey">Annual Dataset Identifier</td><td style="background-color:lightgrey">Quarterly Dataset Identifier</td><td style="background-color:lightgrey">Monthly Dataset Identifier</td></tr><tr><td style="background-color:white">-19</td><td style="background-color:white">1998</td><td style="background-color:white">Public new housing</td><td style="background-color:white">MV5H</td><td style="background-color:white">MV54</td><td style="background-color:white">MV4O</td></tr><tr><td style="background-color:white">1</td><td style="background-color:white">1998</td><td style="background-color:white">Private new housing</td><td style="background-color:white">MV5I</td><td style="background-color:white">MV55</td><td style="background-color:white">MV4P</td></tr><tr><td style="background-color:white">-13.3</td><td style="background-color:white">1999</td><td style="background-color:white">Public new housing</td><td style="background-color:white">MV5H</td><td style="background-color:white">MV54</td><td style="background-color:white">MV4O</td></tr><tr><td style="background-color:white">-10</td><td style="background-color:white">1999</td><td style="background-color:white">Private new housing</td><td style="background-color:white">MV5I</td><td style="background-color:white">MV55</td><td style="background-color:white">MV4P</td></tr><tr><td style="background-color:white">25.5</td><td style="background-color:white">2000</td><td style="background-color:white">Public new housing</td><td style="background-color:white">MV5H</td><td style="background-color:white">MV54</td><td style="background-color:white">MV4O</td></tr><tr><td style="background-color:white">11.7</td><td style="background-color:white">2000</td><td style="background-color:white">Private new housing</td><td style="background-color:white">MV5I</td><td style="background-color:white">MV55</td><td style="background-color:white">MV4P</td></tr><tr><td style="background-color:white">2.3</td><td style="background-color:white">2001</td><td style="background-color:white">Public new housing</td><td style="background-color:white">MV5H</td><td style="background-color:white">MV54</td><td style="background-color:white">MV4O</td></tr><tr><td style="background-color:white">-6.7</td><td style="background-color:white">2001</td><td style="background-color:white">Private new housing</td><td style="background-color:white">MV5I</td><td style="background-color:white">MV55</td><td style="background-color:white">MV4P</td></tr><tr><td style="background-color:white">13.2</td><td style="background-color:white">2002</td><td style="background-color:white">Public new housing</td><td style="background-color:white">MV5H</td><td style="background-color:white">MV54</td><td style="background-color:white">MV4O</td></tr><tr><td style="background-color:white">9</td><td style="background-color:white">2002</td><td style="background-color:white">Private new housing</td><td style="background-color:white">MV5I</td><td style="background-color:white">MV55</td><td style="background-color:white">MV4P</td></tr><tr><td style="background-color:white">13.8</td><td style="background-color:white">2003</td><td style="background-color:white">Public new housing</td><td style="background-color:white">MV5H</td><td style="background-color:white">MV54</td><td style="background-color:white">MV4O</td></tr><tr><td style="background-color:white">24.8</td><td style="background-color:white">2003</td><td style="background-color:white">Private new housing</td><td style="background-color:white">MV5I</td><td style="background-color:white">MV55</td><td style="background-color:white">MV4P</td></tr><tr><td style="background-color:white">20.1</td><td style="background-color:white">2004</td><td style="background-color:white">Public new housing</td><td style="background-color:white">MV5H</td><td style="background-color:white">MV54</td><td style="background-color:white">MV4O</td></tr><tr><td style="background-color:white">21.5</td><td style="background-color:white">2004</td><td style="background-color:white">Private new housing</td><td style="background-color:white">MV5I</td><td style="background-color:white">MV55</td><td style="background-color:white">MV4P</td></tr><tr><td style="background-color:white">-5.9</td><td style="background-color:white">2005</td><td style="background-color:white">Public new housing</td><td style="background-color:white">MV5H</td><td style="background-color:white">MV54</td><td style="background-color:white">MV4O</td></tr><tr><td style="background-color:white">2.9</td><td style="background-color:white">2005</td><td style="background-color:white">Private new housing</td><td style="background-color:white">MV5I</td><td style="background-color:white">MV55</td><td style="background-color:white">MV4P</td></tr><tr><td style="background-color:white">17.9</td><td style="background-color:white">2006</td><td style="background-color:white">Public new housing</td><td style="background-color:white">MV5H</td><td style="background-color:white">MV54</td><td style="background-color:white">MV4O</td></tr><tr><td style="background-color:white">0.3</td><td style="background-color:white">2006</td><td style="background-color:white">Private new housing</td><td style="background-color:white">MV5I</td><td style="background-color:white">MV55</td><td style="background-color:white">MV4P</td></tr><tr><td style="background-color:white">15.5</td><td style="background-color:white">2007</td><td style="background-color:white">Public new housing</td><td style="background-color:white">MV5H</td><td style="background-color:white">MV54</td><td style="background-color:white">MV4O</td></tr><tr><td style="background-color:white">-1.6</td><td style="background-color:white">2007</td><td style="background-color:white">Private new housing</td><td style="background-color:white">MV5I</td><td style="background-color:white">MV55</td><td style="background-color:white">MV4P</td></tr>
-                </table>
-            </body>
-            <br>
-        </html>
-    </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>

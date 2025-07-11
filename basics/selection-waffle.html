@@ -174,9 +174,7 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../how-to-use-this-book.html">How To Use This Book</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../extensibility.html">Extensibility</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../quirks.html">Quirks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-to-use-this-book.html">How to Use This Book</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../basics.html">Chapter 1: Basics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="acquire.html">Acquire</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preview.html">Preview</a></li>
@@ -219,42 +217,28 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Chapter 4: Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/basic/basic.html">Basic Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../examples/basic/bands.html">Bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/bands.html">Bands</a></li>
 
 
-<li class="toctree-l3"><a class="reference internal" href="../examples/basic/oic-1a-table.html">Output In Construction: Table 1a</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/oic-table.html">Output In Construction: Tables 1a + 1b</a></li>
 
 
-<li class="toctree-l3"><a class="reference internal" href="../examples/basic/monthly-gdp-tables.html">Monthly GDP Tables: GVA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/service-industry.html">Service Industry</a></li>
 
 
-<li class="toctree-l3"><a class="reference internal" href="../examples/basic/house-prices.html">House Prices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/cornavavirus-loneliness.html">Coronavirus: Loneliness</a></li>
 
-<li class="toctree-l3"><a class="reference internal" href="../examples/basic/service-industry.html">Service Industry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/house-prices.html">House Prices</a></li>
 
+<li class="toctree-l2"><a class="reference internal" href="../examples/tourism.html">Tourism</a></li>
 
-<li class="toctree-l3"><a class="reference internal" href="../examples/basic/cornavavirus-loneliness.html">Coronavirus: Loneliness</a></li>
-
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/intermediate/intermediate.html">Intermediate Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../examples/intermediate/human-development.html">Human Development</a></li>
-
-<li class="toctree-l3"><a class="reference internal" href="../examples/intermediate/household-debt.html">Household Debt Inequalities</a></li>
-
-<li class="toctree-l3"><a class="reference internal" href="../examples/intermediate/tourism.html">Tourism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/monthly-gdp-tables.html">Monthly GDP Tables: GVA</a></li>
 
 
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/validation/validation.html">Validation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../examples/validation/bands.html">Bands (with validation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/household-debt.html">Household Debt Inequalities</a></li>
 
-<li class="toctree-l3"><a class="reference internal" href="../examples/validation/oic-1a-table.html">Output In Construction: Table 1a (with validation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/human-development.html">Human Development</a></li>
 
-</ul>
-</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../technical.html">Chapter 5: Technical Reference</a></li>
@@ -811,15 +795,15 @@ document.write(`
 <span class="g g-Whitespace">     </span><span class="mi">23</span>     <span class="bp">self</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 <span class="ne">---&gt; </span><span class="mi">24</span>     <span class="k">return</span> <span class="n">method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="nn">File ~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/selection/selectable.py:538,</span> in <span class="ni">Selectable.waffle</span><span class="nt">(self, direction, additional_selection)</span>
-<span class="g g-Whitespace">    </span><span class="mi">536</span>     <span class="n">highest_x</span> <span class="o">=</span> <span class="n">dfc</span><span class="o">.</span><span class="n">maximum_x_offset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cells</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">537</span>     <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">additional_selection</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="n">highest_x</span><span class="p">]):</span>
-<span class="ne">--&gt; </span><span class="mi">538</span>         <span class="k">raise</span> <span class="n">AmbiguousWaffleError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">539</span>             <span class="s2">&quot;When using waffle right, your additional selections must all &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">540</span>             <span class="s2">&quot;be right of your initial selections.&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">541</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">542</span> <span class="k">if</span> <span class="n">direction</span><span class="o">.</span><span class="n">is_left</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">543</span>     <span class="n">lowest_x</span> <span class="o">=</span> <span class="n">dfc</span><span class="o">.</span><span class="n">minimum_x_offset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cells</span><span class="p">)</span>
+<span class="nn">File ~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/selection/selectable.py:537,</span> in <span class="ni">Selectable.waffle</span><span class="nt">(self, direction, additional_selection)</span>
+<span class="g g-Whitespace">    </span><span class="mi">535</span>     <span class="n">highest_x</span> <span class="o">=</span> <span class="n">dfc</span><span class="o">.</span><span class="n">maximum_x_offset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cells</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">536</span>     <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">additional_selection</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="n">highest_x</span><span class="p">]):</span>
+<span class="ne">--&gt; </span><span class="mi">537</span>         <span class="k">raise</span> <span class="n">AmbiguousWaffleError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">538</span>             <span class="s2">&quot;When using waffle right, your additional selections must all &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">539</span>             <span class="s2">&quot;be right of your initial selections.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">540</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">541</span> <span class="k">if</span> <span class="n">direction</span><span class="o">.</span><span class="n">is_left</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">542</span>     <span class="n">lowest_x</span> <span class="o">=</span> <span class="n">dfc</span><span class="o">.</span><span class="n">minimum_x_offset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cells</span><span class="p">)</span>
 
 <span class="ne">AmbiguousWaffleError</span>: When using waffle right, your additional selections must all be right of your initial selections.
 </pre></div>

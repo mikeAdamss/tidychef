@@ -1,0 +1,77 @@
+Traceback (most recent call last):
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 158, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/user/.pyenv/versions/3.12.11/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from typing import Dict
+from tidychef import acquire, preview, filters
+from tidychef.direction import right, below
+from tidychef.selection import CsvSelectable, filters
+from tidychef.output import TidyData, Column
+
+table: CsvSelectable = acquire.csv.http("https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/csv/bands-wide.csv")
+
+def e_ending_stones(line: Dict[str, str]) -> str:
+    """
+    Returns "True" as string if member ends with "e"
+    and band is "Rolling Stones"
+    """
+    if line["Member"].endswith("e") and line["Band"] == "Rolling Stones":
+        return "True"
+    return "False"
+
+observations = table.filter(filters.is_numeric).label_as("Observation")
+bands = (table.excel_ref("A3") | table.excel_ref("G3")).label_as("Band")
+assets = table.excel_ref('2').is_not_blank().label_as("Asset")
+members = (table.excel_ref("B") | table.excel_ref("H")).is_not_blank().label_as("Member")
+preview(observations, bands, assets, members)
+
+tidy_data = TidyData(
+    observations,
+    Column(bands.finds_observations_closest(right)),
+    Column(assets.finds_observations_directly(below)),
+    Column(members.finds_observations_directly(right)),
+    Column.horizontal_condition("Stones ending with e", e_ending_stones)
+)
+print(tidy_data)
+------------------
+
+
+[31m---------------------------------------------------------------------------[39m
+[31mAttributeError[39m                            Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[2][39m[32m, line 26[39m
+[32m     21[39m members = (table.excel_ref([33m"[39m[33mB[39m[33m"[39m) | table.excel_ref([33m"[39m[33mH[39m[33m"[39m)).is_not_blank().label_as([33m"[39m[33mMember[39m[33m"[39m)
+[32m     22[39m preview(observations, bands, assets, members)
+[32m     24[39m tidy_data = TidyData(
+[32m     25[39m     observations,
+[32m---> [39m[32m26[39m     Column([43mbands[49m[43m.[49m[43mfinds_observations_closest[49m(right)),
+[32m     27[39m     Column(assets.finds_observations_directly(below)),
+[32m     28[39m     Column(members.finds_observations_directly(right)),
+[32m     29[39m     Column.horizontal_condition([33m"[39m[33mStones ending with e[39m[33m"[39m, e_ending_stones)
+[32m     30[39m )
+[32m     31[39m [38;5;28mprint[39m(tidy_data)
+
+[31mAttributeError[39m: 'CsvSelectable' object has no attribute 'finds_observations_closest'
+

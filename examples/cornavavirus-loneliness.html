@@ -1,0 +1,920 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Coronavirus: Loneliness &#8212; Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/cornavavirus-loneliness';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="House Prices" href="house-prices.html" />
+    <link rel="prev" title="Service Industry" href="service-industry.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Tidychef
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../how-to-use-this-book.html">How to Use This Book</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics.html">Chapter 1: Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/acquire.html">Acquire</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/preview.html">Preview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/selection-simple.html">Selection: Simple</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/selection-operators.html">Selection: Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/selection-expand-fill.html">Selection: Expand &amp; Fill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/selection-warnings.html">Selection: Multiple Selection Warnings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/selection-shift.html">Selection: Shift</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/selection-regex.html">Selection: Regex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/selection-filters.html">Selection: Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/selection-waffle.html">Selection: Waffle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/selection-useful.html">Selection: Simple &amp; Useful</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/selection-validate.html">Selection: Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-closest.html">TidyData: Closest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-constants.html">tidychef: Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-writing.html">TidyData: Writing To Csv</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../intermediate.html">Chapter 2: Intermediate</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intermediate/apply.html">Apply</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intermediate/concatenation.html">TidyData: Concatenation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intermediate/iterating.html">Iterating Tables/Sheets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intermediate/duplicates.html">TidyData: Duplicate Rows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intermediate/horizontal-conditions.html">TidyData: Horizontal Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intermediate/data-markers.html">TidyData: Data Markers &amp; Dropping Columns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intermediate/pandas.html">Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intermediate/validation.html">TidyData: Column: validate=</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intermediate/within.html">TidyData: Within</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intermediate/against.html">Against (Creating New Validators)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intermediate/best-practice.html">Best Practice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intermediate/time.html">Time</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../advanced.html">Chapter 3: Advanced</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advanced/advanced-acquisition.html">Advanced Acquisition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advanced/custom-selectables.html">Custom Selectables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advanced/custom-data-sources.html">Custom Data Sources</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../examples.html">Chapter 4: Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bands.html">Bands</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="oic-table.html">Output In Construction: Tables 1a + 1b</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="service-industry.html">Service Industry</a></li>
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Coronavirus: Loneliness</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="house-prices.html">House Prices</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="tourism.html">Tourism</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="monthly-gdp-tables.html">Monthly GDP Tables: GVA</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="household-debt.html">Household Debt Inequalities</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="human-development.html">Human Development</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../technical.html">Chapter 5: Technical Reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mikeAdamss/tidychef" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mikeAdamss/tidychef/issues/new?title=Issue%20on%20page%20%2Fexamples/cornavavirus-loneliness.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/examples/cornavavirus-loneliness.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Coronavirus: Loneliness</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Coronavirus: Loneliness</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-structure">Tutorial Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source">Source</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nuances">Nuances</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subtracting-junk-text">Subtracting junk text</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sex-why-the-double-male-selection">Sex - why the double ‘Male’ selection?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#output">Output</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="coronavirus-loneliness">
+<h1>Coronavirus: Loneliness<a class="headerlink" href="#coronavirus-loneliness" title="Link to this heading">#</a></h1>
+<p>An irregular shaped spreadsheet dataset originally published by the UK Office for National Statistics.</p>
+<section id="tutorial-structure">
+<h2>Tutorial Structure<a class="headerlink" href="#tutorial-structure" title="Link to this heading">#</a></h2>
+<p>With these example tutorials I’m going to comment heavily and cover nuances in a follow up section (with liberal targetted previews as needed) as it’s the easiest way to grapple with new ideas. It may also be worth opening up these notebooks yourself (they’re in <code class="docutils literal notranslate"><span class="pre">./jupyterbook</span></code> in the <a class="reference external" href="https://github.com/mikeAdamss/tidychef">tidychef</a> github repo) so you can run, alter and generally have a play about with this yourself as part of your learning.</p>
+<p>We’ll cover:</p>
+<ul class="simple">
+<li><p>source data</p></li>
+<li><p>requirements, what we’re aiming to do here</p></li>
+<li><p>show the full script (all logic commented)</p></li>
+<li><p>output the selection preview</p></li>
+<li><p>nuances (where applicable)</p></li>
+<li><p>view the output</p></li>
+</ul>
+<p>This sequencing is necessary as the output for some of the example is <strong>really</strong> long so that necessitates it coming last. If you’re viewing this via a jupyter book (i.e on the site) you can navigate between the above sections via your right hand menu.</p>
+<p><em>Note - these tutorial scripts might seem verbose due all the comments but that’s ok (this is a tutorial after all). If you take them out you end up with a fairly succinct and human readable encapsulation of what would otherwise (with existing tools) be a rather convoluted and fragile set of instructions to express.</em></p>
+<p>In virtually all cases I’ll make heavy use of <code class="docutils literal notranslate"><span class="pre">preview</span></code> and <code class="docutils literal notranslate"><span class="pre">bounded</span></code> to only look at relevant parts of what can be quite large datasets. Downloads links are provided for the source data.</p>
+</section>
+<section id="source">
+<h2>Source<a class="headerlink" href="#source" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tidychef</span><span class="w"> </span><span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tidychef.selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">XlsxSelectable</span>
+
+<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/xlsx/coronavirusandlonelinessreferencetable.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;1.4 Loneliness by sex&quot;</span><span class="p">)</span>
+<span class="n">preview</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A1:F24&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <table>
+                
+            </table>
+
+            <body>
+                <h2>1.4 Loneliness by sex</h2>
+                <table>
+                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td></tr>
+<tr><td style="background-color:lightgrey">1</td><td style="background-color:white">Proportion of people who feel lonely, by sex, Great Britain 3rd April to 3rd May 2020</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">2</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">3</td><td style="background-color:white">Definitions: 
+
+Feeling often/ always lonely
+Adults aged 16 and over across Great Britain were asked how often they felt lonely, where the options were "often/always" / "some of the time" / "occasionally" / "hardly ever" / "never". Those reporting feeling lonely often / always is used as the indicator.
+
+Feeling lonely in the past 7 days
+Adults aged 16 and over across Great Britain were asked "In the past seven days, how has your well-being being affected?". This indicator is measured by those then reporting "Feeling lonely". </td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">4</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Percentage</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:white"></td><td style="background-color:white">Male</td><td style="background-color:white">Female</td><td style="background-color:white">All People</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:white">Often/Always</td><td style="background-color:white">5.1</td><td style="background-color:white">4.9</td><td style="background-color:white">5</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:white">Lower 95% Confidence Interval </td><td style="background-color:white">3.7</td><td style="background-color:white">3.9</td><td style="background-color:white">4.1</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">9</td><td style="background-color:white">Upper 95% Confidence Interval </td><td style="background-color:white">6.6</td><td style="background-color:white">6</td><td style="background-color:white">5.9</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">10</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">11</td><td style="background-color:white">Sample size (rounded)</td><td style="background-color:white">2400</td><td style="background-color:white">2860</td><td style="background-color:white">5260</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">12</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Percentage</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">13</td><td style="background-color:white"></td><td style="background-color:white">Male</td><td style="background-color:white">Female</td><td style="background-color:white">All People</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">14</td><td style="background-color:white">Felt lonely in past 7 days</td><td style="background-color:white">29.8</td><td style="background-color:white">31.8</td><td style="background-color:white">30.9</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">15</td><td style="background-color:white">Lower 95% Confidence Interval </td><td style="background-color:white">25.8</td><td style="background-color:white">28.5</td><td style="background-color:white">28.4</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">16</td><td style="background-color:white">Upper 95% Confidence Interval </td><td style="background-color:white">33.8</td><td style="background-color:white">35.1</td><td style="background-color:white">33.5</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">17</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">18</td><td style="background-color:white">Sample size (rounded)</td><td style="background-color:white">1000</td><td style="background-color:white">1450</td><td style="background-color:white">2440</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">19</td><td style="background-color:white">Source: Opinions and Lifestyle Survey, Office for National Statistics</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">20</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">21</td><td style="background-color:white">Notes:</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">22</td><td style="background-color:white">1. All respondents were asked "How often do you feel lonely?". Therefore the base population for those reporting often/ always lonely is those aged 16 and over in Great Britain (n= 5,260)</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">23</td><td style="background-color:white">2. Respondents were asked 'In the past seven days, how has your well-being being affected?' giving the option for noting 'Feeling lonely' if they have already noted that they were 'very worried' or 'somewhat worried' about the 'effect that Coronavirus (COVID-19) is having on their life right now?' and if they reported 'My well-being is being affected (for example, boredom, loneliness, anxiety and stress)' when asked "In which ways is Coronavirus (COVID-19) affecting your life?" (n= 2,440)</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">24</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+
+                </table>
+            </body>
+            <br>
+        </html>
+    </div></div>
+</div>
+<p>From an xlsx source which can be <a class="reference external" href="https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/xlsx/coronavirusandlonelinessreferencetable.xlsx">downloaded here</a>.</p>
+</section>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>We’ll take the priciple description of lonliness (Often/Always etc) as a “Lonliness” column.</p></li>
+<li><p>We’ll take sex as a “Sex” column.</p></li>
+<li><p>Sample size will be taken as a “Sample Size” column.</p></li>
+<li><p>We’ll add a unit of measure so our data makes sense.</p></li>
+</ul>
+<p>One the whole thiis is a particularly good example or a <em>very</em> irregularly presented table, in terms of readibility this was clearly very much constructed for a human not a machine to read.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tidychef</span><span class="w"> </span><span class="kn">import</span> <span class="n">acquire</span><span class="p">,</span> <span class="n">preview</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tidychef.direction</span><span class="w"> </span><span class="kn">import</span> <span class="n">right</span><span class="p">,</span> <span class="n">down</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">up</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tidychef.output</span><span class="w"> </span><span class="kn">import</span> <span class="n">TidyData</span><span class="p">,</span> <span class="n">Column</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tidychef.selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">XlsxSelectable</span>
+
+<span class="c1"># Get the data via the acquire api</span>
+<span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/xlsx/coronavirusandlonelinessreferencetable.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;1.4 Loneliness by sex&quot;</span><span class="p">)</span>
+
+<span class="c1"># Lets find the unwanted footer information so we can dicount it where needed</span>
+<span class="c1"># - (a) select the cell with the text &quot;Source: &quot; in it</span>
+<span class="c1"># - (b) confirm there&#39;s only one of those</span>
+<span class="c1"># - (c) expand to a box selection (think &quot;hold clicking a cell and dragging down right&quot; in excel)</span>
+<span class="n">unwanted_footer</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">cell_containing_string</span><span class="p">(</span><span class="s2">&quot;Source: &quot;</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">expand_to_box</span><span class="p">()</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">table</span> <span class="o">-</span> <span class="n">unwanted_footer</span>
+
+<span class="c1"># - (a) get the column with Male in it</span>
+<span class="c1"># - (b) narrow it down to just specifc cells from that column with Male in them</span>
+<span class="c1"># - (c) extend/extrude the selection to inlcude two cells to the right of each</span>
+<span class="n">sex</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">column_containing_strings</span><span class="p">([</span><span class="s2">&quot;Male&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">re</span><span class="p">(</span><span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extrude</span><span class="p">(</span><span class="n">right</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Sex&quot;</span><span class="p">)</span>
+
+<span class="c1"># - (a) filter the data to cells with the string &quot;Sample size&quot; in them</span>
+<span class="c1"># - (b) confirm there&#39;s just two of those</span>
+<span class="c1"># - (c) select all cells located to the right of those two</span>
+<span class="c1"># - (d) desregard any blank cells you just selected</span>
+<span class="n">sample_size</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">cells_containing_string</span><span class="p">(</span><span class="s2">&quot;Sample size&quot;</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">assert_len</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Sample Size&quot;</span><span class="p">)</span>
+
+<span class="c1"># For observations, we just want all numeric values that aren&#39;t the sample size</span>
+<span class="n">observations</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">is_numeric</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Observations&quot;</span><span class="p">)</span> <span class="o">-</span> <span class="n">sample_size</span>
+
+<span class="c1"># Loneliness is anything to the left of an observation cell thats not a number</span>
+<span class="n">loneliness</span> <span class="o">=</span> <span class="n">observations</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">left</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_numeric</span><span class="p">()</span>
+
+<span class="c1"># Create a bounded preview inline but also write the full preview to path</span>
+<span class="n">preview</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">sex</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">,</span> <span class="n">loneliness</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A1:F20&quot;</span><span class="p">)</span>
+<span class="n">preview</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">sex</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">,</span> <span class="n">loneliness</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;loneliness.html&quot;</span><span class="p">)</span>
+
+<span class="c1"># Construct the tidydata table</span>
+<span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
+    <span class="n">observations</span><span class="p">,</span> 
+    <span class="n">Column</span><span class="p">(</span><span class="n">sex</span><span class="o">.</span><span class="n">attach_directly</span><span class="p">(</span><span class="n">down</span><span class="p">)),</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">sample_size</span><span class="o">.</span><span class="n">attach_directly</span><span class="p">(</span><span class="n">up</span><span class="p">)),</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">loneliness</span><span class="o">.</span><span class="n">attach_directly</span><span class="p">(</span><span class="n">right</span><span class="p">)),</span>
+    <span class="n">Column</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;Unit of measure&quot;</span><span class="p">,</span> <span class="s2">&quot;Percentage&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">tidy_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;loneliness.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <table>
+                
+            <tr>
+                <td style="background-color:cyan">Observations</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#99ff99">Sex</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#eeccff">Sample Size</td>
+            <tr>
+        
+            <tr>
+                <td style="background-color:#ffe066">Observations</td>
+            <tr>
+        
+            </table>
+
+            <body>
+                <h2>1.4 Loneliness by sex</h2>
+                <table>
+                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td></tr>
+<tr><td style="background-color:lightgrey">1</td><td style="background-color:white">Proportion of people who feel lonely, by sex, Great Britain 3rd April to 3rd May 2020</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">2</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">3</td><td style="background-color:white">Definitions: 
+
+Feeling often/ always lonely
+Adults aged 16 and over across Great Britain were asked how often they felt lonely, where the options were "often/always" / "some of the time" / "occasionally" / "hardly ever" / "never". Those reporting feeling lonely often / always is used as the indicator.
+
+Feeling lonely in the past 7 days
+Adults aged 16 and over across Great Britain were asked "In the past seven days, how has your well-being being affected?". This indicator is measured by those then reporting "Feeling lonely". </td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">4</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Percentage</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:white"></td><td style="background-color:#99ff99">Male</td><td style="background-color:#99ff99">Female</td><td style="background-color:#99ff99">All People</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:#ffe066">Often/Always</td><td style="background-color:cyan">5.1</td><td style="background-color:cyan">4.9</td><td style="background-color:cyan">5</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:#ffe066">Lower 95% Confidence Interval </td><td style="background-color:cyan">3.7</td><td style="background-color:cyan">3.9</td><td style="background-color:cyan">4.1</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">9</td><td style="background-color:#ffe066">Upper 95% Confidence Interval </td><td style="background-color:cyan">6.6</td><td style="background-color:cyan">6</td><td style="background-color:cyan">5.9</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">10</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">11</td><td style="background-color:white">Sample size (rounded)</td><td style="background-color:#eeccff">2400</td><td style="background-color:#eeccff">2860</td><td style="background-color:#eeccff">5260</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">12</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Percentage</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">13</td><td style="background-color:white"></td><td style="background-color:#99ff99">Male</td><td style="background-color:#99ff99">Female</td><td style="background-color:#99ff99">All People</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">14</td><td style="background-color:#ffe066">Felt lonely in past 7 days</td><td style="background-color:cyan">29.8</td><td style="background-color:cyan">31.8</td><td style="background-color:cyan">30.9</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">15</td><td style="background-color:#ffe066">Lower 95% Confidence Interval </td><td style="background-color:cyan">25.8</td><td style="background-color:cyan">28.5</td><td style="background-color:cyan">28.4</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">16</td><td style="background-color:#ffe066">Upper 95% Confidence Interval </td><td style="background-color:cyan">33.8</td><td style="background-color:cyan">35.1</td><td style="background-color:cyan">33.5</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">17</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">18</td><td style="background-color:white">Sample size (rounded)</td><td style="background-color:#eeccff">1000</td><td style="background-color:#eeccff">1450</td><td style="background-color:#eeccff">2440</td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">19</td><td style="background-color:white">Source: Opinions and Lifestyle Survey, Office for National Statistics</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">20</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+
+                </table>
+            </body>
+            <br>
+        </html>
+    </div></div>
+</div>
+</section>
+<section id="nuances">
+<h2>Nuances<a class="headerlink" href="#nuances" title="Link to this heading">#</a></h2>
+<section id="subtracting-junk-text">
+<h3>Subtracting junk text<a class="headerlink" href="#subtracting-junk-text" title="Link to this heading">#</a></h3>
+<p>There’s a nice example here if why tidychef supports the <strong>substraction of one selection from another</strong>. Human first tables have a nasty habit of including all sorts of ad hoc footers and side comments that don’t fit into any sort of regular structured data view of a resource.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">unwanted_footer</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">contains_string</span><span class="p">(</span><span class="s2">&quot;Source: &quot;</span><span class="p">))</span><span class="o">.</span><span class="n">assert_one</span><span class="p">()</span><span class="o">.</span><span class="n">expand_to_box</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>which allows us to casually disregard the junk text later on as needed, i.e</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">loneliness</span> <span class="o">=</span> <span class="n">loneliness</span> <span class="o">-</span> <span class="n">unwanted_footer</span> <span class="c1"># clear it up a bit</span>
+</pre></div>
+</div>
+</section>
+<section id="sex-why-the-double-male-selection">
+<h3>Sex - why the double ‘Male’ selection?<a class="headerlink" href="#sex-why-the-double-male-selection" title="Link to this heading">#</a></h3>
+<p>This probably seems odd at first. The key point here is <strong>re is slow</strong>.</p>
+<p>So this would work:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sex</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">re</span><span class="p">(</span><span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extrude</span><span class="p">(</span><span class="n">right</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Sex&quot;</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p>but this is smarter</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sex</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">column_containing_strings</span><span class="p">([</span><span class="s2">&quot;Male&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">re</span><span class="p">(</span><span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extrude</span><span class="p">(</span><span class="n">right</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Sex&quot;</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p>…in complete honestly, “slow” is relative and unless you’re running <code class="docutils literal notranslate"><span class="pre">re</span></code> against 10’s of thousands of cells it’s probably fine, even then its minutes not hours -neverthelss- it <em>is</em> a lot slower than the other standard methods so I wanted to make the point. It’s good practice to always aim to tighten your selection <em>prior</em> to <code class="docutils literal notranslate"><span class="pre">re</span></code> where it’s viable to.</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="output">
+<h1>Output<a class="headerlink" href="#output" title="Link to this heading">#</a></h1>
+<p>The full preview can be <a class="reference download internal" download="" href="../_downloads/34de831cbd27d14f494c971249f96400/loneliness.html"><span class="xref download myst">viewed here</span></a>.</p>
+<p>The tidy data can be <a class="reference download internal" download="" href="../_downloads/34de831cbd27d14f494c971249f96400/loneliness.html"><span class="xref download myst">downloaded here</span></a> and a full inline preview of the tidydata generated is shown below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <body>
+                <table>
+                    <tr><td style="background-color:lightgrey">Observations</td><td style="background-color:lightgrey">Sex</td><td style="background-color:lightgrey">Sample Size</td><td style="background-color:lightgrey">Observations</td><td style="background-color:lightgrey">Unit of measure</td></tr><tr><td style="background-color:white">Often/Always</td><td style="background-color:white">Male</td><td style="background-color:white">2400</td><td style="background-color:white">Often/Always</td><td style="background-color:white">Percentage</td></tr><tr><td style="background-color:white">Often/Always</td><td style="background-color:white">Female</td><td style="background-color:white">2860</td><td style="background-color:white">Often/Always</td><td style="background-color:white">Percentage</td></tr><tr><td style="background-color:white">Often/Always</td><td style="background-color:white">All People</td><td style="background-color:white">5260</td><td style="background-color:white">Often/Always</td><td style="background-color:white">Percentage</td></tr><tr><td style="background-color:white">Lower 95% Confidence Interval </td><td style="background-color:white">Male</td><td style="background-color:white">2400</td><td style="background-color:white">Lower 95% Confidence Interval </td><td style="background-color:white">Percentage</td></tr><tr><td style="background-color:white">Lower 95% Confidence Interval </td><td style="background-color:white">Female</td><td style="background-color:white">2860</td><td style="background-color:white">Lower 95% Confidence Interval </td><td style="background-color:white">Percentage</td></tr><tr><td style="background-color:white">Lower 95% Confidence Interval </td><td style="background-color:white">All People</td><td style="background-color:white">5260</td><td style="background-color:white">Lower 95% Confidence Interval </td><td style="background-color:white">Percentage</td></tr><tr><td style="background-color:white">Upper 95% Confidence Interval </td><td style="background-color:white">Male</td><td style="background-color:white">2400</td><td style="background-color:white">Upper 95% Confidence Interval </td><td style="background-color:white">Percentage</td></tr><tr><td style="background-color:white">Upper 95% Confidence Interval </td><td style="background-color:white">Female</td><td style="background-color:white">2860</td><td style="background-color:white">Upper 95% Confidence Interval </td><td style="background-color:white">Percentage</td></tr><tr><td style="background-color:white">Upper 95% Confidence Interval </td><td style="background-color:white">All People</td><td style="background-color:white">5260</td><td style="background-color:white">Upper 95% Confidence Interval </td><td style="background-color:white">Percentage</td></tr><tr><td style="background-color:white">Felt lonely in past 7 days</td><td style="background-color:white">Male</td><td style="background-color:white">1000</td><td style="background-color:white">Felt lonely in past 7 days</td><td style="background-color:white">Percentage</td></tr><tr><td style="background-color:white">Felt lonely in past 7 days</td><td style="background-color:white">Female</td><td style="background-color:white">1450</td><td style="background-color:white">Felt lonely in past 7 days</td><td style="background-color:white">Percentage</td></tr><tr><td style="background-color:white">Felt lonely in past 7 days</td><td style="background-color:white">All People</td><td style="background-color:white">2440</td><td style="background-color:white">Felt lonely in past 7 days</td><td style="background-color:white">Percentage</td></tr><tr><td style="background-color:white">Lower 95% Confidence Interval </td><td style="background-color:white">Male</td><td style="background-color:white">1000</td><td style="background-color:white">Lower 95% Confidence Interval </td><td style="background-color:white">Percentage</td></tr><tr><td style="background-color:white">Lower 95% Confidence Interval </td><td style="background-color:white">Female</td><td style="background-color:white">1450</td><td style="background-color:white">Lower 95% Confidence Interval </td><td style="background-color:white">Percentage</td></tr><tr><td style="background-color:white">Lower 95% Confidence Interval </td><td style="background-color:white">All People</td><td style="background-color:white">2440</td><td style="background-color:white">Lower 95% Confidence Interval </td><td style="background-color:white">Percentage</td></tr><tr><td style="background-color:white">Upper 95% Confidence Interval </td><td style="background-color:white">Male</td><td style="background-color:white">1000</td><td style="background-color:white">Upper 95% Confidence Interval </td><td style="background-color:white">Percentage</td></tr><tr><td style="background-color:white">Upper 95% Confidence Interval </td><td style="background-color:white">Female</td><td style="background-color:white">1450</td><td style="background-color:white">Upper 95% Confidence Interval </td><td style="background-color:white">Percentage</td></tr><tr><td style="background-color:white">Upper 95% Confidence Interval </td><td style="background-color:white">All People</td><td style="background-color:white">2440</td><td style="background-color:white">Upper 95% Confidence Interval </td><td style="background-color:white">Percentage</td></tr>
+                </table>
+            </body>
+            <br>
+        </html>
+    </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./examples"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="service-industry.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Service Industry</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="house-prices.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">House Prices</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Coronavirus: Loneliness</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-structure">Tutorial Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source">Source</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nuances">Nuances</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subtracting-junk-text">Subtracting junk text</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sex-why-the-double-male-selection">Sex - why the double ‘Male’ selection?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#output">Output</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By https://github.com/mikeAdamss
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
