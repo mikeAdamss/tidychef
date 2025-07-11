@@ -166,10 +166,10 @@ def test_selectable_closest_wrapper_works(selectable_simple_table: Selectable):
     assert isinstance(
         selectable_simple_table.excel_ref("A1")
         .label_as("foo")
-        .finds_observations_closest(down),
+        .attach_closest(down),
         Closest,
     )
 
     # Constructor should raise if called on an unlabelled selection
     with pytest.raises(MissingLabelError):
-        selectable_simple_table.excel_ref("A1").finds_observations_closest(down)
+        selectable_simple_table.excel_ref("A1").attach_closest(down)

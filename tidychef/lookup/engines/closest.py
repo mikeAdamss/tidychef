@@ -281,7 +281,7 @@ class Closest(BaseLookupEngine):
         """
 
         err_str = """
-                When processing table {table}.
+                When processing table {table}. And column '{label}'.
 
                 Lookup for observation cell '{cell}' is impossible. No
                 cells in your selection exist in direction '{direction.name}'
@@ -307,6 +307,7 @@ class Closest(BaseLookupEngine):
             raise ImpossibleLookupError(
                 err_str.format(
                     table=self.table,
+                    label=self.label,
                     cell=cell,
                     direction=self.direction,
                     axis=axis,

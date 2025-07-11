@@ -111,3 +111,7 @@ it _feels_ like could potentially simplify a lot of recipes but (a) "sweep" does
 I cant see any reason why any Selectable method that reults in 0 selectec cells would be desirable. Should we just raise when this happens? That feels like it'd make debugging easier. 
 
 Maybe a decorator, i.e _something_ like `@ensure_has_cells`.
+
+## Label Previews
+
+It would be nice if people could optionally provide a label/heading for previews.This woulebehandy with multi preview / itertive extraction sceanrios.

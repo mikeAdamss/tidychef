@@ -194,12 +194,24 @@ class Cell(BaseCell):
     # cell formatting.
     cellformat: Optional[CellFormatting] = None
 
+    # Derivable things. Better to do it on load once than every
+    # time we need it.
+    numeric: bool = False
+
     def __post_init__(self):
         """
         We'll store the original value of the cell
         for where a cell value has been changed.
         """
         self._original_value = self.value
+        
+        # Derive if its numeric
+        try:
+            float(self.value)
+            self.numeric = True
+        except (ValueError, TypeError):
+            pass
+
 
     def is_blank(self, disregard_whitespace: bool = True):
         """

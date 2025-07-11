@@ -33,7 +33,6 @@ from tidychef.lookup.engines.direct import Directly
 from tidychef.lookup.engines.within import Within
 from tidychef.models.source.cell import BaseCell, Cell
 from tidychef.models.source.table import LiveTable
-from tidychef.selection.filters import is_not_numeric, is_numeric
 from tidychef.utils.decorators import dontmutate
 
 
@@ -617,7 +616,7 @@ following validation errors were encountered:
         self.cells += [x for x in additional_cells if x not in self.cells]
         return self
 
-    def finds_observations_directly(self, direction: Direction) -> Directly:
+    def attach_directly(self, direction: Direction) -> Directly:
         """
         Creates and returns a class:Directly lookup engine
         that can resolve the correct cell from this selection
@@ -644,7 +643,7 @@ following validation errors were encountered:
         # As such we need to reverse the stated direction.
         return Directly(self.label, self, direction.inverted())
 
-    def finds_observations_closest(self, direction: Direction) -> Closest:
+    def attach_closest(self, direction: Direction) -> Closest:
         """
         Creates and returns a class:Closest lookup engine
         that can resolve the correct cell from this selection
@@ -671,7 +670,7 @@ following validation errors were encountered:
         # As such we need to reverse the stated direction.
         return Closest(self.label, self, direction.inverted())
 
-    def finds_observations_within(
+    def attach_within(
         self, direction: Direction, start: Direction, end: Direction
     ) -> Within:
         """
@@ -710,7 +709,7 @@ following validation errors were encountered:
         return self.excel_ref(row_number)
     
     @dontmutate
-    def row_containing_strings(self, row_strings: List[str]):
+    def row_containing_strings(self, row_strings: List[str], strict=True):
         """
         Specifies a selection of cells from the current selection that are
         all on the same row - but - only where there's at least one cell
@@ -725,10 +724,18 @@ following validation errors were encountered:
             row_cells = dfc.cells_on_y_index(self.cells, y_index)
             found_count = 0
             for wanted in row_strings:
-                if wanted in [cell.value for cell in row_cells]:
-                    found_count += 1
+                if strict:
+                    # If strict, wanted must be exactly equal to the cell value
+                    if wanted in [cell.value for cell in row_cells]:
+                        found_count += 1
+                else:
+                    # If not strict a substring match is fine
+                    for cell in row_cells:
+                        if wanted in cell.value:
+                            found_count += 1
+                            break
             if found_count == len(row_strings):
-                # If we found all the strings in this row, add it to the selection
+                # If we found at least one instance of everying on this row, add it to the selection
                 found_cells += row_cells
 
         self.cells = found_cells
@@ -768,7 +775,7 @@ following validation errors were encountered:
         return self
     
     @dontmutate
-    def box_select(self, remove_blank: bool = True):
+    def expand_to_box(self, remove_blank: bool = True):
         """
         Returns a new selection of cells that are all in the same
         region as the first cell in the current selection.
@@ -793,7 +800,7 @@ following validation errors were encountered:
         """
         Filters the selection to those cells that are numeric.
         """
-        self.cells = self.filter(is_numeric)
+        self.cells = [x for x in self.cells if x.numeric]
         return self
     
     @dontmutate
@@ -801,13 +808,13 @@ following validation errors were encountered:
         """
         Filters the selection to those cells that are not numeric.
         """
-        self.cells = self.filter(is_not_numeric)
+        self.cells = [x for x in self.cells if not x.numeric]
         return self
     
     @dontmutate
     def cell_containing_string(self, string: str, strict: bool = True):
         """
-        Filters the selection to those cells that contain the provided string.
+        Filters the selection to precisely one cell containing or equal to the provided string.
         """
         if strict:
             found_cells = [x for x in self.cells if string == x.value]
@@ -815,4 +822,18 @@ following validation errors were encountered:
             found_cells = [x for x in self.cells if string in x.value]
         self.cells = found_cells
         self.assert_one()
+        return self
+    
+    @dontmutate
+    def cells_containing_string(
+        self, string: str, strict: bool = True
+    ):
+        """
+        Filters the selection to those cells that contain or are equal to the provided strings.
+        """
+        if strict:
+            found_cells = [x for x in self.cells if x.value == string]
+        else:
+            found_cells = [x for x in self.cells if string in x.value]
+        self.cells = found_cells
         return self

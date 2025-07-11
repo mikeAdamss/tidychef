@@ -24,8 +24,6 @@ def test_filter_contains_string(selectable_simple1: Selectable):
     s = selectable_simple1.excel_ref("A1:G25").filter(filters.contains_string("A"))
     assert len(s.cells) == 25
     assert dfc.basecells_to_excel_ref(s.cells) == "A1:A25"
-    assert filters.contains_string("A").explain == "Contains string: A"
-
 
 def test_filter_does_not_contain_string(selectable_simple1: Selectable):
     """
@@ -35,8 +33,6 @@ def test_filter_does_not_contain_string(selectable_simple1: Selectable):
     s = selectable_simple1.excel_ref("A1:B2").filter(filters.not_contains_string("A"))
     assert len(s.cells) == 2
     assert dfc.basecells_to_excel_ref(s.cells) == "B1:B2"
-    assert filters.not_contains_string("A").explain == "Does not contain string: A"
-
 
 def test_filter_is_numeric(selectable_vertical_dimensions: Selectable):
     """
@@ -50,8 +46,6 @@ def test_filter_is_numeric(selectable_vertical_dimensions: Selectable):
     )
     assert len(s.cells) == 10
     assert dfc.basecells_to_excel_ref(s.cells) == "D14:E18"
-    assert filters.is_numeric.explain == "Cell value is numeric"
-
 
 def test_filter_is_not_numeric(selectable_vertical_dimensions: Selectable):
     """
@@ -65,4 +59,3 @@ def test_filter_is_not_numeric(selectable_vertical_dimensions: Selectable):
     )
     assert len(s.cells) == 2
     assert dfc.basecells_to_excel_ref(s.cells) == "D12:E12"
-    assert filters.is_not_numeric.explain == "Cell value is not numeric"

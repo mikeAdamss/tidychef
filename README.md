@@ -46,23 +46,20 @@ table = acquire.csv.http(
 # Select numeric observations and label them
 observations = table.is_numeric().label_as("Value")
 
-# Label headers
+# Select headers and label them
 bands = table.row_containing_strings(["Beatles"]).is_not_blank().label_as("Band")
 assets = table.row_containing_strings(["Cars"]).is_not_blank().label_as("Asset")
-names = table.cell_containing_string("Beatles").shift(down).box_select().is_not_numeric().label_as("Name")
+names = table.cell_containing_string("Beatles").shift(down).expand_to_box().is_not_numeric().label_as("Name")
 
 # We'll request a preview to see our selections
 preview(observations, bands, assets, names)
 
-# Build tidy data by associating observations with their corresponding headers
+# Build tidy data by attaching observations and headers
 tidy_data = TidyData(
     observations,
-    # the observations are closest to the right of bands
-    Column(bands.finds_observations_closest(right)),
-    # the observations are directly below assets
-    Column(assets.finds_observations_directly(below)),
-    # the observations are directyl right of names
-    Column(names.finds_observations_directly(right)),
+    Column(bands.attach_closest(right)),
+    Column(assets.attach_directly(below)),
+    Column(names.attach_directly(right)),
 )
 
 # Export the tidy data to CSV

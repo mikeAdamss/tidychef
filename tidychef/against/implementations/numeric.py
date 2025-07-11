@@ -87,7 +87,11 @@ class IsNotNumericValidator(BaseValidator):
         :param cell: A single tidychef Cell object.
         :return: bool, is it valid or not
         """
-        return not cell.value.isnumeric()
+        try:
+            float(cell.value)
+            return False
+        except ValueError:
+            return True
 
     def msg(self, cell: Cell) -> str:
         """
@@ -117,7 +121,16 @@ class IsNumericValidator(BaseValidator):
         :param cell: A single tidychef Cell object.
         :return: bool, is it valid or not
         """
-        return cell.value.isnumeric()
+
+        # Note: we need to check explictly not use the cell.numeric
+        # property as a validator can be called. on a derived or
+        # modified (post extraction) value, i.e apply= could have
+        # ran
+        try:
+            float(cell.value)
+            return True
+        except ValueError:
+            return False
 
     def msg(self, cell: Cell) -> str:
         """

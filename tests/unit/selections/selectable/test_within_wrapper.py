@@ -29,7 +29,7 @@ def test_within_from_selection():
     )
 
     sex = selection.excel_ref("1").is_not_blank().label_as("Sex")
-    within_lookup: Within = sex.finds_observations_within(
+    within_lookup: Within = sex.attach_within(
         down, start=right(2), end=left(2)
     )
 
@@ -59,7 +59,7 @@ def test_within_from_selection():
     )
 
     sex = selection.excel_ref("3").is_not_blank().label_as("Sex")
-    within_lookup: Within = sex.finds_observations_within(
+    within_lookup: Within = sex.attach_within(
         up, start=left(2), end=right(3)
     )
 
@@ -94,7 +94,7 @@ def test_within_from_selection():
     )
 
     sex = selection.excel_ref("A").is_not_blank().label_as("Sex")
-    within_lookup: Within = sex.finds_observations_within(
+    within_lookup: Within = sex.attach_within(
         right, start=down(2), end=up(1)
     )
 
@@ -133,7 +133,7 @@ def test_within_from_selection():
         .is_not_blank()
         .label_as("Sex")
     )
-    within_lookup: Within = sex.finds_observations_within(
+    within_lookup: Within = sex.attach_within(
         right, start=down(2), end=up(2)
     )
 
@@ -178,7 +178,7 @@ def test_within_from_selection():
         .label_as("Sex")
     )
 
-    within_lookup: Within = sex.finds_observations_within(
+    within_lookup: Within = sex.attach_within(
         left, start=down(3), end=up(2)
     )
 

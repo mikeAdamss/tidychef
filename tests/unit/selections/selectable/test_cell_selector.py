@@ -25,3 +25,17 @@ def test_cell_selector_not_strict(selectable_simple1: Selectable):
     selection = selectable_simple1.column("W").cell_containing_string("97val", strict=False)
     assert len(selection) == 1
     assert selection.cells[0].value == "W97val"
+
+def test_cells_selector(selectable_simple1: Selectable):
+    """
+    Test we can select multiple cells from a selection.
+    """
+    selection = selectable_simple1.cells_containing_string("A2val")
+    assert len(selection) == 1
+
+def test_cells_selector_not_strict(selectable_simple1: Selectable):
+    """
+    Test we can select multiple cells from a selection, not strictly.
+    """
+    selection = selectable_simple1.cells_containing_string("2val", strict=False)
+    assert len(selection) == 260

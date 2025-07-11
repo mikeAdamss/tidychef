@@ -388,12 +388,12 @@ def test_selectable_within_wrapper_works(selectable_simple_table: Selectable):
     assert isinstance(
         selectable_simple_table.excel_ref("A1")
         .label_as("foo")
-        .finds_observations_within(up, left(1), right(1)),
+        .attach_within(up, left(1), right(1)),
         Within,
     )
 
     # Constructor should raise if called on an unlabelled selection
     with pytest.raises(MissingLabelError):
-        selectable_simple_table.excel_ref("A1").finds_observations_within(
+        selectable_simple_table.excel_ref("A1").attach_within(
             up, left(1), right(1)
         )

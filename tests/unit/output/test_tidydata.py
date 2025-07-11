@@ -375,9 +375,9 @@ def test_tidydata_converted_to_dict():
 
     tidy_data = TidyData(
         observations,
-        Column(bands.finds_observations_closest(right)),
-        Column(assets.finds_observations_directly(below)),
-        Column(members.finds_observations_directly(right)),
+        Column(bands.attach_closest(right)),
+        Column(assets.attach_directly(below)),
+        Column(members.attach_directly(right)),
     )
 
     tidy_as_dict = tidy_data.to_dict()
@@ -436,3 +436,24 @@ def test_drop_duplicates_to_path(tidy: TidyData):
     with open("deleteme.txt") as f:
         assert "1,Rock & Roll,Houses,John" in f.read()
     os.remove("deleteme.txt")
+
+def test_add_column(tidy: TidyData):
+    """
+    Test that the tidy_data .add_column() method works as expected.
+    """
+
+    tidy2 = copy.deepcopy(tidy)
+    assert len(tidy2.columns) == 3
+    tidy2.add_column(Column.constant("NewColumn", "NewValue"))
+    assert len(tidy2.columns) == 4
+
+def test_add_column_after_transform_raises(tidy: TidyData):
+    """
+    Test that the tidy_data .add_column() method raises an error
+    if called after the data has been transformed.
+    """
+
+    tidy2 = copy.deepcopy(tidy)
+    tidy2._transform()
+    with pytest.raises(AssertionError):
+        tidy2.add_column(Column.constant("NewColumn", "NewValue"))

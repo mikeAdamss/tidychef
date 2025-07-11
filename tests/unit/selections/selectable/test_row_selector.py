@@ -22,3 +22,12 @@ def test_row_containing_strings(selectable_simple1: Selectable):
     where the row contains all of the strings in the provided list.
     """
     selectable_simple1.row_containing_strings(["A2val", "D2val"]).assert_single_row()
+
+
+def test_row_containing_strings_not_strict(selectable_simple1: Selectable):
+    """
+    Test we can select exactly one row from a selection
+    where the row contains all of the strings in the provided list,
+    but not strictly (i.e. martial string match).
+    """
+    selectable_simple1.row_containing_strings(["A2v", "D2v"], strict=False).assert_single_row()
