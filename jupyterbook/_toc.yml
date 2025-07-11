@@ -6,9 +6,6 @@ root: intro
 chapters:
 
 - file: how-to-use-this-book
-- file: walk
-- file: extensibility
-- file: quirks
 
 - file: basics
   sections:
@@ -45,6 +42,9 @@ chapters:
     - file: intermediate/best-practice
     - file: intermediate/time
 
+- file: extensibility
+- file: quirks
+
 - file: advanced
   sections:
     - file: advanced/advanced-acquisition
@@ -53,25 +53,14 @@ chapters:
 
 - file: examples
   sections:
-    - file: examples/basic/basic
-      sections:
-        - file: examples/basic/bands
-        - file: examples/basic/oic-tables
-        - file: examples/basic/monthly-gdp-tables
-        - file: examples/basic/house-prices
-        - file: examples/basic/service-industry
-        - file: examples/basic/cornavavirus-loneliness
-
-    - file: examples/intermediate/intermediate
-      sections:
-        - file: examples/intermediate/human-development
-        - file: examples/intermediate/household-debt
-        - file: examples/intermediate/tourism
-
-    - file: examples/validation/validation
-      sections:
-        - file: examples/validation/bands
-        - file: examples/validation/oic-1a-table
-    
+    - file: examples/bands
+    - file: examples/oic-table
+    - file: examples/service-industry
+    - file: examples/cornavavirus-loneliness
+    - file: examples/house-prices
+    - file: examples/tourism
+    - file: examples/monthly-gdp-tables
+    - file: examples/household-debt
+    - file: examples/human-development
 
 - file: technical

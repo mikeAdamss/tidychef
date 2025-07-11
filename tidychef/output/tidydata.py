@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import csv
 from pathlib import Path
-from typing import Callable, Dict, List, Optional, Union
+from typing import Callable, Dict, List, Optional, Union, Tuple
 
 import tabulate
 from IPython.display import HTML, display
@@ -50,13 +50,39 @@ class TidyData(BaseOutput):
             """
 
         self.observations = observations
-        self.columns: List[BaseColumn] = columns
+        self.columns: Tuple[BaseColumn] = columns
         self.drop = drop if drop else []
         self.obs_apply = obs_apply
 
         # Don't transform until told to, but once we have
         # only do it once.
         self._data = None
+
+
+    def add_column(self, column: BaseColumn):
+        """
+        Add a column to the TidyData object.
+
+        This method can only be called before the first
+        transformation has been run, i.e. before the first
+        call to ._transform().
+        
+        :param column: A BaseColumn object to add to the TidyData.
+        """
+
+        assert self._data is None, """
+        You can only add columns to TidyData before the first
+        transformation has been run. If you want to add a column
+        after the first transformation, you need to create a new
+        TidyData object with the new column included.
+        """
+
+        assert isinstance(
+            column, BaseColumn
+        ), "You can only add columns of type BaseColumn to TidyData"
+
+        self.columns += (column,)
+
 
     def __get_representation(self):  # pragma: no cover
         """

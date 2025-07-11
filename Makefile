@@ -31,6 +31,8 @@ book: ## Create the jupyter book in /jupyterbook/_build
 
 	cp ./docs/ai-overview.html ./jupyterbook/_build/html/ai-overview.html
 
+	cp ./docs/preamble-preview.html ./jupyterbook/_build/html/examples/preamble-preview.html
+
 
 push_docs: ## Publish the jupyter book to github pages
 	poetry run pip install ghp-import

@@ -21,6 +21,7 @@ def preview(
     show_xy: bool = False,
     multiple_selection_warning: bool = True,
     selection_boundary: bool = False,
+    label: str = None,
 ):
     """
     Create a preview from one of more selections of cells.
