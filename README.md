@@ -104,7 +104,7 @@ This is the bit you need to understand above all - here’s another preview I've
 
 Extensive documentation, including tutorials, real UK government datasets, advanced recipes, and developer guidance is available at:
 
-👉 [mikeadamss.github.io/tidychef](https://mikeadamss.github.io/tidychef/intro.html)
+👉 [mikeadamss.github.io/tidychef](https://mikeadamss.github.io/tidychef/index.html)
 
 
 ## Installation

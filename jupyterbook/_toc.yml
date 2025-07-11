@@ -2,10 +2,8 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: intro
+root: how-to-use-this-book
 chapters:
-
-- file: how-to-use-this-book
 
 - file: basics
   sections:
@@ -41,9 +39,6 @@ chapters:
     - file: intermediate/against
     - file: intermediate/best-practice
     - file: intermediate/time
-
-- file: extensibility
-- file: quirks
 
 - file: advanced
   sections:
