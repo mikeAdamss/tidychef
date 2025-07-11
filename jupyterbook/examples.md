@@ -9,11 +9,11 @@ Please note - extractions in the real world _trend_ towards the simpler end of t
 ## Contents
 
 - [Bands](./examples/bands.ipynb)
-- [Construction](./examples/oic-table.ipynb)
+- [Output In Construction: Tables 1a + 1b](./examples/oic-table.ipynb)
 - [Service Industry](./examples/service-industry.ipynb)
 - [Coronavirus Loneliness](./examples/cornavavirus-loneliness.ipynb)
 - [House Prices](./examples/house-prices.ipynb)
 - [Tourism](./examples/tourism.ipynb)
-- [Monthly GCP Tables](./examples/monthly-gdp-tables.ipynb)
-- [Household Dept](./examples/household-debt.ipynb)
+- [Monthly GDP Tables: GVA](./examples/monthly-gdp-tables.ipynb)
+- [Household Debt](./examples/household-debt.ipynb)
 - [Human Development](./examples/human-development.ipynb)
