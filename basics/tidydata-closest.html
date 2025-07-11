@@ -680,7 +680,7 @@ document.write(`
 
 <span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
     <span class="n">observations</span><span class="p">,</span>
-    <span class="n">Column</span><span class="p">(</span><span class="n">bands</span><span class="o">.</span><span class="n">finds_observations_closest</span><span class="p">(</span><span class="n">right</span><span class="p">))</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">bands</span><span class="o">.</span><span class="n">attach_closest</span><span class="p">(</span><span class="n">right</span><span class="p">))</span>
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
 </pre></div>
@@ -740,18 +740,38 @@ document.write(`
             </body>
             <br>
         </html>
-    </div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">14</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">bands</span> <span class="o">=</span> <span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;A3&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;G3&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Bands&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">preview</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">bands</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="n">observations</span><span class="p">,</span>
-<span class="ne">---&gt; </span><span class="mi">14</span>     <span class="n">Column</span><span class="p">(</span><span class="n">bands</span><span class="o">.</span><span class="n">finds_observations_closest</span><span class="p">(</span><span class="n">right</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
+    </div><div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
 
-<span class="ne">AttributeError</span>: &#39;CsvSelectable&#39; object has no attribute &#39;finds_observations_closest&#39;
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <body>
+                <table>
+                    <tr><td style="background-color:lightgrey">Observations</td><td style="background-color:lightgrey">Bands</td></tr><tr><td style="background-color:white">1</td><td style="background-color:white">Beatles</td></tr><tr><td style="background-color:white">5</td><td style="background-color:white">Beatles</td></tr><tr><td style="background-color:white">9</td><td style="background-color:white">Beatles</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Rolling Stones</td></tr><tr><td style="background-color:white">6</td><td style="background-color:white">Rolling Stones</td></tr><tr><td style="background-color:white">10</td><td style="background-color:white">Rolling Stones</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Beatles</td></tr><tr><td style="background-color:white">6</td><td style="background-color:white">Beatles</td></tr><tr><td style="background-color:white">10</td><td style="background-color:white">Beatles</td></tr><tr><td style="background-color:white">3</td><td style="background-color:white">Rolling Stones</td></tr><tr><td style="background-color:white">7</td><td style="background-color:white">Rolling Stones</td></tr><tr><td style="background-color:white">11</td><td style="background-color:white">Rolling Stones</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Beatles</td></tr><tr><td style="background-color:white">7</td><td style="background-color:white">Beatles</td></tr><tr><td style="background-color:white">11</td><td style="background-color:white">Beatles</td></tr><tr><td style="background-color:white">3</td><td style="background-color:white">Rolling Stones</td></tr><tr><td style="background-color:white">8</td><td style="background-color:white">Rolling Stones</td></tr><tr><td style="background-color:white">12</td><td style="background-color:white">Rolling Stones</td></tr><tr><td style="background-color:white">4</td><td style="background-color:white">Beatles</td></tr><tr><td style="background-color:white">8</td><td style="background-color:white">Beatles</td></tr><tr><td style="background-color:white">12</td><td style="background-color:white">Beatles</td></tr><tr><td style="background-color:white">5</td><td style="background-color:white">Rolling Stones</td></tr><tr><td style="background-color:white">9</td><td style="background-color:white">Rolling Stones</td></tr><tr><td style="background-color:white">13</td><td style="background-color:white">Rolling Stones</td></tr>
+                </table>
+            </body>
+            <br>
+        </html>
+    </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -777,9 +797,9 @@ document.write(`
 
 <span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
     <span class="n">observations</span><span class="p">,</span>
-    <span class="n">Column</span><span class="p">(</span><span class="n">bands</span><span class="o">.</span><span class="n">finds_observations_closest</span><span class="p">(</span><span class="n">right</span><span class="p">)),</span>
-    <span class="n">Column</span><span class="p">(</span><span class="n">assets</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">below</span><span class="p">)),</span>
-    <span class="n">Column</span><span class="p">(</span><span class="n">members</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">right</span><span class="p">))</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">bands</span><span class="o">.</span><span class="n">attach_closest</span><span class="p">(</span><span class="n">right</span><span class="p">)),</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">assets</span><span class="o">.</span><span class="n">attach_directly</span><span class="p">(</span><span class="n">below</span><span class="p">)),</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">members</span><span class="o">.</span><span class="n">attach_directly</span><span class="p">(</span><span class="n">right</span><span class="p">))</span>
 
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>

@@ -4,7 +4,7 @@ This guide is designed to help you become productive with TidyChef as quickly as
 
 ## Quick Start
 
-- Start with **[Chapter 1: Basics](https://mikeadamss.github.io/tidychef/basics.html)**. This introduces TidyChef’s core concepts and how to apply them.
+- ➡️ Start here: **[Chapter 1: Basics](https://mikeadamss.github.io/tidychef/basics.html)**. This introduces TidyChef’s core concepts and how to apply them.
 
 - Then move on to the **[Examples](https://mikeadamss.github.io/tidychef/examples.html)**. These are presented in _roughly_ increasing order of complexity.
 
@@ -18,8 +18,10 @@ This guide is designed to help you become productive with TidyChef as quickly as
 
 - The **[Technical Reference](https://mikeadamss.github.io/tidychef/technical.html)** is a detailed API guide, primarily intended for developers.
 
-## Notes
+## A Note on Terminology
 
 - TidyChef often uses the phrase "Excel reference" or the function `excel_ref()`. This has **nothing** to do with Microsoft Excel or spreadsheets. It's simply a practical convention—saying “Excel reference C3” is immediately understandable, whereas “x offset 2, y offset 4” is not.
+
+## Extending TidyChef
 
 - TidyChef is built as an extensible framework. While its core features handle most common needs, it’s designed to be easily extended—supporting new data formats, acquisition methods, selection logic, or domain-specific validation. Extensions integrate cleanly and are fully documented, allowing you to adapt TidyChef to your workflow.

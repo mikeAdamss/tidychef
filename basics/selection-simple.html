@@ -437,6 +437,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-selection-in-tidychef">Understanding Selection in TidyChef</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-data">Source Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#row-s-column-s-ranges">Row(s), Column(s) &amp; Ranges</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-a-row">Selecting a row</a></li>
@@ -460,7 +461,11 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="selection-simple">
 <h1>Selection: Simple<a class="headerlink" href="#selection-simple" title="Link to this heading">#</a></h1>
-<p>This is our introduction to the basic tidychef cell selection mechanisms.</p>
+<section id="understanding-selection-in-tidychef">
+<h2>Understanding Selection in TidyChef<a class="headerlink" href="#understanding-selection-in-tidychef" title="Link to this heading">#</a></h2>
+<p>Selection is the process of identifying parts of your spreadsheet that you want to work with—such as specific cells, rows, columns, or blocks of data. Because visually structured tables often contain headers, footnotes, and irregular layouts, simply reading the whole sheet won’t produce tidy data.</p>
+<p>TidyChef uses <code class="docutils literal notranslate"><span class="pre">Selectables</span></code> — programmable, composable selectors—to precisely target these meaningful data elements. Mastering selection lets you extract and reshape only the relevant information, forming the foundation for clean, analysis-ready datasets.</p>
+</section>
 <section id="source-data">
 <h2>Source Data<a class="headerlink" href="#source-data" title="Link to this heading">#</a></h2>
 <p>The data source we’re using for these examples is shown below:</p>
@@ -1071,6 +1076,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-selection-in-tidychef">Understanding Selection in TidyChef</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-data">Source Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#row-s-column-s-ranges">Row(s), Column(s) &amp; Ranges</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-a-row">Selecting a row</a></li>
