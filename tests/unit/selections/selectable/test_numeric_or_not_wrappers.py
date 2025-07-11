@@ -16,8 +16,8 @@ def selectable_simple1_with_one_numeric_cell():
     """
 
     selectable = fixture_simple_one_tab()
-    # Cahnge the very last (bottom right) cell
-    selectable.pcells[len(selectable.pcells) - 1].value = "2"
+    # Change the very last (bottom right) cell
+    selectable.pcells[len(selectable.pcells) - 1].numeric = True
     selectable.cells = selectable.pcells
     return selectable
 
