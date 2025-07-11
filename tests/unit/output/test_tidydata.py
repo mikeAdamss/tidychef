@@ -436,3 +436,24 @@ def test_drop_duplicates_to_path(tidy: TidyData):
     with open("deleteme.txt") as f:
         assert "1,Rock & Roll,Houses,John" in f.read()
     os.remove("deleteme.txt")
+
+def test_add_column(tidy: TidyData):
+    """
+    Test that the tidy_data .add_column() method works as expected.
+    """
+
+    tidy2 = copy.deepcopy(tidy)
+    assert len(tidy2.columns) == 3
+    tidy2.add_column(Column.constant("NewColumn", "NewValue"))
+    assert len(tidy2.columns) == 4
+
+def test_add_column_after_transform_raises(tidy: TidyData):
+    """
+    Test that the tidy_data .add_column() method raises an error
+    if called after the data has been transformed.
+    """
+
+    tidy2 = copy.deepcopy(tidy)
+    tidy2._transform()
+    with pytest.raises(AssertionError):
+        tidy2.add_column(Column.constant("NewColumn", "NewValue"))
