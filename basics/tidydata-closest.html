@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'basics/tidydata-closest';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="tidychef: Constants" href="tidydata-constants.html" />
+    <link rel="next" title="TidyData: Constants" href="tidydata-constants.html" />
     <link rel="prev" title="TidyData: Columns &amp; Direct" href="tidydata-columns-direct.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -142,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="../intro.html">
+<a class="navbar-brand logo" href="../how-to-use-this-book.html">
   
   
   
@@ -168,13 +168,12 @@
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="../intro.html">
-                    Tidychef
+                <a class="reference internal" href="../how-to-use-this-book.html">
+                    How to Use This Book
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../how-to-use-this-book.html">How to Use This Book</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../basics.html">Chapter 1: Basics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="acquire.html">Acquire</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preview.html">Preview</a></li>
@@ -190,7 +189,7 @@
 <li class="toctree-l2"><a class="reference internal" href="selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">TidyData: Closest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tidydata-constants.html">tidychef: Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tidydata-constants.html">TidyData: Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
@@ -586,8 +585,8 @@ document.write(`
     </div></div>
 </div>
 <p>These cells are problematic as they do not exist in a specific cardinal direction to the observations that they inform.</p>
-<p>In other words <code class="docutils literal notranslate"><span class="pre">finds_observations_directly()</span></code> will not work.</p>
-<p>Instead, we need to use <code class="docutils literal notranslate"><span class="pre">finds_observations_closest()</span></code></p>
+<p>In other words <code class="docutils literal notranslate"><span class="pre">attach_directly()</span></code> will not work.</p>
+<p>Instead, we need to use <code class="docutils literal notranslate"><span class="pre">attach_closest()</span></code></p>
 </section>
 <section id="the-solution">
 <h2>The Solution<a class="headerlink" href="#the-solution" title="Link to this heading">#</a></h2>
@@ -663,7 +662,7 @@ document.write(`
 </div>
 <p>Now think of how you’d describe this visual relationship in plain english. They way we think about it in <code class="docutils literal notranslate"><span class="pre">tidychef</span></code> would be:</p>
 <p><strong>For each cell in the “bands” selection, the observations are the ones that are the “closest” to the right.</strong></p>
-<p>As a tidychef method, this is expressed as <code class="docutils literal notranslate"><span class="pre">bands.finds_observations_closest(right)</span></code>.</p>
+<p>As a tidychef method, this is expressed as <code class="docutils literal notranslate"><span class="pre">bands.attach_closest(right)</span></code>.</p>
 <p>Lets try this in practice.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -951,7 +950,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">tidychef: Constants</p>
+        <p class="prev-next-title">TidyData: Constants</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

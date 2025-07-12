@@ -142,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="../intro.html">
+<a class="navbar-brand logo" href="../how-to-use-this-book.html">
   
   
   
@@ -168,13 +168,12 @@
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="../intro.html">
-                    Tidychef
+                <a class="reference internal" href="../how-to-use-this-book.html">
+                    How to Use This Book
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../how-to-use-this-book.html">How to Use This Book</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../basics.html">Chapter 1: Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../basics/acquire.html">Acquire</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/preview.html">Preview</a></li>
@@ -190,7 +189,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-closest.html">TidyData: Closest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-constants.html">tidychef: Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-constants.html">TidyData: Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
@@ -643,7 +642,7 @@ document.write(`
 
 <span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
     <span class="n">observations</span><span class="p">,</span>
-    <span class="n">Column</span><span class="p">(</span><span class="n">sex</span><span class="o">.</span><span class="n">finds_observations_within</span><span class="p">(</span><span class="n">down</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">left</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="n">right</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">sex</span><span class="o">.</span><span class="n">attach_within</span><span class="p">(</span><span class="n">down</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">left</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="n">right</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
 </pre></div>
@@ -703,18 +702,38 @@ document.write(`
             </body>
             <br>
         </html>
-    </div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">14</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">sex</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;D2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Sex&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">preview</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">sex</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="n">observations</span><span class="p">,</span>
-<span class="ne">---&gt; </span><span class="mi">14</span>     <span class="n">Column</span><span class="p">(</span><span class="n">sex</span><span class="o">.</span><span class="n">finds_observations_within</span><span class="p">(</span><span class="n">down</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">left</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="n">right</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
+    </div><div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
 
-<span class="ne">AttributeError</span>: &#39;XlsSelectable&#39; object has no attribute &#39;finds_observations_within&#39;
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <body>
+                <table>
+                    <tr><td style="background-color:lightgrey">Observations</td><td style="background-color:lightgrey">Sex</td></tr><tr><td style="background-color:white">2.0</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">3.0</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">23.0</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">4.0</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">12.0</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">7.0</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">1.0</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">3.0</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">4.0</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">5.0</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">5.0</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">4.0</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">3.0</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">1.0</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">21.0</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">21.0</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">12.0</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">9.0</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">1.0</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">1.0</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">12.0</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">23.0</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">5.0</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">6.0</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">56.0</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">3.0</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">24.0</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">4.0</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">24.0</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">512.0</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">5.0</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">2.0</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">16.0</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">31.0</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">12.0</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">7.0</td><td style="background-color:white">Female</td></tr>
+                </table>
+            </body>
+            <br>
+        </html>
+    </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -939,38 +958,18 @@ document.write(`
             </body>
             <br>
         </html>
-    </div><div class="output text_html">
-    <html>
-        
-    <style>
-    table, th, td {
-        border: 1px solid;
-    }
+    </div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">sex</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Sex&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">preview</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">sex</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">observations</span><span class="p">,</span>
+<span class="ne">----&gt; </span><span class="mi">7</span>     <span class="n">Column</span><span class="p">(</span><span class="n">sex</span><span class="o">.</span><span class="n">finds_observations_within</span><span class="p">(</span><span class="n">down</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">right</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="n">left</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
 
-    table {
-        border-collapse: collapse;
-    }
-
-    td {
-        align: center;
-        border: 1px  black solid !important;
-        color: black !important;
-    }
-
-    th, td {
-        padding: 5px;
-    }
-
-    </style>
-    
-            <body>
-                <table>
-                    <tr><td style="background-color:lightgrey">Observations</td><td style="background-color:lightgrey">Sex</td></tr><tr><td style="background-color:white">13</td><td style="background-color:white">Both</td></tr><tr><td style="background-color:white">3</td><td style="background-color:white">Both</td></tr><tr><td style="background-color:white">1</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">4</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">1</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">19</td><td style="background-color:white">Both</td></tr><tr><td style="background-color:white">3</td><td style="background-color:white">Both</td></tr><tr><td style="background-color:white">3</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">5</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">3</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">4</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">1</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">27</td><td style="background-color:white">Both</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Both</td></tr><tr><td style="background-color:white">4</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">6</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">4</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">3</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">4</td><td style="background-color:white">Female</td></tr>
-                </table>
-            </body>
-            <br>
-        </html>
-    </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class="ne">AttributeError</span>: &#39;Selectable&#39; object has no attribute &#39;finds_observations_within&#39;
 </pre></div>
 </div>
 </div>
@@ -995,93 +994,6 @@ document.write(`
 <span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-    <html>
-        
-    <style>
-    table, th, td {
-        border: 1px solid;
-    }
-
-    table {
-        border-collapse: collapse;
-    }
-
-    td {
-        align: center;
-        border: 1px  black solid !important;
-        color: black !important;
-    }
-
-    th, td {
-        padding: 5px;
-    }
-
-    </style>
-    
-            <table>
-                
-            <tr>
-                <td style="background-color:cyan">Observations</td>
-            <tr>
-        
-            <tr>
-                <td style="background-color:#99ff99">Sex</td>
-            <tr>
-        
-            </table>
-
-            <body>
-                <h2>Unnamed Table</h2>
-                <table>
-                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td><td style="background-color:lightgrey">G</td></tr>
-<tr><td style="background-color:lightgrey">1</td><td style="background-color:#99ff99">Both</td><td style="background-color:white"></td><td style="background-color:#99ff99">Male</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#99ff99">Female</td><td style="background-color:white"></td></tr>
-<tr><td style="background-color:lightgrey">2</td><td style="background-color:white">-</td><td style="background-color:white">Retired</td><td style="background-color:white">Working Age</td><td style="background-color:white">Child</td><td style="background-color:white">Retired</td><td style="background-color:white">Working Age</td><td style="background-color:white">Child</td></tr>
-<tr><td style="background-color:lightgrey">3</td><td style="background-color:cyan">13</td><td style="background-color:cyan">3</td><td style="background-color:cyan">1</td><td style="background-color:cyan">4</td><td style="background-color:cyan">2</td><td style="background-color:cyan">1</td><td style="background-color:cyan">2</td></tr>
-<tr><td style="background-color:lightgrey">4</td><td style="background-color:cyan">19</td><td style="background-color:cyan">3</td><td style="background-color:cyan">3</td><td style="background-color:cyan">5</td><td style="background-color:cyan">3</td><td style="background-color:cyan">4</td><td style="background-color:cyan">1</td></tr>
-<tr><td style="background-color:lightgrey">5</td><td style="background-color:cyan">27</td><td style="background-color:cyan">2</td><td style="background-color:cyan">4</td><td style="background-color:cyan">6</td><td style="background-color:cyan">4</td><td style="background-color:cyan">3</td><td style="background-color:cyan">4</td></tr>
-<tr><td style="background-color:lightgrey">6</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
-
-                </table>
-            </body>
-            <br>
-        </html>
-    </div><div class="output text_html">
-    <html>
-        
-    <style>
-    table, th, td {
-        border: 1px solid;
-    }
-
-    table {
-        border-collapse: collapse;
-    }
-
-    td {
-        align: center;
-        border: 1px  black solid !important;
-        color: black !important;
-    }
-
-    th, td {
-        padding: 5px;
-    }
-
-    </style>
-    
-            <body>
-                <table>
-                    <tr><td style="background-color:lightgrey">Observations</td><td style="background-color:lightgrey">Sex</td></tr><tr><td style="background-color:white">13</td><td style="background-color:white">Both</td></tr><tr><td style="background-color:white">3</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">1</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">4</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">1</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">19</td><td style="background-color:white">Both</td></tr><tr><td style="background-color:white">3</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">3</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">5</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">3</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">4</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">1</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">27</td><td style="background-color:white">Both</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">4</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">6</td><td style="background-color:white">Male</td></tr><tr><td style="background-color:white">4</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">3</td><td style="background-color:white">Female</td></tr><tr><td style="background-color:white">4</td><td style="background-color:white">Female</td></tr>
-                </table>
-            </body>
-            <br>
-        </html>
-    </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>

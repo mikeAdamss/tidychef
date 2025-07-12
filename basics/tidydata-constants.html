@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>tidychef: Constants &#8212; Documentation</title>
+    <title>TidyData: Constants &#8212; Documentation</title>
   
   
   
@@ -142,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="../intro.html">
+<a class="navbar-brand logo" href="../how-to-use-this-book.html">
   
   
   
@@ -168,13 +168,12 @@
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="../intro.html">
-                    Tidychef
+                <a class="reference internal" href="../how-to-use-this-book.html">
+                    How to Use This Book
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../how-to-use-this-book.html">How to Use This Book</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../basics.html">Chapter 1: Basics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="acquire.html">Acquire</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preview.html">Preview</a></li>
@@ -190,7 +189,7 @@
 <li class="toctree-l2"><a class="reference internal" href="selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-closest.html">TidyData: Closest</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">tidychef: Constants</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">TidyData: Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
@@ -427,7 +426,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>tidychef: Constants</h1>
+    <h1>TidyData: Constants</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -450,9 +449,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="tidychef-constants">
-<h1>tidychef: Constants<a class="headerlink" href="#tidychef-constants" title="Link to this heading">#</a></h1>
-<p>There will be times when you need to populate a column with a single constant value.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="tidydata-constants">
+<h1>TidyData: Constants<a class="headerlink" href="#tidydata-constants" title="Link to this heading">#</a></h1>
 <p>This section details how to do that.</p>
 <section id="source-data">
 <h2>Source Data<a class="headerlink" href="#source-data" title="Link to this heading">#</a></h2>
@@ -542,7 +540,7 @@ document.write(`
 
 <span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
     <span class="n">observations</span><span class="p">,</span>
-    <span class="n">Column</span><span class="p">(</span><span class="n">assets</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">below</span><span class="p">)),</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">assets</span><span class="o">.</span><span class="n">attach_directly</span><span class="p">(</span><span class="n">below</span><span class="p">)),</span>
     <span class="n">Column</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;Constant Foo&quot;</span><span class="p">,</span> <span class="s2">&quot;Foo&quot;</span><span class="p">),</span>
     <span class="n">Column</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;Constant Bar&quot;</span><span class="p">,</span> <span class="s2">&quot;Bar&quot;</span><span class="p">)</span>
 <span class="p">)</span>
@@ -605,20 +603,38 @@ document.write(`
             </body>
             <br>
         </html>
-    </div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">16</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">assets</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Assets Via Direction&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">preview</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">assets</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="n">observations</span><span class="p">,</span>
-<span class="ne">---&gt; </span><span class="mi">16</span>     <span class="n">Column</span><span class="p">(</span><span class="n">assets</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">below</span><span class="p">)),</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">Column</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;Constant Foo&quot;</span><span class="p">,</span> <span class="s2">&quot;Foo&quot;</span><span class="p">),</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">Column</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;Constant Bar&quot;</span><span class="p">,</span> <span class="s2">&quot;Bar&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
+    </div><div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
 
-<span class="ne">AttributeError</span>: &#39;CsvSelectable&#39; object has no attribute &#39;finds_observations_directly&#39;
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <body>
+                <table>
+                    <tr><td style="background-color:lightgrey">Value</td><td style="background-color:lightgrey">Assets Via Direction</td><td style="background-color:lightgrey">Constant Foo</td><td style="background-color:lightgrey">Constant Bar</td></tr><tr><td style="background-color:white">1</td><td style="background-color:white">Houses</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr><tr><td style="background-color:white">5</td><td style="background-color:white">Cars</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr><tr><td style="background-color:white">9</td><td style="background-color:white">Boats</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Houses</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr><tr><td style="background-color:white">6</td><td style="background-color:white">Cars</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr><tr><td style="background-color:white">10</td><td style="background-color:white">Boats</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Houses</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr><tr><td style="background-color:white">6</td><td style="background-color:white">Cars</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr><tr><td style="background-color:white">10</td><td style="background-color:white">Boats</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr><tr><td style="background-color:white">3</td><td style="background-color:white">Houses</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr><tr><td style="background-color:white">7</td><td style="background-color:white">Cars</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr><tr><td style="background-color:white">11</td><td style="background-color:white">Boats</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Houses</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr><tr><td style="background-color:white">7</td><td style="background-color:white">Cars</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr><tr><td style="background-color:white">11</td><td style="background-color:white">Boats</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr><tr><td style="background-color:white">3</td><td style="background-color:white">Houses</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr><tr><td style="background-color:white">8</td><td style="background-color:white">Cars</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr><tr><td style="background-color:white">12</td><td style="background-color:white">Boats</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr><tr><td style="background-color:white">4</td><td style="background-color:white">Houses</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr><tr><td style="background-color:white">8</td><td style="background-color:white">Cars</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr><tr><td style="background-color:white">12</td><td style="background-color:white">Boats</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr><tr><td style="background-color:white">5</td><td style="background-color:white">Houses</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr><tr><td style="background-color:white">9</td><td style="background-color:white">Cars</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr><tr><td style="background-color:white">13</td><td style="background-color:white">Boats</td><td style="background-color:white">Foo</td><td style="background-color:white">Bar</td></tr>
+                </table>
+            </body>
+            <br>
+        </html>
+    </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>

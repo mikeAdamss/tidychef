@@ -38,7 +38,7 @@ dataset_identifier_code = table.excel_ref("B6").expand(right).label_as("Dataset 
 # Note: matches a regex of capital M followed by anything
 tidy_data = TidyData(
     observations,
-    Column(dataset_identifier_code.finds_observations_directly(down), validate=against.regex("L.*"))
+    Column(dataset_identifier_code.attach_directly(down), validate=against.regex("L.*"))
 )
 
 print(tidy_data)
@@ -46,15 +46,64 @@ print(tidy_data)
 
 
 [31m---------------------------------------------------------------------------[39m
-[31mAttributeError[39m                            Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[2][39m[32m, line 14[39m
-[32m      9[39m dataset_identifier_code = table.excel_ref([33m"[39m[33mB6[39m[33m"[39m).expand(right).label_as([33m"[39m[33mDataset Identifier Codes[39m[33m"[39m)
+[31mCellValidationError[39m                       Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[2][39m[32m, line 17[39m
 [32m     11[39m [38;5;66;03m# Note: matches a regex of capital M followed by anything[39;00m
 [32m     12[39m tidy_data = TidyData(
 [32m     13[39m     observations,
-[32m---> [39m[32m14[39m     Column([43mdataset_identifier_code[49m[43m.[49m[43mfinds_observations_directly[49m(down), validate=against.regex([33m"[39m[33mL.*[39m[33m"[39m))
+[32m     14[39m     Column(dataset_identifier_code.attach_directly(down), validate=against.regex([33m"[39m[33mL.*[39m[33m"[39m))
 [32m     15[39m )
-[32m     17[39m [38;5;28mprint[39m(tidy_data)
+[32m---> [39m[32m17[39m [38;5;28;43mprint[39;49m[43m([49m[43mtidy_data[49m[43m)[49m
 
-[31mAttributeError[39m: 'XlsxSelectable' object has no attribute 'finds_observations_directly'
+[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/output/tidydata.py:110[39m, in [36mTidyData.__str__[39m[34m(self)[39m
+[32m    109[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34m__str__[39m([38;5;28mself[39m):  [38;5;66;03m# pragma: no cover[39;00m
+[32m--> [39m[32m110[39m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[43m.[49m[43m__get_representation[49m[43m([49m[43m)[49m
+
+[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/output/tidydata.py:92[39m, in [36mTidyData.__get_representation[39m[34m(self)[39m
+[32m     88[39m [38;5;250m[39m[33;03m"""[39;00m
+[32m     89[39m [33;03mRepresentation logic shared by __str__ and __repr__[39;00m
+[32m     90[39m [33;03m"""[39;00m
+[32m     91[39m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m [38;5;28mself[39m._data:
+[32m---> [39m[32m92[39m     [38;5;28;43mself[39;49m[43m.[49m[43m_transform[49m[43m([49m[43m)[49m
+[32m     94[39m table_as_strings = [38;5;28mself[39m._data_as_table_of_strings()
+[32m     95[39m header_row = table_as_strings[[32m0[39m]
+
+[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/output/tidydata.py:359[39m, in [36mTidyData._transform[39m[34m(self)[39m
+[32m    353[39m standard_columns = [
+[32m    354[39m     x
+[32m    355[39m     [38;5;28;01mfor[39;00m x [38;5;129;01min[39;00m [38;5;28mself[39m.columns
+[32m    356[39m     [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m [38;5;28misinstance[39m(x.engine, HorizontalCondition)
+[32m    357[39m ]
+[32m    358[39m [38;5;28;01mfor[39;00m column [38;5;129;01min[39;00m standard_columns:
+[32m--> [39m[32m359[39m     column_cell = [43mcolumn[49m[43m.[49m[43mresolve_column_cell_from_obs_cell[49m[43m([49m[43mobservation[49m[43m)[49m
+[32m    360[39m     column_value_dict[column.label] = column_cell.value
+[32m    361[39m     [38;5;28;01mif[39;00m column.label [38;5;129;01mnot[39;00m [38;5;129;01min[39;00m [38;5;28mself[39m.drop:
+
+[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/column/base.py:104[39m, in [36mBaseColumn.resolve_column_cell_from_obs_cell[39m[34m(self, observation_cell, *args)[39m
+[32m     91[39m [38;5;250m[39m[33;03m"""[39;00m
+[32m     92[39m [33;03mUse the provided lookup engine to return the value[39;00m
+[32m     93[39m [33;03mof this Column against a given observation, according[39;00m
+[32m   (...)[39m[32m    101[39m [33;03m:return: A single tidychef Cell object.[39;00m
+[32m    102[39m [33;03m"""[39;00m
+[32m    103[39m cell = [38;5;28mself[39m.engine.resolve(observation_cell, *args)
+[32m--> [39m[32m104[39m cell = [38;5;28;43mself[39;49m[43m.[49m[43m_post_lookup[49m[43m([49m[43mcell[49m[43m)[49m
+[32m    105[39m [38;5;28;01mreturn[39;00m cell
+
+[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/column/column.py:136[39m, in [36mColumn._post_lookup[39m[34m(self, cell)[39m
+[32m    134[39m         [38;5;28;01melse[39;00m:
+[32m    135[39m             msg = [33m"[39m[33m"[39m
+[32m--> [39m[32m136[39m         [38;5;28;01mraise[39;00m CellValidationError(
+[32m    137[39m             [33mf[39m[33m"""[39m
+[32m    138[39m [33m                Column [39m[38;5;132;01m{[39;00m[38;5;28mself[39m.label[38;5;132;01m}[39;00m[33m has a cell that is not valid,[39m
+[32m    139[39m [33m                Invalid cell [39m[38;5;132;01m{[39;00mcell[38;5;132;01m}[39;00m[33m.[39m
+[32m    140[39m [33m                [39m[38;5;132;01m{[39;00mmsg[38;5;132;01m}[39;00m[33m                      [39m
+[32m    141[39m [33m                [39m[33m"""[39m
+[32m    142[39m         )
+[32m    144[39m [38;5;28;01mreturn[39;00m cell
+
+[31mCellValidationError[39m: 
+                        Column Dataset Identifier Codes has a cell that is not valid,
+                        Invalid cell (B6, value:"MVO6", x:1, y:5).
+                        Message is: "MVO6" does not match pattern: "L.*"                      
+                        
 

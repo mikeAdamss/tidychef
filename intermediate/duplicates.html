@@ -142,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="../intro.html">
+<a class="navbar-brand logo" href="../how-to-use-this-book.html">
   
   
   
@@ -168,13 +168,12 @@
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="../intro.html">
-                    Tidychef
+                <a class="reference internal" href="../how-to-use-this-book.html">
+                    How to Use This Book
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../how-to-use-this-book.html">How to Use This Book</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../basics.html">Chapter 1: Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../basics/acquire.html">Acquire</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/preview.html">Preview</a></li>
@@ -190,7 +189,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-closest.html">TidyData: Closest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-constants.html">tidychef: Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-constants.html">TidyData: Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
@@ -537,27 +536,10 @@ document.write(`
 
 <span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
     <span class="n">observations</span><span class="p">,</span>
-    <span class="n">Column</span><span class="p">(</span><span class="n">bands</span><span class="o">.</span><span class="n">finds_observations_closest</span><span class="p">(</span><span class="n">right</span><span class="p">)),</span>
-    <span class="n">Column</span><span class="p">(</span><span class="n">assets</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">below</span><span class="p">)),</span>
-    <span class="n">Column</span><span class="p">(</span><span class="n">members</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">right</span><span class="p">))</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">bands</span><span class="o">.</span><span class="n">attach_closest</span><span class="p">(</span><span class="n">right</span><span class="p">)),</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">assets</span><span class="o">.</span><span class="n">attach_directly</span><span class="p">(</span><span class="n">below</span><span class="p">)),</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">members</span><span class="o">.</span><span class="n">attach_directly</span><span class="p">(</span><span class="n">right</span><span class="p">))</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">15</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">assets</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Asset&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">members</span> <span class="o">=</span> <span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Member&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">observations</span><span class="p">,</span>
-<span class="ne">---&gt; </span><span class="mi">15</span>     <span class="n">Column</span><span class="p">(</span><span class="n">bands</span><span class="o">.</span><span class="n">finds_observations_closest</span><span class="p">(</span><span class="n">right</span><span class="p">)),</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="n">Column</span><span class="p">(</span><span class="n">assets</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">below</span><span class="p">)),</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">Column</span><span class="p">(</span><span class="n">members</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">right</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="p">)</span>
-
-<span class="ne">AttributeError</span>: &#39;CsvSelectable&#39; object has no attribute &#39;finds_observations_closest&#39;
 </pre></div>
 </div>
 </div>
@@ -575,6 +557,36 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Removed duplicate instances of the following row(s):
+-----------------------------------------------------
+1,Beatles,Houses,John
+5,Beatles,Cars,John
+9,Beatles,Boats,John
+2,Rolling Stones,Houses,Keith
+6,Rolling Stones,Cars,Keith
+10,Rolling Stones,Boats,Keith
+2,Beatles,Houses,Paul
+6,Beatles,Cars,Paul
+10,Beatles,Boats,Paul
+3,Rolling Stones,Houses,Mick
+7,Rolling Stones,Cars,Mick
+11,Rolling Stones,Boats,Mick
+2,Beatles,Houses,George
+7,Beatles,Cars,George
+11,Beatles,Boats,George
+3,Rolling Stones,Houses,Charlie
+8,Rolling Stones,Cars,Charlie
+12,Rolling Stones,Boats,Charlie
+4,Beatles,Houses,Ringo
+8,Beatles,Cars,Ringo
+12,Beatles,Boats,Ringo
+5,Rolling Stones,Houses,Ronnie
+9,Rolling Stones,Cars,Ronnie
+13,Rolling Stones,Boats,Ronnie
+</pre></div>
+</div>
+</div>
 </div>
 <p>The above is the result of <code class="docutils literal notranslate"><span class="pre">print_duplicates=True</span></code>.</p>
 <p>Below, we’ll check the contents of <code class="docutils literal notranslate"><span class="pre">duplicates.txt</span></code> as well.</p>
@@ -582,6 +594,34 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;duplicates.csv&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1,Beatles,Houses,John
+5,Beatles,Cars,John
+9,Beatles,Boats,John
+2,Rolling Stones,Houses,Keith
+6,Rolling Stones,Cars,Keith
+10,Rolling Stones,Boats,Keith
+2,Beatles,Houses,Paul
+6,Beatles,Cars,Paul
+10,Beatles,Boats,Paul
+3,Rolling Stones,Houses,Mick
+7,Rolling Stones,Cars,Mick
+11,Rolling Stones,Boats,Mick
+2,Beatles,Houses,George
+7,Beatles,Cars,George
+11,Beatles,Boats,George
+3,Rolling Stones,Houses,Charlie
+8,Rolling Stones,Cars,Charlie
+12,Rolling Stones,Boats,Charlie
+4,Beatles,Houses,Ringo
+8,Beatles,Cars,Ringo
+12,Beatles,Boats,Ringo
+5,Rolling Stones,Houses,Ronnie
+9,Rolling Stones,Cars,Ronnie
+13,Rolling Stones,Boats,Ronnie
 </pre></div>
 </div>
 </div>

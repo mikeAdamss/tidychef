@@ -142,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="../intro.html">
+<a class="navbar-brand logo" href="../how-to-use-this-book.html">
   
   
   
@@ -168,13 +168,12 @@
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="../intro.html">
-                    Tidychef
+                <a class="reference internal" href="../how-to-use-this-book.html">
+                    How to Use This Book
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../how-to-use-this-book.html">How to Use This Book</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../basics.html">Chapter 1: Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../basics/acquire.html">Acquire</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/preview.html">Preview</a></li>
@@ -190,7 +189,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-closest.html">TidyData: Closest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-constants.html">tidychef: Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-constants.html">TidyData: Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
@@ -565,7 +564,7 @@ document.write(`
 <span class="c1"># Note: matches a regex of capital M followed by anything</span>
 <span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
     <span class="n">observations</span><span class="p">,</span>
-    <span class="n">Column</span><span class="p">(</span><span class="n">dataset_identifier_code</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">down</span><span class="p">),</span> <span class="n">validate</span><span class="o">=</span><span class="n">against</span><span class="o">.</span><span class="n">regex</span><span class="p">(</span><span class="s2">&quot;L.*&quot;</span><span class="p">))</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">dataset_identifier_code</span><span class="o">.</span><span class="n">attach_directly</span><span class="p">(</span><span class="n">down</span><span class="p">),</span> <span class="n">validate</span><span class="o">=</span><span class="n">against</span><span class="o">.</span><span class="n">regex</span><span class="p">(</span><span class="s2">&quot;L.*&quot;</span><span class="p">))</span>
 <span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
@@ -574,17 +573,66 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">14</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">dataset_identifier_code</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B6&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Dataset Identifier Codes&quot;</span><span class="p">)</span>
+<span class="ne">CellValidationError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">17</span>
 <span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1"># Note: matches a regex of capital M followed by anything</span>
 <span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
 <span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="n">observations</span><span class="p">,</span>
-<span class="ne">---&gt; </span><span class="mi">14</span>     <span class="n">Column</span><span class="p">(</span><span class="n">dataset_identifier_code</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">down</span><span class="p">),</span> <span class="n">validate</span><span class="o">=</span><span class="n">against</span><span class="o">.</span><span class="n">regex</span><span class="p">(</span><span class="s2">&quot;L.*&quot;</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">Column</span><span class="p">(</span><span class="n">dataset_identifier_code</span><span class="o">.</span><span class="n">attach_directly</span><span class="p">(</span><span class="n">down</span><span class="p">),</span> <span class="n">validate</span><span class="o">=</span><span class="n">against</span><span class="o">.</span><span class="n">regex</span><span class="p">(</span><span class="s2">&quot;L.*&quot;</span><span class="p">))</span>
 <span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">17</span> <span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
 
-<span class="ne">AttributeError</span>: &#39;XlsxSelectable&#39; object has no attribute &#39;finds_observations_directly&#39;
+<span class="nn">File ~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/output/tidydata.py:110,</span> in <span class="ni">TidyData.__str__</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">109</span> <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
+<span class="ne">--&gt; </span><span class="mi">110</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_representation</span><span class="p">()</span>
+
+<span class="nn">File ~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/output/tidydata.py:92,</span> in <span class="ni">TidyData.__get_representation</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">88</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">89</span><span class="sd"> Representation logic shared by __str__ and __repr__</span>
+<span class="g g-Whitespace">     </span><span class="mi">90</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">91</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">92</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_transform</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span> <span class="n">table_as_strings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data_as_table_of_strings</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">95</span> <span class="n">header_row</span> <span class="o">=</span> <span class="n">table_as_strings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nn">File ~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/output/tidydata.py:359,</span> in <span class="ni">TidyData._transform</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">353</span> <span class="n">standard_columns</span> <span class="o">=</span> <span class="p">[</span>
+<span class="g g-Whitespace">    </span><span class="mi">354</span>     <span class="n">x</span>
+<span class="g g-Whitespace">    </span><span class="mi">355</span>     <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span>
+<span class="g g-Whitespace">    </span><span class="mi">356</span>     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">engine</span><span class="p">,</span> <span class="n">HorizontalCondition</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">357</span> <span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">358</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">standard_columns</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">359</span>     <span class="n">column_cell</span> <span class="o">=</span> <span class="n">column</span><span class="o">.</span><span class="n">resolve_column_cell_from_obs_cell</span><span class="p">(</span><span class="n">observation</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">360</span>     <span class="n">column_value_dict</span><span class="p">[</span><span class="n">column</span><span class="o">.</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">column_cell</span><span class="o">.</span><span class="n">value</span>
+<span class="g g-Whitespace">    </span><span class="mi">361</span>     <span class="k">if</span> <span class="n">column</span><span class="o">.</span><span class="n">label</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop</span><span class="p">:</span>
+
+<span class="nn">File ~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/column/base.py:104,</span> in <span class="ni">BaseColumn.resolve_column_cell_from_obs_cell</span><span class="nt">(self, observation_cell, *args)</span>
+<span class="g g-Whitespace">     </span><span class="mi">91</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">92</span><span class="sd"> Use the provided lookup engine to return the value</span>
+<span class="g g-Whitespace">     </span><span class="mi">93</span><span class="sd"> of this Column against a given observation, according</span>
+<span class="sd">   (...)    101 :return: A single tidychef Cell object.</span>
+<span class="g g-Whitespace">    </span><span class="mi">102</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">103</span> <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">observation_cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">104</span> <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_post_lookup</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">105</span> <span class="k">return</span> <span class="n">cell</span>
+
+<span class="nn">File ~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/column/column.py:136,</span> in <span class="ni">Column._post_lookup</span><span class="nt">(self, cell)</span>
+<span class="g g-Whitespace">    </span><span class="mi">134</span>         <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span>             <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">136</span>         <span class="k">raise</span> <span class="n">CellValidationError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">137</span>             <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">138</span><span class="s2">                 Column </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s2"> has a cell that is not valid,</span>
+<span class="g g-Whitespace">    </span><span class="mi">139</span><span class="s2">                 Invalid cell </span><span class="si">{</span><span class="n">cell</span><span class="si">}</span><span class="s2">.</span>
+<span class="g g-Whitespace">    </span><span class="mi">140</span><span class="s2">                 </span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2">                      </span>
+<span class="g g-Whitespace">    </span><span class="mi">141</span><span class="s2">                 &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">142</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">144</span> <span class="k">return</span> <span class="n">cell</span>
+
+<span class="ne">CellValidationError</span>: 
+                        <span class="n">Column</span> <span class="n">Dataset</span> <span class="n">Identifier</span> <span class="n">Codes</span> <span class="n">has</span> <span class="n">a</span> <span class="n">cell</span> <span class="n">that</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">valid</span><span class="p">,</span>
+                        <span class="n">Invalid</span> <span class="n">cell</span> <span class="p">(</span><span class="n">B6</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span><span class="s2">&quot;MVO6&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span>
+                        <span class="n">Message</span> <span class="ow">is</span><span class="p">:</span> <span class="s2">&quot;MVO6&quot;</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">match</span> <span class="n">pattern</span><span class="p">:</span> <span class="s2">&quot;L.*&quot;</span>                      
+                        
 </pre></div>
 </div>
 </div>

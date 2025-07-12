@@ -4,7 +4,7 @@ This section holds our working examples.
 
 The examples are listed in a _rough_ order of complexity.
 
-Please note - extractions in the real world _trend_ towards the simpler end of the spectrum, but we need to get fairly messy to cover practical uses of tidychef functionality._ 
+_Please note - extractions in the real world _trend_ towards the simpler end of the spectrum, but we need to get fairly messy to cover practical uses of tidychef functionality._ 
 
 ## Contents
 

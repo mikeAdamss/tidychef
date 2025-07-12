@@ -142,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="../intro.html">
+<a class="navbar-brand logo" href="../how-to-use-this-book.html">
   
   
   
@@ -168,13 +168,12 @@
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="../intro.html">
-                    Tidychef
+                <a class="reference internal" href="../how-to-use-this-book.html">
+                    How to Use This Book
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../how-to-use-this-book.html">How to Use This Book</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../basics.html">Chapter 1: Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../basics/acquire.html">Acquire</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/preview.html">Preview</a></li>
@@ -190,7 +189,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-closest.html">TidyData: Closest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-constants.html">tidychef: Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-constants.html">TidyData: Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
@@ -545,9 +544,9 @@ document.write(`
 
 <span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
     <span class="n">observations</span><span class="p">,</span>
-    <span class="n">Column</span><span class="p">(</span><span class="n">bands</span><span class="o">.</span><span class="n">finds_observations_closest</span><span class="p">(</span><span class="n">right</span><span class="p">)),</span>
-    <span class="n">Column</span><span class="p">(</span><span class="n">assets</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">below</span><span class="p">)),</span>
-    <span class="n">Column</span><span class="p">(</span><span class="n">members</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">right</span><span class="p">))</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">bands</span><span class="o">.</span><span class="n">attach_closest</span><span class="p">(</span><span class="n">right</span><span class="p">)),</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">assets</span><span class="o">.</span><span class="n">attach_directly</span><span class="p">(</span><span class="n">below</span><span class="p">)),</span>
+    <span class="n">Column</span><span class="p">(</span><span class="n">members</span><span class="o">.</span><span class="n">attach_directly</span><span class="p">(</span><span class="n">right</span><span class="p">))</span>
 <span class="p">)</span>
 
 <span class="c1"># See the non dict tidydata</span>
@@ -621,21 +620,143 @@ document.write(`
             </body>
             <br>
         </html>
-    </div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">17</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">members</span> <span class="o">=</span> <span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Member&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">preview</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">bands</span><span class="p">,</span> <span class="n">assets</span><span class="p">,</span> <span class="n">members</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">tidy_data</span> <span class="o">=</span> <span class="n">TidyData</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="n">observations</span><span class="p">,</span>
-<span class="ne">---&gt; </span><span class="mi">17</span>     <span class="n">Column</span><span class="p">(</span><span class="n">bands</span><span class="o">.</span><span class="n">finds_observations_closest</span><span class="p">(</span><span class="n">right</span><span class="p">)),</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">Column</span><span class="p">(</span><span class="n">assets</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">below</span><span class="p">)),</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span>     <span class="n">Column</span><span class="p">(</span><span class="n">members</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">right</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="c1"># See the non dict tidydata</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
+    </div><div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
 
-<span class="ne">AttributeError</span>: &#39;CsvSelectable&#39; object has no attribute &#39;finds_observations_closest&#39;
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <body>
+                <table>
+                    <tr><td style="background-color:lightgrey">Observation</td><td style="background-color:lightgrey">Band</td><td style="background-color:lightgrey">Asset</td><td style="background-color:lightgrey">Member</td></tr><tr><td style="background-color:white">1</td><td style="background-color:white">Beatles</td><td style="background-color:white">Houses</td><td style="background-color:white">John</td></tr><tr><td style="background-color:white">5</td><td style="background-color:white">Beatles</td><td style="background-color:white">Cars</td><td style="background-color:white">John</td></tr><tr><td style="background-color:white">9</td><td style="background-color:white">Beatles</td><td style="background-color:white">Boats</td><td style="background-color:white">John</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Houses</td><td style="background-color:white">Keith</td></tr><tr><td style="background-color:white">6</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Cars</td><td style="background-color:white">Keith</td></tr><tr><td style="background-color:white">10</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Boats</td><td style="background-color:white">Keith</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Beatles</td><td style="background-color:white">Houses</td><td style="background-color:white">Paul</td></tr><tr><td style="background-color:white">6</td><td style="background-color:white">Beatles</td><td style="background-color:white">Cars</td><td style="background-color:white">Paul</td></tr><tr><td style="background-color:white">10</td><td style="background-color:white">Beatles</td><td style="background-color:white">Boats</td><td style="background-color:white">Paul</td></tr><tr><td style="background-color:white">3</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Houses</td><td style="background-color:white">Mick</td></tr><tr><td style="background-color:white">7</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Cars</td><td style="background-color:white">Mick</td></tr><tr><td style="background-color:white">11</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Boats</td><td style="background-color:white">Mick</td></tr><tr><td style="background-color:white">2</td><td style="background-color:white">Beatles</td><td style="background-color:white">Houses</td><td style="background-color:white">George</td></tr><tr><td style="background-color:white">7</td><td style="background-color:white">Beatles</td><td style="background-color:white">Cars</td><td style="background-color:white">George</td></tr><tr><td style="background-color:white">11</td><td style="background-color:white">Beatles</td><td style="background-color:white">Boats</td><td style="background-color:white">George</td></tr><tr><td style="background-color:white">3</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Houses</td><td style="background-color:white">Charlie</td></tr><tr><td style="background-color:white">8</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Cars</td><td style="background-color:white">Charlie</td></tr><tr><td style="background-color:white">12</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Boats</td><td style="background-color:white">Charlie</td></tr><tr><td style="background-color:white">4</td><td style="background-color:white">Beatles</td><td style="background-color:white">Houses</td><td style="background-color:white">Ringo</td></tr><tr><td style="background-color:white">8</td><td style="background-color:white">Beatles</td><td style="background-color:white">Cars</td><td style="background-color:white">Ringo</td></tr><tr><td style="background-color:white">12</td><td style="background-color:white">Beatles</td><td style="background-color:white">Boats</td><td style="background-color:white">Ringo</td></tr><tr><td style="background-color:white">5</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Houses</td><td style="background-color:white">Ronnie</td></tr><tr><td style="background-color:white">9</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Cars</td><td style="background-color:white">Ronnie</td></tr><tr><td style="background-color:white">13</td><td style="background-color:white">Rolling Stones</td><td style="background-color:white">Boats</td><td style="background-color:white">Ronnie</td></tr>
+                </table>
+            </body>
+            <br>
+        </html>
+    </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
+  &quot;Observation&quot;: [
+    &quot;1&quot;,
+    &quot;5&quot;,
+    &quot;9&quot;,
+    &quot;2&quot;,
+    &quot;6&quot;,
+    &quot;10&quot;,
+    &quot;2&quot;,
+    &quot;6&quot;,
+    &quot;10&quot;,
+    &quot;3&quot;,
+    &quot;7&quot;,
+    &quot;11&quot;,
+    &quot;2&quot;,
+    &quot;7&quot;,
+    &quot;11&quot;,
+    &quot;3&quot;,
+    &quot;8&quot;,
+    &quot;12&quot;,
+    &quot;4&quot;,
+    &quot;8&quot;,
+    &quot;12&quot;,
+    &quot;5&quot;,
+    &quot;9&quot;,
+    &quot;13&quot;
+  ],
+  &quot;Band&quot;: [
+    &quot;Beatles&quot;,
+    &quot;Beatles&quot;,
+    &quot;Beatles&quot;,
+    &quot;Rolling Stones&quot;,
+    &quot;Rolling Stones&quot;,
+    &quot;Rolling Stones&quot;,
+    &quot;Beatles&quot;,
+    &quot;Beatles&quot;,
+    &quot;Beatles&quot;,
+    &quot;Rolling Stones&quot;,
+    &quot;Rolling Stones&quot;,
+    &quot;Rolling Stones&quot;,
+    &quot;Beatles&quot;,
+    &quot;Beatles&quot;,
+    &quot;Beatles&quot;,
+    &quot;Rolling Stones&quot;,
+    &quot;Rolling Stones&quot;,
+    &quot;Rolling Stones&quot;,
+    &quot;Beatles&quot;,
+    &quot;Beatles&quot;,
+    &quot;Beatles&quot;,
+    &quot;Rolling Stones&quot;,
+    &quot;Rolling Stones&quot;,
+    &quot;Rolling Stones&quot;
+  ],
+  &quot;Asset&quot;: [
+    &quot;Houses&quot;,
+    &quot;Cars&quot;,
+    &quot;Boats&quot;,
+    &quot;Houses&quot;,
+    &quot;Cars&quot;,
+    &quot;Boats&quot;,
+    &quot;Houses&quot;,
+    &quot;Cars&quot;,
+    &quot;Boats&quot;,
+    &quot;Houses&quot;,
+    &quot;Cars&quot;,
+    &quot;Boats&quot;,
+    &quot;Houses&quot;,
+    &quot;Cars&quot;,
+    &quot;Boats&quot;,
+    &quot;Houses&quot;,
+    &quot;Cars&quot;,
+    &quot;Boats&quot;,
+    &quot;Houses&quot;,
+    &quot;Cars&quot;,
+    &quot;Boats&quot;,
+    &quot;Houses&quot;,
+    &quot;Cars&quot;,
+    &quot;Boats&quot;
+  ],
+  &quot;Member&quot;: [
+    &quot;John&quot;,
+    &quot;John&quot;,
+    &quot;John&quot;,
+    &quot;Keith&quot;,
+    &quot;Keith&quot;,
+    &quot;Keith&quot;,
+    &quot;Paul&quot;,
+    &quot;Paul&quot;,
+    &quot;Paul&quot;,
+    &quot;Mick&quot;,
+    &quot;Mick&quot;,
+    &quot;Mick&quot;,
+    &quot;George&quot;,
+    &quot;George&quot;,
+    &quot;George&quot;,
+    &quot;Charlie&quot;,
+    &quot;Charlie&quot;,
+    &quot;Charlie&quot;,
+    &quot;Ringo&quot;,
+    &quot;Ringo&quot;,
+    &quot;Ringo&quot;,
+    &quot;Ronnie&quot;,
+    &quot;Ronnie&quot;,
+    &quot;Ronnie&quot;
+  ]
+}
 </pre></div>
 </div>
 </div>

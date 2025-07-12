@@ -25,35 +25,30 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-from tidychef import acquire, preview
-from tidychef.direction import right, down, left
-from tidychef.output import Column, TidyData
-from tidychef.selection import XlsSelectable
-
-table: XlsSelectable = acquire.xls.http("https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/xls/within-sample.xls", tables="data")
-
-observations = table.excel_ref('C3').expand(right).expand(down).is_not_blank().label_as("Observations")
-sex = table.excel_ref('D2').expand(right).is_not_blank().label_as("Sex")
+observations = table.filter(filters.is_numeric).label_as("Observations")
+sex = table.excel_ref("1").is_not_blank().label_as("Sex")
 preview(observations, sex)
 
 tidy_data = TidyData(
     observations,
-    Column(sex.finds_observations_within(down, start=left(1), end=right(1)))
+    Column(sex.finds_observations_within(down, start=right(1), end=left(1)))
 )
+
 print(tidy_data)
+
 ------------------
 
 
 [31m---------------------------------------------------------------------------[39m
 [31mAttributeError[39m                            Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[2][39m[32m, line 14[39m
-[32m      9[39m sex = table.excel_ref([33m'[39m[33mD2[39m[33m'[39m).expand(right).is_not_blank().label_as([33m"[39m[33mSex[39m[33m"[39m)
-[32m     10[39m preview(observations, sex)
-[32m     12[39m tidy_data = TidyData(
-[32m     13[39m     observations,
-[32m---> [39m[32m14[39m     Column([43msex[49m[43m.[49m[43mfinds_observations_within[49m(down, start=left([32m1[39m), end=right([32m1[39m)))
-[32m     15[39m )
-[32m     16[39m [38;5;28mprint[39m(tidy_data)
+[36mCell[39m[36m [39m[32mIn[4][39m[32m, line 7[39m
+[32m      2[39m sex = table.excel_ref([33m"[39m[33m1[39m[33m"[39m).is_not_blank().label_as([33m"[39m[33mSex[39m[33m"[39m)
+[32m      3[39m preview(observations, sex)
+[32m      5[39m tidy_data = TidyData(
+[32m      6[39m     observations,
+[32m----> [39m[32m7[39m     Column([43msex[49m[43m.[49m[43mfinds_observations_within[49m(down, start=right([32m1[39m), end=left([32m1[39m)))
+[32m      8[39m )
+[32m     10[39m [38;5;28mprint[39m(tidy_data)
 
-[31mAttributeError[39m: 'XlsSelectable' object has no attribute 'finds_observations_within'
+[31mAttributeError[39m: 'Selectable' object has no attribute 'finds_observations_within'
 

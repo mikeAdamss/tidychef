@@ -142,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="../intro.html">
+<a class="navbar-brand logo" href="../how-to-use-this-book.html">
   
   
   
@@ -168,13 +168,12 @@
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="../intro.html">
-                    Tidychef
+                <a class="reference internal" href="../how-to-use-this-book.html">
+                    How to Use This Book
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../how-to-use-this-book.html">How to Use This Book</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../basics.html">Chapter 1: Basics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="acquire.html">Acquire</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preview.html">Preview</a></li>
@@ -190,7 +189,7 @@
 <li class="toctree-l2"><a class="reference internal" href="selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-closest.html">TidyData: Closest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tidydata-constants.html">tidychef: Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tidydata-constants.html">TidyData: Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
@@ -445,7 +444,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-a-column">Selecting a column</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-a-column-conditionally">Selecting a column conditionally</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-a-single-cell-conditionally">Selecting a single cell conditionally</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-box-select">Understanding <code class="docutils literal notranslate"><span class="pre">box_select()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-expand-to-box">Understanding <code class="docutils literal notranslate"><span class="pre">expand_to_box()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-ref">Excel ref</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#is-numeric-and-is-not-numeric">Is Numeric and Is Not Numeric</a></li>
 </ul>
@@ -848,15 +847,9 @@ document.write(`
     </div></div>
 </div>
 </section>
-<section id="understanding-box-select">
-<h2>Understanding <code class="docutils literal notranslate"><span class="pre">box_select()</span></code><a class="headerlink" href="#understanding-box-select" title="Link to this heading">#</a></h2>
-<p>This is one of the less intuitive methods but also one you’re gonna use a lot. The logic goes something like this:</p>
-<ul class="simple">
-<li><ol class="arabic simple">
-<li><p>For virtual all tabulated datasource the observations (the actual values) appear in a box or rectangular, shape - as shown below</p></li>
-</ol>
-</li>
-</ul>
+<section id="understanding-expand-to-box">
+<h2>Understanding <code class="docutils literal notranslate"><span class="pre">expand_to_box()</span></code><a class="headerlink" href="#understanding-expand-to-box" title="Link to this heading">#</a></h2>
+<p>For virtual all tabulated datasource the observations (the actual values) appear in a box or rectangular, shape - as shown below</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preview</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B9:E12&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Box like selection of value cells&quot;</span><span class="p">),</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A5:E12&quot;</span><span class="p">)</span>
@@ -921,11 +914,12 @@ document.write(`
 </ol>
 </li>
 <li><ol class="arabic simple" start="3">
-<li><p><code class="docutils literal notranslate"><span class="pre">.box_select()</span></code> mirrors this quirk of how we read, so it:</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">.expand_to_box()</span></code> mirrors this quirk of how we read, so it:</p>
 <ul>
 <li><p>Starts with a single cell (the top-left part of the box)</p></li>
 <li><p>Sweeps right gathering all the cells</p></li>
 <li><p>Sweeps down gathering all cells beneath <em>those</em> cells.</p></li>
+<li><p>Removes any cells that are blank</p></li>
 </ul>
 </li>
 </ol>
@@ -935,23 +929,62 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start_cell</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B9&quot;</span><span class="p">)</span>
-<span class="n">box_of_cells</span> <span class="o">=</span> <span class="n">start_cell</span><span class="o">.</span><span class="n">box_select</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Box like selection of value cells&quot;</span><span class="p">)</span>
+<span class="n">box_of_cells</span> <span class="o">=</span> <span class="n">start_cell</span><span class="o">.</span><span class="n">expand_to_box</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Box like selection of value cells&quot;</span><span class="p">)</span>
 <span class="n">preview</span><span class="p">(</span><span class="n">box_of_cells</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A5:E12&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">start_cell</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;B9&quot;</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">box_of_cells</span> <span class="o">=</span> <span class="n">start_cell</span><span class="o">.</span><span class="n">box_select</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Box like selection of value cells&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">preview</span><span class="p">(</span><span class="n">box_of_cells</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A5:E12&quot;</span><span class="p">)</span>
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
 
-<span class="ne">AttributeError</span>: &#39;XlsxSelectable&#39; object has no attribute &#39;box_select&#39;
-</pre></div>
-</div>
-</div>
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <table>
+                
+            <tr>
+                <td style="background-color:cyan">Box like selection of value cells</td>
+            <tr>
+        
+            </table>
+
+            <body>
+                <h2>Table 3a</h2>
+                <table>
+                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:white">Time period</td><td style="background-color:white">Public new housing</td><td style="background-color:white">Private new housing</td><td style="background-color:white">Total new housing</td><td style="background-color:white">Infrastructure new work</td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:white">Annual dataset identifier code</td><td style="background-color:white">MV5H</td><td style="background-color:white">MV5I</td><td style="background-color:white">MVM3</td><td style="background-color:white">MV5J</td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:white">Quarterly dataset identifier code</td><td style="background-color:white">MV54</td><td style="background-color:white">MV55</td><td style="background-color:white">MVM7</td><td style="background-color:white">MV56</td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:white">Monthly dataset identifier code</td><td style="background-color:white">MV4O</td><td style="background-color:white">MV4P</td><td style="background-color:white">MVM2</td><td style="background-color:white">MV4Q</td></tr>
+<tr><td style="background-color:lightgrey">9</td><td style="background-color:white">1998</td><td style="background-color:cyan">-19</td><td style="background-color:cyan">1</td><td style="background-color:cyan">-1.2</td><td style="background-color:cyan">-2.8</td></tr>
+<tr><td style="background-color:lightgrey">10</td><td style="background-color:white">1999</td><td style="background-color:cyan">-13.3</td><td style="background-color:cyan">-10</td><td style="background-color:cyan">-10.3</td><td style="background-color:cyan">-2.8</td></tr>
+<tr><td style="background-color:lightgrey">11</td><td style="background-color:white">2000</td><td style="background-color:cyan">25.5</td><td style="background-color:cyan">11.7</td><td style="background-color:cyan">12.9</td><td style="background-color:cyan">-6.2</td></tr>
+<tr><td style="background-color:lightgrey">12</td><td style="background-color:white">2001</td><td style="background-color:cyan">2.3</td><td style="background-color:cyan">-6.7</td><td style="background-color:cyan">-5.8</td><td style="background-color:cyan">7.1</td></tr>
+
+                </table>
+            </body>
+            <br>
+        </html>
+    </div></div>
 </div>
 <p>…wait…. can’t we just use that handy <code class="docutils literal notranslate"><span class="pre">excel_ref()</span></code> thing that keeps cropping up?</p>
 <p>Yes you 100% can ….. but…. that’s an explicit reference, so your code <strong>breaks</strong> the second someone moves whatever you’re targetting so there’s a trade off to consider.</p>
@@ -967,6 +1000,57 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <table>
+                
+            <tr>
+                <td style="background-color:cyan">Unnamed Selection: 0</td>
+            <tr>
+        
+            </table>
+
+            <body>
+                <h2>Table 3a</h2>
+                <table>
+                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:white">Time period</td><td style="background-color:white">Public new housing</td><td style="background-color:white">Private new housing</td><td style="background-color:white">Total new housing</td><td style="background-color:white">Infrastructure new work</td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:white">Annual dataset identifier code</td><td style="background-color:white">MV5H</td><td style="background-color:white">MV5I</td><td style="background-color:white">MVM3</td><td style="background-color:white">MV5J</td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:white">Quarterly dataset identifier code</td><td style="background-color:white">MV54</td><td style="background-color:white">MV55</td><td style="background-color:white">MVM7</td><td style="background-color:white">MV56</td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:white">Monthly dataset identifier code</td><td style="background-color:white">MV4O</td><td style="background-color:white">MV4P</td><td style="background-color:white">MVM2</td><td style="background-color:white">MV4Q</td></tr>
+<tr><td style="background-color:lightgrey">9</td><td style="background-color:white">1998</td><td style="background-color:cyan">-19</td><td style="background-color:white">1</td><td style="background-color:white">-1.2</td><td style="background-color:white">-2.8</td></tr>
+<tr><td style="background-color:lightgrey">10</td><td style="background-color:white">1999</td><td style="background-color:white">-13.3</td><td style="background-color:white">-10</td><td style="background-color:white">-10.3</td><td style="background-color:white">-2.8</td></tr>
+<tr><td style="background-color:lightgrey">11</td><td style="background-color:white">2000</td><td style="background-color:white">25.5</td><td style="background-color:white">11.7</td><td style="background-color:white">12.9</td><td style="background-color:white">-6.2</td></tr>
+<tr><td style="background-color:lightgrey">12</td><td style="background-color:white">2001</td><td style="background-color:white">2.3</td><td style="background-color:white">-6.7</td><td style="background-color:white">-5.8</td><td style="background-color:white">7.1</td></tr>
+
+                </table>
+            </body>
+            <br>
+        </html>
+    </div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -974,6 +1058,57 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <table>
+                
+            <tr>
+                <td style="background-color:cyan">Unnamed Selection: 0</td>
+            <tr>
+        
+            </table>
+
+            <body>
+                <h2>Table 3a</h2>
+                <table>
+                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:white">Time period</td><td style="background-color:white">Public new housing</td><td style="background-color:white">Private new housing</td><td style="background-color:white">Total new housing</td><td style="background-color:white">Infrastructure new work</td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:white">Annual dataset identifier code</td><td style="background-color:white">MV5H</td><td style="background-color:white">MV5I</td><td style="background-color:white">MVM3</td><td style="background-color:white">MV5J</td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:white">Quarterly dataset identifier code</td><td style="background-color:white">MV54</td><td style="background-color:white">MV55</td><td style="background-color:white">MVM7</td><td style="background-color:white">MV56</td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:white">Monthly dataset identifier code</td><td style="background-color:white">MV4O</td><td style="background-color:white">MV4P</td><td style="background-color:white">MVM2</td><td style="background-color:white">MV4Q</td></tr>
+<tr><td style="background-color:lightgrey">9</td><td style="background-color:white">1998</td><td style="background-color:cyan">-19</td><td style="background-color:cyan">1</td><td style="background-color:cyan">-1.2</td><td style="background-color:white">-2.8</td></tr>
+<tr><td style="background-color:lightgrey">10</td><td style="background-color:white">1999</td><td style="background-color:cyan">-13.3</td><td style="background-color:cyan">-10</td><td style="background-color:cyan">-10.3</td><td style="background-color:white">-2.8</td></tr>
+<tr><td style="background-color:lightgrey">11</td><td style="background-color:white">2000</td><td style="background-color:cyan">25.5</td><td style="background-color:cyan">11.7</td><td style="background-color:cyan">12.9</td><td style="background-color:white">-6.2</td></tr>
+<tr><td style="background-color:lightgrey">12</td><td style="background-color:white">2001</td><td style="background-color:white">2.3</td><td style="background-color:white">-6.7</td><td style="background-color:white">-5.8</td><td style="background-color:white">7.1</td></tr>
+
+                </table>
+            </body>
+            <br>
+        </html>
+    </div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -981,6 +1116,57 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <table>
+                
+            <tr>
+                <td style="background-color:cyan">Unnamed Selection: 0</td>
+            <tr>
+        
+            </table>
+
+            <body>
+                <h2>Table 3a</h2>
+                <table>
+                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:white">Time period</td><td style="background-color:white">Public new housing</td><td style="background-color:white">Private new housing</td><td style="background-color:white">Total new housing</td><td style="background-color:white">Infrastructure new work</td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:white">Annual dataset identifier code</td><td style="background-color:white">MV5H</td><td style="background-color:white">MV5I</td><td style="background-color:white">MVM3</td><td style="background-color:white">MV5J</td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:white">Quarterly dataset identifier code</td><td style="background-color:white">MV54</td><td style="background-color:white">MV55</td><td style="background-color:white">MVM7</td><td style="background-color:white">MV56</td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:cyan">Monthly dataset identifier code</td><td style="background-color:cyan">MV4O</td><td style="background-color:cyan">MV4P</td><td style="background-color:cyan">MVM2</td><td style="background-color:cyan">MV4Q</td></tr>
+<tr><td style="background-color:lightgrey">9</td><td style="background-color:cyan">1998</td><td style="background-color:cyan">-19</td><td style="background-color:cyan">1</td><td style="background-color:cyan">-1.2</td><td style="background-color:cyan">-2.8</td></tr>
+<tr><td style="background-color:lightgrey">10</td><td style="background-color:cyan">1999</td><td style="background-color:cyan">-13.3</td><td style="background-color:cyan">-10</td><td style="background-color:cyan">-10.3</td><td style="background-color:cyan">-2.8</td></tr>
+<tr><td style="background-color:lightgrey">11</td><td style="background-color:white">2000</td><td style="background-color:white">25.5</td><td style="background-color:white">11.7</td><td style="background-color:white">12.9</td><td style="background-color:white">-6.2</td></tr>
+<tr><td style="background-color:lightgrey">12</td><td style="background-color:white">2001</td><td style="background-color:white">2.3</td><td style="background-color:white">-6.7</td><td style="background-color:white">-5.8</td><td style="background-color:white">7.1</td></tr>
+
+                </table>
+            </body>
+            <br>
+        </html>
+    </div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -988,11 +1174,62 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <table>
+                
+            <tr>
+                <td style="background-color:cyan">Unnamed Selection: 0</td>
+            <tr>
+        
+            </table>
+
+            <body>
+                <h2>Table 3a</h2>
+                <table>
+                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:white">Time period</td><td style="background-color:white">Public new housing</td><td style="background-color:white">Private new housing</td><td style="background-color:cyan">Total new housing</td><td style="background-color:cyan">Infrastructure new work</td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:white">Annual dataset identifier code</td><td style="background-color:white">MV5H</td><td style="background-color:white">MV5I</td><td style="background-color:cyan">MVM3</td><td style="background-color:cyan">MV5J</td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:white">Quarterly dataset identifier code</td><td style="background-color:white">MV54</td><td style="background-color:white">MV55</td><td style="background-color:cyan">MVM7</td><td style="background-color:cyan">MV56</td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:white">Monthly dataset identifier code</td><td style="background-color:white">MV4O</td><td style="background-color:white">MV4P</td><td style="background-color:cyan">MVM2</td><td style="background-color:cyan">MV4Q</td></tr>
+<tr><td style="background-color:lightgrey">9</td><td style="background-color:white">1998</td><td style="background-color:white">-19</td><td style="background-color:white">1</td><td style="background-color:cyan">-1.2</td><td style="background-color:cyan">-2.8</td></tr>
+<tr><td style="background-color:lightgrey">10</td><td style="background-color:white">1999</td><td style="background-color:white">-13.3</td><td style="background-color:white">-10</td><td style="background-color:cyan">-10.3</td><td style="background-color:cyan">-2.8</td></tr>
+<tr><td style="background-color:lightgrey">11</td><td style="background-color:white">2000</td><td style="background-color:white">25.5</td><td style="background-color:white">11.7</td><td style="background-color:cyan">12.9</td><td style="background-color:cyan">-6.2</td></tr>
+<tr><td style="background-color:lightgrey">12</td><td style="background-color:white">2001</td><td style="background-color:white">2.3</td><td style="background-color:white">-6.7</td><td style="background-color:cyan">-5.8</td><td style="background-color:cyan">7.1</td></tr>
+
+                </table>
+            </body>
+            <br>
+        </html>
+    </div></div>
 </div>
 </section>
 <section id="is-numeric-and-is-not-numeric">
 <h2>Is Numeric and Is Not Numeric<a class="headerlink" href="#is-numeric-and-is-not-numeric" title="Link to this heading">#</a></h2>
-<p>These common methods are wrappers on two very popular filters (more on filters later) and they work largely as you’d image.</p>
+<p>These common methods are convenient aliases two very popular filters (more on filters later) and they work largely as you’d image.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numeric</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">is_numeric</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Is numeric&quot;</span><span class="p">)</span>
@@ -1000,6 +1237,57 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <table>
+                
+            <tr>
+                <td style="background-color:cyan">Is numeric</td>
+            <tr>
+        
+            </table>
+
+            <body>
+                <h2>Table 3a</h2>
+                <table>
+                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:white">Time period</td><td style="background-color:white">Public new housing</td><td style="background-color:white">Private new housing</td><td style="background-color:white">Total new housing</td><td style="background-color:white">Infrastructure new work</td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:white">Annual dataset identifier code</td><td style="background-color:white">MV5H</td><td style="background-color:white">MV5I</td><td style="background-color:white">MVM3</td><td style="background-color:white">MV5J</td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:white">Quarterly dataset identifier code</td><td style="background-color:white">MV54</td><td style="background-color:white">MV55</td><td style="background-color:white">MVM7</td><td style="background-color:white">MV56</td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:white">Monthly dataset identifier code</td><td style="background-color:white">MV4O</td><td style="background-color:white">MV4P</td><td style="background-color:white">MVM2</td><td style="background-color:white">MV4Q</td></tr>
+<tr><td style="background-color:lightgrey">9</td><td style="background-color:cyan">1998</td><td style="background-color:cyan">-19</td><td style="background-color:cyan">1</td><td style="background-color:cyan">-1.2</td><td style="background-color:cyan">-2.8</td></tr>
+<tr><td style="background-color:lightgrey">10</td><td style="background-color:cyan">1999</td><td style="background-color:cyan">-13.3</td><td style="background-color:cyan">-10</td><td style="background-color:cyan">-10.3</td><td style="background-color:cyan">-2.8</td></tr>
+<tr><td style="background-color:lightgrey">11</td><td style="background-color:cyan">2000</td><td style="background-color:cyan">25.5</td><td style="background-color:cyan">11.7</td><td style="background-color:cyan">12.9</td><td style="background-color:cyan">-6.2</td></tr>
+<tr><td style="background-color:lightgrey">12</td><td style="background-color:cyan">2001</td><td style="background-color:cyan">2.3</td><td style="background-color:cyan">-6.7</td><td style="background-color:cyan">-5.8</td><td style="background-color:cyan">7.1</td></tr>
+
+                </table>
+            </body>
+            <br>
+        </html>
+    </div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1008,6 +1296,57 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <html>
+        
+    <style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        align: center;
+        border: 1px  black solid !important;
+        color: black !important;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    </style>
+    
+            <table>
+                
+            <tr>
+                <td style="background-color:cyan">In not numeric</td>
+            <tr>
+        
+            </table>
+
+            <body>
+                <h2>Table 3a</h2>
+                <table>
+                    <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td></tr>
+<tr><td style="background-color:lightgrey">5</td><td style="background-color:cyan">Time period</td><td style="background-color:cyan">Public new housing</td><td style="background-color:cyan">Private new housing</td><td style="background-color:cyan">Total new housing</td><td style="background-color:cyan">Infrastructure new work</td></tr>
+<tr><td style="background-color:lightgrey">6</td><td style="background-color:cyan">Annual dataset identifier code</td><td style="background-color:cyan">MV5H</td><td style="background-color:cyan">MV5I</td><td style="background-color:cyan">MVM3</td><td style="background-color:cyan">MV5J</td></tr>
+<tr><td style="background-color:lightgrey">7</td><td style="background-color:cyan">Quarterly dataset identifier code</td><td style="background-color:cyan">MV54</td><td style="background-color:cyan">MV55</td><td style="background-color:cyan">MVM7</td><td style="background-color:cyan">MV56</td></tr>
+<tr><td style="background-color:lightgrey">8</td><td style="background-color:cyan">Monthly dataset identifier code</td><td style="background-color:cyan">MV4O</td><td style="background-color:cyan">MV4P</td><td style="background-color:cyan">MVM2</td><td style="background-color:cyan">MV4Q</td></tr>
+<tr><td style="background-color:lightgrey">9</td><td style="background-color:white">1998</td><td style="background-color:white">-19</td><td style="background-color:white">1</td><td style="background-color:white">-1.2</td><td style="background-color:white">-2.8</td></tr>
+<tr><td style="background-color:lightgrey">10</td><td style="background-color:white">1999</td><td style="background-color:white">-13.3</td><td style="background-color:white">-10</td><td style="background-color:white">-10.3</td><td style="background-color:white">-2.8</td></tr>
+<tr><td style="background-color:lightgrey">11</td><td style="background-color:white">2000</td><td style="background-color:white">25.5</td><td style="background-color:white">11.7</td><td style="background-color:white">12.9</td><td style="background-color:white">-6.2</td></tr>
+<tr><td style="background-color:lightgrey">12</td><td style="background-color:white">2001</td><td style="background-color:white">2.3</td><td style="background-color:white">-6.7</td><td style="background-color:white">-5.8</td><td style="background-color:white">7.1</td></tr>
+
+                </table>
+            </body>
+            <br>
+        </html>
+    </div></div>
 </div>
 </section>
 </section>
@@ -1084,7 +1423,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-a-column">Selecting a column</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-a-column-conditionally">Selecting a column conditionally</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-a-single-cell-conditionally">Selecting a single cell conditionally</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-box-select">Understanding <code class="docutils literal notranslate"><span class="pre">box_select()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-expand-to-box">Understanding <code class="docutils literal notranslate"><span class="pre">expand_to_box()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-ref">Excel ref</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#is-numeric-and-is-not-numeric">Is Numeric and Is Not Numeric</a></li>
 </ul>

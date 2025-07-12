@@ -142,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="../intro.html">
+<a class="navbar-brand logo" href="../how-to-use-this-book.html">
   
   
   
@@ -168,13 +168,12 @@
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="../intro.html">
-                    Tidychef
+                <a class="reference internal" href="../how-to-use-this-book.html">
+                    How to Use This Book
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../how-to-use-this-book.html">How to Use This Book</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../basics.html">Chapter 1: Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../basics/acquire.html">Acquire</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/preview.html">Preview</a></li>
@@ -190,7 +189,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-closest.html">TidyData: Closest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-constants.html">tidychef: Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-constants.html">TidyData: Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-obs-formatting.html">TidyData: Observation Formatting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
@@ -486,6 +485,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tidychef</span><span class="w"> </span><span class="kn">import</span> <span class="n">preview</span>
 
 <span class="c1"># First we&#39;ll create a simple pre hook that meets our requirements.</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">select_band_csv</span><span class="p">(</span><span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -500,7 +500,8 @@ document.write(`
     <span class="k">return</span> <span class="n">url_wanted</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="c1"># Now let&#39;s try it out</span>
-<span class="n">select_band_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/json/api.json&quot;</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">select_band_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/json/api.json&quot;</span><span class="p">)</span>
+<span class="n">url</span>
 </pre></div>
 </div>
 </div>
