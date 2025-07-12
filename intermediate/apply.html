@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Apply &#8212; Documentation</title>
+    <title>Apply &#8212; TidyChef</title>
   
   
   
@@ -149,7 +149,7 @@
   
   
   
-    <p class="title logo__title">Documentation</p>
+    <p class="title logo__title">TidyChef</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -215,7 +215,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../advanced/custom-data-sources.html">Custom Data Sources</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Chapter 4: Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/bands.html">Bands</a></li>
 
 
@@ -240,7 +240,6 @@
 
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../technical.html">Chapter 5: Technical Reference</a></li>
 </ul>
 
     </div>
@@ -522,10 +521,10 @@ document.write(`
 <h2>What is Apply<a class="headerlink" href="#what-is-apply" title="Link to this heading">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">apply=</span></code> keyword allowed you to pass in a single python “callable” (a function or class that can be passed arguments).</p>
 <p>Such callables are passed into the <code class="docutils literal notranslate"><span class="pre">Column()</span></code> class such as as per the following snippet:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Column</span><span class="p">(</span><span class="n">selection</span><span class="o">.</span><span class="n">finds_observations_directly</span><span class="p">(</span><span class="n">left</span><span class="p">),</span> <span class="n">apply</span><span class="o">=</span><span class="n">myfunction</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Column</span><span class="p">(</span><span class="n">selection</span><span class="o">.</span><span class="n">attach_directly</span><span class="p">(</span><span class="n">left</span><span class="p">),</span> <span class="n">apply</span><span class="o">=</span><span class="n">myfunction</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>In all cases the callable is a thing that acts upon the contents of the <strong>specific column</strong> informing and <strong>at the point of extraction</strong> (so it’ll change your output, never your input).</p>
+<p>In all cases the callable is a thing that acts upon the contents of the <em>specific column</em> <strong>at the point of extraction</strong> (so it’ll change your output, never your input).</p>
 </section>
 <section id="apply-function-example">
 <h2>Apply: Function Example<a class="headerlink" href="#apply-function-example" title="Link to this heading">#</a></h2>

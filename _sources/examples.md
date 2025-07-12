@@ -1,6 +1,6 @@
-# Chapter 4: Examples
+# Examples
 
-This section holds our working examples.
+This section holds our example transformations.
 
 The examples are listed in a _rough_ order of complexity.
 
