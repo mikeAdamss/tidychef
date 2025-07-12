@@ -16,8 +16,6 @@ This guide is designed to help you become productive with TidyChef as quickly as
 
 - **[Chapter 3: Advanced](https://mikeadamss.github.io/tidychef/advanced.html)** is for those looking to extend TidyChef or integrate it into broader tooling. This chapter is optional but valuable for power users and developers.
 
-- The **[Technical Reference](https://mikeadamss.github.io/tidychef/technical.html)** is a detailed API guide, primarily intended for developers.
-
 ## A Note on Terminology
 
 - TidyChef often uses the phrase "Excel reference" or the function `excel_ref()`. This has **nothing** to do with Microsoft Excel or spreadsheets. It's simply a practical convention—saying “Excel reference C3” is immediately understandable, whereas “x offset 2, y offset 4” is not.

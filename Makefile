@@ -24,11 +24,6 @@ book: ## Create the jupyter book in /jupyterbook/_build
 	pip install jupyter-book
 	jupyter-book build jupyterbook/ --all
 
-	python -m venv ./jupyterbook/pdoc_venv
-	. ./jupyterbook/pdoc_venv/bin/activate
-	pip install pdoc
-	pdoc ./tidychef -o ./jupyterbook/_build/html/api_docs
-
 	cp ./docs/ai-overview.html ./jupyterbook/_build/html/ai-overview.html
 
 	cp ./docs/preamble-preview.html ./jupyterbook/_build/html/examples/preamble-preview.html
