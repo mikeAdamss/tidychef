@@ -632,18 +632,27 @@ document.write(`
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unexpected table name, got </span><span class="si">{</span><span class="n">table</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="c1"># Set an anchor cell for convenient reference</span>
+    <span class="c1"># An anchor cell isjust a cell in a convenoent place, we&#39;re not gonna extractut but its convenient as a</span>
+    <span class="c1"># starting point for other selections.</span>
     <span class="n">anchor</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cell_containing_string</span><span class="p">(</span><span class="s2">&quot;Time period&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Anchor Cell&quot;</span><span class="p">)</span>
 
-    <span class="c1"># Move down+right one and expand to box</span>
+    <span class="c1"># To get the observations when starting from the anchor</span>
+    <span class="c1"># - shift right one cell</span>
+    <span class="c1"># - shift down two cells</span>
+    <span class="c1"># - expand to create a box like selection</span>
     <span class="n">observations</span> <span class="o">=</span> <span class="n">anchor</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">down</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">expand_to_box</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">)</span>
     
-    <span class="c1"># Down one from the anchor and everything to our right is an Identifier</span>
+    <span class="c1"># To get the identifiers when starting from the anchor</span>
+    <span class="c1">#- shift down one cell</span>
+    <span class="c1"># -fill right to get the row</span>
     <span class="n">identifier</span> <span class="o">=</span> <span class="n">anchor</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Identifier&quot;</span><span class="p">)</span>
     
     <span class="c1"># Everyting to the right of anchor is a type of Construction</span>
     <span class="n">construction</span> <span class="o">=</span> <span class="n">anchor</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Construction&quot;</span><span class="p">)</span>
     
-    <span class="c1"># Move down one cell from the anchor, and everything below is time period</span>
+    <span class="c1"># To get the time period when starting from the anchor</span>
+    <span class="c1"># - shift down one cell</span>
+    <span class="c1"># - fill down to get the time periods</span>
     <span class="n">time_period</span> <span class="o">=</span> <span class="n">anchor</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Time Period&quot;</span><span class="p">)</span>
 
     <span class="c1"># Create a bounded preview inline but also write the full preview to path</span>
