@@ -576,7 +576,7 @@ document.write(`
 <span class="c1"># Get the area level - I&#39;m doing something a little sneaky here to avoid regex&#39;ing a large dataset, see nuances.</span>
 <span class="n">area</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">up</span><span class="p">)</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Area&quot;</span><span class="p">)</span> <span class="o">-</span> <span class="n">unwanted</span>
 
-<span class="c1"># An area code is always above an area</span>
+<span class="c1"># An area code is always below an area</span>
 <span class="n">area_code</span> <span class="o">=</span> <span class="n">area</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">down</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Area Code&quot;</span><span class="p">)</span>
 
 <span class="c1"># - (a) Find the row that&#39;s got 1 or more cells with &#39;Price&#39; written in it</span>
@@ -592,7 +592,7 @@ document.write(`
 <span class="c1"># We&#39;ll select year as number values in column B</span>
 <span class="n">year</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">is_numeric</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">)</span>
 
-<span class="c1"># years are non black cells to the right of year</span>
+<span class="c1"># years are non blank cells to the right of year and up to three cells down</span>
 <span class="n">quarter</span> <span class="o">=</span> <span class="n">year</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">right</span><span class="p">)</span><span class="o">.</span><span class="n">extrude</span><span class="p">(</span><span class="n">down</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">is_not_blank</span><span class="p">()</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Quarter&quot;</span><span class="p">)</span>
 
 <span class="c1"># Create a bounded preview inline but also write the full preview to path</span>
