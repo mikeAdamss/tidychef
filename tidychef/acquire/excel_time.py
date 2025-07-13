@@ -99,5 +99,5 @@ EXCEL_TIME_FORMATS = {
     # Milliseconds without trailing zeros (e.g., 567)
     "0.": "%.3f",
     # Time as month and year (e.g., May 2023)
-    "mmm\ yyyy": "%b %Y",
+    r"mmm\ yyyy": "%b %Y",
 }
