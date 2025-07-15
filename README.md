@@ -72,7 +72,7 @@ which will get you an inline preview (because we used `preview()` in the snippet
 
 and will putput a csv (`band_tidy.csv` as per the snippet) that looks like this:
 
-![](https://mikeadamss.github.io/tidychef/docs/bands-sample-output.png)
+![](./docs/bands-sample-output.png)
 
 _Note: image cropped for reasons of practicality._
 
