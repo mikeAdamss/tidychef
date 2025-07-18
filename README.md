@@ -6,7 +6,7 @@
 
 🧠 **A Different Way to Work with Tabular Data**
 
-Tidychef is a Python tool that helps you extract data from **human-oriented spreadsheets**—the kind published by governments, NGOs, and analysts.
+TidyChef is a Python tool designed to extract and tidy data from **human-oriented spreadsheets and other visually structured tabular data** — the kind published by governments, NGOs, analysts, and beyond.
 
 Rather than relying on rigid cell references, Tidychef lets you define **spatial relationships** like “this value is below this header,” or “shift right from here,” making your scripts repeatable even when layouts evolve.
 
