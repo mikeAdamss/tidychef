@@ -542,8 +542,8 @@ document.write(`
 <p>Lets just select a row based on its row mumber.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">row3</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">row</span><span class="p">(</span><span class="s2">&quot;7&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Just row 7&quot;</span><span class="p">)</span>
-<span class="n">preview</span><span class="p">(</span><span class="n">row3</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A5:H8&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">row7</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">row</span><span class="p">(</span><span class="s2">&quot;7&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Just row 7&quot;</span><span class="p">)</span>
+<span class="n">preview</span><span class="p">(</span><span class="n">row7</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;A5:H8&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -657,7 +657,7 @@ document.write(`
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">row_containing_strings</span><span class="p">([</span><span class="s2">&quot;Foo&quot;</span><span class="p">,</span> <span class="s2">&quot;Bar&quot;</span><span class="p">,</span> <span class="s2">&quot;Baz&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>This would still only return exactly one row, but only where said row contained a call ppulated with the value “Foo” and another call populated with the value “Bar” and another one populated with the word “Baz”.</p>
+<p>This would still only return exactly one row, but only where said row contained a call populated with the value “Foo” and another call populated with the value “Bar” and another one populated with the word “Baz”.</p>
 </section>
 <section id="selecting-a-column">
 <h2>Selecting a column<a class="headerlink" href="#selecting-a-column" title="Link to this heading">#</a></h2>
@@ -726,8 +726,8 @@ document.write(`
 <h2>Selecting a column conditionally<a class="headerlink" href="#selecting-a-column-conditionally" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">column</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">column_containing_strings</span><span class="p">([</span><span class="s2">&quot;Private new housing&quot;</span><span class="p">])</span>
-<span class="n">preview</span><span class="p">(</span><span class="n">column_c</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;B2:D10&quot;</span><span class="p">)</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">column</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">column_containing_strings</span><span class="p">([</span><span class="s2">&quot;Private new housing&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;I&#39;m a column with Private new housing in it&quot;</span><span class="p">)</span>
+<span class="n">preview</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;B2:D10&quot;</span><span class="p">)</span> 
 </pre></div>
 </div>
 </div>
@@ -759,7 +759,7 @@ document.write(`
             <table>
                 
             <tr>
-                <td style="background-color:cyan">I am column C</td>
+                <td style="background-color:cyan">I'm a column with Private new housing in it</td>
             <tr>
         
             </table>
@@ -791,7 +791,7 @@ document.write(`
 <p>Very much what is sounds like, in this case you only pass one string because you’re only even looking for one match.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cell</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">cell_containing_string</span><span class="p">(</span><span class="s2">&quot;MV5I&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Single cell selection&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cell</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">cell_containing_string</span><span class="p">(</span><span class="s2">&quot;MV5I&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">label_as</span><span class="p">(</span><span class="s2">&quot;Single cell selection - cell containing MV5I&quot;</span><span class="p">)</span>
 <span class="n">preview</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">bounded</span><span class="o">=</span><span class="s2">&quot;B4:D8&quot;</span><span class="p">)</span> 
 </pre></div>
 </div>
@@ -824,7 +824,7 @@ document.write(`
             <table>
                 
             <tr>
-                <td style="background-color:cyan">Single cell selection</td>
+                <td style="background-color:cyan">Single cell selection - cell containing MV5I</td>
             <tr>
         
             </table>
