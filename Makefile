@@ -24,10 +24,10 @@ book: ## Create the jupyter book in /jupyterbook/_build
 	pip install jupyter-book
 	jupyter-book build jupyterbook/ --all
 
+    # Copy additional static html files to the jupyter book build directory
 	cp ./docs/ai-overview.html ./jupyterbook/_build/html/ai-overview.html
-
 	cp ./docs/preamble-preview.html ./jupyterbook/_build/html/examples/preamble-preview.html
-
+	cp ./docs/googlee3179b02e4a8c48e.html ./jupyterbook/_build/html/googlee3179b02e4a8c48e.html
 
 push_docs: ## Publish the jupyter book to github pages
 	poetry run pip install ghp-import
