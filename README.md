@@ -68,7 +68,7 @@ tidy_data.to_csv("bands_tidy.csv")
 
 which will get you an inline preview (because we used `preview()` in the snippet)
 
-![preview](./docs/preview1.png)
+![preview](https://raw.githubusercontent.com/mikeAdamss/tidychef/refs/heads/main/docs/preview1.png)
 
 and will putput a csv (`band_tidy.csv` as per the snippet) that looks like this:
 
@@ -83,7 +83,7 @@ This is the bit you need to understand above all - here’s another preview I've
 
 💡 Same script, radically different input—same output structure.
 
-![preview](./docs/preview2.png)
+![preview](https://raw.githubusercontent.com/mikeAdamss/tidychef/refs/heads/main/docs/preview2.png)
 
 📌 You’re modeling visual structure, not fixed coordinates!
 
