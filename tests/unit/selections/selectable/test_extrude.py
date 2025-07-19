@@ -63,35 +63,34 @@ def test_extrude_out_of_bounds(selectable_simple1: Selectable):
     with pytest.raises(OutOfBoundsError):
         selectable_simple1.excel_ref("E6:E10").extrude(left(100))
 
-    def test_extrude_out_of_bounds(selectable_simple1: Selectable):
-        """
-        Test that extrude raises OutOfBoundsError when attempting to extrude 
-        entirely outside the table boundaries.
-        """
+
+def test_extrude_boundary_cases(selectable_simple1: Selectable):
+    """
+    Test that extrude raises OutOfBoundsError when attempting to extrude 
+    beyond table boundaries, including edge cases.
+    """
+    
+    # Try to extrude right from the rightmost column (Z) - should fail
+    with pytest.raises(OutOfBoundsError):
+        selectable_simple1.excel_ref("Z50").extrude(right)
+    
+    # Try to extrude left from the leftmost column (A) - should fail
+    with pytest.raises(OutOfBoundsError):
+        selectable_simple1.excel_ref("A50").extrude(left)
+    
+    # Try to extrude up from the top row - should fail
+    with pytest.raises(OutOfBoundsError):
+        selectable_simple1.excel_ref("M1").extrude(up)
+    
+    # Try to extrude down from the bottom row (100) - should fail
+    with pytest.raises(OutOfBoundsError):
+        selectable_simple1.excel_ref("M100").extrude(down)
+    
+    # Try to extrude with a large distance that goes out of bounds - should fail
+    with pytest.raises(OutOfBoundsError):
+        selectable_simple1.excel_ref("Y100").extrude(right(5))  # Y+5 = beyond Z
         
-        # Try to extrude right from the rightmost column (Z) - should fail
-        with pytest.raises(OutOfBoundsError):
-            selectable_simple1.excel_ref("Z50").extrude(right)
-        
-        # Try to extrude left from the leftmost column (A) - should fail
-        with pytest.raises(OutOfBoundsError):
-            selectable_simple1.excel_ref("A50").extrude(left)
-        
-        # Try to extrude up from the top row - should fail
-        with pytest.raises(OutOfBoundsError):
-            selectable_simple1.excel_ref("M1").extrude(up)
-        
-        # Try to extrude down from the bottom row (100) - should fail
-        with pytest.raises(OutOfBoundsError):
-            selectable_simple1.excel_ref("M100").extrude(down)
-        
-        # Try to extrude with a large distance that goes out of bounds - should fail
-        with pytest.raises(OutOfBoundsError):
-            selectable_simple1.excel_ref("Y100").extrude(right(5))  # Y+5 = beyond Z
-            
-        # Partial extrusion should work (some cells can be extruded, some can't)
-        # This should NOT raise an error as long as at least some cells are found
-        partial_extrude = selectable_simple1.excel_ref("Y50:Z50").extrude(right)
-        # Only the Y50 cell should be able to extrude to Z50, but Z50 can't extrude further
-        # So we should have Y50, Z50 (original) + Z50 (extruded from Y50) = 2 cells total
-        partial_extrude.assert_len(2)
+    # Even partial extrusion should fail if ANY cell hits a boundary
+    # This should raise an error because Z50 cannot extrude further right
+    with pytest.raises(OutOfBoundsError):
+        selectable_simple1.excel_ref("Y50:Z50").extrude(right)

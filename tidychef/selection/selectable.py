@@ -725,7 +725,7 @@ following validation errors were encountered:
             raise MissingLabelError(
                 """
                 You are trying to create a lookup engine for a selection of
-                cells using the .resolve_observations_directly() method but
+                cells using the .attach_directly() method but
                 have not yet assigned a label to said selection of cells.
 
                 Please use the .label_as() method to assign a label before
@@ -752,7 +752,7 @@ following validation errors were encountered:
             raise MissingLabelError(
                 """
                 You are trying to create a lookup engine for a selection of
-                cells using the .resolve_observations_closest() method but
+                cells using the .attach_closest() method but
                 have not yet assigned a label to said selection of cells.
 
                 Please use the .label_as() method to assign a label before
@@ -781,7 +781,7 @@ following validation errors were encountered:
             raise MissingLabelError(
                 """
                 You are trying to create a lookup engine for a selection of
-                cells using the .resolve_observations_within() method but have
+                cells using the .attach_within() method but have
                 not yet assigned a label to said selection of cells.
 
                 Please use the .label_as() method to assign a label before
