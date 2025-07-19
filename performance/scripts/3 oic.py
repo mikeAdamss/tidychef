@@ -41,10 +41,8 @@ def main():
     tidy_data.to_csv("data.csv")
     end_transform = datetime.now()
 
-
     acquire_duration = end_acquire - start_acquire
     selection_duration = end_select - start_select
     transform_duration = end_transform - start_transform
 
     return acquire_duration, selection_duration, transform_duration, len(tidy_data)
-

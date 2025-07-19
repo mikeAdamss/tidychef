@@ -14,7 +14,6 @@ def main():
     )
     end_acquire = datetime.now()
 
-
     start_select = datetime.now()
     # Sensible starting things
     anchor = table.excel_ref("B7").label_as("Anchor Cell")

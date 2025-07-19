@@ -14,7 +14,6 @@ def main():
     )
     end_acquire = datetime.now()
 
-
     start_select = datetime.now()
     footer = table.excel_ref("A").re("Average").expand(right).expand(down)
 
@@ -60,4 +59,3 @@ def main():
     transform_duration = end_transform - start_transform
 
     return acquire_duration, selection_duration, transform_duration, len(tidy_data)
-

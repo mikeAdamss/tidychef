@@ -20,9 +20,14 @@ def main():
     # Select headers and label them
     bands = table.row_containing_strings(["Beatles"]).is_not_blank().label_as("Band")
     assets = table.row_containing_strings(["Cars"]).is_not_blank().label_as("Asset")
-    names = table.cell_containing_string("Beatles").shift(down).expand_to_box().is_not_numeric().label_as("Name")
+    names = (
+        table.cell_containing_string("Beatles")
+        .shift(down)
+        .expand_to_box()
+        .is_not_numeric()
+        .label_as("Name")
+    )
     end_select = datetime.now()
-
 
     start_transform = datetime.now()
     # Build tidy data by attaching observations and headers
@@ -35,7 +40,6 @@ def main():
     # Force the transform
     tidy_data.to_csv("data.csv")
     end_transform = datetime.now()
-
 
     acquire_duration = end_acquire - start_acquire
     selection_duration = end_select - start_select
