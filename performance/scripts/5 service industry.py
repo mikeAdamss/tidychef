@@ -1,13 +1,20 @@
+from datetime import datetime
+
 def main():
     from tidychef import acquire, against, preview
     from tidychef.direction import down, left, right, up
     from tidychef.output import Column, TidyData
     from tidychef.selection import XlsSelectable
 
+    start_acquire = datetime.now()
     table: XlsSelectable = acquire.xls.http(
         "https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/xls/service-industry.xls",
         tables="TOPSI9",
     )
+    end_acquire = datetime.now()
+
+
+    start_select = datetime.now()
     footer = table.excel_ref("A").re("Average").expand(right).expand(down)
 
     anchor = (
@@ -26,22 +33,30 @@ def main():
         .label_as("Product")
     )
     observations = (cdid.waffle(down, quarter) - footer).label_as("Value")
+    end_select = datetime.now()
 
-    preview(anchor, observations, product, year, quarter, cdid)
-
+    start_transform = datetime.now()
     tidy_data = TidyData(
         observations,
-        Column(product.finds_observations_directly(down)),
+        Column(product.attach_directly(down)),
         Column(
-            year.finds_observations_closest(down),
+            year.attach_closest(down),
             apply=lambda x: x[:4],
             validate=against.is_numeric,
         ),
         Column(
-            quarter.finds_observations_directly(right),
+            quarter.attach_directly(right),
             apply=lambda x: "All" if x == "" else x,
         ),
-        Column(cdid.finds_observations_directly(down)),
+        Column(cdid.attach_directly(down)),
     )
 
     tidy_data.to_csv("data.csv")
+    end_transform = datetime.now()
+
+    acquire_duration = end_acquire - start_acquire
+    selection_duration = end_select - start_select
+    transform_duration = end_transform - start_transform
+
+    return acquire_duration, selection_duration, transform_duration, len(tidy_data)
+

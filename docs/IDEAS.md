@@ -1,13 +1,16 @@
-Tidychef has a pretty strong api but there's a lot I'd like to add.
-
 This document is just an informal holding ground for some thoughts that are baking but aren't quite ready to come out of oven yet. I might add them, I might not. If you're reading this consider anything you see as notes for the future and strictly possibilties not promises.
 
-**i.e everyting here is speculative!!**
+i.e I had an interesting thought while doing something else so scribbled it down here. As such these are notes to self and should not be confused with documentation, or indeed even a good or properly thought through idea.
 
-## Do better examples!!!!
+**Important - everyting here is informal and speculative and in no way a promise of anything that'll actually happen**
 
-The examples are all fine but with could probably all be cleaner. We're adding an cognitive load to onboarding here that we probably don't need to.
+## Do better examples
 
+The examples are all fine but with could probably all be cleaner and I'd like more. The less cognitive load in onboarding the better, we want people up and using tidychef in seconds not minutes. 
+
+## Interactive demo
+
+There are a few soltions for sharing runable code, including notebooks. Would it be good to share a runable example with people?
 
 ## Contiguous Cell Propositions
 
@@ -45,10 +48,10 @@ i.e - get me a selection of cells, made of of a horizontal presentation of sting
 so _something_ like:
 
 ```
-selction.expand(right, until=not(str))
+selction.expand(right, until=is_numeric)
 ```
 
-i.e expand right but stop expanding on a given row when you hit number or blank.
+i.e expand right but stop expanding on a given row when you hit a condition, i.e is_numeric, is_blank, is_row(2), is_column("D"), contains_str("foo") etc etc
 
 ## Cell Formatting
 
@@ -78,9 +81,6 @@ basically consider putting `_is_bold()` on all children of FormatableSelectable 
 
 in fact .....maybe.... we put an `is_bold()` on `Selectable` and raise a "format x doesn't do bold cells" type error in case of lazy cut and paste confusion for users. If `FormatableSelectable` forces the child to override if that should help keep us honest.
 
-## Consider removing explain=
-
-It doesn't feel like something someone would use all that much once they've got a grip on the api. Wait and see but (unless we need other config options) it might not be worth having.
 
 ## Sweep
 
@@ -106,12 +106,30 @@ and possibly
 
 it _feels_ like could potentially simplify a lot of recipes but (a) "sweep" doesn't quite capture the behavioud and (b) it could bequite unintuitive to "sweep" from multiple points, wemight to enforce the single cell starting point which would need careful conventions and handling to be obvious.
 
-## Raise of emply Selector returns
+## Raise for emply Selector returns
 
 I cant see any reason why any Selectable method that reults in 0 selectec cells would be desirable. Should we just raise when this happens? That feels like it'd make debugging easier. 
 
 Maybe a decorator, i.e _something_ like `@ensure_has_cells`.
 
+_think this one through_, it feels right but it'd be very abolsute by its nature.
+
 ## Label Previews
 
 It would be nice if people could optionally provide a label/heading for previews.This woulebehandy with multi preview / itertive extraction sceanrios.
+
+## Google Sheets
+
+An acquire mechanism for google sheets feels likean easy win, just put some thought into auth, need it to be an implementation that's equally accessible to the less technical folks.
+
+Have a think on api pattern:
+
+```
+acquire.sheets.http() ?
+acquire.google.http() ?
+
+# more interestingly
+acquire.google.sheets.http?
+# thats verbose ..but.. there are all sorts of google offerings that you could imbibe as a table, might be worth it, have a mull
+# ...but is there a non http google sheet? does it matter?
+```

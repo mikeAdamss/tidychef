@@ -1,13 +1,19 @@
+from datetime import datetime
+
 def main():
     from tidychef import acquire, preview
     from tidychef.direction import down, right
     from tidychef.output import Column, TidyData
     from tidychef.selection import XlsxSelectable
 
+    start_acquire = datetime.now()
     table: XlsxSelectable = acquire.xlsx.http(
         "https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/xlsx/ons-oic.xlsx",
         tables="Table 1a",
     )
+    end_acquire = datetime.now()
+
+    start_select = datetime.now()
     anchor = table.excel_ref("A").re("Time period").assert_one().label_as("Anchor Cell")
 
     observations = (
@@ -21,15 +27,23 @@ def main():
     identifier = anchor.shift(down).fill(right).label_as("Identifier")
     housing = anchor.fill(right).label_as("Housing")
     time_period = anchor.shift(down).fill(down).label_as("Time Period")
+    end_select = datetime.now()
 
-    # Create a bounded preview inline but also write the full preview to path
-    preview(anchor, observations, identifier, housing, time_period, bounded="A3:O13")
-
+    start_transform = datetime.now()
     tidy_data = TidyData(
         observations,
-        Column(identifier.finds_observations_directly(down)),
-        Column(housing.finds_observations_directly(down)),
-        Column(time_period.finds_observations_directly(right)),
+        Column(identifier.attach_directly(down)),
+        Column(housing.attach_directly(down)),
+        Column(time_period.attach_directly(right)),
     )
 
     tidy_data.to_csv("data.csv")
+    end_transform = datetime.now()
+
+
+    acquire_duration = end_acquire - start_acquire
+    selection_duration = end_select - start_select
+    transform_duration = end_transform - start_transform
+
+    return acquire_duration, selection_duration, transform_duration, len(tidy_data)
+
