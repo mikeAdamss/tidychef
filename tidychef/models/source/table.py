@@ -30,11 +30,29 @@ class Table:
         """
         self.cells = None
         self._signature = str(uuid.uuid4())
+        self.has_neighbours = False
 
     def add_cell(self, cell: Cell):
         if not self.cells:
             self.cells = []
         self.cells.append(cell)
+
+    def build_neighbor_graph(self):
+        """
+        Build the neighbor graph for the table.
+        This sets the _neighbour_up, _neighbour_down, _neighbour_left,
+        and _neighbour_right attributes for each cell.
+        """
+
+        cell_map = {(cell.x, cell.y): cell for cell in self.cells}
+
+        for cell in self.cells:
+            # Set neighbors based on position
+            cell._neighbour_up = cell_map.get((cell.x, cell.y - 1))
+            cell._neighbour_down = cell_map.get((cell.x, cell.y + 1))
+            cell._neighbour_left = cell_map.get((cell.x - 1, cell.y))
+            cell._neighbour_right = cell_map.get((cell.x + 1, cell.y))
+        self.has_neighbours = True
 
 
 class LiveTable:
@@ -59,8 +77,13 @@ class LiveTable:
     """
 
     def __init__(self, data_table: Table, name: str = None, source: str = None):
+
         self.pristine: Table = data_table
         self.filtered: Table = copy.deepcopy(data_table)
+
+        self.filtered.build_neighbor_graph()  # <- Neighbors built AFTER deep copy
+        self.pristine.build_neighbor_graph()  # <- Neighbors built AFTER deep copy
+
         self._name: Optional[str] = name
         self.source: Optional[Union[Path, str]] = source
 

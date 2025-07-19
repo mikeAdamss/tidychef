@@ -115,8 +115,31 @@ class Column(BaseColumn):
         if self.apply is not None:
             already_applied_cell = self._apply_cache.get(cell.value, None)
             if already_applied_cell is None:
+
+                # Clear neighbor references before deepcopy to prevent RecursionError
+                # that will occur as most cells (those of type Cell) have references to
+                # other cells (neighbours)
+                if isinstance(cell, Cell):
+                    old_neighbour_up = cell._neighbour_up
+                    old_neighbour_down = cell._neighbour_down
+                    old_neighbour_left = cell._neighbour_left
+                    old_neighbour_right = cell._neighbour_right
+                    
+                    cell._neighbour_up = None
+                    cell._neighbour_down = None
+                    cell._neighbour_left = None
+                    cell._neighbour_right = None
+                
                 applied_cell = copy.deepcopy(cell)
                 applied_cell.value = self.apply(applied_cell.value)
+                
+                if isinstance(cell, Cell):
+                    # Restore neighbor references on original cell
+                    cell._neighbour_up = old_neighbour_up
+                    cell._neighbour_down = old_neighbour_down
+                    cell._neighbour_left = old_neighbour_left
+                    cell._neighbour_right = old_neighbour_right
+                
                 self._apply_cache[cell.value] = applied_cell
                 cell = applied_cell
             else:
