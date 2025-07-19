@@ -1,19 +1,23 @@
-def main():
-    from datetime import datetime
+from datetime import datetime
 
+
+def main():
     from tidychef import acquire, filters, preview
     from tidychef.direction import down, right, up
     from tidychef.output import Column, TidyData
     from tidychef.selection import XlsSelectable
 
+    start_acquire = datetime.now()
     table: XlsSelectable = acquire.xls.http(
         "https://raw.githubusercontent.com/mikeAdamss/tidychef/main/tests/fixtures/xls/house-prices.xls",
         tables="Table 11",
     )
+    end_acquire = datetime.now()
+
+    start_select = datetime.now()
 
     housing = (
-        table.re("New dwellings")
-        .assert_one()
+        table.row_containing_strings(["New dwellings"])
         .expand(right)
         .is_not_blank()
         .label_as("Housing")
@@ -29,28 +33,26 @@ def main():
 
     quarter = year.shift(right).expand(down).is_not_blank().label_as("Quarter")
 
-    observations = (
-        quarter.fill(right)
-        .is_not_blank()
-        .filter(filters.is_not_numeric)
-        .label_as("Value")
-    )
+    observations = quarter.fill(right).is_not_blank().is_numeric().label_as("Value")
+    end_select = datetime.now()
 
-    # Create a bounded preview inline but also write the full preview to path
-    preview(observations, housing, area_code, area, year, quarter, bounded="A1:M20")
+    start_transform = datetime.now()
 
     tidy_data = TidyData(
         observations,
-        Column(
-            housing.finds_observations_directly(down), apply=lambda x: x.rstrip("4")
-        ),
-        Column(area.finds_observations_closest(down)),
-        Column(area_code.finds_observations_closest(down)),
-        Column(
-            year.finds_observations_closest(down), apply=lambda x: x.replace(".0", "")
-        ),
-        Column(quarter.finds_observations_directly(right)),
+        Column(housing.attach_directly(down), apply=lambda x: x.rstrip("4")),
+        Column(area.attach_closest(down)),
+        Column(area_code.attach_closest(down)),
+        Column(year.attach_closest(down), apply=lambda x: x.replace(".0", "")),
+        Column(quarter.attach_directly(right)),
         obs_apply=lambda x: x.replace(".0", ""),
     )
 
     tidy_data.to_csv("data.csv")
+    end_transform = datetime.now()
+
+    acquire_duration = end_acquire - start_acquire
+    selection_duration = end_select - start_select
+    transform_duration = end_transform - start_transform
+
+    return acquire_duration, selection_duration, transform_duration, len(tidy_data)

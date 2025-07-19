@@ -37,6 +37,7 @@ class IsNumeric:
     """
     The value of the cell is numerical
     """
+
     def __call__(self, cell: Cell):
         return cell.numeric
 
@@ -51,5 +52,6 @@ class IsNotNumeric:
 
     def __call__(self, cell: Cell):
         return not cell.numeric
+
 
 is_not_numeric = IsNotNumeric()

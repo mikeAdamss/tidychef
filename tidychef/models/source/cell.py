@@ -204,14 +204,13 @@ class Cell(BaseCell):
         for where a cell value has been changed.
         """
         self._original_value = self.value
-        
+
         # Derive if its numeric
         try:
             float(self.value)
             self.numeric = True
         except (ValueError, TypeError):
             pass
-
 
     def is_blank(self, disregard_whitespace: bool = True):
         """
@@ -260,3 +259,13 @@ class Cell(BaseCell):
         """
 
         return f'({self._excel_ref()}, value:"{self.value}", x:{self.x}, y:{self.y})'
+
+    def __hash__(self):
+        # Hash based on immutable properties that uniquely identify the cell
+        return hash((self.x, self.y, self.value))
+
+    def __eq__(self, other):
+        # Ensure equality works correctly with hashing
+        if not isinstance(other, Cell):
+            return False
+        return self.x == other.x and self.y == other.y and self.value == other.value

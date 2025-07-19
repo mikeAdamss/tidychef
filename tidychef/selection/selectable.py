@@ -1,9 +1,8 @@
 from __future__ import annotations
 
-import copy
 import re
 from os import linesep
-from typing import Callable, FrozenSet, List, Optional, Union
+from typing import Callable, List, Optional, Union
 
 from tidychef import datafuncs as dfc
 from tidychef.against.implementations.base import BaseValidator
@@ -33,6 +32,7 @@ from tidychef.lookup.engines.direct import Directly
 from tidychef.lookup.engines.within import Within
 from tidychef.models.source.cell import BaseCell, Cell
 from tidychef.models.source.table import LiveTable
+from tidychef.utils import cellutils
 from tidychef.utils.decorators import dontmutate
 
 
@@ -149,83 +149,78 @@ class Selectable(LiveTable):
         are aliases of UP and DOWN respectively.
         """
         direction._confirm_pristine()
-        selection: List[BaseCell] = []
-
-        # To begin with, the potential cells is equal to all cells
-        # not currently selected.
-        potential_cells: List[Cell] = dfc.cells_not_in(self.pcells, self.cells)
+        current_cells_set = set(self.cells)  # Single conversion for O(1) lookups
 
         if direction in [up, down, above, below]:
+            # Pre-compute direction checks for efficiency
+            is_up = direction in [up, above]
+            is_down = direction in [down, below]
 
-            # Only consider things on the same horizontal(x) index as a cell
-            # that's already selected.
-            all_used_x_indicies: FrozenSet[int] = set(c.x for c in self.cells)
+            # Use frozenset for faster lookup performance
+            all_used_x_indicies = frozenset(c.x for c in self.cells)
 
-            # Now consider each relevant x index
+            # Pre-allocate list with estimated size for better memory performance
+            selection = []
+
+            # Process each column
             for xi in all_used_x_indicies:
+                # Use index for fast column access
+                cells_on_xi = self._x_index[xi]
 
-                # All cells on this index (i.e in this column)
-                selected_cells_on_xi = dfc.cells_on_x_index(self.cells, xi)
+                # Split cells into selected and potential in one pass
+                selected_y_coords = []
+                potential_cells = []
 
-                # Not currently selected cells on this index
-                potential_cells_on_xi: List[Cell] = [
-                    c for c in potential_cells if c.x == xi
-                ]
+                for cell in cells_on_xi:
+                    if cell in current_cells_set:
+                        selected_y_coords.append(cell.y)
+                    else:
+                        potential_cells.append(cell)
 
-                if direction in [up, above]:
-                    lowest_used_xi = dfc.maximum_y_offset(selected_cells_on_xi)
-                    # Add cells from the potential selection to the
-                    # actual selection if they meet the criteria.
-                    selection += [
-                        c
-                        for c in potential_cells_on_xi
-                        if c.is_above(lowest_used_xi)  # above: visually
-                    ]
+                # Find boundary coordinates directly (fastest approach)
+                if is_up:
+                    max_y = max(selected_y_coords)
+                    # Use generator expression for memory efficiency with extend
+                    selection.extend(c for c in potential_cells if c.y < max_y)
+                elif is_down:
+                    min_y = min(selected_y_coords)
+                    selection.extend(c for c in potential_cells if c.y > min_y)
 
-                if direction in [down, below]:
-                    largest_used_yi = dfc.minimum_y_offset(selected_cells_on_xi)
-                    # Add cells from the potential selection to the
-                    # actual selection if they meet the criteria.
-                    selection += [
-                        c
-                        for c in potential_cells_on_xi
-                        if c.is_below(largest_used_yi)  # below: visually
-                    ]
+        elif direction in [left, right]:
+            # Pre-compute direction checks for efficiency
+            is_left = direction == left
+            is_right = direction == right
 
-        if direction in [left, right]:
+            # Use frozenset for faster lookup performance
+            all_used_y_indicies = frozenset(c.y for c in self.cells)
 
-            # For every row in which have at least one cell selected
-            all_used_y_indicies: FrozenSet[int] = set(c.y for c in self.cells)
+            selection = []
+
+            # Process each row
             for yi in all_used_y_indicies:
+                # Use index for fast row access
+                row_cells = self._y_index[yi]
 
-                # Get all currently selected cells on that row
-                selected_cells_on_yi = dfc.cells_on_y_index(self.cells, yi)
+                # Split cells into selected and potential in one pass
+                selected_x_coords = []
+                potential_cells = []
 
-                # Get all not selected cells on that row
-                potential_cells_on_yi: List[Cell] = [
-                    c for c in potential_cells if c.y == yi
-                ]
+                for cell in row_cells:
+                    if cell in current_cells_set:
+                        selected_x_coords.append(cell.x)
+                    else:
+                        potential_cells.append(cell)
 
-                if direction == left:
+                # Find boundary coordinates directly (fastest approach)
+                if is_left:
+                    min_x = min(selected_x_coords)
+                    selection.extend(c for c in potential_cells if c.x < min_x)
+                elif is_right:
+                    max_x = max(selected_x_coords)
+                    selection.extend(c for c in potential_cells if c.x > max_x)
 
-                    # Select anything to the left of the
-                    # rightmost of the selected cells on this row
-                    leftmost_used_yi = dfc.minimum_x_offset(selected_cells_on_yi)
-                    selection += [
-                        c
-                        for c in potential_cells_on_yi
-                        if c.is_left_of(leftmost_used_yi)
-                    ]
-
-                if direction == right:
-                    rightmost_used_yi = dfc.maximum_x_offset(selected_cells_on_yi)
-                    selection += [
-                        c
-                        for c in potential_cells_on_yi
-                        if c.is_right_of(rightmost_used_yi)
-                    ]
-
-        self.cells += selection
+        # Extend is more efficient than += for large lists
+        self.cells.extend(selection)
         return self
 
     @dontmutate
@@ -238,12 +233,13 @@ class Selectable(LiveTable):
         """
 
         # Fill is just a slightly modified wrapper
-        # for expand. 
+        # for expand.
 
-        did_have = copy.deepcopy(self.cells)
+        original_cells_set = set(self.cells)  # Convert to set for faster lookups
         self = self.expand(direction)
 
-        self.cells = [x for x in self.cells if x not in did_have]
+        # Use set difference for much faster filtering
+        self.cells = [x for x in self.cells if x not in original_cells_set]
         return self
 
     @dontmutate
@@ -362,6 +358,7 @@ class Selectable(LiveTable):
         # eg: '4'
         elif re.match("^[0-9]+$", excel_ref):
             wanted_y_index: int = dfc.single_excel_row_to_y_index(excel_ref)
+
             wanted = [c for c in self.pcells if c.y == wanted_y_index]
             try:
                 assert wanted_y_index <= self.maximum_pristine_y
@@ -400,16 +397,20 @@ class Selectable(LiveTable):
         # An excel reference that is one column letter
         # eg: 'H'
         elif re.match("^[A-Z]+$", excel_ref):
+            # We've indexed which cells make up a column as we can just return directly
             wanted_x_index: int = dfc.single_excel_column_to_x_index(excel_ref)
-            try:
-                assert wanted_x_index <= self.maximum_pristine_x
-                assert wanted_x_index >= self.minimum_pristine_x
-                wanted = [c for c in self.pcells if c.x == wanted_x_index]
-                selected = dfc.exactly_matched_xy_cells(self.cells, wanted)
-            except CellsDoNotExistError:
+            wanted_column_letters = cellutils.x_to_letters(wanted_x_index)
+
+            # They're asking for a column that doesn't exist
+            if wanted_column_letters not in self._column_index:
                 raise ReferenceOutsideSelectionError(msg)
-            except AssertionError:
+
+            # They're asking for a column that doesn't exist in the current selection
+            if wanted_x_index not in set(c.x for c in self.cells):
                 raise ReferenceOutsideSelectionError(msg)
+
+            wanted = set(self._column_index[wanted_column_letters])
+            selected = [c for c in self.cells if c in wanted]
 
         # An excel reference that is a range of column letters
         # eg: 'H:J'
@@ -422,17 +423,20 @@ class Selectable(LiveTable):
                 raise BadExcelReferenceError(
                     f'Excel ref "{excel_ref}" is invalid. {right_letters} much be higher than {left_letters}'
                 )
-            wanted = [
-                c for c in self.pcells if c.x >= start_x_index and c.x <= end_x_index
-            ]
-            try:
-                assert end_x_index <= self.maximum_pristine_x
-                assert start_x_index >= self.minimum_pristine_x
-                selected = dfc.exactly_matched_xy_cells(self.cells, wanted)
-            except CellsDoNotExistError:
-                raise ReferenceOutsideSelectionError(msg)
-            except AssertionError:
-                raise ReferenceOutsideSelectionError(msg)
+            wanted = []
+            for x_offset in range(start_x_index, end_x_index + 1):
+                letter = cellutils.x_to_letters(x_offset)
+
+                # They're specifying a column that doesn't exist
+                if letter not in self._column_index:
+                    raise ReferenceOutsideSelectionError(msg)
+
+                # They're specifying a column that doesn't exist in the current selection
+                if x_offset not in set(c.x for c in self.cells):
+                    raise ReferenceOutsideSelectionError(msg)
+
+                wanted += self._column_index[letter]
+            selected = [c for c in self.cells if c in wanted]
 
         # Unknown excel reference
         else:
@@ -440,7 +444,7 @@ class Selectable(LiveTable):
 
         self.cells = selected
         return self
-    
+
     def validate(self, validator: BaseValidator, raise_first_error: bool = False):
         """
         Validates current cell selection by passing each currently
@@ -495,8 +499,8 @@ following validation errors were encountered:
         pattern.
         """
 
-        matcher = re.compile(r"" + pattern)
-        self.cells = [x for x in self.cells if matcher.match(x.value) is not None]
+        matcher = re.compile(pattern)
+        self.cells = [x for x in self.cells if matcher.match(str(x.value)) is not None]
         return self
 
     @dontmutate
@@ -613,7 +617,9 @@ following validation errors were encountered:
                     ]
                 additional_cells += extruded_cells
 
-        self.cells += [x for x in additional_cells if x not in self.cells]
+        # Use set for faster membership testing
+        current_cells_set = set(self.cells)
+        self.cells += [x for x in additional_cells if x not in current_cells_set]
         return self
 
     def attach_directly(self, direction: Direction) -> Directly:
@@ -707,7 +713,7 @@ following validation errors were encountered:
         all on the specfied row.
         """
         return self.excel_ref(row_number)
-    
+
     @dontmutate
     def row_containing_strings(self, row_strings: List[str], strict=True):
         """
@@ -715,10 +721,10 @@ following validation errors were encountered:
         all on the same row - but - only where there's at least one cell
         on that row contains each of the strings in the provided list.
         """
-        assert isinstance(row_strings, list), (
-            "You must provide a list of strings to row_containing_strings"
-        )
-        
+        assert isinstance(
+            row_strings, list
+        ), "You must provide a list of strings to row_containing_strings"
+
         found_cells = []
         for y_index in dfc.all_used_y_indicies(self.cells):
             row_cells = dfc.cells_on_y_index(self.cells, y_index)
@@ -750,7 +756,7 @@ following validation errors were encountered:
         column as the first cell in the current selection.
         """
         return self.excel_ref(column_letter)
-    
+
     @dontmutate
     def column_containing_strings(self, column_strings: List[str]):
         """
@@ -773,7 +779,7 @@ following validation errors were encountered:
         self.assert_single_column()
 
         return self
-    
+
     @dontmutate
     def expand_to_box(self, remove_blank: bool = True):
         """
@@ -794,7 +800,6 @@ following validation errors were encountered:
         self.cells = cells
         return self
 
-
     @dontmutate
     def is_numeric(self):
         """
@@ -802,7 +807,7 @@ following validation errors were encountered:
         """
         self.cells = [x for x in self.cells if x.numeric]
         return self
-    
+
     @dontmutate
     def is_not_numeric(self):
         """
@@ -810,7 +815,7 @@ following validation errors were encountered:
         """
         self.cells = [x for x in self.cells if not x.numeric]
         return self
-    
+
     @dontmutate
     def cell_containing_string(self, string: str, strict: bool = True):
         """
@@ -823,11 +828,9 @@ following validation errors were encountered:
         self.cells = found_cells
         self.assert_one()
         return self
-    
+
     @dontmutate
-    def cells_containing_string(
-        self, string: str, strict: bool = True
-    ):
+    def cells_containing_string(self, string: str, strict: bool = True):
         """
         Filters the selection to those cells that contain or are equal to the provided strings.
         """
