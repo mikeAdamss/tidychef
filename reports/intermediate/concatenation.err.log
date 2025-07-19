@@ -37,10 +37,10 @@ tidydata1 + tidydata2
 [32m      1[39m [38;5;66;03m# Now we try and concatenate them - and get an error![39;00m
 [32m----> [39m[32m3[39m [43mtidydata1[49m[43m [49m[43m+[49m[43m [49m[43mtidydata2[49m
 
-[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/utils/decorators/dontmutate.py:41[39m, in [36mdontmutate.<locals>.wrapper[39m[34m(self, *args, **kwargs)[39m
-[32m     38[39m         new_self.filtered = copy.copy([38;5;28mself[39m.filtered)
-[32m     39[39m         new_self.filtered.cells = [38;5;28mself[39m.filtered.cells.copy()
-[32m---> [39m[32m41[39m [38;5;28;01mreturn[39;00m [43mmethod[49m[43m([49m[43mnew_self[49m[43m,[49m[43m [49m[43m*[49m[43margs[49m[43m,[49m[43m [49m[43m*[49m[43m*[49m[43mkwargs[49m[43m)[49m
+[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/utils/decorators/dontmutate.py:45[39m, in [36mdontmutate.<locals>.wrapper[39m[34m(self, *args, **kwargs)[39m
+[32m     42[39m         new_self.filtered = copy.copy([38;5;28mself[39m.filtered)
+[32m     43[39m         new_self.filtered.cells = [38;5;28mself[39m.filtered.cells.copy()
+[32m---> [39m[32m45[39m [38;5;28;01mreturn[39;00m [43mmethod[49m[43m([49m[43mnew_self[49m[43m,[49m[43m [49m[43m*[49m[43margs[49m[43m,[49m[43m [49m[43m*[49m[43m*[49m[43mkwargs[49m[43m)[49m
 
 [36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/output/tidydata.py:223[39m, in [36mTidyData.__add__[39m[34m(self, other_tidy_data)[39m
 [32m    220[39m [38;5;66;03m# Error if we're joining two TidyData objects[39;00m

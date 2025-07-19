@@ -89,17 +89,17 @@ print(tidy_data)
 [32m--> [39m[32m104[39m cell = [38;5;28;43mself[39;49m[43m.[49m[43m_post_lookup[49m[43m([49m[43mcell[49m[43m)[49m
 [32m    105[39m [38;5;28;01mreturn[39;00m cell
 
-[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/column/column.py:136[39m, in [36mColumn._post_lookup[39m[34m(self, cell)[39m
-[32m    134[39m         [38;5;28;01melse[39;00m:
-[32m    135[39m             msg = [33m"[39m[33m"[39m
-[32m--> [39m[32m136[39m         [38;5;28;01mraise[39;00m CellValidationError(
-[32m    137[39m             [33mf[39m[33m"""[39m
-[32m    138[39m [33m                Column [39m[38;5;132;01m{[39;00m[38;5;28mself[39m.label[38;5;132;01m}[39;00m[33m has a cell that is not valid,[39m
-[32m    139[39m [33m                Invalid cell [39m[38;5;132;01m{[39;00mcell[38;5;132;01m}[39;00m[33m.[39m
-[32m    140[39m [33m                [39m[38;5;132;01m{[39;00mmsg[38;5;132;01m}[39;00m[33m                      [39m
-[32m    141[39m [33m                [39m[33m"""[39m
-[32m    142[39m         )
-[32m    144[39m [38;5;28;01mreturn[39;00m cell
+[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/column/column.py:159[39m, in [36mColumn._post_lookup[39m[34m(self, cell)[39m
+[32m    157[39m         [38;5;28;01melse[39;00m:
+[32m    158[39m             msg = [33m"[39m[33m"[39m
+[32m--> [39m[32m159[39m         [38;5;28;01mraise[39;00m CellValidationError(
+[32m    160[39m             [33mf[39m[33m"""[39m
+[32m    161[39m [33m                Column [39m[38;5;132;01m{[39;00m[38;5;28mself[39m.label[38;5;132;01m}[39;00m[33m has a cell that is not valid,[39m
+[32m    162[39m [33m                Invalid cell [39m[38;5;132;01m{[39;00mcell[38;5;132;01m}[39;00m[33m.[39m
+[32m    163[39m [33m                [39m[38;5;132;01m{[39;00mmsg[38;5;132;01m}[39;00m[33m                      [39m
+[32m    164[39m [33m                [39m[33m"""[39m
+[32m    165[39m         )
+[32m    167[39m [38;5;28;01mreturn[39;00m cell
 
 [31mCellValidationError[39m: 
                         Column Dataset Identifier Codes has a cell that is not valid,

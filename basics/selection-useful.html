@@ -639,7 +639,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tidychef.selection.xlsx.xlsx.XlsxSelectable at 0x7cc7752ab1a0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tidychef.selection.xlsx.xlsx.XlsxSelectable at 0x7d41e0ad0950&gt;
 </pre></div>
 </div>
 </div>
@@ -663,23 +663,23 @@ document.write(`
 <span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">table</span><span class="p">:</span> <span class="n">XlsxSelectable</span> <span class="o">=</span> <span class="n">acquire</span><span class="o">.</span><span class="n">xlsx</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;https://github.com/mikeAdamss/tidychef/raw/main/tests/fixtures/xlsx/ons-oic.xlsx&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="o">=</span><span class="s2">&quot;Table 3a&quot;</span><span class="p">)</span>
 <span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">table</span><span class="o">.</span><span class="n">excel_ref</span><span class="p">(</span><span class="s1">&#39;A1:A2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">assert_one</span><span class="p">()</span>
 
-<span class="nn">File ~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/selection/selectable.py:75,</span> in <span class="ni">Selectable.assert_one</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">     </span><span class="mi">71</span> <span class="k">def</span><span class="w"> </span><span class="nf">assert_one</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">72</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">73</span><span class="sd">     Assert that the current selection contains exactly one cell</span>
-<span class="g g-Whitespace">     </span><span class="mi">74</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">---&gt; </span><span class="mi">75</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">assert_len</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nn">File ~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/selection/selectable.py:74,</span> in <span class="ni">Selectable.assert_one</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span> <span class="k">def</span><span class="w"> </span><span class="nf">assert_one</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span><span class="sd">     Assert that the current selection contains exactly one cell</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">74</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">assert_len</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="nn">File ~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/selection/selectable.py:67,</span> in <span class="ni">Selectable.assert_len</span><span class="nt">(self, number_of_cells)</span>
-<span class="g g-Whitespace">     </span><span class="mi">61</span> <span class="k">def</span><span class="w"> </span><span class="nf">assert_len</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_of_cells</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">62</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">63</span><span class="sd">     Assert that the current selection contains the number of cells</span>
-<span class="g g-Whitespace">     </span><span class="mi">64</span><span class="sd">     specified</span>
-<span class="g g-Whitespace">     </span><span class="mi">65</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">66</span>     <span class="k">assert</span> <span class="p">(</span>
-<span class="ne">---&gt; </span><span class="mi">67</span>         <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cells</span><span class="p">)</span> <span class="o">==</span> <span class="n">number_of_cells</span>
-<span class="g g-Whitespace">     </span><span class="mi">68</span>     <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Selection contains </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cells</span><span class="p">)</span><span class="si">}</span><span class="s2"> cells, not </span><span class="si">{</span><span class="n">number_of_cells</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">69</span>     <span class="k">return</span> <span class="bp">self</span>
+<span class="nn">File ~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/selection/selectable.py:66,</span> in <span class="ni">Selectable.assert_len</span><span class="nt">(self, number_of_cells)</span>
+<span class="g g-Whitespace">     </span><span class="mi">60</span> <span class="k">def</span><span class="w"> </span><span class="nf">assert_len</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_of_cells</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span><span class="sd">     Assert that the current selection contains the number of cells</span>
+<span class="g g-Whitespace">     </span><span class="mi">63</span><span class="sd">     specified</span>
+<span class="g g-Whitespace">     </span><span class="mi">64</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span>     <span class="k">assert</span> <span class="p">(</span>
+<span class="ne">---&gt; </span><span class="mi">66</span>         <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cells</span><span class="p">)</span> <span class="o">==</span> <span class="n">number_of_cells</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span>     <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Selection contains </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cells</span><span class="p">)</span><span class="si">}</span><span class="s2"> cells, not </span><span class="si">{</span><span class="n">number_of_cells</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span>     <span class="k">return</span> <span class="bp">self</span>
 
 <span class="ne">AssertionError</span>: Selection contains 2 cells, not 1
 </pre></div>
