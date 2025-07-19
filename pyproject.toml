@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tidychef"
-version = "1.0.2"
+version = "1.0.3"
 description = "Python framework for transforming tabulated data with visual relationships into tidy data"
 authors = ["mikeAdamss <mikelovesbooks@gmail.com>"]
 packages = [
