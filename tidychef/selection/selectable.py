@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import copy
 import re
 from os import linesep
 from typing import Callable, List, Optional, Union
