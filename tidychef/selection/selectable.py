@@ -33,8 +33,8 @@ from tidychef.lookup.engines.direct import Directly
 from tidychef.lookup.engines.within import Within
 from tidychef.models.source.cell import BaseCell, Cell
 from tidychef.models.source.table import LiveTable
-from tidychef.utils.decorators import dontmutate
 from tidychef.utils import cellutils
+from tidychef.utils.decorators import dontmutate
 
 
 class Selectable(LiveTable):
@@ -156,28 +156,28 @@ class Selectable(LiveTable):
             # Pre-compute direction checks for efficiency
             is_up = direction in [up, above]
             is_down = direction in [down, below]
-            
+
             # Use frozenset for faster lookup performance
             all_used_x_indicies = frozenset(c.x for c in self.cells)
 
             # Pre-allocate list with estimated size for better memory performance
             selection = []
-            
+
             # Process each column
             for xi in all_used_x_indicies:
                 # Use index for fast column access
                 cells_on_xi = self._x_index[xi]
-                
+
                 # Split cells into selected and potential in one pass
                 selected_y_coords = []
                 potential_cells = []
-                
+
                 for cell in cells_on_xi:
                     if cell in current_cells_set:
                         selected_y_coords.append(cell.y)
                     else:
                         potential_cells.append(cell)
-                
+
                 # Find boundary coordinates directly (fastest approach)
                 if is_up:
                     max_y = max(selected_y_coords)
@@ -191,21 +191,21 @@ class Selectable(LiveTable):
             # Pre-compute direction checks for efficiency
             is_left = direction == left
             is_right = direction == right
-            
+
             # Use frozenset for faster lookup performance
             all_used_y_indicies = frozenset(c.y for c in self.cells)
-            
+
             selection = []
-            
+
             # Process each row
             for yi in all_used_y_indicies:
                 # Use index for fast row access
                 row_cells = self._y_index[yi]
-                
+
                 # Split cells into selected and potential in one pass
                 selected_x_coords = []
                 potential_cells = []
-                
+
                 for cell in row_cells:
                     if cell in current_cells_set:
                         selected_x_coords.append(cell.x)
@@ -234,7 +234,7 @@ class Selectable(LiveTable):
         """
 
         # Fill is just a slightly modified wrapper
-        # for expand. 
+        # for expand.
 
         original_cells_set = set(self.cells)  # Convert to set for faster lookups
         self = self.expand(direction)
@@ -409,10 +409,10 @@ class Selectable(LiveTable):
             # They're asking for a column that doesn't exist in the current selection
             if wanted_x_index not in set(c.x for c in self.cells):
                 raise ReferenceOutsideSelectionError(msg)
-            
+
             wanted = set(self._column_index[wanted_column_letters])
             selected = [c for c in self.cells if c in wanted]
-        
+
         # An excel reference that is a range of column letters
         # eg: 'H:J'
         elif re.match("^[A-Z]+:[A-Z]+$", excel_ref):
@@ -431,11 +431,11 @@ class Selectable(LiveTable):
                 # They're specifying a column that doesn't exist
                 if letter not in self._column_index:
                     raise ReferenceOutsideSelectionError(msg)
-                
+
                 # They're specifying a column that doesn't exist in the current selection
                 if x_offset not in set(c.x for c in self.cells):
                     raise ReferenceOutsideSelectionError(msg)
-            
+
                 wanted += self._column_index[letter]
             selected = [c for c in self.cells if c in wanted]
 
@@ -445,7 +445,7 @@ class Selectable(LiveTable):
 
         self.cells = selected
         return self
-    
+
     def validate(self, validator: BaseValidator, raise_first_error: bool = False):
         """
         Validates current cell selection by passing each currently
@@ -714,7 +714,7 @@ following validation errors were encountered:
         all on the specfied row.
         """
         return self.excel_ref(row_number)
-    
+
     @dontmutate
     def row_containing_strings(self, row_strings: List[str], strict=True):
         """
@@ -722,10 +722,10 @@ following validation errors were encountered:
         all on the same row - but - only where there's at least one cell
         on that row contains each of the strings in the provided list.
         """
-        assert isinstance(row_strings, list), (
-            "You must provide a list of strings to row_containing_strings"
-        )
-        
+        assert isinstance(
+            row_strings, list
+        ), "You must provide a list of strings to row_containing_strings"
+
         found_cells = []
         for y_index in dfc.all_used_y_indicies(self.cells):
             row_cells = dfc.cells_on_y_index(self.cells, y_index)
@@ -757,7 +757,7 @@ following validation errors were encountered:
         column as the first cell in the current selection.
         """
         return self.excel_ref(column_letter)
-    
+
     @dontmutate
     def column_containing_strings(self, column_strings: List[str]):
         """
@@ -780,7 +780,7 @@ following validation errors were encountered:
         self.assert_single_column()
 
         return self
-    
+
     @dontmutate
     def expand_to_box(self, remove_blank: bool = True):
         """
@@ -801,7 +801,6 @@ following validation errors were encountered:
         self.cells = cells
         return self
 
-
     @dontmutate
     def is_numeric(self):
         """
@@ -809,7 +808,7 @@ following validation errors were encountered:
         """
         self.cells = [x for x in self.cells if x.numeric]
         return self
-    
+
     @dontmutate
     def is_not_numeric(self):
         """
@@ -817,7 +816,7 @@ following validation errors were encountered:
         """
         self.cells = [x for x in self.cells if not x.numeric]
         return self
-    
+
     @dontmutate
     def cell_containing_string(self, string: str, strict: bool = True):
         """
@@ -830,11 +829,9 @@ following validation errors were encountered:
         self.cells = found_cells
         self.assert_one()
         return self
-    
+
     @dontmutate
-    def cells_containing_string(
-        self, string: str, strict: bool = True
-    ):
+    def cells_containing_string(self, string: str, strict: bool = True):
         """
         Filters the selection to those cells that contain or are equal to the provided strings.
         """

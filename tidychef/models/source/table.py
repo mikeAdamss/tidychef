@@ -7,13 +7,14 @@ from __future__ import annotations
 import copy
 import uuid
 from pathlib import Path
-from typing import Dict,List, Optional, Union
+from typing import Dict, List, Optional, Union
 
 import tidychef.datafuncs as dfc
 from tidychef.exceptions import UnalignedTableOperation
 from tidychef.models.source.cell import BaseCell, Cell
-from tidychef.utils.decorators import dontmutate
 from tidychef.utils import cellutils
+from tidychef.utils.decorators import dontmutate
+
 
 class Table:
     """
@@ -79,28 +80,28 @@ class LiveTable:
         # as it can really slow down the process.
         # So we create indexes for the cells in the table.
         self._column_index: Dict[str, List[Cell]] = {}  # "A": [cell1, cell2, ...]
-        self._row_index: Dict[int, List[Cell]] = {}     # 1: [cell1, cell2, ...]
-        self._x_index: Dict[int, List[Cell]] = {}       # 0: [cell1, cell2, ...]
-        self._y_index: Dict[int, List[Cell]] = {}       # 0: [cell1, cell2, ...]
-    
+        self._row_index: Dict[int, List[Cell]] = {}  # 1: [cell1, cell2, ...]
+        self._x_index: Dict[int, List[Cell]] = {}  # 0: [cell1, cell2, ...]
+        self._y_index: Dict[int, List[Cell]] = {}  # 0: [cell1, cell2, ...]
+
         for cell in self.pcells:
             # Column letter index
             col_letter = cellutils.x_to_letters(cell.x)
             if col_letter not in self._column_index:
                 self._column_index[col_letter] = []
             self._column_index[col_letter].append(cell)
-            
+
             # Row number index
             row_num = cellutils.y_to_number(cell.y)
             if row_num not in self._row_index:
                 self._row_index[row_num] = []
             self._row_index[row_num].append(cell)
-            
+
             # X/Y coordinate indices
             if cell.x not in self._x_index:
                 self._x_index[cell.x] = []
             self._x_index[cell.x].append(cell)
-            
+
             if cell.y not in self._y_index:
                 self._y_index[cell.y] = []
             self._y_index[cell.y].append(cell)

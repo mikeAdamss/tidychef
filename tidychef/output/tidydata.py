@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import csv
 from pathlib import Path
-from typing import Callable, Dict, List, Optional, Union, Tuple
+from typing import Callable, Dict, List, Optional, Tuple, Union
 
 import tabulate
 from IPython.display import HTML, display
@@ -58,7 +58,6 @@ class TidyData(BaseOutput):
         # only do it once.
         self._data = None
 
-
     def add_column(self, column: BaseColumn):
         """
         Add a column to the TidyData object.
@@ -66,11 +65,13 @@ class TidyData(BaseOutput):
         This method can only be called before the first
         transformation has been run, i.e. before the first
         call to ._transform().
-        
+
         :param column: A BaseColumn object to add to the TidyData.
         """
 
-        assert self._data is None, """
+        assert (
+            self._data is None
+        ), """
         You can only add columns to TidyData before the first
         transformation has been run. If you want to add a column
         after the first transformation, you need to create a new
@@ -82,7 +83,6 @@ class TidyData(BaseOutput):
         ), "You can only add columns of type BaseColumn to TidyData"
 
         self.columns += (column,)
-
 
     def __get_representation(self):  # pragma: no cover
         """
