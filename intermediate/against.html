@@ -689,17 +689,17 @@ Should be False: False
 <span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="n">numeric_validator</span> <span class="o">=</span> <span class="n">NumericValidator</span><span class="p">()</span>
 <span class="ne">---&gt; </span><span class="mi">15</span> <span class="n">selection</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">numeric_validator</span><span class="p">)</span>
 
-<span class="nn">File ~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/selection/selectable.py:468,</span> in <span class="ni">Selectable.validate</span><span class="nt">(self, validator, raise_first_error)</span>
-<span class="g g-Whitespace">    </span><span class="mi">465</span>                     <span class="n">validation_errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">validator</span><span class="o">.</span><span class="n">msg</span><span class="p">(</span><span class="n">cell</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">467</span>         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">validation_errors</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">468</span>             <span class="k">raise</span> <span class="n">CellValidationError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">469</span>                 <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">470</span><span class="s2"> When making selections from table: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> the</span>
-<span class="g g-Whitespace">    </span><span class="mi">471</span><span class="s2"> following validation errors were encountered:</span>
-<span class="g g-Whitespace">    </span><span class="mi">472</span><span class="s2"> </span><span class="si">{</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">validation_errors</span><span class="p">)</span><span class="si">}</span>
-<span class="g g-Whitespace">    </span><span class="mi">473</span><span class="s2">                 &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">474</span>             <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">476</span>         <span class="k">return</span> <span class="bp">self</span>
+<span class="nn">File ~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/selection/selectable.py:473,</span> in <span class="ni">Selectable.validate</span><span class="nt">(self, validator, raise_first_error)</span>
+<span class="g g-Whitespace">    </span><span class="mi">470</span>                     <span class="n">validation_errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">validator</span><span class="o">.</span><span class="n">msg</span><span class="p">(</span><span class="n">cell</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">472</span>         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">validation_errors</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">473</span>             <span class="k">raise</span> <span class="n">CellValidationError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">474</span>                 <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">475</span><span class="s2"> When making selections from table: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> the</span>
+<span class="g g-Whitespace">    </span><span class="mi">476</span><span class="s2"> following validation errors were encountered:</span>
+<span class="g g-Whitespace">    </span><span class="mi">477</span><span class="s2"> </span><span class="si">{</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">validation_errors</span><span class="p">)</span><span class="si">}</span>
+<span class="g g-Whitespace">    </span><span class="mi">478</span><span class="s2">                 &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">479</span>             <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">481</span>         <span class="k">return</span> <span class="bp">self</span>
 
 <span class="ne">CellValidationError</span>: 
 <span class="n">When</span> <span class="n">making</span> <span class="n">selections</span> <span class="kn">from</span><span class="w"> </span><span class="nn">table</span><span class="p">:</span> <span class="n">Unnamed</span> <span class="n">Table</span> <span class="n">the</span>

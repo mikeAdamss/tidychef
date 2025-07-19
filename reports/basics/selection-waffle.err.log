@@ -39,21 +39,20 @@ waffled_selection = years.waffle(right, codes)
 [32m      3[39m preview(codes, years, bounded=[33m"[39m[33mA4:H10[39m[33m"[39m)
 [32m----> [39m[32m4[39m waffled_selection = [43myears[49m[43m.[49m[43mwaffle[49m[43m([49m[43mright[49m[43m,[49m[43m [49m[43mcodes[49m[43m)[49m
 
-[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/utils/decorators/dontmutate.py:24[39m, in [36mdontmutate.<locals>.wrapper[39m[34m(self, *args, **kwargs)[39m
-[32m     21[39m [38;5;129m@wraps[39m(method)
-[32m     22[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mwrapper[39m([38;5;28mself[39m, *args, **kwargs):
-[32m     23[39m     [38;5;28mself[39m = copy.deepcopy([38;5;28mself[39m)
-[32m---> [39m[32m24[39m     [38;5;28;01mreturn[39;00m [43mmethod[49m[43m([49m[38;5;28;43mself[39;49m[43m,[49m[43m [49m[43m*[49m[43margs[49m[43m,[49m[43m [49m[43m*[49m[43m*[49m[43mkwargs[49m[43m)[49m
+[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/utils/decorators/dontmutate.py:41[39m, in [36mdontmutate.<locals>.wrapper[39m[34m(self, *args, **kwargs)[39m
+[32m     38[39m         new_self.filtered = copy.copy([38;5;28mself[39m.filtered)
+[32m     39[39m         new_self.filtered.cells = [38;5;28mself[39m.filtered.cells.copy()
+[32m---> [39m[32m41[39m [38;5;28;01mreturn[39;00m [43mmethod[49m[43m([49m[43mnew_self[49m[43m,[49m[43m [49m[43m*[49m[43margs[49m[43m,[49m[43m [49m[43m*[49m[43m*[49m[43mkwargs[49m[43m)[49m
 
-[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/selection/selectable.py:537[39m, in [36mSelectable.waffle[39m[34m(self, direction, additional_selection)[39m
-[32m    535[39m     highest_x = dfc.maximum_x_offset([38;5;28mself[39m.cells)
-[32m    536[39m     [38;5;28;01mif[39;00m [38;5;28many[39m([x [38;5;28;01mfor[39;00m x [38;5;129;01min[39;00m additional_selection [38;5;28;01mif[39;00m x.x <= highest_x]):
-[32m--> [39m[32m537[39m         [38;5;28;01mraise[39;00m AmbiguousWaffleError(
-[32m    538[39m             [33m"[39m[33mWhen using waffle right, your additional selections must all [39m[33m"[39m
-[32m    539[39m             [33m"[39m[33mbe right of your initial selections.[39m[33m"[39m
-[32m    540[39m         )
-[32m    541[39m [38;5;28;01mif[39;00m direction.is_left:
-[32m    542[39m     lowest_x = dfc.minimum_x_offset([38;5;28mself[39m.cells)
+[36mFile [39m[32m~/.pyenv/versions/3.12.11/lib/python3.12/site-packages/tidychef/selection/selectable.py:542[39m, in [36mSelectable.waffle[39m[34m(self, direction, additional_selection)[39m
+[32m    540[39m     highest_x = dfc.maximum_x_offset([38;5;28mself[39m.cells)
+[32m    541[39m     [38;5;28;01mif[39;00m [38;5;28many[39m([x [38;5;28;01mfor[39;00m x [38;5;129;01min[39;00m additional_selection [38;5;28;01mif[39;00m x.x <= highest_x]):
+[32m--> [39m[32m542[39m         [38;5;28;01mraise[39;00m AmbiguousWaffleError(
+[32m    543[39m             [33m"[39m[33mWhen using waffle right, your additional selections must all [39m[33m"[39m
+[32m    544[39m             [33m"[39m[33mbe right of your initial selections.[39m[33m"[39m
+[32m    545[39m         )
+[32m    546[39m [38;5;28;01mif[39;00m direction.is_left:
+[32m    547[39m     lowest_x = dfc.minimum_x_offset([38;5;28mself[39m.cells)
 
 [31mAmbiguousWaffleError[39m: When using waffle right, your additional selections must all be right of your initial selections.
 
