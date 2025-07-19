@@ -190,6 +190,11 @@ class Cell(BaseCell):
     x: int
     y: int
 
+    _neighbour_up: Optional[Cell] = None
+    _neighbour_down: Optional[Cell] = None
+    _neighbour_left: Optional[Cell] = None
+    _neighbour_right: Optional[Cell] = None
+
     # Optional as some tabulated formats (eg csv) do not have
     # cell formatting.
     cellformat: Optional[CellFormatting] = None

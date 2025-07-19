@@ -150,77 +150,52 @@ class Selectable(LiveTable):
         """
         direction._confirm_pristine()
         current_cells_set = set(self.cells)  # Single conversion for O(1) lookups
+        new_cells = []
 
-        if direction in [up, down, above, below]:
-            # Pre-compute direction checks for efficiency
-            is_up = direction in [up, above]
-            is_down = direction in [down, below]
+        # Use neighbor traversal for much faster expansion
+        if direction in [up, above]:
+            # For each cell in current selection, traverse up until we hit a boundary
+            for cell in self.cells:
+                current = cell._neighbour_up
+                while current is not None and current not in current_cells_set:
+                    new_cells.append(current)
+                    current = current._neighbour_up
 
-            # Use frozenset for faster lookup performance
-            all_used_x_indicies = frozenset(c.x for c in self.cells)
+        elif direction in [down, below]:
+            # For each cell in current selection, traverse down until we hit a boundary
+            for cell in self.cells:
+                current = cell._neighbour_down
+                while current is not None and current not in current_cells_set:
+                    new_cells.append(current)
+                    current = current._neighbour_down
 
-            # Pre-allocate list with estimated size for better memory performance
-            selection = []
+        elif direction == left:
+            # For each cell in current selection, traverse left until we hit a boundary
+            for cell in self.cells:
+                current = cell._neighbour_left
+                while current is not None and current not in current_cells_set:
+                    new_cells.append(current)
+                    current = current._neighbour_left
 
-            # Process each column
-            for xi in all_used_x_indicies:
-                # Use index for fast column access
-                cells_on_xi = self._x_index[xi]
+        elif direction == right:
+            # For each cell in current selection, traverse right until we hit a boundary
+            for cell in self.cells:
+                current = cell._neighbour_right
+                while current is not None and current not in current_cells_set:
+                    new_cells.append(current)
+                    current = current._neighbour_right
 
-                # Split cells into selected and potential in one pass
-                selected_y_coords = []
-                potential_cells = []
+        # Remove duplicates and cells that are already in current selection
+        current_cells_set = set(self.cells)  # We already have this from above
+        seen = set()
+        unique_new_cells = []
+        for cell in new_cells:
+            if cell not in seen and cell not in current_cells_set:
+                seen.add(cell)
+                unique_new_cells.append(cell)
 
-                for cell in cells_on_xi:
-                    if cell in current_cells_set:
-                        selected_y_coords.append(cell.y)
-                    else:
-                        potential_cells.append(cell)
-
-                # Find boundary coordinates directly (fastest approach)
-                if is_up:
-                    max_y = max(selected_y_coords)
-                    # Use generator expression for memory efficiency with extend
-                    selection.extend(c for c in potential_cells if c.y < max_y)
-                elif is_down:
-                    min_y = min(selected_y_coords)
-                    selection.extend(c for c in potential_cells if c.y > min_y)
-
-        elif direction in [left, right]:
-            # Pre-compute direction checks for efficiency
-            is_left = direction == left
-            is_right = direction == right
-
-            # Use frozenset for faster lookup performance
-            all_used_y_indicies = frozenset(c.y for c in self.cells)
-
-            selection = []
-
-            # Process each row
-            for yi in all_used_y_indicies:
-                # Use index for fast row access
-                row_cells = self._y_index[yi]
-
-                # Split cells into selected and potential in one pass
-                selected_x_coords = []
-                potential_cells = []
-
-                for cell in row_cells:
-                    if cell in current_cells_set:
-                        selected_x_coords.append(cell.x)
-                    else:
-                        potential_cells.append(cell)
-
-                # Find boundary coordinates directly (fastest approach)
-                if is_left:
-                    min_x = min(selected_x_coords)
-                    selection.extend(c for c in potential_cells if c.x < min_x)
-                elif is_right:
-                    max_x = max(selected_x_coords)
-                    selection.extend(c for c in potential_cells if c.x > max_x)
-
-        # Extend is more efficient than += for large lists
-        self.cells.extend(selection)
+        # Extend current selection with new cells
+        self.cells.extend(unique_new_cells)
         return self
 
     @dontmutate
@@ -285,13 +260,38 @@ class Selectable(LiveTable):
         else:
             raise BadShiftParameterError(msg)
 
-        wanted_cells: List[BaseCell] = [
-            BaseCell(x=c.x + x_offset, y=c.y + y_offset) for c in self.cells
-        ]
+        # For multi-step moves, break them down into single-step recursive calls
+        if abs(x_offset) > 1 or abs(y_offset) > 1:
+            # Break down into single steps and apply recursively
+            if x_offset != 0:
+                x_step = 1 if x_offset > 0 else -1
+                self = self.shift(x_step, 0)
+                return self.shift(x_offset - x_step, y_offset)
+            else:  # y_offset != 0
+                y_step = 1 if y_offset > 0 else -1
+                self = self.shift(0, y_step)
+                return self.shift(x_offset, y_offset - y_step)
+        
+        # Handle single-step shifts using neighbor traversal (much faster than coordinate lookup)
+        found_cells = []
+        
+        for cell in self.cells:
+            shifted_cell = None
+            
+            # Handle single direction shifts efficiently
+            if x_offset == 1 and y_offset == 0:  # right
+                shifted_cell = cell._neighbour_right
+            elif x_offset == -1 and y_offset == 0:  # left
+                shifted_cell = cell._neighbour_left
+            elif x_offset == 0 and y_offset == 1:  # down
+                shifted_cell = cell._neighbour_down
+            elif x_offset == 0 and y_offset == -1:  # up
+                shifted_cell = cell._neighbour_up
+            
+            if shifted_cell:
+                found_cells.append(shifted_cell)
 
-        found_cells = dfc.matching_xy_cells(self.pcells, wanted_cells)
-
-        if len(found_cells) == 0 and len(wanted_cells) > 0:
+        if len(found_cells) == 0 and len(self.cells) > 0:
             raise OutOfBoundsError(
                 "You are attempting to shift your selection "
                 "entirely outside of the boundary of the table."
@@ -517,44 +517,106 @@ following validation errors were encountered:
         [C4,C5,C6].waffle("F1", "G1") == [F4,F5,F6,G4,G5,G6]
         """
 
+        # Validation checks (keep existing validation logic)
         if direction.is_vertical:
             if direction.is_downwards:
                 highest_y = dfc.maximum_y_offset(self.cells)
-                if any([x for x in additional_selection if x.y <= highest_y]):
+                if any(x.y <= highest_y for x in additional_selection.cells):
                     raise AmbiguousWaffleError(
                         "When using waffle down, your additional selections must all "
                         "be below your initial selections."
                     )
             if direction.is_upwards:
                 lowest_y = dfc.minimum_y_offset(self.cells)
-                if any([x for x in additional_selection if x.y >= lowest_y]):
+                if any(x.y >= lowest_y for x in additional_selection.cells):
                     raise AmbiguousWaffleError(
                         "When using waffle up, your additional selections must all be "
                         "above your initial selections."
                     )
-            x_offsets = dfc.all_used_x_indicies(self.cells)
-            y_offsets = dfc.all_used_y_indicies(additional_selection.cells)
         else:
             if direction.is_right:
                 highest_x = dfc.maximum_x_offset(self.cells)
-                if any([x for x in additional_selection if x.x <= highest_x]):
+                if any(x.x <= highest_x for x in additional_selection.cells):
                     raise AmbiguousWaffleError(
                         "When using waffle right, your additional selections must all "
                         "be right of your initial selections."
                     )
             if direction.is_left:
                 lowest_x = dfc.minimum_x_offset(self.cells)
-                if any([x for x in additional_selection if x.x >= lowest_x]):
+                if any(x.x >= lowest_x for x in additional_selection.cells):
                     raise AmbiguousWaffleError(
                         "When using waffle left, your additional selections must all be "
                         "left of your initial selections."
                     )
-            x_offsets = dfc.all_used_x_indicies(additional_selection.cells)
-            y_offsets = dfc.all_used_y_indicies(self.cells)
 
-        self.cells = [x for x in self.pcells if x.x in x_offsets and x.y in y_offsets]
+        # Use neighbor traversal for much faster waffle intersection
+        result_cells = []
+        seen_coordinates = set()  # Track coordinates to avoid duplicates during collection
+        
+        if direction.is_vertical:
+            # For vertical waffle: x from current selection, y from additional selection
+            # Use neighbor traversal to find cells at intersection coordinates
+            additional_y_coords = {cell.y for cell in additional_selection.cells}
+            
+            for current_cell in self.cells:
+                # For each x-coordinate in current selection, find cells at additional y-coordinates
+                for target_y in additional_y_coords:
+                    target_coord = (current_cell.x, target_y)
+                    if target_coord not in seen_coordinates:
+                        # Navigate to the target y coordinate using neighbor traversal
+                        found_cell = self._navigate_to_coordinate(current_cell, current_cell.x, target_y)
+                        if found_cell:
+                            result_cells.append(found_cell)
+                            seen_coordinates.add(target_coord)
+        else:
+            # For horizontal waffle: x from additional selection, y from current selection  
+            # Use neighbor traversal to find cells at intersection coordinates
+            additional_x_coords = {cell.x for cell in additional_selection.cells}
+            
+            for current_cell in self.cells:
+                # For each y-coordinate in current selection, find cells at additional x-coordinates
+                for target_x in additional_x_coords:
+                    target_coord = (target_x, current_cell.y)
+                    if target_coord not in seen_coordinates:
+                        # Navigate to the target x coordinate using neighbor traversal
+                        found_cell = self._navigate_to_coordinate(current_cell, target_x, current_cell.y)
+                        if found_cell:
+                            result_cells.append(found_cell)
+                            seen_coordinates.add(target_coord)
 
+        self.cells = result_cells
         return self
+
+    def _navigate_to_coordinate(self, start_cell, target_x, target_y):
+        """
+        Helper method to navigate from start_cell to target coordinates using neighbor traversal.
+        Returns the cell at (target_x, target_y) if it exists, None otherwise.
+        """
+        current = start_cell
+        
+        # Navigate horizontally first
+        while current.x != target_x:
+            if current.x < target_x:
+                if current._neighbour_right is None:
+                    return None  # Can't reach target
+                current = current._neighbour_right
+            else:
+                if current._neighbour_left is None:
+                    return None  # Can't reach target
+                current = current._neighbour_left
+        
+        # Now navigate vertically  
+        while current.y != target_y:
+            if current.y < target_y:
+                if current._neighbour_down is None:
+                    return None  # Can't reach target
+                current = current._neighbour_down
+            else:
+                if current._neighbour_up is None:
+                    return None  # Can't reach target
+                current = current._neighbour_up
+                
+        return current
 
     @dontmutate
     def extrude(self, direction: Direction):
@@ -582,44 +644,74 @@ following validation errors were encountered:
         """
 
         additional_cells = []
+        current_cells_set = set(self.cells)  # For fast duplicate checking
+        seen_additional = set()  # Track additional cells to avoid duplicates during collection
+
+        # Use neighbor traversal for much faster extrusion
         for cell in self.cells:
+            current = cell
+            
+            # Traverse in the specified direction, collecting ALL cells up to the specified distance
+            if direction.is_right:
+                for step in range(direction.x):
+                    current = current._neighbour_right
+                    if current is None:
+                        # Hit table boundary before completing the full extrusion - this is out of bounds
+                        raise OutOfBoundsError(
+                            f"You are attempting to extrude your selection beyond the boundary of the table. "
+                            f"Cell {cell._excel_ref()} cannot be extruded {direction.x} steps to the right "
+                            f"(stopped at step {step + 1})."
+                        )
+                    if current not in current_cells_set and current not in seen_additional:
+                        additional_cells.append(current)
+                        seen_additional.add(current)
+                        
+            elif direction.is_left:
+                # For left direction, direction.x is negative, so we take abs()
+                for step in range(abs(direction.x)):
+                    current = current._neighbour_left
+                    if current is None:
+                        # Hit table boundary before completing the full extrusion - this is out of bounds
+                        raise OutOfBoundsError(
+                            f"You are attempting to extrude your selection beyond the boundary of the table. "
+                            f"Cell {cell._excel_ref()} cannot be extruded {abs(direction.x)} steps to the left "
+                            f"(stopped at step {step + 1})."
+                        )
+                    if current not in current_cells_set and current not in seen_additional:
+                        additional_cells.append(current)
+                        seen_additional.add(current)
+                        
+            elif direction.is_downwards:
+                for step in range(direction.y):
+                    current = current._neighbour_down
+                    if current is None:
+                        # Hit table boundary before completing the full extrusion - this is out of bounds
+                        raise OutOfBoundsError(
+                            f"You are attempting to extrude your selection beyond the boundary of the table. "
+                            f"Cell {cell._excel_ref()} cannot be extruded {direction.y} steps downwards "
+                            f"(stopped at step {step + 1})."
+                        )
+                    if current not in current_cells_set and current not in seen_additional:
+                        additional_cells.append(current)
+                        seen_additional.add(current)
+                        
+            elif direction.is_upwards:
+                # For up direction, direction.y is negative, so we take abs()
+                for step in range(abs(direction.y)):
+                    current = current._neighbour_up
+                    if current is None:
+                        # Hit table boundary before completing the full extrusion - this is out of bounds
+                        raise OutOfBoundsError(
+                            f"You are attempting to extrude your selection beyond the boundary of the table. "
+                            f"Cell {cell._excel_ref()} cannot be extruded {abs(direction.y)} steps upwards "
+                            f"(stopped at step {step + 1})."
+                        )
+                    if current not in current_cells_set and current not in seen_additional:
+                        additional_cells.append(current)
+                        seen_additional.add(current)
 
-            if direction.is_horizontal:
-                viable_cells = dfc.cells_on_y_index(self.pcells, cell.y)
-                if direction.is_right:
-                    extruded_cells = [
-                        x
-                        for x in viable_cells
-                        if x.x > cell.x and x.x <= (cell.x + direction.x)
-                    ]
-                    additional_cells + extruded_cells
-                if direction.is_left:
-                    extruded_cells = [
-                        x
-                        for x in viable_cells
-                        if x.x < cell.x and x.x >= (cell.x + direction.x)
-                    ]
-                additional_cells += extruded_cells
-
-            else:
-                viable_cells = dfc.cells_on_x_index(self.pcells, cell.x)
-                if direction.is_downwards:
-                    extruded_cells = [
-                        x
-                        for x in viable_cells
-                        if x.y > cell.y and x.y <= (cell.y + direction.y)
-                    ]
-                if direction.is_upwards:
-                    extruded_cells = [
-                        x
-                        for x in viable_cells
-                        if x.y < cell.y and x.y >= (cell.y + direction.y)
-                    ]
-                additional_cells += extruded_cells
-
-        # Use set for faster membership testing
-        current_cells_set = set(self.cells)
-        self.cells += [x for x in additional_cells if x not in current_cells_set]
+        # Add new cells to current selection (no dedup needed since we prevented duplicates above)
+        self.cells.extend(additional_cells)
         return self
 
     def attach_directly(self, direction: Direction) -> Directly:
@@ -732,7 +824,8 @@ following validation errors were encountered:
             for wanted in row_strings:
                 if strict:
                     # If strict, wanted must be exactly equal to the cell value
-                    if wanted in [cell.value for cell in row_cells]:
+                    row_values = {cell.value for cell in row_cells}  # Use set for O(1) lookup
+                    if wanted in row_values:
                         found_count += 1
                 else:
                     # If not strict a substring match is fine
@@ -767,9 +860,10 @@ following validation errors were encountered:
         found_cells = []
         for x_index in dfc.all_used_x_indicies(self.cells):
             column_cells = dfc.cells_on_x_index(self.cells, x_index)
+            column_values = {cell.value for cell in column_cells}  # Use set for O(1) lookup
             found_count = 0
             for wanted in column_strings:
-                if wanted in [cell.value for cell in column_cells]:
+                if wanted in column_values:
                     found_count += 1
             if found_count == len(column_strings):
                 # If we found all the strings in this column, add it to the selection
