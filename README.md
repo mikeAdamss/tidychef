@@ -35,7 +35,7 @@ A simple script
 
 ```python
 from tidychef import acquire, filters, preview
-from tidychef.direction import down, right, below
+from tidychef.direction import below, down, right
 from tidychef.output import Column, TidyData
 
 # Load a CSV table from a URL
