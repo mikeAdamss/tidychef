@@ -69,15 +69,27 @@ class XlsxSelectable(Selectable):
         return self
 
     @dontmutate
-    def is_underline(self):
+    def is_underline(self, include_hyperlinks: bool = False):
         """
         Filters the selection to those cells that are underlined.
+        
+        Args:
+            include_hyperlinks (bool): If False (default), excludes hyperlinks from the selection 
+                                     to focus on decoratively underlined text. If True, includes 
+                                     all underlined cells including hyperlinks.
         """
         filtered_cells = []
         for cell in self.cells:
             try:
-                if cell.cellformat.is_underline():
+                is_underlined = cell.cellformat.is_underline()
+                is_hyperlink = cell.cellformat.is_hyperlink()
+                
+                # Include cell if it's underlined and either:
+                # - We're including hyperlinks, OR
+                # - It's not a hyperlink (decorative underline only)
+                if is_underlined and (include_hyperlinks or not is_hyperlink):
                     filtered_cells.append(cell)
+                    
             except CellFormattingError as e:
                 # This should not happen in normal XLSX processing as cells should have
                 # proper formatting information. Re-raise to indicate a serious issue.

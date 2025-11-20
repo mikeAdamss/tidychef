@@ -74,32 +74,60 @@ class TestXlsSelectableUnderlineMethods:
     def setup_method(self):
         """Set up test fixtures."""
         self.underline_cell = Mock()
-        self.underline_cell.cellformat = CellFormatting(underline=True)
+        self.underline_cell.cellformat = CellFormatting(underline=True, hyperlink=False)
         self.underline_cell.x, self.underline_cell.y = 0, 0
         
         self.not_underline_cell = Mock()
-        self.not_underline_cell.cellformat = CellFormatting(underline=False)
+        self.not_underline_cell.cellformat = CellFormatting(underline=False, hyperlink=False)
         self.not_underline_cell.x, self.not_underline_cell.y = 1, 0
         
+        self.hyperlink_cell = Mock()
+        self.hyperlink_cell.cellformat = CellFormatting(underline=True, hyperlink=True)
+        self.hyperlink_cell.x, self.hyperlink_cell.y = 2, 0
+        
         self.unknown_underline_cell = Mock()
-        self.unknown_underline_cell.cellformat = CellFormatting(underline=None)
+        self.unknown_underline_cell.cellformat = CellFormatting(underline=None, hyperlink=False)
         self.unknown_underline_cell._excel_ref = Mock(return_value="D4")
-        self.unknown_underline_cell.x, self.unknown_underline_cell.y = 2, 0
+        self.unknown_underline_cell.x, self.unknown_underline_cell.y = 3, 0
 
-    def test_is_underline_filters_correctly(self):
-        """Test that is_underline() filters to only underlined cells."""
+    def test_is_underline_filters_correctly_default_excludes_hyperlinks(self):
+        """Test that is_underline() by default excludes hyperlinks and only returns decoratively underlined cells."""
         data_table = Table()
-        data_table.cells = [self.underline_cell, self.not_underline_cell]
+        data_table.cells = [self.underline_cell, self.not_underline_cell, self.hyperlink_cell]
         selectable = XlsSelectable(data_table)
         
         result = selectable.is_underline()
         assert len(result.cells) == 1
         assert result.cells[0].cellformat.underline is True
+        assert result.cells[0].cellformat.hyperlink is False
+
+    def test_is_underline_with_include_hyperlinks_true(self):
+        """Test that is_underline(include_hyperlinks=True) includes both decorative underlines and hyperlinks."""
+        data_table = Table()
+        data_table.cells = [self.underline_cell, self.not_underline_cell, self.hyperlink_cell]
+        selectable = XlsSelectable(data_table)
+        
+        result = selectable.is_underline(include_hyperlinks=True)
+        assert len(result.cells) == 2
+        # Should include both the decoratively underlined cell and the hyperlink
+        underlined_cells = [cell for cell in result.cells if cell.cellformat.underline]
+        assert len(underlined_cells) == 2
+
+    def test_is_underline_with_include_hyperlinks_false_explicit(self):
+        """Test that is_underline(include_hyperlinks=False) explicitly excludes hyperlinks."""
+        data_table = Table()
+        data_table.cells = [self.underline_cell, self.not_underline_cell, self.hyperlink_cell]
+        selectable = XlsSelectable(data_table)
+        
+        result = selectable.is_underline(include_hyperlinks=False)
+        assert len(result.cells) == 1
+        assert result.cells[0].cellformat.underline is True
+        assert result.cells[0].cellformat.hyperlink is False
 
     def test_is_not_underline_filters_correctly(self):
         """Test that is_not_underline() filters to only non-underlined cells."""
         data_table = Table()
-        data_table.cells = [self.underline_cell, self.not_underline_cell]
+        data_table.cells = [self.underline_cell, self.not_underline_cell, self.hyperlink_cell]
         selectable = XlsSelectable(data_table)
         
         result = selectable.is_not_underline()

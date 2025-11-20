@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 
 from tidychef.models.source.cell import Cell
 from tidychef.models.source.table import LiveTable
@@ -81,22 +81,62 @@ class SelectionKeys:
 class HtmlCell:
     """
     Class to create a simple html representation of a single cell
-    using a single background colour.
+    using a single background colour and optional text formatting.
     """
 
-    def __init__(self, value: str, colour: str):
+    def __init__(self, value: Union[str, int, Cell], colour: str, cell: Cell = None):
         """
         Class to create a simple html representation of a single cell
-        using a single background colour.
+        using a single background colour and optional text formatting.
 
-        :param value: The value contained in the cell in question.
+        :param value: The value contained in the cell, or a Cell object
         :param colour: The background colour to use for the cell.
+        :param cell: Optional Cell object for formatting information
         """
-        self.value = value
+        if isinstance(value, Cell):
+            self.cell = value
+            self.value = value.value
+        else:
+            self.cell = cell
+            self.value = str(value)
         self.colour = colour
 
     def as_html(self):
         """
-        Create the html representation of this cell.
+        Create the html representation of this cell with formatting.
         """
-        return f'<td style="background-color:{self.colour}">{self.value}</td>'
+        content = str(self.value)
+        
+        # Apply text formatting if cell formatting is available
+        if self.cell and self.cell.cellformat:
+            # Check for hyperlink first (higher priority than underline)
+            is_hyperlink = False
+            try:
+                if self.cell.cellformat.is_hyperlink():
+                    # Style hyperlinks differently - could be enhanced to include actual href
+                    content = f'<span style="color: blue; text-decoration: underline;">{content}</span>'
+                    is_hyperlink = True
+            except:
+                pass
+            
+            try:
+                if self.cell.cellformat.is_bold():
+                    content = f"<strong>{content}</strong>"
+            except:
+                # If formatting info is not available, just use plain content
+                pass
+                
+            try:
+                if self.cell.cellformat.is_italic():
+                    content = f"<em>{content}</em>"
+            except:
+                pass
+                
+            # Only apply underline formatting if it's not a hyperlink
+            try:
+                if not is_hyperlink and self.cell.cellformat.is_underline():
+                    content = f"<u>{content}</u>"
+            except:
+                pass
+        
+        return f'<td style="background-color:{self.colour}">{content}</td>'

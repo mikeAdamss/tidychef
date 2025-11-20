@@ -307,12 +307,15 @@ def test_xls_formatting_selection_methods():
     assert len(not_italic_cells.cells) > 0, "Should find some non-italic cells"
     assert len(italic_cells.cells) + len(not_italic_cells.cells) == len(sheet.cells), "Italic + not italic should equal total"
     
-    # Test underline selection methods
-    underline_cells = sheet.is_underline()
+    # Test underline selection methods - new semantic behavior excludes hyperlinks by default
+    underline_cells = sheet.is_underline()  # Excludes hyperlinks by default
+    underline_cells_with_hyperlinks = sheet.is_underline(include_hyperlinks=True)  # Includes hyperlinks
     not_underline_cells = sheet.is_not_underline()
-    assert len(underline_cells.cells) > 0, "Should find some underlined cells"
+    assert len(underline_cells.cells) > 0, "Should find some decoratively underlined cells"
+    assert len(underline_cells_with_hyperlinks.cells) > len(underline_cells.cells), "Should find more underlined cells when including hyperlinks"
     assert len(not_underline_cells.cells) > 0, "Should find some non-underlined cells"
-    assert len(underline_cells.cells) + len(not_underline_cells.cells) == len(sheet.cells), "Underline + not underline should equal total"
+    # Note: The semantic behavior means underline + not_underline may not equal total anymore
+    # because hyperlinks are excluded from the default is_underline() but still count as underlined
     
     # Test hyperlink selection methods
     hyperlink_cells = sheet.is_hyperlink()

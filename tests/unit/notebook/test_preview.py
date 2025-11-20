@@ -1,11 +1,15 @@
 import os
 from pathlib import Path
+from unittest.mock import Mock
 
 import pytest
 
 from tests.fixtures.helpers import path_to_fixture
 from tests.fixtures.preconfigured import fixture_simple_small_one_tab
 from tidychef.exceptions import OutputPassedToPreview, UnalignedTableOperation
+from tidychef.models.source.cellformat import CellFormatting
+from tidychef.models.source.table import Table
+from tidychef.notebook.preview.html.components import HtmlCell
 from tidychef.notebook.preview.html.main import preview
 from tidychef.output.tidydata import TidyData
 from tidychef.selection.selectable import Selectable
@@ -217,3 +221,67 @@ def test_output_preview_to_path_works_with_both_xy_and_excel_references(
         fixture_content = f.read()
 
     assert new_content == fixture_content
+
+
+def test_html_cell_formatting():
+    """
+    Test that HtmlCell correctly applies text formatting based on CellFormatting.
+    """
+    from tidychef.models.source.cell import Cell
+    
+    # Test bold formatting
+    bold_cell = Cell(value="Bold Text", x=0, y=0, cellformat=CellFormatting(bold=True))
+    html_cell = HtmlCell(bold_cell, "white")
+    html_output = html_cell.as_html()
+    assert "<strong>Bold Text</strong>" in html_output
+    assert 'style="background-color:white"' in html_output
+
+    # Test italic formatting
+    italic_cell = Cell(value="Italic Text", x=0, y=0, cellformat=CellFormatting(italic=True))
+    html_cell = HtmlCell(italic_cell, "lightgrey")
+    html_output = html_cell.as_html()
+    assert "<em>Italic Text</em>" in html_output
+
+    # Test underline formatting
+    underline_cell = Cell(value="Underlined Text", x=0, y=0, cellformat=CellFormatting(underline=True))
+    html_cell = HtmlCell(underline_cell, "cyan")
+    html_output = html_cell.as_html()
+    assert "<u>Underlined Text</u>" in html_output
+
+    # Test hyperlink formatting (should override underline)
+    hyperlink_cell = Cell(value="Link Text", x=0, y=0, cellformat=CellFormatting(hyperlink=True, underline=True))
+    html_cell = HtmlCell(hyperlink_cell, "cyan")
+    html_output = html_cell.as_html()
+    assert '<span style="color: blue; text-decoration: underline;">Link Text</span>' in html_output
+    assert "<u>" not in html_output  # Should NOT have <u> tags since it's a hyperlink
+
+    # Test combined formatting
+    combined_cell = Cell(value="Combined", x=0, y=0, cellformat=CellFormatting(bold=True, italic=True, underline=True))
+    html_cell = HtmlCell(combined_cell, "white")
+    html_output = html_cell.as_html()
+    # The tags are applied in the order they appear in the code: bold, italic, underline
+    assert "<u><em><strong>Combined</strong></em></u>" in html_output
+
+    # Test hyperlink with other formatting
+    hyperlink_bold_cell = Cell(value="Bold Link", x=0, y=0, cellformat=CellFormatting(hyperlink=True, bold=True, underline=True))
+    html_cell = HtmlCell(hyperlink_bold_cell, "white")
+    html_output = html_cell.as_html()
+    assert '<strong><span style="color: blue; text-decoration: underline;">Bold Link</span></strong>' in html_output
+    assert "<u>" not in html_output  # Should NOT have <u> tags since it's a hyperlink
+
+    # Test no formatting
+    plain_cell = Cell(value="Plain Text", x=0, y=0, cellformat=CellFormatting())
+    html_cell = HtmlCell(plain_cell, "white")
+    html_output = html_cell.as_html()
+    assert html_output == '<td style="background-color:white">Plain Text</td>'
+
+    # Test cell with no cellformat attribute
+    no_format_cell = Cell(value="No Format", x=0, y=0, cellformat=None)
+    html_cell = HtmlCell(no_format_cell, "white")
+    html_output = html_cell.as_html()
+    assert html_output == '<td style="background-color:white">No Format</td>'
+
+    # Test backward compatibility with string values
+    html_cell = HtmlCell("Plain String", "white")
+    html_output = html_cell.as_html()
+    assert html_output == '<td style="background-color:white">Plain String</td>'
