@@ -10,6 +10,7 @@ from .badparams import (
     WithinAxisDeclarationError,
 )
 from .cells import (
+    CellFormattingError,
     CellValidationError,
     InvlaidCellPositionError,
     NonExistentCellComparissonError,
@@ -41,6 +42,7 @@ __all__ = [
     "ReversedExcelRefError",
     "UnknownDirectionError",
     "WithinAxisDeclarationError",
+    "CellFormattingError",
     "CellValidationError",
     "InvlaidCellPositionError",
     "NonExistentCellComparissonError",

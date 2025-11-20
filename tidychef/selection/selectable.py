@@ -911,28 +911,6 @@ following validation errors were encountered:
         return self
 
     @dontmutate
-    def is_bold(self):
-        """
-        Filters the selection to those cells that are bold.
-        This method must be implemented by child classes where bold formatting
-        detection is supported.
-        """
-        raise NotImplementedError(
-            f"Selectable {self.__class__.__name__} does not implement an is_bold() method"
-        )
-
-    @dontmutate
-    def is_not_bold(self):
-        """
-        Filters the selection to those cells that are not bold.
-        This method must be implemented by child classes where bold formatting
-        detection is supported.
-        """
-        raise NotImplementedError(
-            f"Selectable {self.__class__.__name__} does not implement an is_not_bold() method"
-        )
-
-    @dontmutate
     def cell_containing_string(self, string: str, strict: bool = True):
         """
         Filters the selection to precisely one cell containing or equal to the provided string.

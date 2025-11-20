@@ -30,3 +30,12 @@ class CellValidationError(Exception):
 
     def __init__(self, msg):
         self.msg = msg
+
+
+class CellFormattingError(Exception):
+    """
+    Raised when cell formatting information is unavailable or in an invalid state.
+    """
+
+    def __init__(self, msg):
+        self.msg = msg
