@@ -1,5 +1,6 @@
-import pytest
 from unittest.mock import Mock
+
+import pytest
 
 from tidychef.exceptions import CellFormattingError
 from tidychef.models.source.cellformat import CellFormatting

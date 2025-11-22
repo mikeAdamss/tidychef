@@ -1,3 +1,4 @@
+import logging
 from typing import List, Union
 
 from tidychef.models.source.cell import Cell
@@ -5,6 +6,7 @@ from tidychef.models.source.table import LiveTable
 
 from .constants import COLOURS
 
+logger = logging.getLogger(__name__)
 
 class SelectionKey:
     """
@@ -116,27 +118,26 @@ class HtmlCell:
                     # Style hyperlinks differently - could be enhanced to include actual href
                     content = f'<span style="color: blue; text-decoration: underline;">{content}</span>'
                     is_hyperlink = True
-            except:
-                pass
+            except Exception:
+                logger.error("Error checking hyperlink formatting", exc_info=True)
             
             try:
                 if self.cell.cellformat.is_bold():
                     content = f"<strong>{content}</strong>"
-            except:
-                # If formatting info is not available, just use plain content
-                pass
-                
+            except Exception:
+                logger.error("Error checking bold formatting", exc_info=True)
+
             try:
                 if self.cell.cellformat.is_italic():
                     content = f"<em>{content}</em>"
-            except:
-                pass
-                
+            except Exception:
+                logger.error("Error checking italic formatting", exc_info=True)
+
             # Only apply underline formatting if it's not a hyperlink
             try:
                 if not is_hyperlink and self.cell.cellformat.is_underline():
                     content = f"<u>{content}</u>"
-            except:
-                pass
-        
+            except Exception:
+                logger.error("Error checking underline formatting", exc_info=True)
+
         return f'<td style="background-color:{self.colour}">{content}</td>'

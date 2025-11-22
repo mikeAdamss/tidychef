@@ -1,6 +1,7 @@
-from ..selectable import Selectable
 from tidychef.exceptions import CellFormattingError
 from tidychef.utils.decorators import dontmutate
+
+from ..selectable import Selectable
 
 
 class XlsxSelectable(Selectable):

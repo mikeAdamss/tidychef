@@ -228,7 +228,7 @@ def test_html_cell_formatting():
     Test that HtmlCell correctly applies text formatting based on CellFormatting.
     """
     from tidychef.models.source.cell import Cell
-    
+
     # Test bold formatting
     bold_cell = Cell(value="Bold Text", x=0, y=0, cellformat=CellFormatting(bold=True))
     html_cell = HtmlCell(bold_cell, "white")

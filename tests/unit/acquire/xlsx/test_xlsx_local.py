@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import List
 
-from tests.fixtures import path_to_fixture  
+from tests.fixtures import path_to_fixture
 from tidychef import acquire
 from tidychef.models.source.cellformat import CellFormatting
 from tidychef.selection.xlsx.xlsx import XlsxSelectable
