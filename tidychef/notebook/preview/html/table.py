@@ -105,15 +105,15 @@ def get_preview_table_as_html(
                 colour = selection_key.colour
 
         if found == 1:
-            row.append(HtmlCell(cell.value, colour=colour))
+            row.append(HtmlCell(cell, colour))
         elif found > 1:
             if multiple_selection_warning:
-                row.append(HtmlCell(cell.value, colour=warning_colour))
+                row.append(HtmlCell(cell, warning_colour))
                 show_warning = True
             else:
-                row.append(HtmlCell(cell.value, colour=colour))
+                row.append(HtmlCell(cell, colour))
         else:
-            row.append(HtmlCell(cell.value, blank_cells))
+            row.append(HtmlCell(cell, blank_cells))
 
     # final row
     html_cell_rows.append(row)

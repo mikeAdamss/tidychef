@@ -6,6 +6,7 @@ from openpyxl.cell.cell import Cell as OpenPyxlCell
 from openpyxl.workbook import Workbook
 
 from tidychef.models.source.cell import Cell
+from tidychef.models.source.cellformat import CellFormatting
 from tidychef.models.source.table import Table
 from tidychef.selection import Selectable, XlsxSelectable
 
@@ -48,6 +49,34 @@ def sheets_from_workbook(
 
             opycell: OpenPyxlCell
             for x, opycell in enumerate(row):
+                
+                # Extract formatting information from openpyxl cell
+                is_bold = False
+                is_italic = False
+                is_underline = False
+                is_hyperlink = False
+                indent_level = 0
+                
+                if opycell.font:
+                    is_bold = opycell.font.bold if opycell.font.bold is not None else False
+                    is_italic = opycell.font.italic if opycell.font.italic is not None else False
+                    # Check for underline - openpyxl uses 'single', 'double', etc. or None
+                    is_underline = opycell.font.underline is not None and opycell.font.underline != 'none'
+                
+                if opycell.alignment and opycell.alignment.indent is not None:
+                    indent_level = int(opycell.alignment.indent)
+                
+                # Check if cell is a hyperlink
+                is_hyperlink = opycell.hyperlink is not None
+                
+                cell_formatting = CellFormatting(
+                    bold=is_bold,
+                    italic=is_italic,
+                    underline=is_underline,
+                    hyperlink=is_hyperlink,
+                    indent_level=indent_level
+                )
+                
                 if opycell.is_date and opycell.internal_value is not None:
                     strformat_pattern = xlsx_time_formats().get(
                         opycell.number_format, None
@@ -75,7 +104,13 @@ def sheets_from_workbook(
                     cell_value = opycell.value
                 else:
                     cell_value = ""
-                table.add_cell(Cell(x=x, y=y, value=str(cell_value)))
+                
+                table.add_cell(Cell(
+                    x=x, 
+                    y=y, 
+                    value=str(cell_value),
+                    cellformat=cell_formatting
+                ))
 
         for bad_fmt, examples in time_format_warnings.items():
             time_issue_cells = (

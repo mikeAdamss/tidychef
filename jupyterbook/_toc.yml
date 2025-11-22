@@ -17,6 +17,7 @@ chapters:
     - file: basics/selection-regex
     - file: basics/selection-filters
     - file: basics/selection-waffle
+    - file: basics/selection-formatting
     - file: basics/selection-useful
     - file: basics/selection-validate
     - file: basics/tidydata-columns-direct

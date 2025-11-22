@@ -14,6 +14,7 @@ fmt: ## Format the codebase with isort and black
 	rm -rf ./jupyterbook/venv
 	rm -rf ./jupyterbook/pdoc_venv
 	poetry run isort ./* && poetry run black ./**/*.py
+	poetry run ruff check ./tidychef --fix
 
 book: ## Create the jupyter book in /jupyterbook/_build
 	rm -rf ./jupyterbook/_build
@@ -38,3 +39,12 @@ tox: install ## Use tox to run tests against all python versions
 
 profile: ## Run a very basic performance profiling script
 	poetry run python3 performance/profiler.py
+
+push: ## Push to remote repository using custom SSH key (Usage: make push BRANCH=<branch_name> [KEY=<key_name>])
+ifndef BRANCH
+	$(error BRANCH is not set. Usage: make push BRANCH=<branch_name> [KEY=<key_name>])
+endif
+ifndef KEY
+	$(eval KEY := id_ed25519_personnal)
+endif
+	GIT_SSH_COMMAND="ssh -i ~/.ssh/$(KEY)" git push origin $(BRANCH)

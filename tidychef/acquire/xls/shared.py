@@ -6,6 +6,7 @@ from typing import Any, Dict, List, Union
 import xlrd
 
 from tidychef.models.source.cell import Cell
+from tidychef.models.source.cellformat import CellFormatting
 from tidychef.models.source.table import Table
 from tidychef.selection.selectable import Selectable
 from tidychef.selection.xls.xls import XlsSelectable
@@ -59,9 +60,50 @@ def sheets_from_workbook(
 
         for y in range(0, num_rows):
             for x, cell in enumerate(worksheet.row(y)):
+                
+                # Extract formatting information first
+                xf = workbook.xf_list[cell.xf_index]
+                font = workbook.font_list[xf.font_index]
+                
+                # Font is bold if the bold attribute is 1 or weight >= 700
+                is_bold = font.bold == 1 or font.weight >= 700
+                
+                # Font is italic if the italic attribute is 1
+                is_italic = font.italic == 1
+                
+                # Font is underlined if underlined attribute is 1 or underline_type > 0
+                is_underline = font.underlined == 1 or font.underline_type > 0
+                
+                # Check if cell is a hyperlink
+                # In XLS files, hyperlinks are typically detected by checking if the cell has underline formatting
+                # and potentially by checking the font color or other indicators
+                is_hyperlink = False
+                if hasattr(worksheet, 'hyperlink_map') and (x, y) in worksheet.hyperlink_map:
+                    is_hyperlink = True
+                elif hasattr(worksheet, 'hyperlink_list') and worksheet.hyperlink_list:
+                    # Check if this cell position is covered by any hyperlink
+                    for hyperlink in worksheet.hyperlink_list:
+                        if (hasattr(hyperlink, 'frowx') and hasattr(hyperlink, 'lrowx') and 
+                            hasattr(hyperlink, 'fcolx') and hasattr(hyperlink, 'lcolx')):
+                            if (hyperlink.frowx <= y <= hyperlink.lrowx and 
+                                hyperlink.fcolx <= x <= hyperlink.lcolx):
+                                is_hyperlink = True
+                                break
+                
+                # Get indentation level from XF alignment
+                indent_level = 0
+                if hasattr(xf, 'alignment') and hasattr(xf.alignment, 'indent_level'):
+                    indent_level = xf.alignment.indent_level
+                
+                cell_formatting = CellFormatting(
+                    bold=is_bold,
+                    italic=is_italic,
+                    underline=is_underline,
+                    hyperlink=is_hyperlink,
+                    indent_level=indent_level
+                )
 
                 if cell.ctype == 3:  # Date Cell
-                    xf = workbook.xf_list[cell.xf_index]
                     xls_time_format = strip_non_time_formatting(
                         workbook.format_map[xf.format_key].format_str
                     )
@@ -92,7 +134,13 @@ def sheets_from_workbook(
                         cell_value = cell_as_datetime.strftime(strformat_pattern)
                 else:
                     cell_value = str(cell.value)
-                table.add_cell(Cell(x=x, y=y, value=cell_value if cell_value else ""))
+                
+                table.add_cell(Cell(
+                    x=x, 
+                    y=y, 
+                    value=cell_value if cell_value else "", 
+                    cellformat=cell_formatting
+                ))
 
         for bad_fmt, examples in time_format_warnings.items():
             time_issue_cells = (
