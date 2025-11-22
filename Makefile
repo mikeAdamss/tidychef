@@ -14,6 +14,7 @@ fmt: ## Format the codebase with isort and black
 	rm -rf ./jupyterbook/venv
 	rm -rf ./jupyterbook/pdoc_venv
 	poetry run isort ./* && poetry run black ./**/*.py
+	poetry run ruff check ./tidychef --fix
 
 book: ## Create the jupyter book in /jupyterbook/_build
 	rm -rf ./jupyterbook/_build
