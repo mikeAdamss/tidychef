@@ -17,6 +17,23 @@ COLOURS = [
     "#b380ff",
 ]
 
+# Separate color palette for multiple selection combinations
+# These colors are distinct from individual selection colors to avoid confusion
+MULTIPLE_SELECTION_COLOURS = [
+    "#ffb3b3",  # Light red
+    "#ffd9b3",  # Light orange  
+    "#ffffb3",  # Light yellow
+    "#d9ffb3",  # Light lime
+    "#b3ffb3",  # Light green
+    "#b3ffff",  # Light cyan
+    "#c6e6ff",  # Very light blue (different from #b3d9ff)
+    "#d9b3ff",  # Light purple
+    "#ffb3ff",  # Light magenta
+    "#ffb3d9",  # Light pink
+    "#e6ccb3",  # Light brown
+    "#cccccc",  # Light gray
+]
+
 # Simple CSS to make it pretty-ish
 INLINE_CSS = """
     <style>
