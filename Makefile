@@ -16,13 +16,13 @@ fmt: ## Format the codebase with isort and black
 	poetry run isort ./* && poetry run black ./**/*.py
 	poetry run ruff check ./tidychef --fix
 
-book: ## Create the jupyter book in /jupyterbook/_build
+book:
 	rm -rf ./jupyterbook/_build
 	rm -rf ./jupyterbook/venv
-	python -m venv ./jupyterbook/venv
-	. ./jupyterbook/venv/bin/activate
-	pip install .
-	pip install jupyter-book
+	python -m venv ./jupyterbook/venv && \
+	. ./jupyterbook/venv/bin/activate && \
+	pip install . && \
+	pip install git+https://github.com/executablebooks/jupyter-book.git@v1 && \
 	jupyter-book build jupyterbook/ --all
 
     # Copy additional static html files to the jupyter book build directory

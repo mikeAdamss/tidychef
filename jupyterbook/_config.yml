@@ -17,10 +17,8 @@ latex:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/mikeAdamss/tidychef # Online location of your book
+  url: https://github.com/mikeAdamss/tidychef
 
-# Add GitHub buttons to your book
-# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
 html:
   use_issues_button: true
   use_repository_button: true
