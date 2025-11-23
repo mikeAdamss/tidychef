@@ -16,6 +16,8 @@ from .constants import (
     INLINE_CSS,
     NO_COLOUR,
     WARNING_COLOUR,
+    COLOURS,
+    MULTIPLE_SELECTION_COLOURS,
 )
 
 
@@ -87,6 +89,10 @@ def get_preview_table_as_html(
         if show_excel:
             row.append(HtmlCell(last_y + 1, border_cells))
 
+    # Track multiple selection combinations for enhanced key display
+    multiple_selection_combinations = {}  # combination_key -> {'selections': [...], 'cells': [...], 'colour': str}
+    combination_colour_index = 0
+    
     # Add cell rows, including xy and excel if so indicated
     for cell in all_cells:
         if cell.y != last_y:
@@ -98,20 +104,38 @@ def get_preview_table_as_html(
                 row.append(HtmlCell(cell.y + 1, border_cells))
             last_y = cell.y
 
-        found = 0
+        matching_selections = []
         for selection_key in selection_keys:
             if selection_key.matches_xy_of_cell(cell):
-                found += 1
-                colour = selection_key.colour
+                matching_selections.append(selection_key)
 
-        if found == 1:
-            row.append(HtmlCell(cell, colour))
-        elif found > 1:
+        if len(matching_selections) == 1:
+            row.append(HtmlCell(cell, matching_selections[0].colour))
+        elif len(matching_selections) > 1:
             if multiple_selection_warning:
-                row.append(HtmlCell(cell, warning_colour))
+                # Create a unique key for this combination of selections
+                selection_labels = sorted([sel.label for sel in matching_selections])
+                combination_key = " + ".join(selection_labels)
+                
+                if combination_key not in multiple_selection_combinations:
+                    # Assign a unique color to this combination from the separate palette
+                    # Use colors from MULTIPLE_SELECTION_COLOURS list, cycling through if needed
+                    combo_colour = MULTIPLE_SELECTION_COLOURS[combination_colour_index % len(MULTIPLE_SELECTION_COLOURS)]
+                    combination_colour_index += 1
+                    
+                    multiple_selection_combinations[combination_key] = {
+                        'selections': matching_selections.copy(),
+                        'cells': [],
+                        'colour': combo_colour
+                    }
+                multiple_selection_combinations[combination_key]['cells'].append(cell)
+                
+                # Use the unique color for this combination
+                combo_colour = multiple_selection_combinations[combination_key]['colour']
+                row.append(HtmlCell(cell, combo_colour))
                 show_warning = True
             else:
-                row.append(HtmlCell(cell, colour))
+                row.append(HtmlCell(cell, matching_selections[0].colour))
         else:
             row.append(HtmlCell(cell, blank_cells))
 
@@ -119,19 +143,69 @@ def get_preview_table_as_html(
     html_cell_rows.append(row)
 
     # ---------------------
-    # Create html key table
+    # Create html key table with two-column layout
 
-    if show_warning:
-        key_table_html = f"""
-            <tr>
-                <td style="background-color:{warning_colour}">Cell Appears in Multiple Selections</td>
-            <tr>
-        """
-    else:
-        key_table_html = ""
-
+    # Build individual selections column
+    individual_selections_html = ""
     for selection_key in selection_keys:
-        key_table_html += selection_key.as_html()
+        individual_selections_html += selection_key.as_html()
+
+    # Build multiple selections column (only if there are any)
+    multiple_selections_html = ""
+    if show_warning and multiple_selection_combinations:
+        for combination_key, combination_info in multiple_selection_combinations.items():
+            selections = combination_info['selections']
+            cell_count = len(combination_info['cells'])
+            combo_colour = combination_info['colour']
+            
+            # Create a visual representation showing which selections are combined
+            selection_colors_html = ""
+            for sel in selections:
+                selection_colors_html += f'<span style="background-color:{sel.colour}; padding: 2px 4px; margin: 1px; display: inline-block;">{sel.label}</span>'
+            
+            multiple_selections_html += f"""
+                <tr>
+                    <td style="background-color:{combo_colour}">
+                        {combination_key} ({cell_count} cell{'s' if cell_count != 1 else ''}) → {selection_colors_html}
+                    </td>
+                </tr>
+            """
+
+    # Create the key content without outer box, only show if there are selections
+    if individual_selections_html or (show_warning and multiple_selection_combinations):
+        if show_warning and multiple_selection_combinations:
+            # Two-column layout when there are multiple selections
+            key_content_html = f"""
+                <div style="display: flex; margin-bottom: 15px;">
+                    <div style="margin-right: 30px;">
+                        <strong style="text-align: left;">Selections</strong>
+                        <table style="width: auto; margin-top: 5px; text-align: left;">
+                            {individual_selections_html}
+                        </table>
+                    </div>
+                    <div>
+                        <strong style="text-align: left;">Multiple Selection Warnings</strong>
+                        <table style="width: auto; margin-top: 5px; text-align: left;">
+                            {multiple_selections_html}
+                        </table>
+                    </div>
+                </div>
+            """
+        elif individual_selections_html:
+            # Single column layout when there are selections but no multiple selections
+            key_content_html = f"""
+                <div style="margin-bottom: 15px;">
+                    <strong style="text-align: left;">Selections</strong>
+                    <table style="width: auto; margin-top: 5px; text-align: left;">
+                        {individual_selections_html}
+                    </table>
+                </div>
+            """
+        else:
+            key_content_html = ""
+    else:
+        # No selections made, don't show any key content
+        key_content_html = ""
 
     # ---------------------
     # Create html cell rows
@@ -148,12 +222,11 @@ def get_preview_table_as_html(
     return f"""
     <html>
         {INLINE_CSS}
-            <table>
-                {key_table_html}
-            </table>
-
             <body>
-                <h2>{selections[0].name}</h2>
+                <h2>{selections[0].name if selections and hasattr(selections[0], 'name') else 'Preview'}</h2>
+                
+                {key_content_html}
+                
                 <table>
                     {cell_table_row_html}
                 </table>
