@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -174,7 +174,7 @@
             </li>
         </ul>
         <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../basics.html">Chapter 1: Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../overview-basics.html">Chapter 1: Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../basics/acquire.html">Acquire</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../basics/preview.html">Preview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../basics/selection-simple.html">Selection: Simple</a></li>
@@ -185,6 +185,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../basics/selection-regex.html">Selection: Regex</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../basics/selection-filters.html">Selection: Filters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../basics/selection-waffle.html">Selection: Waffle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/selection-formatting.html">Selection: Formatting</a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="../../basics/selection-useful.html">Selection: Simple &amp; Useful</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../basics/selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../basics/tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
@@ -194,7 +196,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../basics/tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../intermediate.html">Chapter 2: Intermediate</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../overview-intermediate.html">Chapter 2: Intermediate</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../intermediate/apply.html">Apply</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../intermediate/concatenation.html">TidyData: Concatenation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../intermediate/iterating.html">Iterating Tables/Sheets</a></li>
@@ -209,13 +211,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../../intermediate/time.html">Time</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../advanced.html">Chapter 3: Advanced</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../overview-advanced.html">Chapter 3: Advanced</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../advanced/advanced-acquisition.html">Advanced Acquisition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../advanced/custom-selectables.html">Custom Selectables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../advanced/custom-data-sources.html">Custom Data Sources</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../overview-examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../bands.html">Bands</a></li>
 
 
@@ -233,8 +235,6 @@
 
 <li class="toctree-l2"><a class="reference internal" href="../monthly-gdp-tables.html">Monthly GDP Tables: GVA</a></li>
 
-
-<li class="toctree-l2"><a class="reference internal" href="../household-debt.html">Household Debt Inequalities</a></li>
 
 <li class="toctree-l2"><a class="reference internal" href="../human-development.html">Human Development</a></li>
 
@@ -675,7 +675,7 @@ document.write(`
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="outputs">
 <h1>Outputs<a class="headerlink" href="#outputs" title="Link to this heading">#</a></h1>
-<p>The output generated by the above example can be <a class="reference download internal" download="" href="../../_downloads/6734c890ad1c51288780ce983baa10ea/bands_tidy.csv"><span class="xref download myst">downloaded here</span></a> or viewed below.</p>
+<p>The output generated by the above example can be <a class="reference internal" href="#./bands_tidy.csv"><span class="xref myst">downloaded here</span></a> or viewed below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>

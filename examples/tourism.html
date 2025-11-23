@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -174,7 +174,7 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../basics.html">Chapter 1: Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview-basics.html">Chapter 1: Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../basics/acquire.html">Acquire</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/preview.html">Preview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-simple.html">Selection: Simple</a></li>
@@ -185,6 +185,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-regex.html">Selection: Regex</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-filters.html">Selection: Filters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-waffle.html">Selection: Waffle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/selection-formatting.html">Selection: Formatting</a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-useful.html">Selection: Simple &amp; Useful</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/selection-validate.html">Selection: Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-columns-direct.html">TidyData: Columns &amp; Direct</a></li>
@@ -194,7 +196,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../basics/tidydata-writing.html">TidyData: Writing To Csv</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../intermediate.html">Chapter 2: Intermediate</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview-intermediate.html">Chapter 2: Intermediate</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/apply.html">Apply</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/concatenation.html">TidyData: Concatenation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/iterating.html">Iterating Tables/Sheets</a></li>
@@ -209,13 +211,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/time.html">Time</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../advanced.html">Chapter 3: Advanced</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview-advanced.html">Chapter 3: Advanced</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../advanced/advanced-acquisition.html">Advanced Acquisition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../advanced/custom-selectables.html">Custom Selectables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../advanced/custom-data-sources.html">Custom Data Sources</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../examples.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview-examples.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="bands.html">Bands</a></li>
 
 
@@ -233,8 +235,6 @@
 
 <li class="toctree-l2"><a class="reference internal" href="monthly-gdp-tables.html">Monthly GDP Tables: GVA</a></li>
 
-
-<li class="toctree-l2"><a class="reference internal" href="household-debt.html">Household Debt Inequalities</a></li>
 
 <li class="toctree-l2"><a class="reference internal" href="human-development.html">Human Development</a></li>
 
@@ -523,7 +523,7 @@ document.write(`
                 <h2>Table 3</h2>
                 <table>
                     <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td><td style="background-color:lightgrey">G</td><td style="background-color:lightgrey">H</td><td style="background-color:lightgrey">I</td><td style="background-color:lightgrey">J</td><td style="background-color:lightgrey">K</td><td style="background-color:lightgrey">L</td></tr>
-<tr><td style="background-color:lightgrey">1</td><td style="background-color:white">3</td><td style="background-color:white">UK  residents' visits abroad by month</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">1</td><td style="background-color:white"><strong>3</strong></td><td style="background-color:white"><strong>UK  residents' visits abroad by month</strong></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
 <tr><td style="background-color:lightgrey">2</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">thousands</td><td style="background-color:white"></td></tr>
 <tr><td style="background-color:lightgrey">3</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">All Visits</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Area of visit</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
 <tr><td style="background-color:lightgrey">4</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">North America</td><td style="background-color:white">Europe</td><td style="background-color:white">of which</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">Other countries</td><td style="background-color:white"></td></tr>
@@ -680,7 +680,7 @@ document.write(`
                 <h2>Table 3</h2>
                 <table>
                     <tr><td style="background-color:lightgrey"></td><td style="background-color:lightgrey">A</td><td style="background-color:lightgrey">B</td><td style="background-color:lightgrey">C</td><td style="background-color:lightgrey">D</td><td style="background-color:lightgrey">E</td><td style="background-color:lightgrey">F</td><td style="background-color:lightgrey">G</td><td style="background-color:lightgrey">H</td><td style="background-color:lightgrey">I</td><td style="background-color:lightgrey">J</td><td style="background-color:lightgrey">K</td><td style="background-color:lightgrey">L</td></tr>
-<tr><td style="background-color:lightgrey">1</td><td style="background-color:white">3</td><td style="background-color:white">UK  residents' visits abroad by month</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
+<tr><td style="background-color:lightgrey">1</td><td style="background-color:white"><strong>3</strong></td><td style="background-color:white"><strong>UK  residents' visits abroad by month</strong></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td></tr>
 <tr><td style="background-color:lightgrey">2</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:white">thousands</td><td style="background-color:white"></td></tr>
 <tr><td style="background-color:lightgrey">3</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#99ff99">All Visits</td><td style="background-color:#99ff99"></td><td style="background-color:white"></td><td style="background-color:#99ff99">Area of visit</td><td style="background-color:#99ff99"></td><td style="background-color:#99ff99"></td><td style="background-color:#99ff99"></td><td style="background-color:#99ff99"></td><td style="background-color:#99ff99"></td><td style="background-color:white"></td></tr>
 <tr><td style="background-color:lightgrey">4</td><td style="background-color:white"></td><td style="background-color:white"></td><td style="background-color:#eeccff"></td><td style="background-color:#eeccff"></td><td style="background-color:white"></td><td style="background-color:#eeccff">North America</td><td style="background-color:#eeccff">Europe</td><td style="background-color:#eeccff">of which</td><td style="background-color:#eeccff"></td><td style="background-color:#eeccff"></td><td style="background-color:#eeccff">Other countries</td><td style="background-color:white"></td></tr>
@@ -817,7 +817,7 @@ document.write(`
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="outputs">
 <h1>Outputs<a class="headerlink" href="#outputs" title="Link to this heading">#</a></h1>
-<p>The tidy data can be <a class="reference download internal" download="" href="../_downloads/c3c1cebe115f2cd38cc8acf663532db6/tourism.csv"><span class="xref download myst">downloaded here</span></a> and a full inline preview of the tidydata generated is shown below for those people who’d prefer to scroll.</p>
+<p>The tidy data can be <a class="reference internal" href="#./tourism.csv"><span class="xref myst">downloaded here</span></a> and a full inline preview of the tidydata generated is shown below for those people who’d prefer to scroll.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tidy_data</span><span class="p">)</span>
