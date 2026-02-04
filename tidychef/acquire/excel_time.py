@@ -34,6 +34,8 @@ EXCEL_TIME_FORMATS = {
     "M/D/YY": "%m/%d/%y",
     # Month/Year with 4-digit year (e.g., 5/2023)
     "m/yyyy": "%-m/%Y",
+    # Month as three letter abbreviation and 2 digit year (e.g., May-23)
+    "mmm-yy": "%b-%y",
     # Year/Month with 4-digit year (e.g., 2023/5)
     "yyyy/m": "%Y/%-m",
     # Day/Month/Year with 2-digit year (e.g., 1/5/23)

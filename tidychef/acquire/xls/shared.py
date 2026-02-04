@@ -90,17 +90,50 @@ def sheets_from_workbook(
                                 is_hyperlink = True
                                 break
                 
-                # Get indentation level from XF alignment
+                # Get alignment information from XF
                 indent_level = 0
-                if hasattr(xf, 'alignment') and hasattr(xf.alignment, 'indent_level'):
-                    indent_level = xf.alignment.indent_level
+                horizontal_alignment = None
+                vertical_alignment = None
+                
+                if hasattr(xf, 'alignment'):
+                    # Get indentation level
+                    if hasattr(xf.alignment, 'indent_level'):
+                        indent_level = xf.alignment.indent_level
+                    
+                    # Get horizontal alignment - XLS uses integers:
+                    # 0 = general, 1 = left, 2 = center, 3 = right, 4 = fill, 5 = justify
+                    if hasattr(xf.alignment, 'hor_align'):
+                        hor_align = xf.alignment.hor_align
+                        alignment_map = {
+                            0: None,  # general - let Excel decide
+                            1: 'left',
+                            2: 'center', 
+                            3: 'right',
+                            4: 'fill',  # not common, treat as general
+                            5: 'justify'
+                        }
+                        horizontal_alignment = alignment_map.get(hor_align)
+                    
+                    # Get vertical alignment - XLS uses integers:
+                    # 0 = top, 1 = center, 2 = bottom, 3 = justify
+                    if hasattr(xf.alignment, 'vert_align'):
+                        vert_align = xf.alignment.vert_align
+                        vertical_map = {
+                            0: 'top',
+                            1: 'center',
+                            2: 'bottom',
+                            3: 'justify'
+                        }
+                        vertical_alignment = vertical_map.get(vert_align)
                 
                 cell_formatting = CellFormatting(
                     bold=is_bold,
                     italic=is_italic,
                     underline=is_underline,
                     hyperlink=is_hyperlink,
-                    indent_level=indent_level
+                    indent_level=indent_level,
+                    horizontal_alignment=horizontal_alignment,
+                    vertical_alignment=vertical_alignment
                 )
 
                 if cell.ctype == 3:  # Date Cell

@@ -11,6 +11,8 @@ class CellFormatting:
     underline: Optional[bool] = None
     hyperlink: Optional[bool] = None
     indent_level: Optional[int] = None
+    horizontal_alignment: Optional[str] = None  # 'left', 'center', 'right', 'justify', 'general'
+    vertical_alignment: Optional[str] = None  # 'top', 'center', 'bottom'
     
     def is_bold(self) -> bool:
         """
@@ -107,3 +109,50 @@ class CellFormatting:
                 "Indentation level is unknown. Cannot determine if cell is indented."
             )
         return self.indent_level > 0
+    
+    def get_horizontal_alignment(self) -> str:
+        """
+        Get the horizontal alignment of the cell.
+        
+        Returns:
+            str: The horizontal alignment ('left', 'center', 'right', 'justify', 'general')
+                 Returns 'general' if alignment is not specified (Excel default behavior)
+        """
+        return self.horizontal_alignment or 'general'
+    
+    def get_vertical_alignment(self) -> str:
+        """
+        Get the vertical alignment of the cell.
+        
+        Returns:
+            str: The vertical alignment ('top', 'center', 'bottom')
+                 Returns 'bottom' if alignment is not specified (Excel default behavior)
+        """
+        return self.vertical_alignment or 'bottom'
+    
+    def is_left_aligned(self) -> bool:
+        """
+        Check if the cell is left-aligned.
+        
+        Returns:
+            bool: True if cell is explicitly left-aligned, False otherwise
+        """
+        return self.horizontal_alignment == 'left'
+    
+    def is_center_aligned(self) -> bool:
+        """
+        Check if the cell is center-aligned.
+        
+        Returns:
+            bool: True if cell is center-aligned, False otherwise
+        """
+        return self.horizontal_alignment == 'center'
+    
+    def is_right_aligned(self) -> bool:
+        """
+        Check if the cell is right-aligned.
+        
+        Returns:
+            bool: True if cell is right-aligned, False otherwise
+        """
+        return self.horizontal_alignment == 'right'

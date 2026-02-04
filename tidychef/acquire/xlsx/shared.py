@@ -56,6 +56,8 @@ def sheets_from_workbook(
                 is_underline = False
                 is_hyperlink = False
                 indent_level = 0
+                horizontal_alignment = None
+                vertical_alignment = None
                 
                 if opycell.font:
                     is_bold = opycell.font.bold if opycell.font.bold is not None else False
@@ -63,8 +65,17 @@ def sheets_from_workbook(
                     # Check for underline - openpyxl uses 'single', 'double', etc. or None
                     is_underline = opycell.font.underline is not None and opycell.font.underline != 'none'
                 
-                if opycell.alignment and opycell.alignment.indent is not None:
-                    indent_level = int(opycell.alignment.indent)
+                if opycell.alignment:
+                    if opycell.alignment.indent is not None:
+                        indent_level = int(opycell.alignment.indent)
+                    
+                    # Extract horizontal alignment (None means 'general' in Excel)
+                    if opycell.alignment.horizontal is not None:
+                        horizontal_alignment = opycell.alignment.horizontal
+                    
+                    # Extract vertical alignment (None means 'bottom' in Excel)  
+                    if opycell.alignment.vertical is not None:
+                        vertical_alignment = opycell.alignment.vertical
                 
                 # Check if cell is a hyperlink
                 is_hyperlink = opycell.hyperlink is not None
@@ -74,7 +85,9 @@ def sheets_from_workbook(
                     italic=is_italic,
                     underline=is_underline,
                     hyperlink=is_hyperlink,
-                    indent_level=indent_level
+                    indent_level=indent_level,
+                    horizontal_alignment=horizontal_alignment,
+                    vertical_alignment=vertical_alignment
                 )
                 
                 if opycell.is_date and opycell.internal_value is not None:

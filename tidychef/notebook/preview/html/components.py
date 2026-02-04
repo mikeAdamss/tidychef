@@ -108,6 +108,7 @@ class HtmlCell:
         Create the html representation of this cell with formatting.
         """
         content = str(self.value)
+        cell_styles = [f"background-color:{self.colour}"]
         
         # Apply text formatting if cell formatting is available
         if self.cell and self.cell.cellformat:
@@ -140,4 +141,39 @@ class HtmlCell:
             except Exception:
                 logger.error("Error checking underline formatting", exc_info=True)
 
-        return f'<td style="background-color:{self.colour}">{content}</td>'
+            # Apply alignment and indentation formatting - handle each separately
+            # Handle indentation first (takes precedence and implies left alignment)
+            try:
+                if (self.cell.cellformat.indent_level is not None and 
+                    self.cell.cellformat.indent_level > 0):
+                    indent_level = self.cell.cellformat.indent_level
+                    # Apply padding-left based on indent level - make it more pronounced than Excel's subtle 8px
+                    # Using 20px per level to make indentation clearly visible in HTML previews
+                    padding_left = indent_level * 20
+                    cell_styles.append(f"padding-left: {padding_left}px")
+                    # Indented cells are always left-aligned in Excel
+                    # Use !important to override Jupyter notebook CSS
+                    cell_styles.append("text-align: left !important")
+                else:
+                    # Handle horizontal alignment for non-indented cells
+                    alignment = self.cell.cellformat.get_horizontal_alignment()
+                    if alignment != 'general':
+                        # Apply explicit alignment (but not for 'general')
+                        # Use !important to override Jupyter notebook CSS
+                        cell_styles.append(f"text-align: {alignment} !important")
+                    else:
+                        # For 'general' alignment, override the CSS center alignment
+                        # Excel's general alignment: text left, numbers right
+                        # Since we don't easily distinguish types here, default to left
+                        # which is more appropriate for most data
+                        # Use !important to override Jupyter notebook CSS
+                        cell_styles.append("text-align: left !important")
+            except Exception:
+                logger.error("Error checking alignment/indentation formatting", exc_info=True)
+                # Fallback - at least override the center alignment from CSS
+                # Use !important to override Jupyter notebook CSS
+                cell_styles.append("text-align: left !important")
+
+        # Combine all styles
+        style_attr = "; ".join(cell_styles)
+        return f'<td style="{style_attr}">{content}</td>'
